@@ -1,0 +1,173 @@
+/* Градиентный текст */
+.gradient-text {
+    background: linear-gradient(
+        45deg,
+        #3b82f6,
+        #8b5cf6,
+        #ec4899,
+        #3b82f6
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Плавающие круги */
+.tech-circles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.circle {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    animation: float var(--duration) ease-in-out infinite;
+}
+
+.circle i {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.circle:nth-child(1) {
+    --duration: 6s;
+    top: 20%;
+    left: 20%;
+}
+
+.circle:nth-child(2) {
+    --duration: 8s;
+    top: 60%;
+    left: 80%;
+}
+
+.circle:nth-child(3) {
+    --duration: 7s;
+    top: 80%;
+    left: 30%;
+}
+
+.circle:nth-child(4) {
+    --duration: 9s;
+    top: 30%;
+    left: 70%;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(20px, -20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Анимации появления */
+.tech-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Плавное появление карточек */
+.card {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+    position: relative;
+    isolation: isolate; /* Изолируем эффект блеска */
+}
+
+.cards-grid .card:nth-child(1) { animation-delay: 0.2s; }
+.cards-grid .card:nth-child(2) { animation-delay: 0.4s; }
+.cards-grid .card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Эффект блеска карточек */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    z-index: 1;
+    pointer-events: none; /* Предотвращаем влияние на соседние элементы */
+}
+
+.card:hover::before {
+    transform: translateX(100%);
+}
+
+/* Анимация кнопок */
+.search-box button {
+    position: relative;
+    overflow: hidden;
+}
+
+.search-box button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.search-box button:active::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+} 
