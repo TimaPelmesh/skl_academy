@@ -104,11 +104,16 @@ body {
 .nav-about {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white !important;
+    border-radius: 8px;
 }
 
 .nav-about:hover {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%) !important;
     transform: translateY(-1px);
+}
+
+.nav-about::after {
+    display: none;
 }
 
 .mobile-menu-btn {
@@ -783,9 +788,22 @@ body {
 
 /* Футер */
 footer {
-    background: var(--nav-bg);
+    background: var(--background);
     padding: 4rem 2rem 2rem;
     margin-top: 4rem;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 
 .footer-content {
@@ -794,24 +812,34 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .footer-section h3 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
+    color: var(--text);
 }
 
 .footer-section a {
-    color: var(--text-light);
+    color: var(--text-secondary);
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin: 0.5rem 0;
     opacity: 0.8;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .footer-section a:hover {
     opacity: 1;
+    color: var(--primary-light);
+}
+
+.footer-section a i {
+    font-size: 1.1rem;
 }
 
 .footer-bottom {
@@ -819,6 +847,9 @@ footer {
     margin-top: 2rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
+    color: var(--text-secondary);
 }
 
 /* Стили для структуры тем */
@@ -971,28 +1002,67 @@ footer {
 .cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem 2.5rem;
     color: white;
     text-decoration: none;
-    border-radius: 0.5rem;
+    border-radius: 12px;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 2rem;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+    margin-top: 2.5rem;
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--primary);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.cta-button:hover::before {
+    width: 100%;
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
 }
 
 .cta-button i {
+    font-size: 1.2rem;
     transition: transform 0.3s ease;
 }
 
 .cta-button:hover i {
     transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .cta-button {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-button {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        margin-top: 1.5rem;
+    }
 }
 
 /* Адаптивность для новых секций */
