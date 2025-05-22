@@ -1158,4 +1158,432 @@ footer::before {
     .feature {
         padding: 1rem;
     }
+}
+
+/* About Page Styles */
+.about-page {
+    padding-top: 80px;
+}
+
+.about-hero {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.about-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-hero .subtitle {
+    font-size: 1.5rem;
+    color: #ffffff;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.about-mission {
+    padding: 4rem 0;
+    background: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.mission-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.join-project {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.join-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.join-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.join-card:hover {
+    transform: translateY(-5px);
+}
+
+.join-card i {
+    color: #6e45e2;
+    margin-bottom: 1rem;
+}
+
+.join-card h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.join-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.support-project {
+    padding: 4rem 0;
+    background: #ffffff;
+}
+
+.support-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.support-card {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.support-card:hover {
+    transform: translateY(-5px);
+}
+
+.support-card i {
+    color: #6e45e2;
+    margin-bottom: 1rem;
+}
+
+.donation-buttons, .social-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.social-buttons .button {
+    padding: 0.8rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .about-hero .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .join-options, .support-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark Theme Styles */
+.dark-section {
+    background: var(--background);
+    color: var(--text);
+}
+
+.dark-section h2 {
+    color: var(--text);
+}
+
+.dark-section p {
+    color: var(--text-secondary);
+}
+
+.dark-card {
+    background: var(--background-light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.dark-card h3 {
+    color: var(--text);
+}
+
+.dark-card p {
+    color: var(--text-secondary);
+}
+
+.dark-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+/* Обновляем стили для about-mission */
+.about-mission.dark-section {
+    background: var(--background);
+}
+
+.about-mission.dark-section .mission-content p {
+    color: var(--text-secondary);
+}
+
+/* Обновляем стили для join-project */
+.join-project.dark-section {
+    background: var(--background);
+}
+
+/* Обновляем стили для support-project */
+.support-project.dark-section {
+    background: var(--background);
+}
+
+.support-project.dark-section .support-content p {
+    color: var(--text-secondary);
+}
+
+/* Mobile Optimization Styles */
+.mobile-friendly {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* Базовые стили для мобильных устройств */
+@media (max-width: 768px) {
+    /* Контейнер */
+    .container {
+        width: 100%;
+        padding: 0 15px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    /* Hero секция */
+    .about-hero {
+        min-height: 300px;
+        padding: 60px 0 40px;
+    }
+
+    .about-hero-content {
+        padding: 0 15px;
+    }
+
+    .about-hero h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        padding: 0 10px;
+    }
+
+    .about-hero .subtitle {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+
+    /* Секции */
+    .dark-section {
+        padding: 40px 0;
+    }
+
+    .dark-section h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        padding: 0 15px;
+    }
+
+    /* Карточки */
+    .join-options,
+    .support-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1rem 0;
+        padding: 0 15px;
+    }
+
+    .dark-card {
+        width: 100%;
+        margin: 0;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .dark-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .dark-card p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    /* Кнопки */
+    .button {
+        width: 100%;
+        max-width: none;
+        padding: 0.75rem;
+        font-size: 1rem;
+        text-align: center;
+        margin: 0.5rem 0;
+    }
+
+    .donation-buttons,
+    .social-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .social-buttons .button {
+        width: auto;
+        min-width: 44px;
+        height: 44px;
+    }
+
+    /* Навигация */
+    .main-nav {
+        position: fixed;
+        width: 100%;
+        height: 60px;
+    }
+
+    .nav-content {
+        padding: 0 15px;
+    }
+
+    .mobile-menu {
+        position: fixed;
+        width: 100%;
+        top: 60px;
+        padding: 0;
+        background: var(--background);
+    }
+
+    .mobile-menu a {
+        padding: 15px;
+        margin: 0;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Миссия */
+    .mission-content {
+        padding: 0 15px;
+    }
+
+    .mission-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Дополнительные оптимизации для маленьких экранов */
+@media (max-width: 380px) {
+    .about-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .dark-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .dark-card {
+        padding: 1.25rem;
+    }
+
+    .dark-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .dark-card p {
+        font-size: 0.9rem;
+    }
+
+    .button {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Предотвращение горизонтального скролла */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Фиксированная ширина контента */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Оптимизация для ландшафтной ориентации */
+@media (max-height: 500px) and (orientation: landscape) {
+    .about-hero {
+        min-height: auto;
+        padding: 80px 0 40px;
+    }
+
+    .dark-section {
+        padding: 30px 0;
+    }
+
+    .join-options,
+    .support-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
 } 
