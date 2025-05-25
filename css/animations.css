@@ -170,4 +170,119 @@
 .search-box button:active::after {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
+}
+
+/* Базовые анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Применение анимаций */
+.hero {
+    animation: fadeIn 1s ease-out;
+}
+
+.hero-text {
+    animation: slideInUp 1s ease-out;
+}
+
+.gradient-text {
+    background-size: 200% auto;
+    animation: gradientFlow 8s ease infinite;
+}
+
+/* Анимации для мобильного меню */
+.mobile-menu {
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu.active {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Анимации для карточек */
+.topic-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topic-card:hover {
+    animation: cardHover 0.3s ease forwards;
+}
+
+@keyframes cardHover {
+    to {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Оптимизация анимаций для мобильных */
+@media (max-width: 768px) {
+    .topic-card:hover {
+        animation: none;
+    }
+
+    .topic-card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Анимации для кнопок */
+.cta-button {
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover i {
+    animation: arrowBounce 1s infinite;
+}
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+}
+
+/* Анимации для частиц фона */
+.particles-background {
+    animation: particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    100% {
+        transform: translateY(-50px) translateX(50px);
+    }
 } 
