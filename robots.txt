@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Запрет индексации служебных файлов
+Disallow: /.git/
+Disallow: /.github/ 

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKL Academy</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./images/icon.ico" type="image/x-icon">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/logo.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="nav-left">
+                <a href="./index.html" class="logo">
+                    <img src="./images/icon.ico" alt="SKL Academy Logo" class="nav-logo-icon">
+                    <span class="gradient-text">SKL Academy</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#networks">Компьютерные сети</a>
+                    <a href="#python">Python</a>
+                    <a href="#git">Git</a>
+                    <a href="#web">Web-разработка</a>
+                    <a href="#shell">Командная строка</a>
+                    <a href="./about.html" class="nav-about">О проекте</a>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="#networks">Компьютерные сети</a>
+        <a href="#python">Python</a>
+        <a href="#git">Git</a>
+        <a href="#web">Web-разработка</a>
+        <a href="#shell">Командная строка</a>
+        <a href="./about.html">О проекте</a>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-main">
+                <div class="hero-text">
+                    <h1 class="welcome-text gradient-text">Добро пожаловать!</h1>
+                    <div class="hero-description">
+                        <p>Образовательная платформа, созданная</p>
+                        <p>энтузиастом</p>
+                        <p>для будущих IT-специалистов</p>
+                        <p class="materials-highlight">С бесплатными образовательными материалами</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+            <div class="particles-background"></div>
+        </div>
+    </header>
+
+    <main>
+        <section id="networks" class="tech-section">
+            <h2>Компьютерные сети</h2>
+            <div class="tech-content">
+                <div class="tech-description">
+                    <p class="tech-intro">Изучите основы компьютерных сетей: от базовых концепций до продвинутых технологий.</p>
+                    <div class="tech-features">
+                        <div class="feature">
+                            <i class="fa-solid fa-network-wired fa-2x"></i>
+                            <h4>Основы сетей</h4>
+                            <p>Модель OSI, TCP/IP, IP-адресация, маршрутизация и коммутация</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-server fa-2x"></i>
+                            <h4>Сетевое оборудование</h4>
+                            <p>Настройка маршрутизаторов Cisco, коммутаторов, межсетевых экранов</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fa-solid fa-shield-halved fa-2x"></i>
+                            <h4>Безопасность</h4>
+                            <p>Защита сетей, VPN, файрволы, обнаружение вторжений</p>
+                        </div>
+                    </div>
+                    <a href="./networks/index.html" class="cta-button">
+                        <span>Начать обучение</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="python" class="tech-section">
+            <h2>Python</h2>
+            <div class="tech-content">
+                <div class="tech-description">
+                    <p class="tech-intro">Освойте Python - от основ до продвинутых техник программирования.</p>
+                    <div class="tech-features">
+                        <div class="feature">
+                            <i class="fab fa-python fa-2x"></i>
+                            <h4>Основы Python</h4>
+                            <p>Синтаксис, типы данных, функции, ООП, работа с файлами</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-code-branch fa-2x"></i>
+                            <h4>Продвинутый Python</h4>
+                            <p>Декораторы, генераторы, многопоточность, асинхронное программирование</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-project-diagram fa-2x"></i>
+                            <h4>Фреймворки</h4>
+                            <p>Django, Flask, FastAPI, работа с базами данных</p>
+                        </div>
+                    </div>
+                    <a href="./python/index.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="git" class="tech-section">
+            <h2>Git</h2>
+            <div class="tech-content">
+                <div class="tech-description">
+                    <p class="tech-intro">Изучите Git - самую популярную систему контроля версий.</p>
+                    <div class="tech-features">
+                        <div class="feature">
+                            <i class="fab fa-git-alt fa-2x"></i>
+                            <h4>Основы Git</h4>
+                            <p>Базовые команды, работа с репозиториями, ветвление и слияние</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fab fa-github fa-2x"></i>
+                            <h4>GitHub</h4>
+                            <p>Работа с удаленными репозиториями, Pull Request, Issues, GitHub Pages</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-code-branch fa-2x"></i>
+                            <h4>Командная работа</h4>
+                            <p>Git Flow, работа в команде, разрешение конфликтов</p>
+                        </div>
+                    </div>
+                    <a href="./git/index.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="web" class="tech-section">
+            <h2>Web-разработка</h2>
+            <div class="tech-content">
+                <div class="tech-description">
+                    <p class="tech-intro">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
+                    <div class="tech-features">
+                        <div class="feature">
+                            <i class="fab fa-html5 fa-2x"></i>
+                            <h4>HTML5</h4>
+                            <p>Семантическая верстка, формы, мультимедиа, доступность</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fab fa-css3-alt fa-2x"></i>
+                            <h4>CSS3</h4>
+                            <p>Flexbox, Grid, анимации, адаптивный дизайн</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mobile-alt fa-2x"></i>
+                            <h4>Responsive Design</h4>
+                            <p>Mobile First, медиа-запросы, оптимизация для разных устройств</p>
+                        </div>
+                    </div>
+                    <a href="./web/index.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="shell" class="tech-section">
+            <h2>Командная строка</h2>
+            <div class="tech-content">
+                <div class="tech-description">
+                    <p class="tech-intro">Освойте мощные инструменты командной строки в Linux и Windows.</p>
+                    <div class="tech-features">
+                        <div class="feature">
+                            <i class="fab fa-linux fa-2x"></i>
+                            <h4>Linux Bash</h4>
+                            <p>Базовые команды, скрипты, автоматизация задач, работа с файлами и процессами</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fab fa-windows fa-2x"></i>
+                            <h4>Windows PowerShell</h4>
+                            <p>Командлеты, скрипты, управление системой, автоматизация Windows</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-terminal fa-2x"></i>
+                            <h4>Практика</h4>
+                            <p>Реальные сценарии использования, администрирование, решение задач</p>
+                        </div>
+                    </div>
+                    <a href="./shell/index.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>О проекте</h3>
+                <p>SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
+                <p>Бесплатные материалы, практические задания и проекты</p>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <a href="mailto:mr.tim.pumpkin@gmail.com"><i class="fas fa-envelope"></i> Gmail</a>
+                <a href="https://t.me/tima_pelmeshka" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SKL Academy. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html> 
