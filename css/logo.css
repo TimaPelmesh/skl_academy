@@ -1,8 +1,8 @@
 /* Стили для логотипа */
 .nav-logo-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
     vertical-align: middle;
     flex-shrink: 0;
 }
@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     padding: 0.5rem 0;
     letter-spacing: 0.5px;
@@ -23,32 +23,32 @@
 /* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {
     .nav-logo-icon {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
     }
 
     .logo {
-        font-size: 20px;
+        font-size: 24px;
         scale: 1;
     }
 }
 
 @media (max-width: 480px) {
     .nav-logo-icon {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
     }
 
     .logo {
-        font-size: 20px;
+        font-size: 22px;
         scale: 1;
     }
 }
 
 @media (max-width: 360px) {
     .nav-logo-icon {
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
     }
 
     .logo {

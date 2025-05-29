@@ -483,12 +483,23 @@ body {
     
     .mobile-menu a {
         padding: 0.8rem 1rem;
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     
     .mobile-menu a i {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        margin-right: 12px;
+    }
+
+    /* Улучшение стилей для логотипа */
+    .nav-logo-icon {
+        width: 32px;
+        height: 32px;
         margin-right: 10px;
+    }
+
+    .logo {
+        font-size: 24px;
     }
 }
 
@@ -533,13 +544,14 @@ body {
     }
     
     .hero-text {
-        text-align: center;
+        text-align: left; /* Изменено с center на left */
         padding: 0 var(--mobile-padding);
     }
     
     .hero-description {
-        font-size: clamp(1rem, 3.5vw, 1.4rem);
-        padding: 0 var(--mobile-padding);
+        font-size: clamp(1.2rem, 4vw, 1.6rem); /* Увеличен размер шрифта */
+        padding: 0;
+        text-align: left; /* Добавлено выравнивание по левому краю */
     }
     
     .hero-description p:hover {
@@ -553,41 +565,60 @@ body {
 
     /* Медиа-запросы для адаптивности */
     .nav-logo-icon {
-        width: 28px;
-        height: 28px;
+        width: 32px; /* Увеличено с 28px */
+        height: 32px; /* Увеличено с 28px */
         margin-right: 10px;
     }
 
     .logo {
-        font-size: 22px;
-        transform: scale(0.95);
+        font-size: 24px; /* Увеличено с 22px */
+        transform: scale(1); /* Изменено с 0.95 */
     }
 
-    @media (max-width: 480px) {
-        .nav-logo-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-        }
+    .materials-highlight {
+        font-size: clamp(1.3rem, 4.2vw, 1.8rem); /* Увеличен размер шрифта */
+        font-weight: 700; /* Жирнее текст */
+    }
+}
 
-        .logo {
-            font-size: 20px;
-            transform: scale(0.9);
-        }
+@media (max-width: 480px) {
+    .nav-logo-icon {
+        width: 30px; /* Увеличено с 24px */
+        height: 30px; /* Увеличено с 24px */
+        margin-right: 8px;
     }
 
-    /* Дополнительная оптимизация для очень маленьких экранов */
-    @media (max-width: 360px) {
-        .nav-logo-icon {
-            width: 22px;
-            height: 22px;
-            margin-right: 6px;
-        }
+    .logo {
+        font-size: 22px; /* Увеличено с 20px */
+        transform: scale(0.95); /* Изменено с 0.9 */
+    }
 
-        .logo {
-            font-size: 18px;
-            transform: scale(0.85);
-        }
+    .hero-text h1 {
+        font-size: clamp(2.2rem, 7vw, 3.2rem); /* Увеличен размер шрифта */
+    }
+    
+    .hero-description {
+        font-size: clamp(1.1rem, 3.5vw, 1.4rem); /* Увеличен размер шрифта */
+        text-align: left; /* Добавлено выравнивание по левому краю */
+    }
+}
+
+/* Дополнительная оптимизация для очень маленьких экранов */
+@media (max-width: 360px) {
+    .nav-logo-icon {
+        width: 28px; /* Увеличено с 22px */
+        height: 28px; /* Увеличено с 22px */
+        margin-right: 6px;
+    }
+
+    .logo {
+        font-size: 20px; /* Увеличено с 18px */
+        transform: scale(0.9); /* Изменено с 0.85 */
+    }
+
+    .hero-description {
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        line-height: 1.5;
     }
 }
 
@@ -2237,366 +2268,34 @@ html, body {
     }
 
     .hero-text {
-        text-align: left;
+        text-align: left; /* Изменено с center */
         margin-bottom: 32px;
     }
 
     .hero-text h1 {
-        font-size: clamp(32px, 8vw, 48px);
+        font-size: clamp(36px, 8vw, 52px); /* Увеличен размер шрифта */
         line-height: 1.2;
         font-weight: 800;
         letter-spacing: -0.03em;
         margin-bottom: 16px;
-        background: linear-gradient(135deg, 
-            var(--secondary) 0%,
-            var(--primary) 50%,
-            var(--secondary-light) 100%
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
     }
 
+    /* Улучшение описания */
     .hero-description {
-        font-size: clamp(16px, 4vw, 18px);
-        line-height: 1.6;
-        color: var(--text-secondary);
-        margin-bottom: 24px;
-    }
-
-    /* Карточки разделов */
-    .topic-grid {
-        padding: 0 var(--mobile-padding);
-        display: grid;
-        gap: 16px;
-        margin-bottom: 32px;
-    }
-
-    .topic-card {
-        background: rgba(17, 25, 40, 0.8);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-radius: var(--card-radius);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 24px;
-        transition: all 0.3s ease;
-    }
-
-    .topic-card:active {
-        transform: scale(0.98);
-        background: rgba(17, 25, 40, 0.9);
-    }
-
-    .topic-header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 16px;
-    }
-
-    .topic-icon {
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 14px;
-        font-size: 24px;
-        color: var(--primary-light);
-    }
-
-    .topic-title {
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        color: var(--text);
-    }
-
-    .topic-description {
-        font-size: 15px;
-        line-height: 1.6;
-        color: var(--text-secondary);
-        margin-bottom: 16px;
-    }
-
-    /* Нижняя навигация */
-    .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: var(--header-height);
-        background: rgba(15, 23, 42, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 0 var(--mobile-padding);
-        z-index: 1000;
-    }
-
-    .bottom-nav a {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        color: var(--text-secondary);
-        font-size: 12px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
-
-    .bottom-nav a i {
-        font-size: 22px;
-        margin-bottom: 2px;
-    }
-
-    .bottom-nav a.active {
-        color: var(--primary-light);
-    }
-
-    .bottom-nav a:active {
-        transform: scale(0.95);
-    }
-
-    /* Улучшенный фон */
-    .particles-background {
-        opacity: 0.2;
-    }
-
-    .gradient-overlay {
-        background: 
-            radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
-    }
-
-    /* Оптимизация для маленьких экранов */
-    @media (max-width: 360px) {
-        :root {
-            --mobile-padding: 12px;
-            --card-radius: 16px;
-        }
-
-        .topic-card {
-            padding: 20px;
-        }
-
-        .topic-icon {
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-        }
-
-        .topic-title {
-            font-size: 18px;
-        }
-
-        .topic-description {
-            font-size: 14px;
-        }
-    }
-
-    /* Оптимизация для высоких экранов */
-    @media (min-height: 800px) {
-        .hero {
-            justify-content: flex-start;
-            padding-top: calc(var(--header-height) + 40px);
-        }
-
-        .topic-grid {
-            gap: 20px;
-        }
-    }
-}
-
-/* Улучшения для тач-интерфейса */
-@media (hover: none) {
-    * {
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    .topic-card:active,
-    .mobile-menu a:active,
-    .bottom-nav a:active {
-        transition: all 0.2s ease;
-    }
-}
-
-/* Предотвращение горизонтального скролла */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-/* Фиксированная ширина контента */
-.container {
-    max-width: 100%;
-    margin: 0 auto;
-    position: relative;
-}
-
-/* Оптимизация для ландшафтной ориентации */
-@media (max-height: 500px) and (orientation: landscape) {
-    .about-hero {
-        min-height: auto;
-        padding: 80px 0 40px;
-    }
-
-    .dark-section {
-        padding: 30px 0;
-    }
-
-    .join-options,
-    .support-options {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-    }
-}
-
-/* Базовые мобильные оптимизации */
-:root {
-    --header-height-mobile: 60px;
-    --mobile-padding: 16px;
-}
-
-/* Оптимизация для мобильных устройств */
-@media (max-width: 768px) {
-    /* Улучшенная производительность прокрутки */
-    body {
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-    }
-
-    /* Оптимизация контейнера */
-    .container {
-        padding-left: var(--mobile-padding);
-        padding-right: var(--mobile-padding);
-    }
-
-    /* Оптимизация навигации */
-    .main-nav {
-        height: var(--header-height-mobile);
-    }
-
-    .nav-content {
-        padding: 0 var(--mobile-padding);
-    }
-
-    .logo {
-        font-size: 20px;
-        padding: 8px 0;
-    }
-
-    /* Улучшенное мобильное меню */
-    .mobile-menu {
-        top: var(--header-height-mobile);
-        background: rgba(15, 23, 42, 0.98);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 8px;
-        border-radius: 0 0 16px 16px;
-    }
-
-    .mobile-menu a {
-        padding: 14px;
-        margin: 4px 0;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-weight: 500;
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    /* Оптимизация героя */
-    .hero {
-        padding-top: calc(var(--header-height-mobile) + 20px);
-        min-height: 100svh;
-        width: 100%;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, 
-            var(--background) 0%, 
-            rgba(30, 27, 75, 1) 100%
-        );
-        overflow: hidden;
-    }
-
-    .hero-content {
-        padding: var(--mobile-padding);
-        width: 100%;
-    }
-
-    .hero-text {
-        text-align: center;
-        padding: 0 var(--mobile-padding);
-    }
-
-    .hero-description {
-        font-size: clamp(1rem, 3.5vw, 1.4rem);
-        padding: 0 var(--mobile-padding);
+        font-size: clamp(1.2rem, 4vw, 1.6rem); /* Увеличен размер текста */
+        line-height: 1.5;
+        margin-top: 0.8rem;
+        text-align: left; /* Гарантируем левое выравнивание */
     }
 
     .hero-description p {
-        margin: 0.8rem 0;
+        margin-bottom: 0.4rem;
     }
 
     .materials-highlight {
-        font-size: clamp(1.1rem, 4vw, 1.5rem);
-        margin: 1.2rem 0;
-        padding: 0.3em 0;
-    }
-
-    .gradient-overlay {
-        opacity: 0.8;
-    }
-
-    .particles-background {
-        opacity: 0.4;
-    }
-
-    /* Оптимизация карточек */
-    .cards-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 16px var(--mobile-padding);
-    }
-
-    .card {
-        padding: 20px;
-        border-radius: 16px;
-    }
-
-    /* Оптимизация кнопок */
-    .cta-button {
-        width: 100%;
-        padding: 16px;
-        font-size: 1rem;
-        justify-content: center;
-        border-radius: 12px;
-    }
-
-    /* Оптимизация секций */
-    .tech-section {
-        padding: 40px var(--mobile-padding);
-    }
-
-    .tech-content {
-        padding: 20px;
-        border-radius: 16px;
-    }
-
-    .tech-features {
-        gap: 16px;
-    }
-
-    .feature {
-        padding: 20px;
-        border-radius: 12px;
+        font-size: clamp(1.3rem, 4.2vw, 1.8rem); /* Увеличен размер */
+        font-weight: 700; /* Жирнее текст */
+        margin-top: 0.8rem;
     }
 }
 
@@ -2607,12 +2306,12 @@ html, body {
     }
 
     .logo {
-        font-size: 18px;
+        font-size: 22px;
     }
 
     .nav-logo-icon {
-        width: 20px;
-        height: 20px;
+        width: 28px;
+        height: 28px;
     }
 
     .hero-text {
@@ -2620,93 +2319,12 @@ html, body {
     }
 
     .hero-description {
-        font-size: clamp(0.9rem, 3.2vw, 1.2rem);
+        font-size: clamp(1.1rem, 3.5vw, 1.4rem); /* Увеличен с 0.9rem */
     }
 
     .materials-highlight {
-        font-size: clamp(1rem, 3.8vw, 1.3rem);
-    }
-}
-
-/* Оптимизация для высоких мобильных экранов */
-@media (min-height: 800px) and (max-width: 768px) {
-    .hero {
-        min-height: 90svh;
-    }
-
-    .hero-content {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-}
-
-/* Оптимизация для ландшафтной ориентации */
-@media (max-height: 600px) and (orientation: landscape) {
-    .hero {
-        min-height: auto;
-        padding: 80px 0;
-    }
-
-    .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .tech-features {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Улучшения производительности для мобильных */
-@media (max-width: 768px) {
-    /* Оптимизация анимаций */
-    .card,
-    .feature,
-    .cta-button {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        will-change: transform;
-    }
-
-    /* Оптимизация изображений и градиентов */
-    .gradient-overlay {
-        background: linear-gradient(135deg, 
-            rgba(124, 58, 237, 0.1) 0%,
-            rgba(96, 165, 250, 0.1) 100%
-        );
-    }
-
-    /* Оптимизация шрифтов */
-    .hero-text h1,
-    .gradient-text {
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    /* Улучшение тактильной обратной связи */
-    .card:active,
-    .feature:active,
-    .cta-button:active {
-        transform: scale(0.98);
-    }
-}
-
-/* Оптимизация для устройств с высоким DPI */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .gradient-overlay,
-    .particles-background {
-        background-size: 25px 25px;
-    }
-}
-
-/* Оптимизация для жестов */
-@media (hover: none) and (pointer: coarse) {
-    .nav-links a::after,
-    .highlight::after {
-        display: none;
-    }
-
-    .card:hover,
-    .feature:hover {
-        transform: none;
+        font-size: clamp(1.2rem, 3.8vw, 1.5rem); /* Увеличен с 1rem */
+        font-weight: 700;
     }
 }
 
