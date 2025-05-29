@@ -13,6 +13,24 @@
     <link rel="stylesheet" href="./css/logo.css">
     <link rel="stylesheet" href="./css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+    ym(102262736, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+ </script>
+ <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+ <!-- /Yandex.Metrika counter -->
+  
 </head>
 <body>
     <nav class="main-nav">
@@ -27,6 +45,7 @@
                 <div class="nav-links">
                     <a href="#networks">Компьютерные сети</a>
                     <a href="#python">Python</a>
+                    <a href="#csharp">C#</a>
                     <a href="#git">Git</a>
                     <a href="#web">Web-разработка</a>
                     <a href="#shell">Командная строка</a>
@@ -40,12 +59,13 @@
     </nav>
 
     <div class="mobile-menu">
-        <a href="#networks">Компьютерные сети</a>
-        <a href="#python">Python</a>
-        <a href="#git">Git</a>
-        <a href="#web">Web-разработка</a>
-        <a href="#shell">Командная строка</a>
-        <a href="./about.html">О проекте</a>
+        <a href="#networks"><i class="fas fa-network-wired"></i>Компьютерные сети</a>
+        <a href="#python"><i class="fab fa-python"></i>Python</a>
+        <a href="#csharp"><i class="fas fa-laptop-code"></i>C#</a>
+        <a href="#git"><i class="fab fa-git-alt"></i>Git</a>
+        <a href="#web"><i class="fab fa-html5"></i>Web-разработка</a>
+        <a href="#shell"><i class="fas fa-terminal"></i>Командная строка</a>
+        <a href="./about.html"><i class="fas fa-info-circle"></i>О проекте</a>
     </div>
 
     <header class="hero">
@@ -86,7 +106,7 @@
                             <p>Настройка маршрутизаторов Cisco, коммутаторов, межсетевых экранов</p>
                         </div>
                         <div class="feature">
-                            <i class="fa-solid fa-shield-halved fa-2x"></i>
+                            <i class="fas fa-shield-alt fa-2x"></i>
                             <h4>Безопасность</h4>
                             <p>Защита сетей, VPN, файрволы, обнаружение вторжений</p>
                         </div>
@@ -122,6 +142,33 @@
                         </div>
                     </div>
                     <a href="./python/index.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="csharp" class="tech-section">
+            <h2>C#</h2>
+            <div class="tech-content">
+                <div class="tech-description">
+                    <p class="tech-intro">Изучите C# - мощный, современный язык программирования от Microsoft.</p>
+                    <div class="tech-features">
+                        <div class="feature">
+                            <i class="fas fa-laptop-code fa-2x"></i>
+                            <h4>Основы C#</h4>
+                            <p>Синтаксис, типы данных, классы, интерфейсы, LINQ, асинхронное программирование</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-window-restore fa-2x"></i>
+                            <h4>.NET Платформа</h4>
+                            <p>ASP.NET Core, Entity Framework, Blazor, десктопные приложения</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-gamepad fa-2x"></i>
+                            <h4>Разработка игр</h4>
+                            <p>Unity, основы геймдизайна, игровая физика, многопользовательские игры</p>
+                        </div>
+                    </div>
+                    <a href="./csharp/index.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -226,7 +273,83 @@
         </div>
     </footer>
 
+    <!-- Всплывающее уведомление (оставляем для функции копирования) -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Ссылка скопирована</span>
+    </div>
+
     <script src="./js/main.js"></script>
     <script src="./js/animations.js"></script>
+    
+    <script>
+        // Функционал копирования ссылки (оставляем для других кнопок, которые могут использовать эту функциональность)
+        document.addEventListener('DOMContentLoaded', function() {
+            const shareButtons = document.querySelectorAll('[data-share]');
+            const notification = document.getElementById('notification');
+            
+            if (shareButtons.length > 0) {
+                shareButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Текст для копирования (ссылка на сайт)
+                        const siteUrl = 'skl-academy.ru';
+                        
+                        // Копирование в буфер обмена
+                        navigator.clipboard.writeText(siteUrl)
+                            .then(() => {
+                                // Показываем уведомление
+                                notification.classList.add('show');
+                                
+                                // Скрываем уведомление через 3 секунды
+                                setTimeout(() => {
+                                    notification.classList.remove('show');
+                                }, 3000);
+                            })
+                            .catch(err => {
+                                console.error('Не удалось скопировать: ', err);
+                                // Альтернативный способ копирования для старых браузеров
+                                fallbackCopyTextToClipboard(siteUrl);
+                            });
+                    });
+                });
+            }
+            
+            // Резервный метод копирования для старых браузеров
+            function fallbackCopyTextToClipboard(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                
+                // Делаем элемент невидимым
+                textArea.style.position = "fixed";
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.width = "2em";
+                textArea.style.height = "2em";
+                textArea.style.padding = "0";
+                textArea.style.border = "none";
+                textArea.style.outline = "none";
+                textArea.style.boxShadow = "none";
+                textArea.style.background = "transparent";
+                
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        notification.classList.add('show');
+                        setTimeout(() => {
+                            notification.classList.remove('show');
+                        }, 3000);
+                    }
+                } catch (err) {
+                    console.error('Ошибка при копировании: ', err);
+                }
+                
+                document.body.removeChild(textArea);
+            }
+        });
+    </script>
 </body>
 </html> 

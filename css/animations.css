@@ -286,3 +286,191 @@
         transform: translateY(-50px) translateX(50px);
     }
 } 
+
+/* Анимации для элементов при скролле */
+.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Анимация пульсации для кнопок */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(124, 58, 237, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+    }
+}
+
+.pulse {
+    animation: pulse 1.5s infinite;
+}
+
+/* Анимации для частиц в фоне */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-30px) translateX(15px);
+    }
+    50% {
+        transform: translateY(-15px) translateX(-15px);
+    }
+    75% {
+        transform: translateY(30px) translateX(15px);
+    }
+}
+
+.particle {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.5), rgba(96, 165, 250, 0.5));
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Улучшенные анимации для интерактивных элементов */
+.tech-section,
+.feature,
+.cta-button,
+.nav-links a,
+.logo {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Улучшенная анимация для мобильного меню */
+.mobile-menu {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* Анимации для материалов и текста */
+.materials-highlight {
+    transition: all 0.5s ease;
+    position: relative;
+    z-index: 1;
+}
+
+/* Адаптивные улучшения для анимаций на мобильных устройствах */
+@media (max-width: 768px) {
+    /* Уменьшаем количество анимаций на мобильных для производительности */
+    .particle {
+        display: none;
+    }
+    
+    /* Показываем только каждую 3-ю частицу для экономии ресурсов */
+    .particle:nth-child(3n) {
+        display: block;
+    }
+    
+    /* Более быстрые анимации для мобильных */
+    .fade-in {
+        transition: opacity 0.3s ease, transform 0.3s ease !important;
+    }
+    
+    /* Улучшенная адаптивность для верхней навигации */
+    .main-nav {
+        height: auto;
+        padding: 10px 0;
+    }
+    
+    .nav-content {
+        padding: 0 16px;
+    }
+    
+    .logo {
+        font-size: 18px;
+    }
+    
+    .nav-logo-icon {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Улучшенная анимация для верхней части сайта */
+.hero {
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-background {
+    animation: gradientFlow 15s ease infinite alternate;
+}
+
+/* Улучшения для маленьких экранов */
+@media (max-width: 480px) {
+    .nav-logo-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .logo .gradient-text {
+        font-size: 16px;
+    }
+    
+    .nav-content {
+        padding: 0 12px;
+    }
+    
+    .hero-text h1 {
+        font-size: clamp(28px, 7vw, 36px);
+    }
+    
+    .hero-description p {
+        font-size: clamp(14px, 3.5vw, 16px);
+    }
+}
+
+/* Улучшения для очень маленьких экранов */
+@media (max-width: 360px) {
+    .nav-logo-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .logo .gradient-text {
+        font-size: 14px;
+    }
+    
+    .mobile-menu a {
+        font-size: 16px;
+        padding: 14px 16px;
+    }
+}
+
+/* Улучшения для ландшафтной ориентации на мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 80px 0 40px;
+    }
+    
+    .hero-content {
+        padding: 0 5%;
+    }
+    
+    .tech-section {
+        padding: 40px 0;
+    }
+    
+    .mobile-menu {
+        overflow-y: auto;
+        max-height: 100vh;
+    }
+}
+
+/* Плавная анимация для всех элементов */
+* {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+} 
