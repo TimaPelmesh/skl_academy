@@ -253,6 +253,51 @@
     .topic-card:active {
         transform: scale(0.98);
     }
+
+    .gradient-text {
+        background-size: 200% 200%; /* Уменьшенный размер градиента для мобильных */
+        animation-duration: 6s; /* Ускорена анимация */
+    }
+    
+    .particles-background {
+        background-size: 200px 200px; /* Увеличил базовый размер частиц */
+    }
+    
+    .particles-background::before,
+    .particles-background::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: 
+            radial-gradient(circle at 25% 25%, rgba(124, 58, 237, 0.15) 0%, transparent 40px),
+            radial-gradient(circle at 75% 75%, rgba(96, 165, 250, 0.15) 0%, transparent 40px);
+        background-size: 200px 200px; /* Увеличен размер градиента */
+        opacity: 0.4;
+        animation: particlesMove 20s linear infinite;
+    }
+    
+    @keyframes particlesMove {
+        0% {
+            background-position: 0% 0%;
+        }
+        100% {
+            background-position: 100% 100%;
+        }
+    }
+}
+
+/* Дополнительные улучшения для очень маленьких экранов */
+@media (max-width: 380px) {
+    .particles-background,
+    .particles-background::before,
+    .particles-background::after {
+        background-size: 150px 150px; /* Еще больше увеличиваем размер для очень маленьких экранов */
+        opacity: 0.35;
+    }
+    
+    .gradient-overlay {
+        opacity: 0.9; /* Увеличиваем непрозрачность фонового градиента */
+    }
 }
 
 /* Анимации для кнопок */

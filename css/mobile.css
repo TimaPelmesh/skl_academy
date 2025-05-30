@@ -1,0 +1,230 @@
+/* Специализированные стили для мобильных устройств */
+
+/* Базовые стили для мобильных */
+@media (max-width: 768px) {
+    /* Улучшаем четкость текста */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        letter-spacing: -0.01em;
+    }
+    
+    h1, h2, h3, h4 {
+        text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        letter-spacing: -0.02em;
+    }
+    
+    /* Увеличенные шрифты */
+    .hero-text h1 {
+        font-weight: 800;
+    }
+    
+    .hero-description p {
+        font-weight: 500;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .materials-highlight {
+        font-weight: 700;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        letter-spacing: -0.01em;
+    }
+    
+    /* Улучшения для блоков контента */
+    .tech-section {
+        margin-bottom: 30px;
+    }
+    
+    .tech-section h2 {
+        font-weight: 700;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    
+    .tech-intro {
+        font-weight: 500;
+    }
+    
+    /* Улучшения для карточек */
+    .feature {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .feature:active {
+        transform: scale(0.98);
+    }
+    
+    /* Улучшенный стиль для фона */
+    .particles-background {
+        animation: particlesMoveMobile 25s linear infinite;
+    }
+    
+    @keyframes particlesMoveMobile {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 50% 50%; }
+        100% { background-position: 0% 0%; }
+    }
+    
+    /* Новый фон для мобильных устройств - замена пиксельного на более гладкий */
+    .hero-background {
+        background: linear-gradient(135deg, 
+            var(--background) 0%, 
+            rgba(30, 27, 75, 1) 100%
+        );
+        opacity: 1;
+    }
+    
+    /* Дополнительные частицы для более гладкого визуального эффекта */
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50px),
+            radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.1) 0%, transparent 50px),
+            radial-gradient(circle at 40% 60%, rgba(157, 78, 221, 0.1) 0%, transparent 60px),
+            radial-gradient(circle at 60% 30%, rgba(96, 165, 250, 0.1) 0%, transparent 40px);
+        background-size: 200px 200px;
+        opacity: 0.4;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    /* Улучшенная градиентная подложка */
+    .gradient-overlay {
+        background: linear-gradient(135deg, 
+            rgba(15, 23, 42, 0.9) 0%, 
+            rgba(30, 27, 75, 0.9) 100%
+        );
+        opacity: 1;
+    }
+}
+
+/* Дополнительные стили для маленьких экранов */
+@media (max-width: 380px) {
+    .logo {
+        letter-spacing: -0.03em;
+    }
+    
+    .hero-text h1 {
+        font-size: 34px !important;
+    }
+    
+    .hero-description p {
+        font-size: 17px !important;
+        line-height: 1.6 !important;
+    }
+    
+    .materials-highlight {
+        font-size: 19px !important;
+    }
+    
+    .tech-section h2 {
+        font-size: 26px !important;
+    }
+    
+    .feature h4 {
+        font-size: 19px !important;
+    }
+    
+    .feature p {
+        font-size: 16px !important;
+    }
+    
+    .hero-background {
+        background: linear-gradient(135deg, 
+            rgba(15, 23, 42, 1) 0%, 
+            rgba(30, 27, 75, 1) 100%
+        );
+    }
+    
+    .particles-background {
+        opacity: 0.4;
+        background-size: 200px 200px;
+    }
+}
+
+/* Улучшения для средних экранов смартфонов */
+@media (min-width: 381px) and (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 36px !important;
+    }
+    
+    .hero-description p {
+        font-size: 18px !important;
+    }
+    
+    .materials-highlight {
+        font-size: 20px !important;
+    }
+}
+
+/* Улучшения для тач-интерфейса */
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем зоны касания */
+    .mobile-menu a {
+        padding: 16px !important;
+    }
+    
+    .cta-button {
+        padding: 16px 20px !important;
+        min-height: 54px;
+    }
+    
+    .feature {
+        padding: 20px !important;
+    }
+    
+    /* Улучшаем обратную связь при нажатии */
+    .mobile-menu a:active,
+    .cta-button:active,
+    .feature:active {
+        transform: scale(0.97);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Стили для поддержки класса touch-active */
+.touch-active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Улучшения для активных элементов */
+.mobile-device .cta-button:active,
+.mobile-device .feature:active,
+.mobile-device .mobile-menu a:active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Улучшение отображения шрифтов на малых экранах */
+@media (max-width: 768px) {
+    * {
+        -webkit-text-size-adjust: none;
+    }
+}
+
+/* Стили для активного состояния в меню */
+.mobile-menu a.active {
+    background-color: rgba(124, 58, 237, 0.2);
+    border-left: 3px solid var(--primary);
+}
+
+.mobile-menu a.active i {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.particles-background {
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(124, 58, 237, 0.2) 0%, transparent 70px),
+        radial-gradient(circle at 75% 75%, rgba(96, 165, 250, 0.2) 0%, transparent 70px),
+        radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 100px);
+    background-size: 300px 300px;
+    animation: particlesMoveMobile 25s linear infinite;
+    opacity: 0.6;
+} 
