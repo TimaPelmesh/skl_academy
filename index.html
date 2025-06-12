@@ -2,21 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="text-size-adjust" content="100%">
-    <meta name="msapplication-tap-highlight" content="no">
-    <title>SKL Academy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>SKL Academy - Современное обучение IT</title>
     
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="./images/icon.ico" type="image/x-icon">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/logo.css">
-    <link rel="stylesheet" href="./css/animations.css">
-    <link rel="stylesheet" href="./css/mobile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -34,327 +23,497 @@
  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
  <!-- /Yandex.Metrika counter -->
   
+    <!-- Favicon / Иконки сайта -->
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    
+    <!-- SEO Мета-теги -->
+    <meta name="description" content="SKL Academy - образовательная платформа для изучения IT-технологий. Бесплатные курсы по Python, C#, Git, Web-разработке и компьютерным сетям.">
+    <meta name="keywords" content="IT образование, курсы программирования, Python, C#, Git, Web-разработка, компьютерные сети, бесплатное обучение">
+    <meta name="author" content="SKL Academy">
+    
+    <!-- Open Graph мета-теги для социальных сетей -->
+    <meta property="og:title" content="SKL Academy - Современное обучение IT">
+    <meta property="og:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skl-academy.ru/">
+    <meta property="og:image" content="images/skl-academy-og.jpg">
+    
+    <!-- Twitter Card мета-теги -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SKL Academy - Современное обучение IT">
+    <meta name="twitter:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
+    <meta name="twitter:image" content="images/skl-academy-og.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://skl-academy.ru/">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/footer-buttons.css">
+    <link rel="stylesheet" href="css/additional-styles.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/dark-particles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+        
+        .course-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--background) 0%, rgba(30, 27, 75, 1) 100%);
+        }
+        
+        .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        
+        /* Стили для мобильного меню */
+        .mobile-menu {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .mobile-menu.hidden {
+            display: none;
+        }
+        
+        .mobile-menu-btn {
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+
+    
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-content">
-            <div class="nav-left">
-                <a href="./index.html" class="logo">
-                    <img src="./images/icon.ico" alt="SKL Academy Logo" class="nav-logo-icon">
-                    <span class="gradient-text">SKL Academy</span>
-                </a>
-            </div>
-            <div class="nav-right">
-                <div class="nav-links">
-                    <a href="#networks">Компьютерные сети</a>
-                    <a href="#python">Python</a>
-                    <a href="#csharp">C#</a>
-                    <a href="#git">Git</a>
-                    <a href="#web">Web-разработка</a>
-                    <a href="#shell">Командная строка</a>
-                    <a href="./about.html" class="nav-about">О проекте</a>
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50" style="background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="images/icon.ico" alt="SKL Academy" class="w-8 h-8 mr-3">
+                    <h1 class="text-2xl font-bold gradient-text">SKL Academy</h1>
                 </div>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8 justify-end">
+                        <li><a href="about.html" class="font-medium text-gray-200 hover:text-blue-400 transition">О проекте</a></li>
+                        <li><a href="#contacts" class="font-medium text-gray-200 hover:text-blue-400 transition" onclick="scrollToContacts(event)">Контакты</a></li>
+                    </ul>
+                </nav>
+                <button type="button" class="md:hidden text-gray-200 mobile-menu-btn p-2" style="z-index: 100; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent;">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
-    </nav>
-
-    <div class="mobile-menu">
-        <a href="#networks"><i class="fas fa-network-wired"></i>Компьютерные сети</a>
-        <a href="#python"><i class="fab fa-python"></i>Python</a>
-        <a href="#csharp"><i class="fas fa-laptop-code"></i>C#</a>
-        <a href="#git"><i class="fab fa-git-alt"></i>Git</a>
-        <a href="#web"><i class="fab fa-html5"></i>Web-разработка</a>
-        <a href="#shell"><i class="fas fa-terminal"></i>Командная строка</a>
-        <a href="./about.html"><i class="fas fa-info-circle"></i>О проекте</a>
-    </div>
-
-    <header class="hero">
-        <div class="hero-content">
-            <div class="hero-main">
-                <div class="hero-text">
-                    <h1 class="welcome-text gradient-text">Добро пожаловать!</h1>
-                    <div class="hero-description">
-                        <p>Образовательная платформа, созданная энтузиастом для будущих IT-специалистов</p>
-                        <p class="materials-highlight">С бесплатными образовательными материалами</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-background">
-            <div class="gradient-overlay"></div>
-            <div class="particles-background"></div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden" style="background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: absolute; width: 100%; top: 100%; left: 0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
+            <ul class="py-4 text-center">
+                <li class="py-3"><a href="about.html" class="block font-medium text-gray-200 hover:text-blue-400 transition text-lg">О проекте</a></li>
+                <li class="py-3"><a href="#contacts" class="block font-medium text-gray-200 hover:text-blue-400 transition text-lg" onclick="scrollToContacts(event)">Контакты</a></li>
+            </ul>
         </div>
     </header>
 
-    <main>
-        <section id="networks" class="tech-section">
-            <h2>Компьютерные сети</h2>
-            <div class="tech-content">
-                <div class="tech-description">
-                    <p class="tech-intro">Изучите основы компьютерных сетей: от базовых концепций до продвинутых технологий.</p>
-                    <div class="tech-features">
-                        <div class="feature">
-                            <i class="fa-solid fa-network-wired fa-2x"></i>
-                            <h4>Основы сетей</h4>
-                            <p>Модель OSI, TCP/IP, IP-адресация, маршрутизация и коммутация</p>
+    <!-- Hero Section -->
+    <section class="hero-gradient bg-particles py-16 md:py-24 relative">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 gradient-text glow-text">Добро пожаловать!</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-4 text-gray-200">Образовательная платформа, созданная энтузиастом для будущих IT-специалистов</p>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-300">С бесплатными образовательными материалами</p>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="py-16 bg-particles relative">
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-3xl font-bold text-center text-gray-100 mb-12 glow-text">Наши курсы</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Computer Networks Card -->
+                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="icon-circle bg-blue-100 text-blue-600">
+                        <i class="fas fa-network-wired text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Компьютерные сети</h3>
+                    <p class="text-gray-300 mb-4">Изучите основы компьютерных сетей: от базовых концепций до продвинутых технологий.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Модель OSI, TCP/IP, IP-адресация</span>
                         </div>
-                        <div class="feature">
-                            <i class="fa-solid fa-server fa-2x"></i>
-                            <h4>Сетевое оборудование</h4>
-                            <p>Настройка маршрутизаторов Cisco, коммутаторов, межсетевых экранов</p>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Настройка Cisco оборудования</span>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-shield-alt fa-2x"></i>
-                            <h4>Безопасность</h4>
-                            <p>Защита сетей, VPN, файрволы, обнаружение вторжений</p>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Безопасность сетей и VPN</span>
                         </div>
                     </div>
-                    <a href="./courses/networks/index.html" class="cta-button">
-                        <span>Начать обучение</span>
-                        <i class="fas fa-arrow-right"></i>
+                    
+                    <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
+                </div>
+                
+                <!-- Python Card -->
+                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="icon-circle bg-green-100 text-green-600">
+                        <i class="fab fa-python text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Python</h3>
+                    <p class="text-gray-300 mb-4">Освойте Python - от основ до продвинутых техник программирования.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Синтаксис, ООП, работа с файлами</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Декораторы, генераторы, асинхронность</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Django, Flask, FastAPI, базы данных</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
+                </div>
+                
+                <!-- C# Card -->
+                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="icon-circle bg-purple-100 text-purple-600">
+                        <i class="fas fa-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-100">C#</h3>
+                    <p class="text-gray-300 mb-4">Изучите C# - мощный, современный язык программирования от Microsoft.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Синтаксис, LINQ, асинхронность</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">ASP.NET Core, Entity Framework</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Разработка игр на Unity</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
+                </div>
+                
+                <!-- Git Card -->
+                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="icon-circle bg-red-100 text-red-600">
+                        <i class="fab fa-git-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Git</h3>
+                    <p class="text-gray-300 mb-4">Изучите Git - самую популярную систему контроля версий.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Основные команды, ветвление</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">GitHub, Pull Request, Issues</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Командная работа, Git Flow</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
+                </div>
+                
+                <!-- Web Development Card -->
+                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="icon-circle bg-yellow-100 text-yellow-600">
+                        <i class="fas fa-laptop-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Web-разработка</h3>
+                    <p class="text-gray-300 mb-4">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-yellow-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">HTML5, семантическая верстка</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-yellow-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">CSS3, Flexbox, Grid, анимации</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-yellow-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Адаптивный дизайн, Mobile First</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="block w-full bg-yellow-600 hover:bg-yellow-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
+                </div>
+                
+                <!-- Command Line Card -->
+                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="icon-circle bg-indigo-100 text-indigo-600">
+                        <i class="fas fa-terminal text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Командная строка</h3>
+                    <p class="text-gray-300 mb-4">Освойте мощные инструменты командной строки в Linux и Windows.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Linux Bash, скрипты, автоматизация</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Windows PowerShell, командлеты</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Реальные сценарии использования</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-particles relative">
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-3xl font-bold text-center text-gray-100 mb-12 glow-text">Почему выбирают SKL Academy?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
+                    <div class="icon-circle bg-blue-100 text-blue-600 inline-flex">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-100">Сообщество энтузиастов</h3>
+                    <p class="text-gray-300">Все материалы публикуются и обновляются сообществом увлеченных IT-специалистов.</p>
+                </div>
+                
+                <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
+                    <div class="icon-circle bg-green-100 text-green-600 inline-flex">
+                        <i class="fas fa-book text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-100">Обширная теоретическая база</h3>
+                    <p class="text-gray-300">Предлагаем полноценную теоретическую базу знаний по всем IT-направлениям.</p>
+                </div>
+                
+                <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
+                    <div class="icon-circle bg-purple-100 text-purple-600 inline-flex">
+                        <i class="fas fa-hand-holding-heart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-100">Полностью бесплатно</h3>
+                    <p class="text-gray-300">Все материалы и курсы доступны совершенно бесплатно для всех желающих.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="new-footer">
+        <div class="container">
+            <div class="footer-grid" id="contacts">
+                <div class="footer-section">
+                    <h3>О проекте</h3>
+                    <p>SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
+                    <p>Бесплатные материалы, практические задания и проекты</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <a href="#" onclick="openGmail(); return false;" class="contact-button gmail" style="display: block; width: 100%; padding: 15px 20px; margin-bottom: 15px; border-radius: 6px; text-align: center; text-decoration: none; font-weight: 600; font-size: 16px; color: white; cursor: pointer; background-color: #ea4335; border-bottom: 3px solid #c5221f; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);">
+                        <i class="fas fa-envelope" style="margin-right: 10px;"></i> Gmail
+                    </a>
+                    <a href="#" onclick="openTelegram(); return false;" class="contact-button telegram" style="display: block; width: 100%; padding: 15px 20px; margin-bottom: 15px; border-radius: 6px; text-align: center; text-decoration: none; font-weight: 600; font-size: 16px; color: white; cursor: pointer; background-color: #0088cc; border-bottom: 3px solid #006699; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);">
+                        <i class="fab fa-telegram" style="margin-right: 10px;"></i> Telegram
                     </a>
                 </div>
             </div>
-        </section>
-
-        <section id="python" class="tech-section">
-            <h2>Python</h2>
-            <div class="tech-content">
-                <div class="tech-description">
-                    <p class="tech-intro">Освойте Python - от основ до продвинутых техник программирования.</p>
-                    <div class="tech-features">
-                        <div class="feature">
-                            <i class="fab fa-python fa-2x"></i>
-                            <h4>Основы Python</h4>
-                            <p>Синтаксис, типы данных, функции, ООП, работа с файлами</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-code-branch fa-2x"></i>
-                            <h4>Продвинутый Python</h4>
-                            <p>Декораторы, генераторы, многопоточность, асинхронное программирование</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-project-diagram fa-2x"></i>
-                            <h4>Фреймворки</h4>
-                            <p>Django, Flask, FastAPI, работа с базами данных</p>
-                        </div>
-                    </div>
-                    <a href="./courses/python/404.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
-                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SKL Academy. Все права защищены.</p>
             </div>
-        </section>
-
-        <section id="csharp" class="tech-section">
-            <h2>C#</h2>
-            <div class="tech-content">
-                <div class="tech-description">
-                    <p class="tech-intro">Изучите C# - мощный, современный язык программирования от Microsoft.</p>
-                    <div class="tech-features">
-                        <div class="feature">
-                            <i class="fas fa-laptop-code fa-2x"></i>
-                            <h4>Основы C#</h4>
-                            <p>Синтаксис, типы данных, классы, интерфейсы, LINQ, асинхронное программирование</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-window-restore fa-2x"></i>
-                            <h4>.NET Платформа</h4>
-                            <p>ASP.NET Core, Entity Framework, Blazor, десктопные приложения</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-gamepad fa-2x"></i>
-                            <h4>Разработка игр</h4>
-                            <p>Unity, основы геймдизайна, игровая физика, многопользовательские игры</p>
-                        </div>
-                    </div>
-                    <a href="./courses/csharp/404.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="git" class="tech-section">
-            <h2>Git</h2>
-            <div class="tech-content">
-                <div class="tech-description">
-                    <p class="tech-intro">Изучите Git - самую популярную систему контроля версий.</p>
-                    <div class="tech-features">
-                        <div class="feature">
-                            <i class="fab fa-git-alt fa-2x"></i>
-                            <h4>Основы Git</h4>
-                            <p>Базовые команды, работа с репозиториями, ветвление и слияние</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fab fa-github fa-2x"></i>
-                            <h4>GitHub</h4>
-                            <p>Работа с удаленными репозиториями, Pull Request, Issues, GitHub Pages</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-code-branch fa-2x"></i>
-                            <h4>Командная работа</h4>
-                            <p>Git Flow, работа в команде, разрешение конфликтов</p>
-                        </div>
-                    </div>
-                    <a href="./courses/git/404.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="web" class="tech-section">
-            <h2>Web-разработка</h2>
-            <div class="tech-content">
-                <div class="tech-description">
-                    <p class="tech-intro">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
-                    <div class="tech-features">
-                        <div class="feature">
-                            <i class="fab fa-html5 fa-2x"></i>
-                            <h4>HTML5</h4>
-                            <p>Семантическая верстка, формы, мультимедиа, доступность</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fab fa-css3-alt fa-2x"></i>
-                            <h4>CSS3</h4>
-                            <p>Flexbox, Grid, анимации, адаптивный дизайн</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-mobile-alt fa-2x"></i>
-                            <h4>Responsive Design</h4>
-                            <p>Mobile First, медиа-запросы, оптимизация для разных устройств</p>
-                        </div>
-                    </div>
-                    <a href="./courses/web/404.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="shell" class="tech-section">
-            <h2>Командная строка</h2>
-            <div class="tech-content">
-                <div class="tech-description">
-                    <p class="tech-intro">Освойте мощные инструменты командной строки в Linux и Windows.</p>
-                    <div class="tech-features">
-                        <div class="feature">
-                            <i class="fab fa-linux fa-2x"></i>
-                            <h4>Linux Bash</h4>
-                            <p>Базовые команды, скрипты, автоматизация задач, работа с файлами и процессами</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fab fa-windows fa-2x"></i>
-                            <h4>Windows PowerShell</h4>
-                            <p>Командлеты, скрипты, управление системой, автоматизация Windows</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-terminal fa-2x"></i>
-                            <h4>Практика</h4>
-                            <p>Реальные сценарии использования, администрирование, решение задач</p>
-                        </div>
-                    </div>
-                    <a href="./courses/shell/404.html" class="cta-button">Начать обучение <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>О проекте</h3>
-                <p>SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
-                <p>Бесплатные материалы, практические задания и проекты</p>
-            </div>
-            <div class="footer-section">
-                <h3>Контакты</h3>
-                <a href="mailto:mr.tim.pumpkin@gmail.com"><i class="fas fa-envelope"></i> Gmail</a>
-                <a href="https://t.me/tima_pelmeshka" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 SKL Academy. Все права защищены.</p>
         </div>
     </footer>
 
-    <!-- Всплывающее уведомление (оставляем для функции копирования) -->
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span>Ссылка скопирована</span>
-    </div>
-
-    <script src="./js/main.js"></script>
-    <script src="./js/animations.js"></script>
-    
     <script>
-        // Функционал копирования ссылки (оставляем для других кнопок, которые могут использовать эту функциональность)
+        // Функция для плавного скролла к контактам
+        function scrollToContacts(event) {
+            event.preventDefault();
+            const contactsSection = document.getElementById('contacts');
+            if (contactsSection) {
+                contactsSection.scrollIntoView({ 
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Функции для открытия Gmail и Telegram
+        function openGmail() {
+            window.open('mailto:mr.tim.pumpkin@gmail.com', '_blank');
+        }
+        
+        function openTelegram() {
+            window.open('https://t.me/tima_pelmeshka', '_blank');
+        }
+        
+        // Инициализация всех функций при загрузке DOM
         document.addEventListener('DOMContentLoaded', function() {
-            const shareButtons = document.querySelectorAll('[data-share]');
-            const notification = document.getElementById('notification');
+            // Добавляем эффекты для кнопок
+            const gmailBtn = document.querySelector('.contact-button.gmail');
+            const telegramBtn = document.querySelector('.contact-button.telegram');
             
-            if (shareButtons.length > 0) {
-                shareButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        // Текст для копирования (ссылка на сайт)
-                        const siteUrl = 'skl-academy.ru';
-                        
-                        // Копирование в буфер обмена
-                        navigator.clipboard.writeText(siteUrl)
-                            .then(() => {
-                                // Показываем уведомление
-                                notification.classList.add('show');
-                                
-                                // Скрываем уведомление через 3 секунды
-                                setTimeout(() => {
-                                    notification.classList.remove('show');
-                                }, 3000);
-                            })
-                            .catch(err => {
-                                console.error('Не удалось скопировать: ', err);
-                                // Альтернативный способ копирования для старых браузеров
-                                fallbackCopyTextToClipboard(siteUrl);
-                            });
+            // Добавляем дополнительные эффекты для кнопок
+            function addButtonEffects() {
+                const contactButtons = document.querySelectorAll('.contact-button');
+                
+                contactButtons.forEach(button => {
+                    // Добавляем эффект пульсации при загрузке страницы
+                    setTimeout(() => {
+                        button.classList.add('pulse-animation');
+                        setTimeout(() => {
+                            button.classList.remove('pulse-animation');
+                        }, 1000);
+                    }, 500);
+                    
+                    // Добавляем обработчики для сенсорных устройств
+                    button.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.97)';
+                    });
+                    
+                    button.addEventListener('touchend', function() {
+                        this.style.transform = 'scale(1)';
                     });
                 });
             }
             
-            // Резервный метод копирования для старых браузеров
-            function fallbackCopyTextToClipboard(text) {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                
-                // Делаем элемент невидимым
-                textArea.style.position = "fixed";
-                textArea.style.top = "0";
-                textArea.style.left = "0";
-                textArea.style.width = "2em";
-                textArea.style.height = "2em";
-                textArea.style.padding = "0";
-                textArea.style.border = "none";
-                textArea.style.outline = "none";
-                textArea.style.boxShadow = "none";
-                textArea.style.background = "transparent";
-                
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                try {
-                    const successful = document.execCommand('copy');
-                    if (successful) {
-                        notification.classList.add('show');
-                        setTimeout(() => {
-                            notification.classList.remove('show');
-                        }, 3000);
+            addButtonEffects();
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                // Обработчик для открытия/закрытия меню
+                function toggleMenu(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
                     }
-                } catch (err) {
-                    console.error('Ошибка при копировании: ', err);
+                    
+                    // Переключаем класс hidden для показа/скрытия меню
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    // Изменяем иконку при открытии/закрытии меню
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    } else {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    }
                 }
                 
-                document.body.removeChild(textArea);
+                // Добавляем несколько обработчиков для лучшей работы на мобильных устройствах
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                mobileMenuBtn.addEventListener('touchend', toggleMenu);
+                
+                // Закрываем меню при клике на пункт меню
+                document.querySelectorAll('.mobile-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    });
+                });
+                
+                // Закрываем меню при клике вне его
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target) && 
+                        !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+            
+            // Скрипт для обеспечения работы кнопок на мобильных устройствах
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Добавляем класс для тела документа
+                document.body.classList.add('mobile-device');
+                
+                // Обработчики для тач-событий на кнопках
+                const contactButtons = document.querySelectorAll('.contact-btn');
+                
+                contactButtons.forEach(button => {
+                    // Убираем стандартные события hover для мобильных
+                    button.addEventListener('touchstart', function(e) {
+                        // Добавляем визуальный отклик при касании
+                        this.style.opacity = '0.9';
+                        this.style.transform = 'scale(0.98)';
+                    });
+                    
+                    button.addEventListener('touchend', function(e) {
+                        // Возвращаем нормальное состояние
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1)';
+                    });
+                });
             }
         });
     </script>
-
-    <!-- Scripts -->
-    <script src="./js/script.js"></script>
-    <script src="./js/mobile-optimizations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/footer-fix.js"></script>
 </body>
-</html> 
+</html>
