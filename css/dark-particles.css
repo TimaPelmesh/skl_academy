@@ -1,0 +1,45 @@
+/* Статичный фон для темной темы */
+
+/* Фон для секций */
+.bg-particles {
+    position: relative;
+    background: #131830;
+}
+
+.bg-particles::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,255,255,0.05)"/></svg>');
+    background-size: 20px 20px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Скрываем плавающие частицы */
+.particles-container {
+    display: none;
+}
+
+/* Градиентное свечение для заголовков */
+.glow-text {
+    text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+}
+
+/* Блюр для карточек */
+.blur-card {
+    background: rgba(14, 18, 34, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .blur-card {
+        background: rgba(14, 18, 34, 0.8);
+    }
+} 

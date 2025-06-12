@@ -5,7 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastScroll = 0;
 
     // Мобильное меню с улучшенной анимацией
-    mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        toggleMenu();
+    });
+    
+    // Функция переключения состояния меню
+    function toggleMenu() {
         mobileMenu.classList.toggle('active');
         mobileMenuBtn.classList.toggle('active');
         
@@ -14,11 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileMenu.classList.contains('active')) {
             icon.classList.remove('fa-bars');
             icon.classList.add('fa-times');
+            document.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы
         } else {
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
+            document.body.style.overflow = ''; // Разрешаем прокрутку страницы
         }
-    });
+    }
 
     // Закрытие меню при клике на пункт меню с анимацией
     document.querySelectorAll('.mobile-menu a').forEach(link => {
@@ -30,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const icon = mobileMenuBtn.querySelector('i');
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
+            document.body.style.overflow = ''; // Разрешаем прокрутку страницы
         });
     });
 
@@ -45,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const icon = mobileMenuBtn.querySelector('i');
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
+            document.body.style.overflow = ''; // Разрешаем прокрутку страницы
         }
     });
 

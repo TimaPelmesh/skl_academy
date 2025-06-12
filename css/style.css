@@ -160,6 +160,8 @@ body {
     height: 44px;
     width: 44px;
     z-index: 1001;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-menu-btn:hover {
@@ -172,10 +174,11 @@ body {
 
 .mobile-menu-btn i {
     transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 .mobile-menu-btn.active i {
-    transform: rotate(90deg);
+    transform: rotate(180deg);
 }
 
 /* Герой секция */
@@ -403,28 +406,29 @@ body {
 /* Мобильное меню - заменяю существующие стили */
 .mobile-menu {
     position: fixed;
-    top: 64px;
+    top: var(--header-height-mobile);
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 1rem;
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 0.8rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transform: translateY(-100%);
-    transition: all 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translateY(-150%);
+    transition: all 0.3s ease;
     z-index: 999;
-    max-height: calc(100vh - 64px);
+    max-height: calc(100vh - var(--header-height-mobile));
     overflow-y: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    visibility: hidden;
 }
 
 .mobile-menu.active {
     transform: translateY(0);
-    display: flex;
+    visibility: visible;
 }
 
 .mobile-menu a {
@@ -1710,6 +1714,193 @@ footer::before {
     
     main {
         padding-bottom: 40px;
+    }
+}
+
+.courses-overview {
+    max-width: 1400px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background: var(--primary-light);
+    border-radius: 2px;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+    align-items: stretch;
+}
+
+.tech-section {
+    background: var(--background-light);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure cards stretch to fill grid cell */
+}
+
+.tech-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.tech-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    color: var(--primary-light);
+    text-align: center;
+}
+
+.tech-section .tech-intro {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.tech-section .tech-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-grow: 1; /* Allow features to take up available space */
+}
+
+.tech-section .feature {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1.2rem;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.tech-section .feature:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.tech-section .feature i {
+    color: var(--secondary);
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.tech-section .feature h4 {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+.tech-section .feature p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.tech-section .cta-button {
+    margin-top: auto; /* Push button to the bottom */
+    display: block; /* Make button full width */
+    width: fit-content; /* Adjust width to content */
+    margin-left: auto; /* Center button */
+    margin-right: auto; /* Center button */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1200px) {
+    .courses-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .courses-overview {
+        margin: 2rem auto;
+        padding: 0 var(--mobile-padding);
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: 2rem;
+    }
+
+    .courses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tech-section {
+        padding: 2rem;
+    }
+
+    .tech-section h2 {
+        font-size: clamp(1.6rem, 5vw, 2rem);
+    }
+
+    .tech-section .tech-intro {
+        font-size: 0.95rem;
+    }
+
+    .tech-section .feature {
+        padding: 1rem;
+    }
+
+    .tech-section .feature i {
+        font-size: 1.6rem;
+    }
+
+    .tech-section .feature h4 {
+        font-size: 1rem;
+    }
+
+    .tech-section .feature p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tech-section {
+        padding: 1.5rem;
+    }
+
+    .tech-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .tech-section .tech-intro {
+        font-size: 0.9rem;
+    }
+
+    .tech-section .feature {
+        padding: 0.8rem;
     }
 }
 

@@ -8,6 +8,117 @@
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
         letter-spacing: -0.01em;
+        overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
+    }
+    
+    /* Улучшения для мобильного меню */
+    .mobile-menu {
+        top: var(--header-height-mobile);
+        padding-top: 10px;
+        padding-bottom: 20px;
+        transition: all 0.3s ease;
+        z-index: 99;
+        pointer-events: auto; /* Обеспечиваем активность кликов */
+    }
+    
+    /* Явное определение видимости для мобильного меню */
+    .mobile-menu.hidden {
+        display: none !important; /* !important для перекрытия других стилей */
+        visibility: hidden;
+        opacity: 0;
+    }
+    
+    /* Стили кнопки мобильного меню */
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: rgba(124, 58, 237, 0.1);
+        transition: all 0.3s ease;
+        -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных */
+        cursor: pointer;
+        user-select: none; /* Предотвращаем выделение текста */
+        touch-action: manipulation; /* Улучшаем отзывчивость на мобильных */
+    }
+    
+    .mobile-menu-btn:active {
+        transform: scale(0.95);
+        background: rgba(124, 58, 237, 0.2);
+    }
+    
+    /* Делаем иконку более заметной */
+    .mobile-menu-btn i {
+        font-size: 1.25rem;
+        color: white;
+    }
+    
+    /* Улучшенные стили для содержимого мобильного меню */
+    .mobile-menu ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .mobile-menu li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .mobile-menu li:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-menu a {
+        display: block;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+        position: relative;
+        -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных */
+    }
+    
+    .mobile-menu a:active {
+        background: rgba(124, 58, 237, 0.1);
+    }
+    
+    /* Активное состояние элементов меню */
+    .mobile-menu a.active {
+        background-color: rgba(124, 58, 237, 0.2);
+        border-left: 3px solid var(--primary);
+    }
+    
+    .mobile-menu a.active i {
+        color: var(--primary);
+        transform: scale(1.1);
+    }
+    
+    /* Анимации для мобильного меню */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translate3d(0, -10px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    .mobile-menu:not(.hidden) {
+        animation: fadeInDown 0.3s ease-out forwards;
+    }
+    
+    /* Адаптация для маленьких экранов */
+    @media (max-width: 320px) {
+        .gradient-text {
+            font-size: 1.5rem;
+        }
+        
+        .mobile-menu-btn {
+            width: 36px;
+            height: 36px;
+        }
     }
     
     h1, h2, h3, h4 {
@@ -33,7 +144,6 @@
     
     /* Улучшения для блоков контента */
     .tech-section {
-        margin-bottom: 30px;
     }
     
     .tech-section h2 {
@@ -47,8 +157,6 @@
     
     /* Улучшения для карточек */
     .feature {
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        border: 1px solid rgba(255,255,255,0.05);
     }
     
     .feature:active {
@@ -111,28 +219,21 @@
     }
     
     .hero-text h1 {
-        font-size: 34px !important;
     }
     
     .hero-description p {
-        font-size: 17px !important;
-        line-height: 1.6 !important;
     }
     
     .materials-highlight {
-        font-size: 19px !important;
     }
     
     .tech-section h2 {
-        font-size: 26px !important;
     }
     
     .feature h4 {
-        font-size: 19px !important;
     }
     
     .feature p {
-        font-size: 16px !important;
     }
     
     .hero-background {
@@ -151,15 +252,12 @@
 /* Улучшения для средних экранов смартфонов */
 @media (min-width: 381px) and (max-width: 480px) {
     .hero-text h1 {
-        font-size: 36px !important;
     }
     
     .hero-description p {
-        font-size: 18px !important;
     }
     
     .materials-highlight {
-        font-size: 20px !important;
     }
 }
 
@@ -167,16 +265,12 @@
 @media (hover: none) and (pointer: coarse) {
     /* Увеличиваем зоны касания */
     .mobile-menu a {
-        padding: 16px !important;
     }
     
     .cta-button {
-        padding: 16px 20px !important;
-        min-height: 54px;
     }
     
     .feature {
-        padding: 20px !important;
     }
     
     /* Улучшаем обратную связь при нажатии */
@@ -206,17 +300,6 @@
     * {
         -webkit-text-size-adjust: none;
     }
-}
-
-/* Стили для активного состояния в меню */
-.mobile-menu a.active {
-    background-color: rgba(124, 58, 237, 0.2);
-    border-left: 3px solid var(--primary);
-}
-
-.mobile-menu a.active i {
-    color: var(--primary);
-    transform: scale(1.1);
 }
 
 .particles-background {
