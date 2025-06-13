@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-разработка: HTML, CSS и JavaScript</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Веб-разработка</h1>
+        <div class="header-buttons">
+            <button class="theme-toggle-btn" id="themeToggle">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Z"/></svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 S11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0 s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/></svg>
+            </button>
+            <a href="https://skl-academy.ru/" class="exit-btn" title="Перейти на SKL Academy">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <div class="tabs" id="tabs">
+                <div class="tab active" data-tab="html">HTML</div>
+                <div class="tab" data-tab="css">CSS</div>
+                <div class="tab" data-tab="js">JS</div>
+            </div>
+
+            <!-- HTML Tab Content -->
+            <div class="tab-content active" id="html-content">
+                <div class="topic">
+                    <button class="topic-btn">Модуль 1: Введение в HTML</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Основные понятия веб-разработки</a>
+                        <a href="#" class="subtopic">Структура HTML-документа</a>
+                        <a href="#" class="subtopic">Теги и атрибуты</a>
+                        <a href="#" class="subtopic">Практика: создание простой HTML-страницы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 2: Структурные элементы HTML</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Семантические теги</a>
+                        <a href="#" class="subtopic">header, nav, main, article</a>
+                        <a href="#" class="subtopic">aside, footer</a>
+                        <a href="#" class="subtopic">Практика: создание многостраничного сайта</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 3: Текстовые элементы и форматирование</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Заголовки и абзацы</a>
+                        <a href="#" class="subtopic">Списки и цитаты</a>
+                        <a href="#" class="subtopic">Изображения и ссылки</a>
+                        <a href="#" class="subtopic">Практика: создание страницы с форматированием</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 4: Таблицы и формы</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Создание и форматирование таблиц</a>
+                        <a href="#" class="subtopic">Работа с формами</a>
+                        <a href="#" class="subtopic">Поля ввода и атрибуты</a>
+                        <a href="#" class="subtopic">Валидация данных</a>
+                        <a href="#" class="subtopic">Практика: создание формы обратной связи</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 5: Встраивание медиа-контента</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Работа с видео</a>
+                        <a href="#" class="subtopic">Работа с аудио</a>
+                        <a href="#" class="subtopic">Различные форматы и теги</a>
+                        <a href="#" class="subtopic">Практика: страница с медиа-контентом</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 6: HTML5 API</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Geolocation API</a>
+                        <a href="#" class="subtopic">Web Storage API</a>
+                        <a href="#" class="subtopic">Другие API HTML5</a>
+                        <a href="#" class="subtopic">Практика: создание приложения с API</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 7: Продвинутые темы HTML</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Шаблонизаторы</a>
+                        <a href="#" class="subtopic">Работа с фрагментами и шаблонами</a>
+                        <a href="#" class="subtopic">Микроразметка для SEO</a>
+                        <a href="#" class="subtopic">Практика: динамический сайт</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 8: Доступность (a11y)</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">ARIA-атрибуты</a>
+                        <a href="#" class="subtopic">Структура для скринридеров</a>
+                        <a href="#" class="subtopic">Роль семантических HTML5 элементов</a>
+                        <a href="#" class="subtopic">Практика: доступный веб-сайт</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS Tab Content -->
+            <div class="tab-content" id="css-content">
+                <div class="topic">
+                    <button class="topic-btn">Модуль 1: Введение в CSS</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Основные понятия CSS</a>
+                        <a href="#" class="subtopic">Селекторы, свойства, значения</a>
+                        <a href="#" class="subtopic">Практика: стилизация HTML-страницы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 2: Селекторы CSS</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Селекторы по тегу</a>
+                        <a href="#" class="subtopic">Селекторы по классу и ID</a>
+                        <a href="#" class="subtopic">Комбинированные селекторы</a>
+                        <a href="#" class="subtopic">Практика: сложные стили</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 3: Свойства CSS для текста и блоков</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Шрифты и цвета</a>
+                        <a href="#" class="subtopic">Отступы и поля</a>
+                        <a href="#" class="subtopic">Размеры и позиционирование</a>
+                        <a href="#" class="subtopic">Практика: макет страницы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 4: CSS Box Model</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Модель блочной разметки</a>
+                        <a href="#" class="subtopic">Padding, margin, border</a>
+                        <a href="#" class="subtopic">Box-sizing и z-index</a>
+                        <a href="#" class="subtopic">Практика: сложные макеты</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 5: Flexbox и Grid Layout</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Основы Flexbox</a>
+                        <a href="#" class="subtopic">Основы Grid Layout</a>
+                        <a href="#" class="subtopic">Создание адаптивных макетов</a>
+                        <a href="#" class="subtopic">Практика: адаптивный дизайн</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 6: Препроцессоры CSS</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Sass/Less</a>
+                        <a href="#" class="subtopic">CSS Modules</a>
+                        <a href="#" class="subtopic">Эффективная организация стилей</a>
+                        <a href="#" class="subtopic">Практика: проект с препроцессором</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 7: Продвинутые темы CSS</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Анимация CSS</a>
+                        <a href="#" class="subtopic">CSS-переходы</a>
+                        <a href="#" class="subtopic">CSS-фреймворки</a>
+                        <a href="#" class="subtopic">Практика: интерактивные элементы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 8: Адаптивный дизайн</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Медиазапросы (@media)</a>
+                        <a href="#" class="subtopic">Mobile-first подход</a>
+                        <a href="#" class="subtopic">Viewport и единицы измерения</a>
+                        <a href="#" class="subtopic">Практика: адаптивный макет</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JavaScript Tab Content -->
+            <div class="tab-content" id="js-content">
+                <div class="topic">
+                    <button class="topic-btn">Модуль 1: Введение в JavaScript</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Основные понятия</a>
+                        <a href="#" class="subtopic">Переменные и типы данных</a>
+                        <a href="#" class="subtopic">Операторы</a>
+                        <a href="#" class="subtopic">Практика: простые скрипты</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 2: Управление потоком выполнения</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Условные операторы</a>
+                        <a href="#" class="subtopic">Циклы</a>
+                        <a href="#" class="subtopic">Функции и стрелочные функции</a>
+                        <a href="#" class="subtopic">Практика: программы с условиями и циклами</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 3: Работа с DOM</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Document Object Model</a>
+                        <a href="#" class="subtopic">Манипулирование элементами</a>
+                        <a href="#" class="subtopic">localStorage и sessionStorage</a>
+                        <a href="#" class="subtopic">Практика: интерактивные элементы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 4: Обработка событий</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">События мыши и клавиатуры</a>
+                        <a href="#" class="subtopic">Обработчики событий</a>
+                        <a href="#" class="subtopic">Делегирование событий</a>
+                        <a href="#" class="subtopic">Практика: интерактивные формы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 5: Асинхронное программирование</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Промисы</a>
+                        <a href="#" class="subtopic">Async/await</a>
+                        <a href="#" class="subtopic">Async function* и yield</a>
+                        <a href="#" class="subtopic">Практика: асинхронные запросы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 6: AJAX и Fetch API</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Отправка запросов на сервер</a>
+                        <a href="#" class="subtopic">Обработка ответов</a>
+                        <a href="#" class="subtopic">Работа с API</a>
+                        <a href="#" class="subtopic">Практика: динамическая загрузка данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 7: Продвинутые темы JavaScript</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Библиотеки и фреймворки</a>
+                        <a href="#" class="subtopic">Модули ES6</a>
+                        <a href="#" class="subtopic">Паттерны проектирования</a>
+                        <a href="#" class="subtopic">Классы и наследование</a>
+                        <a href="#" class="subtopic">Практика: веб-приложение</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 8: Инструменты и фреймворки</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Webpack, Babel</a>
+                        <a href="#" class="subtopic">TypeScript</a>
+                        <a href="#" class="subtopic">React/Vue</a>
+                        <a href="#" class="subtopic">Next.js/Nuxt.js</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">Модуль 9: Оптимизация и тестирование</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Chrome DevTools</a>
+                        <a href="#" class="subtopic">Lighthouse</a>
+                        <a href="#" class="subtopic">Юнит-тесты (Jest)</a>
+                        <a href="#" class="subtopic">E2E тестирование (Cypress, Playwright)</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="content" id="content">
+            <div class="welcome">
+                <h1>Веб-разработка: HTML, CSS и JavaScript</h1>
+                <p>Добро пожаловать на платформу для изучения современных веб-технологий. Здесь вы найдете структурированные курсы по трем основным направлениям веб-разработки:</p>
+                
+                <h2>HTML - основа структуры веб-страниц</h2>
+                <p>HTML (HyperText Markup Language) — стандартизированный язык разметки документов для веб-страниц. Изучив HTML, вы сможете создавать структуру веб-страниц, добавлять различный контент и создавать формы для взаимодействия с пользователями.</p>
+                
+                <h2>CSS - оформление и стилизация</h2>
+                <p>CSS (Cascading Style Sheets) — язык описания внешнего вида документа. С помощью CSS вы сможете оформлять веб-страницы, создавать красивые макеты и адаптировать их под различные устройства.</p>
+                
+                <h2>JavaScript - динамика и интерактивность</h2>
+                <p>JavaScript — мультипарадигменный язык программирования, который позволяет создавать динамический контент, обрабатывать действия пользователя и взаимодействовать с серверами.</p>
+                
+                <h2>Как использовать этот ресурс?</h2>
+                <p>Используйте меню слева для навигации по курсам и темам. Каждый раздел содержит теоретический материал и практические задания для закрепления знаний.</p>
+                <ul>
+                    <li>Выберите интересующую вас тему</li>
+                    <li>Изучите теоретический материал</li>
+                    <li>Выполните практические задания</li>
+                    <li>Переходите к следующей теме</li>
+                </ul>
+                <p>Рекомендуется начать с основ HTML, затем перейти к CSS и потом к JavaScript.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
