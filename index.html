@@ -84,6 +84,49 @@
             background: linear-gradient(135deg, var(--background) 0%, rgba(30, 27, 75, 1) 100%);
         }
         
+        /* Новые стили для иконок курсов */
+        .course-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .course-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            margin-right: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .course-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: 1;
+        }
+        
+        .course-icon i {
+            font-size: 1.75rem;
+            z-index: 2;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+        }
+        
+        .course-card:hover .course-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+        
         .icon-circle {
             display: inline-flex;
             align-items: center;
@@ -115,6 +158,65 @@
         
         .mobile-menu-btn:active {
             transform: scale(0.95);
+        }
+        
+        /* Стили для текста мобильного меню */
+        .mobile-menu-link {
+            background: linear-gradient(90deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+            display: inline-block;
+            padding: 5px 0;
+        }
+        
+        .mobile-menu-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(90deg, #60a5fa, #34d399);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
+        }
+        
+        .mobile-menu-link:hover {
+            text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
+            letter-spacing: 1.5px;
+        }
+        
+        .mobile-menu-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu li:nth-child(1) .mobile-menu-link {
+            animation-delay: 0.1s;
+        }
+        
+        .mobile-menu li:nth-child(2) .mobile-menu-link {
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Стили для кнопок контактов */
@@ -218,9 +320,9 @@
         </div>
         <!-- Mobile menu -->
         <div class="mobile-menu hidden" style="background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: absolute; width: 100%; left: 0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
-            <ul class="py-4 text-center">
-                <li class="py-3"><a href="about.html" class="block font-medium text-gray-200 hover:text-blue-400 transition text-lg">О проекте</a></li>
-                <li class="py-3"><a href="#contacts" class="block font-medium text-gray-200 hover:text-blue-400 transition text-lg" onclick="scrollToContacts(event)">Контакты</a></li>
+            <ul class="py-0 text-center -mt-32 space-y-3">
+                <li><a href="about.html" class="block mobile-menu-link transition text-lg"><i class="fas fa-info-circle mr-2"></i>О проекте</a></li>
+                <li><a href="#contacts" class="block mobile-menu-link transition text-lg" onclick="scrollToContacts(event)"><i class="fas fa-address-book mr-2"></i>Контакты</a></li>
             </ul>
         </div>
     </header>
@@ -242,10 +344,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Computer Networks Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
-                    <div class="icon-circle bg-blue-100 text-blue-600">
-                        <i class="fas fa-network-wired text-2xl"></i>
+                    <div class="course-header">
+                        <div class="course-icon bg-blue-100 text-blue-600">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100">Компьютерные сети</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Компьютерные сети</h3>
                     <p class="text-gray-300 mb-4">Изучите основы компьютерных сетей: от базовых концепций до продвинутых технологий.</p>
                     
                     <div class="space-y-2 mb-6">
@@ -268,10 +372,12 @@
                 
                 <!-- Python Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
-                    <div class="icon-circle bg-green-100 text-green-600">
-                        <i class="fab fa-python text-2xl"></i>
+                    <div class="course-header">
+                        <div class="course-icon bg-green-100 text-green-600">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100">Python</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Python</h3>
                     <p class="text-gray-300 mb-4">Освойте Python - от основ до продвинутых техник программирования.</p>
                     
                     <div class="space-y-2 mb-6">
@@ -294,10 +400,12 @@
                 
                 <!-- C# Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
-                    <div class="icon-circle bg-purple-100 text-purple-600">
-                        <i class="fas fa-code text-2xl"></i>
+                    <div class="course-header">
+                        <div class="course-icon bg-purple-100 text-purple-600">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100">C#</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2 text-gray-100">C#</h3>
                     <p class="text-gray-300 mb-4">Изучите C# - мощный, современный язык программирования от Microsoft.</p>
                     
                     <div class="space-y-2 mb-6">
@@ -320,10 +428,12 @@
                 
                 <!-- Git Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
-                    <div class="icon-circle bg-red-100 text-red-600">
-                        <i class="fab fa-git-alt text-2xl"></i>
+                    <div class="course-header">
+                        <div class="course-icon bg-red-100 text-red-600">
+                            <i class="fab fa-git-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100">Git</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Git</h3>
                     <p class="text-gray-300 mb-4">Изучите Git - самую популярную систему контроля версий.</p>
                     
                     <div class="space-y-2 mb-6">
@@ -346,10 +456,12 @@
                 
                 <!-- Web Development Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
-                    <div class="icon-circle bg-yellow-100 text-yellow-600">
-                        <i class="fas fa-laptop-code text-2xl"></i>
+                    <div class="course-header">
+                        <div class="course-icon bg-yellow-100 text-yellow-600">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100">Web-разработка</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Web-разработка</h3>
                     <p class="text-gray-300 mb-4">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
                     
                     <div class="space-y-2 mb-6">
@@ -372,10 +484,12 @@
                 
                 <!-- Command Line Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
-                    <div class="icon-circle bg-indigo-100 text-indigo-600">
-                        <i class="fas fa-terminal text-2xl"></i>
+                    <div class="course-header">
+                        <div class="course-icon bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100">Командная строка</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2 text-gray-100">Командная строка</h3>
                     <p class="text-gray-300 mb-4">Освойте мощные инструменты командной строки в Linux и Windows.</p>
                     
                     <div class="space-y-2 mb-6">
@@ -406,24 +520,24 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
-                    <div class="icon-circle bg-blue-100 text-blue-600 inline-flex">
-                        <i class="fas fa-users text-2xl"></i>
+                    <div class="course-icon bg-blue-100 text-blue-600 mx-auto mb-4">
+                        <i class="fas fa-users"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2 text-gray-100">Сообщество энтузиастов</h3>
                     <p class="text-gray-300">Все материалы публикуются и обновляются сообществом увлеченных IT-специалистов.</p>
                 </div>
                 
                 <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
-                    <div class="icon-circle bg-green-100 text-green-600 inline-flex">
-                        <i class="fas fa-book text-2xl"></i>
+                    <div class="course-icon bg-green-100 text-green-600 mx-auto mb-4">
+                        <i class="fas fa-book"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2 text-gray-100">Обширная теоретическая база</h3>
                     <p class="text-gray-300">Предлагаем полноценную теоретическую базу знаний по всем IT-направлениям.</p>
                 </div>
                 
                 <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
-                    <div class="icon-circle bg-purple-100 text-purple-600 inline-flex">
-                        <i class="fas fa-hand-holding-heart text-2xl"></i>
+                    <div class="course-icon bg-purple-100 text-purple-600 mx-auto mb-4">
+                        <i class="fas fa-hand-holding-heart"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2 text-gray-100">Полностью бесплатно</h3>
                     <p class="text-gray-300">Все материалы и курсы доступны совершенно бесплатно для всех желающих.</p>
