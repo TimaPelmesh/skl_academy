@@ -1,29 +1,8 @@
 /**
- * Основной файл скриптов для сайта
+ * Дополнительные скрипты для сайта
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Обработка мобильного меню
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('active');
-            this.classList.toggle('active');
-        });
-    }
-    
-    // Закрытие мобильного меню при клике вне его
-    document.addEventListener('click', function(event) {
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
-            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-            }
-        }
-    });
-    
     // Добавление активного класса для текущего раздела в меню
     const sections = document.querySelectorAll('.tech-section');
     const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');

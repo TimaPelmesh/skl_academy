@@ -97,11 +97,14 @@
         /* Стили для мобильного меню */
         .mobile-menu {
             transition: all 0.3s ease;
-            overflow: hidden;
         }
         
         .mobile-menu.hidden {
             display: none;
+        }
+        
+        .mobile-menu.active {
+            display: block;
         }
         
         .mobile-menu-btn {
@@ -112,6 +115,82 @@
         
         .mobile-menu-btn:active {
             transform: scale(0.95);
+        }
+        
+        /* Стили для кнопок контактов */
+        .contact-button {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-button i {
+            margin-right: 10px;
+        }
+        
+        .contact-button.gmail {
+            background-color: #ea4335;
+            border-bottom: 3px solid #c5221f;
+        }
+        
+        .contact-button.telegram {
+            background-color: #0088cc;
+            border-bottom: 3px solid #006699;
+        }
+        
+        /* Адаптивные стили для кнопок */
+        @media (max-width: 767px) {
+            .contact-button {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-button {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+        }
+        
+        /* Исправление для футера на мобильных устройствах */
+        @media (max-width: 767px) {
+            .footer-grid {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                width: 100%;
+                padding: 0 15px;
+                margin-bottom: 20px;
+            }
+            
+            .contact-button {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
         }
     </style>
 
@@ -138,7 +217,7 @@
             </div>
         </div>
         <!-- Mobile menu -->
-        <div class="mobile-menu hidden" style="background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: absolute; width: 100%; top: 100%; left: 0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
+        <div class="mobile-menu hidden" style="background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: absolute; width: 100%; left: 0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
             <ul class="py-4 text-center">
                 <li class="py-3"><a href="about.html" class="block font-medium text-gray-200 hover:text-blue-400 transition text-lg">О проекте</a></li>
                 <li class="py-3"><a href="#contacts" class="block font-medium text-gray-200 hover:text-blue-400 transition text-lg" onclick="scrollToContacts(event)">Контакты</a></li>
@@ -364,12 +443,14 @@
                 </div>
                 <div class="footer-section">
                     <h3>Контакты</h3>
-                    <a href="#" onclick="openGmail(); return false;" class="contact-button gmail" style="display: block; width: 100%; padding: 15px 20px; margin-bottom: 15px; border-radius: 6px; text-align: center; text-decoration: none; font-weight: 600; font-size: 16px; color: white; cursor: pointer; background-color: #ea4335; border-bottom: 3px solid #c5221f; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);">
-                        <i class="fas fa-envelope" style="margin-right: 10px;"></i> Gmail
-                    </a>
-                    <a href="#" onclick="openTelegram(); return false;" class="contact-button telegram" style="display: block; width: 100%; padding: 15px 20px; margin-bottom: 15px; border-radius: 6px; text-align: center; text-decoration: none; font-weight: 600; font-size: 16px; color: white; cursor: pointer; background-color: #0088cc; border-bottom: 3px solid #006699; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);">
-                        <i class="fab fa-telegram" style="margin-right: 10px;"></i> Telegram
-                    </a>
+                    <div style="width: 100%; max-width: 300px; margin: 0 auto;">
+                        <a href="#" onclick="openGmail(); return false;" class="contact-button gmail">
+                            <i class="fas fa-envelope"></i> Gmail
+                        </a>
+                        <a href="#" onclick="openTelegram(); return false;" class="contact-button telegram">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -431,88 +512,77 @@
             
             addButtonEffects();
             
-            // Mobile menu toggle
+            // Простая реализация мобильного меню
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const mobileMenu = document.querySelector('.mobile-menu');
             
             if (mobileMenuBtn && mobileMenu) {
-                // Обработчик для открытия/закрытия меню
-                function toggleMenu(e) {
-                    if (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
+                // Обработчик клика по кнопке меню
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
                     
-                    // Переключаем класс hidden для показа/скрытия меню
-                    mobileMenu.classList.toggle('hidden');
-                    
-                    // Изменяем иконку при открытии/закрытии меню
-                    const icon = mobileMenuBtn.querySelector('i');
+                    // Если меню скрыто, показываем его
                     if (mobileMenu.classList.contains('hidden')) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    } else {
+                        mobileMenu.classList.remove('hidden');
+                        mobileMenu.classList.add('active');
+                        
+                        // Меняем иконку на крестик
+                        const icon = this.querySelector('i');
                         icon.classList.remove('fa-bars');
                         icon.classList.add('fa-times');
+                    } 
+                    // Если меню открыто, скрываем его
+                    else {
+                        mobileMenu.classList.remove('active');
+                        
+                        // Меняем иконку на три полоски
+                        const icon = this.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
                     }
-                }
+                });
                 
-                // Добавляем несколько обработчиков для лучшей работы на мобильных устройствах
-                mobileMenuBtn.addEventListener('click', toggleMenu);
-                mobileMenuBtn.addEventListener('touchend', toggleMenu);
-                
-                // Закрываем меню при клике на пункт меню
+                // Закрытие меню при клике на пункт меню
                 document.querySelectorAll('.mobile-menu a').forEach(link => {
                     link.addEventListener('click', () => {
-                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('active');
+                        
+                        // Меняем иконку на три полоски
                         const icon = mobileMenuBtn.querySelector('i');
                         icon.classList.remove('fa-times');
                         icon.classList.add('fa-bars');
+                        
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
                     });
                 });
                 
-                // Закрываем меню при клике вне его
+                // Закрытие меню при клике вне меню
                 document.addEventListener('click', (e) => {
                     if (!mobileMenu.contains(e.target) && 
                         !mobileMenuBtn.contains(e.target) && 
                         !mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
+                        
+                        mobileMenu.classList.remove('active');
+                        
+                        // Меняем иконку на три полоски
                         const icon = mobileMenuBtn.querySelector('i');
                         icon.classList.remove('fa-times');
                         icon.classList.add('fa-bars');
+                        
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
                     }
-                });
-            }
-            
-            // Скрипт для обеспечения работы кнопок на мобильных устройствах
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
-            if (isMobile) {
-                // Добавляем класс для тела документа
-                document.body.classList.add('mobile-device');
-                
-                // Обработчики для тач-событий на кнопках
-                const contactButtons = document.querySelectorAll('.contact-btn');
-                
-                contactButtons.forEach(button => {
-                    // Убираем стандартные события hover для мобильных
-                    button.addEventListener('touchstart', function(e) {
-                        // Добавляем визуальный отклик при касании
-                        this.style.opacity = '0.9';
-                        this.style.transform = 'scale(0.98)';
-                    });
-                    
-                    button.addEventListener('touchend', function(e) {
-                        // Возвращаем нормальное состояние
-                        this.style.opacity = '1';
-                        this.style.transform = 'scale(1)';
-                    });
                 });
             }
         });
     </script>
-    <script src="js/main.js"></script>
-    <script src="js/script.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/footer-fix.js"></script>
 </body>

@@ -92,7 +92,35 @@
         text-align: center;
     }
     
+    .new-footer .footer-section {
+        padding: 0 15px;
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
     .new-footer .footer-section a {
         justify-content: center;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+    
+    .new-footer .container {
+        padding: 0 15px;
+    }
+}
+
+/* Дополнительные стили для очень маленьких экранов */
+@media (max-width: 480px) {
+    .new-footer .footer-section a {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .new-footer .footer-section a i {
+        margin-right: 8px;
     }
 } 

@@ -12,8 +12,11 @@
 .contact-button {
     display: block !important;
     width: 100% !important;
+    max-width: 300px !important;
     padding: 15px 20px !important;
     margin-bottom: 15px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     border-radius: 6px !important;
     text-align: center !important;
     text-decoration: none !important;
@@ -27,6 +30,7 @@
     border: none !important;
     overflow: hidden !important;
     opacity: 1 !important;
+    box-sizing: border-box !important;
 }
 
 .contact-button i {
@@ -127,11 +131,36 @@
 /* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
     .contact-button {
-        padding: 16px 20px !important;
-        font-size: 18px !important;
+        padding: 14px 16px !important;
+        font-size: 16px !important;
+        width: 100% !important;
+        max-width: 280px !important;
     }
     
     .contact-button i {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
-} 
+}
+
+/* Адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+    .contact-button {
+        padding: 12px 14px !important;
+        font-size: 14px !important;
+        max-width: 260px !important;
+    }
+    
+    .contact-button i {
+        font-size: 16px !important;
+    }
+}
+
+/* Исправление для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .contact-button {
+        /* Предотвращаем смещение на iOS */
+        transform: translateZ(0) !important;
+    }
+}
+
+/* Проверяю содержимое файла */ 

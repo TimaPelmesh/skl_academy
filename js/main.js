@@ -1,46 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Простая реализация мобильного меню
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
-    const mainNav = document.querySelector('.main-nav');
-    let lastScroll = 0;
+    const menuIcon = mobileMenuBtn.querySelector('i');
 
-    // Мобильное меню с улучшенной анимацией
+    // Обработчик клика по кнопке меню
     mobileMenuBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         
-        toggleMenu();
-    });
-    
-    // Функция переключения состояния меню
-    function toggleMenu() {
-        mobileMenu.classList.toggle('active');
-        mobileMenuBtn.classList.toggle('active');
-        
-        // Меняем иконку на крестик при открытии меню
-        const icon = mobileMenuBtn.querySelector('i');
-        if (mobileMenu.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-            document.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            document.body.style.overflow = ''; // Разрешаем прокрутку страницы
+        // Если меню скрыто, показываем его
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.add('active');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            }, 10);
+        } 
+        // Если меню открыто, скрываем его
+        else {
+            mobileMenu.classList.remove('active');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
         }
-    }
+    });
 
-    // Закрытие меню при клике на пункт меню с анимацией
+    // Закрытие меню при клике на пункт меню
     document.querySelectorAll('.mobile-menu a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            
-            // Возвращаем иконку-бургер
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            document.body.style.overflow = ''; // Разрешаем прокрутку страницы
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
         });
     });
 
@@ -48,35 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (!mobileMenu.contains(e.target) && 
             !mobileMenuBtn.contains(e.target) && 
-            mobileMenu.classList.contains('active')) {
-            mobileMenu.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
+            !mobileMenu.classList.contains('hidden')) {
             
-            // Возвращаем иконку-бургер
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            document.body.style.overflow = ''; // Разрешаем прокрутку страницы
+            mobileMenu.classList.remove('active');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
         }
-    });
-
-    // Скрытие/показ навигации при скролле
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll <= 0) {
-            mainNav.style.transform = 'translateY(0)';
-            return;
-        }
-        
-        if (currentScroll > lastScroll && !mobileMenu.classList.contains('active')) {
-            // Скролл вниз - скрываем меню
-            mainNav.style.transform = 'translateY(-100%)';
-        } else {
-            // Скролл вверх - показываем меню
-            mainNav.style.transform = 'translateY(0)';
-        }
-        
-        lastScroll = currentScroll;
     });
 }); 

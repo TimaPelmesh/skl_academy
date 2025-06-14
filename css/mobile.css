@@ -11,24 +11,31 @@
         overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
     }
     
-    /* Улучшения для мобильного меню */
+    /* Стили для мобильного меню */
     .mobile-menu {
-        top: var(--header-height-mobile);
-        padding-top: 10px;
-        padding-bottom: 20px;
-        transition: all 0.3s ease;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         z-index: 99;
-        pointer-events: auto; /* Обеспечиваем активность кликов */
+        transition: all 0.3s ease;
     }
     
-    /* Явное определение видимости для мобильного меню */
+    /* Скрытое состояние */
     .mobile-menu.hidden {
-        display: none !important; /* !important для перекрытия других стилей */
-        visibility: hidden;
-        opacity: 0;
+        display: none;
     }
     
-    /* Стили кнопки мобильного меню */
+    /* Активное состояние */
+    .mobile-menu.active {
+        display: block;
+    }
+    
+    /* Стили для кнопки мобильного меню */
     .mobile-menu-btn {
         display: flex;
         align-items: center;
@@ -40,8 +47,6 @@
         transition: all 0.3s ease;
         -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных */
         cursor: pointer;
-        user-select: none; /* Предотвращаем выделение текста */
-        touch-action: manipulation; /* Улучшаем отзывчивость на мобильных */
     }
     
     .mobile-menu-btn:active {
@@ -49,13 +54,7 @@
         background: rgba(124, 58, 237, 0.2);
     }
     
-    /* Делаем иконку более заметной */
-    .mobile-menu-btn i {
-        font-size: 1.25rem;
-        color: white;
-    }
-    
-    /* Улучшенные стили для содержимого мобильного меню */
+    /* Стили для содержимого мобильного меню */
     .mobile-menu ul {
         padding: 0;
         margin: 0;
@@ -80,45 +79,6 @@
     
     .mobile-menu a:active {
         background: rgba(124, 58, 237, 0.1);
-    }
-    
-    /* Активное состояние элементов меню */
-    .mobile-menu a.active {
-        background-color: rgba(124, 58, 237, 0.2);
-        border-left: 3px solid var(--primary);
-    }
-    
-    .mobile-menu a.active i {
-        color: var(--primary);
-        transform: scale(1.1);
-    }
-    
-    /* Анимации для мобильного меню */
-    @keyframes fadeInDown {
-        from {
-            opacity: 0;
-            transform: translate3d(0, -10px, 0);
-        }
-        to {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-        }
-    }
-    
-    .mobile-menu:not(.hidden) {
-        animation: fadeInDown 0.3s ease-out forwards;
-    }
-    
-    /* Адаптация для маленьких экранов */
-    @media (max-width: 320px) {
-        .gradient-text {
-            font-size: 1.5rem;
-        }
-        
-        .mobile-menu-btn {
-            width: 36px;
-            height: 36px;
-        }
     }
     
     h1, h2, h3, h4 {
@@ -210,6 +170,39 @@
         );
         opacity: 1;
     }
+    
+    /* Улучшения для футера на мобильных устройствах */
+    .new-footer {
+        overflow: hidden;
+    }
+    
+    .new-footer .container {
+        padding: 0 15px;
+        box-sizing: border-box;
+        overflow: hidden;
+        width: 100%;
+    }
+    
+    .new-footer .footer-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .new-footer .footer-section {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .contact-button {
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
 }
 
 /* Дополнительные стили для маленьких экранов */
@@ -246,6 +239,16 @@
     .particles-background {
         opacity: 0.4;
         background-size: 200px 200px;
+    }
+    
+    /* Дополнительные стили для футера на очень маленьких экранах */
+    .new-footer .footer-section {
+        padding: 0 10px;
+    }
+    
+    .contact-button {
+        padding: 10px 12px;
+        font-size: 14px;
     }
 }
 
