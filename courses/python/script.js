@@ -45,6 +45,81 @@ document.querySelectorAll('.topic-btn').forEach(btn => {
     });
 });
 
+// Обработка якорных ссылок для плавной прокрутки
+document.querySelectorAll('.subtopic').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Если ссылка ведет на текущую страницу (якорь)
+        if (this.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            
+            // Убираем активный класс у всех ссылок
+            document.querySelectorAll('.subtopic').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Добавляем активный класс текущей ссылке
+            this.classList.add('active');
+            
+            // Получаем ID секции для перехода
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            // Прокручиваем к нужной секции с учетом высоты шапки и мобильных устройств
+            if (targetSection) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const offset = headerHeight + 20; // Дополнительный отступ для комфорта
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - offset,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Закрытие сайдбара на мобильных устройствах после клика
+            if (sidebar.classList.contains('active') && window.innerWidth <= 991) {
+                menuToggle.classList.remove('active');
+                sidebar.classList.remove('active');
+                content.classList.remove('sidebar-active');
+            }
+        }
+    });
+});
+
+// Отслеживание прокрутки для активации ссылок
+function setActiveSection() {
+    const sections = document.querySelectorAll('.topic-section');
+    const subtopics = document.querySelectorAll('.subtopic[href^="#"]'); // Только якорные ссылки
+    
+    const headerHeight = document.querySelector('header').offsetHeight;
+    const scrollPosition = window.scrollY + headerHeight + 50; // Добавляем запас
+    
+    let currentActiveIndex = -1;
+    
+    sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentActiveIndex = index;
+        }
+    });
+    
+    // Устанавливаем активную ссылку
+    if (currentActiveIndex >= 0) {
+        subtopics.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        if (subtopics[currentActiveIndex]) {
+            subtopics[currentActiveIndex].classList.add('active');
+        }
+    }
+}
+
+// Вызываем функцию при загрузке и при прокрутке
+window.addEventListener('scroll', setActiveSection);
+document.addEventListener('DOMContentLoaded', setActiveSection);
+
 // Переключение темы
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;

@@ -9,6 +9,294 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+
+        /* Стили для новых элементов */
+        .resources-section, 
+        .practice-tips, 
+        .interactive-resources,
+        .next-steps {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #58a6ff;
+        }
+
+        .light-theme .resources-section,
+        .light-theme .practice-tips,
+        .light-theme .interactive-resources,
+        .light-theme .next-steps {
+            background-color: #f1f1f1;
+            border-left: 4px solid #0366d6;
+        }
+
+        .resources-section h4,
+        .practice-tips h4,
+        .interactive-resources h4,
+        .next-steps h4 {
+            color: #58a6ff;
+            margin-top: 0;
+        }
+
+        .light-theme .resources-section h4,
+        .light-theme .practice-tips h4,
+        .light-theme .interactive-resources h4,
+        .light-theme .next-steps h4 {
+            color: #0366d6;
+        }
+
+        .visual-guide {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #7ee787;
+        }
+
+        .light-theme .visual-guide {
+            background-color: #f1f1f1;
+            border-left: 4px solid #2ea44f;
+        }
+
+        .visual-guide h4 {
+            color: #7ee787;
+            margin-top: 0;
+        }
+
+        .light-theme .visual-guide h4 {
+            color: #2ea44f;
+        }
+
+        .operators-cheatsheet {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #d2a8ff;
+        }
+
+        .light-theme .operators-cheatsheet {
+            background-color: #f1f1f1;
+            border-left: 4px solid #8a63d2;
+        }
+
+        .operators-cheatsheet h4 {
+            color: #d2a8ff;
+            margin-top: 0;
+        }
+
+        .light-theme .operators-cheatsheet h4 {
+            color: #8a63d2;
+        }
+
+        .operators-cheatsheet table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .operators-cheatsheet th,
+        .operators-cheatsheet td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #444c56;
+        }
+
+        .light-theme .operators-cheatsheet th,
+        .light-theme .operators-cheatsheet td {
+            border: 1px solid #d0d7de;
+        }
+
+        .operators-cheatsheet th {
+            background-color: #373e47;
+        }
+
+        .light-theme .operators-cheatsheet th {
+            background-color: #e6e6e6;
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
 </head>
 <body>
     <!-- Шапка сайта -->
@@ -151,13 +439,404 @@
             <!-- Введение в модуль -->
             <section class="module-intro">
                 <h2>Модуль 5: ООП в Python</h2>
-                <p>В этом модуле вы познакомитесь с основами объектно-ориентированного программирования в Python.</p>
+                <p>Объектно-ориентированное программирование (ООП) — это парадигма программирования, которая использует объекты и классы для организации кода. Python — полноценный объектно-ориентированный язык, который предоставляет все необходимые инструменты для разработки в этом стиле.</p>
+                
+                <p>В этом модуле вы изучите:</p>
+                <ul>
+                    <li>Классы и объекты — основные строительные блоки ООП</li>
+                    <li>Наследование — механизм повторного использования кода</li>
+                    <li>Полиморфизм — возможность использовать объекты разных классов через общий интерфейс</li>
+                    <li>Инкапсуляцию — скрытие внутренних деталей реализации</li>
+                </ul>
+                
+                <p>Понимание принципов ООП позволит вам создавать более структурированные, поддерживаемые и масштабируемые программы. Вы научитесь моделировать реальные сущности в виде классов и объектов, что сделает ваш код более понятным и близким к предметной области.</p>
             </section>
             
             <!-- 5.1 Классы и объекты -->
             <section id="classes-objects" class="topic-section">
                 <h2>5.1 Классы и объекты</h2>
-                <p>Содержимое раздела о классах и объектах будет добавлено позже.</p>
+                <p>Классы и объекты — фундаментальные концепции объектно-ориентированного программирования. Класс — это шаблон или чертеж, который определяет свойства (атрибуты) и поведение (методы) объектов. Объект — это конкретный экземпляр класса.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые понятия:</h4>
+                    <ul>
+                        <li><strong>Класс</strong> — шаблон для создания объектов</li>
+                        <li><strong>Объект</strong> — экземпляр класса</li>
+                        <li><strong>Атрибуты</strong> — переменные, хранящие данные объекта</li>
+                        <li><strong>Методы</strong> — функции, определяющие поведение объекта</li>
+                        <li><strong>Конструктор</strong> — специальный метод для инициализации объекта</li>
+                    </ul>
+                </div>
+                
+                <h3>Создание класса</h3>
+                <p>В Python класс определяется с помощью ключевого слова <code>class</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Автомобиль:
+    """Класс для представления автомобиля."""
+    
+    # Атрибуты класса (общие для всех экземпляров)
+    количество_колес = 4
+    
+    # Конструктор
+    def __init__(self, марка, модель, год, цвет):
+        # Атрибуты экземпляра (уникальные для каждого объекта)
+        self.марка = марка
+        self.модель = модель
+        self.год = год
+        self.цвет = цвет
+        self.пробег = 0  # Начальное значение
+    
+    # Методы
+    def информация(self):
+        """Возвращает информацию об автомобиле."""
+        return f"{self.марка} {self.модель}, {self.год}, {self.цвет}, пробег: {self.пробег} км"
+    
+    def ехать(self, расстояние):
+        """Увеличивает пробег на указанное расстояние."""
+        self.пробег += расстояние
+        return f"Проехали {расстояние} км. Текущий пробег: {self.пробег} км"</code></pre>
+                </div>
+                
+                <h3>Создание объектов (экземпляров класса)</h3>
+                <p>После определения класса можно создавать его экземпляры:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Создаем объекты класса Автомобиль
+моя_машина = Автомобиль("Toyota", "Corolla", 2020, "белый")
+другая_машина = Автомобиль("Honda", "Civic", 2019, "синий")
+
+# Получаем доступ к атрибутам
+print(моя_машина.марка)  # Toyota
+print(другая_машина.цвет)  # синий
+
+# Вызываем методы
+print(моя_машина.информация())  # Toyota Corolla, 2020, белый, пробег: 0 км
+print(моя_машина.ехать(100))  # Проехали 100 км. Текущий пробег: 100 км
+print(моя_машина.ехать(50))  # Проехали 50 км. Текущий пробег: 150 км
+
+# Доступ к атрибутам класса
+print(Автомобиль.количество_колес)  # 4
+print(моя_машина.количество_колес)  # 4 (доступ через экземпляр)</code></pre>
+                </div>
+                
+                <h3>Метод __init__ (конструктор)</h3>
+                <p>Метод <code>__init__</code> — это специальный метод, который автоматически вызывается при создании нового экземпляра класса. Он используется для инициализации атрибутов объекта.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Человек:
+    def __init__(self, имя, возраст):
+        self.имя = имя
+        self.возраст = возраст
+        print(f"Создан новый объект Человек: {имя}, {возраст} лет")
+
+# При создании объекта автоматически вызывается __init__
+человек1 = Человек("Иван", 30)  # Выведет: Создан новый объект Человек: Иван, 30 лет</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>О параметре self</h4>
+                    <p>Параметр <code>self</code> ссылается на текущий экземпляр класса и используется для доступа к его атрибутам и методам. Он всегда должен быть первым параметром в методах класса, но при вызове метода его указывать не нужно — Python автоматически передает объект как первый аргумент.</p>
+                </div>
+                
+                <h3>Атрибуты класса и экземпляра</h3>
+                <p>В Python существует два типа атрибутов:</p>
+                <ul>
+                    <li><strong>Атрибуты класса</strong> — общие для всех экземпляров</li>
+                    <li><strong>Атрибуты экземпляра</strong> — уникальные для каждого объекта</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Студент:
+    # Атрибут класса
+    учебное_заведение = "Университет"
+    
+    def __init__(self, имя, курс):
+        # Атрибуты экземпляра
+        self.имя = имя
+        self.курс = курс
+
+# Создаем студентов
+студент1 = Студент("Анна", 2)
+студент2 = Студент("Петр", 3)
+
+# Доступ к атрибутам экземпляра
+print(студент1.имя)  # Анна
+print(студент2.курс)  # 3
+
+# Доступ к атрибутам класса
+print(студент1.учебное_заведение)  # Университет
+print(студент2.учебное_заведение)  # Университет
+
+# Изменение атрибута класса
+Студент.учебное_заведение = "Академия"
+print(студент1.учебное_заведение)  # Академия
+print(студент2.учебное_заведение)  # Академия
+
+# Изменение атрибута экземпляра не влияет на другие экземпляры
+студент1.курс = 4
+print(студент1.курс)  # 4
+print(студент2.курс)  # 3 (не изменился)</code></pre>
+                </div>
+                
+                <h3>Методы экземпляра, класса и статические методы</h3>
+                <p>В Python существует три типа методов:</p>
+                
+                <h4>1. Методы экземпляра</h4>
+                <p>Это обычные методы, которые работают с конкретным экземпляром класса. Они принимают <code>self</code> в качестве первого параметра.</p>
+                
+                <h4>2. Методы класса</h4>
+                <p>Методы класса работают с классом, а не с его экземплярами. Они определяются с помощью декоратора <code>@classmethod</code> и принимают <code>cls</code> (ссылку на класс) в качестве первого параметра.</p>
+                
+                <h4>3. Статические методы</h4>
+                <p>Статические методы не работают ни с классом, ни с его экземплярами. Они определяются с помощью декоратора <code>@staticmethod</code> и не принимают специальных первых параметров.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Математика:
+    # Атрибут класса
+    описание = "Класс для математических операций"
+    
+    def __init__(self, значение):
+        # Атрибут экземпляра
+        self.значение = значение
+    
+    # Метод экземпляра
+    def удвоить(self):
+        return self.значение * 2
+    
+    # Метод класса
+    @classmethod
+    def изменить_описание(cls, новое_описание):
+        cls.описание = новое_описание
+        return cls.описание
+    
+    # Статический метод
+    @staticmethod
+    def сложить(a, b):
+        return a + b
+
+# Использование методов экземпляра
+мат = Математика(5)
+print(мат.удвоить())  # 10
+
+# Использование методов класса
+Математика.изменить_описание("Новое описание")
+print(Математика.описание)  # Новое описание
+print(мат.описание)  # Новое описание
+
+# Использование статических методов
+print(Математика.сложить(10, 20))  # 30
+print(мат.сложить(10, 20))  # 30 (можно вызвать и через экземпляр)</code></pre>
+                </div>
+                
+                <h3>Магические методы (dunder методы)</h3>
+                <p>Python предоставляет множество специальных методов, которые начинаются и заканчиваются двойным подчеркиванием (double underscore, или "dunder"). Эти методы позволяют определить, как объекты вашего класса будут взаимодействовать со встроенными функциями и операторами Python.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Точка:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    # Строковое представление для пользователя
+    def __str__(self):
+        return f"Точка({self.x}, {self.y})"
+    
+    # Строковое представление для отладки
+    def __repr__(self):
+        return f"Точка(x={self.x}, y={self.y})"
+    
+    # Сложение точек
+    def __add__(self, other):
+        return Точка(self.x + other.x, self.y + other.y)
+    
+    # Сравнение точек
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+    
+    # Длина вектора от начала координат
+    def __abs__(self):
+        return (self.x ** 2 + self.y ** 2) ** 0.5
+
+# Создаем точки
+точка1 = Точка(3, 4)
+точка2 = Точка(1, 2)
+
+# Используем магические методы
+print(точка1)  # Вызывает __str__: Точка(3, 4)
+print(repr(точка1))  # Вызывает __repr__: Точка(x=3, y=4)
+
+# Сложение точек
+точка3 = точка1 + точка2  # Вызывает __add__
+print(точка3)  # Точка(4, 6)
+
+# Сравнение точек
+print(точка1 == точка2)  # Вызывает __eq__: False
+print(точка1 == Точка(3, 4))  # True
+
+# Вычисление длины вектора
+print(abs(точка1))  # Вызывает __abs__: 5.0</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Часто используемые магические методы:</h4>
+                    <ul>
+                        <li><code>__init__(self, ...)</code> — конструктор</li>
+                        <li><code>__str__(self)</code> — строковое представление для пользователя (str())</li>
+                        <li><code>__repr__(self)</code> — строковое представление для отладки (repr())</li>
+                        <li><code>__len__(self)</code> — длина объекта (len())</li>
+                        <li><code>__getitem__(self, key)</code> — доступ по индексу/ключу (obj[key])</li>
+                        <li><code>__setitem__(self, key, value)</code> — установка значения по индексу/ключу (obj[key] = value)</li>
+                        <li><code>__add__(self, other)</code> — сложение (obj1 + obj2)</li>
+                        <li><code>__eq__(self, other)</code> — сравнение на равенство (obj1 == obj2)</li>
+                        <li><code>__lt__(self, other)</code> — сравнение "меньше" (obj1 < obj2)</li>
+                        <li><code>__call__(self, ...)</code> — вызов объекта как функции (obj())</li>
+                    </ul>
+                </div>
+                
+                <h3>Свойства (properties)</h3>
+                <p>Свойства позволяют определить методы, которые будут вызываться при доступе к атрибуту, его изменении или удалении. Это позволяет контролировать доступ к атрибутам и добавлять дополнительную логику.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Температура:
+    def __init__(self, цельсий=0):
+        self._цельсий = цельсий
+    
+    # Геттер - вызывается при доступе к свойству
+    @property
+    def цельсий(self):
+        return self._цельсий
+    
+    # Сеттер - вызывается при изменении свойства
+    @цельсий.setter
+    def цельсий(self, значение):
+        if значение < -273.15:
+            raise ValueError("Температура не может быть ниже абсолютного нуля!")
+        self._цельсий = значение
+    
+    # Другое свойство, вычисляемое на основе цельсия
+    @property
+    def фаренгейт(self):
+        return self._цельсий * 9/5 + 32
+    
+    @фаренгейт.setter
+    def фаренгейт(self, значение):
+        self.цельсий = (значение - 32) * 5/9
+
+# Использование свойств
+температура = Температура(25)
+print(температура.цельсий)  # 25
+print(температура.фаренгейт)  # 77.0
+
+# Изменение через сеттер
+температура.цельсий = 30
+print(температура.цельсий)  # 30
+print(температура.фаренгейт)  # 86.0
+
+температура.фаренгейт = 68
+print(температура.цельсий)  # 20.0
+
+# Проверка валидации
+try:
+    температура.цельсий = -300  # Вызовет ошибку
+except ValueError as e:
+    print(e)  # Температура не может быть ниже абсолютного нуля!</code></pre>
+                </div>
+                
+                <h3>Практический пример: Создание класса Банковский счет</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">class БанковскийСчет:
+    """Класс для представления банковского счета."""
+    
+    # Атрибут класса - процентная ставка для всех счетов
+    процентная_ставка = 0.05
+    
+    def __init__(self, владелец, начальный_баланс=0):
+        self.владелец = владелец
+        self._баланс = начальный_баланс  # Защищенный атрибут
+        self.история_операций = []
+        
+    @property
+    def баланс(self):
+        """Свойство для доступа к балансу счета."""
+        return self._баланс
+    
+    def внести(self, сумма):
+        """Вносит деньги на счет."""
+        if сумма <= 0:
+            raise ValueError("Сумма должна быть положительной")
+        
+        self._баланс += сумма
+        self.история_операций.append(f"Внесено: {сумма}")
+        return f"Внесено {сумма}. Новый баланс: {self._баланс}"
+    
+    def снять(self, сумма):
+        """Снимает деньги со счета."""
+        if сумма <= 0:
+            raise ValueError("Сумма должна быть положительной")
+        
+        if сумма > self._баланс:
+            raise ValueError("Недостаточно средств")
+        
+        self._баланс -= сумма
+        self.история_операций.append(f"Снято: {сумма}")
+        return f"Снято {сумма}. Новый баланс: {self._баланс}"
+    
+    def начислить_проценты(self):
+        """Начисляет проценты на баланс счета."""
+        проценты = self._баланс * self.процентная_ставка
+        self._баланс += проценты
+        self.история_операций.append(f"Начислены проценты: {проценты:.2f}")
+        return f"Начислены проценты: {проценты:.2f}. Новый баланс: {self._баланс:.2f}"
+    
+    def показать_историю(self):
+        """Возвращает историю операций по счету."""
+        return "\n".join(self.история_операций)
+    
+    def __str__(self):
+        return f"Счет владельца {self.владелец}, баланс: {self._баланс}"
+    
+    @classmethod
+    def изменить_ставку(cls, новая_ставка):
+        """Изменяет процентную ставку для всех счетов."""
+        if новая_ставка < 0:
+            raise ValueError("Ставка не может быть отрицательной")
+        cls.процентная_ставка = новая_ставка
+        return f"Новая процентная ставка: {новая_ставка}"
+
+# Использование класса БанковскийСчет
+счет_анны = БанковскийСчет("Анна Иванова", 1000)
+счет_петра = БанковскийСчет("Петр Сидоров")
+
+print(счет_анны)  # Счет владельца Анна Иванова, баланс: 1000
+
+# Операции со счетом
+print(счет_анны.внести(500))  # Внесено 500. Новый баланс: 1500
+print(счет_анны.снять(200))  # Снято 200. Новый баланс: 1300
+print(счет_анны.начислить_проценты())  # Начислены проценты: 65.00. Новый баланс: 1365.00
+
+# Изменение процентной ставки для всех счетов
+БанковскийСчет.изменить_ставку(0.06)
+print(БанковскийСчет.процентная_ставка)  # 0.06
+print(счет_анны.процентная_ставка)  # 0.06
+print(счет_петра.процентная_ставка)  # 0.06
+
+# История операций
+print("\nИстория операций:")
+print(счет_анны.показать_историю())</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по работе с классами и объектами</h4>
+                    <ul>
+                        <li>Следуйте соглашению: имена классов пишутся в CamelCase (каждое слово с большой буквы)</li>
+                        <li>Всегда добавляйте docstring к классам и методам</li>
+                        <li>Используйте атрибуты класса для данных, общих для всех экземпляров</li>
+                        <li>Используйте свойства (properties) для контроля доступа к атрибутам</li>
+                        <li>Создавайте классы с единственной ответственностью (принцип единственной ответственности)</li>
+                        <li>Помните, что в Python все атрибуты публичны по умолчанию</li>
+                    </ul>
+                </div>
             </section>
             
             <!-- 5.2 Наследование -->
@@ -176,6 +855,16 @@
             <section id="encapsulation" class="topic-section">
                 <h2>5.4 Инкапсуляция</h2>
                 <p>Содержимое раздела об инкапсуляции будет добавлено позже.</p>
+            </section>
+            
+            <!-- Заключение модуля -->
+            <section class="conclusion">
+                <h3>Поздравляем!</h3>
+                <p>Вы прошли модуль "ООП в Python". Теперь вы знаете, как создавать классы, использовать наследование, полиморфизм и инкапсуляцию для создания объектно-ориентированных программ!</p>
+                
+                <div class="next-module">
+                    <a href="06-file-handling.html">Перейти к модулю 6: Работа с файлами</a>
+                </div>
             </section>
         </div>
     </div>

@@ -9,6 +9,189 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
 </head>
 <body>
     <!-- Шапка сайта -->
@@ -179,6 +362,16 @@
             <section id="async" class="topic-section">
                 <h2>8.4 Асинхронное программирование</h2>
                 <p>Содержимое раздела об асинхронном программировании будет добавлено позже.</p>
+            </section>
+            
+            <!-- Заключение модуля -->
+            <section class="conclusion">
+                <h3>Поздравляем!</h3>
+                <p>Вы завершили курс Python! Вы изучили все основные концепции языка от базового синтаксиса до продвинутых тем. Теперь вы готовы создавать собственные проекты и продолжать совершенствовать свои навыки!</p>
+                
+                <div class="next-module">
+                    <a href="../certificates/python-certificate.html">Получить сертификат</a>
+                </div>
             </section>
         </div>
     </div>
