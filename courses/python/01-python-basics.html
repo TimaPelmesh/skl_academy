@@ -72,6 +72,11 @@
             margin-bottom: 1rem;
         }
         
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
         h2, h3, h4 {
             margin-top: 1.5rem;
             margin-bottom: 1rem;
@@ -90,6 +95,27 @@
             .content {
                 margin-left: 0;
             }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
         }
     </style>
 </head>
@@ -217,10 +243,7 @@
 
         <!-- Основной контент -->
         <div id="content" class="content sidebar-active">
-            <!-- Введение в модуль -->
-            <section class="module-intro">
-                <h1>Модуль 1: Основы Python</h1>
-            </section>
+            <!-- Убрал секцию module-intro с заголовком "Модуль 1: Основы Python" -->
             
             <!-- Тема 1.1: Установка и настройка -->
             <section id="installation" class="topic-section">
