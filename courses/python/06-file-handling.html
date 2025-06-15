@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Работа с файлами в Python - изучите текстовые файлы, JSON, CSV и бинарные файлы">
     <meta name="keywords" content="python, файлы, текстовые файлы, json, csv, бинарные файлы">
-    <title>Работа с файлами в Python</title>
+    <title>Работа с файлами</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
@@ -201,7 +201,7 @@
             <span></span>
             <span></span>
         </div>
-        <h1 class="header-title">Python: Работа с файлами</h1>
+        <h1 class="header-title">Работа с файлами</h1>
         <div class="header-buttons">
             <button class="theme-toggle-btn" id="themeToggle">
                 <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Z"/></svg>
@@ -217,13 +217,8 @@
     <div class="container">
         <!-- Боковое меню -->
         <div id="sidebar" class="sidebar">
-            <div class="tabs">
-                <div class="tab active" data-tab="lessons">Уроки</div>
-                <div class="tab" data-tab="tasks">Задачи</div>
-            </div>
-
-            <!-- Содержимое вкладки "Уроки" -->
-            <div id="lessons-content" class="tab-content active">
+            <!-- Структура курса -->
+            <div class="course-structure">
                 <!-- Модуль 1 -->
                 <div class="topic">
                     <button class="topic-btn">1. Основы Python</button>
@@ -278,16 +273,17 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 6 - текущий -->
+                <!-- Модуль 6 -->
                 <div class="topic">
                     <button class="topic-btn active">6. Работа с файлами</button>
                     <div class="subtopics" style="max-height: 1000px;">
-                        <a href="#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="#text-files" class="subtopic active">6.1 Текстовые файлы</a>
                         <a href="#json-csv" class="subtopic">6.2 JSON и CSV</a>
                         <a href="#binary-files" class="subtopic">6.3 Бинарные файлы</a>
                     </div>
                 </div>
                 
+                <!-- Остальные модули -->
                 <div class="topic">
                     <button class="topic-btn">7. Модули и пакеты</button>
                     <div class="subtopics">
@@ -307,27 +303,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Содержимое вкладки "Задачи" -->
-            <div id="tasks-content" class="tab-content">
-                <div class="topic">
-                    <button class="topic-btn">Практические задания</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Начальный уровень</a>
-                        <a href="#" class="subtopic">Средний уровень</a>
-                        <a href="#" class="subtopic">Продвинутый уровень</a>
-                    </div>
-                </div>
-                
-                <div class="topic">
-                    <button class="topic-btn">Тесты</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Тест по основам</a>
-                        <a href="#" class="subtopic">Тест по функциям</a>
-                        <a href="#" class="subtopic">Тест по ООП</a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Основной контент -->
@@ -341,29 +316,438 @@
             <!-- 6.1 Текстовые файлы -->
             <section id="text-files" class="topic-section">
                 <h2>6.1 Текстовые файлы</h2>
-                <p>Содержимое раздела о работе с текстовыми файлами будет добавлено позже.</p>
+                <p>Работа с текстовыми файлами — одна из самых распространенных операций в программировании. Python предоставляет удобные инструменты для чтения, записи и обработки текстовых файлов.</p>
+                
+                <h3>Открытие и закрытие файлов</h3>
+                <p>Для работы с файлами используется функция <code>open()</code>, которая возвращает объект файла. После завершения работы с файлом его необходимо закрыть с помощью метода <code>close()</code>.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Открытие файла для чтения
+file = open('example.txt', 'r')
+content = file.read()
+file.close()
+
+# Более безопасный способ с использованием контекстного менеджера
+with open('example.txt', 'r') as file:
+    content = file.read()
+# Файл автоматически закрывается при выходе из блока with</code></pre>
+                </div>
+                
+                <h3>Режимы открытия файлов</h3>
+                <p>При открытии файла указывается режим, определяющий, какие операции можно выполнять с файлом:</p>
+                <ul>
+                    <li><code>'r'</code> — чтение (режим по умолчанию)</li>
+                    <li><code>'w'</code> — запись (создает новый файл или перезаписывает существующий)</li>
+                    <li><code>'a'</code> — добавление (дописывает данные в конец файла)</li>
+                    <li><code>'x'</code> — эксклюзивное создание (создает файл, возвращает ошибку, если он уже существует)</li>
+                    <li><code>'t'</code> — текстовый режим (по умолчанию)</li>
+                    <li><code>'b'</code> — бинарный режим</li>
+                    <li><code>'+'</code> — чтение и запись</li>
+                </ul>
+                
+                <h3>Чтение текстовых файлов</h3>
+                <p>Python предлагает несколько способов чтения файлов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Чтение всего файла в строку
+with open('example.txt', 'r') as file:
+    content = file.read()
+    print(content)
+
+# Чтение файла построчно в список
+with open('example.txt', 'r') as file:
+    lines = file.readlines()
+    for line in lines:
+        print(line.strip())  # strip() удаляет символ новой строки
+
+# Построчное чтение с использованием итерации
+with open('example.txt', 'r') as file:
+    for line in file:
+        print(line.strip())</code></pre>
+                </div>
+                
+                <h3>Запись в текстовые файлы</h3>
+                <p>Для записи данных в файл используются методы <code>write()</code> и <code>writelines()</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Запись строки в файл
+with open('new_file.txt', 'w') as file:
+    file.write('Привет, мир!\n')
+    file.write('Это вторая строка.')
+
+# Запись нескольких строк
+lines = ['Строка 1\n', 'Строка 2\n', 'Строка 3\n']
+with open('multiple_lines.txt', 'w') as file:
+    file.writelines(lines)</code></pre>
+                </div>
+                
+                <h3>Кодировка</h3>
+                <p>При работе с файлами, содержащими не-ASCII символы (например, кириллицу), важно указывать правильную кодировку:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Указание кодировки UTF-8
+with open('russian_text.txt', 'r', encoding='utf-8') as file:
+    content = file.read()
+    print(content)
+
+with open('output_russian.txt', 'w', encoding='utf-8') as file:
+    file.write('Привет, мир! Это текст на русском языке.')</code></pre>
+                </div>
+                
+                <h3>Позиционирование в файле</h3>
+                <p>Методы <code>seek()</code> и <code>tell()</code> позволяют управлять текущей позицией в файле:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">with open('example.txt', 'r') as file:
+    # Перемещение указателя на 5 байт от начала файла
+    file.seek(5)
+    
+    # Чтение 10 символов
+    content = file.read(10)
+    print(content)
+    
+    # Получение текущей позиции
+    position = file.tell()
+    print(f'Текущая позиция: {position}')</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы</h4>
+                    <ul>
+                        <li>Всегда используйте конструкцию <code>with</code> для работы с файлами — она гарантирует закрытие файла даже при возникновении ошибок.</li>
+                        <li>Помните о различиях между операционными системами в отношении символов окончания строки (Windows: \r\n, Unix/Linux: \n). Python может автоматически обрабатывать эти различия при использовании текстового режима.</li>
+                        <li>При чтении больших файлов используйте итерацию по строкам или метод <code>read(size)</code>, чтобы избежать загрузки всего файла в память.</li>
+                    </ul>
+                </div>
             </section>
             
             <!-- 6.2 JSON и CSV -->
             <section id="json-csv" class="topic-section">
                 <h2>6.2 JSON и CSV</h2>
-                <p>Содержимое раздела о работе с JSON и CSV файлами будет добавлено позже.</p>
+                <p>Для хранения структурированных данных часто используются форматы JSON и CSV. Python предоставляет встроенные модули для работы с этими форматами.</p>
+                
+                <h3>Работа с JSON</h3>
+                <p>JSON (JavaScript Object Notation) — популярный формат обмена данными, который легко читается как человеком, так и машиной. Модуль <code>json</code> в Python позволяет кодировать и декодировать данные в этом формате.</p>
+                
+                <h4>Сериализация (Python → JSON)</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import json
+
+# Создаем словарь Python
+data = {
+    "имя": "Иван",
+    "возраст": 30,
+    "город": "Москва",
+    "языки": ["Python", "JavaScript", "C++"],
+    "активен": True,
+    "рейтинг": 4.8
+}
+
+# Преобразование в строку JSON
+json_string = json.dumps(data, ensure_ascii=False, indent=4)
+print(json_string)
+
+# Запись в JSON-файл
+with open('data.json', 'w', encoding='utf-8') as file:
+    json.dump(data, file, ensure_ascii=False, indent=4)</code></pre>
+                </div>
+                
+                <p>Параметр <code>ensure_ascii=False</code> позволяет сохранять не-ASCII символы в их оригинальном виде, а <code>indent=4</code> делает вывод более читаемым с помощью отступов.</p>
+                
+                <h4>Десериализация (JSON → Python)</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import json
+
+# Чтение JSON из строки
+json_string = '{"имя": "Иван", "возраст": 30, "языки": ["Python", "JavaScript"]}'
+data = json.loads(json_string)
+print(data["имя"])  # Иван
+
+# Чтение из JSON-файла
+with open('data.json', 'r', encoding='utf-8') as file:
+    loaded_data = json.load(file)
+    print(loaded_data)</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Соответствие типов данных</h4>
+                    <p>При конвертации данных между Python и JSON используются следующие соответствия:</p>
+                    <ul>
+                        <li>Python <code>dict</code> ⟷ JSON Object</li>
+                        <li>Python <code>list</code>, <code>tuple</code> ⟷ JSON Array</li>
+                        <li>Python <code>str</code> ⟷ JSON String</li>
+                        <li>Python <code>int</code>, <code>float</code> ⟷ JSON Number</li>
+                        <li>Python <code>True</code> ⟷ JSON true</li>
+                        <li>Python <code>False</code> ⟷ JSON false</li>
+                        <li>Python <code>None</code> ⟷ JSON null</li>
+                    </ul>
+                </div>
+                
+                <h3>Работа с CSV</h3>
+                <p>CSV (Comma-Separated Values) — формат для хранения табличных данных в текстовом виде. Для работы с CSV в Python используется модуль <code>csv</code>.</p>
+                
+                <h4>Запись данных в CSV</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import csv
+
+# Данные для записи
+data = [
+    ['Имя', 'Возраст', 'Город'],
+    ['Иван', 25, 'Москва'],
+    ['Мария', 23, 'Санкт-Петербург'],
+    ['Алексей', 30, 'Казань']
+]
+
+# Запись в CSV-файл
+with open('users.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+# Запись словарей в CSV
+users = [
+    {'Имя': 'Иван', 'Возраст': 25, 'Город': 'Москва'},
+    {'Имя': 'Мария', 'Возраст': 23, 'Город': 'Санкт-Петербург'},
+    {'Имя': 'Алексей', 'Возраст': 30, 'Город': 'Казань'}
+]
+
+with open('users_dict.csv', 'w', newline='', encoding='utf-8') as file:
+    fieldnames = ['Имя', 'Возраст', 'Город']
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(users)</code></pre>
+                </div>
+                
+                <h4>Чтение данных из CSV</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import csv
+
+# Чтение CSV-файла
+with open('users.csv', 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+
+# Чтение CSV-файла в список словарей
+with open('users_dict.csv', 'r', encoding='utf-8') as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(f"{row['Имя']}: {row['Возраст']} лет, город {row['Город']}")</code></pre>
+                </div>
+                
+                <h4>Настройка разделителя и диалекта</h4>
+                <p>CSV файлы могут использовать разные разделители и правила форматирования:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import csv
+
+# Использование точки с запятой в качестве разделителя
+with open('data_semicolon.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file, delimiter=';')
+    writer.writerow(['Имя', 'Возраст', 'Город'])
+    writer.writerow(['Иван', 25, 'Москва'])
+
+# Создание и использование пользовательского диалекта
+csv.register_dialect('custom', delimiter='|', quoting=csv.QUOTE_MINIMAL)
+
+with open('data_custom.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file, dialect='custom')
+    writer.writerow(['Имя', 'Возраст', 'Город'])
+    writer.writerow(['Иван', 25, 'Москва'])</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы по работе с JSON и CSV</h4>
+                    <ul>
+                        <li>Используйте параметр <code>ensure_ascii=False</code> при работе с JSON на русском языке.</li>
+                        <li>Для CSV всегда указывайте параметр <code>newline=''</code> при открытии файла, чтобы избежать проблем с переносами строк на разных платформах.</li>
+                        <li>При работе с большими CSV-файлами используйте построчное чтение, чтобы не загружать весь файл в память.</li>
+                        <li>Модуль <code>pandas</code> предоставляет более удобные инструменты для анализа и обработки данных в формате CSV: <code>pd.read_csv()</code> и <code>df.to_csv()</code>.</li>
+                    </ul>
+                </div>
+                
+                <div class="interactive-resources">
+                    <h4>Полезные инструменты</h4>
+                    <ul>
+                        <li><a href="https://jsonlint.com/" target="_blank">JSONLint</a> — онлайн-валидатор JSON</li>
+                        <li><a href="https://jsonformatter.org/" target="_blank">JSON Formatter</a> — инструмент для форматирования и валидации JSON</li>
+                        <li><a href="https://www.csvvalidator.io/" target="_blank">CSV Validator</a> — инструмент для проверки CSV-файлов</li>
+                    </ul>
+                </div>
             </section>
             
             <!-- 6.3 Бинарные файлы -->
             <section id="binary-files" class="topic-section">
                 <h2>6.3 Бинарные файлы</h2>
-                <p>Содержимое раздела о работе с бинарными файлами будет добавлено позже.</p>
+                <p>Бинарные файлы содержат данные в виде последовательности байтов, а не в текстовом формате. К бинарным файлам относятся изображения, аудио, видео, исполняемые файлы и многие другие.</p>
+                
+                <h3>Открытие и чтение бинарных файлов</h3>
+                <p>Для работы с бинарными файлами используется режим <code>'b'</code> в сочетании с режимами чтения или записи:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Чтение бинарного файла
+with open('image.jpg', 'rb') as file:
+    binary_data = file.read()
+    print(f"Размер файла: {len(binary_data)} байт")
+    print(f"Первые 10 байт: {binary_data[:10]}")
+
+# Чтение определенного количества байтов
+with open('image.jpg', 'rb') as file:
+    header = file.read(10)  # Чтение первых 10 байт
+    print(header)</code></pre>
+                </div>
+                
+                <h3>Запись бинарных файлов</h3>
+                <p>Для записи бинарных данных используется режим <code>'wb'</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Запись бинарных данных
+with open('output.bin', 'wb') as file:
+    file.write(b'\x00\x01\x02\x03\x04')  # Запись байтовой строки
+    
+    # Запись массива байтов
+    import array
+    byte_array = array.array('B', [5, 6, 7, 8, 9])
+    file.write(byte_array)
+
+# Копирование бинарного файла
+with open('image.jpg', 'rb') as source:
+    with open('image_copy.jpg', 'wb') as destination:
+        destination.write(source.read())</code></pre>
+                </div>
+                
+                <h3>Работа с модулем <code>struct</code></h3>
+                <p>Модуль <code>struct</code> позволяет упаковывать и распаковывать бинарные данные по определенному формату:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import struct
+
+# Упаковка данных в бинарный формат
+# 'i' - целое число (4 байта), 'f' - число с плавающей точкой (4 байта), 's' - строка
+data = struct.pack('if10s', 123, 45.67, b'Hello')
+print(data)  # b'{\x00\x00\x00\\xd7#B\x00Hello\x00\x00\x00\x00\x00'
+
+# Запись упакованных данных в файл
+with open('packed_data.bin', 'wb') as file:
+    file.write(data)
+
+# Чтение и распаковка данных
+with open('packed_data.bin', 'rb') as file:
+    binary_data = file.read()
+    unpacked = struct.unpack('if10s', binary_data)
+    print(unpacked)  # (123, 45.67, b'Hello\x00\x00\x00\x00\x00')</code></pre>
+                </div>
+                
+                <h3>Работа с модулем <code>pickle</code></h3>
+                <p>Модуль <code>pickle</code> позволяет сериализовать и десериализовать объекты Python:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import pickle
+
+# Создаем объект для сериализации
+data = {
+    'name': 'Иван',
+    'age': 30,
+    'skills': ['Python', 'Data Science'],
+    'contacts': {
+        'email': 'ivan@example.com',
+        'phone': '+7-900-123-45-67'
+    }
+}
+
+# Сериализация объекта в файл
+with open('data.pickle', 'wb') as file:
+    pickle.dump(data, file)
+
+# Десериализация объекта из файла
+with open('data.pickle', 'rb') as file:
+    loaded_data = pickle.load(file)
+    print(loaded_data)
+    print(f"Имя: {loaded_data['name']}, Возраст: {loaded_data['age']}")</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Меры безопасности при работе с pickle</h4>
+                    <p>Важно помнить, что модуль <code>pickle</code> не безопасен при работе с ненадежными данными:</p>
+                    <ul>
+                        <li>Никогда не загружайте pickle-файлы из ненадежных источников</li>
+                        <li>Pickle может исполнять произвольный код во время загрузки</li>
+                        <li>Для обмена данными с внешними системами лучше использовать JSON или другие безопасные форматы</li>
+                    </ul>
+                </div>
+                
+                <h3>Работа с бинарными файлами изображений</h3>
+                <p>Для работы с изображениями часто используется библиотека <code>Pillow</code> (PIL):</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">from PIL import Image
+
+# Открытие изображения
+image = Image.open('example.jpg')
+print(f"Размер изображения: {image.width}x{image.height}")
+print(f"Формат: {image.format}")
+
+# Изменение размера и сохранение изображения
+resized_image = image.resize((800, 600))
+resized_image.save('resized_example.jpg')
+
+# Конвертация между форматами
+image.save('example.png')</code></pre>
+                </div>
+                
+                <h3>Работа с zip-архивами</h3>
+                <p>Модуль <code>zipfile</code> позволяет создавать и распаковывать ZIP-архивы:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import zipfile
+import os
+
+# Создание ZIP-архива
+with zipfile.ZipFile('archive.zip', 'w') as zipf:
+    # Добавление файла в архив
+    zipf.write('data.json')
+    zipf.write('image.jpg')
+    
+    # Добавление всех текстовых файлов из директории
+    for file in os.listdir('.'):
+        if file.endswith('.txt'):
+            zipf.write(file)
+
+# Распаковка архива
+with zipfile.ZipFile('archive.zip', 'r') as zipf:
+    # Вывод списка файлов в архиве
+    print(zipf.namelist())
+    
+    # Распаковка всех файлов
+    zipf.extractall('extracted_files')
+    
+    # Извлечение конкретного файла
+    zipf.extract('data.json', 'single_file')</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы по работе с бинарными файлами</h4>
+                    <ul>
+                        <li>При работе с большими бинарными файлами читайте и обрабатывайте данные порциями, чтобы избежать проблем с памятью.</li>
+                        <li>Используйте контекстные менеджеры (<code>with</code>) для автоматического закрытия файлов.</li>
+                        <li>Для сложных бинарных форматов (аудио, видео, изображения) используйте специализированные библиотеки, такие как Pillow, OpenCV, PyAudio и др.</li>
+                        <li>При работе с сетевыми бинарными данными помните о различиях в порядке байтов (little-endian и big-endian).</li>
+                    </ul>
+                </div>
+                
+                <div class="next-steps">
+                    <h4>Следующие шаги для изучения</h4>
+                    <ul>
+                        <li>Изучите библиотеку <code>BytesIO</code> из модуля <code>io</code> для работы с бинарными данными в памяти.</li>
+                        <li>Познакомьтесь с библиотекой <code>NumPy</code> для эффективной работы с бинарными массивами данных.</li>
+                        <li>Изучите форматы HDF5 и Parquet для работы с большими объемами научных или аналитических данных.</li>
+                    </ul>
+                </div>
             </section>
             
             <!-- Заключение модуля -->
             <section class="conclusion">
                 <h3>Поздравляем!</h3>
                 <p>Вы прошли модуль "Работа с файлами" в Python. Теперь вы знаете, как работать с текстовыми, JSON, CSV и бинарными файлами для эффективного хранения и обработки данных!</p>
-                
-                <div class="next-module">
-                    <a href="07-modules-and-packages.html">Перейти к модулю 7: Модули и пакеты</a>
-                </div>
             </section>
         </div>
     </div>

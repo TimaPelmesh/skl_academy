@@ -9,28 +9,6 @@ menuToggle.addEventListener('click', () => {
     content.classList.toggle('sidebar-active');
 });
 
-// Переключение вкладок
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-        // Убрать активный класс со всех вкладок
-        document.querySelectorAll('.tab').forEach(item => {
-            item.classList.remove('active');
-        });
-        
-        // Убрать активный класс со всех контентов
-        document.querySelectorAll('.tab-content').forEach(item => {
-            item.classList.remove('active');
-        });
-        
-        // Добавить активный класс выбранной вкладке
-        this.classList.add('active');
-        
-        // Показать соответствующий контент
-        const tabId = this.getAttribute('data-tab') + '-content';
-        document.getElementById(tabId).classList.add('active');
-    });
-});
-
 // Раскрытие тем
 document.querySelectorAll('.topic-btn').forEach(btn => {
     btn.addEventListener('click', function() {

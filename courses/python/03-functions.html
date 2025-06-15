@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Функции в Python - изучите создание функций, параметры, аргументы, lambda-функции и рекурсию">
     <meta name="keywords" content="python, функции, параметры, аргументы, lambda, рекурсия">
-    <title>Функции в Python</title>
+    <title>Функции</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
@@ -306,7 +306,7 @@
             <span></span>
             <span></span>
         </div>
-        <h1 class="header-title" data-course="python" data-module="Функции"><span>Python: </span>Функции</h1>
+        <h1 class="header-title" data-course="python" data-module="Функции">Функции</h1>
         <div class="header-buttons">
             <button class="theme-toggle-btn" id="themeToggle">
                 <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Z"/></svg>
@@ -322,13 +322,8 @@
     <div class="container">
         <!-- Боковое меню -->
         <div id="sidebar" class="sidebar">
-            <div class="tabs">
-                <div class="tab active" data-tab="lessons">Уроки</div>
-                <div class="tab" data-tab="tasks">Задачи</div>
-            </div>
-
-            <!-- Содержимое вкладки "Уроки" -->
-            <div id="lessons-content" class="tab-content active">
+            <!-- Структура курса -->
+            <div class="course-structure">
                 <!-- Модуль 1 -->
                 <div class="topic">
                     <button class="topic-btn">1. Основы Python</button>
@@ -350,18 +345,18 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 3 - текущий -->
+                <!-- Модуль 3 -->
                 <div class="topic">
                     <button class="topic-btn active">3. Функции</button>
                     <div class="subtopics" style="max-height: 1000px;">
-                        <a href="#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="#creating" class="subtopic active">3.1 Создание функций</a>
                         <a href="#parameters" class="subtopic">3.2 Параметры и аргументы</a>
                         <a href="#lambda" class="subtopic">3.3 Lambda-функции</a>
                         <a href="#recursion" class="subtopic">3.4 Рекурсия</a>
                     </div>
                 </div>
                 
-                <!-- Модуль 4 -->
+                <!-- Остальные модули -->
                 <div class="topic">
                     <button class="topic-btn">4. Структуры данных</button>
                     <div class="subtopics">
@@ -372,7 +367,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 5 -->
                 <div class="topic">
                     <button class="topic-btn">5. ООП в Python</button>
                     <div class="subtopics">
@@ -383,7 +377,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 6 -->
                 <div class="topic">
                     <button class="topic-btn">6. Работа с файлами</button>
                     <div class="subtopics">
@@ -393,7 +386,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 7 -->
                 <div class="topic">
                     <button class="topic-btn">7. Модули и пакеты</button>
                     <div class="subtopics">
@@ -403,7 +395,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 8 -->
                 <div class="topic">
                     <button class="topic-btn">8. Продвинутые темы</button>
                     <div class="subtopics">
@@ -411,27 +402,6 @@
                         <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
                         <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
                         <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Содержимое вкладки "Задачи" -->
-            <div id="tasks-content" class="tab-content">
-                <div class="topic">
-                    <button class="topic-btn">Практические задания</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Начальный уровень</a>
-                        <a href="#" class="subtopic">Средний уровень</a>
-                        <a href="#" class="subtopic">Продвинутый уровень</a>
-                    </div>
-                </div>
-                
-                <div class="topic">
-                    <button class="topic-btn">Тесты</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Тест по основам</a>
-                        <a href="#" class="subtopic">Тест по функциям</a>
-                        <a href="#" class="subtopic">Тест по ООП</a>
                     </div>
                 </div>
             </div>
@@ -1273,10 +1243,6 @@ print(факториал_хвостовой(5))  # 120</code></pre>
             <section class="conclusion">
                 <h3>Поздравляем!</h3>
                 <p>Вы прошли модуль "Функции" в Python. Теперь вы знаете, как создавать и использовать функции для организации и повторного использования кода!</p>
-                
-                <div class="next-module">
-                    <a href="04-data-structures.html">Перейти к модулю 4: Структуры данных</a>
-                </div>
             </section>
         </div>
     </div>

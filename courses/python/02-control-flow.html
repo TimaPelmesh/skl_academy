@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Управление потоком в Python - изучите условные операторы, циклы и обработку исключений">
     <meta name="keywords" content="python, условные операторы, if, else, циклы, for, while, исключения, try, except">
-    <title>Управление потоком в Python</title>
+    <title>Условия и циклы</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
@@ -333,7 +333,7 @@
             <span></span>
             <span></span>
         </div>
-        <h1 class="header-title">Python: Управление потоком</h1>
+        <h1 class="header-title">Условия и циклы</h1>
         <div class="header-buttons">
             <button class="theme-toggle-btn" id="themeToggle">
                 <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Z"/></svg>
@@ -349,13 +349,8 @@
     <div class="container">
         <!-- Боковое меню -->
         <div id="sidebar" class="sidebar">
-            <div class="tabs">
-                <div class="tab active" data-tab="lessons">Уроки</div>
-                <div class="tab" data-tab="tasks">Задачи</div>
-            </div>
-
-            <!-- Содержимое вкладки "Уроки" -->
-            <div id="lessons-content" class="tab-content active">
+            <!-- Структура курса -->
+            <div class="course-structure">
                 <!-- Модуль 1 -->
                 <div class="topic">
                     <button class="topic-btn">1. Основы Python</button>
@@ -367,11 +362,11 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 2 - текущий -->
+                <!-- Модуль 2 -->
                 <div class="topic">
                     <button class="topic-btn active">2. Управление потоком</button>
                     <div class="subtopics" style="max-height: 1000px;">
-                        <a href="#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="#conditional" class="subtopic active">2.1 Условные операторы</a>
                         <a href="#loops" class="subtopic">2.2 Циклы (for/while)</a>
                         <a href="#exceptions" class="subtopic">2.3 Исключения</a>
                     </div>
@@ -388,7 +383,7 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 4 -->
+                <!-- Остальные модули -->
                 <div class="topic">
                     <button class="topic-btn">4. Структуры данных</button>
                     <div class="subtopics">
@@ -399,7 +394,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 5 -->
                 <div class="topic">
                     <button class="topic-btn">5. ООП в Python</button>
                     <div class="subtopics">
@@ -410,7 +404,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 6 -->
                 <div class="topic">
                     <button class="topic-btn">6. Работа с файлами</button>
                     <div class="subtopics">
@@ -420,7 +413,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 7 -->
                 <div class="topic">
                     <button class="topic-btn">7. Модули и пакеты</button>
                     <div class="subtopics">
@@ -430,7 +422,6 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 8 -->
                 <div class="topic">
                     <button class="topic-btn">8. Продвинутые темы</button>
                     <div class="subtopics">
@@ -438,27 +429,6 @@
                         <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
                         <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
                         <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Содержимое вкладки "Задачи" -->
-            <div id="tasks-content" class="tab-content">
-                <div class="topic">
-                    <button class="topic-btn">Практические задания</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Начальный уровень</a>
-                        <a href="#" class="subtopic">Средний уровень</a>
-                        <a href="#" class="subtopic">Продвинутый уровень</a>
-                    </div>
-                </div>
-                
-                <div class="topic">
-                    <button class="topic-btn">Тесты</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Тест по основам</a>
-                        <a href="#" class="subtopic">Тест по функциям</a>
-                        <a href="#" class="subtopic">Тест по ООП</a>
                     </div>
                 </div>
             </div>
@@ -1043,10 +1013,6 @@ print(safe_divide("abc", 2))   # Ошибка: аргументы должны �
             <section class="conclusion">
                 <h3>Поздравляем!</h3>
                 <p>Вы прошли модуль "Управление потоком" в Python. Теперь вы знаете, как использовать условные операторы, циклы и обработку исключений для создания более сложной логики в своих программах!</p>
-                
-                <div class="next-module">
-                    <a href="03-functions.html">Перейти к модулю 3: Функции в Python</a>
-                </div>
             </section>
         </div>
     </div>
@@ -1055,6 +1021,5 @@ print(safe_divide("abc", 2))   # Ошибка: аргументы должны �
     <script>
         hljs.highlightAll();
     </script>
-    <script src="script.js"></script>
 </body>
 </html>

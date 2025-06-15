@@ -521,3 +521,38 @@ body::-webkit-scrollbar-thumb {
         margin-right: 10px;
     }
 }
+
+/* Стили для секции с обратной связью */
+.feedback-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    color: #4a9eff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.contact-link i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.contact-link:hover {
+    color: #6db5ff;
+    transform: translateX(5px);
+}

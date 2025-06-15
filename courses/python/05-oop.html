@@ -306,7 +306,7 @@
             <span></span>
             <span></span>
         </div>
-        <h1 class="header-title">Python: ООП</h1>
+        <h1 class="header-title">ООП</h1>
         <div class="header-buttons">
             <button class="theme-toggle-btn" id="themeToggle">
                 <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Z"/></svg>
@@ -322,13 +322,8 @@
     <div class="container">
         <!-- Боковое меню -->
         <div id="sidebar" class="sidebar">
-            <div class="tabs">
-                <div class="tab active" data-tab="lessons">Уроки</div>
-                <div class="tab" data-tab="tasks">Задачи</div>
-            </div>
-
-            <!-- Содержимое вкладки "Уроки" -->
-            <div id="lessons-content" class="tab-content active">
+            <!-- Структура курса -->
+            <div class="course-structure">
                 <!-- Модуль 1 -->
                 <div class="topic">
                     <button class="topic-btn">1. Основы Python</button>
@@ -372,17 +367,18 @@
                     </div>
                 </div>
                 
-                <!-- Модуль 5 - текущий -->
+                <!-- Модуль 5 -->
                 <div class="topic">
                     <button class="topic-btn active">5. ООП в Python</button>
                     <div class="subtopics" style="max-height: 1000px;">
-                        <a href="#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="#classes-objects" class="subtopic active">5.1 Классы и объекты</a>
                         <a href="#inheritance" class="subtopic">5.2 Наследование</a>
                         <a href="#polymorphism" class="subtopic">5.3 Полиморфизм</a>
                         <a href="#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
                     </div>
                 </div>
                 
+                <!-- Остальные модули -->
                 <div class="topic">
                     <button class="topic-btn">6. Работа с файлами</button>
                     <div class="subtopics">
@@ -408,27 +404,6 @@
                         <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
                         <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
                         <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Содержимое вкладки "Задачи" -->
-            <div id="tasks-content" class="tab-content">
-                <div class="topic">
-                    <button class="topic-btn">Практические задания</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Начальный уровень</a>
-                        <a href="#" class="subtopic">Средний уровень</a>
-                        <a href="#" class="subtopic">Продвинутый уровень</a>
-                    </div>
-                </div>
-                
-                <div class="topic">
-                    <button class="topic-btn">Тесты</button>
-                    <div class="subtopics">
-                        <a href="#" class="subtopic">Тест по основам</a>
-                        <a href="#" class="subtopic">Тест по функциям</a>
-                        <a href="#" class="subtopic">Тест по ООП</a>
                     </div>
                 </div>
             </div>
@@ -2024,10 +1999,6 @@ except ValueError as e:
             <section class="conclusion">
                 <h3>Поздравляем!</h3>
                 <p>Вы прошли модуль "ООП в Python". Теперь вы знаете, как создавать классы, использовать наследование, полиморфизм и инкапсуляцию для создания объектно-ориентированных программ!</p>
-                
-                <div class="next-module">
-                    <a href="06-file-handling.html">Перейти к модулю 6: Работа с файлами</a>
-                </div>
             </section>
         </div>
     </div>
