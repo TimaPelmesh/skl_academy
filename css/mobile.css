@@ -11,6 +11,23 @@
         overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
     }
     
+    /* Стили для таблиц на мобильных устройствах */
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+    }
+    
+    .operators-cheatsheet table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
     /* Стили для мобильного меню */
     .mobile-menu {
         position: absolute;

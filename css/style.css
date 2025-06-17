@@ -1481,6 +1481,41 @@ footer::before {
         padding: var(--container-padding-mobile);
     }
     
+    /* Стили для таблиц на мобильных устройствах */
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+    }
+    
+    .operators-cheatsheet table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Скрываем слово Python в заголовках модулей на мобильных устройствах */
+    .header-title {
+        font-size: 1.3rem;
+    }
+    
+    .header-title:contains("Python:") {
+        text-transform: none;
+    }
+    
+    .header-title[data-course="python"]::before {
+        content: attr(data-module);
+        display: inline;
+    }
+    
+    .header-title[data-course="python"] span {
+        display: none;
+    }
+    
     .main-nav {
         height: 60px;
         padding: 0;
