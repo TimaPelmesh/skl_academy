@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>Тренажер печати | SKL Academy</title>
+    <title>Тест скорости печати | SKL Academy</title>
     
     <!-- Favicon / Иконки сайта -->
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
@@ -30,23 +30,11 @@
 <body>
     <!-- Шапка -->
     <header class="typing-header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-container">
-                    <a href="../../index.html" class="logo">
-                        <img src="../../images/icon.ico" alt="SKL Academy" class="nav-logo-icon">
-                        <span class="logo-text">SKL Academy</span>
-                    </a>
-                </div>
-                <div class="header-title">
-                    <h1>Тренажер печати</h1>
-                </div>
-                <div class="home-button">
-                    <a href="../../index.html" class="home-link">
-                        <i class="fas fa-home"></i> На главную
-                    </a>
-                </div>
-            </div>
+        <div class="container header-container">
+            <h1 class="header-title">Тест скорости печати</h1>
+            <a href="../../index.html" class="exit-btn" title="Вернуться на главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
         </div>
     </header>
 
@@ -55,8 +43,8 @@
         <div class="typing-wrapper">
             <!-- Заголовок с инструкцией -->
             <div class="typing-intro">
-                <h2>Улучшайте навыки быстрой печати</h2>
-                <p>Печатайте текст, следуя за подсветкой. Результаты будут показаны в конце.</p>
+                <h2>Проверьте скорость печати</h2>
+                <p>Просто начните печатать - нажимайте клавиши, чтобы вводить текст. Нажмите Backspace для исправления ошибок.</p>
             </div>
             
             <!-- Таймер (маленький, в углу) -->
@@ -68,7 +56,7 @@
             <div class="typing-text-container">
                 <div class="typing-text" id="typing-text"></div>
                 <div class="current-input">
-                    <input type="text" id="typing-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Начните печатать здесь...">
+                    <input type="text" id="typing-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                 </div>
             </div>
             
@@ -80,6 +68,7 @@
                         <option value="easy">Легкая</option>
                         <option value="medium" selected>Средняя</option>
                         <option value="hard">Сложная</option>
+                        <option value="expert">Эксперт</option>
                     </select>
                 </div>
                 
@@ -93,6 +82,91 @@
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
         </div>
+        
+        <!-- Информация о скорости печати -->
+        <div class="typing-info">
+            <div class="info-section collapsible">
+                <div class="info-header">
+                    <h3>Как интерпретировать результаты теста?</h3>
+                    <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="info-content hidden">
+                    <div class="speed-levels">
+                        <div class="speed-level">
+                            <div class="speed-badge beginner">0-150</div>
+                            <div class="level-desc">
+                                <strong>Начинающий:</strong> До 150 знаков в минуту. Это базовый уровень, с которого начинают большинство людей.
+                            </div>
+                        </div>
+                        <div class="speed-level">
+                            <div class="speed-badge average">150-200</div>
+                            <div class="level-desc">
+                                <strong>Средний:</strong> 150-200 знаков в минуту. Этот уровень достаточен для большинства задач на компьютере.
+                            </div>
+                        </div>
+                        <div class="speed-level">
+                            <div class="speed-badge good">200-250</div>
+                            <div class="level-desc">
+                                <strong>Хороший:</strong> 200-250 знаков в минуту. С такой скоростью уже можно эффективно работать.
+                            </div>
+                        </div>
+                        <div class="speed-level">
+                            <div class="speed-badge excellent">250+</div>
+                            <div class="level-desc">
+                                <strong>Отличный:</strong> 250-300 знаков в минуту. Профессиональный уровень набора текста.
+                            </div>
+                        </div>
+                        <div class="speed-level">
+                            <div class="speed-badge expert">300+</div>
+                            <div class="level-desc">
+                                <strong>Эксперт:</strong> Более 300 знаков в минуту. Экстраординарная скорость печати, достижимая лишь с годами практики.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-section collapsible">
+                <div class="info-header">
+                    <h3>Советы для повышения скорости печати</h3>
+                    <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="info-content hidden">
+                    <div class="typing-tips">
+                        <div class="tip">
+                            <div class="tip-icon"><i class="fas fa-keyboard"></i></div>
+                            <div class="tip-content">
+                                <strong>Правильное положение рук:</strong> Держите руки на основном ряду клавиатуры (ASDF - JKL;).
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="tip-icon"><i class="fas fa-eye"></i></div>
+                            <div class="tip-content">
+                                <strong>Не смотрите на клавиатуру:</strong> Старайтесь печатать вслепую, фокусируясь только на тексте.
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="tip-icon"><i class="fas fa-calendar-check"></i></div>
+                            <div class="tip-content">
+                                <strong>Регулярная практика:</strong> Уделяйте не менее 15-20 минут в день тренировке печати.
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="tip-icon"><i class="fas fa-running"></i></div>
+                            <div class="tip-content">
+                                <strong>Постепенное увеличение темпа:</strong> Начинайте с комфортной скорости, постепенно ускоряясь.
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="tip-icon"><i class="fas fa-hand-paper"></i></div>
+                            <div class="tip-content">
+                                <strong>Используйте все пальцы:</strong> Каждый палец должен отвечать за определенные клавиши.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     
     <!-- Модальное окно с результатами -->
@@ -100,7 +174,7 @@
         <div class="results-content">
             <div class="results-header">
                 <h2>Поздравляем!</h2>
-                <p>Вы успешно завершили упражнение</p>
+                <p>Вы успешно завершили тест</p>
             </div>
             
             <div class="results-stats">
