@@ -73,11 +73,42 @@
         .course-card {
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
         .course-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .status-ready {
+            background-color: rgba(34, 197, 94, 0.9);
+            color: white;
+        }
+        
+        .status-development {
+            background-color: rgba(234, 179, 8, 0.9);
+            color: white;
+        }
+        
+        .status-planned {
+            background-color: rgba(107, 114, 128, 0.9);
+            color: white;
         }
         
         .hero-gradient {
@@ -313,7 +344,7 @@
                 </div>
                 <nav class="hidden md:block">
                     <ul class="flex space-x-8 justify-end">
-                                <li><a href="courses/typing/index.html" class="font-medium text-gray-200 hover:text-blue-400 transition"><i class="fas fa-keyboard mr-1"></i> Тренажер печати</a></li>
+                                <li><a href="courses/typing/test.html" class="font-medium text-gray-200 hover:text-blue-400 transition"><i class="fas fa-keyboard mr-1"></i> Тренажер печати</a></li>
         <li><a href="#contacts" class="font-medium text-gray-200 hover:text-blue-400 transition" onclick="scrollToContacts(event)"><i class="fas fa-address-book mr-1"></i> Контакты</a></li>
         <li><a href="about.html" class="font-medium text-gray-200 hover:text-blue-400 transition"><i class="fas fa-info-circle mr-1"></i> О проекте</a></li>
                     </ul>
@@ -326,7 +357,7 @@
         <!-- Mobile menu -->
         <div class="mobile-menu hidden" style="background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: absolute; width: 100%; left: 0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
             <ul class="py-0 text-center -mt-32 space-y-3">
-                <li><a href="courses/typing/index.html" class="block mobile-menu-link transition text-lg" style="background: linear-gradient(90deg, #9c27b0, #673ab7);"><i class="fas fa-keyboard mr-2"></i>Тренажер печати</a></li>
+                <li><a href="courses/typing/test.html" class="block mobile-menu-link transition text-lg" style="background: linear-gradient(90deg, #9c27b0, #673ab7);"><i class="fas fa-keyboard mr-2"></i>Тест скорости печати</a></li>
                 <li><a href="#contacts" class="block mobile-menu-link transition text-lg" onclick="scrollToContacts(event)"><i class="fas fa-address-book mr-2"></i>Контакты</a></li>
                 <li><a href="about.html" class="block mobile-menu-link transition text-lg"><i class="fas fa-info-circle mr-2"></i>О проекте</a></li>
             </ul>
@@ -350,6 +381,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Computer Networks Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="course-status status-development">
+                        <i class="fas fa-tools"></i>
+                        <span>В разработке</span>
+                    </div>
                     <div class="course-header">
                         <div class="course-icon bg-blue-100 text-blue-600">
                             <i class="fas fa-network-wired"></i>
@@ -380,6 +415,10 @@
                 
                 <!-- Python Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="course-status status-ready">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Готов</span>
+                    </div>
                     <div class="course-header">
                         <div class="course-icon bg-green-100 text-green-600">
                             <i class="fab fa-python"></i>
@@ -408,6 +447,10 @@
                 
                 <!-- C# Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="course-status status-planned">
+                        <i class="fas fa-calendar"></i>
+                        <span>Планируется</span>
+                    </div>
                     <div class="course-header">
                         <div class="course-icon bg-purple-100 text-purple-600">
                             <i class="fas fa-code"></i>
@@ -436,6 +479,10 @@
                 
                 <!-- Git Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="course-status status-planned">
+                        <i class="fas fa-calendar"></i>
+                        <span>Планируется</span>
+                    </div>
                     <div class="course-header">
                         <div class="course-icon bg-red-100 text-red-600">
                             <i class="fab fa-git-alt"></i>
@@ -464,6 +511,10 @@
                 
                 <!-- Web Development Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="course-status status-development">
+                        <i class="fas fa-tools"></i>
+                        <span>В разработке</span>
+                    </div>
                     <div class="course-header">
                         <div class="course-icon bg-yellow-100 text-yellow-600">
                             <i class="fas fa-laptop-code"></i>
@@ -492,6 +543,10 @@
                 
                 <!-- Command Line Card -->
                 <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="course-status status-planned">
+                        <i class="fas fa-calendar"></i>
+                        <span>Планируется</span>
+                    </div>
                     <div class="course-header">
                         <div class="course-icon bg-indigo-100 text-indigo-600">
                             <i class="fas fa-terminal"></i>
@@ -517,6 +572,38 @@
                     
                     <a href="#" class="block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
                 </div>
+                
+                <!-- Typing Speed Card -->
+                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                    <div class="course-status status-development">
+                        <i class="fas fa-tools"></i>
+                        <span>В разработке</span>
+                    </div>
+                    <div class="course-header">
+                        <div class="course-icon bg-purple-100 text-purple-600">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-100">Быстрая печать</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Освойте скоростную печать на клавиатуре и повысьте свою производительность.</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Методика слепой десятипальцевой печати</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Упражнения для улучшения скорости и точности</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span class="text-gray-300">Эргономика рабочего места и здоровье</span>
+                        </div>
+                    </div>
+                    
+                    <a href="courses/typing/01-vvedenie.html" class="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
+                </div>
             </div>
         </div>
     </section>
@@ -524,13 +611,13 @@
     <!-- Typing Trainer Section -->
     <section class="py-16 bg-particles relative">
         <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center text-white mb-12 glow-text">Наш тренажер</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-12 glow-text">Тест скорости печати</h2>
             
             <div class="flex flex-col lg:flex-row items-center gap-8">
                 <div class="lg:w-1/2">
                     <div class="blur-card rounded-xl p-8 border border-purple-400 bg-opacity-10 bg-purple-800">
-                        <h3 class="text-2xl font-bold text-white mb-4">Тренажер скорости печати</h3>
-                        <p class="text-gray-200 mb-6">Улучшите свою скорость и точность печати с помощью нашего интерактивного тренажера. Отслеживайте свой прогресс, соревнуйтесь с самим собой и развивайте навык быстрой печати.</p>
+                        <h3 class="text-2xl font-bold text-white mb-4">С какой скоростью вы печатаете?</h3>
+                        <p class="text-gray-200 mb-6">Улучшите свою скорость и точность печати с помощью нашего интерактивного теста. Отслеживайте свой прогресс, соревнуйтесь с самим собой и развивайте навык быстрой печати.</p>
                         
                         <div class="space-y-4 mb-6">
                             <div class="flex items-start">
@@ -547,8 +634,8 @@
                             </div>
                         </div>
                         
-                        <a href="courses/typing/index.html" class="inline-block bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-medium py-3 px-8 rounded-lg transition transform hover:-translate-y-1 hover:shadow-lg">
-                            Попробовать тренажер <i class="fas fa-arrow-right ml-2"></i>
+                        <a href="courses/typing/test.html" class="inline-block bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-medium py-3 px-8 rounded-lg transition transform hover:-translate-y-1 hover:shadow-lg">
+                            Пройти тест <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
