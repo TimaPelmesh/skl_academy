@@ -70,6 +70,223 @@
             color: var(--text);
         }
         
+        /* Стекломорфные карточки */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+            z-index: 0;
+        }
+        
+        .glass-card:hover::before {
+            left: 100%;
+            transition: 0.5s;
+        }
+        
+        .glass-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Эффект анимации текста */
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            margin: 0;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #60a5fa }
+        }
+        
+        /* Улучшенная анимация печатающегося текста */
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.05em;
+            border-right: 0.15em solid #60a5fa;
+            animation: 
+                typing 3.5s steps(30, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+          
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #60a5fa; box-shadow: 0 0 10px rgba(96, 165, 250, 0.7); }
+        }
+        
+        /* Новая анимация для заголовка */
+        .hero-title {
+            display: inline-block;
+            animation: heroAppear 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+        }
+        
+        @keyframes heroAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+                text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.05) translateY(-5px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                text-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+            }
+        }
+        
+        /* Неоново-глитч эффект */
+        .neon-glitch {
+            position: relative;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px rgba(10, 175, 230, 1),
+                0 0 10px rgba(10, 175, 230, 0.8),
+                0 0 20px rgba(10, 175, 230, 0.6),
+                0 0 40px rgba(10, 175, 230, 0.4);
+            opacity: 0;
+            animation: flicker 3s ease-in-out forwards;
+        }
+
+        .neon-glitch::before, 
+        .neon-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .neon-glitch::before {
+            animation: glitch-top 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: #0ff;
+            z-index: -1;
+        }
+
+        .neon-glitch::after {
+            animation: glitch-bottom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+            color: #f0f;
+            z-index: -2;
+        }
+
+        @keyframes flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                opacity: 0.99;
+                text-shadow: 
+                    0 0 5px rgba(10, 175, 230, 1),
+                    0 0 10px rgba(10, 175, 230, 1),
+                    0 0 15px rgba(10, 175, 230, 1),
+                    0 0 20px rgba(10, 175, 230, 1),
+                    0 0 35px rgba(10, 175, 230, 1),
+                    0 0 40px rgba(10, 175, 230, 1);
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                opacity: 0.4;
+                text-shadow: none;
+            }
+        }
+
+        @keyframes glitch-top {
+            0% {
+                transform: translateX(0);
+            }
+            30% {
+                transform: translateX(2px);
+            }
+            50% {
+                transform: translateX(-2px);
+            }
+            70% {
+                transform: translateX(4px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glitch-bottom {
+            0% {
+                transform: translateX(0);
+            }
+            30% {
+                transform: translateX(-2px);
+            }
+            50% {
+                transform: translateX(2px);
+            }
+            70% {
+                transform: translateX(-4px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        
+        /* Анимация появления */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Улучшения для существующих стилей */
         .course-card {
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -94,20 +311,22 @@
             gap: 5px;
             z-index: 2;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         
         .status-ready {
-            background-color: rgba(34, 197, 94, 0.9);
+            background-color: rgba(34, 197, 94, 0.7);
             color: white;
         }
         
         .status-development {
-            background-color: rgba(234, 179, 8, 0.9);
+            background-color: rgba(234, 179, 8, 0.7);
             color: white;
         }
         
         .status-planned {
-            background-color: rgba(107, 114, 128, 0.9);
+            background-color: rgba(107, 114, 128, 0.7);
             color: white;
         }
         
@@ -134,6 +353,9 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         
         .course-icon::before {
@@ -243,6 +465,22 @@
             animation-delay: 0.3s;
         }
         
+        .mobile-menu-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu li:nth-child(1) .mobile-menu-link {
+            animation-delay: 0.1s;
+        }
+        
+        .mobile-menu li:nth-child(2) .mobile-menu-link {
+            animation-delay: 0.2s;
+        }
+        
+        .mobile-menu li:nth-child(3) .mobile-menu-link {
+            animation-delay: 0.3s;
+        }
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -329,6 +567,66 @@
                 box-sizing: border-box;
             }
         }
+        
+        /* Стильный градиентный заголовок */
+        .gradient-wave-title {
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(90deg, #60a5fa, #6366f1, #8b5cf6, #ec4899);
+            background-size: 300% 300%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: gradientWave 6s ease infinite, titleAppear 1.5s ease forwards;
+            opacity: 0;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+            transform: perspective(500px) translateZ(0px);
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-wave-title:hover {
+            transform: perspective(500px) translateZ(20px);
+            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.6));
+        }
+        
+        .gradient-wave-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #60a5fa, #6366f1, #8b5cf6, #ec4899);
+            background-size: 300% 300%;
+            animation: gradientWave 6s ease infinite;
+            transform: scaleX(0);
+            transition: transform 1s ease;
+            transform-origin: right;
+        }
+        
+        .gradient-wave-title.loaded::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        @keyframes gradientWave {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+        
+        @keyframes titleAppear {
+            0% { 
+                opacity: 0;
+                transform: perspective(500px) translateZ(-50px);
+                filter: blur(8px);
+            }
+            100% { 
+                opacity: 1;
+                transform: perspective(500px) translateZ(0px);
+                filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+            }
+        }
     </style>
 
     
@@ -367,9 +665,11 @@
     <!-- Hero Section -->
     <section class="hero-gradient bg-particles py-16 md:py-24 relative">
         <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 gradient-text glow-text">Добро пожаловать!</h1>
-            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-4 text-gray-200">Образовательная платформа, созданная энтузиастом для будущих IT-специалистов</p>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-300">С бесплатными образовательными материалами</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="gradient-wave-title">Добро пожаловать!</span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-4 text-gray-200 fade-in-up">Образовательная платформа, созданная энтузиастом для будущих IT-специалистов</p>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-300 fade-in-up" style="animation-delay: 0.2s;">С бесплатными образовательными материалами</p>
         </div>
     </section>
 
@@ -380,7 +680,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Computer Networks Card -->
-                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.1s;">
                     <div class="course-status status-development">
                         <i class="fas fa-tools"></i>
                         <span>В разработке</span>
@@ -414,7 +714,7 @@
 
                 
                 <!-- Python Card -->
-                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.2s;">
                     <div class="course-status status-ready">
                         <i class="fas fa-check-circle"></i>
                         <span>Готов</span>
@@ -446,7 +746,7 @@
                 </div>
                 
                 <!-- C# Card -->
-                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.3s;">
                     <div class="course-status status-planned">
                         <i class="fas fa-calendar"></i>
                         <span>Планируется</span>
@@ -478,7 +778,7 @@
                 </div>
                 
                 <!-- Git Card -->
-                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.1s;">
                     <div class="course-status status-planned">
                         <i class="fas fa-calendar"></i>
                         <span>Планируется</span>
@@ -510,7 +810,7 @@
                 </div>
                 
                 <!-- Web Development Card -->
-                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.2s;">
                     <div class="course-status status-development">
                         <i class="fas fa-tools"></i>
                         <span>В разработке</span>
@@ -542,7 +842,7 @@
                 </div>
                 
                 <!-- Command Line Card -->
-                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.3s;">
                     <div class="course-status status-planned">
                         <i class="fas fa-calendar"></i>
                         <span>Планируется</span>
@@ -574,7 +874,7 @@
                 </div>
                 
                 <!-- Typing Speed Card -->
-                <div class="course-card blur-card rounded-xl p-6 border border-gray-200">
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.1s;">
                     <div class="course-status status-development">
                         <i class="fas fa-tools"></i>
                         <span>В разработке</span>
@@ -615,7 +915,7 @@
             
             <div class="flex flex-col lg:flex-row items-center gap-8">
                 <div class="lg:w-1/2">
-                    <div class="blur-card rounded-xl p-8 border border-purple-400 bg-opacity-10 bg-purple-800">
+                    <div class="glass-card p-8 fade-in-up" style="animation-delay: 0.2s;">
                         <h3 class="text-2xl font-bold text-white mb-4">С какой скоростью вы печатаете?</h3>
                         <p class="text-gray-200 mb-6">Улучшите свою скорость и точность печати с помощью нашего интерактивного теста. Отслеживайте свой прогресс, соревнуйтесь с самим собой и развивайте навык быстрой печати.</p>
                         
@@ -640,8 +940,8 @@
                     </div>
                 </div>
                 
-                <div class="lg:w-1/2">
-                    <div class="relative" style="height: 300px; overflow: hidden; border-radius: 10px; box-shadow: 0 10px 30px rgba(142, 68, 173, 0.3);">
+                <div class="lg:w-1/2 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="glass-card" style="height: 300px; overflow: hidden; border-radius: 16px;">
                         <div class="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-purple-900/30 z-10"></div>
                         <div class="absolute inset-0 flex items-center justify-center z-20">
                             <div class="text-center">
@@ -655,7 +955,7 @@
                             </div>
                         </div>
                         <div class="absolute inset-0 z-0 flex items-center justify-center">
-                            <div class="typing-animation">
+                            <div class="typing-demo">
                                 <span>П</span><span>р</span><span>о</span><span>в</span><span>е</span><span>р</span><span>ь</span><span>т</span><span>е</span><span> </span><span>с</span><span>в</span><span>о</span><span>ю</span><span> </span><span>с</span><span>к</span><span>о</span><span>р</span><span>о</span><span>с</span><span>т</span><span>ь</span><span> </span><span>п</span><span>е</span><span>ч</span><span>а</span><span>т</span><span>и</span><span>!</span>
                             </div>
                         </div>
@@ -671,7 +971,7 @@
             <h2 class="text-3xl font-bold text-center text-gray-100 mb-12 glow-text">Почему выбирают SKL Academy?</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
+                <div class="text-center p-6 glass-card fade-in-up" style="animation-delay: 0.1s;">
                     <div class="course-icon bg-blue-100 text-blue-600 mx-auto mb-4">
                         <i class="fas fa-users"></i>
                     </div>
@@ -679,7 +979,7 @@
                     <p class="text-gray-300">Все материалы публикуются и обновляются сообществом увлеченных IT-специалистов.</p>
                 </div>
                 
-                <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
+                <div class="text-center p-6 glass-card fade-in-up" style="animation-delay: 0.2s;">
                     <div class="course-icon bg-green-100 text-green-600 mx-auto mb-4">
                         <i class="fas fa-book"></i>
                     </div>
@@ -687,7 +987,7 @@
                     <p class="text-gray-300">Предлагаем полноценную теоретическую базу знаний по всем IT-направлениям.</p>
                 </div>
                 
-                <div class="text-center p-6 blur-card rounded-xl border border-gray-700">
+                <div class="text-center p-6 glass-card fade-in-up" style="animation-delay: 0.3s;">
                     <div class="course-icon bg-purple-100 text-purple-600 mx-auto mb-4">
                         <i class="fas fa-hand-holding-heart"></i>
                     </div>
@@ -851,5 +1151,64 @@
     </script>
     <script src="js/animations.js"></script>
     <script src="js/footer-fix.js"></script>
+    
+    <script>
+        // Новая функция для реализации эффекта печати
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация для градиентного заголовка
+            setTimeout(function() {
+                const titleElement = document.querySelector('.gradient-wave-title');
+                if (titleElement) {
+                    titleElement.classList.add('loaded');
+                }
+            }, 1000);
+            
+            // Анимация появления элементов при скролле
+            function handleScrollAnimations() {
+                const fadeElements = document.querySelectorAll('.fade-in-up');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                fadeElements.forEach(element => {
+                    observer.observe(element);
+                });
+            }
+            
+            // Запуск анимации
+            handleScrollAnimations();
+            
+            // Добавляем эффект для стекломорфных карточек
+            const glassCards = document.querySelectorAll('.glass-card');
+            
+            glassCards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    this.style.background = `
+                        radial-gradient(
+                            circle at ${x}px ${y}px,
+                            rgba(255, 255, 255, 0.1),
+                            rgba(255, 255, 255, 0.05) 40%
+                        ),
+                        rgba(255, 255, 255, 0.05)
+                    `;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.background = 'rgba(255, 255, 255, 0.05)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
