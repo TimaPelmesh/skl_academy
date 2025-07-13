@@ -569,3 +569,58 @@ body::-webkit-scrollbar-thumb {
 .light-theme .operators-cheatsheet td {
     background-color: #f6f8fa;
 }
+
+/* Улучшенные стили для визуальных блоков */
+.visual-guide {
+    background-color: #2d333b;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-left: 4px solid #7ee787;
+}
+
+.visual-guide h4 {
+    color: #7ee787;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.visual-guide ul {
+    margin-left: 20px;
+}
+
+.visual-guide li {
+    color: #e6e6e6;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.visual-guide strong {
+    color: #7ee787;
+    font-weight: 600;
+}
+
+.visual-guide p {
+    color: #e6e6e6;
+    margin-bottom: 10px;
+}
+
+/* Стили для светлой темы */
+.light-theme .visual-guide {
+    background-color: #f1f1f1;
+    border-left: 4px solid #2ea44f;
+}
+
+.light-theme .visual-guide h4 {
+    color: #2ea44f;
+}
+
+.light-theme .visual-guide li,
+.light-theme .visual-guide p {
+    color: #333344;
+}
+
+.light-theme .visual-guide strong {
+    color: #2ea44f;
+}
