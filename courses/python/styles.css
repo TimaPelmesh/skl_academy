@@ -624,3 +624,43 @@ body::-webkit-scrollbar-thumb {
 .light-theme .visual-guide strong {
     color: #2ea44f;
 }
+
+/* Улучшенные стили для блока заключения */
+.conclusion {
+    background-color: #2d333b;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin: 40px auto;
+    border-left: 4px solid #d2a8ff;
+    text-align: center;
+    max-width: 800px;
+}
+
+.conclusion h3 {
+    color: #d2a8ff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.conclusion p {
+    color: #e6e6e6;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Стили для светлой темы */
+.light-theme .conclusion {
+    background-color: #f1f1f1;
+    border-left: 4px solid #8a63d2;
+}
+
+.light-theme .conclusion h3 {
+    color: #6f42c1;
+}
+
+.light-theme .conclusion p {
+    color: #333344;
+}
