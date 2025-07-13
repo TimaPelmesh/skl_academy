@@ -1,826 +1,189 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <title>О проекте - SKL Academy</title>
-    
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="./images/icon.ico" type="image/x-icon">
-    
-    <!-- Styles -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/logo.css">
-    <link rel="stylesheet" href="./css/animations.css">
-    <link rel="stylesheet" href="./css/footer.css">
-    <link rel="stylesheet" href="./css/footer-buttons.css">
-    <link rel="stylesheet" href="./css/additional-styles.css">
-    <link rel="stylesheet" href="./css/dark-theme.css">
-    <link rel="stylesheet" href="./css/dark-particles.css">
-    <link rel="stylesheet" href="./css/mobile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="images/icon.ico" type="image/x-icon">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--background);
-            color: var(--text);
-        }
-        
-        /* Дополнительные стили для страницы О проекте */
-        .about-hero {
-            min-height: 50vh;
-            background: linear-gradient(135deg, var(--background) 0%, rgba(30, 27, 75, 1) 100%);
-            padding: 120px 0 60px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .about-hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--mobile-padding, 24px);
-            text-align: center;
-        }
-        
-        .about-hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, 
-                var(--secondary) 0%,
-                var(--primary) 50%,
-                var(--secondary-light) 100%
-            );
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .about-hero .subtitle {
-            font-size: clamp(1.1rem, 4vw, 1.5rem);
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-        
-        .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px var(--mobile-padding, 24px);
-        }
-        
-        .section-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: var(--text);
-            text-align: center;
-        }
-        
-        .section-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        @media (min-width: 768px) {
-            .section-content {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .mission-section .section-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .cat-section .section-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        .text-content {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: clamp(1rem, 3vw, 1.1rem);
-        }
-        
-        .text-content p {
-            margin-bottom: 1.5rem;
-        }
-        
-        .text-content h3 {
-            color: var(--text);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
-        
-        .feature-list li {
-            padding-left: 2rem;
-            position: relative;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        .cat-img-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            height: 100%;
-            min-height: 300px;
-            background: linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .cat-img-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .cat-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
-        }
-        
-        .cat-img:hover {
-            opacity: 1;
-        }
-        
-        .cat-info {
-            padding: 2rem;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .donation-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            margin-top: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .donation-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-            z-index: 1;
-        }
-        
-        .donation-btn i {
-            font-size: 1.4rem;
-            position: relative;
-            z-index: 2;
-            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
-            color: white !important;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-        }
-        
-        .donation-btn span {
-            position: relative;
-            z-index: 2;
-            color: white;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        }
-        
-        .donation-btn:hover i,
-        .donation-btn:hover span {
-            filter: brightness(1.1);
-        }
-        
-        .help-options {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        @media (min-width: 768px) {
-            .help-options {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        .help-card {
-            background: linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .help-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-        }
-        
-        .help-card i {
-            font-size: 2.5rem;
-            color: var(--primary-light);
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 2px 5px rgba(124, 58, 237, 0.3));
-        }
-        
-        .help-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-        
-        .help-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-        
-        /* Улучшения для мобильных устройств */
-        @media (max-width: 767px) {
-            .about-hero {
-                padding: 100px 0 40px;
-            }
-            
-            .section-container {
-                padding: 60px var(--mobile-padding, 16px);
-            }
-            
-            .cat-img-container {
-                min-height: 250px;
-                margin-bottom: 1.5rem;
-            }
-            
-            .section-content {
-                gap: 1.5rem;
-            }
-            
-            .cat-section .section-content {
-                display: flex;
-                flex-direction: column-reverse;
-            }
-        }
-        
-        /* Предотвращение переполнения текста на маленьких экранах */
-        @media (max-width: 480px) {
-            .feature-list li {
-                font-size: 0.95rem;
-                padding-left: 1.5rem;
-            }
-            
-            .text-content {
-                font-size: 0.95rem;
-            }
-            
-            .help-card {
-                padding: 1.2rem;
-            }
-            
-            .help-card h3 {
-                font-size: 1.1rem;
-            }
-            
-            .help-card p {
-                font-size: 0.95rem;
-            }
-        }
-        
-        /* Стили для всплывающего уведомления */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(124, 58, 237, 0.9);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 500;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .notification.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(-10px);
-        }
-        
-        .notification i {
-            font-size: 1.2rem;
-        }
-        
-        /* Стили для карточки "Поделиться" */
-        .share-card {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(96, 165, 250, 0.2) 100%);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-        }
-        
-        /* Кнопка возврата на главную */
-        .back-to-home {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 10px 16px;
-            border-radius: 12px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(124, 58, 237, 0.2);
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            visibility: visible;
-        }
-        
-        .back-to-home.hidden {
-            opacity: 0;
-            transform: translateY(-20px) scale(0.95);
-            visibility: hidden;
-        }
-        
-        .back-to-home:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            background: rgba(30, 27, 75, 0.9);
-            border: 1px solid rgba(124, 58, 237, 0.4);
-        }
-        
-        .back-to-home i {
-            font-size: 18px;
-            color: var(--primary-light);
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-            transition: transform 0.3s ease;
-        }
-        
-        .back-to-home:hover i {
-            transform: translateX(-3px);
-        }
-        
-        /* Стили из index.html для мобильной адаптации */
-        .mobile-menu {
-            transition: all 0.3s ease;
-        }
-        
-        .mobile-menu.hidden {
-            display: none;
-        }
-        
-        .mobile-menu.active {
-            display: block;
-        }
-        
-        .mobile-menu-btn {
-            cursor: pointer;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .mobile-menu-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* Стили для текста мобильного меню */
-        .mobile-menu-link {
-            background: linear-gradient(90deg, #60a5fa, #34d399);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
-            display: inline-block;
-            padding: 5px 0;
-        }
-        
-        .mobile-menu-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background: linear-gradient(90deg, #60a5fa, #34d399);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
-        }
-        
-        .mobile-menu-link:hover {
-            text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
-            letter-spacing: 1.5px;
-        }
-        
-        .mobile-menu-link:hover::after {
-            width: 100%;
-        }
-        
-        /* Анимация для мобильного меню */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Стили для кнопок контактов */
-        .contact-button {
-            display: block;
-            width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-        }
-        
-        .contact-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .contact-button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .contact-button i {
-            margin-right: 10px;
-        }
-        
-        .contact-button.gmail {
-            background-color: #ea4335;
-            border-bottom: 3px solid #c5221f;
-        }
-        
-        .contact-button.telegram {
-            background-color: #0088cc;
-            border-bottom: 3px solid #006699;
-        }
-        
-        /* Адаптивные стили для кнопок */
-        @media (max-width: 767px) {
-            .contact-button {
-                padding: 12px 16px;
-                font-size: 14px;
-            }
-            
-            /* Смещаем контент вниз для мобильных устройств */
-            .about-hero {
-                padding-top: 80px;
-            }
-            
-            .back-to-home {
-                top: 15px;
-                left: 15px;
-                padding: 8px 12px;
-                font-size: 14px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .contact-button {
-                padding: 10px 14px;
-                font-size: 13px;
-            }
-        }
-        
-        /* Исправление для футера на мобильных устройствах */
-        @media (max-width: 767px) {
-            .footer-grid {
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .footer-section {
-                width: 100%;
-                padding: 0 15px;
-                margin-bottom: 20px;
-            }
-            
-            .contact-button {
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О проекте - SKL Academy</title>
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- Заменяем навигацию на кнопку возврата -->
-    <a href="./index.html" class="back-to-home">
-        <i class="fas fa-arrow-left"></i>
-        <span>Вернуться на главную</span>
-    </a>
-
-    <header class="about-hero">
-        <div class="about-hero-content">
-            <h1>О проекте</h1>
-            <p class="subtitle">Бесплатная образовательная платформа для всех, кто хочет освоить современные IT-технологии</p>
+<body class="font-sans">
+  <!-- Navigation -->
+  <nav class="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-20 items-center">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <img class="h-9 w-auto" src="images/icon.ico" alt="SKL Academy">
+            <span class="ml-3 text-xl font-bold text-gray-900" style="font-family: 'Quicksand', sans-serif;">SKL Academy</span>
+          </div>
         </div>
-        <div class="hero-background">
-            <div class="gradient-overlay"></div>
-            <div class="particles-background"></div>
+        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+          <a href="index.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Главная</a>
+          <a href="https://skl-academy.ru/courses/typing/test.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Тренажер печати</a>
+          <a href="index.html#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
         </div>
-    </header>
-
-    <main>
-        <section class="mission-section">
-            <div class="section-container">
-                <h2 class="section-title">Наша миссия</h2>
-                <div class="section-content">
-                    <div class="text-content">
-                        <p>SKL Academy — это образовательный проект, созданный с целью сделать качественное IT-образование доступным для всех желающих, независимо от их местонахождения, возраста или финансовых возможностей.</p>
-                        
-                        <p>Мы верим, что каждый человек должен иметь возможность получить знания в области информационных технологий, которые становятся всё более важными в современном мире.</p>
-                        
-                        <h3>Наши преимущества:</h3>
-                        <ul class="feature-list">
-                            <li>Бесплатные и качественные образовательные материалы</li>
-                            <li>Практический подход к обучению с реальными проектами</li>
-                            <li>Постоянное обновление контента в соответствии с последними тенденциями</li>
-                            <li>Поддержка сообщества и возможность общения с единомышленниками</li>
-                            <li>Гибкая программа обучения, подходящая для любого уровня подготовки</li>
-                        </ul>
-                        
-                        <p>Мы стремимся создать платформу, где каждый сможет найти для себя полезные знания и развить навыки, необходимые для успешной карьеры в сфере IT.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cat-section">
-            <div class="section-container">
-                <h2 class="section-title">Познакомьтесь с Василием</h2>
-                <div class="section-content">
-                    <div class="cat-info">
-                        <h3>Кот Василий — неофициальный талисман SKL Academy</h3>
-                        <p>Василий — умный и любознательный кот, который, как и его хозяин, очень любит кушать и учиться новому. Он внимательно следит за разработкой образовательных материалов и иногда даже помогает писать код (наступая на клавиатуру).</p>
-                        
-                        <p>Василий считает, что учиться новому никогда не поздно, а делиться знаниями — это достойное занятие. Он всегда поддерживает нашу миссию делать образование доступным для всех.</p>
-                        
-                        <p>Если вы хотите порадовать Василия (и его хозяина) и поддержать развитие проекта, вы можете сделать пожертвование. Это поможет нам создавать ещё больше бесплатных образовательных материалов и улучшать платформу.</p>
-
-                    </div>
-                    
-                    <div class="cat-img-container">
-                        <img src="./images/cat.png" alt="Кот Василий" class="cat-img">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="donation" class="help-section">
-            <div class="section-container">
-                <h2 class="section-title">Как помочь проекту</h2>
-                <div class="text-content" style="text-align: center; max-width: 800px; margin: 0 auto;">
-                    <p>SKL Academy существует благодаря энтузиазму и поддержке сообщества. Есть несколько способов, которыми вы можете помочь нашему проекту расти и развиваться:</p>
-                </div>
-                
-                <div class="help-options">
-                    <div class="help-card">
-                        <i class="fas fa-hand-holding-heart"></i>
-                        <h3>Финансовая поддержка</h3>
-                        <p>Ваши пожертвования помогают нам покрывать расходы на хостинг, разработку новых материалов и улучшение платформы. Даже небольшая сумма имеет значение!</p>
-                        <a href="https://tbank.ru/cf/5WE9u97bUbM" class="donation-btn">
-                            <i class="fas fa-heart"></i>
-                            <span>Поддержать</span>
-                        </a>
-                    </div>
-                    
-                    <div class="help-card">
-                        <i class="fas fa-code-branch"></i>
-                        <h3>Вклад в разработку</h3>
-                        <p>Если вы разработчик, вы можете помочь улучшить нашу платформу — исправлять ошибки, добавлять новые функции или улучшать документацию.</p>
-                        <a href="https://forms.gle/EqRXNtkdf4AZJKX57" target="_blank" class="donation-btn">
-                            <i class="fab fa-github"></i>
-                            <span>Участвовать</span>
-                        </a>
-                    </div>
-                    
-                    <div class="help-card">
-                        <i class="fas fa-share-alt"></i>
-                        <h3>Расскажите о нас</h3>
-                        <p>Помогите нам расширить сообщество — расскажите о SKL Academy своим друзьям, коллегам и подписчикам в социальных сетях.</p>
-                        <a href="javascript:void(0);" id="shareButton" class="donation-btn">
-                            <i class="fas fa-share"></i>
-                            <span>Поделиться</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Всплывающее уведомление -->
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span>Ссылка скопирована</span>
+        <div class="-mr-2 flex items-center md:hidden">
+          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Open main menu</span>
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="new-footer">
-        <div class="container">
-            <div class="footer-grid" id="contacts">
-                <div class="footer-section">
-                    <h3>О проекте</h3>
-                    <p>SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
-                    <p>Бесплатные материалы, практические задания и проекты</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Контакты</h3>
-                    <div style="width: 100%; max-width: 300px; margin: 0 auto;">
-                        <a href="#" onclick="openGmail(); return false;" class="contact-button gmail">
-                            <i class="fas fa-envelope"></i> Gmail
-                        </a>
-                        <a href="#" onclick="openTelegram(); return false;" class="contact-button telegram">
-                            <i class="fab fa-telegram"></i> Telegram
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>SKL Academy. 2025</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="./js/main.js"></script>
-    <script src="./js/animations.js"></script>
     
-    <script>
-        // Функционал копирования ссылки
-        document.addEventListener('DOMContentLoaded', function() {
-            const shareButton = document.getElementById('shareButton');
-            const notification = document.getElementById('notification');
-            const backButton = document.querySelector('.back-to-home');
-            
-            // Отслеживание прокрутки страницы
-            let lastScrollTop = 0;
-            
-            window.addEventListener('scroll', function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // Если прокрутка вниз - скрываем кнопку
-                if (scrollTop > lastScrollTop && scrollTop > 100) {
-                    backButton.classList.add('hidden');
-                } 
-                // Если прокрутка вверх - показываем кнопку
-                else if (scrollTop < lastScrollTop) {
-                    backButton.classList.remove('hidden');
-                }
-                
-                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Предотвращаем получение отрицательных значений
-            });
-            
-            if (shareButton) {
-                shareButton.addEventListener('click', function() {
-                    // Текст для копирования (ссылка на сайт)
-                    const siteUrl = 'skl-academy.ru';
-                    
-                    // Копирование в буфер обмена
-                    navigator.clipboard.writeText(siteUrl)
-                        .then(() => {
-                            // Показываем уведомление
-                            notification.classList.add('show');
-                            
-                            // Скрываем уведомление через 3 секунды
-                            setTimeout(() => {
-                                notification.classList.remove('show');
-                            }, 3000);
-                        })
-                        .catch(err => {
-                            console.error('Не удалось скопировать: ', err);
-                            // Альтернативный способ копирования для старых браузеров
-                            fallbackCopyTextToClipboard(siteUrl);
-                        });
-                });
-            }
-            
-            // Резервный метод копирования для старых браузеров
-            function fallbackCopyTextToClipboard(text) {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                
-                // Делаем элемент невидимым
-                textArea.style.position = "fixed";
-                textArea.style.top = "0";
-                textArea.style.left = "0";
-                textArea.style.width = "2em";
-                textArea.style.height = "2em";
-                textArea.style.padding = "0";
-                textArea.style.border = "none";
-                textArea.style.outline = "none";
-                textArea.style.boxShadow = "none";
-                textArea.style.background = "transparent";
-                
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                try {
-                    const successful = document.execCommand('copy');
-                    if (successful) {
-                        notification.classList.add('show');
-                        setTimeout(() => {
-                            notification.classList.remove('show');
-                        }, 3000);
-                    }
-                } catch (err) {
-                    console.error('Ошибка при копировании: ', err);
-                }
-                
-                document.body.removeChild(textArea);
-            }
-            
-            // Функции для открытия Gmail и Telegram
-            window.openGmail = function() {
-                window.open('mailto:mr.tim.pumpkin@gmail.com', '_blank');
-            }
-            
-            window.openTelegram = function() {
-                window.open('https://t.me/tima_pelmeshka', '_blank');
-            }
-        });
-    </script>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="pt-2 pb-3 space-y-1 px-4">
+        <a href="index.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Главная</a>
+        <a href="https://skl-academy.ru/courses/typing/test.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Тренажер печати</a>
+        <a href="index.html#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl" style="font-family: 'Quicksand', sans-serif;">О проекте SKL Academy</h1>
+      <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto" style="font-family: 'Quicksand', sans-serif;">
+        Образовательная платформа, созданная энтузиастом для будущих IT-специалистов
+      </p>
+    </div>
+    
+    <div class="prose prose-lg max-w-3xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-900 mt-10" style="font-family: 'Quicksand', sans-serif;">Наша миссия</h2>
+      <p>
+        SKL Academy — это образовательный проект, созданный с целью сделать IT-образование доступным для всех желающих. 
+        Мы верим, что качественные знания в сфере информационных технологий должны быть открыты каждому, 
+        независимо от его финансовых возможностей или географического положения.
+      </p>
+      
+      <h2 class="text-2xl font-bold text-gray-900 mt-10" style="font-family: 'Quicksand', sans-serif;">История создания</h2>
+      <p>
+        Проект был основан в 2023 году энтузиастом и практикующим IT-специалистом, 
+        который столкнулся с проблемой нехватки структурированных и практико-ориентированных 
+        образовательных материалов на русском языке. Начав с небольших уроков по программированию, 
+        проект постепенно расширялся, охватывая всё больше направлений IT-сферы.
+      </p>
+      
+      <h2 class="text-2xl font-bold text-gray-900 mt-10" style="font-family: 'Quicksand', sans-serif;">Наш подход к обучению</h2>
+      <p>
+        Мы придерживаемся следующих принципов:
+      </p>
+      <ul class="list-disc pl-6 mt-4">
+        <li><strong>Практическая направленность</strong> — каждый курс содержит реальные примеры и задания для закрепления материала</li>
+        <li><strong>Актуальность</strong> — мы регулярно обновляем контент, чтобы соответствовать современным требованиям индустрии</li>
+        <li><strong>Доступность</strong> — все материалы бесплатны и доступны онлайн 24/7</li>
+        <li><strong>Структурированность</strong> — информация подается в логичном порядке, от простого к сложному</li>
+      </ul>
+      
+      <h2 class="text-2xl font-bold text-gray-900 mt-10" style="font-family: 'Quicksand', sans-serif;">Планы на будущее</h2>
+      <p>
+        Мы активно работаем над расширением нашей образовательной платформы. В ближайшие месяцы планируется:
+      </p>
+      <ul class="list-disc pl-6 mt-4">
+        <li>Запуск новых курсов по востребованным направлениям</li>
+        <li>Создание интерактивных тренажеров для практики</li>
+        <li>Формирование сообщества учащихся для обмена опытом</li>
+        <li>Разработка системы сертификации для подтверждения полученных знаний</li>
+      </ul>
+      
+      <h2 class="text-2xl font-bold text-gray-900 mt-10" style="font-family: 'Quicksand', sans-serif;">Присоединяйтесь к нам</h2>
+      <p>
+        Мы приглашаем всех желающих присоединиться к нашему образовательному проекту. 
+        Если вы только начинаете свой путь в IT или хотите расширить свои знания — 
+        SKL Academy поможет вам достичь ваших целей.
+      </p>
+      <p class="mt-4">
+        Если у вас есть предложения по улучшению платформы или вы хотите принять участие 
+        в развитии проекта — свяжитесь с нами через раздел <a href="index.html#contacts" class="text-indigo-600 hover:text-indigo-800">Контакты</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacts">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold" style="font-family: 'Quicksand', sans-serif;">SKL Academy</h4>
+        <p class="mt-4 text-gray-400">Бесплатная образовательная платформа для IT-специалистов. Учитесь в удобном темпе, применяйте знания на практике.</p>
+        <div class="flex space-x-4 mt-6">
+          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+            <i class="fab fa-vk text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+            <i class="fab fa-telegram text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+            <i class="fab fa-youtube text-xl"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold" style="font-family: 'Quicksand', sans-serif;">Курсы</h4>
+        <ul class="mt-4 space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Python</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Компьютерные сети</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">C#</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Git</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Веб-разработка</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Командная строка</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold" style="font-family: 'Quicksand', sans-serif;">Инструменты</h4>
+        <ul class="mt-4 space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Тренажер печати</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Чек-листы</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Шпаргалки</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Тесты</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold" style="font-family: 'Quicksand', sans-serif;">Контакты</h4>
+        <ul class="mt-4 space-y-3">
+          <li class="flex items-start">
+            <i class="fas fa-envelope text-gray-400 mt-1"></i>
+            <span class="ml-3 text-gray-400">info@skl-academy.ru</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-phone text-gray-400 mt-1"></i>
+            <span class="ml-3 text-gray-400">+7 (XXX) XXX-XXXX</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-map-marker-alt text-gray-400 mt-1"></i>
+            <span class="ml-3 text-gray-400">Москва, Россия</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-gray-800">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm">&copy; 2023 SKL Academy. Все права защищены.</p>
+        <div class="mt-4 md:mt-0">
+          <ul class="flex space-x-6">
+            <li><a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Политика конфиденциальности</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Условия использования</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Карта сайта</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
-</html> 
+</html>

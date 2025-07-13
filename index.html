@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <title>SKL Academy</title>
-    
-    <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKL Academy</title>
+  
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript" >
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
     m[i].l=1*new Date();
     for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -19,1196 +18,494 @@
          trackLinks:true,
          accurateTrackBounce:true
     });
- </script>
- <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
- <!-- /Yandex.Metrika counter -->
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
   
-    <!-- Favicon / Иконки сайта -->
-    <link rel="icon" href="images/icon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    
-    <!-- SEO Мета-теги -->
-    <meta name="description" content="SKL Academy - образовательная платформа для изучения IT-технологий. Бесплатные курсы по Python, C#, Git, Web-разработке и компьютерным сетям.">
-    <meta name="keywords" content="IT образование, курсы программирования, Python, C#, Git, Web-разработка, компьютерные сети, бесплатное обучение">
-    <meta name="author" content="SKL Academy">
-    
-    <!-- Open Graph мета-теги для социальных сетей -->
-    <meta property="og:title" content="SKL Academy - Современное обучение IT">
-    <meta property="og:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://skl-academy.ru/">
-    <meta property="og:image" content="images/skl-academy-og.jpg">
-    
-    <!-- Twitter Card мета-теги -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SKL Academy - Современное обучение IT">
-    <meta name="twitter:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
-    <meta name="twitter:image" content="images/skl-academy-og.jpg">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://skl-academy.ru/">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/mobile.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/footer-buttons.css">
-    <link rel="stylesheet" href="css/additional-styles.css">
-    <link rel="stylesheet" href="css/dark-theme.css">
-    <link rel="stylesheet" href="css/dark-particles.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--background);
-            color: var(--text);
-        }
-        
-        /* Стекломорфные карточки */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-            z-index: 0;
-        }
-        
-        .glass-card:hover::before {
-            left: 100%;
-            transition: 0.5s;
-        }
-        
-        .glass-card > * {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Эффект анимации текста */
-        .typing-text {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-            margin: 0;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #60a5fa }
-        }
-        
-        /* Улучшенная анимация печатающегося текста */
-        .typewriter {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: 0.05em;
-            border-right: 0.15em solid #60a5fa;
-            animation: 
-                typing 3.5s steps(30, end),
-                blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-          
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #60a5fa; box-shadow: 0 0 10px rgba(96, 165, 250, 0.7); }
-        }
-        
-        /* Новая анимация для заголовка */
-        .hero-title {
-            display: inline-block;
-            animation: heroAppear 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            opacity: 0;
-            transform: scale(0.9) translateY(20px);
-        }
-        
-        @keyframes heroAppear {
-            0% {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-                text-shadow: 0 0 0 rgba(255, 255, 255, 0);
-            }
-            70% {
-                opacity: 1;
-                transform: scale(1.05) translateY(-5px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                text-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
-            }
-        }
-        
-        /* Неоново-глитч эффект */
-        .neon-glitch {
-            position: relative;
-            color: #fff;
-            font-weight: 700;
-            text-shadow: 
-                0 0 5px rgba(10, 175, 230, 1),
-                0 0 10px rgba(10, 175, 230, 0.8),
-                0 0 20px rgba(10, 175, 230, 0.6),
-                0 0 40px rgba(10, 175, 230, 0.4);
-            opacity: 0;
-            animation: flicker 3s ease-in-out forwards;
-        }
-
-        .neon-glitch::before, 
-        .neon-glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-        }
-
-        .neon-glitch::before {
-            animation: glitch-top 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-            color: #0ff;
-            z-index: -1;
-        }
-
-        .neon-glitch::after {
-            animation: glitch-bottom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
-            color: #f0f;
-            z-index: -2;
-        }
-
-        @keyframes flicker {
-            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
-                opacity: 0.99;
-                text-shadow: 
-                    0 0 5px rgba(10, 175, 230, 1),
-                    0 0 10px rgba(10, 175, 230, 1),
-                    0 0 15px rgba(10, 175, 230, 1),
-                    0 0 20px rgba(10, 175, 230, 1),
-                    0 0 35px rgba(10, 175, 230, 1),
-                    0 0 40px rgba(10, 175, 230, 1);
-            }
-            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-                opacity: 0.4;
-                text-shadow: none;
-            }
-        }
-
-        @keyframes glitch-top {
-            0% {
-                transform: translateX(0);
-            }
-            30% {
-                transform: translateX(2px);
-            }
-            50% {
-                transform: translateX(-2px);
-            }
-            70% {
-                transform: translateX(4px);
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes glitch-bottom {
-            0% {
-                transform: translateX(0);
-            }
-            30% {
-                transform: translateX(-2px);
-            }
-            50% {
-                transform: translateX(2px);
-            }
-            70% {
-                transform: translateX(-4px);
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
-        
-        /* Анимация появления */
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Улучшения для существующих стилей */
-        .course-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .course-status {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 4px 10px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            z-index: 2;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-        
-        .status-ready {
-            background-color: rgba(34, 197, 94, 0.7);
-            color: white;
-        }
-        
-        .status-development {
-            background-color: rgba(234, 179, 8, 0.7);
-            color: white;
-        }
-        
-        .status-planned {
-            background-color: rgba(107, 114, 128, 0.7);
-            color: white;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, var(--background) 0%, rgba(30, 27, 75, 1) 100%);
-        }
-        
-        /* Новые стили для иконок курсов */
-        .course-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .course-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            margin-right: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-        
-        .course-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-            z-index: 1;
-        }
-        
-        .course-icon i {
-            font-size: 1.75rem;
-            z-index: 2;
-            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-        }
-        
-        .course-card:hover .course-icon {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-        }
-        
-        .icon-circle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-        }
-        
-        /* Стили для мобильного меню */
-        .mobile-menu {
-            transition: all 0.3s ease;
-        }
-        
-        .mobile-menu.hidden {
-            display: none;
-        }
-        
-        .mobile-menu.active {
-            display: block;
-        }
-        
-        .mobile-menu-btn {
-            cursor: pointer;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .mobile-menu-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* Стили для текста мобильного меню */
-        .mobile-menu-link {
-            background: linear-gradient(90deg, #60a5fa, #34d399);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
-            display: inline-block;
-            padding: 5px 0;
-        }
-        
-        .mobile-menu-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background: linear-gradient(90deg, #60a5fa, #34d399);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
-        }
-        
-        .mobile-menu-link:hover {
-            text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
-            letter-spacing: 1.5px;
-        }
-        
-        .mobile-menu-link:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu li:nth-child(1) .mobile-menu-link {
-            animation-delay: 0.1s;
-        }
-        
-        .mobile-menu li:nth-child(2) .mobile-menu-link {
-            animation-delay: 0.2s;
-        }
-        
-        .mobile-menu li:nth-child(3) .mobile-menu-link {
-            animation-delay: 0.3s;
-        }
-        
-        .mobile-menu-link:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu li:nth-child(1) .mobile-menu-link {
-            animation-delay: 0.1s;
-        }
-        
-        .mobile-menu li:nth-child(2) .mobile-menu-link {
-            animation-delay: 0.2s;
-        }
-        
-        .mobile-menu li:nth-child(3) .mobile-menu-link {
-            animation-delay: 0.3s;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Стили для кнопок контактов */
-        .contact-button {
-            display: block;
-            width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-        }
-        
-        .contact-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .contact-button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .contact-button i {
-            margin-right: 10px;
-        }
-        
-        .contact-button.gmail {
-            background-color: #ea4335;
-            border-bottom: 3px solid #c5221f;
-        }
-        
-        .contact-button.telegram {
-            background-color: #0088cc;
-            border-bottom: 3px solid #006699;
-        }
-        
-        /* Адаптивные стили для кнопок */
-        @media (max-width: 767px) {
-            .contact-button {
-                padding: 12px 16px;
-                font-size: 14px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .contact-button {
-                padding: 10px 14px;
-                font-size: 13px;
-            }
-        }
-        
-        /* Исправление для футера на мобильных устройствах */
-        @media (max-width: 767px) {
-            .footer-grid {
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .footer-section {
-                width: 100%;
-                padding: 0 15px;
-                margin-bottom: 20px;
-            }
-            
-            .contact-button {
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-        }
-        
-        /* Стильный градиентный заголовок */
-        .gradient-wave-title {
-            display: inline-block;
-            position: relative;
-            background: linear-gradient(90deg, #60a5fa, #6366f1, #8b5cf6, #ec4899);
-            background-size: 300% 300%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: gradientWave 6s ease infinite, titleAppear 1.5s ease forwards;
-            opacity: 0;
-            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
-            transform: perspective(500px) translateZ(0px);
-            transition: all 0.3s ease;
-        }
-        
-        .gradient-wave-title:hover {
-            transform: perspective(500px) translateZ(20px);
-            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.6));
-        }
-        
-        .gradient-wave-title::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #60a5fa, #6366f1, #8b5cf6, #ec4899);
-            background-size: 300% 300%;
-            animation: gradientWave 6s ease infinite;
-            transform: scaleX(0);
-            transition: transform 1s ease;
-            transform-origin: right;
-        }
-        
-        .gradient-wave-title.loaded::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-        
-        @keyframes gradientWave {
-            0% { background-position: 0% 50% }
-            50% { background-position: 100% 50% }
-            100% { background-position: 0% 50% }
-        }
-        
-        @keyframes titleAppear {
-            0% { 
-                opacity: 0;
-                transform: perspective(500px) translateZ(-50px);
-                filter: blur(8px);
-            }
-            100% { 
-                opacity: 1;
-                transform: perspective(500px) translateZ(0px);
-                filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
-            }
-        }
-    </style>
-
-    
+  <!-- Favicon / Иконки сайта -->
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  
+  <!-- SEO Мета-теги -->
+  <meta name="description" content="SKL Academy - образовательная платформа для изучения IT-технологий. Бесплатные курсы по Python, C#, Git, Web-разработке и компьютерным сетям.">
+  <meta name="keywords" content="IT образование, курсы программирования, Python, C#, Git, Web-разработка, компьютерные сети, бесплатное обучение">
+  <meta name="author" content="SKL Academy">
+  
+  <!-- Open Graph мета-теги для социальных сетей -->
+  <meta property="og:title" content="SKL Academy - Современное обучение IT">
+  <meta property="og:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skl-academy.ru/">
+  <meta property="og:image" content="images/skl-academy-og.jpg">
+  
+  <!-- Twitter Card мета-теги -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SKL Academy - Современное обучение IT">
+  <meta name="twitter:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
+  <meta name="twitter:image" content="images/skl-academy-og.jpg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skl-academy.ru/">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- Header/Navigation -->
-    <header class="sticky top-0 z-50" style="background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <img src="images/icon.ico" alt="SKL Academy" class="w-8 h-8 mr-3">
-                    <h1 class="text-2xl font-bold gradient-text">SKL Academy</h1>
-                </div>
-                <nav class="hidden md:block">
-                    <ul class="flex space-x-8 justify-end">
-                                <li><a href="courses/typing/test.html" class="font-medium text-gray-200 hover:text-blue-400 transition"><i class="fas fa-keyboard mr-1"></i> Тренажер печати</a></li>
-        <li><a href="#contacts" class="font-medium text-gray-200 hover:text-blue-400 transition" onclick="scrollToContacts(event)"><i class="fas fa-address-book mr-1"></i> Контакты</a></li>
-        <li><a href="about.html" class="font-medium text-gray-200 hover:text-blue-400 transition"><i class="fas fa-info-circle mr-1"></i> О проекте</a></li>
-                    </ul>
-                </nav>
-                <button type="button" class="md:hidden text-gray-200 mobile-menu-btn p-2" style="z-index: 100; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent;">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
+<body class="font-sans">
+  <!-- Navigation -->
+  <nav class="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-20 items-center">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <img class="h-9 w-auto" src="images/icon.ico" alt="SKL Academy">
+            <span class="ml-3 text-xl font-bold text-gray-900" style="font-family: 'Quicksand', sans-serif;">SKL Academy</span>
+          </div>
         </div>
-        <!-- Mobile menu -->
-        <div class="mobile-menu hidden" style="background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: absolute; width: 100%; left: 0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
-            <ul class="py-0 text-center -mt-32 space-y-3">
-                <li><a href="courses/typing/test.html" class="block mobile-menu-link transition text-lg" style="background: linear-gradient(90deg, #9c27b0, #673ab7);"><i class="fas fa-keyboard mr-2"></i>Тест скорости печати</a></li>
-                <li><a href="#contacts" class="block mobile-menu-link transition text-lg" onclick="scrollToContacts(event)"><i class="fas fa-address-book mr-2"></i>Контакты</a></li>
-                <li><a href="about.html" class="block mobile-menu-link transition text-lg"><i class="fas fa-info-circle mr-2"></i>О проекте</a></li>
-            </ul>
+        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+          <a href="https://skl-academy.ru/courses/typing/test.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Тест скорости печати</a>
+          <a href="#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
+          <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-gradient bg-particles py-16 md:py-24 relative">
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">
-                <span class="gradient-wave-title">Добро пожаловать!</span>
-            </h1>
-            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-4 text-gray-200 fade-in-up">Образовательная платформа, созданная энтузиастом для будущих IT-специалистов</p>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-300 fade-in-up" style="animation-delay: 0.2s;">С бесплатными образовательными материалами</p>
+        <div class="-mr-2 flex items-center md:hidden">
+          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Open main menu</span>
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section class="py-16 bg-particles relative">
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center text-gray-100 mb-12 glow-text">Наши курсы</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Computer Networks Card -->
-                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.1s;">
-                    <div class="course-status status-development">
-                        <i class="fas fa-tools"></i>
-                        <span>В разработке</span>
-                    </div>
-                    <div class="course-header">
-                        <div class="course-icon bg-blue-100 text-blue-600">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-100">Компьютерные сети</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4">Изучите основы компьютерных сетей: от базовых концепций до продвинутых технологий.</p>
-                    
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Модель OSI, TCP/IP, IP-адресация</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Настройка Cisco оборудования</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Безопасность сетей и VPN</span>
-                        </div>
-                    </div>
-                    
-                    <a href="courses/networks/index.html" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
-                </div>
-                
-
-                
-                <!-- Python Card -->
-                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.2s;">
-                    <div class="course-status status-ready">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Готов</span>
-                    </div>
-                    <div class="course-header">
-                        <div class="course-icon bg-green-100 text-green-600">
-                            <i class="fab fa-python"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-100">Python</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4">Освойте Python - от основ до продвинутых техник программирования.</p>
-                    
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Синтаксис, ООП, работа с файлами</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Декораторы, генераторы, асинхронность</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Django, Flask, FastAPI</span>
-                        </div>
-                    </div>
-                    
-                    <a href="courses/python/01-python-basics.html" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
-                </div>
-                
-                <!-- C# Card -->
-                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.3s;">
-                    <div class="course-status status-planned">
-                        <i class="fas fa-calendar"></i>
-                        <span>Планируется</span>
-                    </div>
-                    <div class="course-header">
-                        <div class="course-icon bg-purple-100 text-purple-600">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-100">C#</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4">Изучите C# - мощный, современный язык программирования от Microsoft.</p>
-                    
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Синтаксис, LINQ, асинхронность</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">ASP.NET Core, Entity Framework</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Разработка игр на Unity</span>
-                        </div>
-                    </div>
-                    
-                    <a href="courses/csharp/index.html" class="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
-                </div>
-                
-                <!-- Git Card -->
-                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.1s;">
-                    <div class="course-status status-planned">
-                        <i class="fas fa-calendar"></i>
-                        <span>Планируется</span>
-                    </div>
-                    <div class="course-header">
-                        <div class="course-icon bg-red-100 text-red-600">
-                            <i class="fab fa-git-alt"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-100">Git</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4">Изучите Git - самую популярную систему контроля версий.</p>
-                    
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Основные команды, ветвление</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">GitHub, Pull Request, Issues</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Командная работа, Git Flow</span>
-                        </div>
-                    </div>
-                    
-                    <a href="#" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
-                </div>
-                
-                <!-- Web Development Card -->
-                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.2s;">
-                    <div class="course-status status-development">
-                        <i class="fas fa-tools"></i>
-                        <span>В разработке</span>
-                    </div>
-                    <div class="course-header">
-                        <div class="course-icon bg-yellow-100 text-yellow-600">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-100">Web-разработка</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
-                    
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-yellow-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">HTML5, семантическая верстка</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-yellow-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">CSS3, Flexbox, Grid, анимации</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-yellow-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Адаптивный дизайн, Mobile First</span>
-                        </div>
-                    </div>
-                    
-                <a href="courses/web/index.html" class="block w-full bg-yellow-600 hover:bg-yellow-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
-                </div>
-                
-                <!-- Command Line Card -->
-                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.3s;">
-                    <div class="course-status status-planned">
-                        <i class="fas fa-calendar"></i>
-                        <span>Планируется</span>
-                    </div>
-                    <div class="course-header">
-                        <div class="course-icon bg-indigo-100 text-indigo-600">
-                            <i class="fas fa-terminal"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-100">Командная строка</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4">Освойте мощные инструменты командной строки в Linux и Windows.</p>
-                    
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Linux Bash, скрипты, автоматизация</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Windows PowerShell, командлеты</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Реальные сценарии использования</span>
-                        </div>
-                    </div>
-                    
-                    <a href="#" class="block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
-                </div>
-                
-                <!-- Typing Speed Card -->
-                <div class="glass-card rounded-xl p-6 fade-in-up" style="animation-delay: 0.1s;">
-                    <div class="course-status status-development">
-                        <i class="fas fa-tools"></i>
-                        <span>В разработке</span>
-                    </div>
-                    <div class="course-header">
-                        <div class="course-icon bg-purple-100 text-purple-600">
-                            <i class="fas fa-keyboard"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-100">Быстрая печать</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4">Освойте скоростную печать на клавиатуре и повысьте свою производительность.</p>
-                    
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Методика слепой десятипальцевой печати</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Упражнения для улучшения скорости и точности</span>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
-                            <span class="text-gray-300">Эргономика рабочего места и здоровье</span>
-                        </div>
-                    </div>
-                    
-                    <a href="courses/typing/01-vvedenie.html" class="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center font-medium py-3 px-4 rounded-lg transition">Начать обучение</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Typing Trainer Section -->
-    <section class="py-16 bg-particles relative">
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center text-white mb-12 glow-text">Тест скорости печати</h2>
-            
-            <div class="flex flex-col lg:flex-row items-center gap-8">
-                <div class="lg:w-1/2">
-                    <div class="glass-card p-8 fade-in-up" style="animation-delay: 0.2s;">
-                        <h3 class="text-2xl font-bold text-white mb-4">С какой скоростью вы печатаете?</h3>
-                        <p class="text-gray-200 mb-6">Улучшите свою скорость и точность печати с помощью нашего интерактивного теста. Отслеживайте свой прогресс, соревнуйтесь с самим собой и развивайте навык быстрой печати.</p>
-                        
-                        <div class="space-y-4 mb-6">
-                            <div class="flex items-start">
-                                <i class="fas fa-tachometer-alt text-purple-400 mt-1 mr-3"></i>
-                                <span class="text-gray-200">Интерактивный спидометр показывает вашу скорость в реальном времени</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-chart-line text-purple-400 mt-1 mr-3"></i>
-                                <span class="text-gray-200">Детальная статистика результатов с анализом ошибок</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-sliders-h text-purple-400 mt-1 mr-3"></i>
-                                <span class="text-gray-200">Различные уровни сложности для любого уровня подготовки</span>
-                            </div>
-                        </div>
-                        
-                        <a href="courses/typing/test.html" class="inline-block bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-medium py-3 px-8 rounded-lg transition transform hover:-translate-y-1 hover:shadow-lg">
-                            Пройти тест <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="lg:w-1/2 fade-in-up" style="animation-delay: 0.4s;">
-                    <div class="glass-card" style="height: 300px; overflow: hidden; border-radius: 16px;">
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-purple-900/30 z-10"></div>
-                        <div class="absolute inset-0 flex items-center justify-center z-20">
-                            <div class="text-center">
-                                <div class="speedometer-preview">
-                                    <div class="speedometer-dial-preview">
-                                        <div class="speedometer-needle-preview"></div>
-                                    </div>
-                                    <div class="text-white text-4xl font-bold mt-4">75 WPM</div>
-                                    <div class="text-gray-300 mt-2">Попробуйте прямо сейчас!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute inset-0 z-0 flex items-center justify-center">
-                            <div class="typing-demo">
-                                <span>П</span><span>р</span><span>о</span><span>в</span><span>е</span><span>р</span><span>ь</span><span>т</span><span>е</span><span> </span><span>с</span><span>в</span><span>о</span><span>ю</span><span> </span><span>с</span><span>к</span><span>о</span><span>р</span><span>о</span><span>с</span><span>т</span><span>ь</span><span> </span><span>п</span><span>е</span><span>ч</span><span>а</span><span>т</span><span>и</span><span>!</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-16 bg-particles relative">
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center text-gray-100 mb-12 glow-text">Почему выбирают SKL Academy?</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6 glass-card fade-in-up" style="animation-delay: 0.1s;">
-                    <div class="course-icon bg-blue-100 text-blue-600 mx-auto mb-4">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-100">Сообщество энтузиастов</h3>
-                    <p class="text-gray-300">Все материалы публикуются и обновляются сообществом увлеченных IT-специалистов.</p>
-                </div>
-                
-                <div class="text-center p-6 glass-card fade-in-up" style="animation-delay: 0.2s;">
-                    <div class="course-icon bg-green-100 text-green-600 mx-auto mb-4">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-100">Обширная теоретическая база</h3>
-                    <p class="text-gray-300">Предлагаем полноценную теоретическую базу знаний по всем IT-направлениям.</p>
-                </div>
-                
-                <div class="text-center p-6 glass-card fade-in-up" style="animation-delay: 0.3s;">
-                    <div class="course-icon bg-purple-100 text-purple-600 mx-auto mb-4">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-100">Полностью бесплатно</h3>
-                    <p class="text-gray-300">Все материалы и курсы доступны совершенно бесплатно для всех желающих.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="new-footer">
-        <div class="container">
-            <div class="footer-grid" id="contacts">
-                <div class="footer-section">
-                    <h3>О проекте</h3>
-                    <p>SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
-                    <p>Бесплатные материалы, практические задания и проекты</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Контакты</h3>
-                    <div style="width: 100%; max-width: 300px; margin: 0 auto 0 0;">
-                        <a href="#" onclick="openGmail(); return false;" class="contact-button gmail">
-                            <i class="fas fa-envelope"></i> Gmail
-                        </a>
-                        <a href="#" onclick="openTelegram(); return false;" class="contact-button telegram">
-                            <i class="fab fa-telegram"></i> Telegram
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>SKL Academy. 2025</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Функция для плавного скролла к контактам
-        function scrollToContacts(event) {
-            event.preventDefault();
-            const contactsSection = document.getElementById('contacts');
-            if (contactsSection) {
-                contactsSection.scrollIntoView({ 
-                    behavior: 'smooth'
-                });
-            }
-        }
-        
-        // Функции для открытия Gmail и Telegram
-        function openGmail() {
-            window.open('mailto:mr.tim.pumpkin@gmail.com', '_blank');
-        }
-        
-        function openTelegram() {
-            window.open('https://t.me/tima_pelmeshka', '_blank');
-        }
-        
-        // Инициализация всех функций при загрузке DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            // Добавляем эффекты для кнопок
-            const gmailBtn = document.querySelector('.contact-button.gmail');
-            const telegramBtn = document.querySelector('.contact-button.telegram');
-            
-            // Добавляем дополнительные эффекты для кнопок
-            function addButtonEffects() {
-                const contactButtons = document.querySelectorAll('.contact-button');
-                
-                contactButtons.forEach(button => {
-                    // Добавляем эффект пульсации при загрузке страницы
-                    setTimeout(() => {
-                        button.classList.add('pulse-animation');
-                        setTimeout(() => {
-                            button.classList.remove('pulse-animation');
-                        }, 1000);
-                    }, 500);
-                    
-                    // Добавляем обработчики для сенсорных устройств
-                    button.addEventListener('touchstart', function() {
-                        this.style.transform = 'scale(0.97)';
-                    });
-                    
-                    button.addEventListener('touchend', function() {
-                        this.style.transform = 'scale(1)';
-                    });
-                });
-            }
-            
-            addButtonEffects();
-            
-            // Простая реализация мобильного меню
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (mobileMenuBtn && mobileMenu) {
-                // Обработчик клика по кнопке меню
-                mobileMenuBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Если меню скрыто, показываем его
-                    if (mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.remove('hidden');
-                        mobileMenu.classList.add('active');
-                        
-                        // Меняем иконку на крестик
-                        const icon = this.querySelector('i');
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } 
-                    // Если меню открыто, скрываем его
-                    else {
-                        mobileMenu.classList.remove('active');
-                        
-                        // Меняем иконку на три полоски
-                        const icon = this.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                        
-                        setTimeout(() => {
-                            mobileMenu.classList.add('hidden');
-                        }, 300);
-                    }
-                });
-                
-                // Закрытие меню при клике на пункт меню
-                document.querySelectorAll('.mobile-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.remove('active');
-                        
-                        // Меняем иконку на три полоски
-                        const icon = mobileMenuBtn.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                        
-                        setTimeout(() => {
-                            mobileMenu.classList.add('hidden');
-                        }, 300);
-                    });
-                });
-                
-                // Закрытие меню при клике вне меню
-                document.addEventListener('click', (e) => {
-                    if (!mobileMenu.contains(e.target) && 
-                        !mobileMenuBtn.contains(e.target) && 
-                        !mobileMenu.classList.contains('hidden')) {
-                        
-                        mobileMenu.classList.remove('active');
-                        
-                        // Меняем иконку на три полоски
-                        const icon = mobileMenuBtn.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                        
-                        setTimeout(() => {
-                            mobileMenu.classList.add('hidden');
-                        }, 300);
-                    }
-                });
-            }
-        });
-    </script>
-    <script src="js/animations.js"></script>
-    <script src="js/footer-fix.js"></script>
+      </div>
+    </div>
     
-    <script>
-        // Новая функция для реализации эффекта печати
-        document.addEventListener('DOMContentLoaded', function() {
-            // Анимация для градиентного заголовка
-            setTimeout(function() {
-                const titleElement = document.querySelector('.gradient-wave-title');
-                if (titleElement) {
-                    titleElement.classList.add('loaded');
-                }
-            }, 1000);
-            
-            // Анимация появления элементов при скролле
-            function handleScrollAnimations() {
-                const fadeElements = document.querySelectorAll('.fade-in-up');
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
-                
-                fadeElements.forEach(element => {
-                    observer.observe(element);
-                });
-            }
-            
-            // Запуск анимации
-            handleScrollAnimations();
-            
-            // Добавляем эффект для стекломорфных карточек
-            const glassCards = document.querySelectorAll('.glass-card');
-            
-            glassCards.forEach(card => {
-                card.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    this.style.background = `
-                        radial-gradient(
-                            circle at ${x}px ${y}px,
-                            rgba(255, 255, 255, 0.1),
-                            rgba(255, 255, 255, 0.05) 40%
-                        ),
-                        rgba(255, 255, 255, 0.05)
-                    `;
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.background = 'rgba(255, 255, 255, 0.05)';
-                });
-            });
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="pt-2 pb-3 space-y-1 px-4">
+        <a href="https://skl-academy.ru/courses/typing/test.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Тренажер печати</a>
+        <a href="#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
+        <a href="about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="gradient-bg text-white">
+    <div class="animated-gradient"></div>
+    <div class="max-w-7xl mx-auto py-24 px-4 sm:py-28 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="hero-title text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl" style="font-family: 'Quicksand', sans-serif;">
+          Добро пожаловать в SKL Academy!
+        </h1>
+        <p class="mt-6 max-w-2xl mx-auto text-xl text-indigo-100" style="font-family: 'Quicksand', sans-serif;">
+          Образовательная платформа, созданная энтузиастом для будущих IT-специалистов
+        </p>
+        <div class="mt-10 flex justify-center space-x-4">
+          <div class="inline-flex rounded-md shadow">
+            <a href="#courses" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-indigo-600 bg-white hover:bg-gray-50 transition duration-300">
+              Начать обучение
+            </a>
+          </div>
+          <div class="inline-flex rounded-md shadow">
+            <a href="#typing-test" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-700/30 hover:bg-indigo-700/50 transition duration-300">
+              Тренажер печати
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Courses Section -->
+  <div id="courses" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl" style="font-family: 'Quicksand', sans-serif;">Наши курсы</h2>
+      <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto" style="font-family: 'Quicksand', sans-serif;">
+        Бесплатные образовательные материалы для IT-специалистов
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Course 1 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-xl">
+              <i class="fas fa-network-wired text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900" style="font-family: 'Quicksand', sans-serif;">Компьютерные сети</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">В разработке</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <p class="text-gray-600">Изучите компьютерные сети: от основ до продвинутых технологий.</p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Модель OSI, TCP/IP, IP-адресация</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Настройка Cisco оборудования</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Безопасность сетей и VPN</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="https://skl-academy.ru/courses/networks/index.html" class="w-full flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-300">Начать обучение</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 2 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-green-100 p-3 rounded-xl">
+              <i class="fab fa-python text-green-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900" style="font-family: 'Quicksand', sans-serif;">Python</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <p class="text-gray-600">Освойте Python - от основ до продвинутых техник программирования.</p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Синтаксис, ООП, работа с файлами</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Декораторы, генераторы, асинхронность</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Django, Flask, FastAPI</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="https://skl-academy.ru/courses/python/01-python-basics.html" class="w-full flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-green-600 hover:bg-green-700 transition duration-300">Начать обучение</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 3 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-purple-100 p-3 rounded-xl">
+              <i class="fab fa-microsoft text-purple-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900" style="font-family: 'Quicksand', sans-serif;">C#</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <p class="text-gray-600">Изучите C# - мощный, современный язык программирования от Microsoft.</p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Синтаксис, LINQ, асинхронность</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">ASP.NET Core, Entity Framework</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Разработка игр на Unity</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="https://skl-academy.ru/courses/csharp/index.html" class="w-full flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-300">Начать обучение</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 4 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-blue-100 p-3 rounded-xl">
+              <i class="fab fa-git-alt text-blue-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900" style="font-family: 'Quicksand', sans-serif;">Git</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <p class="text-gray-600">Изучите Git - самую популярную систему контроля версий.</p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Основные команды, ветвление</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">GitHub, Pull Request, Issues</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Командная работа, Git Flow</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="http://skl-academy.ru/#" class="w-full flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-300">Начать обучение</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 5 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-red-100 p-3 rounded-xl">
+              <i class="fab fa-html5 text-red-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900" style="font-family: 'Quicksand', sans-serif;">Веб-разработка</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">В разработке</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <p class="text-gray-600">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">HTML5, семантическая верстка</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">CSS3, Flexbox, Grid, анимации</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Адаптивный дизайн, Mobile First</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="https://skl-academy.ru/courses/web/index.html" class="w-full flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-red-600 hover:bg-red-700 transition duration-300">Начать обучение</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 6 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-yellow-100 p-3 rounded-xl">
+              <i class="fas fa-terminal text-yellow-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900" style="font-family: 'Quicksand', sans-serif;">Командная строка</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">В разработке</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <p class="text-gray-600">Освойте мощные инструменты командной строки в Linux и Windows.</p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Linux Bash, скрипты, автоматизация</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Windows PowerShell, командлеты</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Реальные сценарии использования</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="http://skl-academy.ru/#" class="w-full flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 transition duration-300">Начать обучение</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typing Test Section -->
+  <div id="typing-test" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="typing-test rounded-2xl">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+          <div class="mb-12 lg:mb-0">
+            <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-white" style="font-family: 'Quicksand', sans-serif;">Тест скорости печати</h2>
+            <h3 class="mt-3 text-xl font-medium text-indigo-100" style="font-family: 'Quicksand', sans-serif;">С какой скоростью вы печатаете?</h3>
+            <p class="mt-6 text-lg text-gray-100">
+              Улучшите свою скорость и точность печати с помощью нашего интерактивного теста. Отслеживайте свой прогресс, соревнуйтесь с самим собой и развивайте навык быстрой печати.
+            </p>
+            <ul class="mt-8 space-y-4">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-400"></i>
+                </div>
+                <p class="ml-3 text-gray-100">Интерактивный спидометр показывает вашу скорость в реальном времени</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-400"></i>
+                </div>
+                <p class="ml-3 text-gray-100">Детальная статистика результатов с анализом ошибок</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-400"></i>
+                </div>
+                <p class="ml-3 text-gray-100">Различные уровни сложности для любого уровня подготовки</p>
+              </li>
+            </ul>
+            <div class="mt-10">
+              <a href="https://skl-academy.ru/courses/typing/test.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-indigo-700 bg-white hover:bg-gray-50 transition duration-300">
+                Пройти тест
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="max-w-md mx-auto bg-gray-900/60 backdrop-blur-sm rounded-2xl p-8">
+              <div class="flex justify-center">
+                <div class="relative w-48 h-48">
+                  <svg class="w-full h-full" viewBox="0 0 100 100">
+                    <circle class="text-gray-600" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                    <circle class="progress-ring text-green-400" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span class="text-4xl font-bold text-white">75</span>
+                    <span class="text-lg text-gray-300">WPM</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 grid grid-cols-2 gap-6">
+                <div class="text-center p-4 bg-gray-800/40 rounded-xl">
+                  <p class="text-lg font-semibold text-white">98%</p>
+                  <p class="text-sm text-gray-300">Точность</p>
+                </div>
+                <div class="text-center p-4 bg-gray-800/40 rounded-xl">
+                  <p class="text-lg font-semibold text-white">0.8s</p>
+                  <p class="text-sm text-gray-300">Среднее время</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacts">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold" style="font-family: 'Quicksand', sans-serif;">О проекте</h4>
+        <p class="mt-4 text-gray-400">SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
+        <p class="mt-2 text-gray-400">Бесплатные материалы, практические задания и проекты</p>
+      </div>
+      
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold" style="font-family: 'Quicksand', sans-serif;">Контакты</h4>
+        <div class="mt-4 space-y-3">
+          <a href="#" onclick="openGmail(); return false;" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
+            <i class="fas fa-envelope mr-2"></i> Gmail
+          </a>
+          <a href="#" onclick="openTelegram(); return false;" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
+            <i class="fab fa-telegram mr-2"></i> Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-gray-800">
+      <div class="flex justify-center">
+        <p class="text-gray-500 text-sm">SKL Academy. 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Функция для плавного скролла к контактам
+    function scrollToContacts(event) {
+      event.preventDefault();
+      const contactsSection = document.getElementById('contacts');
+      if (contactsSection) {
+        contactsSection.scrollIntoView({ 
+          behavior: 'smooth'
         });
-    </script>
+      }
+    }
+    
+    // Функции для открытия Gmail и Telegram
+    function openGmail() {
+      window.open('mailto:mr.tim.pumpkin@gmail.com', '_blank');
+    }
+    
+    function openTelegram() {
+      window.open('https://t.me/tima_pelmeshka', '_blank');
+    }
+  </script>
 </body>
 </html>
