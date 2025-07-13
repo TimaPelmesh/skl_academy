@@ -23,6 +23,37 @@ document.querySelectorAll('.topic-btn').forEach(btn => {
     });
 });
 
+// Функция плавной прокрутки к элементу
+function smoothScrollToElement(element, offset) {
+    if (!element) return;
+    
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 800; // Увеличенная длительность анимации для более плавного эффекта
+    let startTime = null;
+    
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        const ease = easeInOutCubic(progress);
+        
+        window.scrollTo(0, startPosition + distance * ease);
+        
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+    
+    // Функция плавности (кубическая)
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    
+    requestAnimationFrame(animation);
+}
+
 // Обработка якорных ссылок для плавной прокрутки
 document.querySelectorAll('.subtopic').forEach(link => {
     link.addEventListener('click', function(e) {
@@ -42,15 +73,13 @@ document.querySelectorAll('.subtopic').forEach(link => {
             const targetId = this.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
             
-            // Прокручиваем к нужной секции с учетом высоты шапки и мобильных устройств
+            // Прокручиваем к нужной секции с учетом высоты шапки
             if (targetSection) {
                 const headerHeight = document.querySelector('header').offsetHeight;
-                const offset = headerHeight + 20; // Дополнительный отступ для комфорта
+                const offset = headerHeight + 30; // Увеличенный отступ для лучшей видимости
                 
-                window.scrollTo({
-                    top: targetSection.offsetTop - offset,
-                    behavior: 'smooth'
-                });
+                // Используем нашу функцию плавной прокрутки
+                smoothScrollToElement(targetSection, offset);
             }
             
             // Закрытие сайдбара на мобильных устройствах после клика
@@ -98,33 +127,46 @@ function setActiveSection() {
 window.addEventListener('scroll', setActiveSection);
 document.addEventListener('DOMContentLoaded', setActiveSection);
 
-// Переключение темы
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-// Проверка сохраненной темы в localStorage
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    // Если сохранена светлая тема
-    if (currentTheme === 'light') {
-        body.classList.add('light-theme');
+// Обработка якорей при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем наличие хэша в URL
+    if (window.location.hash) {
+        // Сначала прокручиваем страницу в начало, чтобы избежать обрезки контента
+        window.scrollTo(0, 0);
+        
+        // Небольшая задержка для корректной работы
+        setTimeout(function() {
+            const targetId = window.location.hash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const offset = headerHeight + 30; // Увеличенный отступ для лучшей видимости
+                
+                // Используем нашу функцию плавной прокрутки
+                smoothScrollToElement(targetElement, offset);
+                
+                // Активируем соответствующую ссылку в меню
+                const relatedLink = document.querySelector(`.subtopic[href="#${targetId}"]`);
+                if (relatedLink) {
+                    // Убираем активный класс у всех ссылок
+                    document.querySelectorAll('.subtopic').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс текущей ссылке
+                    relatedLink.classList.add('active');
+                    
+                    // Раскрываем родительскую тему, если она свернута
+                    const parentTopic = relatedLink.closest('.subtopics');
+                    if (parentTopic && !parentTopic.style.maxHeight) {
+                        const topicBtn = parentTopic.previousElementSibling;
+                        if (topicBtn && topicBtn.classList.contains('topic-btn')) {
+                            topicBtn.click(); // Имитируем клик для раскрытия
+                        }
+                    }
+                }
+            }
+        }, 100); // Уменьшенная задержка для более быстрой работы
     }
-} else {
-    // Если ничего не сохранено, устанавливаем тему по предпочтениям системы
-    if (!prefersDarkScheme.matches) {
-        body.classList.add('light-theme');
-    }
-}
-
-themeToggle.addEventListener('click', () => {
-    // Переключаем класс light-theme у body
-    body.classList.toggle('light-theme');
-    
-    // Сохраняем текущую тему в localStorage
-    let theme = 'dark';
-    if (body.classList.contains('light-theme')) {
-        theme = 'light';
-    }
-    localStorage.setItem('theme', theme);
 });

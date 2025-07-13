@@ -2,38 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    /* Основные цвета темной темы */
-    --primary-color: #7c4dff;
-    --primary-light: #9571ff;
-    --primary-dark: #5c3dd5;
-    --secondary-color: #4a365a;
-    --accent-color: #b388ff;
-    --text-color: #f8f9fa;
-    --light-text: #fff;
-    --border-color: rgba(255, 255, 255, 0.08);
-    --bg-color: #121212;
-    --bg-gradient-1: #121212;
-    --bg-gradient-2: #1e1e2e;
-    
-    /* Элементы интерфейса */
-    --header-height: 70px;
-    --shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
-    --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.12);
-    --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.2);
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --radius: 10px;
-    --border-light: 1px solid rgba(255, 255, 255, 0.06);
-    --border-dark: 1px solid rgba(0, 0, 0, 0.05);
-    
-    /* Полупрозрачные фоны */
-    --overlay-light: rgba(255, 255, 255, 0.06);
-    --overlay-dark: rgba(0, 0, 0, 0.15);
-    --glassmorphism: rgba(30, 30, 46, 0.85);
-    --header-bg: rgba(18, 18, 18, 0.95);
-}
-
-/* Светлая тема */
-.light-theme {
     /* Основные цвета светлой темы */
     --primary-color: #6c63ff;
     --primary-light: #8a84ff;
@@ -48,9 +16,14 @@
     --bg-gradient-2: #f0f0f5;
     
     /* Элементы интерфейса */
+    --header-height: 70px;
     --shadow: 0 4px 16px rgba(98, 87, 255, 0.06);
     --shadow-small: 0 2px 8px rgba(98, 87, 255, 0.04);
     --shadow-hover: 0 6px 24px rgba(98, 87, 255, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --radius: 10px;
+    --border-light: 1px solid rgba(255, 255, 255, 0.06);
+    --border-dark: 1px solid rgba(0, 0, 0, 0.05);
     
     /* Полупрозрачные фоны */
     --overlay-light: rgba(108, 99, 255, 0.04);
@@ -110,55 +83,6 @@ header {
     align-items: center;
     gap: 16px;
     margin-right: 20px;
-}
-
-/* Кнопка переключения темы */
-.theme-toggle-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: transparent;
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--light-text);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.theme-toggle-btn:hover {
-    background: var(--overlay-light);
-    transform: translateY(-2px);
-}
-
-.theme-toggle-btn svg {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-.theme-toggle-btn .moon {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-}
-
-.theme-toggle-btn .sun {
-    opacity: 0;
-    transform: rotate(-45deg) scale(0);
-}
-
-.light-theme .theme-toggle-btn .moon {
-    opacity: 0;
-    transform: rotate(45deg) scale(0);
-}
-
-.light-theme .theme-toggle-btn .sun {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
 }
 
 /* Кнопка выхода */
@@ -555,4 +479,47 @@ body::-webkit-scrollbar-thumb {
 .contact-link:hover {
     color: #6db5ff;
     transform: translateX(5px);
+}
+
+/* Стили для элементов с темным фоном */
+.resources-section, 
+.practice-tips, 
+.interactive-resources,
+.next-steps,
+.visual-guide,
+.operators-cheatsheet,
+.conclusion {
+    color: #e6e6e6; /* Светлый текст для темного фона */
+}
+
+/* Стили для важных заметок с темным фоном */
+.resources-section p, 
+.practice-tips p, 
+.interactive-resources p,
+.next-steps p,
+.visual-guide p,
+.operators-cheatsheet p,
+.conclusion p {
+    color: #e6e6e6;
+}
+
+/* Стили для списков в блоках с темным фоном */
+.resources-section li, 
+.practice-tips li, 
+.interactive-resources li,
+.next-steps li,
+.visual-guide li,
+.operators-cheatsheet li {
+    color: #e6e6e6;
+}
+
+/* Стили для заголовка "Важно понимать разницу" */
+.resources-section h4,
+.practice-tips h4,
+.interactive-resources h4,
+.next-steps h4,
+.visual-guide h4,
+.operators-cheatsheet h4,
+.conclusion h4 {
+    color: #58a6ff; /* Яркий голубой для заголовков */
 }
