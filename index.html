@@ -60,7 +60,7 @@
   <!-- Navigation -->
   <nav class="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-20 items-center">
+      <div class="flex justify-between h-24 items-center">
         <div class="flex items-center">
           <div class="flex-shrink-0 flex items-center">
             <img class="h-9 w-auto" src="images/icon.ico" alt="SKL Academy">
@@ -94,41 +94,65 @@
   </nav>
 
   <!-- Hero Section -->
-  <div class="gradient-bg text-white">
+  <div class="gradient-bg text-white pt-4">
     <div class="animated-gradient"></div>
-    <div class="max-w-7xl mx-auto py-24 px-4 sm:py-28 sm:px-6 lg:px-8">
+      
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:py-8 sm:px-6 lg:px-8 relative z-10">
       <div class="text-center">
-        <h1 class="hero-title text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-          Добро пожаловать в SKL Academy!
-        </h1>
-        <p class="mt-6 max-w-2xl mx-auto text-xl text-indigo-100">
-          Образовательная платформа, созданная энтузиастом для будущих IT-специалистов
-        </p>
-        <div class="mt-10 flex justify-center space-x-4">
-          <div class="inline-flex rounded-md shadow">
-            <a href="#courses" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-indigo-600 bg-white hover:bg-gray-50 transition duration-300">
-              Начать обучение
-            </a>
-          </div>
-          <div class="inline-flex rounded-md shadow">
-            <a href="#typing-test" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-700/30 hover:bg-indigo-700/50 transition duration-300">
-              Тренажер печати
-            </a>
-          </div>
-        </div>
+         <!-- Заголовок с эффектом печатания -->
+         <div class="mb-2">
+             <h1 class="hero-title text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mx-auto">
+               <span class="typing-effect">Добро пожаловать!</span>
+             </h1>
+         </div>
+         
+         <p class="mt-2 max-w-2xl mx-auto text-lg text-indigo-100 fade-in-after-typing">
+           Что же тебя тут ждет?
+         </p>
+         
+         <div class="hero-content-wrapper fade-in-after-typing" style="margin-top: auto; padding-top: 1rem;">
+           <!-- Улучшенные блоки статистики -->
+           <div class="stats-container">
+             <div class="stat-block">
+               <div class="stat-number">7</div>
+               <div class="stat-label">Курсов</div>
+             </div>
+             <div class="stat-block">
+               <div class="stat-number">24/7</div>
+               <div class="stat-label">Доступ</div>
+             </div>
+             <div class="stat-block">
+               <div class="stat-number">100%</div>
+               <div class="stat-label">Бесплатно</div>
+             </div>
+           </div>
+           
+           <div class="mt-4 flex justify-center space-x-3">
+             <div class="inline-flex rounded-md shadow">
+               <a href="#courses" class="inline-flex items-center justify-center px-4 py-1.5 border border-transparent text-sm font-medium rounded-lg text-indigo-600 bg-white hover:bg-gray-50 transition duration-300">
+                 Начать обучение
+               </a>
+             </div>
+             <div class="inline-flex rounded-md shadow">
+               <a href="#typing-test" class="inline-flex items-center justify-center px-4 py-1.5 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-700/30 hover:bg-indigo-700/50 transition duration-300">
+                 Тренажер печати
+               </a>
+             </div>
+           </div>
+         </div>
       </div>
     </div>
   </div>
 
   <!-- Courses Section -->
-  <div id="courses" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="text-center mb-16">
+  <div id="courses" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-6">
       <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Наши курсы</h2>
-      <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+      <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
         Бесплатные образовательные материалы для IT-специалистов
       </p>
     </div>
-    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <!-- Course 1 -->
       <div class="course-card">
         <div class="p-6">
@@ -143,9 +167,9 @@
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-4">
             <p class="text-gray-600">Изучите компьютерные сети: от основ до продвинутых технологий.</p>
-            <ul class="mt-6 space-y-3">
+            <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
@@ -166,7 +190,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 flex space-x-4">
+          <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-networks">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -193,9 +217,9 @@
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-4">
             <p class="text-gray-600">Освойте Python - от основ до продвинутых техник программирования.</p>
-            <ul class="mt-6 space-y-3">
+            <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
@@ -216,7 +240,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 flex space-x-4">
+          <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-python">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -243,9 +267,9 @@
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-4">
             <p class="text-gray-600">Изучите C# - мощный, современный язык программирования от Microsoft.</p>
-            <ul class="mt-6 space-y-3">
+            <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
@@ -266,7 +290,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 flex space-x-4">
+          <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-csharp">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -293,9 +317,9 @@
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-4">
             <p class="text-gray-600">Изучите Git - самую популярную систему контроля версий.</p>
-            <ul class="mt-6 space-y-3">
+            <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
@@ -316,7 +340,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 flex space-x-4">
+          <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-git">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -343,9 +367,9 @@
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-4">
             <p class="text-gray-600">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
-            <ul class="mt-6 space-y-3">
+            <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
@@ -366,7 +390,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 flex space-x-4">
+          <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-web">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -393,9 +417,9 @@
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-4">
             <p class="text-gray-600">Освойте мощные инструменты командной строки в Linux и Windows.</p>
-            <ul class="mt-6 space-y-3">
+            <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
@@ -416,7 +440,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 flex space-x-4">
+          <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-shell">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -443,9 +467,9 @@
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-4">
             <p class="text-gray-600">Развивайте навык быстрой печати на клавиатуре с нашим интерактивным тренажером.</p>
-            <ul class="mt-6 space-y-3">
+            <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
@@ -466,7 +490,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-8 flex space-x-4">
+          <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-typing">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -482,17 +506,17 @@
   </div>
 
   <!-- Typing Test Section -->
-  <div id="typing-test" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <div id="typing-test" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="typing-test rounded-2xl">
-      <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
-          <div class="mb-12 lg:mb-0">
+          <div class="mb-8 lg:mb-0">
             <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-white">Тест скорости печати</h2>
             <h3 class="mt-3 text-xl font-medium text-indigo-100">С какой скоростью вы печатаете?</h3>
-            <p class="mt-6 text-lg text-gray-100">
+            <p class="mt-4 text-lg text-gray-100">
               Улучшите свою скорость и точность печати с помощью нашего интерактивного теста. Отслеживайте свой прогресс, соревнуйтесь с самим собой и развивайте навык быстрой печати.
             </p>
-            <ul class="mt-8 space-y-4">
+            <ul class="mt-6 space-y-3">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-400"></i>
@@ -512,7 +536,7 @@
                 <p class="ml-3 text-gray-100">Различные уровни сложности для любого уровня подготовки</p>
               </li>
             </ul>
-            <div class="mt-10">
+            <div class="mt-6">
               <a href="404.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-indigo-700 bg-white hover:bg-gray-50 transition duration-300">
                 Пройти тест
               </a>
@@ -1473,6 +1497,81 @@
     
     function openTelegram() {
       window.open('https://t.me/tima_pelmeshka', '_blank');
+    }
+    
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+      // Создаем звезды на фоне
+      addStars(100);
+      
+      // Инициализируем эффект печатания
+      initTypingEffect();
+    });
+    
+    // Функция для создания дополнительных звезд
+    function addStars(count) {
+      const container = document.querySelector('.gradient-bg');
+      
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        // Случайное размещение и размер
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.width = `${Math.random() * 3 + 1}px`;
+        star.style.height = star.style.width;
+        
+        // Случайная задержка анимации
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        
+        container.appendChild(star);
+      }
+    }
+    
+    // Функция для инициализации эффекта печатания
+    function initTypingEffect() {
+      const typingElement = document.querySelector('.typing-effect');
+      
+      if (typingElement) {
+        // Сохраняем оригинальный текст
+        const text = typingElement.textContent;
+        // Очищаем содержимое
+        typingElement.textContent = '';
+        
+        // Запускаем анимацию печатания с небольшой задержкой
+        setTimeout(() => {
+          // Показываем элемент и курсор перед началом печатания
+          typingElement.classList.add('typing-started');
+          
+          // Печатаем текст по одному символу с разной скоростью для естественности
+          let charIndex = 0;
+          
+          function typeNextChar() {
+            if (charIndex < text.length) {
+              typingElement.textContent += text.charAt(charIndex);
+              charIndex++;
+              
+              // Случайная задержка между символами для более естественного эффекта
+              const randomDelay = Math.floor(Math.random() * 50) + 70; // 70-120мс
+              setTimeout(typeNextChar, randomDelay);
+            } else {
+              // Плавно скрываем курсор после небольшой паузы
+              setTimeout(() => {
+                // Добавляем класс для скрытия курсора
+                typingElement.classList.add('typing-complete');
+                
+                // Показываем остальной контент с небольшой задержкой
+                setTimeout(() => {
+                  typingElement.closest('.text-center').classList.add('show-content');
+                }, 300);
+              }, 600); // Пауза перед скрытием курсора
+            }
+          }
+          
+          typeNextChar();
+        }, 800);
+      }
     }
   </script>
 </body>
