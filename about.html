@@ -5,29 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>О проекте - SKL Academy</title>
   
-  <!-- Yandex.Metrika counter -->
-  <script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
- 
-    ym(102262736, "init", {
-         clickmap:true,
-         trackLinks:true,
-         accurateTrackBounce:true
-    });
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <!-- /Yandex.Metrika counter -->
-  
   <!-- Favicon / Иконки сайта -->
   <link rel="icon" href="images/icon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -112,26 +93,96 @@
       </div>
       
       <h2 class="text-2xl font-bold text-gray-900 mt-10">Наш подход к обучению</h2>
-      <p>
+      <p class="mt-4 mb-8 text-gray-600">
         Мы придерживаемся следующих принципов:
       </p>
-      <ul class="list-disc pl-6 mt-4">
-        <li><strong>Практическая направленность</strong> — каждый курс содержит реальные примеры и задания для закрепления материала</li>
-        <li><strong>Актуальность</strong> — мы регулярно обновляем контент, чтобы соответствовать современным требованиям индустрии</li>
-        <li><strong>Доступность</strong> — все материалы бесплатны и доступны онлайн 24/7</li>
-        <li><strong>Структурированность</strong> — информация подается в логичном порядке, от простого к сложному</li>
-      </ul>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-laptop-code text-2xl text-indigo-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900">Практическая направленность</h3>
+              <p class="mt-2 text-gray-600">Каждый курс содержит реальные примеры и задания для закрепления материала</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-sync-alt text-2xl text-indigo-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900">Актуальность</h3>
+              <p class="mt-2 text-gray-600">Мы регулярно обновляем контент, чтобы соответствовать современным требованиям индустрии</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-unlock-alt text-2xl text-indigo-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900">Доступность</h3>
+              <p class="mt-2 text-gray-600">Все материалы бесплатны и доступны онлайн 24/7</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-layer-group text-2xl text-indigo-600"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900">Структурированность</h3>
+              <p class="mt-2 text-gray-600">Информация подается в логичном порядке, от простого к сложному</p>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <h2 class="text-2xl font-bold text-gray-900 mt-10">Планы на будущее</h2>
-      <p>
+      <p class="mb-8">
         Мы активно работаем над расширением нашей образовательной платформы. В ближайшие месяцы планируется:
       </p>
-      <ul class="list-disc pl-6 mt-4">
-        <li>Запуск новых курсов по востребованным направлениям</li>
-        <li>Создание интерактивных тренажеров для практики</li>
-        <li>Формирование сообщества учащихся для обмена опытом</li>
-        <li>Разработка системы сертификации для подтверждения полученных знаний</li>
-      </ul>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl font-bold text-indigo-600">1</span>
+            <h3 class="text-lg font-semibold text-gray-900">Новые курсы</h3>
+          </div>
+          <p class="mt-3 text-gray-600">Запуск новых курсов по востребованным направлениям в IT-индустрии, включая современные технологии и фреймворки.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl font-bold text-indigo-600">2</span>
+            <h3 class="text-lg font-semibold text-gray-900">Интерактивные тренажеры</h3>
+          </div>
+          <p class="mt-3 text-gray-600">Создание интерактивных тренажеров для практического закрепления знаний и развития навыков программирования.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl font-bold text-indigo-600">3</span>
+            <h3 class="text-lg font-semibold text-gray-900">Сообщество учащихся</h3>
+          </div>
+          <p class="mt-3 text-gray-600">Формирование активного сообщества для обмена опытом, совместного обучения и взаимной поддержки.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl font-bold text-indigo-600">4</span>
+            <h3 class="text-lg font-semibold text-gray-900">Система сертификации</h3>
+          </div>
+          <p class="mt-3 text-gray-600">Разработка системы сертификации для подтверждения полученных знаний и навыков на платформе.</p>
+        </div>
+      </div>
       
       <h2 class="text-2xl font-bold text-gray-900 mt-10">Хотите в нашу команду?</h2>
       <p class="mt-3">
