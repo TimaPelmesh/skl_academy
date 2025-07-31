@@ -401,6 +401,317 @@ footer {
   transform: translateY(-5px) rotate(-45deg);
 }
 
+/* UFO Animation для hero секции */
+.ufo-hero {
+  position: absolute;
+  animation: ufoHeroMove 15s ease-in-out forwards;
+  z-index: 5;
+  opacity: 0.8;
+}
+
+.ufo-hero-2 {
+  position: absolute;
+  animation: ufoHeroMove2 15s ease-in-out forwards;
+  z-index: 5;
+  opacity: 0.7;
+}
+
+/* Свечение тарелок - треугольники с градиентом */
+.ufo-hero::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 60px solid;
+  border-image: linear-gradient(to bottom, rgba(99, 102, 241, 0.8) 0%, rgba(99, 102, 241, 0.4) 50%, transparent 100%);
+  border-image-slice: 1;
+  opacity: 0;
+  animation: ufoGlowTriangle 2s ease-in-out 3.5s forwards;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.ufo-hero-2::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 60px solid;
+  border-image: linear-gradient(to bottom, rgba(139, 92, 246, 0.8) 0%, rgba(139, 92, 246, 0.4) 50%, transparent 100%);
+  border-image-slice: 1;
+  opacity: 0;
+  animation: ufoGlowTriangle2 2s ease-in-out 3.5s forwards;
+  pointer-events: none;
+  z-index: 6;
+}
+
+@keyframes ufoGlowTriangle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes ufoGlowTriangle2 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+
+
+@keyframes ufoHeroMove {
+  0% { 
+    transform: translateX(-120px) translateY(70px) rotate(-3deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  35% {
+    transform: translateX(calc(20vw - 40px)) translateY(70px) rotate(0deg);
+  }
+  60% {
+    transform: translateX(calc(20vw - 40px)) translateY(70px) rotate(0deg);
+  }
+  100% { 
+    transform: translateX(-120px) translateY(70px) rotate(3deg);
+    opacity: 0;
+  }
+}
+
+@keyframes ufoHeroMove2 {
+  0% { 
+    transform: translateX(calc(100vw + 120px)) translateY(70px) rotate(3deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  35% {
+    transform: translateX(calc(80vw - 40px)) translateY(70px) rotate(0deg);
+  }
+  60% {
+    transform: translateX(calc(80vw - 40px)) translateY(70px) rotate(0deg);
+  }
+  100% { 
+    transform: translateX(calc(100vw + 120px)) translateY(70px) rotate(-3deg);
+    opacity: 0;
+  }
+}
+
+/* Иконки курсов под тарелками */
+.course-icons-left {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  animation: showCourseIconsLeft 8s ease-in-out 3.5s forwards;
+}
+
+.course-icons-right {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  animation: showCourseIconsRight 8s ease-in-out 3.5s forwards;
+}
+
+.course-icon {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.course-icon:nth-child(1) { animation: showIconLeft1 8s ease-in-out 4s forwards; }
+.course-icon:nth-child(2) { animation: showIconLeft2 8s ease-in-out 4.05s forwards; }
+.course-icon:nth-child(3) { animation: showIconLeft3 8s ease-in-out 4.1s forwards; }
+.course-icon:nth-child(4) { animation: showIconRight1 8s ease-in-out 4s forwards; }
+.course-icon:nth-child(5) { animation: showIconRight2 8s ease-in-out 4.05s forwards; }
+.course-icon:nth-child(6) { animation: showIconRight3 8s ease-in-out 4.1s forwards; }
+.course-icon:nth-child(7) { animation: showIconRight4 8s ease-in-out 4.15s forwards; }
+
+.course-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.course-icon i {
+  font-size: 1.2rem;
+  color: #4f46e5;
+}
+
+@keyframes showCourseIconsLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(35px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(35px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(calc(100vh - 200px));
+  }
+}
+
+@keyframes showCourseIconsRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(35px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(35px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(calc(100vh - 200px));
+  }
+}
+
+@keyframes showIconLeft {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(calc(100vh - 200px));
+  }
+}
+
+@keyframes showIconRight {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(calc(100vh - 200px));
+  }
+}
+
+/* Отдельные анимации для поочередного падения */
+@keyframes showIconLeft1 {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 1; transform: translateY(0); }
+  70% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
+}
+
+@keyframes showIconLeft2 {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 1; transform: translateY(0); }
+  72% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
+}
+
+@keyframes showIconLeft3 {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 1; transform: translateY(0); }
+  74% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
+}
+
+@keyframes showIconRight1 {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 1; transform: translateY(0); }
+  70% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
+}
+
+@keyframes showIconRight2 {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 1; transform: translateY(0); }
+  72% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
+}
+
+@keyframes showIconRight3 {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 1; transform: translateY(0); }
+  74% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
+}
+
+@keyframes showIconRight4 {
+  0% { opacity: 0; transform: translateY(-20px); }
+  20% { opacity: 1; transform: translateY(0); }
+  76% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
+}
+
+/* Скрываем НЛО на мобильных устройствах */
+@media (max-width: 768px) {
+  .ufo-hero,
+  .ufo-hero-2,
+  .course-icons-left,
+  .course-icons-right {
+    display: none;
+  }
+}
+
 /* Media queries */
 @media (max-width: 640px) {
   .gradient-bg {
