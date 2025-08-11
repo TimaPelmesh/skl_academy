@@ -524,6 +524,16 @@ body::-webkit-scrollbar-thumb {
     color: #58a6ff; /* Яркий голубой для заголовков */
 }
 
+/* Базовый читаемый цвет для всех h4 на светлом фоне в курсе */
+h4 {
+    color: #111827;
+}
+
+/* Сохраняем цвета в тёмных блоках, перекрывая базовый h4 */
+.visual-guide h4 { color: #7ee787; }
+.conclusion h4 { color: #d2a8ff; }
+.light-theme .conclusion h4 { color: #6f42c1; }
+
 /* Улучшенные стили для таблиц в темных блоках */
 .operators-cheatsheet table {
     width: 100%;
@@ -623,6 +633,27 @@ body::-webkit-scrollbar-thumb {
 
 .light-theme .visual-guide strong {
     color: #2ea44f;
+}
+
+/* Исправление: в светлой теме делаем текст в блоке "Следующие шаги" чёрным */
+.light-theme .next-steps,
+.light-theme .next-steps p,
+.light-theme .next-steps li {
+    color: #000;
+}
+
+/* Явно делаем текст в блоке "Следующие шаги" чёрным (для всех тем) */
+.next-steps,
+.next-steps p,
+.next-steps li {
+    color: #000;
+}
+
+/* Явно делаем текст в блоках "Практические советы" чёрным (для всех тем) */
+.practice-tips,
+.practice-tips p,
+.practice-tips li {
+    color: #000;
 }
 
 /* Улучшенные стили для блока заключения */
