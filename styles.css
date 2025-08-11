@@ -22,14 +22,69 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 0.25rem;
 }
 
+/* Blurred gradient background (static, no animations) */
+:root {
+  --hero-color-bg1: rgb(108, 0, 162);
+  --hero-color-bg2: rgb(0, 17, 82);
+  --hero-color1: 18, 113, 255;
+  --hero-color2: 221, 74, 255;
+  --hero-color3: 100, 220, 255;
+  --hero-color4: 200, 50, 50;
+  --hero-color5: 180, 180, 50;
+  --hero-circle-size: 85%;
+}
+
 .gradient-bg {
-  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
   position: relative;
   overflow: hidden;
-  height: 380px;
+  min-height: 420px;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(40deg, var(--hero-color-bg1), var(--hero-color-bg2));
+  color: #fff;
 }
+
+/* keep content above blobs */
+.gradient-bg > .max-w-7xl {
+  position: relative;
+  z-index: 2;
+}
+
+/* hold SVG filter defs off-canvas */
+.hero-goo-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.gradients-container {
+  position: absolute;
+  inset: 0;
+  filter: url(#hero-goo) blur(40px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.g1,
+.g2,
+.g3,
+.g4,
+.g5 {
+  position: absolute;
+  width: var(--hero-circle-size);
+  height: var(--hero-circle-size);
+  top: calc(50% - var(--hero-circle-size) / 2);
+  left: calc(50% - var(--hero-circle-size) / 2);
+  mix-blend-mode: hard-light;
+  opacity: 0.9;
+}
+
+.g1 { background: radial-gradient(circle at center, rgba(var(--hero-color1), 0.8) 0, rgba(var(--hero-color1), 0) 55%) no-repeat; transform: translate(-60%, -8%); }
+.g2 { background: radial-gradient(circle at center, rgba(var(--hero-color2), 0.7) 0, rgba(var(--hero-color2), 0) 55%) no-repeat; transform: translate(-70%, 18%); }
+.g3 { background: radial-gradient(circle at center, rgba(var(--hero-color3), 0.7) 0, rgba(var(--hero-color3), 0) 55%) no-repeat; transform: translate(58%, 6%); }
+.g4 { background: radial-gradient(circle at center, rgba(var(--hero-color4), 0.55) 0, rgba(var(--hero-color4), 0) 55%) no-repeat; transform: translate(70%, 26%); opacity: 0.45; }
+.g5 { background: radial-gradient(circle at center, rgba(var(--hero-color5), 0.6) 0, rgba(var(--hero-color5), 0) 55%) no-repeat; transform: translate(40%, -22%); }
 
 .gradient-bg .max-w-7xl {
   flex: 1;
@@ -44,15 +99,32 @@ h1, h2, h3, h4, h5 {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding-top: 16px;
 }
 
-/* Возвращаем исходный цвет для подзаголовка */
+/* Подзаголовок в hero поверх тёмного фона */
 .gradient-bg p.text-indigo-100 {
-  color: #4b5563; /* gray-600 */
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Весь текст в hero белый */
+.gradient-bg .hero-title,
+.gradient-bg .typing-effect {
+  background: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.gradient-bg .stat-number {
+  color: #ffffff;
+}
+
+.gradient-bg .stat-label {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .hero-content-wrapper {
-  margin-top: auto;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -401,19 +473,68 @@ footer {
   transform: translateY(-5px) rotate(-45deg);
 }
 
-/* UFO Animation для hero секции */
-.ufo-hero {
+/* UFO и иконки в hero отключены */
+.ufo-hero,
+.ufo-hero-2,
+.course-icons-left,
+.course-icons-right { display: none !important; }
+
+/* Декоративные иконки курсов по бокам hero (десктоп) */
+.hero-icons-left,
+.hero-icons-right {
   position: absolute;
-  animation: ufoHeroMove 15s ease-in-out forwards;
-  z-index: 1;
-  opacity: 0.8;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none; /* скрыто по умолчанию, покажем на >=1024px */
+  gap: 22px;
+  z-index: 2;
+  flex-direction: column;
+  pointer-events: none; /* не мешаем кликам по контенту */
 }
 
-.ufo-hero-2 {
-  position: absolute;
-  animation: ufoHeroMove2 15s ease-in-out forwards;
-  z-index: 1;
-  opacity: 0.7;
+.hero-icons-left { left: 4%; }
+.hero-icons-right { right: 4%; }
+
+.hero-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.25);
+  transform: rotate(-8deg);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+
+.hero-icons-right .hero-icon { transform: rotate(8deg); }
+
+.hero-icon i { line-height: 1; }
+
+/* размеры карточек */
+.hero-icon.hero-icon-s { width: 72px; height: 72px; }
+.hero-icon.hero-icon-s i { font-size: 32px; }
+
+.hero-icon.hero-icon-m { width: 96px; height: 96px; }
+.hero-icon.hero-icon-m i { font-size: 42px; }
+
+.hero-icon.hero-icon-l { width: 112px; height: 112px; }
+.hero-icon.hero-icon-l i { font-size: 52px; }
+
+/* Небольшой разброс и наклоны для живости */
+.hero-icons-left .hero-icon:nth-child(1) { transform: rotate(-10deg) translateX(-8px) translateY(-8px); }
+.hero-icons-left .hero-icon:nth-child(2) { transform: rotate(-4deg) translateX(28px) translateY(10px); }
+.hero-icons-left .hero-icon:nth-child(3) { transform: rotate(-14deg) translateX(12px) translateY(-22px); }
+
+.hero-icons-right .hero-icon:nth-child(1) { transform: rotate(8deg) translateX(-26px) translateY(8px); }
+.hero-icons-right .hero-icon:nth-child(2) { transform: rotate(12deg) translateX(-8px) translateY(-18px); }
+.hero-icons-right .hero-icon:nth-child(3) { transform: rotate(6deg) translateX(-30px) translateY(14px); }
+
+@media (min-width: 1024px) {
+  .hero-icons-left,
+  .hero-icons-right { display: flex; }
 }
 
 /* Свечение тарелок - треугольники с градиентом */
@@ -527,30 +648,7 @@ footer {
   }
 }
 
-/* Иконки курсов под тарелками */
-.course-icons-left {
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translateX(-50%);
-  z-index: 1;
-  display: flex;
-  gap: 1rem;
-  opacity: 0;
-  animation: showCourseIconsLeft 8s ease-in-out 3.5s forwards;
-}
-
-.course-icons-right {
-  position: absolute;
-  top: 50%;
-  left: 80%;
-  transform: translateX(-50%);
-  z-index: 1;
-  display: flex;
-  gap: 1rem;
-  opacity: 0;
-  animation: showCourseIconsRight 8s ease-in-out 3.5s forwards;
-}
+/* Отключены декоративные иконки и их анимации */
 
 .course-icon {
   width: 45px;
@@ -702,20 +800,14 @@ footer {
   100% { opacity: 1; transform: translateY(calc(100vh - 200px)); }
 }
 
-/* Скрываем НЛО на мобильных устройствах */
 @media (max-width: 768px) {
-  .ufo-hero,
-  .ufo-hero-2,
-  .course-icons-left,
-  .course-icons-right {
-    display: none;
-  }
+  .gradient-bg { min-height: 360px; }
 }
 
 /* Media queries */
 @media (max-width: 640px) {
   .gradient-bg {
-    height: 350px;
+    min-height: 350px;
   }
   
   .stats-container {
@@ -748,5 +840,14 @@ footer {
     padding: 0.75rem 1rem;
   }
 } 
+
+/* Смещение контента hero чуть ниже на планшетах/десктопах без изменения высоты блока */
+@media (min-width: 768px) {
+  .gradient-bg .text-center { padding-top: 28px; }
+}
+
+@media (min-width: 1024px) {
+  .gradient-bg .text-center { padding-top: 40px; }
+}
 
  

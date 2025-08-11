@@ -12,6 +12,7 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <!-- Секция Python курса -->
     <url>
         <loc>https://skl-academy.ru/courses/python/01-python-basics.html</loc>
         <lastmod>2025-01-27</lastmod>
@@ -60,4 +61,5 @@
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
+    <!-- Прочие курсы пока закрыты 404, в карту не добавляем -->
 </urlset> 
