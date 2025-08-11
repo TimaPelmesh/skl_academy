@@ -62,4 +62,11 @@
         <priority>0.9</priority>
     </url>
     <!-- Прочие курсы пока закрыты 404, в карту не добавляем -->
+  <!-- Тест скорости печати -->
+  <url>
+      <loc>https://skl-academy.ru/typing-test/</loc>
+      <lastmod>2025-08-11</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+  </url>
 </urlset> 
