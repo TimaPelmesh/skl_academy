@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тест скорости печати — онлайн проверка WPM и точности | SKL Academy</title>
+  <meta name="description" content="Онлайн тест скорости печати на русском языке: проверьте скорость (WPM) и точность, тренируйтесь с текстами разной сложности. Бесплатно и без регистрации." />
+  <meta name="keywords" content="тест скорости печати, печать на русском, wpm, проверка печати, тренажер печати, скорость набора текста" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://skl-academy.ru/typing-test/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Тест скорости печати — онлайн проверка WPM и точности | SKL Academy" />
+  <meta property="og:description" content="Проверьте скорость печати (WPM) и точность на русском. Режим по времени или по тексту, уровни сложности, мгновенная статистика." />
+  <meta property="og:url" content="https://skl-academy.ru/typing-test/" />
+  <meta property="og:image" content="https://skl-academy.ru/images/icon.ico" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Тест скорости печати — онлайн проверка WPM и точности | SKL Academy" />
+  <meta name="twitter:description" content="Онлайн тест скорости печати на русском языке. Выберите сложность и улучшайте навыки печати." />
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Тест скорости печати",
+    "url": "https://skl-academy.ru/typing-test/",
+    "inLanguage": "ru-RU",
+    "description": "Онлайн тест скорости печати на русском языке с уровнями сложности и мгновенной статистикой.",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Тест скорости печати", "item": "https://skl-academy.ru/typing-test/"}
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+        <div class="header-row">
+          <div class="header-left">
+            <img src="../images/icon.ico" alt="SKL Academy" class="header-logo" />
+            <h1 class="title">Тест скорости печати</h1>
+          </div>
+          <div class="header-actions">
+            <button id="themeToggle" class="theme-toggle" title="Сменить тему" aria-label="Сменить тему" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3a1 1 0 01.993.883L13 4v2a1 1 0 01-1.993.117L11 6V4a1 1 0 011-1zm6.364 2.05a1 1 0 011.32 1.497l-1.414 1.414a1 1 0 01-1.497-1.32l1.414-1.414zM12 17a5 5 0 100-10 5 5 0 000 10zM4 11a1 1 0 01.117 1.993L4 13H2a1 1 0 01-.117-1.993L2 11h2zm18 0a1 1 0 01.117 1.993L22 13h-2a1 1 0 01-.117-1.993L20 11h2zM6.05 5.05a1 1 0 011.32 0l1.415 1.414a1 1 0 01-1.32 1.497L6.05 6.546a1 1 0 010-1.497zM12 18a1 1 0 01.993.883L13 19v2a1 1 0 01-1.993.117L11 21v-2a1 1 0 011-1zm6.95-3.95a1 1 0 011.32 1.497l-1.415 1.414a1 1 0 01-1.497-1.32l1.592-1.591zM6.343 16.95a1 1 0 011.32 1.497l-1.414 1.414a1 1 0 01-1.497-1.32l1.591-1.591z"/></svg>
+            </button>
+            <a href="../index.html" class="home-btn" title="На главную" aria-label="На главную">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z"/></svg>
+            </a>
+          </div>
+      </div>
+    </header>
+
+    <section class="controls">
+      <!-- Режим по времени — единственный режим -->
+
+      <div class="control-group time-group" data-visible="true">
+        <div class="control-label">Время</div>
+        <div class="segmented" role="tablist" aria-label="Длительность">
+          <button class="segmented-btn" data-time="15">15с</button>
+          <button class="segmented-btn" data-time="30">30с</button>
+          <button class="segmented-btn is-active" data-time="60">60с</button>
+          <button class="segmented-btn" data-time="120">120с</button>
+          <button class="segmented-btn" data-time="none">Нет</button>
+        </div>
+      </div>
+
+      <div class="control-group difficulty-group">
+        <div class="control-label">Сложность</div>
+        <div class="segmented" role="tablist" aria-label="Сложность текста">
+          <button class="segmented-btn" data-difficulty="easy">Легко</button>
+          <button class="segmented-btn is-active" data-difficulty="medium">Средне</button>
+          <button class="segmented-btn" data-difficulty="hard">Сложно</button>
+        </div>
+      </div>
+
+      <!-- Раздел выбора текста удалён -->
+
+      <div class="control-group actions-group">
+        <div style="display:flex; gap:8px; justify-content:flex-end; align-items:center;">
+          <button id="restartBtn" class="btn btn-secondary" title="Новый текст (Ctrl+R)">Новый текст</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-label">Скорость</div>
+        <div class="stat-value"><span id="wpm">0</span><span class="stat-suffix"> WPM</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Точность</div>
+        <div class="stat-value"><span id="accuracy">100</span><span class="stat-suffix">%</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Ошибки</div>
+        <div class="stat-value"><span id="errors">0</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Время</div>
+        <div class="stat-value"><span id="timer">60</span><span class="stat-suffix">с</span></div>
+      </div>
+    </section>
+
+    <main class="test">
+      <div class="text-wrapper" id="textWrapper" aria-live="polite">
+        <div id="text" class="text" aria-label="Текст для набора"></div>
+      </div>
+
+      <input id="hiddenInput" class="hidden-input" autocomplete="off" autocapitalize="none" spellcheck="false" />
+    </main>
+
+    <section class="footer-actions">
+      <div class="hint">Кликните по тексту и начните печатать — отсчёт начнётся автоматически. Backspace — исправление.</div>
+    </section>
+
+    <div id="resultModal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+        <div class="modal-header">
+          <h3 id="resultTitle">Результаты</h3>
+          <button id="closeResult" class="modal-close" aria-label="Закрыть">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="result-grid">
+            <div class="result-card">
+              <div class="result-label">Максимальная</div>
+              <div class="result-value" id="resWpm">0 WPM</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Точность</div>
+              <div class="result-value" id="resAccuracy">0%</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Ошибки</div>
+              <div class="result-value" id="resErrors">0</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Средняя</div>
+              <div class="result-value" id="resAverage">0 WPM</div>
+            </div>
+          </div>
+          <div class="chart-section">
+            <div class="chart-title">График разгона (WPM по времени)</div>
+            <canvas id="wpmChart" height="220"></canvas>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="copyResult" class="btn btn-secondary">Скопировать</button>
+          <button id="restartFromModal" class="btn">Ещё раз</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
