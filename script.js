@@ -31,11 +31,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', function() {
-  const scrolled = window.scrollY;
-  const hero = document.querySelector('.gradient-bg');
-  if (hero) {
-    hero.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
-  }
-}); 
+// Parallax effect for hero section removed to keep hero static
