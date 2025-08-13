@@ -9,6 +9,20 @@ h1, h2, h3, h4, h5 {
   font-weight: 600;
 }
 
+/* Readable default color for h4 on light backgrounds */
+h4 {
+  color: #111827; /* near-black for good contrast */
+}
+
+/* Overrides for dark sections */
+.gradient-bg h4 {
+  color: #ffffff;
+}
+
+footer .footer-column h4 {
+  color: #ffffff;
+}
+
 /* Hero section */
 .hero-title {
   letter-spacing: -0.03em;

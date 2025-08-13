@@ -137,7 +137,7 @@
           <feBlend in="SourceGraphic" in2="goo" />
         </filter>
       </defs>
-    </svg>
+      </svg>
     <div class="gradients-container">
       <div class="g1"></div>
       <div class="g2"></div>
@@ -145,7 +145,7 @@
       <div class="g4"></div>
       <div class="g5"></div>
     </div>
-
+    
     <!-- Декоративные иконки курсов по бокам (только на десктопе) -->
     <div class="hero-icons-left" aria-hidden="true">
       <div class="hero-icon hero-icon-s">
@@ -187,7 +187,7 @@
            <!-- Улучшенные блоки статистики -->
            <div class="stats-container mt-4">
              <div class="stat-block">
-               <div class="stat-number">7</div>
+               <div class="stat-number">8</div>
                <div class="stat-label">Курсов</div>
              </div>
              <div class="stat-block">
@@ -223,7 +223,7 @@
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Компьютерные сети</h3>
               <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">В разработке</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
               </div>
             </div>
           </div>
@@ -255,7 +255,7 @@
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
             </button>
-            <a href="404.html" class="course-button">
+            <a href="courses/networks/01-networks-fundamental.html" class="course-button">
               Перейти
               <i class="fas fa-arrow-right ml-2"></i>
             </a>
@@ -513,7 +513,57 @@
         </div>
       </div>
 
-      <!-- Course 7 - Скоростная печать -->
+      <!-- Course 7 - Unity -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-gamepad text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Unity</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Создавайте 2D и 3D игры с помощью Unity - одного из самых популярных игровых движков.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Основы Unity и интерфейс редактора</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Программирование на C# для Unity</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Физика, анимация и UI системы</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-4 flex space-x-4">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-unity">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="404.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 8 - Скоростная печать -->
       <div class="course-card">
         <div class="p-6">
           <div class="flex items-center">
@@ -528,7 +578,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <p class="text-gray-600">Развивайте навык быстрой печати на клавиатуре с нашим интерактивным тренажером.</p>
+            <p class="text-gray-600">Развивайте навык быстрой печати с интерактивным тренажером.</p>
             <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
@@ -725,7 +775,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="404.html" class="course-button">
+        <a href="courses/networks/01-network-basics.html" class="course-button">
           Перейти к курсу
           <i class="fas fa-arrow-right ml-2"></i>
         </a>
@@ -1298,6 +1348,141 @@
             <li>DevOps и SRE инженеры</li>
             <li>Специалисты по информационной безопасности</li>
             <li>IT-энтузиасты, желающие глубже понять работу систем</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="404.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Unity" -->
+  <div class="modal" id="modal-unity">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-gamepad text-purple-600 mr-3"></i>Unity</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
+          <p class="text-gray-600">Курс Unity научит вас создавать 2D и 3D игры с помощью одного из самых популярных игровых движков в мире. Вы освоите не только основы Unity, но и программирование на C# для создания интерактивных игровых механик.</p>
+        </div>
+        
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
+          <div class="space-y-4">
+            <div>
+              <h5 class="font-medium text-gray-900">1. Введение в Unity</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>Установка Unity Hub и Unity Editor</li>
+                <li>Интерфейс Unity и основные окна</li>
+                <li>Создание первого проекта</li>
+                <li>Настройка проекта и сцены</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-medium text-gray-900">2. Основы работы с Unity</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>GameObjects и компоненты</li>
+                <li>Трансформации и иерархия объектов</li>
+                <li>Работа с префабами</li>
+                <li>Создание и управление сценами</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-medium text-gray-900">3. Программирование на C# в Unity</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>Основы C# для Unity</li>
+                <li>MonoBehaviour и жизненный цикл скриптов</li>
+                <li>Переменные и методы в Unity</li>
+                <li>Работа с компонентами через код</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-medium text-gray-900">4. Физика и коллизии</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>Rigidbody и физика объектов</li>
+                <li>Colliders и система коллизий</li>
+                <li>Триггеры и обработка столкновений</li>
+                <li>Физические материалы и настройки</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-medium text-gray-900">5. Анимация и визуальные эффекты</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>Animation Controller и Animator</li>
+                <li>Создание анимаций персонажей</li>
+                <li>Particle System для эффектов</li>
+                <li>Post-processing и визуальные улучшения</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-medium text-gray-900">6. Пользовательский интерфейс</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>Canvas и UI элементы</li>
+                <li>Создание меню и HUD</li>
+                <li>UI события и взаимодействие</li>
+                <li>Адаптивный UI для разных разрешений</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-medium text-gray-900">7. Звук и аудио</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>Audio Source и Audio Listener</li>
+                <li>Работа со звуковыми файлами</li>
+                <li>3D звук и пространственное аудио</li>
+                <li>Аудио миксинг и эффекты</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-medium text-gray-900">8. Оптимизация и публикация</h5>
+              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                <li>Профилирование производительности</li>
+                <li>Оптимизация графики и кода</li>
+                <li>Настройки сборки для разных платформ</li>
+                <li>Публикация игры</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i class="fas fa-gamepad"></i> Практические проекты</h4>
+          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+            <li>Создание простой 2D платформер</li>
+            <li>Разработка 3D шутера от первого лица</li>
+            <li>Создание интерактивной сцены с физикой</li>
+            <li>Разработка мобильной игры</li>
+            <li>Создание полноценного игрового меню</li>
+          </ul>
+        </div>
+        
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i class="fas fa-tools"></i> Технологии и инструменты</h4>
+          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+            <li><strong>Unity Editor</strong> - Основной инструмент разработки</li>
+            <li><strong>C#</strong> - Язык программирования для Unity</li>
+            <li><strong>Unity Asset Store</strong> - Библиотека готовых ресурсов</li>
+            <li><strong>Unity Analytics</strong> - Аналитика игр</li>
+            <li><strong>Unity Cloud Build</strong> - Облачная сборка проектов</li>
+            <li><strong>Unity Collaborate</strong> - Совместная работа над проектами</li>
+          </ul>
+        </div>
+        
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
+          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+            <li>Начинающие разработчики игр</li>
+            <li>Программисты, желающие освоить геймдев</li>
+            <li>Художники и дизайнеры, изучающие техническую сторону</li>
+            <li>Студенты, интересующиеся игровой индустрией</li>
+            <li>Энтузиасты, желающие создать свою первую игру</li>
           </ul>
         </div>
       </div>
