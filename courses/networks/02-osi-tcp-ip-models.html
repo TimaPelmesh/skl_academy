@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Модели OSI и TCP/IP - изучите сетевые модели, их уровни и принципы работы">
+    <meta name="keywords" content="модель OSI, модель TCP/IP, сетевые уровни, инкапсуляция данных, сетевые протоколы">
+    <title>Модели OSI и TCP/IP — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/02-osi-tcp-ip-models.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Networks course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Сетевые технологии",
+          "item": "https://skl-academy.ru/courses/networks/01-networks-fundamental.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Модели OSI и TCP/IP",
+          "item": "https://skl-academy.ru/courses/networks/02-osi-tcp-ip-models.html"
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Модели OSI и TCP/IP</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn active">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#osi-model" class="subtopic active">2.1 Модель OSI</a>
+                        <a href="#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. IP-адресация</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">3.1 IPv4 адресация</a>
+                        <a href="#" class="subtopic">3.2 Подсети и маски</a>
+                        <a href="#" class="subtopic">3.3 IPv6 адресация</a>
+                        <a href="#" class="subtopic">3.4 DNS и DHCP</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Протоколы и технологии</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">4.1 Протоколы TCP и UDP</a>
+                        <a href="#" class="subtopic">4.2 Протоколы маршрутизации</a>
+                        <a href="#" class="subtopic">4.3 Ethernet и Wi-Fi</a>
+                        <a href="#" class="subtopic">4.4 VPN и безопасность</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">5.1 Основы сетевой безопасности</a>
+                        <a href="#" class="subtopic">5.2 Брандмауэры и IDS/IPS</a>
+                        <a href="#" class="subtopic">5.3 Шифрование и SSL/TLS</a>
+                        <a href="#" class="subtopic">5.4 Атаки и защита</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Облачные технологии</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">6.1 Основы облачных вычислений</a>
+                        <a href="#" class="subtopic">6.2 Модели обслуживания</a>
+                        <a href="#" class="subtopic">6.3 Виртуализация</a>
+                        <a href="#" class="subtopic">6.4 Контейнеризация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <div id="content" class="content sidebar-active">
+            <!-- Секция 2.1: Модель OSI -->
+            <section id="osi-model" class="topic-section">
+                <h2>2.1 Модель OSI</h2>
+                <div class="lesson-content">
+                    <h3>Что такое модель OSI?</h3>
+                    <p>Модель OSI (Open Systems Interconnection) — это концептуальная модель, которая стандартизирует и описывает функции системы связи путем разделения на семь абстрактных уровней. Каждый уровень обслуживает уровень выше себя и обслуживается уровнем ниже себя.</p>
+                    
+                    <div class="note">
+                        <p><strong>Историческая справка:</strong> Модель OSI была разработана Международной организацией по стандартизации (ISO) в 1984 году для стандартизации сетевых протоколов и обеспечения совместимости различных систем связи.</p>
+                    </div>
+                    
+                    <h3>Семь уровней модели OSI</h3>
+                    
+                    <div class="visual-guide">
+                        <h4>Уровни модели OSI (сверху вниз):</h4>
+                        <ul>
+                            <li><strong>7. Прикладной уровень (Application Layer)</strong> — обеспечивает интерфейс между сетевыми службами и приложениями. Протоколы: HTTP, SMTP, FTP, DNS.</li>
+                            <li><strong>6. Уровень представления (Presentation Layer)</strong> — отвечает за преобразование данных между форматами приложения и сети, включая шифрование и сжатие. Протоколы: SSL/TLS, JPEG, MPEG.</li>
+                            <li><strong>5. Сеансовый уровень (Session Layer)</strong> — управляет сеансами связи между приложениями, устанавливает, поддерживает и завершает соединения. Протоколы: NetBIOS, RPC.</li>
+                            <li><strong>4. Транспортный уровень (Transport Layer)</strong> — обеспечивает надежную передачу данных между конечными системами, контроль потока и исправление ошибок. Протоколы: TCP, UDP.</li>
+                            <li><strong>3. Сетевой уровень (Network Layer)</strong> — отвечает за маршрутизацию пакетов между сетями, логическую адресацию и определение маршрутов. Протоколы: IP, ICMP, OSPF.</li>
+                            <li><strong>2. Канальный уровень (Data Link Layer)</strong> — обеспечивает передачу данных между соседними узлами сети, обнаружение и исправление ошибок на физическом уровне. Протоколы: Ethernet, PPP, Wi-Fi.</li>
+                            <li><strong>1. Физический уровень (Physical Layer)</strong> — определяет электрические, механические, процедурные и функциональные спецификации для активации и поддержания физического соединения. Стандарты: RS-232, Ethernet (физические аспекты).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Секция 2.2: Модель TCP/IP -->
+            <section id="tcp-ip-model" class="topic-section">
+                <h2>2.2 Модель TCP/IP</h2>
+                <div class="lesson-content">
+                    <h3>Концепция модели TCP/IP</h3>
+                    <p>Модель TCP/IP — практическая модель взаимодействия сетевых протоколов, лежащая в основе Интернета. Она проще OSI и включает четыре уровня: прикладной, транспортный, интернет и сетевой доступ.</p>
+
+                    <div class="visual-guide">
+                        <h4>Уровни модели TCP/IP:</h4>
+                        <ul>
+                            <li><strong>Прикладной уровень</strong> — протоколы пользовательских приложений: HTTP, HTTPS, SMTP, FTP, DNS, DHCP.</li>
+                            <li><strong>Транспортный уровень</strong> — надежная и ненадежная доставка данных: TCP (с установлением соединения) и UDP (без установления).</li>
+                            <li><strong>Интернет-уровень</strong> — адресация и маршрутизация: IP, ICMP, ARP, NDP (в IPv6).</li>
+                            <li><strong>Уровень сетевого доступа</strong> — физическая передача кадров: Ethernet, Wi‑Fi, PPP, VLAN.</li>
+                        </ul>
+                    </div>
+
+                    <h3>TCP против UDP</h3>
+                    <ul>
+                        <li><strong>TCP</strong>: надежная доставка, контроль потока, подтверждения, повторная передача, упорядочивание сегментов. Подходит для веба, e‑mail, файлов.</li>
+                        <li><strong>UDP</strong>: минимальные накладные расходы, без подтверждений, возможны потери. Подходит для стриминга, VoIP, онлайн‑игр.</li>
+                    </ul>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Диагностика сетевых протоколов
+# Windows
+ping 8.8.8.8            # Проверка доступности узла (ICMP)
+tracert 1.1.1.1         # Трассировка маршрута
+netstat -ano            # Активные соединения и порты
+
+# Linux / macOS
+ping -c 4 8.8.8.8
+traceroute 1.1.1.1
+ss -tulpn               # Просмотр сокетов TCP/UDP</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Секция 2.3: Сравнение моделей -->
+            <section id="models-comparison" class="topic-section">
+                <h2>2.3 Сравнение моделей</h2>
+                <div class="lesson-content">
+                    <h3>Соответствие уровней OSI и TCP/IP</h3>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr>
+                                <th>OSI</th>
+                                <th>TCP/IP</th>
+                                <th>Примеры протоколов</th>
+                            </tr>
+                            <tr>
+                                <td>7. Прикладной</td>
+                                <td rowspan="3">Прикладной</td>
+                                <td>HTTP, HTTPS, FTP, SMTP, DNS, DHCP</td>
+                            </tr>
+                            <tr>
+                                <td>6. Представления</td>
+                                <td>TLS/SSL, JPEG, MPEG</td>
+                            </tr>
+                            <tr>
+                                <td>5. Сеансовый</td>
+                                <td>RPC, NetBIOS</td>
+                            </tr>
+                            <tr>
+                                <td>4. Транспортный</td>
+                                <td>Транспортный</td>
+                                <td>TCP, UDP</td>
+                            </tr>
+                            <tr>
+                                <td>3. Сетевой</td>
+                                <td>Интернет‑уровень</td>
+                                <td>IP, ICMP, OSPF, BGP</td>
+                            </tr>
+                            <tr>
+                                <td>2. Канальный</td>
+                                <td rowspan="2">Сетевой доступ</td>
+                                <td>Ethernet, PPP, 802.11 (Wi‑Fi), VLAN (802.1Q)</td>
+                            </tr>
+                            <tr>
+                                <td>1. Физический</td>
+                                <td>UTP, оптоволокно, радиоканал</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Итог:</strong> OSI — учебная и подробная модель для понимания процессов; TCP/IP — практическая модель, используемая в реальных сетях.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Секция 2.4: Инкапсуляция данных -->
+            <section id="data-encapsulation" class="topic-section">
+                <h2>2.4 Инкапсуляция данных</h2>
+                <div class="lesson-content">
+                    <h3>Принцип инкапсуляции/деинкапсуляции</h3>
+                    <p>При передаче сообщение проходит уровни стека. Каждый уровень добавляет свою служебную информацию: заголовки (а на канальном уровне — заголовок и трейлер). На принимающей стороне заголовки снимаются в обратном порядке.</p>
+
+                    <div class="visual-guide">
+                        <h4>Слои и единицы данных:</h4>
+                        <ul>
+                            <li>Прикладной: данные</li>
+                            <li>Транспортный: сегменты/датаграммы</li>
+                            <li>Интернет/Сетевой: пакеты</li>
+                            <li>Канальный: кадры</li>
+                            <li>Физический: биты</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Практика анализа инкапсуляции (Wireshark / tcpdump)
+tcpdump -i eth0 -nn tcp port 80   # Перехват TCP‑трафика HTTP
+tcpdump -i wlan0 -vv icmp         # Подробно ICMP
+
+# В Windows (PowerShell)
+Get-NetTCPConnection | Select-Object LocalAddress,LocalPort,RemoteAddress,RemotePort,State</code></pre>
+                    </div>
+
+                    <div class="conclusion" style="text-align: center;">
+                        <h3>Отлично!</h3>
+                        <p>Вы освоили модели OSI и TCP/IP и понимаете, как данные проходят по уровням. Переходим к IP‑адресации.</p>
+                        <div class="next-module" style="margin-top: 20px;">
+                            <a href="01-networks-fundamental.html#network-components" style="display:inline-block;margin:6px 10px;padding:12px 20px;border-radius:8px;background:#30363d;color:#fff;text-decoration:none;font-weight:600;">← Назад к модулю 1</a>
+                            <a href="#osi-model" style="display:inline-block;margin:6px 10px;padding:12px 20px;border-radius:8px;background:#2188ff;color:#fff;text-decoration:none;font-weight:600;">К началу модуля 2 ↑</a>
+                            <a href="#" title="Скоро" style="opacity:0.7;cursor:not-allowed;display:inline-block;margin:6px 10px;padding:12px 20px;border-radius:8px;background:linear-gradient(90deg,#2188ff,#804eda);color:#fff;text-decoration:none;font-weight:600;">К модулю 3: IP‑адресация →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
