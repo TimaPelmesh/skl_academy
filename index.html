@@ -618,6 +618,13 @@
   <!-- Typing Test Section -->
   <div id="typing-test" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="typing-test rounded-2xl">
+      <!-- Размытые градиентные пятна справа -->
+      <div class="tt-gradients-container" aria-hidden="true">
+        <div class="tt-g1"></div>
+        <div class="tt-g2"></div>
+        <div class="tt-g3"></div>
+        <div class="tt-g4"></div>
+      </div>
       <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
           <div class="mb-8 lg:mb-0">
@@ -653,12 +660,19 @@
             </div>
           </div>
           <div class="relative">
-            <div class="max-w-md mx-auto bg-gray-900/60 backdrop-blur-sm rounded-2xl p-8">
+            <div class="max-w-md mx-auto bg-gray-900/60 backdrop-blur-sm rounded-2xl p-8 metrics-card">
               <div class="flex justify-center">
                 <div class="relative w-48 h-48">
                   <svg class="w-full h-full" viewBox="0 0 100 100">
-                    <circle class="text-gray-600" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
-                    <circle class="progress-ring text-green-400" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                    <defs>
+                      <linearGradient id="ringGradient" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#6366f1" />
+                        <stop offset="50%" stop-color="#8b5cf6" />
+                        <stop offset="100%" stop-color="#22c55e" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="text-gray-700/60" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                    <circle class="progress-ring progress-ring-glow" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round" stroke="url(#ringGradient)" fill="transparent" r="40" cx="50" cy="50" />
                   </svg>
                   <div class="absolute inset-0 flex flex-col items-center justify-center">
                     <span class="text-4xl font-bold text-white">75</span>

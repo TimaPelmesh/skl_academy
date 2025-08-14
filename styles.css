@@ -213,12 +213,94 @@ footer .footer-column h4 {
 
 /* Typing test section */
 .typing-test {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
-  background-size: cover;
-  background-position: center;
+  /* фон как в hero: фирменный градиент без фонового изображения */
+  background: linear-gradient(40deg, var(--hero-color-bg1), var(--hero-color-bg2));
   border-radius: 16px;
   padding-top: 40px;
   padding-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Размытые градиенты внутри typing-test, с акцентом справа */
+.tt-gradients-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: blur(48px);
+  pointer-events: none;
+}
+
+.tt-g1,
+.tt-g2,
+.tt-g3,
+.tt-g4 {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.85;
+  mix-blend-mode: screen;
+}
+
+/* крупное пятно справа вверху */
+.tt-g1 {
+  right: -12%;
+  top: -8%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at 30% 30%, rgba(var(--hero-color1), 0.75), rgba(var(--hero-color1), 0) 60%);
+}
+
+/* среднее пятно справа по центру */
+.tt-g2 {
+  right: -6%;
+  top: 30%;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle at 60% 40%, rgba(var(--hero-color2), 0.65), rgba(var(--hero-color2), 0) 58%);
+}
+
+/* маленькое акцентное пятно справа снизу */
+.tt-g3 {
+  right: 4%;
+  bottom: -8%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle at 50% 50%, rgba(var(--hero-color3), 0.7), rgba(var(--hero-color3), 0) 55%);
+}
+
+/* тёплый рефлекс ближе к центру */
+.tt-g4 {
+  right: 26%;
+  top: 18%;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle at 40% 60%, rgba(var(--hero-color4), 0.45), rgba(var(--hero-color4), 0) 58%);
+}
+
+/* Метрика/карточка справа — лёгкая подсветка и градиентная рамка */
+.metrics-card {
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+
+.metrics-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.65), rgba(139,92,246,0.5), rgba(34,197,94,0.45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Свечение прогресс-ринга */
+.progress-ring-glow {
+  filter: drop-shadow(0 0 6px rgba(99,102,241,0.45)) drop-shadow(0 0 14px rgba(34,197,94,0.25));
 }
 
 .progress-ring {
