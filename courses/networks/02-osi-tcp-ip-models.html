@@ -39,94 +39,7 @@
     }
     </script>
     
-    <style>
-        /* Дополнительные стили для улучшения адаптивности */
-        @media (max-width: 768px) {
-            .code-example pre {
-                font-size: 0.85rem;
-            }
-            
-            .sidebar {
-                width: 250px;
-            }
-            
-            .content.sidebar-active {
-                margin-left: 0;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .code-example pre {
-                font-size: 0.8rem;
-            }
-            
-            .topic-section h2 {
-                font-size: 1.5rem;
-            }
-            
-            .topic-section h3 {
-                font-size: 1.3rem;
-            }
-            
-            .topic-section h4 {
-                font-size: 1.1rem;
-            }
-            
-            ol, ul {
-                padding-left: 20px;
-            }
-        }
-        
-        /* Улучшение читаемости контента */
-        .topic-section {
-            max-width: 900px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-        }
-        
-        .module-intro {
-            max-width: 900px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-        }
-        
-        .code-example {
-            border-radius: 8px;
-            margin: 15px 0;
-            max-width: 100%;
-            overflow-x: auto;
-        }
-        
-        /* Улучшение отступов для лучшей читаемости */
-        p, ul, ol {
-            margin-bottom: 1rem;
-        }
-        
-        /* Добавляем отступы для списков */
-        ol, ul {
-            padding-left: 30px;
-        }
-        
-        h2, h3, h4 {
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Исправление для мобильной версии - меню должно быть скрыто */
-        @media (max-width: 991px) {
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            
-            .content {
-                margin-left: 0;
-            }
-        }
-    </style>
+    
 </head>
 <body>
     <!-- Шапка сайта -->
@@ -136,7 +49,7 @@
             <span></span>
             <span></span>
         </div>
-        <h1 class="header-title">Модели OSI и TCP/IP</h1>
+        <h1 class="header-title">OSI и TCP/IP</h1>
         <div class="header-buttons">
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -163,7 +76,7 @@
                 
                 <!-- Модуль 2 -->
                 <div class="topic">
-                    <button class="topic-btn active">2. Модели OSI и TCP/IP</button>
+                    <button class="topic-btn active">2. OSI и TCP/IP</button>
                     <div class="subtopics" style="max-height: 1000px;">
                         <a href="#osi-model" class="subtopic active">2.1 Модель OSI</a>
                         <a href="#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
@@ -174,45 +87,90 @@
                 
                 <!-- Модуль 3 -->
                 <div class="topic">
-                    <button class="topic-btn">3. IP-адресация</button>
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
                     <div class="subtopics">
-                        <a href="#" class="subtopic">3.1 IPv4 адресация</a>
-                        <a href="#" class="subtopic">3.2 Подсети и маски</a>
-                        <a href="#" class="subtopic">3.3 IPv6 адресация</a>
-                        <a href="#" class="subtopic">3.4 DNS и DHCP</a>
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
                     </div>
                 </div>
-                
+
                 <!-- Модуль 4 -->
                 <div class="topic">
-                    <button class="topic-btn">4. Протоколы и технологии</button>
+                    <button class="topic-btn">4. IP‑адресация</button>
                     <div class="subtopics">
-                        <a href="#" class="subtopic">4.1 Протоколы TCP и UDP</a>
-                        <a href="#" class="subtopic">4.2 Протоколы маршрутизации</a>
-                        <a href="#" class="subtopic">4.3 Ethernet и Wi-Fi</a>
-                        <a href="#" class="subtopic">4.4 VPN и безопасность</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
                     </div>
                 </div>
-                
+
                 <!-- Модуль 5 -->
                 <div class="topic">
-                    <button class="topic-btn">5. Сетевая безопасность</button>
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
                     <div class="subtopics">
-                        <a href="#" class="subtopic">5.1 Основы сетевой безопасности</a>
-                        <a href="#" class="subtopic">5.2 Брандмауэры и IDS/IPS</a>
-                        <a href="#" class="subtopic">5.3 Шифрование и SSL/TLS</a>
-                        <a href="#" class="subtopic">5.4 Атаки и защита</a>
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
                     </div>
                 </div>
-                
+
                 <!-- Модуль 6 -->
                 <div class="topic">
-                    <button class="topic-btn">6. Облачные технологии</button>
+                    <button class="topic-btn">6. Транспортный уровень</button>
                     <div class="subtopics">
-                        <a href="#" class="subtopic">6.1 Основы облачных вычислений</a>
-                        <a href="#" class="subtopic">6.2 Модели обслуживания</a>
-                        <a href="#" class="subtopic">6.3 Виртуализация</a>
-                        <a href="#" class="subtopic">6.4 Контейнеризация</a>
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
                     </div>
                 </div>
             </div>
@@ -260,8 +218,8 @@
                         <ul>
                             <li><strong>Прикладной уровень</strong> — протоколы пользовательских приложений: HTTP, HTTPS, SMTP, FTP, DNS, DHCP.</li>
                             <li><strong>Транспортный уровень</strong> — надежная и ненадежная доставка данных: TCP (с установлением соединения) и UDP (без установления).</li>
-                            <li><strong>Интернет-уровень</strong> — адресация и маршрутизация: IP, ICMP, ARP, NDP (в IPv6).</li>
-                            <li><strong>Уровень сетевого доступа</strong> — физическая передача кадров: Ethernet, Wi‑Fi, PPP, VLAN.</li>
+                            <li><strong>Интернет-уровень</strong> — адресация и маршрутизация: IP, ICMP, NDP (в IPv6).</li>
+                            <li><strong>Уровень сетевого доступа</strong> — физическая передача кадров и локальные протоколы: Ethernet, Wi‑Fi, PPP, VLAN, ARP.</li>
                         </ul>
                     </div>
 
@@ -366,14 +324,9 @@ tcpdump -i wlan0 -vv icmp         # Подробно ICMP
 Get-NetTCPConnection | Select-Object LocalAddress,LocalPort,RemoteAddress,RemotePort,State</code></pre>
                     </div>
 
-                    <div class="conclusion" style="text-align: center;">
-                        <h3>Отлично!</h3>
-                        <p>Вы освоили модели OSI и TCP/IP и понимаете, как данные проходят по уровням. Переходим к IP‑адресации.</p>
-                        <div class="next-module" style="margin-top: 20px;">
-                            <a href="01-networks-fundamental.html#network-components" style="display:inline-block;margin:6px 10px;padding:12px 20px;border-radius:8px;background:#30363d;color:#fff;text-decoration:none;font-weight:600;">← Назад к модулю 1</a>
-                            <a href="#osi-model" style="display:inline-block;margin:6px 10px;padding:12px 20px;border-radius:8px;background:#2188ff;color:#fff;text-decoration:none;font-weight:600;">К началу модуля 2 ↑</a>
-                            <a href="#" title="Скоро" style="opacity:0.7;cursor:not-allowed;display:inline-block;margin:6px 10px;padding:12px 20px;border-radius:8px;background:linear-gradient(90deg,#2188ff,#804eda);color:#fff;text-decoration:none;font-weight:600;">К модулю 3: IP‑адресация →</a>
-                        </div>
+                    <div class="conclusion">
+                        <h3>Поздравляем!</h3>
+                        <p>Теперь вы умеете сопоставлять уровни OSI и TCP/IP и объяснять, как данные инкапсулируются и проходят по стеку протоколов.</p>
                     </div>
                 </div>
             </section>
@@ -382,6 +335,7 @@ Get-NetTCPConnection | Select-Object LocalAddress,LocalPort,RemoteAddress,Remote
 
     <!-- Подключение скриптов -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

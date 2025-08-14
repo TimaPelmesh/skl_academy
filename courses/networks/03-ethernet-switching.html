@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Коммутация и Ethernet: кадры, MAC/ARP, VLAN/802.1Q, STP/RSTP, LACP и безопасность портов">
+    <meta name="keywords" content="Ethernet, MAC, ARP, VLAN, 802.1Q, STP, RSTP, LACP, port security">
+    <title>Коммутация и Ethernet — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/03-ethernet-switching.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Коммутация и Ethernet</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4В5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">3. Коммутация и Ethernet</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#ethernet" class="subtopic active">3.1 Ethernet и MAC/ARP</a>
+                        <a href="#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="#wifi" class="subtopic">3.4 Беспроводные сети 802.11</a>
+                        <a href="#lacp-security" class="subtopic">3.5 LACP и безопасность портов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section id="ethernet" class="topic-section">
+                <h2>3.1 Ethernet и MAC/ARP</h2>
+                <div class="lesson-content">
+                    <p>Ethernet определяет формат кадра (Dst MAC, Src MAC, EtherType/Length, Payload, FCS). Коммутаторы принимают решения на основе MAC‑адресов и таблицы коммутации. ARP сопоставляет IP‑адрес устройству на канальном уровне.</p>
+                    <div class="code-example">
+<pre><code class="bash"># Просмотр ARP‑кэша
+# Windows
+arp -a
+# Linux/macOS
+ip neigh
+</code></pre>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Формат кадра IEEE 802.3/802.1Q</h4>
+                        <ul>
+                            <li><strong>Destination MAC (6 байт)</strong> → <strong>Source MAC (6 байт)</strong></li>
+                            <li><strong>802.1Q Tag (4 байта, опционально)</strong>: TPID 0x8100, поля <em>PCP</em> (приоритет, QoS), <em>DEI</em> (индикатор перегрузки), <em>VID</em> (VLAN ID)</li>
+                            <li><strong>EtherType/Length (2 байта)</strong>: тип полезных данных (напр., 0x0800 — IPv4, 0x86DD — IPv6)</li>
+                            <li><strong>Payload</strong> (46–1500 байт без тега / до 1500 с тегом)</li>
+                            <li><strong>FCS</strong> (CRC32, 4 байта)</li>
+                        </ul>
+                    </div>
+                    <div class="note">
+                        <p><strong>Коммутация кадров:</strong> коммутаторы обучаются MAC‑адресам, записывая &laquo;MAC → порт&raquo; в CAM‑таблицу (с таймаутом <em>aging</em>). Неизвестные unicast кадры &laquo;заливаются&raquo; (flooding) на все порты VLAN. Broadcast (ff:ff:ff:ff:ff:ff) и соответствующие multicast также flood‑ятся в пределах VLAN.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="vlans" class="topic-section">
+                <h2>3.2 VLAN и 802.1Q</h2>
+                <div class="lesson-content">
+                    <p>VLAN логически сегментируют L2‑домены; тег 802.1Q добавляет идентификатор VLAN к кадру на транковых линках. Доступные порты относятся к одной VLAN, транковые — переносят несколько VLAN.</p>
+                    <div class="code-example">
+<pre><code class="bash"># Примеры (vendor‑agnostic концепции)
+# Создание VLAN, привязка порта (псевдокоманды)
+vlan 10
+interface eth1
+ switchport mode access
+ switchport access vlan 10
+
+# Транк 802.1Q
+interface eth2
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+</code></pre>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>802.1Q: теги и практические нюансы</h4>
+                        <ul>
+                            <li><strong>Native VLAN</strong>: кадры без тега на транке относятся к native VLAN (по умолчанию 1), требуются согласованные настройки с обеих сторон.</li>
+                            <li><strong>QinQ (802.1ad)</strong>: двойная тегировка для провайдерских сетей (S‑tag поверх C‑tag).</li>
+                            <li><strong>Приоритет PCP</strong>: может использоваться для базового QoS на L2.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stp" class="topic-section">
+                <h2>3.3 STP/RSTP</h2>
+                <div class="lesson-content">
+                    <p>STP предотвращает L2‑петли, блокируя избыточные пути; RSTP ускоряет сходимость. Выбор корневого коммутатора основан на Bridge ID (приоритет + MAC).</p>
+                    <div class="note"><p><strong>Практика:</strong> на пограничных портах включают PortFast; для защиты от петель и неправильной конфигурации применяют BPDU Guard/Root Guard.</p></div>
+                    <div class="visual-guide">
+                        <h4>Ключевые понятия STP/RSTP/MSTP</h4>
+                        <ul>
+                            <li><strong>Роли портов</strong>: Root, Designated, Alternate/Backup.</li>
+                            <li><strong>Состояния</strong>: Blocking → Listening → Learning → Forwarding.</li>
+                            <li><strong>Таймеры</strong>: Hello (2s), Forward Delay (15s), Max Age (20s) — типичные значения.</li>
+                            <li><strong>MSTP</strong>: множественные экземпляры STP для групп VLAN, балансировка нагрузки.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wifi" class="topic-section">
+                <h2>3.4 Беспроводные сети 802.11</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>Диапазоны и каналы</strong>: 2.4/5/6 ГГц, ширина канала 20/40/80/160 МГц, планирование каналов и мощностей.</li>
+                        <li><strong>Физика</strong>: MIMO, модуляции (QPSK/16‑QAM/64‑QAM/1024‑QAM), SNR и пропускная способность.</li>
+                        <li><strong>Стандарты</strong>: 802.11n/ac/ax/be — различия по скоростям и спектру.</li>
+                        <li><strong>Безопасность</strong>: WPA3‑SAE, 802.1X (EAP), сегментация гостевых сетей, изоляция клиентов.</li>
+                        <li><strong>Медиа‑доступ</strong>: CSMA/CA, RTS/CTS для уменьшения коллизий; DFS‑каналы и их ограничения.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="lacp-security" class="topic-section">
+                <h2>3.5 LACP и безопасность портов</h2>
+                <div class="lesson-content">
+                    <p>LACP (802.1AX) агрегирует физические линки в один логический канал для повышения пропускной способности и отказоустойчивости. Port Security ограничивает количество MAC на порту и реакцию на нарушения.</p>
+                </div>
+            </section>
+
+            <div class="conclusion">
+                <h3>Поздравляем!</h3>
+                <p>Теперь вы умеете на практике различать и применять L2‑механизмы: понимать кадр Ethernet и ARP, настраивать VLAN/транки, объяснять работу STP/RSTP, базово планировать Wi‑Fi и использовать LACP/порт‑безопасность.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

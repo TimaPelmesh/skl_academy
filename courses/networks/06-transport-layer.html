@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Транспортный уровень: TCP, UDP, порты и продвинутые особенности">
+    <meta name="keywords" content="TCP, UDP, трехстороннее рукопожатие, порты, QUIC, Window Scaling">
+    <title>Транспортный уровень (TCP/UDP) — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/06-transport-layer.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Транспортный уровень (TCP/UDP)</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn active">6. Транспортный уровень</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#tcp" class="subtopic active">6.1 TCP</a>
+                        <a href="#udp" class="subtopic">6.2 UDP</a>
+                        <a href="#ports" class="subtopic">6.3 Порты</a>
+                        <a href="#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">6.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">6.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">6.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">7.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">7.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">7.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">7.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">8.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">8.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">8.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section id="tcp" class="topic-section">
+                <h2>6.1 TCP</h2>
+                <div class="lesson-content">
+                    <p>TCP обеспечивает надёжную, упорядоченную доставку данных между приложениями поверх ненадёжной сети IP. Соединение устанавливается через трёхстороннее рукопожатие (SYN → SYN‑ACK → ACK), после чего стороны обмениваются сегментами данных с подтверждениями.</p>
+                    <div class="visual-guide">
+                        <h4>Основные механизмы TCP</h4>
+                        <ul>
+                            <li><strong>Надёжность</strong>: положительные подтверждения (ACK), повторные передачи при тайм‑аутах (RTO), скользящее окно.</li>
+                            <li><strong>Контроль потока</strong>: <em>rwnd</em> (receiver window) ограничивает объём не подтверждённых данных с учётом буфера приёмника.</li>
+                            <li><strong>Управление перегрузкой</strong>: <em>cwnd</em> (congestion window), медленный старт, избегание перегрузок, fast retransmit/fast recovery.</li>
+                            <li><strong>Упорядочивание</strong>: нумерация байтов, сборка потока в верном порядке, отбраковка дубликатов.</li>
+                            <li><strong>Оптимизации</strong>: Delayed ACK, Nagle, Window Scaling (RFC 7323), SACK.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Структура заголовка TCP (ключевые поля)</h4>
+                        <ul>
+                            <li>Порты источника/назначения, номера последовательности и подтверждения.</li>
+                            <li>Флаги: SYN/ACK/FIN/RST/PSH/URG, размер окна, контрольная сумма, опции (MSS, WS, SACK Permitted, TSopt).</li>
+                        </ul>
+                    </div>
+                    <div class="code-example">
+<pre><code class="bash"># Наблюдение за TCP-соединениями
+# Windows
+netstat -ano | findstr ESTABLISHED
+# Linux/macOS
+ss -tn state established
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="udp" class="topic-section">
+                <h2>6.2 UDP</h2>
+                <div class="lesson-content">
+                    <p>UDP — простой дейтаграммный протокол без установления соединения и подтверждений. Минимальные накладные расходы и отсутствие механизма восстановления потерь делают его подходящим для приложений, где критичны задержки и допускаются потери: голос/видео в реальном времени, DNS, игры.</p>
+                    <div class="visual-guide">
+                        <h4>Особенности UDP</h4>
+                        <ul>
+                            <li><strong>Заголовок 8 байт</strong>: порты источника/назначения, длина, контрольная сумма (обязательна в IPv6).</li>
+                            <li><strong>Отсутствие порядка/доставки</strong>: логика повторов и упорядочивания реализуется приложением при необходимости.</li>
+                            <li><strong>Use‑cases</strong>: QUIC/HTTP/3 (на базе UDP), DNS, RTP/SRTP.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ports" class="topic-section">
+                <h2>6.3 Порты</h2>
+                <div class="lesson-content">
+                    <p>Порты (0–65535) определяют конечную точку взаимодействия на хосте и совместно с IP‑адресом образуют сокет. Диапазоны: известные (0–1023), зарегистрированные (1024–49151), динамические/частные (49152–65535).</p>
+                    <div class="visual-guide">
+                        <h4>Практические аспекты</h4>
+                        <ul>
+                            <li><strong>Сокеты</strong>: {srcIP:srcPort → dstIP:dstPort} уникально идентифицируют соединение TCP.</li>
+                            <li><strong>Эфемерные порты</strong>: динамически выделяются клиентам для исходящих соединений.</li>
+                            <li><strong>Безопасность</strong>: фильтрация/ограничение открытых портов, принцип наименьших привилегий.</li>
+                        </ul>
+                    </div>
+                    <div class="code-example">
+<pre><code class="bash"># Просмотр прослушиваемых портов
+# Windows
+netstat -ano | findstr LISTENING
+# Linux/macOS
+ss -tulpen
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="advanced" class="topic-section">
+                <h2>6.4 Для профессионалов</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>Window Scaling</strong>: расширяет размер окна и повышает Throughput на высоколатентных каналах.</li>
+                        <li><strong>QUIC (HTTP/3)</strong>: транспорт поверх UDP с шифрованием и мультиплексированием потоков.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="conclusion">
+                <h3>Поздравляем!</h3>
+                <p>Теперь вы умеете объяснять различия TCP/UDP, интерпретировать состояния соединений и работать с портами в диагностике.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

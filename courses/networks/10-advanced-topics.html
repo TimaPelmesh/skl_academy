@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Дополнительные темы: IoT, MQTT, облачные сети (VPC), SDN, BGP/Anycast, Kubernetes Networking">
+    <meta name="keywords" content="IoT, MQTT, VPC, SDN, BGP, Anycast, Kubernetes, CNI">
+    <title>Дополнительные темы — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/10-advanced-topics.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Дополнительные темы</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17л5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4В5з"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">10. Дополнительные темы</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#iot" class="subtopic active">10.1 IoT и MQTT</a>
+                        <a href="#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section id="iot" class="topic-section">
+                <h2>10.1 IoT и MQTT</h2>
+                <div class="lesson-content">
+                    <p>IoT‑устройства часто используют лёгкие протоколы и асинхронную модель обмена. MQTT строится на публикации/подписке: устройства публикуют сообщения в топики, клиенты подписываются на интересующие темы. Брокер отвечает за маршрутизацию сообщений и удержание состояния.</p>
+                    <div class="visual-guide">
+                        <h4>MQTT кратко</h4>
+                        <ul>
+                            <li><strong>QoS уровни</strong>: 0 (at most once), 1 (at least once), 2 (exactly once) — компромисс между надёжностью и затратами.</li>
+                            <li><strong>Retain/Will</strong>: удержание последних сообщений и посмертное сообщение при разрыве.</li>
+                            <li><strong>Безопасность</strong>: TLS, аутентификация, изоляция топиков, ограничение ACL.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cloud" class="topic-section">
+                <h2>10.2 Облачные сети (VPC)</h2>
+                <div class="lesson-content">
+                    <p>VPC — изолированная виртуальная сеть в облаке с привычной моделью: подсети, маршруты, ACL/SG, NAT, VPN/Direct Connect/Peering. Лучшие практики включают разделение сред (prod/stage/dev), NACL/SG по принципу deny‑by‑default и централизованные сервисы (DNS, логи).</p>
+                    <div class="visual-guide">
+                        <h4>Сетевые элементы VPC</h4>
+                        <ul>
+                            <li><strong>Public/Private субсети</strong>: Интернет‑шлюз vs egress через NAT.</li>
+                            <li><strong>Security Groups / NACL</strong>: уровень экземпляра vs уровень подсети.</li>
+                            <li><strong>Peering/Transit</strong>: меж‑VPC связность, транзитные хабы, маршрутизация.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sdn" class="topic-section">
+                <h2>10.3 SDN</h2>
+                <div class="lesson-content">
+                    <p>SDN отделяет плоскость управления от плоскости передачи и позволяет централизованно описывать желаемое состояние сети. Контроллер программирует поведение фабрики через южные интерфейсы (OpenFlow, P4Runtime, gNMI), а операторы взаимодействуют с контроллером через API.</p>
+                    <div class="visual-guide">
+                        <h4>Ключевые идеи SDN</h4>
+                        <ul>
+                            <li><strong>Intent‑based</strong> управление: декларативное описание политик.</li>
+                            <li><strong>Фабрики L3 Clos</strong>: spine‑leaf, ECMP, централизованный control‑plane.</li>
+                            <li><strong>Сервисные цепочки</strong>: insertion сервисов (FW/IDS) по политике.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="k8s" class="topic-section">
+                <h2>10.4 Для профессионалов</h2>
+                <div class="lesson-content">
+                    <p>Сеть Kubernetes базируется на модели «каждый Pod имеет собственный IP, все Pod‑ы связны». CNI‑плагин реализует передачу и политику. kube‑proxy обеспечивает сервисы L4, Ingress‑контроллер — L7. В продакшене часто применяются overlay/underlay, eBPF и маршрутизация (например, BGP) для масштабируемости.</p>
+                    <div class="visual-guide">
+                        <h4>Ключевые компоненты K8s Networking</h4>
+                        <ul>
+                            <li><strong>CNI</strong>: Calico/Flannel/Cilium/Weave — различия в dataplane и политике.</li>
+                            <li><strong>Services</strong>: ClusterIP/NodePort/LoadBalancer; session affinity и health checks.</li>
+                            <li><strong>NetworkPolicy</strong>: L3/L4 сегментация между Pod‑ами по меткам.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="conclusion">
+                <h3>Поздравляем!</h3>
+                <p>Курс завершён. Теперь вы умеете связывать базовые сетевые знания с современными сценариями: IoT, облачные сети, SDN и Kubernetes‑сетевую модель.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

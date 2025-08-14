@@ -72,9 +72,12 @@ header {
 .header-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin-left: 50px;
+    margin-left: 64px; /* 20 (left) + 28 (burger width) + 16 (gap) */
     color: var(--light-text);
     letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Кнопки в хедере */
@@ -292,8 +295,8 @@ header {
 }
 
 .topic-btn.active {
-    color: var(--primary-color);
-    font-weight: 500;
+    color: #111827; /* Черный, как в курсе по Python */
+    font-weight: 600;
 }
 
 .topic-btn.active::after {
@@ -324,6 +327,13 @@ header {
 .subtopic:hover {
     background-color: var(--overlay-light);
     color: var(--primary-color);
+}
+
+/* Активная подтема в боковом меню: подсветка текста и фона */
+.subtopic.active {
+    color: var(--primary-color);
+    background-color: var(--overlay-light);
+    font-weight: 600;
 }
 
 /* Основной контент */
@@ -446,7 +456,10 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 576px) {
     .header-title {
         font-size: 1.3rem;
-        margin-left: 30px;
+        margin-left: 44px; /* больше зазор справа от бургера на узких экранах */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     .welcome {
@@ -459,6 +472,13 @@ body::-webkit-scrollbar-thumb {
         margin-right: 10px;
     }
 }
+
+/* Универсальные кнопки и блоки навигации между модулями */
+.next-module { text-align: center; margin: 20px 0; }
+.btn { display: inline-block; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+.btn-gradient { background: linear-gradient(90deg, #2188ff, #804eda); color: #fff; }
+.btn-dark { background: #30363d; color: #fff; }
+.btn.disabled { opacity: 0.7; cursor: not-allowed; pointer-events: none; }
 
 /* Стили для секции с обратной связью */
 .feedback-section {

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Безопасность в сетях: угрозы, шифрование, VPN/IPsec, межсетевые экраны, PKI">
+    <meta name="keywords" content="сетевые атаки, MITM, DDoS, TLS, VPN, IPsec, firewall, PKI">
+    <title>Сетевая безопасность — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/08-network-security.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Сетевая безопасность</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4В5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                    </div>
+                </div>
+
+
+                <div class="topic">
+                    <button class="topic-btn active">8. Сетевая безопасность</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#threats" class="subtopic active">8.1 Типы атак</a>
+                        <a href="#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section id="threats" class="topic-section">
+                <h2>8.1 Типы атак</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>Сетевые</strong>: MITM (подмена ARP/DNS, прокси), DDoS (Volumetric/Protocol/Application), сканирование и эксплойты сервисов.</li>
+                        <li><strong>Вектор приложений</strong>: инъекции, XSS/CSRF, уязвимости в аутентификации.</li>
+                        <li><strong>Социальная инженерия</strong>: фишинг, spear phishing, vishing/SMShing.</li>
+                    </ul>
+                    <div class="visual-guide">
+                        <h4>Подходы к снижению рисков</h4>
+                        <ul>
+                            <li><strong>Сегментация</strong>: VLAN/VRF, правила доступа по принципу наименьших привилегий.</li>
+                            <li><strong>Защита L2</strong>: DHCP Snooping, Dynamic ARP Inspection, Port Security.</li>
+                            <li><strong>Наблюдаемость</strong>: логи, телеметрия, алерты, ответ на инциденты.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="crypto" class="topic-section">
+                <h2>8.2 Шифрование и VPN/IPsec</h2>
+                <div class="lesson-content">
+                    <p>TLS защищает приложения (HTTPS); IPsec — защита на сетевом уровне; VPN создаёт защищённый туннель поверх недоверенной сети.</p>
+                    <div class="visual-guide">
+                        <h4>TLS кратко</h4>
+                        <ul>
+                            <li><strong>Рукопожатие</strong>: согласование алгоритмов, проверка сертификата, обмен ключами.</li>
+                            <li><strong>Современные практики</strong>: TLS 1.2/1.3, PFS (ECDHE), отказ от слабых шифров и протоколов.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>IPsec кратко</h4>
+                        <ul>
+                            <li><strong>Режимы</strong>: транспортный/туннельный; протоколы AH/ESP.</li>
+                            <li><strong>IKEv2</strong>: аутентификация и согласование параметров, построение SA.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>VPN</h4>
+                        <ul>
+                            <li><strong>Site‑to‑Site/Remote Access</strong>: выбор технологий (IPsec, SSL‑VPN, WireGuard), маршрутизация/политики.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="firewall" class="topic-section">
+                <h2>8.3 Межсетевые экраны</h2>
+                <div class="lesson-content">
+                    <p>Современные межсетевые экраны сочетают stateful‑фильтрацию, идентификацию приложений (L7), IPS/IDS и функции прокси. Они применяются на периметре и внутри сегментов (микросегментация).</p>
+                    <div class="visual-guide">
+                        <h4>Практика firewall</h4>
+                        <ul>
+                            <li><strong>Stateful</strong> инспекция и таблицы состояний, таймауты.</li>
+                            <li><strong>Правила</strong>: денай по умолчанию, минимизация экспонированных сервисов.</li>
+                            <li><strong>Логи</strong>: критичны для расследований; централизованный сбор в SIEM.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pki" class="topic-section">
+                <h2>8.4 Для профессионалов</h2>
+                <div class="lesson-content">
+                    <p>PKI: инфраструктура открытых ключей, цепочки доверия, OCSP/CRL, HSM. Практики: HSTS, CSP, mTLS, TLS 1.3.</p>
+                    <div class="visual-guide">
+                        <h4>Управление ключами и политиками</h4>
+                        <ul>
+                            <li><strong>Выдача/отзыв</strong> сертификатов, автоматизация (ACME), сроки и ротация ключей.</li>
+                            <li><strong>Политики</strong>: pinning (с осторожностью), минимизация доверенных CA, разделение ролей.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="conclusion">
+                <h3>Поздравляем!</h3>
+                <p>Теперь вы умеете распознавать основные угрозы, выбирать механизмы защиты (TLS/VPN/IPsec, firewall) и ориентироваться в принципах PKI.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

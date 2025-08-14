@@ -9,6 +9,15 @@ menuToggle.addEventListener('click', () => {
     content.classList.toggle('sidebar-active');
 });
 
+// Подсветка синтаксиса (единая инициализация для всех страниц курса)
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.hljs) {
+        document.querySelectorAll('pre code').forEach(function(block) {
+            hljs.highlightBlock(block);
+        });
+    }
+});
+
 // Раскрытие тем
 document.querySelectorAll('.topic-btn').forEach(btn => {
     btn.addEventListener('click', function() {
@@ -88,6 +97,17 @@ document.querySelectorAll('.subtopic').forEach(link => {
                 sidebar.classList.remove('active');
                 content.classList.remove('sidebar-active');
             }
+        }
+    });
+});
+
+// Закрытие сайдбара на мобильных устройствах при клике на любую ссылку меню (включая межстраничные ссылки)
+document.querySelectorAll('.subtopic').forEach(link => {
+    link.addEventListener('click', function() {
+        if (sidebar.classList.contains('active') && window.innerWidth <= 991) {
+            menuToggle.classList.remove('active');
+            sidebar.classList.remove('active');
+            content.classList.remove('sidebar-active');
         }
     });
 });
