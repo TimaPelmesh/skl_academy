@@ -5,10 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Основы Python - изучите установку, синтаксис, переменные, типы данных и базовые операторы Python">
     <meta name="keywords" content="python, основы python, установка python, синтаксис python, переменные python, типы данных python">
-    <title>Основы Python</title>
+    <title>Основы Python — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/python/01-python-basics.html">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Python course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Python",
+          "item": "https://skl-academy.ru/courses/python/01-python-basics.html"
+        }
+      ]
+    }
+    </script>
     <style>
         /* Дополнительные стили для улучшения адаптивности */
         @media (max-width: 768px) {
@@ -110,12 +133,22 @@
         }
         
         /* Исправление цвета ссылок в меню в светлой теме */
-        .light-theme .subtopic {
+        .light-theme .subtopic:not(.active) {
             color: #000;
         }
-        
-        .light-theme .topic-btn {
+
+        /* Сохраняем подсветку активной подтемы как в общих стилях */
+        .light-theme .subtopic.active {
+            color: var(--primary-color);
+            background-color: var(--overlay-light);
+        }
+
+        .light-theme .topic-btn:not(.active) {
             color: #000;
+        }
+
+        .light-theme .topic-btn.active {
+            color: #111827;
         }
         
         /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */

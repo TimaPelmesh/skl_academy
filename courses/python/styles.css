@@ -292,8 +292,8 @@ header {
 }
 
 .topic-btn.active {
-    color: var(--primary-color);
-    font-weight: 500;
+    color: #111827; /* Чёрный, как в курсе Networks */
+    font-weight: 600;
 }
 
 .topic-btn.active::after {
@@ -324,6 +324,13 @@ header {
 .subtopic:hover {
     background-color: var(--overlay-light);
     color: var(--primary-color);
+}
+
+/* Активная подтема в боковом меню: подсветка текста и фона (как в курсе Networks) */
+.subtopic.active {
+    color: var(--primary-color);
+    background-color: var(--overlay-light);
+    font-weight: 600;
 }
 
 /* Основной контент */
