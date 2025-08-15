@@ -11,7 +11,7 @@
     <!-- Страница "О проекте" -->
     <url>
         <loc>https://skl-academy.ru/about.html</loc>
-        <lastmod>2025-01-27</lastmod>
+        <lastmod>2025-08-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -131,7 +131,7 @@
     <!-- Тест скорости печати (готов) -->
     <url>
         <loc>https://skl-academy.ru/typing-test/index.html</loc>
-        <lastmod>2025-01-27</lastmod>
+        <lastmod>2025-08-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -140,7 +140,7 @@
     <!-- C# -->
     <url>
         <loc>https://skl-academy.ru/courses/csharp/01-csharp-basics.html</loc>
-        <lastmod>2025-01-27</lastmod>
+        <lastmod>2025-08-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -148,7 +148,7 @@
     <!-- Git -->
     <url>
         <loc>https://skl-academy.ru/courses/git/01-git-basics.html</loc>
-        <lastmod>2025-01-27</lastmod>
+        <lastmod>2025-08-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -156,7 +156,7 @@
     <!-- Веб-разработка -->
     <url>
         <loc>https://skl-academy.ru/courses/web/01-html-basics.html</loc>
-        <lastmod>2025-01-27</lastmod>
+        <lastmod>2025-08-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -164,7 +164,7 @@
     <!-- Командная строка -->
     <url>
         <loc>https://skl-academy.ru/courses/shell/01-bash-basics.html</loc>
-        <lastmod>2025-01-27</lastmod>
+        <lastmod>2025-08-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -172,7 +172,7 @@
     <!-- Unity -->
     <url>
         <loc>https://skl-academy.ru/courses/unity/01-unity-basics.html</loc>
-        <lastmod>2025-01-27</lastmod>
+        <lastmod>2025-08-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
