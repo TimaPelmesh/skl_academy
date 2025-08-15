@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SKL Academy — Бесплатные курсы по программированию и IT-технологиям</title>
+  <title>SKL Academy</title>
   
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript" >
@@ -30,18 +30,17 @@
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
   
   <!-- SEO Мета-теги -->
-  <meta name="description" content="SKL Academy — бесплатные курсы по программированию и IT-технологиям. Изучите Python, компьютерные сети, веб-разработку с нуля. Полные курсы для начинающих программистов.">
-  <meta name="keywords" content="бесплатные курсы программирования, курсы python, курсы компьютерных сетей, обучение программированию, IT курсы, веб-разработка, python с нуля, компьютерные сети с нуля">
+  <meta name="description" content="SKL Academy - бесплатная образовательная платформа для изучения IT-технологий. Курсы по Python, компьютерным сетям, C#, Git, Web-разработке. Обучение программированию с нуля.">
+  <meta name="keywords" content="бесплатные курсы программирования, python курсы, компьютерные сети курсы, IT образование, обучение программированию, курсы для начинающих, python для начинающих, компьютерные сети для начинающих">
   <meta name="author" content="SKL Academy">
   <meta name="robots" content="index, follow">
   
   <!-- Open Graph мета-теги для социальных сетей -->
-  <meta property="og:title" content="SKL Academy — Бесплатные курсы по программированию и IT-технологиям">
-  <meta property="og:description" content="Изучите Python, компьютерные сети, веб-разработку с нуля. Полные бесплатные курсы для начинающих программистов.">
+  <meta property="og:title" content="SKL Academy - Современное обучение IT">
+  <meta property="og:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://skl-academy.ru/">
   <meta property="og:image" content="images/skl-academy-og.jpg">
-  <meta property="og:site_name" content="SKL Academy">
   
   <!-- Twitter Card мета-теги -->
   <meta name="twitter:card" content="summary_large_image">
@@ -52,47 +51,70 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="https://skl-academy.ru/">
   
-  <!-- Structured Data: SiteNavigation and Organization -->
+  <!-- Structured Data: Organization and Educational Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        "@type": "EducationalOrganization",
         "name": "SKL Academy",
         "url": "https://skl-academy.ru/",
         "logo": {
           "@type": "ImageObject",
           "url": "https://skl-academy.ru/images/favicon-32x32.png"
         },
-        "description": "Бесплатные курсы по программированию и IT-технологиям",
+        "description": "Бесплатная образовательная платформа для изучения IT-технологий и программирования",
+        "foundingDate": "2025",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "RU"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "url": "https://skl-academy.ru/"
+        },
         "sameAs": [
           "https://skl-academy.ru/"
-        ]
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Курсы программирования",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Course",
+                "name": "Бесплатный курс Python для начинающих",
+                "url": "https://skl-academy.ru/courses/python/01-python-basics.html"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Course",
+                "name": "Бесплатный курс по компьютерным сетям",
+                "url": "https://skl-academy.ru/courses/networks/01-networks-fundamental.html"
+              }
+            }
+          ]
+        }
       },
       {
         "@type": "WebSite",
         "name": "SKL Academy",
         "url": "https://skl-academy.ru/",
-        "description": "Бесплатные курсы по программированию и IT-технологиям",
+        "description": "Бесплатная образовательная платформа для изучения IT-технологий",
+        "publisher": {
+          "@type": "Organization",
+          "name": "SKL Academy"
+        },
         "potentialAction": {
           "@type": "SearchAction",
           "target": "https://skl-academy.ru/search?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "name": [
-          "Тренажер печати",
-          "Python",
-          "О проекте"
-        ],
-        "url": [
-          "https://skl-academy.ru/404.html",
-          "https://skl-academy.ru/courses/python/01-python-basics.html",
-          "https://skl-academy.ru/about.html"
-        ]
       }
     ]
   }
