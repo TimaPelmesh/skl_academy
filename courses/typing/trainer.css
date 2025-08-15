@@ -1,0 +1,171 @@
+:root {
+  --border: #e5e7eb;
+  --bg: #f8fafc;
+  --primary: #4f46e5;
+  --text: #111827;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #ffffff; }
+
+.trainer-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f4f4f4;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+.exit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    transition: background-color 0.3s;
+}
+
+.exit-btn:hover {
+    background-color: #d0d0d0;
+}
+
+.exit-btn svg {
+    width: 24px;
+    height: 24px;
+    color: #666;
+}
+
+.trainer-container { max-width: 1000px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 1fr; gap: 16px; }
+
+.trainer-panel { border: 1px solid var(--border); border-radius: 10px; padding: 12px; background: #fff; }
+.control-group { display: grid; gap: 8px; margin-bottom: 10px; }
+.segmented { display: flex; gap: 6px; flex-wrap: wrap; }
+.segmented-btn { border: 1px solid var(--border); background: #fff; color: var(--text); padding: 6px 10px; border-radius: 8px; cursor: pointer; font-weight: 500; }
+.segmented-btn.is-active { border-color: var(--primary); color: var(--primary); background: #eef2ff; }
+.chars-label { font-size: 0.9rem; color: #6b7280; }
+.custom-chars { display: flex; gap: 6px; }
+.custom-chars input { flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+.apply-btn { border: 1px solid var(--border); border-radius: 8px; background: #fff; padding: 8px 12px; cursor: pointer; }
+
+.trainer-workspace { border: 1px solid var(--border); border-radius: 10px; background: #fff; padding: 12px; }
+.trainer-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+.trainer-text-wrapper { border: 1px solid var(--border); border-radius: 10px; height: 260px; overflow: auto; background: var(--bg); padding: 14px; line-height: 1.7; }
+
+/* Стили для режима отображения всего текста */
+.trainer-text-wrapper.full-mode {
+    height: auto;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.trainer-text .char { opacity: 0.7; }
+.trainer-text .char.current { background: #e0e7ff; border-radius: 4px; opacity: 1; }
+.trainer-text .char.correct { color: #16a34a; opacity: 1; }
+.trainer-text .char.incorrect { color: #dc2626; opacity: 1; }
+.trainer-input { position: absolute; left: -9999px; top: -9999px; }
+.trainer-actions { display: flex; gap: 8px; margin-top: 10px; }
+.trainer-actions button { border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; background: #fff; cursor: pointer; font-weight: 600; }
+.trainer-actions .primary { background: linear-gradient(90deg, #2188ff, #804eda); color: #fff; border: none; }
+.hint { color: #6b7280; font-size: 0.85rem; margin-top: 8px; }
+
+.level-display {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.pair-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.pair-mode-toggle input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.pair-mode-toggle label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.trainer-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.control-item label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.control-item select, 
+.control-item input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9em;
+    width: 200px;
+}
+
+.control-item select:focus,
+.control-item input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.scroll-mode-btn,
+.show-all-btn {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.scroll-mode-btn:hover,
+.show-all-btn:hover {
+    background-color: #357abd;
+}
+
+.show-all-btn {
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+@media (max-width: 640px) {
+  .trainer-text-wrapper { height: 220px; }
+}
+
+

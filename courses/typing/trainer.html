@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажёр печати (рус) | SKL Academy</title>
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="trainer.css">
+</head>
+<body>
+    <header class="trainer-header-bar">
+        <div class="header-left">
+            <h1>Тренажёр</h1>
+        </div>
+        <div class="header-right">
+            <a class="exit-btn course-btn" href="01-typing-basics.html" title="К курсу">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 19h4v-2h-4v2zm2-18C6.48 1 2 5.48 2 11s4.48 10 10 10 10-4.48 10-10S17.52 1 12 1zm1 15h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 9.9 13 10.5 13 12h-2v-.5c0-1 .45-1.9 1.17-2.58l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+            </a>
+            <a class="exit-btn home-btn" href="../../index.html" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <main class="trainer-container">
+        <section class="trainer-panel">
+            <div class="control-group">
+                <div class="level-display">
+                    <h3 id="currentLevel">Уровень 1: Домашний ряд</h3>
+                </div>
+                
+                <div class="trainer-controls">
+                    <div class="control-item">
+                        <label for="symbolSelect">Набор символов:</label>
+                        <select id="symbolSelect">
+                            <optgroup label="Основные ряды">
+                                <option value="фываолдже">Домашний ряд</option>
+                                <option value="йцукенгшщзхъ">Верхний ряд</option>
+                                <option value="ячсмитьбю,.">Нижний ряд</option>
+                            </optgroup>
+                            <optgroup label="Конкретные комбинации">
+                                <option value="фы-ва-ол-дж-е">фы-ва-ол-дж-е</option>
+                                <option value="йц-ук-ен-гш-щз">йц-ук-ен-гш-щз</option>
+                                <option value="яч-см-ит-ьб-ю,">яч-см-ит-ьб-ю,</option>
+                                <option value="фй-вы-ац-ок-лу-дн-же-гш-ещ-зх-ъ">фй-вы-ац-ок-лу-дн-же-гш-ещ-зх-ъ</option>
+                                <option value="фя-вч-ас-ом-ли-дт-жь-еб-ю,">фя-вч-ас-ом-ли-дт-жь-еб-ю,</option>
+                                <option value="йя-цч-ус-км-ен-гт-шь-щб-зю-х,">йя-цч-ус-км-ен-гт-шь-щб-зю-х,</option>
+                            </optgroup>
+                            <optgroup label="Специальные наборы">
+                                <option value="pairs">Парные комбинации</option>
+                                <option value="sentences">Осмысленные предложения</option>
+                                <option value=",.;:!?()[]{}<>/\\_+=*&|~`-—">Пунктуация</option>
+                                <option value="1234567890">Цифры</option>
+                            </optgroup>
+                            <option value="custom">Свой набор символов</option>
+                        </select>
+                    </div>
+
+                    <div id="customSymbolInput" class="control-item" style="display: none;">
+                        <label for="customChars">Свои символы:</label>
+                        <input type="text" id="customChars" placeholder="Введите символы">
+                    </div>
+
+                    <div class="control-item">
+                        <label for="displayMode">Режим отображения:</label>
+                        <select id="displayMode">
+                            <option value="scroll">Прокрутка к курсору</option>
+                            <option value="full">Весь текст виден</option>
+                        </select>
+                    </div>
+
+                    <div class="pair-mode-toggle">
+                        <input type="checkbox" id="pairModeCheckbox">
+                        <label for="pairModeCheckbox">Режим парных комбинаций</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="trainer-workspace">
+            <div class="trainer-stats">
+                <div>Время: <strong id="tTimer">60</strong></div>
+                <div>WPM: <strong id="tWpm">0</strong></div>
+                <div>Точность: <strong id="tAcc">100</strong>%</div>
+                <div>Ошибки: <strong id="tErr">0</strong></div>
+            </div>
+            <div class="trainer-text-wrapper" id="tWrapper">
+                <div class="trainer-text" id="tText"></div>
+            </div>
+            <input type="text" id="tInput" class="trainer-input" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <div class="trainer-actions">
+                <button id="startBtn" class="primary">Старт</button>
+                <button id="restartBtn">Сброс</button>
+                <button id="shareBtn">Скопировать результат</button>
+            </div>
+            <p class="hint">Поддерживаются параметры URL: <code>?chars=фываолдже&time=60&length=500</code></p>
+        </section>
+    </main>
+
+    <script src="trainer.js"></script>
+</body>
+</html>
+
+
