@@ -98,6 +98,7 @@
                         <a href="#http" class="subtopic">7.2 HTTP/HTTPS</a>
                         <a href="#dhcp" class="subtopic">7.3 DHCP</a>
                         <a href="#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="#voip" class="subtopic">7.5 VoIP и SIP</a>
                     </div>
                 </div>
 
@@ -207,10 +208,30 @@ dig skl-academy.ru ANY +short
                 </div>
             </section>
 
-            <div class="conclusion">
-                <h3>Поздравляем!</h3>
-                <p>Теперь вы умеете разбирать работу DNS, понимать основы HTTP/HTTPS, объяснять процесс DHCP и ориентироваться в почтовых протоколах.</p>
-            </div>
+            <section id="voip" class="topic-section">
+                <h2>7.5 VoIP и SIP</h2>
+                <div class="lesson-content">
+                    <p>VoIP переносит голос по IP. <strong>SIP</strong> управляет сигнализацией (создание/изменение/завершение сессии), а медиа передаются по <strong>RTP/SRTP</strong>.</p>
+                    <div class="visual-guide">
+                        <h4>Базовые элементы</h4>
+                        <ul>
+                            <li><strong>Регистрация</strong>: UA регистрируется на SIP‑сервере (Registrar/Proxy).</li>
+                            <li><strong>Сессия</strong>: INVITE/200 OK/ACK, параметры медиа в SDP (кодеки, порты).</li>
+                            <li><strong>NAT‑траверс</strong>: STUN/TURN/ICE для установления медиапути через NAT.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Качество и кодеки</h4>
+                        <ul>
+                            <li><strong>Кодеки</strong>: G.711 (простой, высокая полоса), Opus (адаптивный), G.729 (низкая полоса).</li>
+                            <li><strong>Буфер джиттера</strong>: сглаживает вариации задержки, компромисс с задержкой.</li>
+                            <li><strong>MOS</strong>: метрика субъективного качества; важны задержка/джиттер/потери.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Безопасность:</strong> используйте TLS для SIP и SRTP для медиа; сегментация голосового трафика (VLAN/QoS) снижает взаимное влияние.</p></div>
+                </div>
+            </section>
+
         </div>
     </div>
 

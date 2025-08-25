@@ -173,7 +173,7 @@
 
         <h3>Шаг 1: Скачивание Python</h3>
         <ol>
-          <li>Перейдите на официальный сайт Python: <a href="https://python.org" target="_blank" class="text-blue-600 hover:text-blue-800">python.org</a></li>
+          <li>Перейдите на официальный сайт Python: <a href="https://python.org" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800">python.org</a></li>
           <li>Нажмите на кнопку "Downloads"</li>
           <li>Выберите последнюю версию Python (рекомендуется Python 3.11 или новее)</li>
           <li>Скачайте установщик для вашей операционной системы</li>
@@ -330,7 +330,7 @@ pip install requests
 import requests
 
 # Простой GET-запрос
-response = requests.get("https://httpbin.org/get")
+response = requests.get("https://httpbin.org/get", timeout=10)
 
 # Проверяем статус ответа
 print(f"Статус код: {response.status_code}")
@@ -342,8 +342,8 @@ if response.status_code == 200:
     print(data)
 else:
     print("Ошибка при получении данных")
-          </div>
-        </div>
+  </div>
+</div>
 
         <h3>Работа с API</h3>
         <p>Теперь создадим более сложный пример с использованием публичного API:</p>
@@ -359,7 +359,7 @@ url = "https://jsonplaceholder.typicode.com/users/1"
 
 try:
     # Выполняем запрос
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     
     # Проверяем успешность запроса
     if response.status_code == 200:
@@ -377,8 +377,30 @@ except requests.exceptions.RequestException as e:
     print(f"Ошибка сети: {e}")
 except KeyError as e:
     print(f"Ошибка в данных: {e}")
+  </div>
+</div>
+
+        <h3>Виртуальное окружение (venv)</h3>
+        <p>Рекомендуется изолировать зависимости проекта с помощью виртуального окружения:</p>
+        <div class="code-block">
+          <div class="code-block-header">Создание окружения</div>
+          <div class="code-block-content">
+python -m venv venv
           </div>
         </div>
+        <div class="code-block">
+          <div class="code-block-header">Активация (Windows PowerShell)</div>
+          <div class="code-block-content">
+./venv/Scripts/Activate.ps1
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-block-header">Активация (macOS/Linux)</div>
+          <div class="code-block-content">
+source venv/bin/activate
+          </div>
+        </div>
+        <p>После активации устанавливайте пакеты внутри окружения: <code>pip install requests</code>.</p>
 
         <div class="highlight-box">
           <strong>Что мы изучили:</strong>
@@ -398,7 +420,7 @@ except KeyError as e:
 
         <h3>Подготовка</h3>
         <ol>
-          <li>Зарегистрируйтесь на <a href="https://openweathermap.org" target="_blank" class="text-blue-600 hover:text-blue-800">OpenWeatherMap</a></li>
+          <li>Зарегистрируйтесь на <a href="https://openweathermap.org" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800">OpenWeatherMap</a></li>
           <li>Получите бесплатный API ключ</li>
           <li>Установите библиотеку requests: <code>pip install requests</code></li>
         </ol>
@@ -410,13 +432,14 @@ except KeyError as e:
           <div class="code-block-content">
 import requests
 import json
+import os
 
 def get_weather(city, api_key):
     """
     Получает информацию о погоде для указанного города
     """
     # URL API OpenWeatherMap
-    url = f"http://api.openweathermap.org/data/2.5/weather"
+    url = f"https://api.openweathermap.org/data/2.5/weather"
     
     # Параметры запроса
     params = {
@@ -428,7 +451,7 @@ def get_weather(city, api_key):
     
     try:
         # Выполняем запрос
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=10)
         
         # Проверяем статус ответа
         if response.status_code == 200:
@@ -470,8 +493,8 @@ def main():
     print("🌤️ Погодное приложение")
     print("=" * 30)
     
-    # Ваш API ключ (замените на свой)
-    api_key = "YOUR_API_KEY_HERE"
+    # API ключ из переменной окружения или ввод пользователя
+    api_key = os.getenv("OPENWEATHER_API_KEY") or input("Введите ваш API ключ OpenWeatherMap: ")
     
     # Запрашиваем город у пользователя
     city = input("Введите название города: ")
@@ -481,13 +504,27 @@ def main():
 
 if __name__ == "__main__":
     main()
-          </div>
-        </div>
+  </div>
+</div>
 
         <h3>Как использовать приложение</h3>
         <ol>
           <li>Замените <code>YOUR_API_KEY_HERE</code> на ваш реальный API ключ</li>
           <li>Сохраните файл как <code>weather_app.py</code></li>
+          <li>Установите переменную окружения API ключа (безопаснее, чем хранить в коде):
+            <div class="code-block">
+              <div class="code-block-header">Windows PowerShell</div>
+              <div class="code-block-content">
+$env:OPENWEATHER_API_KEY = "ВАШ_КЛЮЧ"
+              </div>
+            </div>
+            <div class="code-block">
+              <div class="code-block-header">macOS/Linux</div>
+              <div class="code-block-content">
+export OPENWEATHER_API_KEY="ВАШ_КЛЮЧ"
+              </div>
+            </div>
+          </li>
           <li>Запустите программу: <code>python weather_app.py</code></li>
           <li>Введите название города, когда программа запросит</li>
         </ol>
@@ -537,6 +574,16 @@ if __name__ == "__main__":
         </blockquote>
 
         <p>Удачи в изучении Python!</p>
+      </section>
+
+      <section id="course-cta">
+        <div class="highlight-box">
+          <h3>Продолжайте обучение бесплатно</h3>
+          <p class="mt-2">Готовы идти дальше? Пройдите наш бесплатный курс по Python с пошаговыми уроками и практикой.</p>
+                     <div class="mt-4">
+             <a href="../courses/python/01-python-basics.html" class="btn-primary">Перейти к бесплатному курсу Python</a>
+           </div>
+        </div>
       </section>
     </article>
     </div>

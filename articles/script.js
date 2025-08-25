@@ -12,15 +12,19 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenu.style.visibility = 'hidden';
     mobileMenu.style.height = '0';
     mobileMenu.style.overflow = 'hidden';
-    
+    mobileMenuButton.setAttribute('aria-expanded', 'false');
+
     mobileMenuButton.addEventListener('click', function() {
-      // Переключаем видимость меню
-      if (mobileMenu.style.visibility === 'hidden') {
+      const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+
+      if (!expanded) {
         // Открываем меню
+        mobileMenu.classList.remove('hidden');
         mobileMenu.style.opacity = '1';
         mobileMenu.style.visibility = 'visible';
         mobileMenu.style.height = 'auto';
         mobileMenu.style.transform = 'translateY(0)';
+        mobileMenuButton.setAttribute('aria-expanded', 'true');
         
         // Активируем иконку бургера
         if (burgerIcon) {
@@ -32,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.style.visibility = 'hidden';
         mobileMenu.style.height = '0';
         mobileMenu.style.transform = 'translateY(-20px)';
+        mobileMenu.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
         
         // Деактивируем иконку бургера
         if (burgerIcon) {
@@ -42,6 +48,24 @@ document.addEventListener('DOMContentLoaded', function() {
       // Для линий внутри бургера
       document.querySelectorAll('.burger-icon .line').forEach(line => {
         line.classList.toggle('active');
+      });
+    });
+
+    // Закрываем меню при клике по ссылке внутри мобильного меню
+    mobileMenu.querySelectorAll('a').forEach(anchor => {
+      anchor.addEventListener('click', () => {
+        mobileMenu.style.opacity = '0';
+        mobileMenu.style.visibility = 'hidden';
+        mobileMenu.style.height = '0';
+        mobileMenu.style.transform = 'translateY(-20px)';
+        mobileMenu.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        if (burgerIcon) {
+          burgerIcon.classList.remove('is-active');
+        }
+        document.querySelectorAll('.burger-icon .line').forEach(line => {
+          line.classList.remove('active');
+        });
       });
     });
   }
@@ -77,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const copyButton = document.createElement('button');
     copyButton.className = 'copy-button';
     copyButton.textContent = 'Копировать';
+    copyButton.setAttribute('aria-label', 'Копировать код');
     
     copyButton.addEventListener('click', function() {
       const code = codeContent.textContent;

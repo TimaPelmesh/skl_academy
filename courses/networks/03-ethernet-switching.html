@@ -57,6 +57,8 @@
                         <a href="#stp" class="subtopic">3.3 STP/RSTP</a>
                         <a href="#wifi" class="subtopic">3.4 Беспроводные сети 802.11</a>
                         <a href="#lacp-security" class="subtopic">3.5 LACP и безопасность портов</a>
+                        <a href="#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
                     </div>
                 </div>
 
@@ -220,6 +222,30 @@ interface eth2
                         <li><strong>Безопасность</strong>: WPA3‑SAE, 802.1X (EAP), сегментация гостевых сетей, изоляция клиентов.</li>
                         <li><strong>Медиа‑доступ</strong>: CSMA/CA, RTS/CTS для уменьшения коллизий; DFS‑каналы и их ограничения.</li>
                     </ul>
+                    <div class="visual-guide">
+                        <h4>RF‑планирование</h4>
+                        <ul>
+                            <li><strong>Покрытие и мощность</strong>: ограничивайте мощность для баланса ячеек; целевой RSSI/SSID min‑RSSI для качества.</li>
+                            <li><strong>Интерференции</strong>: со‑канальная (CCI) и межканальная (ACI); используйте не пересекающиеся каналы.</li>
+                            <li><strong>Плотность</strong>: чем больше клиентов, тем уже каналы (20/40 МГц) и больше AP; ограничивайте низкие data‑rates.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Роуминг</h4>
+                        <ul>
+                            <li><strong>802.11k/v</strong>: обмен радио‑метриками и управление переходами клиента.</li>
+                            <li><strong>802.11r (FT)</strong>: быстрое переназначение ключей для сокращения задержек при handoff.</li>
+                            <li><strong>Соседние каналы</strong>: планируйте так, чтобы соседние AP имели разные каналы и схожий уровень сигнала.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>QoS в Wi‑Fi</h4>
+                        <ul>
+                            <li><strong>WMM/EDCA</strong>: очереди AC_VO/AC_VI/AC_BE/AC_BK с разными параметрами (AIFS, CW, TXOP).</li>
+                            <li><strong>Mapping DSCP→WMM</strong>: согласование с проводным QoS; избегайте приоритизации non‑real‑time.</li>
+                            <li><strong>Airtime Fairness</strong>: защита эфирного времени от «медленных» клиентов.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
@@ -231,10 +257,52 @@ interface eth2
                 </div>
             </section>
 
-            <div class="conclusion">
-                <h3>Поздравляем!</h3>
-                <p>Теперь вы умеете на практике различать и применять L2‑механизмы: понимать кадр Ethernet и ARP, настраивать VLAN/транки, объяснять работу STP/RSTP, базово планировать Wi‑Fi и использовать LACP/порт‑безопасность.</p>
-            </div>
+            <section id="ethernet-oam" class="topic-section">
+                <h2>3.6 Ethernet OAM</h2>
+                <div class="lesson-content">
+                    <p>Ethernet OAM — это набор механизмов для мониторинга и диагностики L2‑сервисов. Ключевые стандарты: 802.3ah (канальный OAM), 802.1ag/ITU‑T Y.1731 (CFM/OAM для обслуживания).</p>
+                    <div class="visual-guide">
+                        <h4>Компоненты и функции</h4>
+                        <ul>
+                            <li><strong>CFM домены/уровни (MEG/MD/MA)</strong>: иерархия обслуживаемых сущностей; уровни разделяют клиентские и провайдерские домены.</li>
+                            <li><strong>CCM</strong>: непрерывные контрольные сообщения для проверки целостности пути.</li>
+                            <li><strong>LB/LT</strong>: Loopback/Linktrace — аналог ping/traceroute на L2.</li>
+                            <li><strong>Y.1731 метрики</strong>: задержка, вариация задержки, потери, измерение SLA.</li>
+                            <li><strong>Fault management</strong>: AIS, RDI, локализация и сигнализация отказов.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика:</strong> OAM не заменяет SNMP/телеметрию, а дополняет их для быстрой локализации проблем внутри L2‑сервисов (E‑Line/E‑LAN).</p></div>
+                </div>
+            </section>
+
+            <section id="wifi-frames-controllers" class="topic-section">
+                <h2>3.7 Кадры Wi‑Fi и контроллеры</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>Типы кадров 802.11</h4>
+                        <ul>
+                            <li><strong>Управляющие</strong>: Beacon, Probe (Req/Resp), Authentication, Association — формируют соединение и объявляют параметры BSS.</li>
+                            <li><strong>Контрольные</strong>: RTS/CTS/ACK — управление эфиром и подтверждения.</li>
+                            <li><strong>Данные</strong>: полезная нагрузка, включая QoS Data для приоритизации трафика.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Безопасность и рукопожатия</h4>
+                        <ul>
+                            <li><strong>WPA2/WPA3</strong>: 4‑шаговое рукопожатие, SAE, PMF (Management Frame Protection).</li>
+                            <li><strong>Роуминг</strong>: 802.11k/v для подсказок, 802.11r (FT) для быстрого ключевого обмена.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Контроллерные архитектуры</h4>
+                        <ul>
+                            <li><strong>WLC + Lightweight AP</strong>: централизованная политика/РЧ‑параметры; CAPWAP для управления и туннелей данных.</li>
+                            <li><strong>Distributed/Cloud</strong>: облачная координация, локальный breakout трафика, автоподстройка RF.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </div>
 

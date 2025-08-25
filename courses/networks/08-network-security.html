@@ -108,6 +108,8 @@
                         <a href="#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
                         <a href="#firewall" class="subtopic">8.3 Межсетевые экраны</a>
                         <a href="#pki" class="subtopic">8.4 Для профессионалов</a>
+                        <a href="#ids-ips" class="subtopic">8.5 IDS/IPS</a>
+                        <a href="#nac-8021x" class="subtopic">8.6 NAC и 802.1X</a>
                     </div>
                 </div>
 
@@ -172,9 +174,19 @@
                         </ul>
                     </div>
                     <div class="visual-guide">
+                        <h4>Криптография и PKI углубление</h4>
+                        <ul>
+                            <li><strong>Ассиметричная/симметричная криптография</strong>: RSA/ECDSA для аутентификации; AES/ChaCha20 для шифрования данных.</li>
+                            <li><strong>Хэш‑функции/целостность</strong>: SHA‑2/SHA‑3, HMAC; назначение и угрозы коллизий.</li>
+                            <li><strong>PKI‑цепочки</strong>: Root/Intermediate/Leaf, OCSP/CRL, OCSP‑stapling.</li>
+                            <li><strong>HSM/KMS</strong>: хранение ключей, разграничение доступа, аудит операций.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
                         <h4>VPN</h4>
                         <ul>
                             <li><strong>Site‑to‑Site/Remote Access</strong>: выбор технологий (IPsec, SSL‑VPN, WireGuard), маршрутизация/политики.</li>
+                            <li><strong>PFS</strong>: новые ключи сеанса исключают компрометацию прошлых сессий при утечке долгосрочного ключа.</li>
                         </ul>
                     </div>
                 </div>
@@ -207,13 +219,65 @@
                             <li><strong>Политики</strong>: pinning (с осторожностью), минимизация доверенных CA, разделение ролей.</li>
                         </ul>
                     </div>
+                    <div class="visual-guide">
+                        <h4>Операционная безопасность PKI</h4>
+                        <ul>
+                            <li><strong>Разделение ролей</strong>: офлайн Root CA, онлайн Issuing CA, аудит ключевых операций.</li>
+                            <li><strong>Прозрачность сертификатов</strong>: CT‑логи, отслеживание и отзыв компрометированных сертификатов.</li>
+                            <li><strong>mTLS</strong>: взаимная аутентификация сервис‑сервис, короткоживущие сертификаты.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <div class="conclusion">
-                <h3>Поздравляем!</h3>
-                <p>Теперь вы умеете распознавать основные угрозы, выбирать механизмы защиты (TLS/VPN/IPsec, firewall) и ориентироваться в принципах PKI.</p>
-            </div>
+            <section id="ids-ips" class="topic-section">
+                <h2>8.5 IDS/IPS</h2>
+                <div class="lesson-content">
+                    <p>IDS/IPS анализируют сетевой трафик и событийные логи для обнаружения атак и аномалий; IPS может активно блокировать трафик. Решения бывают сетевыми (NIDS/NIPS) и хостовыми (HIDS/HIPS).</p>
+                    <div class="visual-guide">
+                        <h4>Подходы к детектированию</h4>
+                        <ul>
+                            <li><strong>Сигнатурный</strong>: сравнение с базой известных шаблонов атак.</li>
+                            <li><strong>Аномальный/поведенческий</strong>: статистика/ML, выявление отклонений.</li>
+                            <li><strong>Stateful L7</strong>: корреляция сессий/протоколов (HTTP/DNS/SMB и др.).</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Развёртывание и интеграция</h4>
+                        <ul>
+                            <li><strong>SPAN/TAP</strong> для зеркалирования трафика в NIDS; in‑line режим для NIPS.</li>
+                            <li><strong>Правила и обновления</strong>: жизненно важны актуальные сигнатуры и исключения (tuning).</li>
+                            <li><strong>SIEM/SOAR</strong>: корреляция событий и автоматизация реакции.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Ложные срабатывания</strong> неизбежны: настраивайте пороги и исключения; комбинируйте с сетевой сегментацией и MFA.</p></div>
+                </div>
+            </section>
+
+            <section id="nac-8021x" class="topic-section">
+                <h2>8.6 NAC и 802.1X</h2>
+                <div class="lesson-content">
+                    <p>Network Access Control (NAC) управляет допуском устройств в сеть на основе аутентификации/авторизации и состояния устройства.</p>
+                    <div class="visual-guide">
+                        <h4>802.1X в двух словах</h4>
+                        <ul>
+                            <li><strong>Роли</strong>: supplicant (клиент), authenticator (коммутатор/AP), authentication server (RADIUS).</li>
+                            <li><strong>EAP‑методы</strong>: PEAP/EAP‑TLS — баланс между удобством и безопасностью (сертификаты).</li>
+                            <li><strong>MAB</strong>: резервная авторизация по MAC, как правило, с ограниченными правами.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Политики доступа</h4>
+                        <ul>
+                            <li><strong>VLAN‑назначение/dACL</strong>: динамическая сегментация на порту по результатам авторизации.</li>
+                            <li><strong>Posture</strong>: проверка соответствия (антивирус, шифрование диска, патчи) и карантинные VLAN.</li>
+                            <li><strong>Гостевой доступ</strong>: временные учётные записи/порталы, изоляция.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика:</strong> начинайте с «low‑impact» режимов (monitor, closed‑mode с исключениями), чтобы не нарушить бизнес‑процессы.</p></div>
+                </div>
+            </section>
+
         </div>
     </div>
 

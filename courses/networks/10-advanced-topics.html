@@ -126,7 +126,12 @@
                         <a href="#iot" class="subtopic active">10.1 IoT и MQTT</a>
                         <a href="#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
                         <a href="#sdn" class="subtopic">10.3 SDN</a>
-                        <a href="#k8s" class="subtopic">10.4 Для профессионалов</a>
+                        <a href="#sdwan" class="subtopic">10.4 SD‑WAN</a>
+                        <a href="#automation" class="subtopic">10.5 Автоматизация сетей</a>
+                        <a href="#k8s" class="subtopic">10.6 Для профессионалов</a>
+                        <a href="#mpls-evpn-vxlan" class="subtopic">10.7 MPLS и EVPN/VXLAN</a>
+                        <a href="#lte-5g" class="subtopic">10.8 LTE/5G основы</a>
+                        <a href="#optics-l1" class="subtopic">10.9 Оптика и L1</a>
                     </div>
                 </div>
             </div>
@@ -177,9 +182,53 @@
                     </div>
                 </div>
             </section>
+            <section id="sdwan" class="topic-section">
+                <h2>10.4 SD‑WAN</h2>
+                <div class="lesson-content">
+                    <p>SD‑WAN использует наложную сеть поверх множества транспортов (MPLS/Интернет/LTE) и централизованную политику для выбора пути на основе метрик качества (потери/задержка/джиттер) и приложений.</p>
+                    <div class="visual-guide">
+                        <h4>Ключевые элементы SD‑WAN</h4>
+                        <ul>
+                            <li><strong>Контроллер/Оркестратор</strong>: управление политиками и конфигурацией узлов.</li>
+                            <li><strong>Edge‑устройства</strong>: шифрование, измерение SLA, динамический выбор пути (DIA/ремаршрутизация).</li>
+                            <li><strong>Overlay</strong>: IPsec/DTLS туннели, сегментация VRF/политики.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Политики и QoS</h4>
+                        <ul>
+                            <li><strong>Application‑Aware Routing</strong>: выбор пути по сигнатурам/DSCP/портам.</li>
+                            <li><strong>Forward Error Correction/Packet Duplication</strong>: улучшение качества на ненадёжных каналах.</li>
+                            <li><strong>Path Conditioning</strong>: shaping/policing/ремаркировка.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="automation" class="topic-section">
+                <h2>10.5 Автоматизация сетей</h2>
+                <div class="lesson-content">
+                    <p>Автоматизация снижает ошибки и ускоряет изменения через декларативные модели и API. Типичный стек: инвентарь, генерация конфигураций по шаблонам, транзакционное применение, валидация.</p>
+                    <div class="visual-guide">
+                        <h4>Инструменты и интерфейсы</h4>
+                        <ul>
+                            <li><strong>YANG/NETCONF/RESTCONF/gNMI</strong>: модельно‑ориентированные интерфейсы устройств.</li>
+                            <li><strong>Ansible/Terraform</strong>: идемпотентное управление и инфраструктура как код.</li>
+                            <li><strong>CI/CD</strong>: тесты конфигураций, pre‑change проверки, авто‑rollback.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Проверка состояния сети</h4>
+                        <ul>
+                            <li><strong>Intent‑валидаторы</strong>: соответствие желаемому состоянию (reachability, policy).</li>
+                            <li><strong>Телеметрия</strong>: потоковые метрики, событийные шины, автогенерация алертов.</li>
+                            <li><strong>Digital Twin</strong>: моделирование изменений до применения.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
             <section id="k8s" class="topic-section">
-                <h2>10.4 Для профессионалов</h2>
+                <h2>10.6 Для профессионалов</h2>
                 <div class="lesson-content">
                     <p>Сеть Kubernetes базируется на модели «каждый Pod имеет собственный IP, все Pod‑ы связны». CNI‑плагин реализует передачу и политику. kube‑proxy обеспечивает сервисы L4, Ingress‑контроллер — L7. В продакшене часто применяются overlay/underlay, eBPF и маршрутизация (например, BGP) для масштабируемости.</p>
                     <div class="visual-guide">
@@ -193,10 +242,72 @@
                 </div>
             </section>
 
-            <div class="conclusion">
-                <h3>Поздравляем!</h3>
-                <p>Курс завершён. Теперь вы умеете связывать базовые сетевые знания с современными сценариями: IoT, облачные сети, SDN и Kubernetes‑сетевую модель.</p>
-            </div>
+            <section id="mpls-evpn-vxlan" class="topic-section">
+                <h2>10.7 MPLS и EVPN/VXLAN</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>MPLS кратко</h4>
+                        <ul>
+                            <li><strong>Метки</strong>: быстрый LSR‑пересыл на основе label stack; LDP/RSVP/IS‑IS/OSPF распространяют метки/пути.</li>
+                            <li><strong>L2/L3 VPN</strong>: VPLS/VPWS и L3VPN (RFC 4364) изолируют клиентов поверх провайдерской сети.</li>
+                            <li><strong>TE</strong>: RSVP‑TE или Segment Routing для гарантированных путей и SLA.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>VXLAN и EVPN</h4>
+                        <ul>
+                            <li><strong>VXLAN</strong>: overlay L2 поверх L3 с VNI (24 бита), VTEP инкапсулирует/деинкапсулирует кадры.</li>
+                            <li><strong>Flood‑and‑Learn vs EVPN</strong>: EVPN (BGP) как control‑plane для MAC/IP, ARP‑suppress, мультихоминг (ESI/DF).</li>
+                            <li><strong>EVPN Route Types</strong>: RT‑2 (MAC/IP), RT‑5 (IP Prefix), RT‑7 (ES routes) — основа фабрик DC.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика:</strong> underlay L3 Clos (IS‑IS/OSPF + ECMP), overlay EVPN/VXLAN с MLAG/ESI обеспечивает масштаб и отказоустойчивость в ЦОД.</p></div>
+                </div>
+            </section>
+
+            <section id="lte-5g" class="topic-section">
+                <h2>10.8 LTE/5G основы</h2>
+                <div class="lesson-content">
+                    <p>Сотовые сети обеспечивают мобильный доступ с разделением плоскостей управления и пользователя.</p>
+                    <div class="visual-guide">
+                        <h4>Архитектура</h4>
+                        <ul>
+                            <li><strong>LTE (EPC)</strong>: eNodeB, MME (control), SGW/PGW (user‑plane).</li>
+                            <li><strong>5G (5GC)</strong>: gNodeB, AMF/SMF (control), UPF (user‑plane); сервис‑ориентированная архитектура.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>QoS и режимы</h4>
+                        <ul>
+                            <li><strong>NSA/SA</strong>: неполно‑ и полно‑самостоятельный 5G.</li>
+                            <li><strong>Bearer/QCI/5QI</strong>: классы QoS для разных сервисов, приоритет и задержка.</li>
+                            <li><strong>Network Slicing</strong>: логическая изоляция сетей под сервисы.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="optics-l1" class="topic-section">
+                <h2>10.9 Оптика и L1</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>Среды и интерфейсы</h4>
+                        <ul>
+                            <li><strong>SMF/MMF</strong>: одномод/многомод; диапазоны волн (1310/1550 нм), влияние дисперсий.</li>
+                            <li><strong>Трансиверы</strong>: SFP(+)/SFP28/QSFP(DD), скорости/дальности, BiDi/DSM.</li>
+                            <li><strong>Бюджет оптики</strong>: мощность, затухание, коннекторы/сплайсы; простая проверка «сойдётся/не сойдётся».</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>OAM/ETH на L1/L2</h4>
+                        <ul>
+                            <li><strong>Ethernet PHY</strong>: 1000BASE‑T/10GBASE‑SR/LR/ER и их ограничения по среде.</li>
+                            <li><strong>DWDM</strong>: уплотнение длин волн; транспондеры/мультиплексоры и OSNR (очень кратко).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </div>
 

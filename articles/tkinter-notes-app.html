@@ -115,7 +115,7 @@
           <a href="../about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
         </div>
         <div class="-mr-2 flex items-center md:hidden">
-          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-label="Открыть основное меню" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <div class="burger-icon">
               <span class="line"></span>
@@ -128,7 +128,7 @@
     </div>
     
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden">
+    <div id="mobile-menu" class="md:hidden">
       <div class="pt-2 pb-3 space-y-1 px-4">
         <a href="../index.html#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
 
@@ -211,7 +211,7 @@
         <p>Перед началом разработки важно продумать структуру приложения и его интерфейс. Это поможет избежать множественных переделок в процессе разработки.</p>
 
         <h3>Структура приложения</h3>
-        <p>Перед началом разработки важно продумать структуру приложения и его интерфейс. Это поможет избежать множественных переделок в процессе разработки.</p>
+        <p>Подготовьте модульную структуру: вынесите создание виджетов, обработчики событий и логику сохранения данных в отдельные методы/классы. Это упростит сопровождение и развитие приложения.</p>
 
         <h3>Основные компоненты</h3>
         <ul>
@@ -617,6 +617,15 @@ if __name__ == "__main__":
         </blockquote>
 
         <p>Поздравляем! Вы создали свое первое GUI приложение на Python!</p>
+      </section>
+      <section id="course-cta">
+        <div class="highlight-box">
+          <h3>Продолжайте обучение бесплатно</h3>
+          <p class="mt-2">Хотите системно прокачать Python? Пройдите наш бесплатный курс: от основ до практики.</p>
+                     <div class="mt-4">
+             <a href="../courses/python/01-python-basics.html" class="btn-primary">Перейти к бесплатному курсу Python</a>
+           </div>
+        </div>
       </section>
     </article>
     </div>

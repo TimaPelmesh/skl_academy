@@ -947,15 +947,48 @@ footer {
 }
 
 /* Стили для карточек статей */
-.article-card {
+ .article-card {
   position: relative;
   overflow: hidden;
-  background-color: #fff;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+
 .article-card:hover {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  border-color: #e2e8f0;
 }
+
+.article-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.article-card .course-icon-container {
+  background: #f3f4f6;
+}
+
+.article-card .course-button {
+  background-color: #4f46e5;
+}
+
+.article-card .course-button:hover {
+  background-color: #4338ca;
+}
+
+/* Чипы-теги в карточках статей */
+.article-card .mt-3 .inline-block.bg-gray-100 {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+}
+
 
 .article-icon-bg {
   opacity: 0.05;
@@ -965,7 +998,8 @@ footer {
 }
 
 .article-card:hover .article-icon-bg {
-  opacity: 0.08;
+  opacity: 0.09;
+  transform: none;
 }
 
  

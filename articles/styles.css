@@ -716,3 +716,15 @@
     justify-content: center;
   }
 } 
+
+.article-content a.btn-primary {
+  color: #ffffff !important;
+  text-decoration: none;
+  border: none;
+}
+
+.article-content a.btn-secondary {
+  color: var(--text-primary) !important;
+  text-decoration: none;
+  border: 1px solid var(--border-light);
+} 

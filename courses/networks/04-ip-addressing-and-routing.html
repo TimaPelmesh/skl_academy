@@ -66,6 +66,7 @@
                         <a href="#nat" class="subtopic">4.2 NAT</a>
                         <a href="#ipv6" class="subtopic">4.3 IPv6</a>
                         <a href="#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
                     </div>
                 </div>
 
@@ -196,13 +197,13 @@ ip route
                             <li><strong>Запись сокращением</strong>: правила сдваивания нулей и двойного двоеточия.</li>
                         </ul>
                     </div>
-                    <div class="code-example">
-<pre><code class="bash"># Просмотр IPv6
-# Windows
-netsh interface ipv6 show address
-# Linux/macOS
-ip -6 addr
-</code></pre>
+                    <div class="visual-guide">
+                        <h4>Заголовок и ICMPv6</h4>
+                        <ul>
+                            <li><strong>Заголовок IPv6</strong>: фиксированный 40 байт + расширения (Routing, Fragment, AH/ESP и др.).</li>
+                            <li><strong>ICMPv6</strong>: критичен для работы (PMTUD, RA/RS/NS/NA, Redirect); его фильтрация ломает стек.</li>
+                            <li><strong>Anycast</strong>: один адрес на нескольких узлах для ближайшего по маршруту.</li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -216,15 +217,35 @@ ip -6 addr
                         <li><strong>Dual‑stack и миграция</strong>: NAT64, DNS64, NPTv6, туннели.</li>
                         <li><strong>Безопасность</strong>: RA Guard, DHCPv6 Guard, контроль ICMPv6; особенности фильтрации.</li>
                     </ul>
+                    <div class="visual-guide">
+                        <h4>Переход и совместимость</h4>
+                        <ul>
+                            <li><strong>464XLAT</strong>, <strong>DS‑Lite</strong>, <strong>MAP‑T/MAP‑E</strong>: варианты для провайдеров и enterprise.</li>
+                            <li><strong>Нумерация</strong>: EUI‑64, Privacy Extensions (RFC 4941/8981) и влияние на наблюдаемость.</li>
+                            <li><strong>Суммаризация</strong>: агрегируйте префиксы между площадками для устойчивой маршрутизации.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ipv6-services" class="topic-section">
+                <h2>4.5 IPv6 сервисы</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>Сетевые сервисы</h4>
+                        <ul>
+                            <li><strong>DNS</strong>: записи AAAA, обратные зоны ip6.arpa; EDNS0, DNSSEC.</li>
+                            <li><strong>DHCPv6‑опции</strong>: Prefix Delegation (PD), DNS‑сервера, домены поиска.</li>
+                            <li><strong>MLD/IGMPv3</strong>: управление multicast‑подписками; MLD Snooping на L2.</li>
+                            <li><strong>Service Discovery</strong>: mDNS/Bonjour/LLMNR нюансы в IPv6‑сегментах.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>RA‑флаги</strong>: A/M/O управляют режимами SLAAC/DHCPv6; согласуйте с политикой адресации.</p></div>
                 </div>
             </section>
 
             
 
-            <div class="conclusion">
-                <h3>Поздравляем!</h3>
-                <p>Теперь вы умеете проектировать IPv4‑подсети, объяснять принципы NAT, работать с основами IPv6 (включая SLAAC/RA/ND) и ориентироваться в типах адресов.</p>
-            </div>
         </div>
     </div>
 

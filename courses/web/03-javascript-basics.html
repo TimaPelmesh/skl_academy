@@ -135,6 +135,14 @@
                         <a href="#forms-js" class="subtopic">3.7 Формы в JS</a>
                         <a href="#storage" class="subtopic">3.8 Хранение данных</a>
                         <a href="#async-fetch" class="subtopic">3.9 Асинхронность и Fetch</a>
+                        <a href="#es6-modules" class="subtopic">3.10 ES6+ и модули</a>
+                        <a href="#web-apis" class="subtopic">3.11 Web APIs</a>
+                        <a href="#perf-vitals" class="subtopic">3.12 Производительность (INP/LCP/CLS)</a>
+                        <a href="#security" class="subtopic">3.13 Безопасность: CSP/XSS/CORS</a>
+                        <a href="#tooling" class="subtopic">3.14 Инструменты: npm, Vite/Webpack</a>
+                        <a href="#testing" class="subtopic">3.15 Тестирование: Jest/Playwright</a>
+                        <a href="#frameworks" class="subtopic">3.16 Фреймворки: React/Vue</a>
+                        <a href="#best-practices" class="subtopic">3.17 Best practices</a>
                         <a href="#module3-project" class="subtopic">Итоговый проект модуля 3</a>
                     </div>
                 </div>
@@ -297,6 +305,155 @@ localStorage.setItem('notes', JSON.stringify(notes));</code></pre>
 loadPosts();</code></pre>
                 </div>
                 <div class="exercise"><h4>Практика</h4><p>Получите 3 поста из JSONPlaceholder и выведите заголовки на страницу.</p></div>
+            </section>
+
+            <!-- 3.10 -->
+            <section id="es6-modules" class="topic-section">
+                <h2>3.10 Современный JS (ES6+) и модули</h2>
+                <ul>
+                    <li>Деструктуризация, rest/spread, шаблонные строки, опциональная цепочка <code>?.</code>, nullish‑объединение <code>??</code>.</li>
+                    <li>Коллекции: <code>Map</code>, <code>Set</code>, <code>WeakMap</code>, <code>WeakSet</code>.</li>
+                    <li>Модули: <code>&lt;script type="module"&gt;</code>, <code>import</code>/<code>export</code>, отложенная загрузка.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;script type="module"&gt;
+  import { sum } from './utils/math.js';
+  console.log(sum(2, 3));
+&lt;/script&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.11 -->
+            <section id="web-apis" class="topic-section">
+                <h2>3.11 Web APIs: события, Fetch/Streams, Storage</h2>
+                <h3>События</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">const controller = new AbortController();
+const handler = (e) =&gt; console.log('mousemove');
+document.addEventListener('mousemove', handler, { passive: true, signal: controller.signal });
+setTimeout(() =&gt; controller.abort(), 3000);</code></pre>
+                </div>
+                <h3>Fetch + Streams</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">const res = await fetch('/big.json');
+const reader = res.body.getReader();
+let received = 0;
+while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+  received += value.length;
+  console.log('Получено байт:', received);
+}</code></pre>
+                </div>
+                <h3>Cache/Storage</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">await caches.open('app-v1').then((cache) =&gt; cache.add('/offline.html'));
+const db = await indexedDB.open('app-db', 1);</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.12 -->
+            <section id="perf-vitals" class="topic-section">
+                <h2>3.12 Производительность (LCP/CLS/INP)</h2>
+                <ul>
+                    <li><strong>LCP:</strong> оптимизируйте главное изображение: <code>preload</code>/<code>fetchpriority</code>, подходящий формат.</li>
+                    <li><strong>CLS:</strong> резервируйте место медиаконтенту, не вставляйте динамику над контентом.</li>
+                    <li><strong>INP:</strong> обработчики событий — быстрые, используйте <code>passive</code>, делайте работу вне главного потока через <code>requestIdleCallback</code>/<code>Web Workers</code>.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;link rel="preload" as="image" href="/img/hero@1x.avif" imagesrcset="/img/hero@1x.avif 1x, /img/hero@2x.avif 2x" imagesizes="100vw"&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.13 -->
+            <section id="security" class="topic-section">
+                <h2>3.13 Безопасность: CSP, XSS, CORS</h2>
+                <ul>
+                    <li><strong>CSP:</strong> ограничивает источники скриптов/стилей/изображений. Избегайте inline‑скриптов, используйте nonce/sha256.</li>
+                    <li><strong>XSS:</strong> никогда не вставляйте пользовательский ввод как HTML; экранируйте, используйте <code>textContent</code>.</li>
+                    <li><strong>CORS:</strong> сервер должен явно разрешать домены/методы/заголовки; на клиенте — используйте <code>mode: 'cors'</code>.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-abc'; img-src 'self' data:; object-src 'none'"&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.14 -->
+            <section id="tooling" class="topic-section">
+                <h2>3.14 Инструменты: npm, Vite/Webpack, PostCSS, Sass</h2>
+                <ul>
+                    <li><strong>npm:</strong> управление зависимостями, команды <code>scripts</code>.</li>
+                    <li><strong>Vite:</strong> дев‑сервер, HMR, сборка с esbuild/rollup.</li>
+                    <li><strong>Webpack:</strong> гибкая сборка модулей, код‑сплиттинг.</li>
+                    <li><strong>PostCSS/Sass:</strong> автопрефиксы, nested‑синтаксис, переменные и миксины.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-json">{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.15 -->
+            <section id="testing" class="topic-section">
+                <h2>3.15 Тестирование: Jest и Playwright</h2>
+                <ul>
+                    <li><strong>Jest:</strong> модульные тесты, моки, снапшоты.</li>
+                    <li><strong>Playwright:</strong> e2e‑тесты в реальном браузере; авто‑ожидания, тестирование доступности.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-javascript">// jest
+import { sum } from './sum';
+test('adds', () =&gt; expect(sum(1,2)).toBe(3));
+
+// playwright.config.ts
+// test('home page', async ({ page }) =&gt; { await page.goto('/'); await expect(page).toHaveTitle(/SKL/); });</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.16 -->
+            <section id="frameworks" class="topic-section">
+                <h2>3.16 Фреймворки: React и Vue</h2>
+                <p>Фреймворки упрощают построение сложных интерфейсов за счёт компонентов и реактивности.</p>
+                <h3>React</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">import { useState } from 'react';
+function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;button onClick={() =&gt; setCount(count + 1)}&gt;{count}&lt;/button&gt;;
+}</code></pre>
+                </div>
+                <h3>Vue</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;script setup&gt;
+import { ref } from 'vue';
+const count = ref(0);
+&lt;/script&gt;
+&lt;template&gt;
+  &lt;button @click="count++"&gt;{{ count }}&lt;/button&gt;
+&lt;/template&gt;</code></pre>
+                </div>
+                <div class="note"><p><strong>Лучшие практики:</strong> компонентная архитектура, состояние как источник истины, типизация (TS), тесты, линтеры (ESLint/Prettier), разделение кода.</p></div>
+            </section>
+
+            <!-- 3.17 -->
+            <section id="best-practices" class="topic-section">
+                <h2>3.17 Best practices</h2>
+                <ul>
+                    <li><strong>Прогрессивное улучшение:</strong> базовая функциональность без JS, улучшения поверх.</li>
+                    <li><strong>Доступность по умолчанию:</strong> семантика, фокус‑индикаторы, контраст, клавиатурная навигация.</li>
+                    <li><strong>Производительность:</strong> бюджет по размерам, lazy‑loading, code‑splitting, критический CSS, кэширование.</li>
+                    <li><strong>Безопасность:</strong> CSP, избегать <code>innerHTML</code>, валидация на клиенте и сервере, sanitize.</li>
+                    <li><strong>Код‑стайл:</strong> ESLint + Prettier, единый формат, meaningful‑имена, маленькие функции.</li>
+                    <li><strong>Типизация:</strong> TypeScript для масштабируемости и снижения числа ошибок.</li>
+                    <li><strong>Git‑практики:</strong> маленькие коммиты, осмысленные сообщения, PR‑ревью, CI.</li>
+                    <li><strong>Тесты:</strong> пирамида тестирования: unit &gt; integration &gt; e2e, покрытия критических путей.</li>
+                    <li><strong>Мониторинг:</strong> логирование ошибок (Sentry), метрики Web Vitals, профилирование.</li>
+                </ul>
             </section>
 
             <!-- Итоговый проект -->

@@ -101,6 +101,9 @@
                         <a href="#links-images" class="subtopic">1.3 Ссылки и изображения</a>
                         <a href="#semantic-markup" class="subtopic">1.4 Семантическая разметка</a>
                         <a href="#forms" class="subtopic">1.5 Формы</a>
+                        <a href="#a11y-aria" class="subtopic">1.6 Доступность (A11y) и ARIA</a>
+                        <a href="#seo-html" class="subtopic">1.7 SEO для HTML</a>
+                        <a href="#media-retina" class="subtopic">1.8 Адаптивные изображения и ретина</a>
                         <a href="#module1-project" class="subtopic">Итоговый проект модуля 1</a>
                     </div>
                 </div>
@@ -381,6 +384,103 @@
                 <div class="exercise">
                     <h4>Практика</h4>
                     <p>Сделайте форму обратной связи: имя, email, тема, сообщение, чекбокс согласия, кнопка отправки. Попробуйте <code>GET</code> и <code>POST</code>.</p>
+                </div>
+            </section>
+
+            <!-- 1.6 -->
+            <section id="a11y-aria" class="topic-section">
+                <h2>1.6 Доступность (A11y) и ARIA</h2>
+                <p>Доступность — это про то, чтобы интерфейсом могли пользоваться люди с разными возможностями и устройствами. Следуйте стандартам <strong>WCAG</strong>, используйте нативную семантику и дополняйте её <strong>ARIA</strong>, когда это необходимо.</p>
+                <h3>Фокус и клавиатурная навигация</h3>
+                <ul>
+                    <li>Порядок табуляции следует логике документа. Не используйте <code>tabindex</code> &gt; 0, предпочитайте нативный порядок.</li>
+                    <li>Кнопки должны быть <code>&lt;button&gt;</code>, а не <code>&lt;div role="button"&gt;</code>. Если всё же нужен кастом — добавляйте <code>role</code>, <code>tabindex="0"</code>, обрабатывайте клавиши Enter/Space.</li>
+                    <li>Добавляйте ссылку «пропустить к содержимому» в самом начале: <code>&lt;a class="skip-link" href="#content"&gt;К основному содержимому&lt;/a&gt;</code>.</li>
+                </ul>
+                <h3>ARIA-атрибуты и лендмарки</h3>
+                <ul>
+                    <li><code>role</code> для уточнения роли, когда нет подходящего тега.</li>
+                    <li><code>aria-label</code>, <code>aria-labelledby</code>, <code>aria-describedby</code> — альтернативные/связанные подписи.</li>
+                    <li><code>aria-expanded</code>, <code>aria-controls</code> — состояние раскрывающихся областей.</li>
+                    <li><code>aria-live="polite|assertive"</code>, <code>aria-busy</code> — живые области и загрузка.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;button aria-expanded="false" aria-controls="acc-1" id="acc-btn-1"&gt;Развернуть&lt;/button&gt;
+&lt;section id="acc-1" role="region" aria-labelledby="acc-btn-1" hidden&gt;
+  &lt;p&gt;Скрываемый контент&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+                </div>
+                <h3>Формы и ошибки</h3>
+                <ul>
+                    <li>Каждое поле связано с <code>&lt;label for&gt;</code>. Не используйте <code>placeholder</code> вместо метки.</li>
+                    <li>Ошибки сообщайте текстом, связывайте с полем через <code>aria-describedby</code>, фокусируйте первую ошибку.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" type="email" aria-describedby="email-err" required&gt;
+&lt;p id="email-err" role="alert" hidden&gt;Введите корректный email&lt;/p&gt;</code></pre>
+                </div>
+                <h3>Контраст и медиа</h3>
+                <ul>
+                    <li>Контраст текста к фону: минимум 4.5:1 для обычного текста.</li>
+                    <li>У изображений обязателен осмысленный <code>alt</code> (декоративным — пустой <code>alt=""</code>).</li>
+                    <li>Для иконок SVG: добавляйте <code>role="img"</code> и <code>aria-label</code> при необходимости.</li>
+                </ul>
+                <div class="note"><p><strong>Правило:</strong> Сначала используйте семантические теги. ARIA — только если нельзя иначе.</p></div>
+            </section>
+
+            <!-- 1.7 -->
+            <section id="seo-html" class="topic-section">
+                <h2>1.7 SEO для HTML</h2>
+                <ul>
+                    <li><strong>Title/Description:</strong> уникальные на страницу; title ≈ 50–60 знаков, description ≈ 140–160.</li>
+                    <li><strong>Заголовки:</strong> один <code>h1</code>, далее иерархия <code>h2–h3</code>.</li>
+                    <li><strong>Open Graph/Twitter:</strong> корректные превью при шаринге.</li>
+                    <li><strong>Canonical:</strong> укажите канонический URL, чтобы избежать дублей.</li>
+                    <li><strong>Structured Data:</strong> JSON‑LD для статей, курсов, хлебных крошек (см. в &lt;head&gt;).</li>
+                    <li><strong>robots.txt / sitemap.xml:</strong> помогайте поисковикам индексировать сайт.</li>
+                    <li><strong>Core Web Vitals:</strong> LCP, CLS, INP влияют на ранжирование — оптимизируйте критический рендеринг и изображения.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;link rel="canonical" href="https://example.com/page" /&gt;
+&lt;meta property="og:title" content="Заголовок" /&gt;
+&lt;meta property="og:description" content="Описание" /&gt;
+&lt;meta property="og:image" content="https://example.com/preview.jpg" /&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 1.8 -->
+            <section id="media-retina" class="topic-section">
+                <h2>1.8 Адаптивные изображения и ретина</h2>
+                <p>Используйте правильные форматы и отдавайте изображения под размер экрана и плотность пикселей. Указывайте явные <code>width/height</code> для предотвращения CLS.</p>
+                <h3>&lt;picture&gt;, <code>srcset</code> и плотности</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;picture&gt;
+  &lt;source type="image/avif" srcset="/img/hero@1x.avif 1x, /img/hero@2x.avif 2x"&gt;
+  &lt;source type="image/webp" srcset="/img/hero@1x.webp 1x, /img/hero@2x.webp 2x"&gt;
+  &lt;img src="/img/hero@1x.jpg" srcset="/img/hero@2x.jpg 2x" sizes="(max-width: 768px) 100vw, 1200px" alt="Обложка" width="1200" height="600" loading="lazy" decoding="async" fetchpriority="high"&gt;
+&lt;/picture&gt;</code></pre>
+                </div>
+                <h3>SVG и иконки</h3>
+                <ul>
+                    <li>Для одноцветных иконок используйте SVG‑спрайты, меняйте цвет через CSS.</li>
+                    <li>Добавляйте <code>aria-hidden="true"</code> декоративным иконкам.</li>
+                </ul>
+                <h3>Фоновые изображения и ретина в CSS</h3>
+                <div class="code-example">
+<pre><code class="language-css">.hero {
+  background-image: image-set(
+    url('/img/hero-bg@1x.jpg') 1x,
+    url('/img/hero-bg@2x.jpg') 2x
+  );
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}</code></pre>
+                </div>
+                <div class="note"><p><strong>Подсказка:</strong> Для LCP‑изображения используйте <code>fetchpriority="high"</code> и не лените загрузку.</p></div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Замените изображения на главной на AVIF/WebP с ретина‑вариантами, добавьте <code>width/height</code> и корректные <code>alt</code>.</p>
                 </div>
             </section>
 

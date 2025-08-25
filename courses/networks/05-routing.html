@@ -78,6 +78,10 @@
                         <a href="#bgp" class="subtopic">5.3 BGP основы</a>
                         <a href="#acl" class="subtopic">5.4 ACL и политики</a>
                         <a href="#qos" class="subtopic">5.5 QoS основы</a>
+                        <a href="#multicast" class="subtopic">5.6 Multicast</a>
+                        <a href="#igp" class="subtopic">5.7 IS‑IS/EIGRP/RIP</a>
+                        <a href="#te" class="subtopic">5.8 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="#qos-deep" class="subtopic">5.9 QoS углубление</a>
                     </div>
                 </div>
 
@@ -167,6 +171,18 @@ ip route add 10.10.0.0/16 via 192.168.1.1
                         </ul>
                     </div>
                     <div class="note"><p><strong>OSPFv2/OSPFv3:</strong> для IPv4/IPv6 соответственно; метрика «стоимость» зависит от опорной пропускной способности (reference‑bandwidth) и должна быть настроена для высокоскоростных линков, иначе все 10G+/40G+ будут иметь одинаковую стоимость.</p></div>
+                    <div class="visual-guide">
+                        <h4>Масштабирование и устойчивость OSPF</h4>
+                        <ul>
+                            <li><strong>Типы областей</strong>: Stub/Totally Stub/NSSA/Totally NSSA уменьшают объём внешних LSA в не‑backbone областях.</li>
+                            <li><strong>Summarization</strong>: агрегация префиксов на границах областей (ABR/ASBR) для сокращения таблиц.</li>
+                            <li><strong>SPF‑таймеры</strong>: минимизация частоты перерасчётов (SPF delay/hold), LSA throttling для снижения нагрузки.</li>
+                            <li><strong>Flooding scope</strong>: корректные области и ограничения area range минимизируют распространение изменений.</li>
+                            <li><strong>Состояния соседства</strong>: Down → Init → 2‑Way → ExStart → Exchange → Loading → Full; несоответствие MTU/времени/аутентификации ломает соседство.</li>
+                            <li><strong>DR/BDR</strong>: на многодоступных сегментах уменьшают число смежностей и LSA‑штормы.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Фильтрация и политика в OSPF:</strong> предпочтительно через summarization и точные area‑границы; route‑filter на ASBR/ABR применять аккуратно, чтобы не ломать конвергенцию.</p></div>
                 </div>
             </section>
 
@@ -183,6 +199,24 @@ ip route add 10.10.0.0/16 via 192.168.1.1
                         </ul>
                     </div>
                     <div class="note"><p><strong>Выбор пути зависит от вендора:</strong> <em>weight</em> — локальный параметр (не распространяется), <em>local‑pref</em> действует в пределах AS, <em>MED</em> сравнивается, как правило, только для одинакового соседнего AS. Атрибут <em>next‑hop</em>, а также политика (AS‑prepend/communities) часто важнее длины AS‑PATH.</p></div>
+                    <div class="visual-guide">
+                        <h4>Масштабирование и устойчивость BGP</h4>
+                        <ul>
+                            <li><strong>Route Reflectors</strong> и <strong>Конфедерации</strong>: уменьшают полносвязность iBGP и разгружают control‑plane.</li>
+                            <li><strong>ECMP/Multipath</strong>: параллельные пути при идентичных атрибутах для повышения пропускной способности/устойчивости.</li>
+                            <li><strong>Max‑Prefix / Dampening</strong>: защита от избыточных апдейтов и флаппинга префиксов.</li>
+                            <li><strong>Graceful Restart/LLGR</strong>: сохранение пересылки трафика при кратковременных сбоях control‑plane.</li>
+                            <li><strong>Add‑Path/ORR</strong>: улучшение разнообразия путей и уменьшение асимметрий в крупных сетях.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Безопасность и валидация маршрутов</h4>
+                        <ul>
+                            <li><strong>GTSM/TTL Security</strong> и MD5 для eBGP‑сессий на смежных линках.</li>
+                            <li><strong>RPKI (ROA/Origin Validation)</strong>: проверка, что объявитель уполномочен на префикс.</li>
+                            <li><strong>Prefix‑фильтры/AS‑path фильтры</strong> и ограничение <em>next‑hop</em> для снижения рисков утечек.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
@@ -212,13 +246,140 @@ ip route add 10.10.0.0/16 via 192.168.1.1
                     </ul>
                     <div class="note"><p><strong>Стандарты и маркировки:</strong> DiffServ (RFC2474/2475), DSCP классы (EF/AF/BE), соотнесение с PCP (802.1Q).</p></div>
                     <div class="note"><p><strong>Практика:</strong> QoS эффективен только end‑to‑end; согласуйте классы/метки по всей цепочке, учитывайте переписание DSCP.</p></div>
+                    <div class="visual-guide">
+                        <h4>Модели QoS</h4>
+                        <ul>
+                            <li><strong>Best Effort</strong>: отсутствие гарантий; весь трафик одинаков.</li>
+                            <li><strong>IntServ</strong>: RSVP‑резервация ресурсов, масштабируется ограниченно.</li>
+                            <li><strong>DiffServ</strong>: классы обслуживания и PHB (EF/AF/BE), масштабируемая модель для больших сетей.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Политики и границы доверия</h4>
+                        <ul>
+                            <li><strong>Trust boundary</strong>: где принимать метки DSCP/CoS, где переписывать.</li>
+                            <li><strong>Mapping</strong>: DSCP → очереди/профили → приоритеты L2 (PCP), CoS → DSCP на uplink.</li>
+                            <li><strong>Противодействие злоупотреблениям</strong>: полисинг на доступе, приоритизация лишь для критичных классов.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <div class="conclusion">
-                <h3>Поздравляем!</h3>
-                <p>Теперь вы умеете применять L3‑механизмы: настраивать статические маршруты, объяснять основы OSPF/BGP, использовать ACL для сегментации и проектировать базовые политики QoS.</p>
-            </div>
+            <section id="multicast" class="topic-section">
+                <h2>5.6 Multicast</h2>
+                <div class="lesson-content">
+                    <p>Multicast обеспечивает доставку «один‑ко‑многим» без дублирования трафика на источнике. Используются специальные адреса и протоколы управления группами и деревьями распространения.</p>
+                    <div class="visual-guide">
+                        <h4>Адреса и основы</h4>
+                        <ul>
+                            <li><strong>IPv4</strong>: 224.0.0.0/4 (link‑local 224.0.0.0/24 не маршрутизируется), IGMP для управления членством.</li>
+                            <li><strong>IPv6</strong>: FF00::/8, области (scope) FF0s::/16; MLD вместо IGMP.</li>
+                            <li><strong>RPF (Reverse Path Forwarding)</strong>: проверка обратного пути предотвращает петли.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>PIM‑семейство</h4>
+                        <ul>
+                            <li><strong>PIM Dense‑Mode</strong>: flood‑and‑prune для плотных доменов (редко используется).</li>
+                            <li><strong>PIM Sparse‑Mode (ASM)</strong>: общий RP, регистрация источников, переход на кратчайшие пути (SPT).</li>
+                            <li><strong>SSM (PIM‑SSM)</strong>: подписка на конкретную пару (S,G) без RP, предпочтителен в современных сетях.</li>
+                            <li><strong>MSDP</strong>: обмен источниками между доменами ASM.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика Multicast:</strong> SSM упрощает безопасность и масштабирование; на L2 используйте IGMP/MLD Snooping для ограничения flood.</p></div>
+                </div>
+            </section>
+
+            <section id="igp" class="topic-section">
+                <h2>5.7 IS‑IS/EIGRP/RIP</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>IS‑IS</h4>
+                        <ul>
+                            <li><strong>Тип</strong>: протокол состояния канала (link‑state) поверх CLNS; переносит IP через TLV.</li>
+                            <li><strong>Уровни</strong>: Level‑1 (внутри области), Level‑2 (между областями); иерархия схожа с OSPF.</li>
+                            <li><strong>Дизайн</strong>: масштабируется в провайдерских/фабричных сетях, устойчив к изменениям адресации.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>EIGRP</h4>
+                        <ul>
+                            <li><strong>Тип</strong>: гибридный (DUAL), быстро сходится, поддерживает резервы (feasible successors).</li>
+                            <li><strong>Метрика</strong>: составная (пропускная способность/задержка и др. коэффициенты); сейчас открыт (RFC 7868).</li>
+                            <li><strong>Применение</strong>: исторически — enterprise Cisco; сегодня реже вне одновендорных сетей.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>RIP</h4>
+                        <ul>
+                            <li><strong>Тип</strong>: вектор расстояний, метрика — количество хопов (макс. 15).</li>
+                            <li><strong>Варианты</strong>: RIPv2 (VLSM, аутентификация), RIPng (IPv6).</li>
+                            <li><strong>Применение</strong>: учебные/малые сети; ограниченная масштабируемость.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="te" class="topic-section">
+                <h2>5.8 Traffic Engineering (RSVP‑TE/SR)</h2>
+                <div class="lesson-content">
+                    <p>Traffic Engineering (TE) позволяет направлять трафик по путям, отличным от кратчайших, учитывая ограничения и цели (полоса, задержка, изоляция).</p>
+                    <div class="visual-guide">
+                        <h4>RSVP‑TE</h4>
+                        <ul>
+                            <li><strong>LSP</strong>: выделение меток и резервирование ресурсов по сигнализации RSVP.</li>
+                            <li><strong>Constraints</strong>: атрибуты ссылок (административные метки, полоса) и CSPF для расчёта пути.</li>
+                            <li><strong>Плюсы/минусы</strong>: детальный контроль, но сложность состояния и масштабирования.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Segment Routing</h4>
+                        <ul>
+                            <li><strong>SR‑MPLS</strong>: стек сегментов (labels) кодирует путь без hop‑by‑hop состояния.</li>
+                            <li><strong>SRv6</strong>: сегменты как IPv6 адреса/функции; программируемость dataplane.</li>
+                            <li><strong>Планирование путей</strong>: on‑box (TI‑LFA, SR‑TE Policy) или от контроллера (PCE/PCEP).</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>TE в транспорте:</strong> аналогичные цели достигаются и на оптическом/SDH уровне (A‑/Z‑концы, SLA, защита 1+1/1:1), но с иными технологиями сигнализации.</p></div>
+                </div>
+            </section>
+
+            <section id="qos-deep" class="topic-section">
+                <h2>5.9 QoS углубление</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>DiffServ и PHB</h4>
+                        <ul>
+                            <li><strong>DSCP</strong>: классы EF (голос), AFxy (гарантированные), BE (по умолчанию).</li>
+                            <li><strong>Mapping</strong>: DSCP ↔ очереди/профили, согласование с L2 PCP (802.1p) и WMM.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Очереди и планирование</h4>
+                        <ul>
+                            <li><strong>Strict Priority</strong> для критичных классов (с осторожностью против starvation).</li>
+                            <li><strong>WRR/WFQ/CBWFQ</strong>: взвешенное обслуживание, формирование профилей.</li>
+                            <li><strong>WRED/RED</strong>: ранние отбрасывания для предотвращения глобальных перегрузок.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Policing vs Shaping</h4>
+                        <ul>
+                            <li><strong>Token/Leaky Bucket</strong>: токены как «кредит» на отправку; shaping выравнивает, policing отбрасывает/ремаркирует.</li>
+                            <li><strong>Параметры</strong>: CIR/PIR, burst (Bc/Be), влияние на джиттер и потери.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Network Calculus (базово)</h4>
+                        <ul>
+                            <li><strong>Идея</strong>: оценка худших задержек/буферов при известных ограничениях трафика и сервисных кривых.</li>
+                            <li><strong>Трафик</strong>: (σ, ρ) модель — «скачок и наклон»; сервис — «rate‑latency».</li>
+                            <li><strong>Применение</strong>: проектирование бюджетов задержки и размеров очередей для критичных классов.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </div>
 

@@ -76,9 +76,12 @@
     }
     
     .error-text {
-      text-shadow: 3px 3px 0 rgba(79, 70, 229, 0.2);
       background: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
+      color: transparent;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
       animation: textShine 3s ease-in-out infinite alternate;
     }
     

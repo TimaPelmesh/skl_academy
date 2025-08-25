@@ -118,6 +118,10 @@
                         <a href="#grid" class="subtopic">2.7 Grid</a>
                         <a href="#responsive" class="subtopic">2.8 Адаптивность и @media</a>
                         <a href="#animations" class="subtopic">2.9 Трансформации и анимации</a>
+                        <a href="#flexbox-advanced" class="subtopic">2.10 Flexbox — углублённо</a>
+                        <a href="#grid-advanced" class="subtopic">2.11 Grid — углублённо</a>
+                        <a href="#css-architecture" class="subtopic">2.12 Архитектуры CSS (БЭМ, ITCSS)</a>
+                        <a href="#responsive-advanced" class="subtopic">2.13 Адаптив: контейнерные запросы, ретина</a>
                         <a href="#module2-project" class="subtopic">Итоговый проект модуля 2</a>
                     </div>
                 </div>
@@ -327,6 +331,90 @@ a:hover { text-decoration: underline; }</code></pre>
                     <h4>Практика</h4>
                     <p>Добавьте hover‑эффекты кнопкам и карточкам, анимируйте появление элементов.</p>
                 </div>
+            </section>
+
+            <!-- 2.10 -->
+            <section id="flexbox-advanced" class="topic-section">
+                <h2>2.10 Flexbox — углублённо</h2>
+                <p>Разбираемся с алгоритмом распределения пространства, переносом строк и выравниванием многострочных рядов.</p>
+                <div class="code-example">
+<pre><code class="language-css">.row { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 24px); }
+.card { flex: 1 1 clamp(220px, 30%, 360px); min-width: 220px; }
+.row { align-content: start; /* выравнивание нескольких рядов */ }
+.card { align-self: stretch; }</code></pre>
+                </div>
+                <h3>Известные ловушки</h3>
+                <ul>
+                    <li>Сжатие контента: используйте <code>min-width</code> и <code>min-height</code>.</li>
+                    <li>Неожиданное выравнивание — различайте <code>align-items</code> и <code>align-content</code>.</li>
+                </ul>
+            </section>
+
+            <!-- 2.11 -->
+            <section id="grid-advanced" class="topic-section">
+                <h2>2.11 Grid — углублённо</h2>
+                <p>Шаблоны областей, автоматическое размещение, функции <code>minmax()</code>, <code>fit-content()</code>, <code>subgrid</code>.</p>
+                <div class="code-example">
+<pre><code class="language-css">.layout {
+  display: grid;
+  grid-template-columns: [full-start] 1fr [content-start] minmax(0, 1200px) [content-end] 1fr [full-end];
+}
+.layout &gt; * { grid-column: content; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.article { display: grid; grid-template-columns: 1fr 320px; grid-template-rows: auto 1fr; grid-template-areas:
+  'title aside' 'content aside'; }
+.article__title { grid-area: title; }
+.article__content { grid-area: content; }
+.article__aside { grid-area: aside; }</code></pre>
+                </div>
+                <div class="note"><p><strong>Subgrid:</strong> позволяет наследовать линии родителя для вложенных сеток (поддержка в современных браузерах).</p></div>
+            </section>
+
+            <!-- 2.12 -->
+            <section id="css-architecture" class="topic-section">
+                <h2>2.12 Архитектуры CSS: БЭМ, ITCSS, Utility‑first</h2>
+                <h3>БЭМ</h3>
+                <p>Именование: <code>block__element--modifier</code>. Пример: <code>card</code>, <code>card__title</code>, <code>card--featured</code>.</p>
+                <div class="code-example">
+<pre><code class="language-css">.card { /* блок */ }
+.card__title { /* элемент */ }
+.card--featured { /* модификатор */ }</code></pre>
+                </div>
+                <h3>ITCSS</h3>
+                <p>Слои: Settings → Tools → Generic → Elements → Objects → Components → Utilities. От абстрактного к конкретному, уменьшает специфичность.</p>
+                <h3>Правила поддержки</h3>
+                <ul>
+                    <li>Минимизируйте специфичность: избегайте селекторов по id, вложенности &gt; 2 уровней.</li>
+                    <li>Компонентный подход: каждый блок изолирован, стили живут рядом.</li>
+                    <li>Используйте design tokens через <code>:root</code> и CSS Custom Properties.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-css">:root { --space-1: 8px; --space-2: 12px; --brand: #4f46e5; }
+.button { padding: var(--space-1) var(--space-2); background: var(--brand); }</code></pre>
+                </div>
+            </section>
+
+            <!-- 2.13 -->
+            <section id="responsive-advanced" class="topic-section">
+                <h2>2.13 Адаптив: контейнерные запросы, ретина, медиа</h2>
+                <h3>Container Queries</h3>
+                <div class="code-example">
+<pre><code class="language-css">.card-grid { container-type: inline-size; }
+.card { display: grid; grid-template-columns: 1fr; }
+@container (min-width: 480px) {
+  .card { grid-template-columns: 1fr 1fr; }
+}</code></pre>
+                </div>
+                <h3>Ретина и качество</h3>
+                <ul>
+                    <li><code>image-set()</code> для фоновых изображений; <code>srcset</code> для <code>&lt;img&gt;</code>.</li>
+                    <li>Используйте <code>aspect-ratio</code>, указывайте <code>width/height</code> у медиа для предотвращения CLS.</li>
+                </ul>
+                <h3>Производительность CSS</h3>
+                <ul>
+                    <li>Критический CSS: инлайните ключевые стили в <code>&lt;head&gt;</code>, остальное отложенно.</li>
+                    <li>Избегайте тяжёлых теней и анимаций layout/paint; анимируйте <code>transform</code> и <code>opacity</code>.</li>
+                </ul>
             </section>
 
             <!-- Итоговый проект -->
