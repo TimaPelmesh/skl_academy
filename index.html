@@ -6,7 +6,7 @@
   <title>SKL Academy</title>
   
   <!-- Yandex.Metrika counter -->
-  <script type="text/javascript" >
+  <script>
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
     m[i].l=1*new Date();
     for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -19,7 +19,6 @@
          accurateTrackBounce:true
     });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
   
   <!-- Favicon / Иконки сайта -->
@@ -42,13 +41,16 @@
   <meta property="og:url" content="https://skl-academy.ru/">
   <meta property="og:image" content="images/skl-academy-og.jpg">
   
+
+  <!-- Для веб мастера -->
+   <meta name="yandex-verification" content="bd95be99f2cb3ea8">
+   
   <!-- Twitter Card мета-теги -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SKL Academy - Современное обучение IT">
   <meta name="twitter:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
   <meta name="twitter:image" content="images/skl-academy-og.jpg">
-  <!-- для веб мастера --> 
-  <meta name="yandex-verification" content="bd95be99f2cb3ea8" />
+  
   <!-- Canonical URL -->
   <link rel="canonical" href="https://skl-academy.ru/">
   
@@ -128,18 +130,21 @@
 
 </head>
 <body class="font-sans">
+  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt=""></div></noscript>
   <!-- Navigation -->
   <nav class="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-24 items-center">
         <div class="flex items-center">
           <div class="flex-shrink-0 flex items-center">
-            <img class="h-9 w-auto" src="images/icon.ico" alt="SKL Academy">
-            <span class="ml-3 text-xl font-semibold text-gray-900 header-title">SKL Academy</span>
+            <a href="index.html" class="flex items-center">
+              <img class="h-9 w-auto" src="images/icon.ico" alt="SKL Academy">
+              <span class="ml-3 text-xl font-semibold text-gray-900 header-title">SKL Academy</span>
+            </a>
           </div>
         </div>
         <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
-          <a href="typing-test/index.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Тест на скорость печати</a>
+          <a href="#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
           <a href="#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
           <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
         </div>
@@ -159,7 +164,7 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden">
       <div class="pt-2 pb-3 space-y-1 px-4">
-        <a href="404.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Тренажер печати</a>
+        <a href="#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
         <a href="#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
         <a href="about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
       </div>
@@ -226,10 +231,10 @@
          <div class="hero-content-wrapper">
            <!-- Улучшенные блоки статистики -->
            <div class="stats-container mt-4">
-             <div class="stat-block">
-               <div class="stat-number">8</div>
-               <div class="stat-label">Курсов</div>
-             </div>
+              <div class="stat-block">
+              <div class="stat-number">7</div>
+              <div class="stat-label">Курсов</div>
+            </div>
              <div class="stat-block">
                <div class="stat-number">24/7</div>
                <div class="stat-label">Доступ</div>
@@ -368,7 +373,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <p class="text-gray-600">Освойте C# - мощный язык программирования от Microsoft.</p>
+            <p class="text-gray-600">Освойте C# — мощный язык для веба, десктопа и игр.</p>
             <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
@@ -463,7 +468,7 @@
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Веб-разработка</h3>
               <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">В разработке</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
               </div>
             </div>
           </div>
@@ -495,7 +500,7 @@
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
             </button>
-            <a href="404.html" class="course-button">
+            <a href="courses/web/01-html-basics.html" class="course-button">
               Перейти
               <i class="fas fa-arrow-right ml-2"></i>
             </a>
@@ -603,139 +608,109 @@
         </div>
       </div>
 
-      <!-- Course 8 - Скоростная печать -->
-      <div class="course-card">
-        <div class="p-6">
-          <div class="flex items-center">
-            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
-              <i class="fas fa-keyboard text-indigo-600 text-xl"></i>
+
+    </div>
+  </div>
+
+  <!-- Articles Section -->
+  <div id="articles" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Наши статьи</h2>
+      <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
+        Дада, здесь не только курсы, но и статьи!
+      </p>
+    </div>
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <!-- Article 1 -->
+        <div class="course-card h-full article-card hover:shadow-lg">
+          <div class="p-5 flex flex-col h-full relative overflow-hidden">
+            <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
+              <i class="fab fa-python"></i>
             </div>
-            <div class="ml-4">
-              <h3 class="text-xl font-medium text-gray-900">Скоростная печать</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">В разработке</span>
+            <div class="flex items-start relative z-10">
+              <div class="course-icon-container flex-shrink-0 bg-indigo-100 p-3 rounded-xl">
+                <i class="fab fa-python text-indigo-600 text-lg"></i>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-lg font-medium text-gray-900">Первая программа на Python: от установки до библиотек</h3>
+                <div class="mt-1">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">Опубликовано</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 ml-2">
+                    <i class="far fa-clock mr-1"></i> 15 мин
+                  </span>
+                </div>
               </div>
             </div>
+            <div class="mt-3 flex-grow">
+              <p class="text-gray-600 text-sm">Пошаговое руководство по созданию первой программы на Python с изучением популярной библиотеки.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                  #python
+                </span>
+                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                  #api
+                </span>
+                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                  #requests
+                </span>
+              </div>
+            </div>
+            <div class="mt-3">
+              <a href="articles/first-python-program.html" class="course-button">
+                Читать
+                <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
           </div>
-          <div class="mt-4">
-            <p class="text-gray-600">Развивайте навык быстрой печати с интерактивным тренажером.</p>
-            <ul class="mt-4 space-y-2">
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="fas fa-check-circle text-green-500"></i>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="course-card h-full article-card hover:shadow-lg">
+          <div class="p-5 flex flex-col h-full relative overflow-hidden">
+            <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
+              <i class="fas fa-sticky-note"></i>
+            </div>
+            <div class="flex items-start relative z-10">
+              <div class="course-icon-container flex-shrink-0 bg-purple-100 p-3 rounded-xl">
+                <i class="fas fa-sticky-note text-indigo-600 text-lg"></i>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-lg font-medium text-gray-900">Создаем красивое приложение заметок на tkinter</h3>
+                <div class="mt-1">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">Опубликовано</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 ml-2">
+                    <i class="far fa-clock mr-1"></i> 20 мин
+                  </span>
                 </div>
-                <p class="ml-3 text-gray-600">Измерение скорости печати в реальном времени</p>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="fas fa-check-circle text-green-500"></i>
-                </div>
-                <p class="ml-3 text-gray-600">Анализ ошибок и статистика прогресса</p>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="fas fa-check-circle text-green-500"></i>
-                </div>
-                <p class="ml-3 text-gray-600">Различные уровни сложности</p>
-              </li>
-            </ul>
-          </div>
-          <div class="mt-4 flex space-x-4">
-            <button type="button" class="course-button-secondary" data-modal-target="modal-typing">
-              Подробнее
-              <i class="fas fa-info-circle ml-2"></i>
-            </button>
-            <a href="courses/typing/01-typing-basics.html" class="course-button">
-              Перейти
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
+              </div>
+            </div>
+            <div class="mt-3 flex-grow">
+              <p class="text-gray-600 text-sm">Создаем стильное приложение для заметок с современным интерфейсом на Python tkinter.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                  #tkinter
+                </span>
+                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                  #python
+                </span>
+                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                  #gui
+                </span>
+              </div>
+            </div>
+            <div class="mt-3">
+              <a href="articles/tkinter-notes-app.html" class="course-button">
+                Читать
+                <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Typing Test Section -->
-  <div id="typing-test" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="typing-test rounded-2xl">
-      <!-- Размытые градиентные пятна справа -->
-      <div class="tt-gradients-container" aria-hidden="true">
-        <div class="tt-g1"></div>
-        <div class="tt-g2"></div>
-        <div class="tt-g3"></div>
-        <div class="tt-g4"></div>
-      </div>
-      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
-          <div class="mb-8 lg:mb-0">
-            <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-white">Тест скорости печати</h2>
-            <h3 class="mt-3 text-xl font-medium text-indigo-100">С какой скоростью вы печатаете?</h3>
-            <p class="mt-4 text-lg text-gray-100">
-              Улучшите свою скорость и точность печати с помощью нашего интерактивного теста. Отслеживайте свой прогресс, соревнуйтесь с самим собой и развивайте навык быстрой печати.
-            </p>
-            <ul class="mt-6 space-y-3">
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="fas fa-check-circle text-green-400"></i>
-                </div>
-                <p class="ml-3 text-gray-100">Интерактивный спидометр показывает вашу скорость в реальном времени</p>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="fas fa-check-circle text-green-400"></i>
-                </div>
-                <p class="ml-3 text-gray-100">Детальная статистика результатов с анализом ошибок</p>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="fas fa-check-circle text-green-400"></i>
-                </div>
-                <p class="ml-3 text-gray-100">Различные уровни сложности для любого уровня подготовки</p>
-              </li>
-            </ul>
-            <div class="mt-6">
-              <a href="typing-test/index.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-indigo-700 bg-white hover:bg-gray-50 transition duration-300">
-                Пройти тест
-              </a>
-            </div>
-          </div>
-          <div class="relative">
-            <div class="max-w-md mx-auto bg-gray-900/60 backdrop-blur-sm rounded-2xl p-8 metrics-card">
-              <div class="flex justify-center">
-                <div class="relative w-48 h-48">
-                  <svg class="w-full h-full" viewBox="0 0 100 100">
-                    <defs>
-                      <linearGradient id="ringGradient" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#6366f1" />
-                        <stop offset="50%" stop-color="#8b5cf6" />
-                        <stop offset="100%" stop-color="#22c55e" />
-                      </linearGradient>
-                    </defs>
-                    <circle class="text-gray-700/60" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
-                    <circle class="progress-ring progress-ring-glow" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round" stroke="url(#ringGradient)" fill="transparent" r="40" cx="50" cy="50" />
-                  </svg>
-                  <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <span class="text-4xl font-bold text-white">75</span>
-                    <span class="text-lg text-gray-300">WPM</span>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-8 grid grid-cols-2 gap-6">
-                <div class="text-center p-4 bg-gray-800/40 rounded-xl">
-                  <p class="text-lg font-semibold text-white">98%</p>
-                  <p class="text-sm text-gray-300">Точность</p>
-                </div>
-                <div class="text-center p-4 bg-gray-800/40 rounded-xl">
-                  <p class="text-lg font-semibold text-white">0.8s</p>
-                  <p class="text-sm text-gray-300">Среднее время</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Модальные окна для курсов -->
   <!-- Модальное окно для курса "Компьютерные сети" -->
@@ -1549,123 +1524,8 @@
     </div>
   </div>
 
-  <!-- Модальное окно для курса "Скоростная печать" -->
-  <div class="modal" id="modal-typing">
-    <div class="modal-backdrop"></div>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3><i class="fas fa-keyboard text-teal-600 mr-3"></i>Скоростная печать</h3>
-        <button class="modal-close"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">Курс "Скоростная печать" научит вас печатать быстро и без ошибок, используя десятипальцевый метод набора текста. Это незаменимый навык для программистов, писателей, офисных работников и всех, кто много работает с текстом на компьютере.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
-            <div>
-              <h5 class="font-medium text-gray-900">1. Введение в слепую печать</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>История машинописи и клавиатур</li>
-                <li>Преимущества десятипальцевого метода</li>
-                <li>Правильная посадка и положение рук</li>
-                <li>Эргономика рабочего места</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">2. Базовый ряд клавиатуры</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Знакомство с клавишами ASDF JKL;</li>
-                <li>Упражнения на базовый ряд</li>
-                <li>Тренировка точности попадания по клавишам</li>
-                <li>Упражнения на развитие мышечной памяти</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. Верхний ряд клавиатуры</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Освоение клавиш QWERT YUIOP</li>
-                <li>Упражнения на комбинации базового и верхнего рядов</li>
-                <li>Тренировка скорости печати</li>
-                <li>Печать слов и коротких предложений</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. Нижний ряд клавиатуры</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Освоение клавиш ZXCVB NM,./</li>
-                <li>Комбинированные упражнения на все три ряда</li>
-                <li>Упражнения на развитие скорости</li>
-                <li>Печать длинных предложений и абзацев</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Цифры и специальные символы</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Освоение цифрового ряда</li>
-                <li>Специальные символы и знаки препинания</li>
-                <li>Упражнения на комбинацию текста и чисел</li>
-                <li>Печать сложных текстов с разными символами</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Совершенствование навыков</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Тренировки на скорость печати</li>
-                <li>Тестирование WPM (слов в минуту)</li>
-                <li>Специализированные упражнения для программистов</li>
-                <li>Методики для преодоления плато в скорости</li>
-                <li>Практика на реальных текстах различной тематики</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-tools"></i> Особенности курса</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Интерактивный тренажер с мгновенной обратной связью</li>
-            <li>Визуализация клавиатуры и правильной постановки пальцев</li>
-            <li>Подробная статистика прогресса и анализ ошибок</li>
-            <li>Геймификация процесса обучения для повышения мотивации</li>
-            <li>Автоматическая генерация персонализированных упражнений</li>
-            <li>Режимы для программистов с упором на код и специальные символы</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Программисты и разработчики</li>
-            <li>Контент-менеджеры и копирайтеры</li>
-            <li>Офисные работники</li>
-            <li>Студенты и школьники</li>
-            <li>Все, кто хочет повысить свою продуктивность при работе с компьютером</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-chart-line"></i> Ожидаемые результаты</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Увеличение скорости печати до 60-80+ слов в минуту</li>
-            <li>Снижение количества ошибок до минимума</li>
-            <li>Возможность печатать не глядя на клавиатуру</li>
-            <li>Значительное повышение продуктивности при работе с текстом</li>
-            <li>Снижение утомляемости при длительной работе за компьютером</li>
-          </ul>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="courses/typing/01-typing-basics.html" class="course-button">
-          Перейти к курсу
-          <i class="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+
+
 
   <!-- JavaScript для работы модальных окон -->
   <script>

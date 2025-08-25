@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Создаем красивое приложение заметок на tkinter - Современный GUI на Python | SKL Academy</title>
+  
+  <!-- Yandex.Metrika counter -->
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+    ym(102262736, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+  
+  <!-- Favicon / Иконки сайта -->
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+  
+  <!-- SEO Мета-теги -->
+  <meta name="description" content="Создаем стильное приложение для заметок с современным интерфейсом на Python tkinter. Пошаговое руководство с красивым дизайном и функциональностью.">
+  <meta name="keywords" content="python tkinter, gui приложение, заметки, десктопное приложение, python интерфейс, tkinter tutorial">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph мета-теги для социальных сетей -->
+  <meta property="og:title" content="Создаем красивое приложение заметок на tkinter - Современный GUI на Python">
+  <meta property="og:description" content="Создаем стильное приложение для заметок с современным интерфейсом на Python tkinter. Пошаговое руководство с красивым дизайном и функциональностью.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://skl-academy.ru/articles/tkinter-notes-app.html">
+  <meta property="og:image" content="../images/tkinter-notes-app.jpg">
+  <meta property="og:site_name" content="SKL Academy">
+  <meta property="article:published_time" content="2025-01-15T00:00:00+03:00">
+  <meta property="article:author" content="SKL Academy">
+  <meta property="article:section" content="Программирование">
+  <meta property="article:tag" content="Python, tkinter, GUI, заметки, десктопное приложение">
+  
+  <!-- Twitter Card мета-теги -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Создаем красивое приложение заметок на tkinter - Современный GUI на Python">
+  <meta name="twitter:description" content="Создаем стильное приложение для заметок с современным интерфейсом на Python tkinter.">
+  <meta name="twitter:image" content="../images/tkinter-notes-app.jpg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skl-academy.ru/articles/tkinter-notes-app.html">
+  
+  <!-- Structured Data: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Создаем красивое приложение заметок на tkinter - Современный GUI на Python",
+    "description": "Создаем стильное приложение для заметок с современным интерфейсом на Python tkinter. Пошаговое руководство с красивым дизайном и функциональностью.",
+    "image": "https://skl-academy.ru/images/tkinter-notes-app.jpg",
+    "author": {
+      "@type": "Organization",
+      "name": "SKL Academy",
+      "url": "https://skl-academy.ru/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SKL Academy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://skl-academy.ru/images/favicon-32x32.png"
+      }
+    },
+    "datePublished": "2025-01-15T00:00:00+03:00",
+    "dateModified": "2025-01-15T00:00:00+03:00",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://skl-academy.ru/articles/tkinter-notes-app.html"
+    },
+    "articleSection": "Программирование",
+    "keywords": "Python, tkinter, GUI, заметки, десктопное приложение, интерфейс"
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body class="font-sans">
+  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- Navigation -->
+  <nav class="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-24 items-center">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="../index.html" class="flex items-center">
+              <img class="h-9 w-auto" src="../images/icon.ico" alt="SKL Academy">
+              <span class="ml-3 text-xl font-semibold text-gray-900 header-title">SKL Academy</span>
+            </a>
+          </div>
+        </div>
+        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+          <a href="../index.html#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
+
+          <a href="../index.html#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
+          <a href="../about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
+        </div>
+        <div class="-mr-2 flex items-center md:hidden">
+          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Open main menu</span>
+            <div class="burger-icon">
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="pt-2 pb-3 space-y-1 px-4">
+        <a href="../index.html#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
+
+        <a href="../index.html#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
+        <a href="../about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-8 md:py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-2xl md:text-3xl font-bold mb-3 text-white">Создаем красивое приложение заметок на tkinter</h1>
+        <p class="text-base md:text-lg text-blue-100 mb-4">Современный GUI с красивым дизайном и полной функциональностью</p>
+        
+        <!-- Article Meta -->
+        <div class="flex flex-wrap justify-center items-center gap-4 text-xs md:text-sm text-blue-100">
+          <div class="flex items-center">
+            <i class="fas fa-clock mr-2"></i>
+            <span>Время чтения: 25 минут</span>
+          </div>
+          <div class="flex items-center">
+            <i class="fas fa-tags mr-2"></i>
+            <span>Python, tkinter, GUI, заметки</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Article Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="article-layout">
+      <!-- Table of Contents -->
+      <div class="table-of-contents">
+        <h3><i class="fas fa-list-ul mr-2"></i>Содержание</h3>
+        <ul>
+          <li><a href="#intro">Введение в tkinter</a></li>
+          <li><a href="#planning">Планирование приложения</a></li>
+          <li><a href="#basic-setup">Базовая настройка окна</a></li>
+          <li><a href="#design">Создание красивого дизайна</a></li>
+          <li><a href="#functionality">Добавление функциональности</a></li>
+          <li><a href="#final-app">Готовое приложение</a></li>
+          <li><a href="#next-steps">Дальнейшее развитие</a></li>
+        </ul>
+      </div>
+
+      <article class="article-content">
+
+      <section id="intro">
+        <h2>Введение в tkinter</h2>
+        <p>tkinter — это стандартная библиотека Python для создания графических пользовательских интерфейсов (GUI). Она входит в состав Python и не требует дополнительной установки, что делает её идеальным выбором для начинающих разработчиков.</p>
+        
+        <div class="highlight-box">
+          <strong>Преимущества tkinter:</strong>
+          <ul>
+            <li>Встроенная в Python — не требует установки</li>
+            <li>Кроссплатформенность — работает на Windows, macOS, Linux</li>
+            <li>Простота изучения — понятный API</li>
+            <li>Богатая документация и примеры</li>
+            <li>Возможность создания современных интерфейсов</li>
+          </ul>
+        </div>
+
+        <h3>Что мы создадим</h3>
+        <p>В этой статье мы создадим стильное приложение для заметок со следующими возможностями:</p>
+        <ul>
+          <li>Создание, редактирование и удаление заметок</li>
+          <li>Современный и красивый интерфейс</li>
+          <li>Сохранение заметок в файл</li>
+          <li>Поиск по заметкам</li>
+          <li>Категории и теги</li>
+          <li>Автосохранение</li>
+        </ul>
+      </section>
+
+      <section id="planning">
+        <h2>Планирование приложения</h2>
+        <p>Перед началом разработки важно продумать структуру приложения и его интерфейс. Это поможет избежать множественных переделок в процессе разработки.</p>
+
+        <h3>Структура приложения</h3>
+        <p>Перед началом разработки важно продумать структуру приложения и его интерфейс. Это поможет избежать множественных переделок в процессе разработки.</p>
+
+        <h3>Основные компоненты</h3>
+        <ul>
+          <li><strong>Главное окно</strong> — контейнер для всех элементов</li>
+          <li><strong>Панель инструментов</strong> — кнопки для создания, удаления, поиска</li>
+          <li><strong>Список заметок</strong> — отображение всех заметок</li>
+          <li><strong>Область редактирования</strong> — для создания и редактирования заметок</li>
+          <li><strong>Строка состояния</strong> — информация о количестве заметок</li>
+        </ul>
+      </section>
+
+      <section id="basic-setup">
+        <h2>Базовая настройка окна</h2>
+        <p>Начнем с создания базового окна приложения и настройки его основных параметров.</p>
+
+        <h3>Создание главного окна</h3>
+        
+        <div class="code-block">
+          <div class="code-block-header">notes_app.py</div>
+          <div class="code-block-content">
+import tkinter as tk
+from tkinter import ttk, messagebox
+import json
+from datetime import datetime
+
+class NotesApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("📝 Мои заметки")
+        self.root.geometry("800x600")
+        self.root.minsize(600, 400)
+        
+        # Настройка стиля
+        self.setup_styles()
+        
+        # Инициализация данных
+        self.notes = []
+        self.current_note = None
+        
+        # Создание интерфейса
+        self.create_widgets()
+        
+        # Загрузка заметок
+        self.load_notes()
+
+    def setup_styles(self):
+        """Настройка стилей для красивого интерфейса"""
+        style = ttk.Style()
+        style.theme_use('clam')
+        
+        # Настройка цветов
+        style.configure('Main.TFrame', background='#f8fafc')
+        style.configure('Toolbar.TFrame', background='#8b5cf6')
+        style.configure('Toolbar.TButton', 
+                       background='#7c3aed', 
+                       foreground='white',
+                       borderwidth=0,
+                       focuscolor='none')
+        
+        # Настройка кнопок
+        style.map('Toolbar.TButton',
+                 background=[('active', '#6d28d9')],
+                 foreground=[('active', 'white')])
+
+    def create_widgets(self):
+        """Создание элементов интерфейса"""
+        # Главный контейнер
+        self.main_frame = ttk.Frame(self.root, style='Main.TFrame')
+        self.main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        
+        # Панель инструментов
+        self.create_toolbar()
+        
+        # Основная область
+        self.create_main_area()
+        
+        # Строка состояния
+        self.create_status_bar()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = NotesApp(root)
+    root.mainloop()
+          </div>
+        </div>
+
+        <div class="success-box">
+          <strong>Отлично!</strong> Мы создали базовую структуру приложения. Теперь у нас есть главное окно с настройкой стилей.
+        </div>
+      </section>
+
+      <section id="design">
+        <h2>Создание красивого дизайна</h2>
+        <p>Теперь добавим красивые элементы интерфейса и настроим их стили для создания современного вида.</p>
+
+        <h3>Панель инструментов</h3>
+        
+        <div class="code-block">
+          <div class="code-block-header">toolbar.py</div>
+          <div class="code-block-content">
+    def create_toolbar(self):
+        """Создание панели инструментов"""
+        toolbar = ttk.Frame(self.main_frame, style='Toolbar.TFrame')
+        toolbar.pack(fill=tk.X, pady=(0, 10))
+        
+        # Кнопки
+        ttk.Button(toolbar, text="➕ Новая заметка", 
+                  style='Toolbar.TButton',
+                  command=self.new_note).pack(side=tk.LEFT, padx=5, pady=5)
+        
+        ttk.Button(toolbar, text="💾 Сохранить", 
+                  style='Toolbar.TButton',
+                  command=self.save_note).pack(side=tk.LEFT, padx=5, pady=5)
+        
+        ttk.Button(toolbar, text="🗑️ Удалить", 
+                  style='Toolbar.TButton',
+                  command=self.delete_note).pack(side=tk.LEFT, padx=5, pady=5)
+        
+        # Поиск
+        search_frame = ttk.Frame(toolbar)
+        search_frame.pack(side=tk.RIGHT, padx=10, pady=5)
+        
+        ttk.Label(search_frame, text="🔍", 
+                 background='#8b5cf6', 
+                 foreground='white').pack(side=tk.LEFT)
+        
+        self.search_var = tk.StringVar()
+        self.search_var.trace('w', self.search_notes)
+        
+        search_entry = ttk.Entry(search_frame, 
+                                textvariable=self.search_var,
+                                width=20)
+        search_entry.pack(side=tk.LEFT, padx=5)
+
+    def create_main_area(self):
+        """Создание основной области приложения"""
+        # Контейнер для разделения на две части
+        paned_window = ttk.PanedWindow(self.main_frame, orient=tk.HORIZONTAL)
+        paned_window.pack(fill=tk.BOTH, expand=True)
+        
+        # Левая панель - список заметок
+        self.create_notes_list(paned_window)
+        
+        # Правая панель - редактирование
+        self.create_edit_area(paned_window)
+
+    def create_notes_list(self, parent):
+        """Создание списка заметок"""
+        list_frame = ttk.Frame(parent)
+        parent.add(list_frame, weight=1)
+        
+        # Заголовок
+        ttk.Label(list_frame, text="📋 Список заметок", 
+                 font=('Arial', 12, 'bold')).pack(pady=10)
+        
+        # Список заметок
+        self.notes_listbox = tk.Listbox(list_frame, 
+                                       font=('Arial', 10),
+                                       selectmode=tk.SINGLE,
+                                       bg='#f8fafc',
+                                       fg='#1f2937',
+                                       selectbackground='#8b5cf6',
+                                       selectforeground='white',
+                                       borderwidth=1,
+                                       relief=tk.SOLID)
+        self.notes_listbox.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        self.notes_listbox.bind('<<ListboxSelect>>', self.on_note_select)
+
+    def create_edit_area(self, parent):
+        """Создание области редактирования"""
+        edit_frame = ttk.Frame(parent)
+        parent.add(edit_frame, weight=2)
+        
+        # Заголовок
+        ttk.Label(edit_frame, text="✏️ Редактирование", 
+                 font=('Arial', 12, 'bold')).pack(pady=10)
+        
+        # Поле для заголовка
+        title_frame = ttk.Frame(edit_frame)
+        title_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        ttk.Label(title_frame, text="Заголовок:").pack(anchor=tk.W)
+        self.title_entry = ttk.Entry(title_frame, font=('Arial', 11))
+        self.title_entry.pack(fill=tk.X, pady=2)
+        
+        # Поле для текста заметки
+        text_frame = ttk.Frame(edit_frame)
+        text_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        
+        ttk.Label(text_frame, text="Текст заметки:").pack(anchor=tk.W)
+        
+        # Создаем текстовое поле с прокруткой
+        text_container = ttk.Frame(text_frame)
+        text_container.pack(fill=tk.BOTH, expand=True, pady=2)
+        
+        self.text_widget = tk.Text(text_container, 
+                                  font=('Arial', 10),
+                                  wrap=tk.WORD,
+                                  bg='white',
+                                  fg='#1f2937',
+                                  insertbackground='#8b5cf6',
+                                  selectbackground='#e9d5ff',
+                                  borderwidth=1,
+                                  relief=tk.SOLID)
+        
+        scrollbar = ttk.Scrollbar(text_container, orient=tk.VERTICAL, 
+                                 command=self.text_widget.yview)
+        self.text_widget.configure(yscrollcommand=scrollbar.set)
+        
+        self.text_widget.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    def create_status_bar(self):
+        """Создание строки состояния"""
+        self.status_bar = ttk.Label(self.main_frame, 
+                                   text="Готово", 
+                                   relief=tk.SUNKEN, 
+                                   anchor=tk.W)
+        self.status_bar.pack(fill=tk.X, pady=(10, 0))
+
+    def new_note(self):
+        """Создание новой заметки"""
+        self.current_note = None
+        self.title_entry.delete(0, tk.END)
+        self.text_widget.delete(1.0, tk.END)
+        self.status_bar.config(text="Создание новой заметки...")
+
+    def save_note(self):
+        """Сохранение заметки"""
+        title = self.title_entry.get().strip()
+        text = self.text_widget.get(1.0, tk.END).strip()
+        
+        if not title:
+            messagebox.showwarning("Предупреждение", "Введите заголовок заметки!")
+            return
+        
+        if self.current_note is None:
+            # Создаем новую заметку
+            note = {
+                'id': len(self.notes) + 1,
+                'title': title,
+                'text': text,
+                'created': datetime.now().isoformat(),
+                'modified': datetime.now().isoformat()
+            }
+            self.notes.append(note)
+        else:
+            # Обновляем существующую заметку
+            self.notes[self.current_note]['title'] = title
+            self.notes[self.current_note]['text'] = text
+            self.notes[self.current_note]['modified'] = datetime.now().isoformat()
+        
+        self.update_notes_list()
+        self.save_notes_to_file()
+        self.status_bar.config(text=f"Заметка '{title}' сохранена")
+
+    def delete_note(self):
+        """Удаление заметки"""
+        if self.current_note is None:
+            messagebox.showinfo("Информация", "Выберите заметку для удаления!")
+            return
+        
+        if messagebox.askyesno("Подтверждение", "Удалить выбранную заметку?"):
+            del self.notes[self.current_note]
+            self.current_note = None
+            self.title_entry.delete(0, tk.END)
+            self.text_widget.delete(1.0, tk.END)
+            self.update_notes_list()
+            self.save_notes_to_file()
+            self.status_bar.config(text="Заметка удалена")
+
+    def on_note_select(self, event):
+        """Обработка выбора заметки в списке"""
+        selection = self.notes_listbox.curselection()
+        if selection:
+            self.current_note = selection[0]
+            note = self.notes[self.current_note]
+            self.title_entry.delete(0, tk.END)
+            self.title_entry.insert(0, note['title'])
+            self.text_widget.delete(1.0, tk.END)
+            self.text_widget.insert(1.0, note['text'])
+            self.status_bar.config(text=f"Заметка '{note['title']}' загружена")
+
+    def update_notes_list(self):
+        """Обновление списка заметок"""
+        self.notes_listbox.delete(0, tk.END)
+        for note in self.notes:
+            self.notes_listbox.insert(tk.END, note['title'])
+
+    def search_notes(self, *args):
+        """Поиск по заметкам"""
+        search_term = self.search_var.get().lower()
+        self.notes_listbox.delete(0, tk.END)
+        
+        for note in self.notes:
+            if (search_term in note['title'].lower() or 
+                search_term in note['text'].lower()):
+                self.notes_listbox.insert(tk.END, note['title'])
+
+    def load_notes(self):
+        """Загрузка заметок из файла"""
+        try:
+            with open('notes.json', 'r', encoding='utf-8') as f:
+                self.notes = json.load(f)
+            self.update_notes_list()
+            self.status_bar.config(text=f"Загружено {len(self.notes)} заметок")
+        except FileNotFoundError:
+            self.status_bar.config(text="Файл заметок не найден, создан новый")
+
+    def save_notes_to_file(self):
+        """Сохранение заметок в файл"""
+        try:
+            with open('notes.json', 'w', encoding='utf-8') as f:
+                json.dump(self.notes, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось сохранить заметки: {e}")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = NotesApp(root)
+    root.mainloop()
+          </div>
+        </div>
+
+        <div class="success-box">
+          <strong>Отлично!</strong> Мы создали полнофункциональное приложение заметок с красивым интерфейсом!
+        </div>
+      </section>
+
+      <section id="final-app">
+        <h2>Готовое приложение</h2>
+        <p>Теперь у нас есть полностью функциональное приложение заметок со следующими возможностями:</p>
+
+        <h3>Функциональность</h3>
+        <ul>
+          <li>✅ Создание новых заметок</li>
+          <li>✅ Редактирование существующих заметок</li>
+          <li>✅ Удаление заметок</li>
+          <li>✅ Поиск по заголовку и содержимому</li>
+          <li>✅ Автоматическое сохранение в JSON файл</li>
+          <li>✅ Загрузка заметок при запуске</li>
+          <li>✅ Современный и красивый интерфейс</li>
+        </ul>
+
+        <h3>Как запустить приложение</h3>
+        <ol>
+          <li>Сохраните весь код в файл <code>notes_app.py</code></li>
+          <li>Откройте командную строку в папке с файлом</li>
+          <li>Выполните команду: <code>python notes_app.py</code></li>
+          <li>Наслаждайтесь вашим приложением!</li>
+        </ol>
+
+        <div class="highlight-box">
+          <strong>Особенности дизайна:</strong>
+          <ul>
+            <li>Градиентная панель инструментов в фиолетовых тонах</li>
+            <li>Современные кнопки с иконками</li>
+            <li>Разделение окна на две панели</li>
+            <li>Красивое оформление списка заметок</li>
+            <li>Стильное текстовое поле для редактирования</li>
+            <li>Информативная строка состояния</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="next-steps">
+        <h2>Дальнейшее развитие</h2>
+        <p>Теперь, когда у вас есть базовое приложение, вы можете добавить дополнительные функции:</p>
+
+        <h3>Возможные улучшения</h3>
+        <ul>
+          <li><strong>Категории и теги</strong> — группировка заметок по темам</li>
+          <li><strong>Форматирование текста</strong> — жирный, курсив, подчеркивание</li>
+          <li><strong>Вложения файлов</strong> — добавление изображений и документов</li>
+          <li><strong>Экспорт заметок</strong> — сохранение в PDF, HTML, TXT</li>
+          <li><strong>Настройки приложения</strong> — выбор темы, шрифтов</li>
+          <li><strong>Резервное копирование</strong> — автоматическое создание бэкапов</li>
+          <li><strong>Синхронизация</strong> — работа с облачными сервисами</li>
+        </ul>
+
+        <h3>Изучение других GUI библиотек</h3>
+        <p>После освоения tkinter вы можете изучить другие библиотеки:</p>
+        <ul>
+          <li><strong>PyQt/PySide</strong> — мощные и современные GUI фреймворки</li>
+          <li><strong>Kivy</strong> — для создания мобильных и десктопных приложений</li>
+          <li><strong>Dear PyGui</strong> — быстрая библиотека для создания интерфейсов</li>
+          <li><strong>CustomTkinter</strong> — современная версия tkinter с красивыми виджетами</li>
+        </ul>
+
+        <div class="highlight-box">
+          <strong>Советы для дальнейшего изучения:</strong>
+          <ul>
+            <li>Изучите документацию tkinter</li>
+            <li>Создавайте собственные виджеты</li>
+            <li>Экспериментируйте с различными темами</li>
+            <li>Изучите паттерны проектирования для GUI</li>
+            <li>Создавайте более сложные приложения</li>
+          </ul>
+        </div>
+
+        <blockquote>
+          "Лучший способ изучить программирование — это создавать реальные проекты, которые решают ваши задачи."
+        </blockquote>
+
+        <p>Поздравляем! Вы создали свое первое GUI приложение на Python!</p>
+      </section>
+    </article>
+    </div>
+
+    <!-- Article Navigation -->
+    <div class="article-navigation">
+      <div class="nav-buttons">
+        <a href="../index.html#articles" class="nav-button back">
+          <i class="fas fa-arrow-left mr-2"></i>К списку статей
+        </a>
+        <a href="../index.html" class="nav-button home">
+          <i class="fas fa-home mr-2"></i>На главную
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacts">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold">О проекте</h4>
+        <p class="mt-4 text-gray-400">SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
+        <p class="mt-2 text-gray-400">Бесплатные материалы, практические задания и проекты</p>
+      </div>
+      
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold">Контакты</h4>
+        <div class="mt-4 space-y-3">
+          <a href="#" onclick="openGmail(); return false;" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
+            <i class="fas fa-envelope mr-2"></i> Gmail
+          </a>
+          <a href="#" onclick="openTelegram(); return false;" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
+            <i class="fab fa-telegram mr-2"></i> Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-gray-800">
+      <div class="flex justify-center">
+        <p class="text-gray-500 text-sm">SKL Academy. 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html> 

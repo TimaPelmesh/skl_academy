@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс по веб‑разработке. Модуль 2: CSS — визуальное оформление, адаптивность, макеты (Flexbox, Grid).">
+    <meta name="keywords" content="веб разработка, css, flexbox, grid, адаптивная верстка, медиазапросы, анимации css, бесплатный курс">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Веб‑разработка — Модуль 2: CSS — Визуальное оформление">
+    <meta property="og:description" content="CSS: селекторы, каскадность, шрифты, box model, позиционирование, Flexbox, Grid, адаптив и анимации.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/web/02-css-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Веб‑разработка — CSS основы">
+    <meta name="twitter:description" content="Модуль 2: CSS — визуальное оформление.">
+    <title>Веб‑разработка — Модуль 2: CSS — Визуальное оформление | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/02-css-basics.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <!-- Structured Data: Breadcrumbs for Web course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Веб‑разработка", "item": "https://skl-academy.ru/courses/web/02-css-basics.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс по веб‑разработке",
+      "description": "Полный курс по веб‑разработке с нуля: HTML, CSS, JavaScript и практика.",
+      "provider": {"@type": "Organization", "name": "SKL Academy", "sameAs": "https://skl-academy.ru/"},
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "coursePrerequisites": "Базовые знания компьютера",
+      "teaches": ["HTML", "CSS", "JavaScript", "адаптивная верстка", "клиентский JavaScript"],
+      "about": [
+        {"@type": "Thing", "name": "HTML"},
+        {"@type": "Thing", "name": "CSS"},
+        {"@type": "Thing", "name": "JavaScript"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Веб‑разработка — Модуль 2: CSS — Визуальное оформление",
+      "description": "CSS: селекторы, каскадность, типографика, модель коробки, позиционирование, Flexbox, Grid, адаптив, анимации.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/web/02-css-basics.html"},
+      "keywords": "css, flexbox, grid, адаптивная верстка"
+    }
+    </script>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">CSS — Визуальное оформление</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. HTML — Структура</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">1.1 Введение в HTML. Каркас</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">1.2 Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">1.3 Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">1.4 Семантическая разметка</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">1.5 Формы</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Итоговый проект модуля 1</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn active">2. CSS — Визуальное оформление</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#css-intro" class="subtopic active">2.1 Введение и подключение</a>
+                        <a href="#specificity" class="subtopic">2.2 Каскадность и специфичность</a>
+                        <a href="#typography" class="subtopic">2.3 Текст и шрифты</a>
+                        <a href="#box-model" class="subtopic">2.4 Модель коробки</a>
+                        <a href="#positioning" class="subtopic">2.5 Позиционирование</a>
+                        <a href="#flexbox" class="subtopic">2.6 Flexbox</a>
+                        <a href="#grid" class="subtopic">2.7 Grid</a>
+                        <a href="#responsive" class="subtopic">2.8 Адаптивность и @media</a>
+                        <a href="#animations" class="subtopic">2.9 Трансформации и анимации</a>
+                        <a href="#module2-project" class="subtopic">Итоговый проект модуля 2</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript — Интерктивность</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">3.1 Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">3.2 Операторы и условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">3.3 Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">3.4 Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">3.5 DOM — поиск и изменения</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">3.6 DOM — события</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">3.7 Формы в JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">3.8 Хранение данных</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">3.9 Асинхронность и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Итоговый проект модуля 3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <div id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 2: CSS — Визуальное оформление</h2>
+                <p>Разберём синтаксис и способы подключения CSS, каскадность и специфичность, типографику, модель коробки, позиционирование, Flexbox, Grid, адаптивность и анимации.</p>
+            </section>
+
+            <!-- 2.1 -->
+            <section id="css-intro" class="topic-section">
+                <h2>2.1 Введение в CSS. Синтаксис и подключение</h2>
+                <p>CSS управляет внешним видом HTML‑элементов. Правило состоит из селектора и деклараций: <code>селектор { свойство: значение; }</code>.</p>
+                <h3>Способы подключения</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- 1) Встроенный (inline) --&gt;
+&lt;h1 style="color:#4f46e5"&gt;Заголовок&lt;/h1&gt;
+
+&lt;!-- 2) Внутренний (в &lt;head&gt;) --&gt;
+&lt;style&gt;
+  h1 { color:#4f46e5; }
+&lt;/style&gt;
+
+&lt;!-- 3) Внешний файл (рекомендуется) --&gt;
+&lt;link rel="stylesheet" href="styles.css"&gt;</code></pre>
+                </div>
+                <h3>Селекторы</h3>
+                <div class="code-example">
+<pre><code class="language-css">/* По тегу */
+p { line-height: 1.7; }
+/* По классу */
+.card { border-radius: 10px; }
+/* По id */
+#mainTitle { font-weight: 700; }
+/* Комбинации */
+nav a:hover { text-decoration: underline; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Подключите внешний CSS к своей странице и измените шрифты, цвета заголовков и отступы абзацев.</p>
+                </div>
+            </section>
+
+            <!-- 2.2 -->
+            <section id="specificity" class="topic-section">
+                <h2>2.2 Каскадность, наследование и специфичность</h2>
+                <p><strong>Каскад</strong> — при конфликте правил берётся то, что ниже/точнее. <strong>Наследование</strong> — некоторые свойства (цвет, шрифты) наследуются потомками.</p>
+                <h3>Специфичность (вес селектора)</h3>
+                <p>Упрощённо: inline &gt; id &gt; класс/атрибут/псевдокласс &gt; тег/псевдоэлемент.</p>
+                <div class="code-example">
+<pre><code class="language-css">h1 { color: black; }          /* тег */
+.title { color: blue; }       /* класс */
+#mainTitle { color: green; }  /* id */
+/* Победит зелёный (id) */</code></pre>
+                </div>
+                <h3>Единицы измерения</h3>
+                <div class="code-example">
+<pre><code class="language-css">.box { width: 50%; padding: 1rem; font-size: 1.125rem; }
+.hero { height: 60vh; }
+.small { font-size: 0.875em; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Решите конфликт стилей для заголовка, поэкспериментируйте с <code>px</code>, <code>rem</code>, <code>vh</code>.</p>
+                </div>
+            </section>
+
+            <!-- 2.3 -->
+            <section id="typography" class="topic-section">
+                <h2>2.3 Работа с текстом и шрифтами</h2>
+                <h3>Базовые свойства</h3>
+                <div class="code-example">
+<pre><code class="language-css">body { font-family: 'Montserrat', system-ui, sans-serif; line-height: 1.7; }
+h1 { font-size: 2rem; font-weight: 700; text-align: center; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }</code></pre>
+                </div>
+                <h3>Подключение Google Fonts</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"&gt;</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Задайте базовую типографику для портфолио: шрифты, размеры и межстрочные интервалы для заголовков/текста.</p>
+                </div>
+            </section>
+
+            <!-- 2.4 -->
+            <section id="box-model" class="topic-section">
+                <h2>2.4 Модель коробки (Box Model)</h2>
+                <p>Каждый элемент — прямоугольник: content + padding + border + margin.</p>
+                <div class="code-example">
+<pre><code class="language-css">.card {
+  width: 300px; /* ширина content */
+  padding: 16px; /* внутренние отступы */
+  border: 1px solid #e5e7eb; /* рамка */
+  margin: 12px auto; /* внешние отступы */
+  box-sizing: border-box; /* включает padding и border в width */
+}</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сверстайте 3 карточки проекта: выровняйте по сетке, примените отступы, рамки и скругления.</p>
+                </div>
+            </section>
+
+            <!-- 2.5 -->
+            <section id="positioning" class="topic-section">
+                <h2>2.5 Позиционирование элементов</h2>
+                <div class="code-example">
+<pre><code class="language-css">.parent { position: relative; }
+.child { position: absolute; top: 8px; right: 8px; }
+.fixed-banner { position: fixed; bottom: 16px; right: 16px; }
+.sticky-header { position: sticky; top: 0; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте липкую шапку и значок (badge) в правом верхнем углу карточки через <code>absolute</code>.</p>
+                </div>
+            </section>
+
+            <!-- 2.6 -->
+            <section id="flexbox" class="topic-section">
+                <h2>2.6 Flexbox</h2>
+                <div class="code-example">
+<pre><code class="language-css">.row {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between; /* выравнивание по главной оси */
+  align-items: center;            /* выравнивание по поперечной оси */
+}
+.card { flex: 1 1 300px; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сверстайте горизонтальное меню и сетку карточек на Flexbox с переносом строк.</p>
+                </div>
+            </section>
+
+            <!-- 2.7 -->
+            <section id="grid" class="topic-section">
+                <h2>2.7 Grid Layout</h2>
+                <div class="code-example">
+<pre><code class="language-css">.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.item:nth-child(1) { grid-column: span 2; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте фотогалерею 3×N, одну из карточек растяните на 2 колонки.</p>
+                </div>
+            </section>
+
+            <!-- 2.8 -->
+            <section id="responsive" class="topic-section">
+                <h2>2.8 Адаптивная верстка и медиазапросы</h2>
+                <p>Mobile‑First: сначала стили для мобильных, затем усложняем для больших экранов.</p>
+                <div class="code-example">
+<pre><code class="language-css">.container { padding: 16px; }
+@media (min-width: 768px) {
+  .container { max-width: 720px; margin: 0 auto; }
+}
+@media (min-width: 1024px) {
+  .container { max-width: 960px; }
+}</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте главную портфолио адаптивной: навигация, сетки карточек, отступы.</p>
+                </div>
+            </section>
+
+            <!-- 2.9 -->
+            <section id="animations" class="topic-section">
+                <h2>2.9 Трансформации, переходы и анимации</h2>
+                <div class="code-example">
+<pre><code class="language-css">.btn { transition: transform .2s ease, box-shadow .2s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,.1); }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+.card:hover { animation: pulse .8s ease-in-out alternate; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Добавьте hover‑эффекты кнопкам и карточкам, анимируйте появление элементов.</p>
+                </div>
+            </section>
+
+            <!-- Итоговый проект -->
+            <section id="module2-project" class="topic-section">
+                <h2>Итоговый проект модуля 2</h2>
+                <p>Полностью стилизуйте главную портфолио‑страницу: сетки (Flex/Grid), адаптивность, типографика, интерактивные hover‑эффекты.</p>
+                <ul>
+                    <li>Навигация (desktop/mobile), секции «Проекты» (карточки), «Контакты» (форма)</li>
+                    <li>Светлая/тёмная темы — по желанию</li>
+                    <li>Анимации появления элементов при наведении/прокрутке</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

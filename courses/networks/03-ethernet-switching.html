@@ -137,7 +137,7 @@
             <section id="ethernet" class="topic-section">
                 <h2>3.1 Ethernet и MAC/ARP</h2>
                 <div class="lesson-content">
-                    <p>Ethernet определяет формат кадра (Dst MAC, Src MAC, EtherType/Length, Payload, FCS). Коммутаторы принимают решения на основе MAC‑адресов и таблицы коммутации. ARP сопоставляет IP‑адрес устройству на канальном уровне.</p>
+                    <p>Ethernet определяет формат кадра (Dst MAC, Src MAC, EtherType/Length, Payload, FCS). Коммутаторы принимают решения на основе MAC‑адресов и таблицы коммутации. ARP сопоставляет IPv4‑адрес с MAC‑адресом (в IPv6 используется NDP).</p>
                     <div class="code-example">
 <pre><code class="bash"># Просмотр ARP‑кэша
 # Windows
@@ -159,6 +159,8 @@ ip neigh
                     <div class="note">
                         <p><strong>Коммутация кадров:</strong> коммутаторы обучаются MAC‑адресам, записывая &laquo;MAC → порт&raquo; в CAM‑таблицу (с таймаутом <em>aging</em>). Неизвестные unicast кадры &laquo;заливаются&raquo; (flooding) на все порты VLAN. Broadcast (ff:ff:ff:ff:ff:ff) и соответствующие multicast также flood‑ятся в пределах VLAN.</p>
                     </div>
+                    <div class="note"><p><strong>Полудуплекс и CSMA/CD:</strong> коллизии и CSMA/CD актуальны для коаксиала/хабов (half‑duplex). В современных коммутируемых сетях применяется full‑duplex, коллизии отсутствуют.</p></div>
+                    <div class="note"><p><strong>MTU и 802.1Q:</strong> типичный MTU L3 — 1500 байт; тег 802.1Q добавляет 4 байта к кадру (кадр до 1522 байт). Устройства часто поддерживают «baby giant» кадры; при туннелировании учитывайте PMTUD/MSS.</p></div>
                 </div>
             </section>
 
@@ -225,6 +227,7 @@ interface eth2
                 <h2>3.5 LACP и безопасность портов</h2>
                 <div class="lesson-content">
                     <p>LACP (802.1AX) агрегирует физические линки в один логический канал для повышения пропускной способности и отказоустойчивости. Port Security ограничивает количество MAC на порту и реакцию на нарушения.</p>
+                    <p>Балансировка трафика в агрегате выполняется по потокам с использованием хэша по заголовкам (например, по парам IP/MAC/портов); один поток не превышает пропускную способность одного физического линка.</p>
                 </div>
             </section>
 

@@ -145,6 +145,8 @@
                             <li><strong>NS/SOA</strong>: делегирование зон/метаданные зоны.</li>
                             <li><strong>MX/TXT/SRV</strong>: почта/произвольный текст/службы.</li>
                             <li><strong>DNSSEC</strong>: криптографическая целостность записей (RRSIG/DS/DNSKEY), защита от подмены.</li>
+                            <li><strong>TTL и негативное кэширование</strong>: контроль времени жизни записей; отрицательные ответы кэшируются по RFC 2308.</li>
+                            <li><strong>DoT/DoH</strong>: шифрованный резолв (DNS‑over‑TLS/HTTPS) снижает риски перехвата/подмены по пути.</li>
                         </ul>
                     </div>
                     <div class="code-example">
@@ -168,6 +170,8 @@ dig skl-academy.ru ANY +short
                             <li><strong>TLS рукопожатие</strong>: выбор параметров, обмен ключами, проверка сертификата.</li>
                             <li><strong>Сертификаты X.509</strong>: цепочка доверия, CA/Intermediate, проверки CN/SAN, OCSP/CRL.</li>
                             <li><strong>HTTP/2 и HTTP/3</strong>: мультиплексирование потоков, сжатие заголовков (HPACK/QPACK), на базе TLS/QUIC.</li>
+                            <li><strong>Идемпотентность</strong>: GET/PUT/DELETE — идемпотентны; POST — нет. Это влияет на ретраи и прокси.</li>
+                            <li><strong>Кэширование</strong>: Cache‑Control/ETag/Last‑Modified управляют валидностью; Vary влияет на ключи кэша.</li>
                         </ul>
                     </div>
                 </div>

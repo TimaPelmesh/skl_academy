@@ -156,6 +156,15 @@
                             <li>Флаги: SYN/ACK/FIN/RST/PSH/URG, размер окна, контрольная сумма, опции (MSS, WS, SACK Permitted, TSopt).</li>
                         </ul>
                     </div>
+                    <div class="visual-guide">
+                        <h4>Завершение и состояния TCP</h4>
+                        <ul>
+                            <li><strong>Четырёхшаговое закрытие</strong>: FIN → ACK / FIN → ACK; возможен полудуплексный финал.</li>
+                            <li><strong>TIME_WAIT</strong>: сторона, закрывающая соединение, удерживает сокет для предотвращения дублирующихся сегментов.</li>
+                            <li><strong>RST</strong>: немедленное разрыв соединения (ошибки протокола/сервисов).</li>
+                            <li><strong>Keepalive</strong>: периодические пробные сегменты для обнаружения «мертвых» пиров (зависит от ОС/настроек).</li>
+                        </ul>
+                    </div>
                     <div class="code-example">
 <pre><code class="bash"># Наблюдение за TCP-соединениями
 # Windows
@@ -211,6 +220,8 @@ ss -tulpen
                     <ul>
                         <li><strong>Window Scaling</strong>: расширяет размер окна и повышает Throughput на высоколатентных каналах.</li>
                         <li><strong>QUIC (HTTP/3)</strong>: транспорт поверх UDP с шифрованием и мультиплексированием потоков.</li>
+                        <li><strong>PMTUD и MSS Clamping</strong>: обнаружение MTU по пути, настройка MSS на границах (особенно при туннелях/VPN).</li>
+                        <li><strong>Алгоритмы перегрузок</strong>: CUBIC (дефолт в Linux), BBR (Google) — выбор влияет на латентность/пропускную способность.</li>
                     </ul>
                 </div>
             </section>

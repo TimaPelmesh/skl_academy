@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Первая программа на Python: от установки до библиотек</title>
+  
+  <!-- Yandex.Metrika counter -->
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+    ym(102262736, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+  
+  <!-- Favicon / Иконки сайта -->
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+  
+  <!-- SEO Мета-теги -->
+  <meta name="description" content="Пошаговое руководство по созданию первой программы на Python. Установка Python, первая программа Hello World, изучение библиотеки requests и создание погодного приложения.">
+  <meta name="keywords" content="python для начинающих, первая программа python, установка python, библиотека requests, обучение программированию">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph мета-теги для социальных сетей -->
+  <meta property="og:title" content="Первая программа на Python: от установки до библиотек">
+  <meta property="og:description" content="Пошаговое руководство по созданию первой программы на Python с изучением библиотеки requests">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://skl-academy.ru/articles/first-python-program.html">
+  <meta property="og:image" content="../images/python-first-program.jpg">
+  <meta property="og:site_name" content="SKL Academy">
+  
+  <!-- Twitter Card мета-теги -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Первая программа на Python: от установки до библиотек">
+  <meta name="twitter:description" content="Пошаговое руководство по созданию первой программы на Python">
+  <meta name="twitter:image" content="../images/python-first-program.jpg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skl-academy.ru/articles/first-python-program.html">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans">
+  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- Navigation -->
+  <nav class="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-24 items-center">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="../index.html" class="flex items-center">
+              <img class="h-9 w-auto" src="../images/icon.ico" alt="SKL Academy">
+              <span class="ml-3 text-xl font-semibold text-gray-900 header-title">SKL Academy</span>
+            </a>
+          </div>
+        </div>
+        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+          <a href="../index.html#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
+
+          <a href="../index.html#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
+          <a href="../about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
+        </div>
+        <div class="-mr-2 flex items-center md:hidden">
+          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Open main menu</span>
+            <div class="burger-icon">
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden">
+      <div class="pt-2 pb-3 space-y-1 px-4">
+        <a href="../index.html#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
+
+        <a href="../index.html#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
+        <a href="../about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-8 md:py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-2xl md:text-3xl font-bold mb-3 text-white">Первая программа на Python: от установки до библиотек</h1>
+        <p class="text-base md:text-lg text-blue-100 mb-4">Пошаговое руководство по созданию первой программы с изучением библиотеки requests</p>
+        
+        <!-- Article Meta -->
+        <div class="flex flex-wrap justify-center items-center gap-4 text-xs md:text-sm text-blue-100">
+          <div class="flex items-center">
+            <i class="fas fa-clock mr-2"></i>
+            <span>Время чтения: 20 минут</span>
+          </div>
+          <div class="flex items-center">
+            <i class="fas fa-tags mr-2"></i>
+            <span>Python, Программирование, Requests</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Article Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="article-layout">
+      <!-- Table of Contents -->
+      <div class="table-of-contents">
+        <h3><i class="fas fa-list-ul mr-2"></i>Содержание</h3>
+        <ul>
+          <li><a href="#intro">Введение в Python</a></li>
+          <li><a href="#installation">Установка Python</a></li>
+          <li><a href="#first-program">Первая программа "Hello World"</a></li>
+          <li><a href="#variables">Переменные и типы данных</a></li>
+          <li><a href="#requests">Изучаем библиотеку requests</a></li>
+          <li><a href="#api-project">Проект: Погодное приложение</a></li>
+          <li><a href="#next-steps">Следующие шаги</a></li>
+        </ul>
+      </div>
+
+      <article class="article-content">
+
+      <section id="intro">
+        <h2>Введение в Python</h2>
+        <p>Python — это высокоуровневый язык программирования, который известен своей простотой и читаемостью. Он идеально подходит для начинающих программистов и широко используется в веб-разработке, анализе данных, машинном обучении и многих других областях.</p>
+        
+        <div class="highlight-box">
+          <strong>Почему Python?</strong>
+          <ul>
+            <li>Простой и понятный синтаксис</li>
+            <li>Богатая экосистема библиотек</li>
+            <li>Отличная документация и сообщество</li>
+            <li>Кроссплатформенность</li>
+            <li>Высокая производительность разработки</li>
+          </ul>
+        </div>
+
+        <h3>Что мы изучим</h3>
+        <p>В этой статье мы пройдем путь от установки Python до создания полноценного приложения, которое получает данные о погоде через API. Вы научитесь:</p>
+        <ul>
+          <li>Устанавливать Python на вашу систему</li>
+          <li>Создавать первую программу "Hello World"</li>
+          <li>Работать с переменными и типами данных</li>
+          <li>Использовать библиотеку requests для HTTP-запросов</li>
+          <li>Создавать простое приложение для получения погоды</li>
+        </ul>
+      </section>
+
+      <section id="installation">
+        <h2>Установка Python</h2>
+        <p>Первым шагом на пути к программированию на Python является установка интерпретатора языка на вашу систему.</p>
+
+        <h3>Шаг 1: Скачивание Python</h3>
+        <ol>
+          <li>Перейдите на официальный сайт Python: <a href="https://python.org" target="_blank" class="text-blue-600 hover:text-blue-800">python.org</a></li>
+          <li>Нажмите на кнопку "Downloads"</li>
+          <li>Выберите последнюю версию Python (рекомендуется Python 3.11 или новее)</li>
+          <li>Скачайте установщик для вашей операционной системы</li>
+        </ol>
+
+        <div class="warning-box">
+          <strong>Важно!</strong> При установке обязательно поставьте галочку "Add Python to PATH" - это позволит запускать Python из командной строки.
+        </div>
+
+        <h3>Шаг 2: Проверка установки</h3>
+        <p>После установки откройте командную строку (Windows) или терминал (macOS/Linux) и выполните:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">Проверка версии Python</div>
+          <div class="code-block-content">
+python --version
+          </div>
+        </div>
+
+        <p>Вы должны увидеть что-то вроде: <code>Python 3.11.0</code></p>
+      </section>
+
+      <section id="first-program">
+        <h2>Первая программа "Hello World"</h2>
+        <p>Традиционно первая программа, которую пишут программисты, выводит на экран фразу "Hello, World!". Давайте создадим такую программу на Python.</p>
+
+        <h3>Создание файла</h3>
+        <ol>
+          <li>Создайте новую папку для ваших проектов</li>
+          <li>Откройте любой текстовый редактор (Notepad, VS Code, PyCharm)</li>
+          <li>Создайте новый файл с именем <code>hello.py</code></li>
+        </ol>
+
+        <h3>Написание кода</h3>
+        <p>В файл <code>hello.py</code> введите следующий код:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">hello.py</div>
+          <div class="code-block-content">
+# Моя первая программа на Python
+print("Hello, World!")
+print("Привет, мир!")
+          </div>
+        </div>
+
+        <h3>Запуск программы</h3>
+        <p>Теперь запустите вашу программу:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">Запуск программы</div>
+          <div class="code-block-content">
+python hello.py
+          </div>
+        </div>
+
+        <div class="success-box">
+          <strong>Поздравляем!</strong> Вы создали и запустили свою первую программу на Python!
+        </div>
+      </section>
+
+      <section id="variables">
+        <h2>Переменные и типы данных</h2>
+        <p>Переменные — это контейнеры для хранения данных. В Python переменные создаются автоматически при присваивании значения.</p>
+
+        <h3>Основные типы данных</h3>
+        
+        <div class="code-block">
+          <div class="code-block-header">variables.py</div>
+          <div class="code-block-content">
+# Строки (str)
+name = "Анна"
+message = "Привет, мир!"
+
+# Числа
+age = 25
+temperature = 23.5
+
+# Логические значения (bool)
+is_student = True
+is_working = False
+
+# Списки (list)
+fruits = ["яблоко", "банан", "апельсин"]
+
+# Словари (dict)
+person = {
+    "name": "Иван",
+    "age": 30,
+    "city": "Москва"
+}
+
+# Вывод значений
+print(f"Имя: {name}")
+print(f"Возраст: {age}")
+print(f"Температура: {temperature}°C")
+print(f"Студент: {is_student}")
+print(f"Фрукты: {fruits}")
+print(f"Человек: {person}")
+          </div>
+        </div>
+
+        <h3>Работа с переменными</h3>
+        <p>В Python вы можете легко изменять значения переменных и выполнять операции с ними:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">operations.py</div>
+          <div class="code-block-content">
+# Математические операции
+a = 10
+b = 5
+
+print(f"a = {a}, b = {b}")
+print(f"Сложение: {a + b}")
+print(f"Вычитание: {a - b}")
+print(f"Умножение: {a * b}")
+print(f"Деление: {a / b}")
+print(f"Остаток от деления: {a % b}")
+print(f"Возведение в степень: {a ** b}")
+
+# Работа со строками
+first_name = "Иван"
+last_name = "Петров"
+full_name = first_name + " " + last_name
+print(f"Полное имя: {full_name}")
+
+# Форматирование строк
+age = 25
+message = f"Мне {age} лет"
+print(message)
+          </div>
+        </div>
+      </section>
+
+      <section id="requests">
+        <h2>Изучаем библиотеку requests</h2>
+        <p>Библиотека <code>requests</code> — это популярная библиотека Python для выполнения HTTP-запросов. Она позволяет легко получать данные с веб-сайтов и API.</p>
+
+        <h3>Установка библиотеки</h3>
+        <p>Сначала установим библиотеку requests:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">Установка requests</div>
+          <div class="code-block-content">
+pip install requests
+          </div>
+        </div>
+
+        <h3>Первый HTTP-запрос</h3>
+        <p>Создадим простую программу для получения данных с веб-сайта:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">simple_request.py</div>
+          <div class="code-block-content">
+import requests
+
+# Простой GET-запрос
+response = requests.get("https://httpbin.org/get")
+
+# Проверяем статус ответа
+print(f"Статус код: {response.status_code}")
+
+# Получаем данные
+if response.status_code == 200:
+    data = response.json()
+    print("Ответ сервера:")
+    print(data)
+else:
+    print("Ошибка при получении данных")
+          </div>
+        </div>
+
+        <h3>Работа с API</h3>
+        <p>Теперь создадим более сложный пример с использованием публичного API:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">api_example.py</div>
+          <div class="code-block-content">
+import requests
+import json
+
+# API для получения информации о пользователях
+url = "https://jsonplaceholder.typicode.com/users/1"
+
+try:
+    # Выполняем запрос
+    response = requests.get(url)
+    
+    # Проверяем успешность запроса
+    if response.status_code == 200:
+        user = response.json()
+        
+        print("Информация о пользователе:")
+        print(f"Имя: {user['name']}")
+        print(f"Email: {user['email']}")
+        print(f"Город: {user['address']['city']}")
+        print(f"Компания: {user['company']['name']}")
+    else:
+        print(f"Ошибка: {response.status_code}")
+        
+except requests.exceptions.RequestException as e:
+    print(f"Ошибка сети: {e}")
+except KeyError as e:
+    print(f"Ошибка в данных: {e}")
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Что мы изучили:</strong>
+          <ul>
+            <li>Установка библиотек через pip</li>
+            <li>Выполнение HTTP GET-запросов</li>
+            <li>Обработка ответов от сервера</li>
+            <li>Работа с JSON-данными</li>
+            <li>Обработка ошибок</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="api-project">
+        <h2>Проект: Погодное приложение</h2>
+        <p>Теперь создадим полноценное приложение, которое получает информацию о погоде через API. Мы будем использовать бесплатный API OpenWeatherMap.</p>
+
+        <h3>Подготовка</h3>
+        <ol>
+          <li>Зарегистрируйтесь на <a href="https://openweathermap.org" target="_blank" class="text-blue-600 hover:text-blue-800">OpenWeatherMap</a></li>
+          <li>Получите бесплатный API ключ</li>
+          <li>Установите библиотеку requests: <code>pip install requests</code></li>
+        </ol>
+
+        <h3>Создание погодного приложения</h3>
+        
+        <div class="code-block">
+          <div class="code-block-header">weather_app.py</div>
+          <div class="code-block-content">
+import requests
+import json
+
+def get_weather(city, api_key):
+    """
+    Получает информацию о погоде для указанного города
+    """
+    # URL API OpenWeatherMap
+    url = f"http://api.openweathermap.org/data/2.5/weather"
+    
+    # Параметры запроса
+    params = {
+        "q": city,
+        "appid": api_key,
+        "units": "metric",  # Температура в градусах Цельсия
+        "lang": "ru"        # Язык ответа
+    }
+    
+    try:
+        # Выполняем запрос
+        response = requests.get(url, params=params)
+        
+        # Проверяем статус ответа
+        if response.status_code == 200:
+            weather_data = response.json()
+            
+            # Извлекаем нужную информацию
+            temperature = weather_data["main"]["temp"]
+            humidity = weather_data["main"]["humidity"]
+            pressure = weather_data["main"]["pressure"]
+            description = weather_data["weather"][0]["description"]
+            wind_speed = weather_data["wind"]["speed"]
+            
+            # Выводим результат
+            print(f"🌤️ Информация о погоде:")
+            print(f"{'='*30}")
+            print(f"Город: {city}")
+            print(f"Температура: {temperature}°C")
+            print(f"Описание: {description}")
+            print(f"Влажность: {humidity}%")
+            print(f"Давление: {pressure} hPa")
+            print(f"Ветер: {wind_speed} м/с")
+            
+        else:
+            print(f"Ошибка при получении данных: {response.status_code}")
+            if response.status_code == 404:
+                print("Город не найден. Проверьте название города.")
+            elif response.status_code == 401:
+                print("Неверный API ключ. Проверьте ваш ключ.")
+                
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка сети: {e}")
+    except KeyError as e:
+        print(f"Ошибка в данных: {e}")
+
+def main():
+    """
+    Главная функция программы
+    """
+    print("🌤️ Погодное приложение")
+    print("=" * 30)
+    
+    # Ваш API ключ (замените на свой)
+    api_key = "YOUR_API_KEY_HERE"
+    
+    # Запрашиваем город у пользователя
+    city = input("Введите название города: ")
+    
+    # Получаем информацию о погоде
+    get_weather(city, api_key)
+
+if __name__ == "__main__":
+    main()
+          </div>
+        </div>
+
+        <h3>Как использовать приложение</h3>
+        <ol>
+          <li>Замените <code>YOUR_API_KEY_HERE</code> на ваш реальный API ключ</li>
+          <li>Сохраните файл как <code>weather_app.py</code></li>
+          <li>Запустите программу: <code>python weather_app.py</code></li>
+          <li>Введите название города, когда программа запросит</li>
+        </ol>
+
+        <div class="success-box">
+          <strong>Отлично!</strong> Вы создали полноценное приложение, которое получает реальные данные о погоде через API!
+        </div>
+      </section>
+
+      <section id="next-steps">
+        <h2>Следующие шаги</h2>
+        <p>Поздравляем! Вы успешно создали свою первую программу на Python и изучили основы работы с библиотекой requests. Теперь вы можете развивать свои навыки дальше.</p>
+
+        <h3>Что изучать дальше</h3>
+        <ul>
+          <li><strong>Управляющие конструкции</strong> — условия (if/else), циклы (for/while)</li>
+          <li><strong>Функции</strong> — создание и использование функций</li>
+          <li><strong>Работа с файлами</strong> — чтение и запись файлов</li>
+          <li><strong>Обработка исключений</strong> — try/except блоки</li>
+          <li><strong>Объектно-ориентированное программирование</strong> — классы и объекты</li>
+          <li><strong>Другие библиотеки</strong> — pandas, matplotlib, flask</li>
+        </ul>
+
+        <h3>Практические проекты</h3>
+        <p>Попробуйте создать следующие проекты для закрепления навыков:</p>
+        <ul>
+          <li>Конвертер валют с использованием API</li>
+          <li>Приложение для сохранения заметок</li>
+          <li>Парсер новостей с веб-сайтов</li>
+          <li>Простой веб-сервер на Flask</li>
+          <li>Игра "Угадай число"</li>
+        </ul>
+
+        <div class="highlight-box">
+          <strong>Советы для дальнейшего изучения:</strong>
+          <ul>
+            <li>Регулярно практикуйтесь в написании кода</li>
+            <li>Изучайте документацию библиотек</li>
+            <li>Участвуйте в open-source проектах</li>
+            <li>Решайте задачи на платформах типа LeetCode</li>
+            <li>Создавайте собственные проекты</li>
+          </ul>
+        </div>
+
+        <blockquote>
+          "Лучший способ изучить программирование — это создавать реальные проекты, которые решают ваши задачи."
+        </blockquote>
+
+        <p>Удачи в изучении Python!</p>
+      </section>
+    </article>
+    </div>
+
+    <!-- Article Navigation -->
+    <div class="article-navigation">
+      <div class="nav-buttons">
+        <a href="../index.html#articles" class="nav-button back">
+          <i class="fas fa-arrow-left mr-2"></i>К списку статей
+        </a>
+        <a href="../index.html" class="nav-button home">
+          <i class="fas fa-home mr-2"></i>На главную
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacts">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold">О проекте</h4>
+        <p class="mt-4 text-gray-400">Образовательная платформа для изучения IT-технологий с нуля</p>
+        <p class="mt-2 text-gray-400">Бесплатные материалы, практические задания и проекты</p>
+      </div>
+      
+      <div class="footer-column">
+        <h4 class="text-white text-xl font-semibold">Контакты</h4>
+        <div class="mt-4 space-y-3">
+          <a href="#" onclick="openGmail(); return false;" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
+            <i class="fas fa-envelope mr-2"></i> Gmail
+          </a>
+          <a href="#" onclick="openTelegram(); return false;" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
+            <i class="fab fa-telegram mr-2"></i> Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-gray-800">
+      <div class="flex justify-center">
+        <p class="text-gray-500 text-sm">2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html> 

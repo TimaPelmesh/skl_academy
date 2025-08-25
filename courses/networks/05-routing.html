@@ -166,6 +166,7 @@ ip route add 10.10.0.0/16 via 192.168.1.1
                             <li><strong>Аутентификация</strong>: MD5/простая; для v3 — IPsec AH/ESP.</li>
                         </ul>
                     </div>
+                    <div class="note"><p><strong>OSPFv2/OSPFv3:</strong> для IPv4/IPv6 соответственно; метрика «стоимость» зависит от опорной пропускной способности (reference‑bandwidth) и должна быть настроена для высокоскоростных линков, иначе все 10G+/40G+ будут иметь одинаковую стоимость.</p></div>
                 </div>
             </section>
 
@@ -181,6 +182,7 @@ ip route add 10.10.0.0/16 via 192.168.1.1
                             <li><strong>iBGP/eBGP</strong>: требования к полносвязности iBGP (или использование route‑reflectors).</li>
                         </ul>
                     </div>
+                    <div class="note"><p><strong>Выбор пути зависит от вендора:</strong> <em>weight</em> — локальный параметр (не распространяется), <em>local‑pref</em> действует в пределах AS, <em>MED</em> сравнивается, как правило, только для одинакового соседнего AS. Атрибут <em>next‑hop</em>, а также политика (AS‑prepend/communities) часто важнее длины AS‑PATH.</p></div>
                 </div>
             </section>
 

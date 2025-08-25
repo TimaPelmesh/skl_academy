@@ -1644,3 +1644,10 @@ h4 {
     margin: 0 auto 40px;
     padding: 0 20px;
 }
+
+/* Контейнер вступления модуля: центрирование и ограничение ширины */
+.module-intro {
+	max-width: 900px;
+	margin: 0 auto 40px;
+	padding: 0 20px;
+}

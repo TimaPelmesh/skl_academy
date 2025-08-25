@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс по веб‑разработке. Модуль 1: HTML — структура веб‑страницы: теги, атрибуты, каркас документа, семантика, формы.">
+    <meta name="keywords" content="веб разработка, html, курс html, основы html, семантика html, формы html, бесплатный курс веб">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Веб‑разработка — Модуль 1: HTML — Структура">
+    <meta property="og:description" content="Изучите HTML с нуля: теги, атрибуты, структура документа, семантическая разметка и формы.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/web/01-html-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Веб‑разработка — HTML основы">
+    <meta name="twitter:description" content="Модуль 1: HTML — структура веб‑страницы.">
+    <title>Веб‑разработка — Модуль 1: HTML — Структура | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/01-html-basics.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <!-- Structured Data: Breadcrumbs for Web course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Веб‑разработка", "item": "https://skl-academy.ru/courses/web/01-html-basics.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс по веб‑разработке",
+      "description": "Полный курс по веб‑разработке с нуля: HTML, CSS, JavaScript и практика.",
+      "provider": {"@type": "Organization", "name": "SKL Academy", "sameAs": "https://skl-academy.ru/"},
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "coursePrerequisites": "Базовые знания компьютера",
+      "teaches": ["HTML", "CSS", "JavaScript", "адаптивная верстка", "клиентский JavaScript"],
+      "about": [
+        {"@type": "Thing", "name": "HTML"},
+        {"@type": "Thing", "name": "CSS"},
+        {"@type": "Thing", "name": "JavaScript"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Веб‑разработка — Модуль 1: HTML — Структура",
+      "description": "HTML: теги, атрибуты, структура документа, семантика и формы.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/web/01-html-basics.html"},
+      "keywords": "веб разработка, html, семантика, формы"
+    }
+    </script>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">HTML — Структура</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn active">1. HTML — Структура</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#html-intro" class="subtopic active">1.1 Введение в HTML. Каркас</a>
+                        <a href="#text-content" class="subtopic">1.2 Текстовый контент</a>
+                        <a href="#links-images" class="subtopic">1.3 Ссылки и изображения</a>
+                        <a href="#semantic-markup" class="subtopic">1.4 Семантическая разметка</a>
+                        <a href="#forms" class="subtopic">1.5 Формы</a>
+                        <a href="#module1-project" class="subtopic">Итоговый проект модуля 1</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. CSS — Визуальное оформление</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">2.1 Введение и подключение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">2.2 Каскадность и специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">2.3 Текст и шрифты</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">2.4 Модель коробки</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">2.5 Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">2.6 Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">2.7 Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">2.8 Адаптивность и @media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">2.9 Трансформации и анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Итоговый проект модуля 2</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript — Интерактивность</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">3.1 Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">3.2 Операторы и условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">3.3 Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">3.4 Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">3.5 DOM — поиск и изменения</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">3.6 DOM — события</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">3.7 Формы в JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">3.8 Хранение данных</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">3.9 Асинхронность и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Итоговый проект модуля 3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <div id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 1: HTML — Структура веб‑страницы</h2>
+                <p>В этом модуле вы освоите базовую разметку HTML: узнаете, как устроен каркас документа, какие теги бывают, как использовать атрибуты, семантические элементы и создавать формы.</p>
+                <div class="note"><p><strong>Подготовительный этап (0.1–0.2)</strong>: установка редактора (VS Code), браузеров (Chrome/Firefox), Git и GitHub, публикация «Hello, World!» на GitHub Pages.</p></div>
+            </section>
+
+            <!-- 1.1 -->
+            <section id="html-intro" class="topic-section">
+                <h2>1.1 Введение в HTML. Базовый каркас документа</h2>
+                <p>HTML (HyperText Markup Language) описывает структуру документа. Основные строительные блоки — <strong>элементы</strong> (теги) и их <strong>атрибуты</strong>.</p>
+                <ul>
+                    <li><strong>Элемент</strong> — пара тегов (открывающий/закрывающий) и содержимое: <code>&lt;p&gt;Текст&lt;/p&gt;</code>.</li>
+                    <li><strong>Атрибут</strong> — дополнительная информация для элемента: <code>&lt;a href="/about" target="_blank"&gt;О нас&lt;/a&gt;</code>.</li>
+                    <li><strong>Структура документа</strong>: <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>.</li>
+                </ul>
+                <h3>Как браузер отображает HTML</h3>
+                <p>Браузер парсит HTML в <strong>дерево DOM</strong> (Document Object Model). Каждый элемент становится <em>узлом</em> со своими атрибутами и детьми. Скрипты и стили воздействуют на DOM, изменяя разметку и внешний вид без перезагрузки страницы.</p>
+                <h3>Пустые (void) элементы</h3>
+                <p>Некоторые теги не имеют содержимого и закрывающего тега: <code>&lt;br&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;link&gt;</code>. Их нельзя «вкладывать» в себя что‑то.</p>
+                <h3>Глобальные атрибуты</h3>
+                <ul>
+                    <li><code>id</code> — уникальный идентификатор узла (якоря, JS‑хуки).</li>
+                    <li><code>class</code> — группировка элементов для CSS/JS.</li>
+                    <li><code>data‑*</code> — пользовательские данные в разметке (доступ через <code>dataset</code>).</li>
+                    <li><code>aria‑*</code> — улучшение доступности (скринридеры).</li>
+                    <li><code>hidden</code>, <code>title</code>, <code>tabindex</code> — управляют отображением/подсказками/фокусом.</li>
+                </ul>
+                <h3>Пути к файлам</h3>
+                <ul>
+                    <li><strong>Абсолютные</strong>: <code>https://site.ru/page</code> — всегда с протоколом/доменом.</li>
+                    <li><strong>Относительные</strong>: <code>about.html</code>, <code>../img/cat.png</code> — относительно текущего файла.</li>
+                    <li><strong>От корня</strong>: <code>/images/icon.ico</code> — от корня сайта.</li>
+                </ul>
+                <h3>Экранирование символов</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&amp;lt; &rarr; &lt; (меньше),  &amp;gt; &rarr; &gt; (больше),  &amp;amp; &rarr; &amp;,  &amp;quot; &rarr; "</code></pre>
+                </div>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Моя первая страница&lt;/title&gt;
+    &lt;meta name="description" content="Краткое описание страницы" /&gt;
+    &lt;link rel="icon" href="/images/icon.ico" type="image/x-icon" /&gt;
+    &lt;link rel="stylesheet" href="/css/styles.css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;&lt;h1&gt;О себе&lt;/h1&gt;&lt;/header&gt;
+    &lt;main&gt;
+      &lt;p&gt;Привет! Это моя первая HTML‑страница.&lt;/p&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;© 2025&lt;/footer&gt;
+    &lt;script src="/js/script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+                <div class="note">
+                    <p><strong>Важно:</strong> <code>&lt;meta name="viewport"&gt;</code> обеспечивает адаптивность. Атрибут <code>lang="ru"</code> у <code>&lt;html&gt;</code> помогает SEO и ассистивным технологиям.</p>
+                </div>
+                <h3>Частые мета‑теги</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;meta name="robots" content="index, follow" /&gt;
+&lt;meta name="author" content="Имя автора" /&gt;
+&lt;meta property="og:title" content="Заголовок для соцсетей" /&gt;</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <ul>
+                        <li>Создайте <code>index.html</code> с корректным доктайпом, <code>lang</code>, <code>charset</code>, <code>viewport</code>.</li>
+                        <li>Подключите внешний CSS/JS, добавьте осмысленный <code>&lt;title&gt;</code> и <code>description</code>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 1.2 -->
+            <section id="text-content" class="topic-section">
+                <h2>1.2 Работа с текстовым контентом</h2>
+                <p>Текст — основа контента. Важно соблюдать иерархию заголовков и семантику.</p>
+                <h3>Заголовки и абзацы</h3>
+                <p><code>&lt;h1&gt;</code> — главный заголовок страницы (один на страницу). Далее структурируйте разделы <code>h2</code>, подпункты <code>h3</code> и т.д. Абзацы набирайте в <code>&lt;p&gt;</code>, перенос строки <code>&lt;br&gt;</code> используйте только для поэтических/адресных записей.</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;h1&gt;Главный заголовок страницы&lt;/h1&gt;
+&lt;h2&gt;Подраздел&lt;/h2&gt;
+&lt;p&gt;Обычный абзац текста с &lt;strong&gt;важным&lt;/strong&gt; словом и &lt;em&gt;акцентом&lt;/em&gt;.&lt;/p&gt;</code></pre>
+                </div>
+                <div class="note"><p><strong>Правило одно H1:</strong> на странице должен быть один <code>&lt;h1&gt;</code>. Заголовки идут по порядку: <code>h1</code> → <code>h2</code> → <code>h3</code> …</p></div>
+                <h3>Списки</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;ul&gt;
+  &lt;li&gt;Маркированный пункт&lt;/li&gt;
+  &lt;li&gt;Ещё пункт&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+  &lt;li&gt;Нумерованный пункт&lt;/li&gt;
+  &lt;li&gt;Ещё пункт&lt;/li&gt;
+&lt;/ol&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Термин&lt;/dt&gt;
+  &lt;dd&gt;Определение&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                </div>
+                <h3>Блочные и строчные элементы</h3>
+                <p><strong>Блочные</strong> (например, <code>div</code>, <code>p</code>, <code>section</code>) занимают всю ширину и начинаются с новой строки. <strong>Строчные</strong> (<code>span</code>, <code>a</code>, <code>em</code>) текут внутри строки и не разрывают поток.</p>
+                <h3>Пробелы и переносы</h3>
+                <p>Браузер схлопывает последовательности пробелов в один. Для отображения «как есть» используйте CSS <code>white-space</code> или тег <code>&lt;pre&gt;</code> для фрагментов кода.</p>
+                <h3>Инлайн‑элементы</h3>
+                <ul>
+                    <li><code>&lt;strong&gt;</code> — логически важное</li>
+                    <li><code>&lt;em&gt;</code> — акцент/интонация</li>
+                    <li><code>&lt;span&gt;</code> — универсальный инлайн‑контейнер</li>
+                </ul>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Добавьте на страницу «О себе» разделы с заголовками, абзацами, маркированным и нумерованным списками, а также списком определений.</p>
+                </div>
+            </section>
+
+            <!-- 1.3 -->
+            <section id="links-images" class="topic-section">
+                <h2>1.3 Ссылки и изображения</h2>
+                <h3>Ссылки</h3>
+                <p><code>&lt;a&gt;</code> создаёт гиперссылки. Внутренние ссылки ведут на страницы сайта, внешние — на другие домены. Для перехода к секции используйте якоря по <code>id</code>.</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;a href="https://example.com" target="_blank" rel="noopener noreferrer"&gt;Внешняя ссылка&lt;/a&gt;
+&lt;a href="/about.html"&gt;Внутренняя страница&lt;/a&gt;
+&lt;a href="#contacts"&gt;Прокрутка к секции на странице&lt;/a&gt;
+&lt;a href="mailto:hi@example.com"&gt;Написать письмо&lt;/a&gt;
+&lt;a href="tel:+79001234567"&gt;Позвонить&lt;/a&gt;</code></pre>
+                </div>
+                <div class="note"><p><strong>Безопасность:</strong> для внешних ссылок с <code>target="_blank"</code> добавляйте <code>rel="noopener noreferrer"</code>.</p></div>
+                <h3>Изображения</h3>
+                <p>Подбирайте формат по задаче: фотографии — JPEG/WebP; графика с прозрачностью — PNG/WebP; иконки/логотипы — SVG.</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;figure&gt;
+  &lt;img src="/images/cat.png" alt="Милый котёнок" width="400" height="300" loading="lazy"&gt;
+  &lt;figcaption&gt;Наш талисман — котёнок&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                </div>
+                <h3>Адаптивные изображения</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;img 
+  src="/images/photo-800.jpg" 
+  srcset="/images/photo-400.jpg 400w, /images/photo-800.jpg 800w, /images/photo-1200.jpg 1200w" 
+  sizes="(max-width: 600px) 100vw, 600px"
+  alt="Пейзаж" width="600" height="400" loading="lazy"&gt;</code></pre>
+                </div>
+                <ul>
+                    <li><strong>alt</strong> — обязательный описательный текст (доступность/SEO)</li>
+                    <li><strong>width/height</strong> — помогают браузеру резервировать место и избегать «скачков» верстки</li>
+                </ul>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Соберите меню из 4 ссылок (включая якорь и mailto) и вставьте 2 изображения: обычное и адаптивное с <code>srcset</code>.</p>
+                </div>
+            </section>
+
+            <!-- 1.4 -->
+            <section id="semantic-markup" class="topic-section">
+                <h2>1.4 Семантическая разметка</h2>
+                <p>Семантические теги описывают <em>смысл</em> блоков: поисковики и ассистивные технологии лучше понимают структуру, пользователям проще навигация.</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;header&gt;
+  &lt;nav&gt;Меню&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;header&gt;&lt;h1&gt;Заголовок статьи&lt;/h1&gt;&lt;/header&gt;
+    &lt;section aria-labelledby="s1"&gt;
+      &lt;h2 id="s1"&gt;Основной контент&lt;/h2&gt;
+      ...
+    &lt;/section&gt;
+    &lt;footer&gt;Автор и дата&lt;/footer&gt;
+  &lt;/article&gt;
+  &lt;aside&gt;Боковая колонка&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;Подвал&lt;/footer&gt;</code></pre>
+                </div>
+                <h3>Лендмарки доступности</h3>
+                <ul>
+                    <li><code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code> — могут быть у страницы и у статьи/секции</li>
+                    <li><code>&lt;main&gt;</code> — только один на странице, основной контент</li>
+                    <li><code>&lt;nav&gt;</code> — группы ссылок (меню/хлебные крошки)</li>
+                    <li><code>&lt;aside&gt;</code> — боковой/вспомогательный контент</li>
+                    <li><code>&lt;article&gt;</code> — самостоятельный, самодостаточный блок (статья, карточка)</li>
+                </ul>
+                <p>Если подходящего тега нет — используйте <code>&lt;div&gt;</code> (блочный) или <code>&lt;span&gt;</code> (строчный) и при необходимости ARIA‑атрибуты.</p>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Преобразуйте страницу «О себе» в семантический макет с <code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>aside</code>, <code>footer</code>.</p>
+                </div>
+            </section>
+
+            <!-- 1.5 -->
+            <section id="forms" class="topic-section">
+                <h2>1.5 Формы</h2>
+                <p>Формы позволяют собирать данные от пользователя и отправлять их на сервер.</p>
+                <h3>Базовая форма</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;form action="/submit" method="post" autocomplete="on"&gt;
+  &lt;label for="name"&gt;Имя&lt;/label&gt;
+  &lt;input id="name" type="text" name="name" required autocomplete="name"&gt;
+
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email" name="email" required autocomplete="email"&gt;
+
+  &lt;label for="pwd"&gt;Пароль&lt;/label&gt;
+  &lt;input id="pwd" type="password" name="password" minlength="6" autocomplete="new-password"&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Подписка&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="news" checked&gt; Новости&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="plan" value="basic" checked&gt; Базовый&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="plan" value="pro"&gt; Pro&lt;/label&gt;
+  &lt;/fieldset&gt;
+
+  &lt;label for="bio"&gt;О себе&lt;/label&gt;
+  &lt;textarea id="bio" name="bio" rows="4"&gt;&lt;/textarea&gt;
+
+  &lt;label for="city"&gt;Город&lt;/label&gt;
+  &lt;select id="city" name="city"&gt;
+    &lt;option value="msk"&gt;Москва&lt;/option&gt;
+    &lt;option value="spb"&gt;Санкт‑Петербург&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;button type="submit"&gt;Отправить&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                <h3>GET vs POST</h3>
+                <ul>
+                    <li><strong>GET</strong> — параметры в URL (для поиска/фильтров, небезопасно для паролей).</li>
+                    <li><strong>POST</strong> — данные в теле запроса (по умолчанию для форм с личными данными).</li>
+                </ul>
+                <div class="note"><p><strong>Доступность:</strong> связывайте подписи и поля через <code>for</code>/<code>id</code>; не используйте <code>placeholder</code> вместо <code>label</code>. Применяйте встроенную валидацию: <code>required</code>, <code>minlength</code>, <code>pattern</code>. Атрибуты <code>autocomplete</code> улучшают UX.</p></div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте форму обратной связи: имя, email, тема, сообщение, чекбокс согласия, кнопка отправки. Попробуйте <code>GET</code> и <code>POST</code>.</p>
+                </div>
+            </section>
+
+            <!-- Итоговый проект -->
+            <section id="module1-project" class="topic-section">
+                <h2>Итоговый проект модуля 1</h2>
+                <p>Сверстайте главную страницу портфолио без стилей. Обязательные секции: «Обо мне», «Навыки», «Проекты», «Контакты»; шапка с меню, подвал. Используйте семантические теги и добавьте форму обратной связи.</p>
+                <ul>
+                    <li>Структура: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code> с 3–4 <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code></li>
+                    <li>Доступность: корректные <code>alt</code> у изображений, иерархия заголовков</li>
+                    <li>Проверка: валидируйте документ на <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Validator</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
