@@ -38,13 +38,13 @@ footer .footer-column h4 {
 
 /* Blurred gradient background (static, no animations) */
 :root {
-  --hero-color-bg1: rgb(108, 0, 162);
-  --hero-color-bg2: rgb(0, 17, 82);
+  --hero-color-bg1: rgb(28, 24, 235);
+  --hero-color-bg2: rgb(42, 34, 110);
   --hero-color1: 18, 113, 255;
   --hero-color2: 221, 74, 255;
   --hero-color3: 100, 220, 255;
   --hero-color4: 200, 50, 50;
-  --hero-color5: 180, 180, 50;
+  --hero-color5: 79, 70, 229;
   --hero-circle-size: 85%;
 }
 
