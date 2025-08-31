@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 10: Сводная практика и лучшие практики. Сквозной пример и культура работы с Git.">
+    <meta name="keywords" content="git лучшие практики, сквозной пример git, workflow git, code review, rebase">
+    <meta name="author" content="SKL Academy">
+    <meta property="og:title" content="Git — Модуль 10: Сводная практика и лучшие практики">
+    <meta property="og:description" content="Закрепляем знания на сквозном примере и формируем устойчивые привычки работы с Git.">
+    <title>Курс Git — Модуль 10: Сводная практика | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/10-summary-best-practices.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Git — Сводная практика</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты и интеграции</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#hooks" class="subtopic">9.1 Hooks</a>
+                        <a href="09-tools-and-integrations.html#ci" class="subtopic">9.2 CI/CD</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">10. Сводная практика и лучшие практики</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#end-to-end" class="subtopic active">10.1 Сквозной пример</a>
+                        <a href="#best" class="subtopic">10.2 Лучшие практики</a>
+                        <a href="#commit-style" class="subtopic">10.3 Стиль коммитов</a>
+                        <a href="#history-hygiene" class="subtopic">10.4 Гигиена истории</a>
+                        <a href="#repo-health" class="subtopic">10.5 Здоровье репозитория</a>
+                        <a href="#security" class="subtopic">10.6 Безопасность секретов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 10: Сводная практика и лучшие практики</h2>
+                <p>Объединяем навыки: пройдём путь от форка репозитория до слияния PR, а затем закрепим правила хорошего тона при работе с Git.</p>
+                <p>Эта глава — о дисциплине: как превратить инструменты в устойчивые привычки. Хорошие практики снижают энтропию в проекте, ускоряют ревью и делают выпуск релизов предсказуемым.</p>
+            </section>
+
+            <section id="end-to-end" class="topic-section">
+                <h2>10.1 Сквозной пример</h2>
+                <ol>
+                    <li>Fork репозитория и <code>git clone</code></li>
+                    <li><code>git switch -c feature/&lt;topic&gt;</code> — создайте ветку</li>
+                    <li>Разработка фичи; коммиты по частям: <code>git add -p</code>, осмысленные сообщения</li>
+                    <li>Перед пушем «почистить» историю: <code>git rebase -i</code> (squash/reword)</li>
+                    <li><code>git push -u origin feature/&lt;topic&gt;</code></li>
+                    <li>Создание PR → Code Review → правки (доп. коммиты или <code>rebase</code>)</li>
+                    <li>Merge (безопасная стратегия, договорённая в проекте)</li>
+                </ol>
+            </section>
+
+            <section id="best" class="topic-section">
+                <h2>10.2 Лучшие практики</h2>
+                <ul>
+                    <li>Делайте <strong>частые и маленькие коммиты</strong></li>
+                    <li>Пишите <strong>осмысленные сообщения</strong> (Conventional Commits приветствуются)</li>
+                    <li>Поддерживайте <code>.gitignore</code></li>
+                    <li>Для синхронизации используйте <code>git pull --rebase</code> (обсуждайте в команде)</li>
+                    <li><strong>Не force‑push</strong> в общие ветки</li>
+                </ul>
+                <p>Выберите минимум правил, которые принесут максимум пользы вашей команде, и применяйте их последовательно. Важна не «идеальность», а предсказуемость.</p>
+            </section>
+            <section id="commit-style" class="topic-section">
+                <h2>10.3 Стиль коммитов и трейлеры</h2>
+                <p>Единый стиль сообщений (Conventional Commits), длина заголовка, осмысленность описания. Используйте трейлеры: <code>Co-authored-by:</code>, <code>Signed-off-by:</code>, ссылки на задачи/тикеты.</p>
+            </section>
+            <section id="history-hygiene" class="topic-section">
+                <h2>10.4 Гигиена истории</h2>
+                <p>Чистая линейная история облегчает поиск причин регрессий и автоматизацию релизов. Используйте rebase/merge согласно политике проекта, удаляйте мёртвые ветки, фиксируйте релизы тегами.</p>
+            </section>
+            <section id="repo-health" class="topic-section">
+                <h2>10.5 Здоровье репозитория</h2>
+                <p>Следите за размером и количеством объектов, периодически выполняйте обслуживание (gc/prune), используйте LFS для больших файлов и partial/shallow clone для оптимизации.</p>
+            </section>
+            <section id="security" class="topic-section">
+                <h2>10.6 Безопасность секретов</h2>
+                <p>Не храните секреты в репозитории; применяйте секрет‑сканеры, политики ревью и удаление утечек (ревок токенов, перевыпуск ключей). Для подтверждения авторства используйте подпись коммитов.</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 2: Коммиты и история. Анализ истории, amend, add -p, git show, .gitignore.">
+    <meta name="keywords" content="git log, git show, amend, add -p, gitignore, история git">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Git — Модуль 2: Коммиты и история">
+    <meta property="og:description" content="Изучаем структуру коммита, продвинутый git log, amend, add -p и .gitignore.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/git/02-commits-and-history.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Git — Коммиты и история">
+    <meta name="twitter:description" content="Анализ истории и исправление ошибок локально.">
+    <title>Курс Git — Модуль 2: Коммиты и история | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/02-commits-and-history.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+        <h1 class="header-title">Git — Коммиты и история</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Философия и основы Git</button>
+                    <div class="subtopics">
+                        <a href="01-git-basics.html#vcs-intro" class="subtopic">1.1 Что такое VCS</a>
+                        <a href="01-git-basics.html#first-steps" class="subtopic">1.2 Первые шаги</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">2. Коммиты и история</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#log-pro" class="subtopic active">2.1 git log — продвинуто</a>
+                        <a href="#git-show" class="subtopic">2.2 git show</a>
+                        <a href="#amend" class="subtopic">2.3 git commit --amend</a>
+                        <a href="#add-patch" class="subtopic">2.4 git add -p</a>
+                        <a href="#gitignore" class="subtopic">2.5 .gitignore</a>
+                        <a href="#commit-anatomy" class="subtopic">2.6 Анатомия коммита</a>
+                        <a href="#author-committer" class="subtopic">2.7 Author vs Committer</a>
+                        <a href="#messages-trailers" class="subtopic">2.8 Сообщения и трейлеры</a>
+                        <a href="#ranges-selectors" class="subtopic">2.9 Диапазоны и селекторы</a>
+                        <a href="#advanced-diff" class="subtopic">2.10 Продв. diff/log опции</a>
+                        <a href="#pickaxe-pathspec" class="subtopic">2.11 Pickaxe и pathspec</a>
+                        <a href="#pretty-formats" class="subtopic">2.12 Форматы вывода</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Ветвление</button>
+                    <div class="subtopics">
+                        <a href="03-branching.html#branch-basics" class="subtopic">3.1 Основы веток</a>
+                        <a href="03-branching.html#compare" class="subtopic">3.2 Сравнение веток</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Слияние и конфликты</button>
+                    <div class="subtopics">
+                        <a href="04-merging-and-conflicts.html#ff-vs-merge" class="subtopic">4.1 Fast‑Forward</a>
+                        <a href="04-merging-and-conflicts.html#conflicts" class="subtopic">4.2 Конфликты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Rebase</button>
+                    <div class="subtopics">
+                        <a href="05-rebase.html#interactive" class="subtopic">5.1 Интерактивный rebase</a>
+                        <a href="05-rebase.html#rules" class="subtopic">5.2 Правила</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Удалённые репозитории</button>
+                    <div class="subtopics">
+                        <a href="06-remotes.html#fetch-pull" class="subtopic">6.1 fetch/pull</a>
+                        <a href="06-remotes.html#push" class="subtopic">6.2 push</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. Командная работа</button>
+                    <div class="subtopics">
+                        <a href="07-teamwork-and-practices.html#pr" class="subtopic">7.1 PR/MR</a>
+                        <a href="07-teamwork-and-practices.html#tags" class="subtopic">7.2 Теги</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Спасение и откаты</button>
+                    <div class="subtopics">
+                        <a href="08-recovery-and-troubleshooting.html#reset-revert" class="subtopic">8.1 reset/revert</a>
+                        <a href="08-recovery-and-troubleshooting.html#reflog" class="subtopic">8.2 reflog</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#gui" class="subtopic">9.1 GUI</a>
+                        <a href="09-tools-and-integrations.html#hooks-ci" class="subtopic">9.2 hooks/CI</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 2: Углубляемся в коммиты и историю</h2>
+                <p>Учимся читать историю, смотреть диффы коммитов, исправлять последний коммит и добавлять изменения частями. Разберём структуру коммита и лучшие практики оформления сообщений.</p>
+                <div class="visual-guide">
+                    <h4>О чём этот модуль</h4>
+                    <ul>
+                        <li><strong>Структура коммита</strong>: дерево файлов, родитель, автор/коммиттер, сообщение</li>
+                        <li><strong>Чтение истории</strong>: oneline/graph/decorate, фильтры по файлам/авторам/датам</li>
+                        <li><strong>Правки</strong>: <code>--amend</code> и аккуратное использование</li>
+                        <li><strong>Точечные добавления</strong>: <code>git add -p</code> для «чистых» коммитов</li>
+                        <li><strong>.gitignore</strong>: исключаем лишнее из истории</li>
+                    </ul>
+                </div>
+                <div class="practice-tips">
+                    <h4>Хорошие сообщения к коммитам</h4>
+                    <ul>
+                        <li>Короткая заголовочная строка (до ~72 символов), затем пустая строка и подробности</li>
+                        <li>Используйте стиль Conventional Commits: <code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>refactor:</code> и т.п.</li>
+                        <li>Пишите <em>почему</em>, а не только <em>что</em></li>
+                    </ul>
+                </div>
+                <p>Чтение истории — это не столько набор флагов к <code>git log</code>, сколько умение формулировать вопрос к истории: «кто и когда трогал этот файл?», «какие коммиты привели к регрессии?», «почему появилось это решение?». Освоив фильтры и форматы вывода, вы превращаете историю в полноценный инструмент анализа.</p>
+            </section>
+
+            <section id="log-pro" class="topic-section">
+                <h2>2.1 Анализ истории: git log</h2>
+                <div class="code-example">
+<pre><code class="bash">git log --oneline --graph --decorate --all
+# Отбор по автору/дате/файлу
+git log --author="Ivan" --since="2024-01-01" -- README.md
+# Показать статистику
+git log --stat
+# Дифф внутри лога
+git log -p -- foo.txt
+</code></pre>
+                </div>
+                <p>Старайтесь подбирать формат под задачу. Краткий «граф» полезен для ориентирования, а детальный <code>-p</code> — для изучения контекста изменений. Помните о диапазонах и селекторах: они позволяют сфокусироваться на интересующем промежутке истории.</p>
+            </section>
+
+            <section id="git-show" class="topic-section">
+                <h2>2.2 Просмотр конкретного коммита: git show</h2>
+                <div class="code-example">
+<pre><code class="bash">git show &lt;commit-hash&gt;
+# Показать только сообщение
+git show -s --format=%B &lt;hash&gt;
+</code></pre>
+                </div>
+                <p><code>git show</code> — это «лупа» для одного коммита: кто автор, какие файлы затронуты, какие строки изменены. Умение быстро читать такие диффы экономит часы на ревью и отладке.</p>
+            </section>
+
+            <section id="amend" class="topic-section">
+                <h2>2.3 Изменение последнего коммита: --amend</h2>
+                <div class="code-example">
+<pre><code class="bash"># Добавить забытые файлы в предыдущий коммит
+git add src/missed.py
+git commit --amend --no-edit
+
+# Изменить сообщение последнего коммита
+git commit --amend -m "fix: корректирует обработку ошибок"
+</code></pre>
+                </div>
+                <p><code>--amend</code> переписывает заголовок истории, создавая новый коммит вместо старого. Это безопасно локально, но опасно для уже опубликованных веток: чужие репозитории потеряют ссылочную целостность.</p>
+                <div class="note"><p><strong>Важно:</strong> не амендьте коммиты, которые уже ушли на общий remote.</p></div>
+            </section>
+
+            <section id="add-patch" class="topic-section">
+                <h2>2.4 Интерактивное добавление: git add -p</h2>
+                <p>Позволяет выбрать части файла (hunks) для включения в коммит, делая коммиты «цельными».</p>
+                <div class="code-example">
+<pre><code class="bash">git add -p
+# Клавиши: y (принять), n (пропустить), e (редактировать), s (разбить), q (выход)
+</code></pre>
+                </div>
+                <p>Мыслите «единицами смысла»: отдельный фикс — отдельный коммит. Интерактивное добавление помогает отделить косметику от логики, а эксперимент — от результата.</p>
+            </section>
+
+            <section id="gitignore" class="topic-section">
+                <h2>2.5 Игнорирование файлов: .gitignore</h2>
+                <div class="code-example">
+<pre><code class="bash"># .gitignore
+__pycache__/
+*.log
+.env
+build/
+</code></pre>
+                </div>
+                <p>Шаблоны в <code>.gitignore</code> работают на уровне путей и масок. Для локальных исключений используйте <code>.git/info/exclude</code>. Не добавляйте в историю артефакты сборки и секреты — это усложняет ревью и раздувает репозиторий.</p>
+            </section>
+            <section id="commit-anatomy" class="topic-section">
+                <h2>2.6 Анатомия коммита</h2>
+                <p>Коммит содержит: ссылку на дерево (snapshot), одного или нескольких родителей, автора и коммиттера (имя, email, время), сообщение. Идентификатор коммита — хеш содержимого объекта.</p>
+            </section>
+            <section id="author-committer" class="topic-section">
+                <h2>2.7 Автор и коммиттер</h2>
+                <p><em>Author</em> — кто написал изменения; <em>Committer</em> — кто записал их в репозиторий (могут различаться при rebase/merge). Метки времени различаются и важны для аудита.</p>
+            </section>
+            <section id="messages-trailers" class="topic-section">
+                <h2>2.8 Сообщения коммитов и трейлеры</h2>
+                <p>Помимо заголовка и описания, сообщения могут включать «трейлеры»: <code>Co-authored-by:</code>, <code>Signed-off-by:</code>, <code>Refs:</code>. Они машинно‑читаемы и поддерживаются инструментами.</p>
+            </section>
+            <section id="ranges-selectors" class="topic-section">
+                <h2>2.9 Диапазоны и селекторы в истории</h2>
+                <p>Выражения диапазонов позволяют адресовать подмножества истории: <code>A..B</code> (что в B, но нет в A), <code>A...B</code> (симметричная разность), каретки и тильды для родителей (<code>HEAD^</code>, <code>HEAD~2</code>), селекторы по датам и авторам.</p>
+            </section>
+            <section id="advanced-diff" class="topic-section">
+                <h2>2.10 Продвинутые опции diff/log</h2>
+                <p>Опции: <code>--word-diff</code> (покомпонентные изменения), <code>--find-renames</code>/<code>--find-copies</code> (эвристики переименований/копий), игнорирование пробелов (<code>-w</code>), цвет и форматирование.</p>
+            </section>
+            <section id="pickaxe-pathspec" class="topic-section">
+                <h2>2.11 Поиск изменений: pickaxe и pathspec</h2>
+                <p><strong>Pickaxe</strong> (<code>-S</code>) ищет коммиты, добавляющие/удаляющие строку/подстроку. <strong>Pathspec</strong> задаёт шаблоны путей, позволяет гибко ограничивать область анализа.</p>
+            </section>
+            <section id="pretty-formats" class="topic-section">
+                <h2>2.12 Форматы вывода и кастомизация</h2>
+                <p><code>git log --pretty=&lt;format&gt;</code> предоставляет гибкую настройку полей (хеш, дата, автор, тема). Комбинация с <code>--decorate</code>, <code>--graph</code> делает ленту истории информативной.</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
