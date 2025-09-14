@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Диагностика Windows - просмотр событий, мониторинг производительности, восстановление системы, продвинутые инструменты.">
+    <meta name="keywords" content="диагностика windows, просмотр событий, мониторинг производительности, восстановление системы">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <title>Диагностика Windows — Устранение неполадок и мониторинг | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/windows/09-troubleshooting.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Windows и PowerShell</h1>
+        <div class="header-buttons">
+            <a href="10-advanced-topics.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Windows</button>
+                    <div class="subtopics">
+                        <a href="01-windows-basics.html#introduction" class="subtopic">1.1 Введение в Windows</a>
+                        <a href="01-windows-basics.html#versions" class="subtopic">1.2 Версии Windows</a>
+                        <a href="01-windows-basics.html#interface" class="subtopic">1.3 Интерфейс Windows</a>
+                        <a href="01-windows-basics.html#file-explorer" class="subtopic">1.4 Проводник Windows</a>
+                        <a href="01-windows-basics.html#settings" class="subtopic">1.5 Настройки системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. PowerShell</button>
+                    <div class="subtopics">
+                        <a href="02-powershell-basics.html#what-is-powershell" class="subtopic">2.1 Что такое PowerShell</a>
+                        <a href="02-powershell-basics.html#installation" class="subtopic">2.2 Установка и настройка</a>
+                        <a href="02-powershell-basics.html#first-commands" class="subtopic">2.3 Первые команды</a>
+                        <a href="02-powershell-basics.html#help-system" class="subtopic">2.4 Система помощи</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="03-file-system.html#structure" class="subtopic">3.1 Структура файловой системы</a>
+                        <a href="03-file-system.html#paths" class="subtopic">3.2 Пути и навигация</a>
+                        <a href="03-file-system.html#permissions" class="subtopic">3.3 Права доступа</a>
+                        <a href="03-file-system.html#attributes" class="subtopic">3.4 Атрибуты файлов</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Реестр Windows</button>
+                    <div class="subtopics">
+                        <a href="04-registry.html#what-is-registry" class="subtopic">4.1 Что такое реестр</a>
+                        <a href="04-registry.html#structure" class="subtopic">4.2 Структура реестра</a>
+                        <a href="04-registry.html#editing" class="subtopic">4.3 Редактирование реестра</a>
+                        <a href="04-registry.html#backup" class="subtopic">4.4 Резервное копирование</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Службы Windows</button>
+                    <div class="subtopics">
+                        <a href="05-services.html#what-are-services" class="subtopic">5.1 Что такое службы</a>
+                        <a href="05-services.html#management" class="subtopic">5.2 Управление службами</a>
+                        <a href="05-services.html#troubleshooting" class="subtopic">5.3 Диагностика служб</a>
+                        <a href="05-services.html#custom-services" class="subtopic">5.4 Создание служб</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Сетевые настройки</button>
+                    <div class="subtopics">
+                        <a href="06-networking.html#network-config" class="subtopic">6.1 Настройка сети</a>
+                        <a href="06-networking.html#firewall" class="subtopic">6.2 Брандмауэр Windows</a>
+                        <a href="06-networking.html#remote-access" class="subtopic">6.3 Удаленный доступ</a>
+                        <a href="06-networking.html#troubleshooting" class="subtopic">6.4 Диагностика сети</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Безопасность</button>
+                    <div class="subtopics">
+                        <a href="07-security.html#user-accounts" class="subtopic">7.1 Учетные записи</a>
+                        <a href="07-security.html#group-policy" class="subtopic">7.2 Групповые политики</a>
+                        <a href="07-security.html#antivirus" class="subtopic">7.3 Антивирусная защита</a>
+                        <a href="07-security.html#encryption" class="subtopic">7.4 Шифрование данных</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Автоматизация</button>
+                    <div class="subtopics">
+                        <a href="08-automation.html#batch-files" class="subtopic">8.1 Пакетные файлы</a>
+                        <a href="08-automation.html#powershell-scripts" class="subtopic">8.2 PowerShell скрипты</a>
+                        <a href="08-automation.html#task-scheduler" class="subtopic">8.3 Планировщик задач</a>
+                        <a href="08-automation.html#advanced-automation" class="subtopic">8.4 Продвинутая автоматизация</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn active">9. Диагностика</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#event-viewer" class="subtopic active">9.1 Просмотр событий</a>
+                        <a href="#performance" class="subtopic">9.2 Мониторинг производительности</a>
+                        <a href="#system-recovery" class="subtopic">9.3 Восстановление системы</a>
+                        <a href="#advanced-tools" class="subtopic">9.4 Продвинутые инструменты</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#hyper-v" class="subtopic">10.1 Hyper-V</a>
+                        <a href="10-advanced-topics.html#wsl" class="subtopic">10.2 WSL (Windows Subsystem for Linux)</a>
+                        <a href="10-advanced-topics.html#containers" class="subtopic">10.3 Контейнеры Windows</a>
+                        <a href="10-advanced-topics.html#cloud-integration" class="subtopic">10.4 Интеграция с облаком</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 9.1: Просмотр событий -->
+            <section id="event-viewer" class="topic-section">
+                <h2>9.1 Просмотр событий</h2>
+                <div class="lesson-content">
+                    <p>Журнал событий Windows содержит информацию о работе системы, приложений и безопасности.</p>
+                    
+                    <h3>Основные журналы</h3>
+                    <div class="terminal-command">
+                        # Просмотр доступных журналов
+                        Get-WinEvent -ListLog *
+                        
+                        # Просмотр событий из журнала System
+                        Get-WinEvent -LogName System -MaxEvents 10
+                        
+                        # Просмотр событий из журнала Application
+                        Get-WinEvent -LogName Application -MaxEvents 10
+                    </div>
+
+                    <h3>Фильтрация событий</h3>
+                    <div class="terminal-command">
+                        # События за последний час
+                        Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=(Get-Date).AddHours(-1)}
+                        
+                        # Ошибки и предупреждения
+                        Get-WinEvent -FilterHashtable @{LogName='System'; Level=2,3} -MaxEvents 20
+                        
+                        # События конкретного источника
+                        Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-Kernel-General'}
+                    </div>
+
+                    <h3>Анализ событий</h3>
+                    <div class="terminal-command">
+                        # Группировка событий по источнику
+                        Get-WinEvent -LogName System -MaxEvents 100 | Group-Object ProviderName | Sort-Object Count -Descending
+                        
+                        # Поиск критических ошибок
+                        Get-WinEvent -FilterHashtable @{LogName='System'; Level=1} -MaxEvents 10
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 9.2: Мониторинг производительности -->
+            <section id="performance" class="topic-section">
+                <h2>9.2 Мониторинг производительности</h2>
+                <div class="lesson-content">
+                    <p>Мониторинг производительности помогает выявить узкие места в работе системы.</p>
+                    
+                    <h3>Счетчики производительности</h3>
+                    <div class="terminal-command">
+                        # Просмотр доступных счетчиков
+                        Get-Counter -ListSet *
+                        
+                        # Мониторинг использования процессора
+                        Get-Counter "\Processor(_Total)\% Processor Time"
+                        
+                        # Мониторинг использования памяти
+                        Get-Counter "\Memory\Available MBytes"
+                    </div>
+
+                    <h3>Мониторинг в реальном времени</h3>
+                    <div class="terminal-command">
+                        # Мониторинг в течение 10 секунд
+                        Get-Counter "\Processor(_Total)\% Processor Time" -SampleInterval 1 -MaxSamples 10
+                        
+                        # Мониторинг нескольких счетчиков
+                        Get-Counter @("\Processor(_Total)\% Processor Time", "\Memory\Available MBytes") -SampleInterval 2 -MaxSamples 5
+                    </div>
+
+                    <h3>Анализ процессов</h3>
+                    <div class="terminal-command">
+                        # Процессы, использующие больше всего CPU
+                        Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
+                        
+                        # Процессы, использующие больше всего памяти
+                        Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 9.3: Восстановление системы -->
+            <section id="system-recovery" class="topic-section">
+                <h2>9.3 Восстановление системы</h2>
+                <div class="lesson-content">
+                    <p>Восстановление системы позволяет вернуть Windows к предыдущему рабочему состоянию.</p>
+                    
+                    <h3>Точки восстановления</h3>
+                    <div class="terminal-command">
+                        # Просмотр точек восстановления
+                        Get-ComputerRestorePoint
+                        
+                        # Создание точки восстановления
+                        Checkpoint-Computer -Description "Ручная точка восстановления" -RestorePointType "MODIFY_SETTINGS"
+                        
+                        # Восстановление системы
+                        Restore-Computer -RestorePoint 1 -Confirm
+                    </div>
+
+                    <h3>Диагностика загрузки</h3>
+                    <div class="terminal-command">
+                        # Восстановление загрузочных файлов
+                        bootrec /fixmbr
+                        bootrec /fixboot
+                        bootrec /rebuildbcd
+                        
+                        # Проверка целостности системных файлов
+                        sfc /scannow
+                        
+                        # Восстановление образа системы
+                        dism /online /cleanup-image /restorehealth
+                    </div>
+
+                    <h3>Безопасный режим</h3>
+                    <div class="info">
+                        <strong>Безопасный режим:</strong> Для входа в безопасный режим перезагрузите компьютер и нажмите F8 во время загрузки, или используйте msconfig для настройки загрузки в безопасном режиме.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 9.4: Продвинутые инструменты -->
+            <section id="advanced-tools" class="topic-section">
+                <h2>9.4 Продвинутые инструменты диагностики</h2>
+                <div class="lesson-content">
+                    <p>Продвинутые инструменты диагностики предоставляют детальную информацию о состоянии системы.</p>
+                    
+                    <h3>System File Checker (SFC)</h3>
+                    <div class="terminal-command">
+                        # Проверка системных файлов
+                        sfc /scannow
+                        
+                        # Проверка конкретного файла
+                        sfc /verifyfile=C:\Windows\System32\kernel32.dll
+                        
+                        # Просмотр результатов проверки
+                        findstr /c:"[SR]" %windir%\Logs\CBS\CBS.log
+                    </div>
+
+                    <h3>DISM (Deployment Image Servicing and Management)</h3>
+                    <div class="terminal-command">
+                        # Проверка здоровья образа
+                        dism /online /cleanup-image /checkhealth
+                        
+                        # Восстановление образа
+                        dism /online /cleanup-image /restorehealth
+                        
+                        # Сканирование источника для восстановления
+                        dism /online /cleanup-image /scanhealth
+                    </div>
+
+                    <h3>Memory Diagnostic</h3>
+                    <div class="terminal-command">
+                        # Запуск диагностики памяти
+                        mdsched.exe
+                        
+                        # Планирование диагностики при следующей перезагрузке
+                        mdsched.exe /t
+                    </div>
+
+                    <h3>Performance Toolkit</h3>
+                    <div class="terminal-command">
+                        # Создание отчета о производительности
+                        perfmon /report
+                        
+                        # Мониторинг в реальном времени
+                        perfmon
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

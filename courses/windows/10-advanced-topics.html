@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Продвинутые темы Windows - Hyper-V, WSL, контейнеры Windows, интеграция с облаком Microsoft Azure.">
+    <meta name="keywords" content="hyper-v, wsl, контейнеры windows, azure, виртуализация windows">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <title>Продвинутые темы Windows — Виртуализация и облачные технологии | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/windows/10-advanced-topics.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Windows и PowerShell</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Windows</button>
+                    <div class="subtopics">
+                        <a href="01-windows-basics.html#introduction" class="subtopic">1.1 Введение в Windows</a>
+                        <a href="01-windows-basics.html#versions" class="subtopic">1.2 Версии Windows</a>
+                        <a href="01-windows-basics.html#interface" class="subtopic">1.3 Интерфейс Windows</a>
+                        <a href="01-windows-basics.html#file-explorer" class="subtopic">1.4 Проводник Windows</a>
+                        <a href="01-windows-basics.html#settings" class="subtopic">1.5 Настройки системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. PowerShell</button>
+                    <div class="subtopics">
+                        <a href="02-powershell-basics.html#what-is-powershell" class="subtopic">2.1 Что такое PowerShell</a>
+                        <a href="02-powershell-basics.html#installation" class="subtopic">2.2 Установка и настройка</a>
+                        <a href="02-powershell-basics.html#first-commands" class="subtopic">2.3 Первые команды</a>
+                        <a href="02-powershell-basics.html#help-system" class="subtopic">2.4 Система помощи</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="03-file-system.html#structure" class="subtopic">3.1 Структура файловой системы</a>
+                        <a href="03-file-system.html#paths" class="subtopic">3.2 Пути и навигация</a>
+                        <a href="03-file-system.html#permissions" class="subtopic">3.3 Права доступа</a>
+                        <a href="03-file-system.html#attributes" class="subtopic">3.4 Атрибуты файлов</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Реестр Windows</button>
+                    <div class="subtopics">
+                        <a href="04-registry.html#what-is-registry" class="subtopic">4.1 Что такое реестр</a>
+                        <a href="04-registry.html#structure" class="subtopic">4.2 Структура реестра</a>
+                        <a href="04-registry.html#editing" class="subtopic">4.3 Редактирование реестра</a>
+                        <a href="04-registry.html#backup" class="subtopic">4.4 Резервное копирование</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Службы Windows</button>
+                    <div class="subtopics">
+                        <a href="05-services.html#what-are-services" class="subtopic">5.1 Что такое службы</a>
+                        <a href="05-services.html#management" class="subtopic">5.2 Управление службами</a>
+                        <a href="05-services.html#troubleshooting" class="subtopic">5.3 Диагностика служб</a>
+                        <a href="05-services.html#custom-services" class="subtopic">5.4 Создание служб</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Сетевые настройки</button>
+                    <div class="subtopics">
+                        <a href="06-networking.html#network-config" class="subtopic">6.1 Настройка сети</a>
+                        <a href="06-networking.html#firewall" class="subtopic">6.2 Брандмауэр Windows</a>
+                        <a href="06-networking.html#remote-access" class="subtopic">6.3 Удаленный доступ</a>
+                        <a href="06-networking.html#troubleshooting" class="subtopic">6.4 Диагностика сети</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Безопасность</button>
+                    <div class="subtopics">
+                        <a href="07-security.html#user-accounts" class="subtopic">7.1 Учетные записи</a>
+                        <a href="07-security.html#group-policy" class="subtopic">7.2 Групповые политики</a>
+                        <a href="07-security.html#antivirus" class="subtopic">7.3 Антивирусная защита</a>
+                        <a href="07-security.html#encryption" class="subtopic">7.4 Шифрование данных</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Автоматизация</button>
+                    <div class="subtopics">
+                        <a href="08-automation.html#batch-files" class="subtopic">8.1 Пакетные файлы</a>
+                        <a href="08-automation.html#powershell-scripts" class="subtopic">8.2 PowerShell скрипты</a>
+                        <a href="08-automation.html#task-scheduler" class="subtopic">8.3 Планировщик задач</a>
+                        <a href="08-automation.html#advanced-automation" class="subtopic">8.4 Продвинутая автоматизация</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика</button>
+                    <div class="subtopics">
+                        <a href="09-troubleshooting.html#event-viewer" class="subtopic">9.1 Просмотр событий</a>
+                        <a href="09-troubleshooting.html#performance" class="subtopic">9.2 Мониторинг производительности</a>
+                        <a href="09-troubleshooting.html#system-recovery" class="subtopic">9.3 Восстановление системы</a>
+                        <a href="09-troubleshooting.html#advanced-tools" class="subtopic">9.4 Продвинутые инструменты</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn active">10. Продвинутые темы</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#hyper-v" class="subtopic active">10.1 Hyper-V</a>
+                        <a href="#wsl" class="subtopic">10.2 WSL (Windows Subsystem for Linux)</a>
+                        <a href="#containers" class="subtopic">10.3 Контейнеры Windows</a>
+                        <a href="#cloud-integration" class="subtopic">10.4 Интеграция с облаком</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 10.1: Hyper-V -->
+            <section id="hyper-v" class="topic-section">
+                <h2>10.1 Hyper-V</h2>
+                <div class="lesson-content">
+                    <p>Hyper-V — это технология виртуализации Microsoft, позволяющая создавать и управлять виртуальными машинами.</p>
+                    
+                    <h3>Установка Hyper-V</h3>
+                    <div class="terminal-command">
+                        # Проверка поддержки Hyper-V
+                        Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+                        
+                        # Включение Hyper-V
+                        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+                        
+                        # Перезагрузка для применения изменений
+                        Restart-Computer
+                    </div>
+
+                    <h3>Управление виртуальными машинами</h3>
+                    <div class="terminal-command">
+                        # Просмотр виртуальных машин
+                        Get-VM
+                        
+                        # Создание виртуальной машины
+                        New-VM -Name "TestVM" -MemoryStartupBytes 2GB -NewVHDPath "C:\VMs\TestVM.vhdx" -NewVHDSizeBytes 50GB
+                        
+                        # Запуск виртуальной машины
+                        Start-VM -Name "TestVM"
+                        
+                        # Остановка виртуальной машины
+                        Stop-VM -Name "TestVM"
+                    </div>
+
+                    <h3>Управление виртуальными дисками</h3>
+                    <div class="terminal-command">
+                        # Создание виртуального диска
+                        New-VHD -Path "C:\VMs\NewDisk.vhdx" -SizeBytes 20GB -Dynamic
+                        
+                        # Подключение диска к виртуальной машине
+                        Add-VMHardDiskDrive -VMName "TestVM" -Path "C:\VMs\NewDisk.vhdx"
+                        
+                        # Просмотр дисков виртуальной машины
+                        Get-VMHardDiskDrive -VMName "TestVM"
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 10.2: WSL -->
+            <section id="wsl" class="topic-section">
+                <h2>10.2 WSL (Windows Subsystem for Linux)</h2>
+                <div class="lesson-content">
+                    <p>WSL позволяет запускать Linux-окружение непосредственно в Windows без виртуализации.</p>
+                    
+                    <h3>Установка WSL</h3>
+                    <div class="terminal-command">
+                        # Включение WSL
+                        dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+                        
+                        # Включение платформы виртуальных машин
+                        dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+                        
+                        # Установка WSL 2
+                        wsl --install
+                    </div>
+
+                    <h3>Управление дистрибутивами</h3>
+                    <div class="terminal-command">
+                        # Просмотр установленных дистрибутивов
+                        wsl --list --verbose
+                        
+                        # Установка дистрибутива из Microsoft Store
+                        wsl --install -d Ubuntu
+                        
+                        # Запуск дистрибутива
+                        wsl -d Ubuntu
+                        
+                        # Остановка дистрибутива
+                        wsl --terminate Ubuntu
+                    </div>
+
+                    <h3>Работа с файлами</h3>
+                    <div class="terminal-command">
+                        # Доступ к файлам Linux из Windows
+                        # Файлы находятся в: \\wsl$\Ubuntu\home\username\
+                        
+                        # Доступ к файлам Windows из Linux
+                        # Файлы находятся в: /mnt/c/Users/username/
+                        
+                        # Копирование файлов между системами
+                        wsl cp /mnt/c/Users/Иван/Documents/file.txt /home/username/
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 10.3: Контейнеры Windows -->
+            <section id="containers" class="topic-section">
+                <h2>10.3 Контейнеры Windows</h2>
+                <div class="lesson-content">
+                    <p>Контейнеры Windows позволяют упаковывать приложения с их зависимостями для развертывания в изолированной среде.</p>
+                    
+                    <h3>Установка Docker Desktop</h3>
+                    <div class="terminal-command">
+                        # Скачивание Docker Desktop
+                        # Перейдите на https://www.docker.com/products/docker-desktop
+                        
+                        # Проверка установки Docker
+                        docker --version
+                        
+                        # Проверка статуса Docker
+                        docker info
+                    </div>
+
+                    <h3>Работа с контейнерами</h3>
+                    <div class="terminal-command">
+                        # Просмотр образов
+                        docker images
+                        
+                        # Запуск контейнера Windows
+                        docker run -it mcr.microsoft.com/windows/servercore:ltsc2022 cmd
+                        
+                        # Просмотр запущенных контейнеров
+                        docker ps
+                        
+                        # Остановка контейнера
+                        docker stop container_id
+                    </div>
+
+                    <h3>Создание Dockerfile</h3>
+                    <div class="code-example">
+                        <h4>Пример Dockerfile для Windows</h4>
+                        <div class="terminal-command">
+# Использование базового образа Windows
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+
+# Копирование файлов приложения
+COPY MyApp.exe C:\MyApp\
+
+# Установка рабочей директории
+WORKDIR C:\MyApp
+
+# Команда запуска
+CMD ["MyApp.exe"]
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 10.4: Интеграция с облаком -->
+            <section id="cloud-integration" class="topic-section">
+                <h2>10.4 Интеграция с облаком</h2>
+                <div class="lesson-content">
+                    <p>Windows предоставляет множество возможностей для интеграции с облачными сервисами Microsoft Azure.</p>
+                    
+                    <h3>Azure PowerShell</h3>
+                    <div class="terminal-command">
+                        # Установка модуля Azure PowerShell
+                        Install-Module -Name Az -Force -AllowClobber
+                        
+                        # Подключение к Azure
+                        Connect-AzAccount
+                        
+                        # Просмотр подписок
+                        Get-AzSubscription
+                    </div>
+
+                    <h3>Azure CLI</h3>
+                    <div class="terminal-command">
+                        # Установка Azure CLI
+                        winget install Microsoft.AzureCLI
+                        
+                        # Вход в Azure
+                        az login
+                        
+                        # Просмотр ресурсов
+                        az resource list --output table
+                    </div>
+
+                    <h3>Azure Active Directory</h3>
+                    <div class="terminal-command">
+                        # Установка модуля Azure AD
+                        Install-Module -Name AzureAD
+                        
+                        # Подключение к Azure AD
+                        Connect-AzureAD
+                        
+                        # Просмотр пользователей
+                        Get-AzureADUser
+                    </div>
+
+                    <h3>OneDrive интеграция</h3>
+                    <div class="terminal-command">
+                        # Синхронизация файлов OneDrive
+                        # OneDrive автоматически синхронизирует файлы
+                        
+                        # Просмотр статуса синхронизации
+                        Get-Process -Name "OneDrive" -ErrorAction SilentlyContinue
+                        
+                        # Управление синхронизацией через PowerShell
+                        # (требует дополнительных модулей)
+                    </div>
+
+                    <div class="conclusion">
+                        <h3>Заключение курса</h3>
+                        <p>Поздравляем! Вы изучили основы Windows и PowerShell. Теперь вы знаете, как управлять системой, автоматизировать задачи, обеспечивать безопасность и работать с современными технологиями виртуализации и облачных сервисов.</p>
+                        <p>Продолжайте практиковаться и изучать новые возможности Windows для профессионального роста в области системного администрирования.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

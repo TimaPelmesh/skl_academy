@@ -1,0 +1,1131 @@
+/* Шрифты */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin');
+
+:root {
+    /* Основные цвета светлой темы */
+    --primary-color: #6c63ff;
+    --primary-light: #8a84ff;
+    --primary-dark: #4b44d1;
+    --secondary-color: #e6e0fc;
+    --accent-color: #5851db;
+    --text-color: #333344;
+    --light-text: #333344;
+    --border-color: rgba(0, 0, 0, 0.06);
+    --bg-color: #f9f9fb;
+    --bg-gradient-1: #f9f9fb;
+    --bg-gradient-2: #f0f0f5;
+    
+    /* Элементы интерфейса */
+    --header-height: 70px;
+    --shadow: 0 4px 16px rgba(98, 87, 255, 0.06);
+    --shadow-small: 0 2px 8px rgba(98, 87, 255, 0.04);
+    --shadow-hover: 0 6px 24px rgba(98, 87, 255, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --radius: 10px;
+    --border-light: 1px solid rgba(255, 255, 255, 0.06);
+    --border-dark: 1px solid rgba(0, 0, 0, 0.05);
+    
+    /* Полупрозрачные фоны */
+    --overlay-light: rgba(108, 99, 255, 0.04);
+    --overlay-dark: rgba(108, 99, 255, 0.06);
+    --glassmorphism: rgba(249, 249, 251, 0.9);
+    --header-bg: rgba(249, 249, 251, 0.98);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: all 0.4s ease;
+    font-weight: 400;
+}
+
+/* Заголовок */
+header {
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--light-text);
+    height: var(--header-height);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-small);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-left: 64px; /* 20 (left) + 28 (burger width) + 16 (gap) */
+    color: var(--light-text);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Кнопки в хедере */
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 20px;
+}
+
+/* Кнопка выхода */
+.exit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--light-text);
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.exit-btn:hover {
+    background: var(--overlay-light);
+    transform: translateY(-2px);
+}
+
+.exit-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Кнопка меню */
+.menu-toggle {
+    position: absolute;
+    left: 20px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 200;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light-text);
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Основной контейнер */
+.container {
+    display: flex;
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+    transition: background 0.4s ease;
+    overflow: hidden;
+}
+
+/* Боковое меню */
+.sidebar {
+    width: 260px;
+    background: var(--bg-color);
+    box-shadow: var(--shadow-small);
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    bottom: 0;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease, background 0.4s ease;
+    z-index: 99;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 2px;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+/* Вкладки */
+.tabs {
+    display: flex;
+    background: var(--bg-color);
+    overflow-x: auto;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tabs.hidden {
+    display: none;
+}
+
+.tabs::-webkit-scrollbar {
+    height: 0;
+    display: none;
+}
+
+.tab {
+    flex: 1;
+    padding: 16px;
+    color: var(--light-text);
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+    min-width: 80px;
+    opacity: 0.7;
+}
+
+.tab:hover {
+    background-color: var(--overlay-light);
+    opacity: 0.9;
+}
+
+.tab.active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+/* Содержимое вкладок */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Темы */
+.topic {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.topic-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 15px 16px;
+    text-align: left;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    color: var(--light-text);
+    font-weight: 400;
+}
+
+.topic-btn:hover {
+    background-color: var(--overlay-light);
+    padding-left: 18px;
+}
+
+.topic-btn::after {
+    content: '\002B';
+    font-size: 1.2rem;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.topic-btn.active {
+    color: #111827; /* Чёрный, как в курсе Networks */
+    font-weight: 600;
+}
+
+.topic-btn.active::after {
+    content: '\2212';
+    color: var(--primary-color);
+}
+
+/* Подтемы */
+.subtopics {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background-color: var(--overlay-dark);
+}
+
+.subtopic {
+    display: block;
+    padding: 12px 16px 12px 18px;
+    text-decoration: none;
+    color: var(--light-text);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    padding-left: 32px;
+}
+
+.subtopic:hover {
+    background-color: var(--overlay-light);
+    color: var(--primary-color);
+}
+
+/* Активная подтема в боковом меню: подсветка текста и фона (как в курсе Networks) */
+.subtopic.active {
+    color: var(--primary-color);
+    background-color: var(--overlay-light);
+    font-weight: 600;
+}
+
+/* Основной контент */
+.content {
+    flex-grow: 1;
+    margin-left: 0;
+    padding: 25px;
+    transition: margin 0.4s ease, background 0.4s ease;
+    overflow-x: hidden;
+}
+
+.content.sidebar-active {
+    margin-left: 260px;
+}
+
+/* Контейнер теории: центрирование и ограничение ширины как в других курсах */
+.topic-section {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+/* Стили для блоков кода - как в курсе Networks */
+.code-example {
+    border-radius: 8px;
+    margin: 15px 0;
+    max-width: 100%;
+    overflow-x: auto;
+    background-color: #282c34; /* Фон как в теме atom-one-dark */
+    border-left: 4px solid #6c63ff; /* Фиолетовая полоса слева */
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: #e6e6e6;
+}
+
+/* Стили для текстового содержимого в блоках кода */
+.code-example h4 {
+    color: #61dafb !important;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.code-example ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.code-example li {
+    color: #e6e6e6;
+    margin: 6px 0;
+    line-height: 1.6;
+}
+
+.code-example p {
+    color: #e6e6e6;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.code-example strong {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.code-example pre {
+    margin: 0;
+    padding: 0;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Стили для текста в блоках кода */
+.code-example code {
+    background: transparent !important;
+    border-radius: 0;
+    padding: 0;
+}
+
+/* Стили для комментариев и других элементов кода */
+.code-example code .hljs-comment,
+.code-example code .hljs-meta {
+    color: #6a9955 !important;
+    font-style: italic;
+}
+
+.code-example code .hljs-string {
+    color: #ce9178 !important;
+}
+
+.code-example code .hljs-keyword {
+    color: #569cd6 !important;
+    font-weight: 600;
+}
+
+.code-example code .hljs-built_in {
+    color: #4ec9b0 !important;
+}
+
+/* Стили для светлой темы */
+.light-theme .code-example {
+    background-color: #f8f9fa;
+    border-left: 4px solid #6c63ff;
+    color: #2d3748;
+}
+
+.light-theme .code-example h4 {
+    color: #2563eb !important;
+}
+
+.light-theme .code-example li,
+.light-theme .code-example p {
+    color: #2d3748;
+}
+
+.light-theme .code-example strong {
+    color: #d97706;
+}
+
+.light-theme .code-example code {
+    color: #333344 !important;
+}
+
+.light-theme .code-example code .hljs-comment,
+.light-theme .code-example code .hljs-meta {
+    color: #008000 !important;
+    font-style: italic;
+}
+
+.light-theme .code-example code .hljs-string {
+    color: #a31515 !important;
+}
+
+.light-theme .code-example code .hljs-keyword {
+    color: #0000ff !important;
+    font-weight: 600;
+}
+
+.light-theme .code-example code .hljs-built_in {
+    color: #267f99 !important;
+}
+
+/* Стили для терминальных команд */
+.terminal-command {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    margin: 15px 0;
+    max-width: 100%;
+    overflow-x: auto;
+    border-left: 4px solid #10b981; /* Зеленая полоса слева */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 15px;
+    color: #e6e6e6;
+    position: relative;
+    z-index: 1;
+}
+
+.light-theme .terminal-command {
+    background-color: #f1f1f1;
+    border-left: 4px solid #059669;
+    color: #333344;
+}
+
+/* Стили для информационных блоков */
+.info {
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.03));
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 10px;
+    padding: 18px 20px 18px 24px;
+    margin: 20px 0;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.info::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: linear-gradient(to bottom, #3b82f6, #60a5fa);
+    border-radius: 0 3px 3px 0;
+}
+
+.info strong {
+    color: #1e40af;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+}
+
+.light-theme .info {
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.02));
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.light-theme .info strong {
+    color: #1e40af;
+}
+
+/* Выделенные боксы с теориями/командами */
+.note,
+.tip,
+.warn,
+.danger {
+    border-radius: 10px;
+    padding: 18px 20px 18px 24px;
+    margin: 20px 0;
+    position: relative;
+    background: linear-gradient(to right, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.03));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.note:hover,
+.tip:hover,
+.warn:hover,
+.danger:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.note::before,
+.tip::before,
+.warn::before,
+.danger::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: linear-gradient(to bottom, var(--accent-color), var(--primary-light));
+    border-radius: 0 3px 3px 0;
+}
+
+.note strong,
+.tip strong,
+.warn strong,
+.danger strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+}
+
+.tip { 
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03));
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+.tip::before { 
+    background: linear-gradient(to bottom, #10b981, #34d399);
+}
+.tip strong { color: #059669; }
+
+.warn { 
+    background: linear-gradient(to right, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.03));
+    border: 1px solid rgba(245, 158, 11, 0.15);
+}
+.warn::before { 
+    background: linear-gradient(to bottom, #f59e0b, #fbbf24);
+}
+.warn strong { color: #d97706; }
+
+.danger { 
+    background: linear-gradient(to right, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.03));
+    border: 1px solid rgba(239, 68, 68, 0.15);
+}
+.danger::before { 
+    background: linear-gradient(to bottom, #ef4444, #f87171);
+}
+.danger strong { color: #dc2626; }
+
+.light-theme .note,
+.light-theme .tip,
+.light-theme .warn,
+.light-theme .danger {
+    background: linear-gradient(to right, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.02));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.light-theme .note::before {
+    background: linear-gradient(to bottom, var(--primary-color), var(--primary-light));
+}
+
+.light-theme .tip {
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+    border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.light-theme .warn {
+    background: linear-gradient(to right, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.02));
+    border: 1px solid rgba(245, 158, 11, 0.1);
+}
+
+.light-theme .danger {
+    background: linear-gradient(to right, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.02));
+    border: 1px solid rgba(239, 68, 68, 0.1);
+}
+
+/* Стили для практических заданий */
+.exercise {
+    background: linear-gradient(to right, rgba(168, 85, 247, 0.08), rgba(168, 85, 247, 0.03));
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 25px 0;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.exercise::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: linear-gradient(to bottom, #a855f7, #c084fc);
+    border-radius: 0 3px 3px 0;
+}
+
+
+.exercise h3,
+.exercise h4 {
+    color: #7c3aed;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.exercise strong {
+    color: #7c3aed;
+    font-weight: 600;
+}
+
+.light-theme .exercise {
+    background: linear-gradient(to right, rgba(168, 85, 247, 0.05), rgba(168, 85, 247, 0.02));
+    border: 1px solid rgba(168, 85, 247, 0.1);
+}
+
+.light-theme .exercise h3,
+.light-theme .exercise h4 {
+    color: #7c3aed;
+}
+
+.light-theme .exercise strong {
+    color: #7c3aed;
+}
+
+.welcome {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(var(--bg-color), 0.6);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s ease;
+}
+
+.welcome h1 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 2rem;
+    position: relative;
+}
+
+.welcome p {
+    margin-bottom: 20px;
+    color: var(--text-color);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.welcome h2 {
+    color: var(--primary-color);
+    margin: 30px 0 15px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.welcome ul {
+    margin: 0 0 20px 20px;
+    color: var(--text-color);
+}
+
+.welcome ul li {
+    margin-bottom: 10px;
+}
+
+/* Общие стили для списков */
+ul, ol {
+    margin: 0 0 20px 20px;
+    color: var(--text-color);
+}
+
+ul li, ol li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* Стили для списков в информационных блоках */
+.info ul, .info ol,
+.note ul, .note ol,
+.tip ul, .tip ol,
+.warn ul, .warn ol,
+.danger ul, .danger ol {
+    margin: 10px 0 10px 20px;
+}
+
+.info li, .note li, .tip li, .warn li, .danger li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Стилизация прокрутки для всей страницы */
+body::-webkit-scrollbar {
+    width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 3px;
+}
+
+/* Адаптивный дизайн */
+@media (min-width: 992px) {
+    .sidebar {
+        transform: translateX(0);
+    }
+    
+    .content {
+        margin-left: 260px;
+    }
+    
+    .menu-toggle {
+        display: none;
+    }
+    
+    .header-title {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome {
+        padding: 25px;
+    }
+    
+    .welcome h1 {
+        font-size: 1.6rem;
+    }
+    
+    .welcome h2 {
+        font-size: 1.2rem;
+    }
+    
+    /* Адаптивные стили для блоков кода */
+    .code-example pre {
+        font-size: 0.85rem;
+        padding: 12px;
+    }
+    
+    .terminal-command {
+        font-size: 0.85rem;
+        padding: 12px;
+    }
+    
+    /* Адаптивные стили для информационных блоков */
+    .note,
+    .tip,
+    .warn,
+    .danger,
+    .info,
+    .exercise {
+        padding: 15px 18px;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-title {
+        font-size: 1.3rem;
+        margin-left: 44px; /* больше зазор справа от бургера на узких экранах */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .welcome {
+        padding: 20px;
+        margin: 10px auto;
+    }
+    
+    .header-buttons {
+        gap: 10px;
+        margin-right: 10px;
+    }
+    
+    /* Адаптивные стили для блоков кода на мобильных */
+    .code-example pre {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+    
+    .terminal-command {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+    
+    /* Адаптивные стили для информационных блоков на мобильных */
+    .note,
+    .tip,
+    .warn,
+    .danger,
+    .info,
+    .exercise {
+        padding: 12px 15px;
+        margin: 12px 0;
+    }
+    
+    .exercise h3,
+    .exercise h4 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Стили для секции с обратной связью */
+.feedback-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    color: #4a9eff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.contact-link i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.contact-link:hover {
+    color: #6db5ff;
+    transform: translateX(5px);
+}
+
+/* Стили для элементов с темным фоном */
+.resources-section, 
+.practice-tips, 
+.interactive-resources,
+.next-steps,
+.visual-guide,
+.operators-cheatsheet,
+.conclusion {
+    color: #e6e6e6; /* Светлый текст для темного фона */
+}
+
+/* Стили для важных заметок с темным фоном */
+.resources-section p, 
+.practice-tips p, 
+.interactive-resources p,
+.next-steps p,
+.visual-guide p,
+.operators-cheatsheet p,
+.conclusion p {
+    color: #e6e6e6;
+}
+
+/* Стили для списков в блоках с темным фоном */
+.resources-section li, 
+.practice-tips li, 
+.interactive-resources li,
+.next-steps li,
+.visual-guide li,
+.operators-cheatsheet li {
+    color: #e6e6e6;
+}
+
+/* Стили для заголовка "Важно понимать разницу" */
+.resources-section h4,
+.practice-tips h4,
+.interactive-resources h4,
+.next-steps h4,
+.visual-guide h4,
+.operators-cheatsheet h4,
+.conclusion h4 {
+    color: #58a6ff; /* Яркий голубой для заголовков */
+}
+
+/* Базовый читаемый цвет для всех h4 на светлом фоне в курсе */
+h4 {
+    color: #111827;
+}
+
+/* Сохраняем цвета в тёмных блоках, перекрывая базовый h4 */
+.visual-guide h4 { color: #7ee787; }
+.conclusion h4 { color: #d2a8ff; }
+.light-theme .conclusion h4 { color: #6f42c1; }
+
+/* Улучшенные стили для таблиц в темных блоках */
+.operators-cheatsheet table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    color: #e6e6e6; /* Светлый текст для всей таблицы */
+}
+
+.operators-cheatsheet th,
+.operators-cheatsheet td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #4d5566; /* Более контрастная граница */
+    color: #e6e6e6; /* Явно задаем цвет текста */
+}
+
+.operators-cheatsheet th {
+    background-color: #373e47;
+    color: #58a6ff; /* Голубой цвет для заголовков */
+    font-weight: 600;
+}
+
+.operators-cheatsheet td {
+    background-color: #2d333b; /* Темный фон для ячеек */
+}
+
+/* Стили для светлой темы */
+.light-theme .operators-cheatsheet table {
+    color: #333344; /* Темный текст для светлой темы */
+}
+
+.light-theme .operators-cheatsheet th,
+.light-theme .operators-cheatsheet td {
+    border: 1px solid #d0d7de;
+    color: #333344;
+}
+
+.light-theme .operators-cheatsheet th {
+    background-color: #e6e6e6;
+    color: #0366d6;
+}
+
+.light-theme .operators-cheatsheet td {
+    background-color: #f6f8fa;
+}
+
+/* Улучшенные стили для визуальных блоков */
+.visual-guide {
+    background-color: #2d333b;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-left: 4px solid #7ee787;
+}
+
+.visual-guide h4 {
+    color: #7ee787;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.visual-guide ul {
+    margin-left: 20px;
+}
+
+.visual-guide li {
+    color: #e6e6e6;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.visual-guide strong {
+    color: #7ee787;
+    font-weight: 600;
+}
+
+.visual-guide p {
+    color: #e6e6e6;
+    margin-bottom: 10px;
+}
+
+/* Стили для светлой темы */
+.light-theme .visual-guide {
+    background-color: #f1f1f1;
+    border-left: 4px solid #2ea44f;
+}
+
+.light-theme .visual-guide h4 {
+    color: #2ea44f;
+}
+
+.light-theme .visual-guide li,
+.light-theme .visual-guide p {
+    color: #333344;
+}
+
+.light-theme .visual-guide strong {
+    color: #2ea44f;
+}
+
+/* Исправление: в светлой теме делаем текст в блоке "Следующие шаги" чёрным */
+.light-theme .next-steps,
+.light-theme .next-steps p,
+.light-theme .next-steps li {
+    color: #000;
+}
+
+/* Явно делаем текст в блоке "Следующие шаги" чёрным (для всех тем) */
+.next-steps,
+.next-steps p,
+.next-steps li {
+    color: #000;
+}
+
+/* Явно делаем текст в блоках "Практические советы" чёрным (для всех тем) */
+.practice-tips,
+.practice-tips p,
+.practice-tips li {
+    color: #000;
+}
+
+/* Улучшенные стили для блока заключения */
+.conclusion {
+    background-color: #2d333b;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin: 40px auto;
+    border-left: 4px solid #d2a8ff;
+    text-align: center;
+    max-width: 800px;
+}
+
+.conclusion h3 {
+    color: #d2a8ff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.conclusion p {
+    color: #e6e6e6;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Стили для светлой темы */
+.light-theme .conclusion {
+    background-color: #f1f1f1;
+    border-left: 4px solid #8a63d2;
+}
+
+.light-theme .conclusion h3 {
+    color: #6f42c1;
+}
+
+.light-theme .conclusion p {
+    color: #333344;
+}

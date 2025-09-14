@@ -143,7 +143,8 @@
   <nav class="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-24 items-center">
-        <div class="flex items-center">
+        <!-- Логотип (слева на десктопе, скрыт на мобильных) -->
+        <div class="flex items-center hidden md:flex">
           <div class="flex-shrink-0 flex items-center">
             <a href="index.html" class="flex items-center">
               <img class="h-9 w-auto" src="images/icon.ico" alt="SKL Academy">
@@ -151,20 +152,86 @@
             </a>
           </div>
         </div>
-        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+
+        <!-- Центральная навигация (только на десктопе) -->
+        <div class="hidden md:flex md:items-center md:space-x-8 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
           <a href="#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
           <a href="#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
           <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
         </div>
-        <div class="-mr-2 flex items-center md:hidden">
-          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-            <span class="sr-only">Open main menu</span>
-            <div class="burger-icon">
-              <span class="line"></span>
-              <span class="line"></span>
-              <span class="line"></span>
+
+        <!-- Правая часть: поиск на десктопе, мобильная навигация -->
+        <div class="flex items-center space-x-4">
+          <!-- Поисковик (только на десктопе) -->
+          <div class="hidden md:block relative search-container">
+            <div class="search-input-wrapper">
+              <input type="text" 
+                     id="search-input" 
+                     placeholder="Поиск курсов и статей..." 
+                     class="search-input">
+              <button type="button" id="search-button" class="search-button">
+                <i class="fas fa-search"></i>
+              </button>
             </div>
-          </button>
+            <!-- Результаты поиска -->
+            <div id="search-results" class="search-results hidden">
+              <div class="search-results-header">
+                <span class="search-results-title">Результаты поиска</span>
+                <button type="button" id="clear-search" class="clear-search-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="search-results-content">
+                <!-- Результаты будут вставляться сюда -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Мобильная навигация -->
+          <div class="flex items-center justify-between w-full md:hidden">
+            <!-- Логотип (слева на мобильных) -->
+            <div class="flex items-center">
+              <a href="index.html" class="flex items-center">
+                <img class="h-8 w-auto" src="images/icon.ico" alt="SKL Academy">
+                <span class="ml-2 text-lg font-semibold text-gray-900 header-title">SKL Academy</span>
+              </a>
+            </div>
+
+            <!-- Правая часть: поиск и бургер -->
+            <div class="flex items-center space-x-3">
+              <!-- Мобильный поисковик -->
+              <div class="relative mobile-search-container">
+                <button type="button" id="mobile-search-toggle" class="mobile-search-toggle-btn">
+                  <i class="fas fa-search"></i>
+                </button>
+                <!-- Мобильные результаты поиска -->
+                <div id="mobile-search-results" class="mobile-search-results hidden">
+                  <div class="mobile-search-input-wrapper">
+                    <input type="text" 
+                           id="mobile-search-input" 
+                           placeholder="Поиск курсов и статей..." 
+                           class="mobile-search-input">
+                    <button type="button" id="mobile-clear-search" class="mobile-clear-search-btn">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <div class="mobile-search-results-content">
+                    <!-- Результаты будут вставляться сюда -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Бургер меню -->
+              <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <span class="sr-only">Open main menu</span>
+                <div class="burger-icon">
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -240,7 +307,7 @@
            <!-- Улучшенные блоки статистики -->
            <div class="stats-container mt-4">
               <div class="stat-block">
-              <div class="stat-number">7</div>
+              <div class="stat-number">10</div>
               <div class="stat-label">Курсов</div>
             </div>
              <div class="stat-block">
@@ -516,49 +583,49 @@
         </div>
       </div>
 
-      <!-- Course 6 -->
+      <!-- Course 6 - Linux и Bash -->
       <div class="course-card">
         <div class="p-6">
           <div class="flex items-center">
             <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
-              <i class="fas fa-terminal text-indigo-600 text-xl"></i>
+              <i class="fab fa-linux text-indigo-600 text-xl"></i>
             </div>
             <div class="ml-4">
-              <h3 class="text-xl font-medium text-gray-900">Командная строка</h3>
+              <h3 class="text-xl font-medium text-gray-900">Linux и Bash</h3>
               <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">В разработке</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
               </div>
             </div>
           </div>
           <div class="mt-4">
-            <p class="text-gray-600">Освойте мощные инструменты командной строки в Linux и Windows.</p>
+            <p class="text-gray-600">Освойте Linux и Bash - основу современной IT-инфраструктуры.</p>
             <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
                 </div>
-                <p class="ml-3 text-gray-600">Linux Bash, скрипты, автоматизация</p>
+                <p class="ml-3 text-gray-600">Основы Linux, файловая система</p>
               </li>
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
                 </div>
-                <p class="ml-3 text-gray-600">Windows PowerShell, командлеты</p>
+                <p class="ml-3 text-gray-600">Bash-скрипты и автоматизация</p>
               </li>
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
                   <i class="fas fa-check-circle text-green-500"></i>
                 </div>
-                <p class="ml-3 text-gray-600">Реальные сценарии использования</p>
+                <p class="ml-3 text-gray-600">Управление процессами и сервисами</p>
               </li>
             </ul>
           </div>
           <div class="mt-4 flex space-x-4">
-            <button type="button" class="course-button-secondary" data-modal-target="modal-shell">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-linux">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
             </button>
-            <a href="404.html" class="course-button">
+            <a href="courses/linux/01-linux-basics.html" class="course-button">
               Перейти
               <i class="fas fa-arrow-right ml-2"></i>
             </a>
@@ -566,7 +633,57 @@
         </div>
       </div>
 
-      <!-- Course 7 - Unity -->
+      <!-- Course 7 - Windows и PowerShell -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fab fa-windows text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Windows и PowerShell</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Изучите Windows PowerShell и автоматизацию в экосистеме Microsoft.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">PowerShell командлеты и модули</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Управление Windows через CLI</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Автоматизация и скриптинг</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-4 flex space-x-4">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-windows">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/windows/01-windows-basics.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 8 - Unity -->
       <div class="course-card">
         <div class="p-6">
           <div class="flex items-center">
@@ -605,6 +722,106 @@
           </div>
           <div class="mt-4 flex space-x-4">
             <button type="button" class="course-button-secondary" data-modal-target="modal-unity">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="404.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 9 - ЕГЭ по информатике -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-graduation-cap text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">ЕГЭ по информатике</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Полная подготовка к ЕГЭ по информатике: от основ до сложных алгоритмов и программирования.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Алгоритмизация и программирование</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Системы счисления и логика</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Базы данных и сети</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-4 flex space-x-4">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-ege">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="404.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 10 - ОГЭ по информатике -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-certificate text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">ОГЭ по информатике</h3>
+              <div class="mt-1">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Подготовка к ОГЭ по информатике: основы программирования, алгоритмы и информационные технологии.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Основы программирования на Python</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Алгоритмы и структуры данных</p>
+              </li>
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Работа с таблицами и базами данных</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-4 flex space-x-4">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-oge">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
             </button>
@@ -726,89 +943,34 @@
     <div class="modal-backdrop"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <h3><i class="fas fa-network-wired text-indigo-600 mr-3"></i>Компьютерные сети</h3>
+        <h3><i class="fas fa-network-wired text-blue-600 mr-3"></i>Компьютерные сети</h3>
         <button class="modal-close"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">Курс "Компьютерные сети" предназначен для тех, кто хочет глубоко понять принципы работы современных компьютерных сетей. Вы изучите фундаментальные концепции, которые являются основой для большинства сетевых технологий и инфраструктур.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
+          <p class="text-gray-600 mb-4">Изучите компьютерные сети: от основ до продвинутых технологий. Модель OSI, TCP/IP, IP-адресация, коммутация, VLAN, беспроводные сети и безопасность.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h5 class="font-medium text-gray-900">1. Основы компьютерных сетей</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Введение в компьютерные сети и их типы</li>
-                <li>Топологии сетей: физические и логические</li>
-                <li>Типы сетевого оборудования и их назначение</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Модель OSI и TCP/IP</li>
+                <li>• IP-адресация и маршрутизация</li>
+                <li>• Коммутация и VLAN</li>
+                <li>• Беспроводные сети</li>
+                <li>• Сетевая безопасность</li>
               </ul>
             </div>
             <div>
-              <h5 class="font-medium text-gray-900">2. Модель OSI и TCP/IP</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Детальный разбор модели OSI по уровням</li>
-                <li>Сравнение с моделью TCP/IP</li>
-                <li>Протоколы каждого уровня и их взаимодействие</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. IP-адресация и маршрутизация</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>IPv4 и IPv6 адресация</li>
-                <li>Подсети и маски подсети</li>
-                <li>Статическая и динамическая маршрутизация</li>
-                <li>Протоколы маршрутизации (OSPF, EIGRP, BGP)</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. Коммутация и VLAN</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Принципы коммутации кадров</li>
-                <li>Виртуальные локальные сети (VLAN)</li>
-                <li>Протокол STP и его вариации</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Беспроводные сети</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Стандарты Wi-Fi (IEEE 802.11)</li>
-                <li>Проектирование и настройка беспроводных сетей</li>
-                <li>Безопасность беспроводных сетей</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Сетевая безопасность</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Брандмауэры и списки доступа (ACL)</li>
-                <li>VPN-технологии и их реализация</li>
-                <li>Обнаружение и предотвращение вторжений</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Сетевые администраторы</li>
+                <li>• Студенты IT-специальностей</li>
+                <li>• Подготовка к CCNA</li>
+                <li>• Системные администраторы</li>
               </ul>
             </div>
           </div>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-book"></i> Практические навыки</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Базовая настройка маршрутизаторов и коммутаторов (вендорно‑нейтрально)</li>
-            <li>Создание и управление VLAN</li>
-            <li>Настройка статических и динамических маршрутов</li>
-            <li>Проектирование и внедрение системы безопасности сети</li>
-            <li>Мониторинг и устранение неполадок сети</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Начинающие сетевые администраторы</li>
-            <li>Студенты IT-специальностей</li>
-            <li>Специалисты, желающие углубить знания в сетевых технологиях</li>
-            <li>Подготовка к сертификациям CCNA, CompTIA Network+</li>
-          </ul>
         </div>
       </div>
       <div class="modal-footer">
@@ -825,116 +987,34 @@
     <div class="modal-backdrop"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <h3><i class="fab fa-python text-green-600 mr-3"></i>Python</h3>
+        <h3><i class="fab fa-python text-blue-600 mr-3"></i>Python</h3>
         <button class="modal-close"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">Курс Python от SKL Academy охватывает основы языка и продвинутые техники. Вы научитесь уверенно писать код и подготовитесь к дальнейшему изучению фреймворков и экосистемы.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
+          <p class="text-gray-600 mb-4">Освойте Python - от основ до продвинутых техник программирования. Синтаксис, ООП, работа с файлами, модули, декораторы, асинхронность и многое другое.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h5 class="font-medium text-gray-900">1. Основы Python</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Установка Python и настройка окружения</li>
-                <li>Синтаксис, переменные и типы данных</li>
-                <li>Операторы и выражения</li>
-                <li>Комментарии и документирование кода</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Основы синтаксиса и типы данных</li>
+                <li>• Функции и ООП</li>
+                <li>• Работа с файлами и модулями</li>
+                <li>• Декораторы и генераторы</li>
+                <li>• Асинхронное программирование</li>
               </ul>
             </div>
             <div>
-              <h5 class="font-medium text-gray-900">2. Управление потоком выполнения</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Условные операторы (if, elif, else)</li>
-                <li>Циклы (for, while)</li>
-                <li>Операторы break, continue, pass</li>
-                <li>Обработка исключений (try, except, finally)</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. Функции</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Определение и вызов функций</li>
-                <li>Аргументы и возвращаемые значения</li>
-                <li>Области видимости переменных</li>
-                <li>Функции высшего порядка и лямбда-функции</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. Структуры данных</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Списки, кортежи, словари, множества</li>
-                <li>Работа со строками</li>
-                <li>Генераторы списков и словарей</li>
-                <li>Сортировка и фильтрация данных</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Объектно-ориентированное программирование</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Классы и объекты</li>
-                <li>Наследование и полиморфизм</li>
-                <li>Инкапсуляция и абстракция</li>
-                <li>Магические методы и перегрузка операторов</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Работа с файлами</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Чтение и запись текстовых файлов</li>
-                <li>Работа с CSV, JSON, XML</li>
-                <li>Бинарные файлы и сериализация объектов</li>
-                <li>Файловые менеджеры и контекстные менеджеры</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">7. Модули и пакеты</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Импорт и использование модулей</li>
-                <li>Создание собственных модулей</li>
-                <li>Организация кода в пакеты</li>
-                <li>Виртуальные окружения и управление зависимостями</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">8. Продвинутые темы</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Декораторы и генераторы</li>
-                <li>Многопоточность и многопроцессорность</li>
-                <li>Асинхронное программирование с asyncio</li>
-                <li>Метаклассы и рефлексия</li>
-                <li>Оптимизация и профилирование кода</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Начинающие программисты</li>
+                <li>• Backend-разработчики</li>
+                <li>• Data Science специалисты</li>
+                <li>• DevOps инженеры</li>
               </ul>
             </div>
           </div>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-cogs"></i> Что дальше (вне текущего курса)</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li><strong>Django</strong> - Полнофункциональный веб-фреймворк для создания сложных приложений</li>
-            <li><strong>Flask</strong> - Легковесный веб-фреймворк для быстрой разработки</li>
-            <li><strong>FastAPI</strong> - Современный высокопроизводительный веб-фреймворк для API</li>
-            <li><strong>NumPy и Pandas</strong> - Для обработки и анализа данных</li>
-            <li><strong>Matplotlib и Seaborn</strong> - Для визуализации данных</li>
-            <li><strong>SQLAlchemy</strong> - ORM для работы с базами данных</li>
-            <li><strong>Pytest</strong> - Для тестирования кода</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Начинающие программисты без опыта</li>
-            <li>Разработчики, переходящие с других языков</li>
-            <li>Специалисты по анализу данных и машинному обучению</li>
-            <li>Backend-разработчики</li>
-            <li>Инженеры DevOps</li>
-          </ul>
         </div>
       </div>
       <div class="modal-footer">
@@ -951,108 +1031,38 @@
     <div class="modal-backdrop"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <h3><i class="fab fa-microsoft text-purple-600 mr-3"></i>C#</h3>
+        <h3><i class="fab fa-microsoft text-blue-600 mr-3"></i>C#</h3>
         <button class="modal-close"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">C# (произносится "си шарп") - это современный объектно-ориентированный язык программирования, разработанный Microsoft. Этот курс поможет вам освоить C# и научиться разрабатывать приложения для различных платформ, включая веб, десктоп и игры.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
+          <p class="text-gray-600 mb-4">Освойте C# — мощный язык для веба, десктопа и игр. Синтаксис, LINQ, асинхронность, ASP.NET Core, Entity Framework и разработка игр на Unity.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h5 class="font-medium text-gray-900">1. Введение в C#</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>История и эволюция C#</li>
-                <li>Установка Visual Studio и настройка среды разработки</li>
-                <li>Структура программы на C#</li>
-                <li>Переменные, типы данных и операторы</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Основы синтаксиса и ООП</li>
+                <li>• LINQ и асинхронность</li>
+                <li>• ASP.NET Core веб-разработка</li>
+                <li>• Entity Framework</li>
+                <li>• Разработка игр на Unity</li>
               </ul>
             </div>
             <div>
-              <h5 class="font-medium text-gray-900">2. Основы языка C#</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Управление потоком выполнения (условия, циклы)</li>
-                <li>Массивы и коллекции</li>
-                <li>Методы и параметры</li>
-                <li>Обработка исключений</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. ООП в C#</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Классы и объекты</li>
-                <li>Наследование и полиморфизм</li>
-                <li>Интерфейсы и абстрактные классы</li>
-                <li>Инкапсуляция и модификаторы доступа</li>
-                <li>Свойства и индексаторы</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. Продвинутые возможности C#</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Делегаты и события</li>
-                <li>Лямбда-выражения</li>
-                <li>LINQ и работа с данными</li>
-                <li>Асинхронное программирование (async/await)</li>
-                <li>Рефлексия и атрибуты</li>
-                <li>Обобщения (Generics)</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Веб-разработка с ASP.NET Core</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Основы ASP.NET Core MVC</li>
-                <li>Маршрутизация и контроллеры</li>
-                <li>Razor Views и модели представления</li>
-                <li>Entity Framework Core</li>
-                <li>Identity и аутентификация</li>
-                <li>Web API и RESTful сервисы</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Разработка игр на Unity</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Введение в Unity</li>
-                <li>Создание 2D и 3D сцен</li>
-                <li>Физика и коллизии</li>
-                <li>Скрипты на C# для Unity</li>
-                <li>Анимация и пользовательский интерфейс</li>
-                <li>Публикация игр</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Начинающие программисты</li>
+                <li>• Веб-разработчики</li>
+                <li>• Разработчики игр</li>
+                <li>• .NET разработчики</li>
               </ul>
             </div>
           </div>
         </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-tools"></i> Технологии и инструменты</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li><strong>Visual Studio</strong> - Полнофункциональная IDE для разработки на C#</li>
-            <li><strong>ASP.NET Core</strong> - Для веб-разработки</li>
-            <li><strong>Entity Framework Core</strong> - ORM для работы с базами данных</li>
-            <li><strong>WPF и Windows Forms</strong> - Для создания настольных приложений</li>
-            <li><strong>Unity</strong> - Для разработки игр</li>
-            <li><strong>Xamarin</strong> - Для создания кроссплатформенных мобильных приложений</li>
-            <li><strong>Blazor</strong> - Для создания интерактивных веб-приложений</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Начинающие программисты без опыта</li>
-            <li>Разработчики, желающие освоить C# и .NET</li>
-            <li>Веб-разработчики для создания бэкенда на ASP.NET Core</li>
-            <li>Разработчики настольных приложений для Windows</li>
-            <li>Начинающие разработчики игр</li>
-          </ul>
-        </div>
       </div>
       <div class="modal-footer">
-        <a href="courses/git/01-git-basics.html" class="course-button">
+        <a href="404.html" class="course-button">
           Перейти к курсу
           <i class="fas fa-arrow-right ml-2"></i>
         </a>
@@ -1070,100 +1080,33 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">Git - это распределённая система контроля версий, которая является стандартом в индустрии разработки программного обеспечения. В этом курсе вы изучите Git от основ до продвинутых техник использования, включая работу с GitHub и организацию процессов командной разработки.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
+          <p class="text-gray-600 mb-4">Изучите Git - самую популярную систему контроля версий. Основные команды, ветвление, GitHub, Pull Request, Issues и командная работа.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h5 class="font-medium text-gray-900">1. Основы Git</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Установка и настройка Git</li>
-                <li>Создание репозитория</li>
-                <li>Основные команды: add, commit, status, log</li>
-                <li>Работа с .gitignore</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Основные команды Git</li>
+                <li>• Ветвление и слияние</li>
+                <li>• Работа с GitHub</li>
+                <li>• Pull Request и Issues</li>
+                <li>• Командная работа</li>
               </ul>
             </div>
             <div>
-              <h5 class="font-medium text-gray-900">2. Ветвление и слияние</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Создание и переключение веток</li>
-                <li>Слияние веток (merge)</li>
-                <li>Разрешение конфликтов слияния</li>
-                <li>Стратегии ветвления</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. Удаленные репозитории</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Клонирование репозитория</li>
-                <li>Работа с удаленными репозиториями (remote)</li>
-                <li>Push и pull операции</li>
-                <li>Синхронизация с upstream репозиториями</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. GitHub</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Создание аккаунта и репозиториев</li>
-                <li>Pull Requests</li>
-                <li>Issues и проекты</li>
-                <li>GitHub Actions и CI/CD</li>
-                <li>GitHub Pages для хостинга сайтов</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Продвинутые техники Git</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Rebase vs Merge</li>
-                <li>Interactive rebase</li>
-                <li>Cherry-pick и патчи</li>
-                <li>Submodules и subtrees</li>
-                <li>Hooks и автоматизация</li>
-                <li>Reflog и восстановление данных</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Git Flow и организация командной работы</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Модель Git Flow</li>
-                <li>Feature Branch Workflow</li>
-                <li>Conventional commits и семантическое версионирование</li>
-                <li>Code review практики</li>
-                <li>Автоматизация релизов</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Разработчики всех уровней</li>
+                <li>• DevOps инженеры</li>
+                <li>• Студенты IT</li>
+                <li>• Project managers</li>
               </ul>
             </div>
           </div>
         </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-tools"></i> Практические навыки</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Эффективное использование Git в повседневной работе</li>
-            <li>Управление сложными проектами с множеством веток</li>
-            <li>Работа с GitHub и другими Git-платформами</li>
-            <li>Организация эффективного процесса разработки в команде</li>
-            <li>Восстановление после ошибок и проблемных ситуаций</li>
-            <li>Настройка автоматизации на базе Git</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Разработчики любого уровня и специализации</li>
-            <li>Студенты IT-направлений</li>
-            <li>Technical writers и документалисты</li>
-            <li>DevOps инженеры</li>
-            <li>Project managers и team leads</li>
-            <li>Любой, кто работает с кодом или текстовыми документами</li>
-          </ul>
-        </div>
       </div>
       <div class="modal-footer">
-        <a href="404.html" class="course-button">
+        <a href="courses/git/01-git-basics.html" class="course-button">
           Перейти к курсу
           <i class="fas fa-arrow-right ml-2"></i>
         </a>
@@ -1176,100 +1119,34 @@
     <div class="modal-backdrop"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <h3><i class="fab fa-html5 text-red-600 mr-3"></i>Веб-разработка</h3>
+        <h3><i class="fab fa-html5 text-blue-600 mr-3"></i>Веб-разработка</h3>
         <button class="modal-close"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">Курс веб-разработки научит вас создавать современные, красивые и функциональные веб-сайты. От основ HTML и CSS до создания интерактивных веб-приложений – вы изучите все ключевые технологии и инструменты современной веб-разработки.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
+          <p class="text-gray-600 mb-4">Создавайте современные веб-сайты с помощью HTML и CSS. HTML5, семантическая верстка, CSS3, Flexbox, Grid, анимации и адаптивный дизайн.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h5 class="font-medium text-gray-900">1. Основы HTML</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Структура HTML-документа</li>
-                <li>Теги и атрибуты</li>
-                <li>Текстовые элементы и списки</li>
-                <li>Ссылки и изображения</li>
-                <li>Таблицы и формы</li>
-                <li>Семантические элементы HTML5</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• HTML5 и семантическая верстка</li>
+                <li>• CSS3, Flexbox, Grid</li>
+                <li>• Адаптивный дизайн</li>
+                <li>• JavaScript основы</li>
+                <li>• Современные инструменты</li>
               </ul>
             </div>
             <div>
-              <h5 class="font-medium text-gray-900">2. CSS и стилизация</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Селекторы и специфичность</li>
-                <li>Box-модель и позиционирование</li>
-                <li>Цвета, фоны и градиенты</li>
-                <li>Типографика и шрифты</li>
-                <li>Flexbox и Grid для создания макетов</li>
-                <li>Переходы и анимации</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. Адаптивный дизайн</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Принципы отзывчивого дизайна</li>
-                <li>Media-запросы</li>
-                <li>Mobile First подход</li>
-                <li>Адаптивные изображения и видео</li>
-                <li>Тестирование на различных устройствах</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. JavaScript основы</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Синтаксис и основные концепции</li>
-                <li>Переменные, типы данных и операторы</li>
-                <li>Функции и области видимости</li>
-                <li>Работа с DOM</li>
-                <li>Обработка событий</li>
-                <li>Асинхронный JavaScript (callbacks, promises, async/await)</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Современная веб-разработка</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Sass и PostCSS</li>
-                <li>Сборщики и инструменты сборки (Webpack, Vite)</li>
-                <li>Работа с API и AJAX</li>
-                <li>LocalStorage и SessionStorage</li>
-                <li>Основы безопасности веб-приложений</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Фреймворки и библиотеки (обзор)</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Современные JavaScript‑фреймворки (React/Vue) — обзор без практики</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Начинающие разработчики</li>
+                <li>• Дизайнеры</li>
+                <li>• Маркетологи</li>
+                <li>• Предприниматели</li>
               </ul>
             </div>
           </div>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-code"></i> Практические проекты</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Создание адаптивного лендинга</li>
-            <li>Разработка интерактивной веб-формы</li>
-            <li>Создание интерактивной галереи</li>
-            <li>Разработка одностраничного приложения</li>
-            <li>Создание личного портфолио-сайта</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Начинающие разработчики без опыта</li>
-            <li>Дизайнеры, желающие освоить вёрстку своих дизайнов</li>
-            <li>Маркетологи и контент-менеджеры</li>
-            <li>Предприниматели, желающие создать свой сайт</li>
-            <li>Студенты IT-направлений</li>
-          </ul>
         </div>
       </div>
       <div class="modal-footer">
@@ -1281,113 +1158,88 @@
     </div>
   </div>
 
-  <!-- Модальное окно для курса "Командная строка" -->
-  <div class="modal" id="modal-shell">
+
+  <!-- Модальное окно для курса "Linux и Bash" -->
+  <div class="modal" id="modal-linux">
     <div class="modal-backdrop"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <h3><i class="fas fa-terminal text-yellow-600 mr-3"></i>Командная строка</h3>
+        <h3><i class="fab fa-linux text-blue-600 mr-3"></i>Linux и Bash</h3>
         <button class="modal-close"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">Курс по командной строке научит вас эффективно использовать терминал в Linux и PowerShell в Windows. Вы освоите мощные инструменты для автоматизации задач, управления системой и повышения своей продуктивности как разработчика или системного администратора.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
+          <p class="text-gray-600 mb-4">Освойте Linux и Bash - основу современной IT-инфраструктуры. Основы Linux, файловая система, Bash-скрипты, автоматизация и управление процессами.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h5 class="font-medium text-gray-900">1. Введение в командную строку</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>История и значение командной строки</li>
-                <li>Terminal в Linux/macOS и Command Prompt/PowerShell в Windows</li>
-                <li>Настройка окружения и конфигурация терминала</li>
-                <li>Эмуляторы терминала и их возможности</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Основы Linux и файловая система</li>
+                <li>• Bash командная строка</li>
+                <li>• Работа с файлами и текстом</li>
+                <li>• Bash-скриптинг</li>
+                <li>• Управление процессами</li>
               </ul>
             </div>
             <div>
-              <h5 class="font-medium text-gray-900">2. Основы Bash (Linux/macOS)</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Навигация по файловой системе</li>
-                <li>Работа с файлами и директориями</li>
-                <li>Права доступа и управление пользователями</li>
-                <li>Перенаправление ввода/вывода и пайпы</li>
-                <li>Базовые команды: ls, cd, mkdir, rm, cp, mv и др.</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. Основы PowerShell (Windows)</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Концепция командлетов и их синтаксис</li>
-                <li>Работа с файловой системой в PowerShell</li>
-                <li>Объектная модель PowerShell</li>
-                <li>Конвейеры и фильтрация объектов</li>
-                <li>Профили и настройка окружения</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. Продвинутые техники Bash</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Регулярные выражения и grep</li>
-                <li>Текстовые редакторы: vim, nano</li>
-                <li>Обработка текста: sed, awk</li>
-                <li>Управление процессами и мониторинг системы</li>
-                <li>Cron и планировщик задач</li>
-                <li>SSH и удаленное администрирование</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Продвинутые техники PowerShell</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Работа с объектами и свойствами</li>
-                <li>Функции и модули</li>
-                <li>Обработка ошибок и отладка</li>
-                <li>Взаимодействие с .NET Framework</li>
-                <li>WMI и CIM для управления Windows</li>
-                <li>Удаленное управление через PowerShell</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Автоматизация и скриптинг</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Написание Bash-скриптов</li>
-                <li>PowerShell скрипты и автоматизация</li>
-                <li>Переменные окружения и параметры</li>
-                <li>Условные операторы и циклы</li>
-                <li>Функции и модульность</li>
-                <li>Автоматизация рутинных задач</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Системные администраторы</li>
+                <li>• DevOps инженеры</li>
+                <li>• Разработчики</li>
+                <li>• IT-специалисты</li>
               </ul>
             </div>
           </div>
         </div>
-        
+      </div>
+      <div class="modal-footer">
+        <a href="courses/linux/01-linux-basics.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Windows и PowerShell" -->
+  <div class="modal" id="modal-windows">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-windows text-blue-600 mr-3"></i>Windows и PowerShell</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-tools"></i> Практические навыки</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Эффективная навигация и управление системой через CLI</li>
-            <li>Автоматизация повторяющихся задач</li>
-            <li>Мониторинг и администрирование систем</li>
-            <li>Обработка и анализ данных в командной строке</li>
-            <li>Настройка и оптимизация рабочего окружения</li>
-            <li>Создание сложных сценариев автоматизации</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Разработчики, желающие повысить свою эффективность</li>
-            <li>Системные администраторы</li>
-            <li>DevOps и SRE инженеры</li>
-            <li>Специалисты по информационной безопасности</li>
-            <li>IT-энтузиасты, желающие глубже понять работу систем</li>
-          </ul>
+          <p class="text-gray-600 mb-4">Изучите Windows PowerShell и автоматизацию в экосистеме Microsoft. PowerShell командлеты и модули, управление Windows через CLI и автоматизация.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Основы PowerShell</li>
+                <li>• Командлеты и модули</li>
+                <li>• Управление Windows системой</li>
+                <li>• PowerShell скриптинг</li>
+                <li>• Автоматизация задач</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Системные администраторы</li>
+                <li>• DevOps инженеры</li>
+                <li>• .NET разработчики</li>
+                <li>• IT-специалисты</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <a href="404.html" class="course-button">
+        <a href="courses/windows/01-windows-basics.html" class="course-button">
           Перейти к курсу
           <i class="fas fa-arrow-right ml-2"></i>
         </a>
@@ -1400,125 +1252,122 @@
     <div class="modal-backdrop"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <h3><i class="fas fa-gamepad text-purple-600 mr-3"></i>Unity</h3>
+        <h3><i class="fas fa-gamepad text-blue-600 mr-3"></i>Unity</h3>
         <button class="modal-close"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-graduation-cap"></i> О курсе</h4>
-          <p class="text-gray-600">Курс Unity научит вас создавать 2D и 3D игры с помощью одного из самых популярных игровых движков в мире. Вы освоите не только основы Unity, но и программирование на C# для создания интерактивных игровых механик.</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-list-ol"></i> Содержание курса</h4>
-          <div class="space-y-4">
+          <p class="text-gray-600 mb-4">Создавайте 2D и 3D игры с помощью Unity - одного из самых популярных игровых движков. Основы Unity и интерфейс редактора, программирование на C# для Unity, физика, анимация и UI системы.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h5 class="font-medium text-gray-900">1. Введение в Unity</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Установка Unity Hub и Unity Editor</li>
-                <li>Интерфейс Unity и основные окна</li>
-                <li>Создание первого проекта</li>
-                <li>Настройка проекта и сцены</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Основы Unity и интерфейс</li>
+                <li>• Программирование на C#</li>
+                <li>• Физика и коллизии</li>
+                <li>• Анимация и визуальные эффекты</li>
+                <li>• UI и звук</li>
               </ul>
             </div>
             <div>
-              <h5 class="font-medium text-gray-900">2. Основы работы с Unity</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>GameObjects и компоненты</li>
-                <li>Трансформации и иерархия объектов</li>
-                <li>Работа с префабами</li>
-                <li>Создание и управление сценами</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">3. Программирование на C# в Unity</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Основы C# для Unity</li>
-                <li>MonoBehaviour и жизненный цикл скриптов</li>
-                <li>Переменные и методы в Unity</li>
-                <li>Работа с компонентами через код</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">4. Физика и коллизии</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Rigidbody и физика объектов</li>
-                <li>Colliders и система коллизий</li>
-                <li>Триггеры и обработка столкновений</li>
-                <li>Физические материалы и настройки</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">5. Анимация и визуальные эффекты</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Animation Controller и Animator</li>
-                <li>Создание анимаций персонажей</li>
-                <li>Particle System для эффектов</li>
-                <li>Post-processing и визуальные улучшения</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">6. Пользовательский интерфейс</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Canvas и UI элементы</li>
-                <li>Создание меню и HUD</li>
-                <li>UI события и взаимодействие</li>
-                <li>Адаптивный UI для разных разрешений</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">7. Звук и аудио</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Audio Source и Audio Listener</li>
-                <li>Работа со звуковыми файлами</li>
-                <li>3D звук и пространственное аудио</li>
-                <li>Аудио миксинг и эффекты</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-gray-900">8. Оптимизация и публикация</h5>
-              <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-                <li>Профилирование производительности</li>
-                <li>Оптимизация графики и кода</li>
-                <li>Настройки сборки для разных платформ</li>
-                <li>Публикация игры</li>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Начинающие разработчики игр</li>
+                <li>• Программисты</li>
+                <li>• Художники и дизайнеры</li>
+                <li>• Студенты</li>
               </ul>
             </div>
           </div>
         </div>
-        
+      </div>
+      <div class="modal-footer">
+        <a href="404.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "ЕГЭ по информатике" -->
+  <div class="modal" id="modal-ege">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-graduation-cap text-blue-600 mr-3"></i>ЕГЭ по информатике</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-gamepad"></i> Практические проекты</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Создание простой 2D платформер</li>
-            <li>Разработка 3D шутера от первого лица</li>
-            <li>Создание интерактивной сцены с физикой</li>
-            <li>Разработка мобильной игры</li>
-            <li>Создание полноценного игрового меню</li>
-          </ul>
+          <p class="text-gray-600 mb-4">Полная подготовка к ЕГЭ по информатике: от основ до сложных алгоритмов и программирования. Алгоритмизация и программирование, системы счисления и логика, базы данных и сети.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Алгоритмизация и программирование</li>
+                <li>• Системы счисления и логика</li>
+                <li>• Базы данных и сети</li>
+                <li>• Информационные технологии</li>
+                <li>• Решение задач повышенной сложности</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Ученики 10-11 классов</li>
+                <li>• Абитуриенты IT-специальностей</li>
+                <li>• Преподаватели информатики</li>
+                <li>• Подготовка к поступлению</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        
+      </div>
+      <div class="modal-footer">
+        <a href="404.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "ОГЭ по информатике" -->
+  <div class="modal" id="modal-oge">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-certificate text-blue-600 mr-3"></i>ОГЭ по информатике</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
         <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-tools"></i> Технологии и инструменты</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li><strong>Unity Editor</strong> - Основной инструмент разработки</li>
-            <li><strong>C#</strong> - Язык программирования для Unity</li>
-            <li><strong>Unity Asset Store</strong> - Библиотека готовых ресурсов</li>
-            <li><strong>Unity Analytics</strong> - Аналитика игр</li>
-            <li><strong>Unity Cloud Build</strong> - Облачная сборка проектов</li>
-            <li><strong>Unity Collaborate</strong> - Совместная работа над проектами</li>
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4 class="modal-section-title"><i class="fas fa-certificate"></i> Для кого этот курс</h4>
-          <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
-            <li>Начинающие разработчики игр</li>
-            <li>Программисты, желающие освоить геймдев</li>
-            <li>Художники и дизайнеры, изучающие техническую сторону</li>
-            <li>Студенты, интересующиеся игровой индустрией</li>
-            <li>Энтузиасты, желающие создать свою первую игру</li>
-          </ul>
+          <p class="text-gray-600 mb-4">Подготовка к ОГЭ по информатике: основы программирования, алгоритмы и информационные технологии. Основы программирования на Python, алгоритмы и структуры данных, работа с таблицами и базами данных.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Основы программирования на Python</li>
+                <li>• Алгоритмы и структуры данных</li>
+                <li>• Работа с таблицами и базами данных</li>
+                <li>• Информационные технологии</li>
+                <li>• Практические задания ОГЭ</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Ученики 8-9 классов</li>
+                <li>• Подготовка к ОГЭ</li>
+                <li>• Изучение основ программирования</li>
+                <li>• Развитие логического мышления</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -1642,6 +1491,8 @@
     </div>
   </footer>
 
+  <script src="search-data.js"></script>
+  <script src="search.js"></script>
   <script src="script.js"></script>
   <script>
     // Функция для плавного скролла к контактам

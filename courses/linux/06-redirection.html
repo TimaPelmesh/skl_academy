@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Перенаправление в Linux: стандартные потоки, перенаправление ввода/вывода, конвейеры, pipes. Изучите мощь командной строки Linux.">
+    <meta name="keywords" content="перенаправление linux, pipes конвейеры, stdin stdout stderr, перенаправление вывода, linux команды">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Перенаправление в Linux — Потоки и конвейеры">
+    <meta property="og:description" content="Изучите перенаправление ввода/вывода в Linux: стандартные потоки, конвейеры, мощные команды.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/linux/06-redirection.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Перенаправление в Linux — Потоки и конвейеры">
+    <meta name="twitter:description" content="Изучите перенаправление ввода/вывода в Linux: стандартные потоки, конвейеры, мощные команды.">
+    <title>Перенаправление в Linux — Потоки и конвейеры | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/linux/06-redirection.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Linux course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Linux и Bash",
+          "item": "https://skl-academy.ru/courses/linux/01-linux-basics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Перенаправление",
+          "item": "https://skl-academy.ru/courses/linux/06-redirection.html"
+        }
+      ]
+    }
+    </script>
+    
+    
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Linux и Bash</h1>
+        <div class="header-buttons">
+            <a href="05-processes.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="07-search.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Знакомство с Linux</button>
+                    <div class="subtopics">
+                        <a href="01-linux-basics.html#introduction" class="subtopic">1.1 Введение в Linux</a>
+                        <a href="01-linux-basics.html#distributions" class="subtopic">1.2 Дистрибутивы Linux</a>
+                        <a href="01-linux-basics.html#installation" class="subtopic">1.3 Установка на виртуальную машину</a>
+                        <a href="01-linux-basics.html#wsl" class="subtopic">1.4 WSL2 для Windows</a>
+                        <a href="01-linux-basics.html#first-steps" class="subtopic">1.5 Первое знакомство</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="02-file-system.html#terminal-shell" class="subtopic">2.1 Терминал и Shell</a>
+                        <a href="02-file-system.html#file-system" class="subtopic">2.2 Файловая система Linux</a>
+                        <a href="02-file-system.html#paths" class="subtopic">2.3 Пути и навигация</a>
+                        <a href="02-file-system.html#commands" class="subtopic">2.4 Команды навигации</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="03-file-operations.html#creating" class="subtopic">3.1 Создание файлов и каталогов</a>
+                        <a href="03-file-operations.html#managing" class="subtopic">3.2 Копирование, перемещение, удаление</a>
+                        <a href="03-file-operations.html#viewing" class="subtopic">3.3 Просмотр содержимого</a>
+                        <a href="03-file-operations.html#editors" class="subtopic">3.4 Текстовые редакторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Права доступа</button>
+                    <div class="subtopics">
+                        <a href="04-permissions.html#ownership" class="subtopic">4.1 Владелец и группа</a>
+                        <a href="04-permissions.html#permissions" class="subtopic">4.2 Права доступа</a>
+                        <a href="04-permissions.html#numeric" class="subtopic">4.3 Числовое представление</a>
+                        <a href="04-permissions.html#analysis" class="subtopic">4.4 Анализ прав</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Процессы</button>
+                    <div class="subtopics">
+                        <a href="05-processes.html#what-is-process" class="subtopic">5.1 Что такое процесс</a>
+                        <a href="05-processes.html#viewing-processes" class="subtopic">5.2 Просмотр процессов</a>
+                        <a href="05-processes.html#managing-processes" class="subtopic">5.3 Управление процессами</a>
+                        <a href="05-processes.html#monitoring" class="subtopic">5.4 Мониторинг системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn active">6. Перенаправление</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#streams" class="subtopic active">6.1 Стандартные потоки</a>
+                        <a href="#output" class="subtopic">6.2 Перенаправление вывода</a>
+                        <a href="#input" class="subtopic">6.3 Перенаправление ввода</a>
+                        <a href="#pipes" class="subtopic">6.4 Конвейеры</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Поиск</button>
+                    <div class="subtopics">
+                        <a href="07-search.html#find" class="subtopic">7.1 find - поиск файлов</a>
+                        <a href="07-search.html#grep" class="subtopic">7.2 grep - поиск текста</a>
+                        <a href="07-search.html#combination" class="subtopic">7.3 Комбинация find и grep</a>
+                        <a href="07-search.html#locate" class="subtopic">7.4 locate - быстрый поиск</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Bash-скриптинг</button>
+                    <div class="subtopics">
+                        <a href="08-scripting.html#what-is-script" class="subtopic">8.1 Что такое скрипт</a>
+                        <a href="08-scripting.html#creating-scripts" class="subtopic">8.2 Создание и запуск</a>
+                        <a href="08-scripting.html#variables" class="subtopic">8.3 Переменные</a>
+                        <a href="08-scripting.html#input" class="subtopic">8.4 Ввод данных</a>
+                        <a href="08-scripting.html#command-substitution" class="subtopic">8.5 Подстановка команд</a>
+                        <a href="08-scripting.html#math" class="subtopic">8.6 Математические операции</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Сетевые утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-networking.html#diagnostics" class="subtopic">9.1 Сетевая диагностика</a>
+                        <a href="09-networking.html#connections" class="subtopic">9.2 Просмотр соединений</a>
+                        <a href="09-networking.html#download" class="subtopic">9.3 Скачивание файлов</a>
+                        <a href="09-networking.html#ssh" class="subtopic">9.4 SSH подключение</a>
+                        <a href="09-networking.html#keys" class="subtopic">9.5 Аутентификация по ключам</a>
+                        <a href="09-networking.html#file-transfer" class="subtopic">9.6 Передача файлов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 6.1: Стандартные потоки -->
+            <section id="streams" class="topic-section">
+                <h2>6.1 Стандартные потоки</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 15 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <p>В Linux каждый процесс имеет три стандартных потока для ввода и вывода данных.</p>
+                    
+                    <h3>stdin (0) — стандартный ввод</h3>
+                    <p>Поток для чтения данных. По умолчанию это клавиатура.</p>
+                    <div class="terminal-command">
+                        cat                    # читает из stdin (клавиатура)
+                        # Нажмите Ctrl+D для завершения ввода
+                    </div>
+
+                    <h3>stdout (1) — стандартный вывод</h3>
+                    <p>Поток для вывода обычных данных. По умолчанию это экран терминала.</p>
+                    <div class="terminal-command">
+                        echo "Hello World"     # выводит в stdout
+                        ls                    # выводит список файлов в stdout
+                    </div>
+
+                    <h3>stderr (2) — стандартный поток ошибок</h3>
+                    <p>Поток для вывода сообщений об ошибках. По умолчанию это тоже экран терминала.</p>
+                    <div class="terminal-command">
+                        ls nonexistent_file   # ошибка выводится в stderr
+                        # ls: cannot access 'nonexistent_file': No such file or directory
+                    </div>
+
+                    <h3>Разделение потоков</h3>
+                    <div class="info">
+                        <strong>Важно понимать:</strong> stdout и stderr — это разные потоки. Это позволяет обрабатывать обычный вывод и ошибки отдельно.
+                    </div>
+
+                    <div class="terminal-command">
+                        # Команда выводит и обычные данные, и ошибки
+                        ls existing_file nonexistent_file
+                        # existing_file          ← stdout
+                        # ls: cannot access...   ← stderr
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.2: Перенаправление вывода -->
+            <section id="output" class="topic-section">
+                <h2>6.2 Перенаправление вывода</h2>
+                <div class="lesson-content">
+                    <p>Перенаправление позволяет отправлять вывод команд в файлы или другие программы.</p>
+                    
+                    <h3>Перенаправление stdout</h3>
+                    <div class="terminal-command">
+                        echo "Hello" > file.txt    # записать в файл (перезаписать)
+                        echo "World" >> file.txt   # добавить в файл
+                        ls > files.txt             # сохранить список файлов
+                    </div>
+
+                    <h3>Перенаправление stderr</h3>
+                    <div class="terminal-command">
+                        ls nonexistent 2> error.log    # перенаправить ошибки в файл
+                        ls existing 2> error.log       # ошибок нет, файл останется пустым
+                    </div>
+
+                    <h3>Перенаправление обоих потоков</h3>
+                    <div class="terminal-command">
+                        ls existing nonexistent > output.log 2>&1
+                        # Перенаправить и stdout, и stderr в один файл
+                        
+                        ls existing nonexistent &> output.log
+                        # Сокращенная запись (bash)
+                    </div>
+
+                    <h3>Отбрасывание вывода</h3>
+                    <div class="terminal-command">
+                        ls > /dev/null              # отбросить stdout
+                        ls 2> /dev/null            # отбросить stderr
+                        ls > /dev/null 2>&1        # отбросить все
+                    </div>
+
+                    <div class="info">
+                        <strong>/dev/null</strong> — это специальный файл, который "поглощает" все данные. Полезен для подавления нежелательного вывода.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.3: Перенаправление ввода -->
+            <section id="input" class="topic-section">
+                <h2>6.3 Перенаправление ввода</h2>
+                <div class="lesson-content">
+                    <p>Перенаправление ввода позволяет читать данные из файла вместо клавиатуры.</p>
+                    
+                    <h3>Перенаправление stdin</h3>
+                    <div class="terminal-command">
+                        cat < file.txt              # читать из файла
+                        sort < unsorted.txt         # сортировать файл
+                        wc -l < file.txt            # подсчитать строки в файле
+                    </div>
+
+                    <h3>Heredoc — многострочный ввод</h3>
+                    <div class="terminal-command">
+                        cat << EOF
+                        Строка 1
+                        Строка 2
+                        Строка 3
+                        EOF
+                        # Создает временный файл с содержимым между EOF
+                    </div>
+
+                    <h3>Here-string — ввод из переменной</h3>
+                    <div class="terminal-command">
+                        text="Hello World"
+                        wc -w <<< "$text"           # подсчитать слова в переменной
+                    </div>
+
+                    <h3>Практические примеры</h3>
+                    <div class="terminal-command">
+                        # Отправить письмо из файла
+                        mail user@example.com < message.txt
+                        
+                        # Создать архив из списка файлов
+                        tar -czf archive.tar.gz -T filelist.txt
+                        
+                        # Выполнить команды из файла
+                        bash < script.sh
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.4: Конвейеры -->
+            <section id="pipes" class="topic-section">
+                <h2>6.4 Конвейеры (Pipes)</h2>
+                <div class="lesson-content">
+                    <p>Конвейер (|) передает stdout одной команды в stdin другой команды. Это основа мощных командных конструкций.</p>
+                    
+                    <h3>Базовое использование</h3>
+                    <div class="terminal-command">
+                        ls -la | grep "txt"         # найти файлы .txt
+                        ps aux | grep firefox       # найти процессы firefox
+                        cat file.txt | sort         # отсортировать файл
+                    </div>
+
+                    <h3>Цепочки команд</h3>
+                    <div class="terminal-command">
+                        ls -la | grep "txt" | wc -l     # подсчитать .txt файлы
+                        ps aux | grep firefox | awk '{print $2}'  # получить PID firefox
+                        cat log.txt | grep ERROR | sort | uniq    # уникальные ошибки
+                    </div>
+
+                    <h3>Полезные команды для конвейеров</h3>
+                    <div class="code-example">
+                        <h4>grep — поиск текста</h4>
+                        <div class="terminal-command">
+                            ps aux | grep python        # найти процессы python
+                            ls -la | grep -v "txt"      # исключить .txt файлы
+                            cat file.txt | grep -i error # поиск без учета регистра
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>sort — сортировка</h4>
+                        <div class="terminal-command">
+                            ls -la | sort -k5 -nr       # сортировать по размеру (убывание)
+                            cat names.txt | sort        # отсортировать имена
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>uniq — удаление дубликатов</h4>
+                        <div class="terminal-command">
+                            cat file.txt | sort | uniq  # уникальные строки
+                            cat file.txt | sort | uniq -c  # с подсчетом
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>head и tail — начало и конец</h4>
+                        <div class="terminal-command">
+                            ls -la | head -10           # первые 10 файлов
+                            ps aux | tail -5            # последние 5 процессов
+                        </div>
+                    </div>
+
+                    <h3>Сложные примеры</h3>
+                    <div class="terminal-command">
+                        # Найти 5 самых больших файлов
+                        find /home -type f -exec ls -la {} \; | sort -k5 -nr | head -5
+                        
+                        # Мониторинг логов в реальном времени
+                        tail -f /var/log/syslog | grep ERROR
+                        
+                        # Статистика использования команд
+                        history | awk '{print $2}' | sort | uniq -c | sort -nr | head -10
+                    </div>
+
+                    <div class="warning">
+                        <strong>Обратите внимание:</strong> stderr не передается через конвейер. Для передачи ошибок используйте <code>2>&1</code>.
+                    </div>
+                </div>
+            </section>
+
+            </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

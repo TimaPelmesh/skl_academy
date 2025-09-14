@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Сетевые настройки Windows - конфигурация, брандмауэр, удаленный доступ, диагностика сети через PowerShell.">
+    <meta name="keywords" content="сеть windows, брандмауэр windows, удаленный доступ, диагностика сети, powershell сеть">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <title>Сетевые настройки Windows — Конфигурация и диагностика | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/windows/06-networking.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Windows и PowerShell</h1>
+        <div class="header-buttons">
+            <a href="07-security.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Windows</button>
+                    <div class="subtopics">
+                        <a href="01-windows-basics.html#introduction" class="subtopic">1.1 Введение в Windows</a>
+                        <a href="01-windows-basics.html#versions" class="subtopic">1.2 Версии Windows</a>
+                        <a href="01-windows-basics.html#interface" class="subtopic">1.3 Интерфейс Windows</a>
+                        <a href="01-windows-basics.html#file-explorer" class="subtopic">1.4 Проводник Windows</a>
+                        <a href="01-windows-basics.html#settings" class="subtopic">1.5 Настройки системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. PowerShell</button>
+                    <div class="subtopics">
+                        <a href="02-powershell-basics.html#what-is-powershell" class="subtopic">2.1 Что такое PowerShell</a>
+                        <a href="02-powershell-basics.html#installation" class="subtopic">2.2 Установка и настройка</a>
+                        <a href="02-powershell-basics.html#first-commands" class="subtopic">2.3 Первые команды</a>
+                        <a href="02-powershell-basics.html#help-system" class="subtopic">2.4 Система помощи</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="03-file-system.html#structure" class="subtopic">3.1 Структура файловой системы</a>
+                        <a href="03-file-system.html#paths" class="subtopic">3.2 Пути и навигация</a>
+                        <a href="03-file-system.html#permissions" class="subtopic">3.3 Права доступа</a>
+                        <a href="03-file-system.html#attributes" class="subtopic">3.4 Атрибуты файлов</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Реестр Windows</button>
+                    <div class="subtopics">
+                        <a href="04-registry.html#what-is-registry" class="subtopic">4.1 Что такое реестр</a>
+                        <a href="04-registry.html#structure" class="subtopic">4.2 Структура реестра</a>
+                        <a href="04-registry.html#editing" class="subtopic">4.3 Редактирование реестра</a>
+                        <a href="04-registry.html#backup" class="subtopic">4.4 Резервное копирование</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Службы Windows</button>
+                    <div class="subtopics">
+                        <a href="05-services.html#what-are-services" class="subtopic">5.1 Что такое службы</a>
+                        <a href="05-services.html#management" class="subtopic">5.2 Управление службами</a>
+                        <a href="05-services.html#troubleshooting" class="subtopic">5.3 Диагностика служб</a>
+                        <a href="05-services.html#custom-services" class="subtopic">5.4 Создание служб</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn active">6. Сетевые настройки</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#network-config" class="subtopic active">6.1 Настройка сети</a>
+                        <a href="#firewall" class="subtopic">6.2 Брандмауэр Windows</a>
+                        <a href="#remote-access" class="subtopic">6.3 Удаленный доступ</a>
+                        <a href="#troubleshooting" class="subtopic">6.4 Диагностика сети</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Безопасность</button>
+                    <div class="subtopics">
+                        <a href="07-security.html#user-accounts" class="subtopic">7.1 Учетные записи</a>
+                        <a href="07-security.html#group-policy" class="subtopic">7.2 Групповые политики</a>
+                        <a href="07-security.html#antivirus" class="subtopic">7.3 Антивирусная защита</a>
+                        <a href="07-security.html#encryption" class="subtopic">7.4 Шифрование данных</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Автоматизация</button>
+                    <div class="subtopics">
+                        <a href="08-automation.html#batch-files" class="subtopic">8.1 Пакетные файлы</a>
+                        <a href="08-automation.html#powershell-scripts" class="subtopic">8.2 PowerShell скрипты</a>
+                        <a href="08-automation.html#task-scheduler" class="subtopic">8.3 Планировщик задач</a>
+                        <a href="08-automation.html#advanced-automation" class="subtopic">8.4 Продвинутая автоматизация</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика</button>
+                    <div class="subtopics">
+                        <a href="09-troubleshooting.html#event-viewer" class="subtopic">9.1 Просмотр событий</a>
+                        <a href="09-troubleshooting.html#performance" class="subtopic">9.2 Мониторинг производительности</a>
+                        <a href="09-troubleshooting.html#system-recovery" class="subtopic">9.3 Восстановление системы</a>
+                        <a href="09-troubleshooting.html#advanced-tools" class="subtopic">9.4 Продвинутые инструменты</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#hyper-v" class="subtopic">10.1 Hyper-V</a>
+                        <a href="10-advanced-topics.html#wsl" class="subtopic">10.2 WSL (Windows Subsystem for Linux)</a>
+                        <a href="10-advanced-topics.html#containers" class="subtopic">10.3 Контейнеры Windows</a>
+                        <a href="10-advanced-topics.html#cloud-integration" class="subtopic">10.4 Интеграция с облаком</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 6.1: Настройка сети -->
+            <section id="network-config" class="topic-section">
+                <h2>6.1 Настройка сети в Windows</h2>
+                <div class="lesson-content">
+                    <p>Windows предоставляет мощные инструменты для настройки и управления сетевыми подключениями.</p>
+                    
+                    <h3>Просмотр сетевых адаптеров</h3>
+                    <div class="terminal-command">
+                        # Просмотр всех сетевых адаптеров
+                        Get-NetAdapter
+                        
+                        # Просмотр только активных адаптеров
+                        Get-NetAdapter | Where-Object {$_.Status -eq "Up"}
+                        
+                        # Детальная информация об адаптере
+                        Get-NetAdapter -Name "Ethernet" | Format-List *
+                    </div>
+
+                    <h3>Настройка IP-адресов</h3>
+                    <div class="terminal-command">
+                        # Просмотр IP-конфигурации
+                        Get-NetIPConfiguration
+                        
+                        # Настройка статического IP
+                        New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress "192.168.1.100" -PrefixLength 24 -DefaultGateway "192.168.1.1"
+                        
+                        # Настройка DNS
+                        Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses "8.8.8.8", "8.8.4.4"
+                    </div>
+
+                    <h3>Управление сетевыми профилями</h3>
+                    <div class="terminal-command">
+                        # Просмотр сетевых профилей
+                        Get-NetConnectionProfile
+                        
+                        # Изменение профиля на "Частная"
+                        Set-NetConnectionProfile -InterfaceAlias "Ethernet" -NetworkCategory Private
+                        
+                        # Изменение профиля на "Публичная"
+                        Set-NetConnectionProfile -InterfaceAlias "Ethernet" -NetworkCategory Public
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.2: Брандмауэр Windows -->
+            <section id="firewall" class="topic-section">
+                <h2>6.2 Брандмауэр Windows</h2>
+                <div class="lesson-content">
+                    <p>Брандмауэр Windows защищает систему от несанкционированного сетевого доступа.</p>
+                    
+                    <h3>Управление брандмауэром</h3>
+                    <div class="terminal-command">
+                        # Просмотр статуса брандмауэра
+                        Get-NetFirewallProfile
+                        
+                        # Включение брандмауэра
+                        Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+                        
+                        # Отключение брандмауэра
+                        Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+                    </div>
+
+                    <h3>Управление правилами</h3>
+                    <div class="terminal-command">
+                        # Просмотр всех правил
+                        Get-NetFirewallRule
+                        
+                        # Создание правила для входящих соединений
+                        New-NetFirewallRule -DisplayName "My App" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
+                        
+                        # Удаление правила
+                        Remove-NetFirewallRule -DisplayName "My App"
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.3: Удаленный доступ -->
+            <section id="remote-access" class="topic-section">
+                <h2>6.3 Удаленный доступ</h2>
+                <div class="lesson-content">
+                    <p>Windows поддерживает различные методы удаленного доступа для администрирования и работы.</p>
+                    
+                    <h3>Remote Desktop</h3>
+                    <div class="terminal-command">
+                        # Включение Remote Desktop
+                        Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+                        
+                        # Настройка NLA (Network Level Authentication)
+                        Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 1
+                    </div>
+
+                    <h3>PowerShell Remoting</h3>
+                    <div class="terminal-command">
+                        # Включение PowerShell Remoting
+                        Enable-PSRemoting -Force
+                        
+                        # Подключение к удаленному компьютеру
+                        Enter-PSSession -ComputerName "RemotePC" -Credential (Get-Credential)
+                        
+                        # Выполнение команды на удаленном компьютере
+                        Invoke-Command -ComputerName "RemotePC" -ScriptBlock {Get-Process}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.4: Диагностика сети -->
+            <section id="troubleshooting" class="topic-section">
+                <h2>6.4 Диагностика сети</h2>
+                <div class="lesson-content">
+                    <p>Диагностика сетевых проблем включает проверку подключения, анализ трафика и мониторинг производительности.</p>
+                    
+                    <h3>Базовые команды диагностики</h3>
+                    <div class="terminal-command">
+                        # Проверка подключения
+                        Test-NetConnection -ComputerName "google.com" -Port 80
+                        
+                        # Трассировка маршрута
+                        Test-NetConnection -ComputerName "google.com" -TraceRoute
+                        
+                        # Проверка DNS
+                        Resolve-DnsName "google.com"
+                    </div>
+
+                    <h3>Мониторинг сети</h3>
+                    <div class="terminal-command">
+                        # Просмотр активных соединений
+                        Get-NetTCPConnection
+                        
+                        # Мониторинг сетевого трафика
+                        Get-Counter "\Network Interface(*)\Bytes Total/sec"
+                        
+                        # Просмотр статистики адаптера
+                        Get-NetAdapterStatistics -Name "Ethernet"
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
