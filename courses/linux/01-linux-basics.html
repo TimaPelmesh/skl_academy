@@ -309,10 +309,10 @@
                     <p>Виртуальная машина позволяет запускать Linux внутри вашей основной операционной системы, не затрагивая её работу.</p>
                     
                     <h3>1. Установка VirtualBox</h3>
-                    <div class="terminal-command">
-                        # Скачайте VirtualBox с официального сайта: virtualbox.org
-                        # Установите программу, следуя инструкциям
-                        # Скачайте образ Ubuntu или Linux Mint
+                    <div class="code-example">
+                        <pre><code class="bash"># Скачайте VirtualBox с официального сайта: virtualbox.org
+# Установите программу, следуя инструкциям
+# Скачайте образ Ubuntu или Linux Mint</code></pre>
                     </div>
 
                     <h3>2. Создание виртуальной машины</h3>
@@ -335,11 +335,11 @@
                     </ol>
 
                     <h3>4. Настройка общих папок</h3>
-                    <div class="terminal-command">
-                        # В VirtualBox: Устройства → Общие папки
-                        # Добавьте папку с хоста
-                        sudo adduser $USER vboxsf
-                        # Перезагрузите систему
+                    <div class="code-example">
+                        <pre><code class="bash"># В VirtualBox: Устройства → Общие папки
+# Добавьте папку с хоста
+sudo adduser $USER vboxsf
+# Перезагрузите систему</code></pre>
                     </div>
                 </div>
             </section>
@@ -359,11 +359,11 @@
                     </ul>
 
                     <h3>Установка WSL2</h3>
-                    <div class="terminal-command">
-                        # Откройте PowerShell от имени администратора
-                        wsl --install
-                        # Перезагрузите компьютер
-                        # При первом запуске создайте пользователя
+                    <div class="code-example">
+                        <pre><code class="bash"># Откройте PowerShell от имени администратора
+wsl --install
+# Перезагрузите компьютер
+# При первом запуске создайте пользователя</code></pre>
                     </div>
 
                     <div class="code-example">

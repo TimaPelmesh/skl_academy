@@ -165,12 +165,12 @@
                     <p>Файловая система Windows основана на NTFS (New Technology File System) и имеет иерархическую структуру, начинающуюся с корневого каталога каждого диска.</p>
                     
                     <h3>Основные диски и разделы</h3>
-                    <div class="terminal-command">
-                        # Просмотр всех дисков в системе
-                        Get-WmiObject -Class Win32_LogicalDisk | Select-Object DeviceID, Size, FreeSpace, FileSystem
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр всех дисков в системе
+Get-WmiObject -Class Win32_LogicalDisk | Select-Object DeviceID, Size, FreeSpace, FileSystem
                         
                         # Или через PowerShell 5.0+
-                        Get-Volume | Select-Object DriveLetter, FileSystemLabel, Size, SizeRemaining
+Get-Volume | Select-Object DriveLetter, FileSystemLabel, Size, SizeRemaining
                     </div>
 
                     <h3>Структура диска C:</h3>
@@ -205,9 +205,9 @@
                     </div>
 
                     <h3>Папка Users</h3>
-                    <div class="terminal-command">
-                        # Просмотр структуры папки пользователя
-                        Get-ChildItem $env:USERPROFILE | Select-Object Name, Attributes
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр структуры папки пользователя
+Get-ChildItem $env:USERPROFILE | Select-Object Name, Attributes
                     </div>
 
                     <div class="code-example">
@@ -229,12 +229,12 @@
                         <strong>Важно:</strong> Многие системные папки скрыты по умолчанию. Для их отображения в проводнике включите "Показать скрытые файлы, папки и диски" в настройках вида.
                     </div>
 
-                    <div class="terminal-command">
-                        # Показать скрытые файлы и папки
-                        Get-ChildItem -Force | Where-Object {$_.Attributes -match "Hidden"}
+                    <div class="code-example">
+                        <pre><code class="bash"># Показать скрытые файлы и папки
+Get-ChildItem -Force | Where-Object {$_.Attributes -match "Hidden"}
                         
                         # Показать только скрытые папки
-                        Get-ChildItem -Directory -Force | Where-Object {$_.Attributes -match "Hidden"}
+Get-ChildItem -Directory -Force | Where-Object {$_.Attributes -match "Hidden"}
                     </div>
 
                     <h3>Специальные папки</h3>
@@ -293,31 +293,31 @@
                     </div>
 
                     <h3>Навигация в PowerShell</h3>
-                    <div class="terminal-command">
-                        # Текущее местоположение
-                        Get-Location
+                    <div class="code-example">
+                        <pre><code class="bash"># Текущее местоположение
+Get-Location
                         # или
                         pwd
                         
                         # Переход в папку
-                        Set-Location "C:\Users"
+Set-Location "C:\Users"
                         # или
                         cd "C:\Users"
                         
                         # Переход в домашнюю папку
-                        Set-Location $env:USERPROFILE
+Set-Location $env:USERPROFILE
                         # или
                         cd ~
                         
                         # Переход на уровень выше
-                        Set-Location ..
+Set-Location ..
                         # или
                         cd ..
                     </div>
 
                     <h3>Работа с переменными путей</h3>
-                    <div class="terminal-command">
-                        # Разделение пути на компоненты
+                    <div class="code-example">
+                        <pre><code class="bash"># Разделение пути на компоненты
                         Split-Path "C:\Users\Иван\Documents\файл.txt" -Parent
                         Split-Path "C:\Users\Иван\Documents\файл.txt" -Leaf
                         
@@ -336,48 +336,48 @@
                         <strong>Экранирование символов:</strong> В PowerShell некоторые символы имеют специальное значение и должны быть экранированы или заключены в кавычки.
                     </div>
 
-                    <div class="terminal-command">
-                        # Путь с пробелами (обязательно в кавычках)
-                        Set-Location "C:\Program Files"
+                    <div class="code-example">
+                        <pre><code class="bash"># Путь с пробелами (обязательно в кавычках)
+Set-Location "C:\Program Files"
                         
                         # Путь с квадратными скобками
-                        Set-Location "C:\Users\[Иван]"
+Set-Location "C:\Users\[Иван]"
                         
                         # Экранирование специальных символов
-                        Set-Location "C:\Users\`$Иван"
+Set-Location "C:\Users\`$Иван"
                         
                         # Использование одинарных кавычек (буквальная интерпретация)
-                        Set-Location 'C:\Users\$Иван'
+Set-Location 'C:\Users\$Иван'
                     </div>
 
                     <h3>Переменные окружения в путях</h3>
-                    <div class="terminal-command">
-                        # Использование переменных окружения
+                    <div class="code-example">
+                        <pre><code class="bash"># Использование переменных окружения
                         $env:USERPROFILE
                         $env:PROGRAMFILES
                         $env:WINDIR
                         $env:TEMP
                         
                         # Переход в папку пользователя
-                        Set-Location $env:USERPROFILE
+Set-Location $env:USERPROFILE
                         
                         # Создание пути с переменными
                         $documentsPath = Join-Path $env:USERPROFILE "Documents"
-                        Set-Location $documentsPath
+Set-Location $documentsPath
                     </div>
 
                     <h3>Поиск файлов по путям</h3>
-                    <div class="terminal-command">
-                        # Поиск файлов по маске
-                        Get-ChildItem "C:\Users\*\Documents\*.txt" -Recurse
+                    <div class="code-example">
+                        <pre><code class="bash"># Поиск файлов по маске
+Get-ChildItem "C:\Users\*\Documents\*.txt" -Recurse
                         
                         # Поиск с использованием переменных
-                        Get-ChildItem "$env:USERPROFILE\Documents\*.txt"
+Get-ChildItem "$env:USERPROFILE\Documents\*.txt"
                         
                         # Поиск в нескольких папках
                         $searchPaths = @("$env:USERPROFILE\Documents", "$env:USERPROFILE\Desktop")
                         foreach ($path in $searchPaths) {
-                            Get-ChildItem $path -Filter "*.txt"
+    Get-ChildItem $path -Filter "*.txt"
                         }
                     </div>
 
@@ -386,29 +386,29 @@
                         <strong>Ограничения длины путей:</strong> В Windows есть ограничение на длину пути (260 символов по умолчанию). Для работы с длинными путями используйте префикс \\?\ или включите поддержку длинных путей в Windows 10/11.
                     </div>
 
-                    <div class="terminal-command">
-                        # Работа с длинными путями (префикс \\?\)
-                        Get-ChildItem "\\?\C:\Very\Long\Path\To\Some\File.txt"
+                    <div class="code-example">
+                        <pre><code class="bash"># Работа с длинными путями (префикс \\?\)
+Get-ChildItem "\\?\C:\Very\Long\Path\To\Some\File.txt"
                         
                         # Проверка поддержки длинных путей
-                        Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled"
+Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled"
                     </div>
 
                     <h3>Создание и удаление папок</h3>
-                    <div class="terminal-command">
-                        # Создание папки
-                        New-Item -ItemType Directory -Path "C:\НоваяПапка"
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание папки
+New-Item -ItemType Directory -Path "C:\НоваяПапка"
                         # или
                         mkdir "C:\НоваяПапка"
                         
                         # Создание вложенных папок
-                        New-Item -ItemType Directory -Path "C:\Папка1\Папка2\Папка3" -Force
+New-Item -ItemType Directory -Path "C:\Папка1\Папка2\Папка3" -Force
                         
                         # Удаление папки
-                        Remove-Item "C:\НоваяПапка" -Recurse -Force
+Remove-Item "C:\НоваяПапка" -Recurse -Force
                         
                         # Удаление только пустых папок
-                        Remove-Item "C:\ПустаяПапка" -Force
+Remove-Item "C:\ПустаяПапка" -Force
                     </div>
                 </div>
             </section>
@@ -432,12 +432,12 @@
                     </div>
 
                     <h3>Просмотр прав доступа в PowerShell</h3>
-                    <div class="terminal-command">
-                        # Просмотр прав доступа к файлу
-                        Get-Acl "C:\Users\Иван\Documents\файл.txt" | Format-List
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр прав доступа к файлу
+Get-Acl "C:\Users\Иван\Documents\файл.txt" | Format-List
                         
                         # Просмотр прав доступа к папке
-                        Get-Acl "C:\Users\Иван\Documents" | Format-List
+Get-Acl "C:\Users\Иван\Documents" | Format-List
                         
                         # Детальная информация о правах
                         (Get-Acl "C:\Users\Иван\Documents").Access | Format-Table IdentityReference, FileSystemRights, AccessControlType
@@ -448,8 +448,8 @@
                         <strong>Внимание:</strong> Изменение прав доступа к системным файлам может привести к нестабильной работе системы. Всегда создавайте резервные копии перед изменением прав.
                     </div>
 
-                    <div class="terminal-command">
-                        # Создание нового объекта прав доступа
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание нового объекта прав доступа
                         $acl = Get-Acl "C:\Users\Иван\Documents"
                         
                         # Создание правила доступа
@@ -459,7 +459,7 @@
                         $acl.SetAccessRule($accessRule)
                         
                         # Применение изменений
-                        Set-Acl "C:\Users\Иван\Documents" $acl
+Set-Acl "C:\Users\Иван\Documents" $acl
                     </div>
 
                     <h3>Наследование прав доступа</h3>
@@ -467,31 +467,31 @@
                         <strong>Наследование:</strong> По умолчанию файлы и папки наследуют права доступа от родительской папки. Это упрощает управление правами, но может создавать проблемы безопасности.
                     </div>
 
-                    <div class="terminal-command">
-                        # Отключение наследования прав
+                    <div class="code-example">
+                        <pre><code class="bash"># Отключение наследования прав
                         $acl = Get-Acl "C:\Users\Иван\Documents"
                         $acl.SetAccessRuleProtection($true, $false)
-                        Set-Acl "C:\Users\Иван\Documents" $acl
+Set-Acl "C:\Users\Иван\Documents" $acl
                         
                         # Включение наследования прав
                         $acl = Get-Acl "C:\Users\Иван\Documents"
                         $acl.SetAccessRuleProtection($false, $true)
-                        Set-Acl "C:\Users\Иван\Documents" $acl
+Set-Acl "C:\Users\Иван\Documents" $acl
                     </div>
 
                     <h3>Работа с группами пользователей</h3>
-                    <div class="terminal-command">
-                        # Просмотр групп пользователей
-                        Get-LocalGroup | Select-Object Name, Description
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр групп пользователей
+Get-LocalGroup | Select-Object Name, Description
                         
                         # Просмотр пользователей в группе
-                        Get-LocalGroupMember "Пользователи"
+Get-LocalGroupMember "Пользователи"
                         
                         # Добавление пользователя в группу
                         Add-LocalGroupMember -Group "Пользователи" -Member "НовыйПользователь"
                         
                         # Удаление пользователя из группы
-                        Remove-LocalGroupMember -Group "Пользователи" -Member "Пользователь"
+Remove-LocalGroupMember -Group "Пользователи" -Member "Пользователь"
                     </div>
 
                     <h3>Эффективные права доступа</h3>
@@ -499,8 +499,8 @@
                         <strong>Эффективные права:</strong> Эффективные права пользователя определяются комбинацией его личных прав и прав групп, к которым он принадлежит. PowerShell может помочь определить эффективные права.
                     </div>
 
-                    <div class="terminal-command">
-                        # Проверка эффективных прав пользователя
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка эффективных прав пользователя
                         $user = [System.Security.Principal.WindowsIdentity]::GetCurrent()
                         $acl = Get-Acl "C:\Users\Иван\Documents"
                         
@@ -510,23 +510,23 @@
                     </div>
 
                     <h3>Аудит доступа к файлам</h3>
-                    <div class="terminal-command">
-                        # Включение аудита для файла
+                    <div class="code-example">
+                        <pre><code class="bash"># Включение аудита для файла
                         $acl = Get-Acl "C:\Users\Иван\Documents\важный_файл.txt"
                         $auditRule = New-Object System.Security.AccessControl.FileSystemAuditRule("Пользователи", "ReadAndExecute", "Success")
                         $acl.SetAuditRule($auditRule)
-                        Set-Acl "C:\Users\Иван\Documents\важный_файл.txt" $acl
+Set-Acl "C:\Users\Иван\Documents\важный_файл.txt" $acl
                         
                         # Просмотр настроек аудита
                         $acl.Audit | Format-Table IdentityReference, FileSystemRights, AuditFlags
                     </div>
 
                     <h3>Сброс прав доступа</h3>
-                    <div class="terminal-command">
-                        # Сброс прав доступа к папке (восстановление наследования)
+                    <div class="code-example">
+                        <pre><code class="bash"># Сброс прав доступа к папке (восстановление наследования)
                         $acl = Get-Acl "C:\Users\Иван\Documents"
                         $acl.SetAccessRuleProtection($false, $true)
-                        Set-Acl "C:\Users\Иван\Documents" $acl
+Set-Acl "C:\Users\Иван\Documents" $acl
                         
                         # Применение прав по умолчанию
                         icacls "C:\Users\Иван\Documents" /reset /T
@@ -535,7 +535,8 @@
                     <h3>Практические примеры</h3>
                     <div class="code-example">
                         <h4>Создание папки с ограниченным доступом</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Создание папки
 $folderPath = "C:\КонфиденциальныеДокументы"
 New-Item -ItemType Directory -Path $folderPath
@@ -581,30 +582,30 @@ Set-Acl $folderPath $acl
                     </div>
 
                     <h3>Просмотр атрибутов в PowerShell</h3>
-                    <div class="terminal-command">
-                        # Просмотр атрибутов файла
-                        Get-ItemProperty "C:\Users\Иван\Documents\файл.txt" | Select-Object Attributes
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр атрибутов файла
+Get-ItemProperty "C:\Users\Иван\Documents\файл.txt" | Select-Object Attributes
                         
                         # Детальная информация о файле
-                        Get-Item "C:\Users\Иван\Documents\файл.txt" | Format-List *
+Get-Item "C:\Users\Иван\Documents\файл.txt" | Format-List *
                         
                         # Просмотр атрибутов папки
-                        Get-Item "C:\Users\Иван\Documents" | Select-Object Attributes
+Get-Item "C:\Users\Иван\Documents" | Select-Object Attributes
                         
                         # Просмотр всех файлов с их атрибутами
-                        Get-ChildItem "C:\Users\Иван\Documents" | Select-Object Name, Attributes
+Get-ChildItem "C:\Users\Иван\Documents" | Select-Object Name, Attributes
                     </div>
 
                     <h3>Установка атрибутов</h3>
-                    <div class="terminal-command">
-                        # Установка атрибута "только для чтения"
-                        Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value ReadOnly
+                    <div class="code-example">
+                        <pre><code class="bash"># Установка атрибута "только для чтения"
+Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value ReadOnly
                         
                         # Установка атрибута "скрытый"
-                        Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value Hidden
+Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value Hidden
                         
                         # Установка нескольких атрибутов
-                        Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value @("ReadOnly", "Hidden")
+Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value @("ReadOnly", "Hidden")
                         
                         # Снятие атрибута "только для чтения"
                         $file = Get-Item "C:\Users\Иван\Documents\файл.txt"
@@ -612,8 +613,8 @@ Set-Acl $folderPath $acl
                     </div>
 
                     <h3>Работа с атрибутами через .NET</h3>
-                    <div class="terminal-command">
-                        # Установка атрибутов через .NET
+                    <div class="code-example">
+                        <pre><code class="bash"># Установка атрибутов через .NET
                         [System.IO.File]::SetAttributes("C:\Users\Иван\Documents\файл.txt", [System.IO.FileAttributes]::ReadOnly)
                         
                         # Установка нескольких атрибутов
@@ -627,18 +628,18 @@ Set-Acl $folderPath $acl
                     </div>
 
                     <h3>Поиск файлов по атрибутам</h3>
-                    <div class="terminal-command">
-                        # Поиск скрытых файлов
-                        Get-ChildItem "C:\Users\Иван" -Force | Where-Object {$_.Attributes -match "Hidden"}
+                    <div class="code-example">
+                        <pre><code class="bash"># Поиск скрытых файлов
+Get-ChildItem "C:\Users\Иван" -Force | Where-Object {$_.Attributes -match "Hidden"}
                         
                         # Поиск файлов только для чтения
-                        Get-ChildItem "C:\Users\Иван" -Recurse | Where-Object {$_.Attributes -match "ReadOnly"}
+Get-ChildItem "C:\Users\Иван" -Recurse | Where-Object {$_.Attributes -match "ReadOnly"}
                         
                         # Поиск системных файлов
-                        Get-ChildItem "C:\Users\Иван" -Force | Where-Object {$_.Attributes -match "System"}
+Get-ChildItem "C:\Users\Иван" -Force | Where-Object {$_.Attributes -match "System"}
                         
                         # Поиск сжатых файлов
-                        Get-ChildItem "C:\Users\Иван" -Recurse | Where-Object {$_.Attributes -match "Compressed"}
+Get-ChildItem "C:\Users\Иван" -Recurse | Where-Object {$_.Attributes -match "Compressed"}
                     </div>
 
                     <h3>Альтернативные потоки данных (ADS)</h3>
@@ -646,22 +647,22 @@ Set-Acl $folderPath $acl
                         <strong>ADS (Alternate Data Streams):</strong> NTFS поддерживает альтернативные потоки данных, которые позволяют хранить дополнительную информацию в файле без изменения его основного содержимого.
                     </div>
 
-                    <div class="terminal-command">
-                        # Создание файла с альтернативным потоком
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание файла с альтернативным потоком
                         "Основное содержимое" | Out-File "C:\Users\Иван\Documents\файл.txt"
                         "Скрытые данные" | Out-File "C:\Users\Иван\Documents\файл.txt:скрытый_поток"
                         
                         # Чтение альтернативного потока
-                        Get-Content "C:\Users\Иван\Documents\файл.txt:скрытый_поток"
+Get-Content "C:\Users\Иван\Documents\файл.txt:скрытый_поток"
                         
                         # Просмотр всех потоков файла
-                        Get-Item "C:\Users\Иван\Documents\файл.txt" -Stream *
+Get-Item "C:\Users\Иван\Documents\файл.txt" -Stream *
                     </div>
 
                     <h3>Расширенные атрибуты</h3>
-                    <div class="terminal-command">
-                        # Просмотр расширенных атрибутов
-                        Get-Item "C:\Users\Иван\Documents\файл.txt" | Get-Member -MemberType Property
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр расширенных атрибутов
+Get-Item "C:\Users\Иван\Documents\файл.txt" | Get-Member -MemberType Property
                         
                         # Информация о времени создания и изменения
                         $file = Get-Item "C:\Users\Иван\Documents\файл.txt"
@@ -674,7 +675,8 @@ Set-Acl $folderPath $acl
                     <h3>Практические примеры</h3>
                     <div class="code-example">
                         <h4>Скрипт для массового изменения атрибутов</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Функция для установки атрибутов файлам в папке
 function Set-FileAttributes {
     param(
@@ -706,12 +708,12 @@ Set-FileAttributes -Path "C:\Users\Иван\Documents" -Attributes @("ReadOnly",
                     </div>
 
                     <h3>Проверка целостности файлов</h3>
-                    <div class="terminal-command">
-                        # Вычисление хеша файла (MD5)
-                        Get-FileHash "C:\Users\Иван\Documents\файл.txt" -Algorithm MD5
+                    <div class="code-example">
+                        <pre><code class="bash"># Вычисление хеша файла (MD5)
+Get-FileHash "C:\Users\Иван\Documents\файл.txt" -Algorithm MD5
                         
                         # Вычисление хеша файла (SHA256)
-                        Get-FileHash "C:\Users\Иван\Documents\файл.txt" -Algorithm SHA256
+Get-FileHash "C:\Users\Иван\Documents\файл.txt" -Algorithm SHA256
                         
                         # Сравнение хешей двух файлов
                         $hash1 = Get-FileHash "C:\Users\Иван\Documents\файл1.txt" -Algorithm SHA256

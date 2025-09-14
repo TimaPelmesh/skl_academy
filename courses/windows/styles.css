@@ -356,150 +356,16 @@ header {
     padding: 0 20px;
 }
 
-/* Стили для блоков кода - как в курсе Networks */
+/* Стили для блоков кода - как в курсе Python */
 .code-example {
     border-radius: 8px;
     margin: 15px 0;
     max-width: 100%;
     overflow-x: auto;
-    background-color: #282c34; /* Фон как в теме atom-one-dark */
-    border-left: 4px solid #0078d4; /* Синяя полоса слева */
-    position: relative;
-    z-index: 1;
-    padding: 20px;
-    color: #e6e6e6;
 }
 
-/* Стили для текстового содержимого в блоках кода */
-.code-example h4 {
-    color: #61dafb !important;
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
 
-.code-example ul {
-    margin: 10px 0;
-    padding-left: 20px;
-}
 
-.code-example li {
-    color: #e6e6e6;
-    margin: 6px 0;
-    line-height: 1.6;
-}
-
-.code-example p {
-    color: #e6e6e6;
-    margin: 8px 0;
-    line-height: 1.6;
-}
-
-.code-example strong {
-    color: #ffd700;
-    font-weight: 600;
-}
-
-.code-example pre {
-    margin: 0;
-    padding: 0;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-/* Стили для текста в блоках кода */
-.code-example code {
-    background: transparent !important;
-    border-radius: 0;
-    padding: 0;
-}
-
-/* Стили для комментариев и других элементов кода */
-.code-example code .hljs-comment,
-.code-example code .hljs-meta {
-    color: #6a9955 !important;
-    font-style: italic;
-}
-
-.code-example code .hljs-string {
-    color: #ce9178 !important;
-}
-
-.code-example code .hljs-keyword {
-    color: #569cd6 !important;
-    font-weight: 600;
-}
-
-.code-example code .hljs-built_in {
-    color: #4ec9b0 !important;
-}
-
-/* Стили для светлой темы */
-.light-theme .code-example {
-    background-color: #f8f9fa;
-    border-left: 4px solid #0078d4;
-    color: #2d3748;
-}
-
-.light-theme .code-example h4 {
-    color: #106ebe !important;
-}
-
-.light-theme .code-example li,
-.light-theme .code-example p {
-    color: #2d3748;
-}
-
-.light-theme .code-example strong {
-    color: #d97706;
-}
-
-.light-theme .code-example code {
-    color: #333344 !important;
-}
-
-.light-theme .code-example code .hljs-comment,
-.light-theme .code-example code .hljs-meta {
-    color: #008000 !important;
-    font-style: italic;
-}
-
-.light-theme .code-example code .hljs-string {
-    color: #a31515 !important;
-}
-
-.light-theme .code-example code .hljs-keyword {
-    color: #0000ff !important;
-    font-weight: 600;
-}
-
-.light-theme .code-example code .hljs-built_in {
-    color: #267f99 !important;
-}
-
-/* Стили для терминальных команд */
-.terminal-command {
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    margin: 15px 0;
-    max-width: 100%;
-    overflow-x: auto;
-    border-left: 4px solid #10b981; /* Зеленая полоса слева */
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    padding: 15px;
-    color: #e6e6e6;
-    position: relative;
-    z-index: 1;
-}
-
-.light-theme .terminal-command {
-    background-color: #f1f1f1;
-    border-left: 4px solid #059669;
-    color: #333344;
-}
 
 /* Стили для информационных блоков */
 .info {
@@ -762,13 +628,8 @@ body::-webkit-scrollbar-thumb {
     /* Адаптивные стили для блоков кода */
     .code-example pre {
         font-size: 0.85rem;
-        padding: 12px;
     }
     
-    .terminal-command {
-        font-size: 0.85rem;
-        padding: 12px;
-    }
     
     /* Адаптивные стили для информационных блоков */
     .note,
@@ -803,13 +664,8 @@ body::-webkit-scrollbar-thumb {
     /* Адаптивные стили для блоков кода на мобильных */
     .code-example pre {
         font-size: 0.8rem;
-        padding: 10px;
     }
     
-    .terminal-command {
-        font-size: 0.8rem;
-        padding: 10px;
-    }
     
     /* Адаптивные стили для информационных блоков на мобильных */
     .note,

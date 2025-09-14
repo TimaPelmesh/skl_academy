@@ -201,27 +201,29 @@
                     <h3>Владелец файла</h3>
                     <p>Владелец — это пользователь, который создал файл или каталог. Только владелец и root могут изменять права доступа к файлу.</p>
                     
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls -l file.txt
                         # -rw-r--r-- 1 user group 1234 Dec 15 10:30 file.txt
                         #           ↑     ↑
-                        #        владелец группа
+                        #        владелец группа</code></pre>
                     </div>
 
                     <h3>Группа файла</h3>
                     <p>Группа — это набор пользователей, которые имеют одинаковые права доступа к файлу. Пользователь может принадлежать нескольким группам.</p>
 
                     <h3>chown — изменение владельца</h3>
-                    <div class="terminal-command">
-                        chown newuser file.txt      # изменить владельца
-                        chown user:group file.txt   # изменить владельца и группу
-                        chown -R user:group dir/    # рекурсивно для каталога
+                    <div class="code-example">
+                        <pre><code class="bash">chown newuser file.txt      # изменить владельца
+chown user:group file.txt   # изменить владельца и группу
+chown -R user:group dir/    # рекурсивно для каталога</code></pre>
                     </div>
 
                     <h3>chgrp — изменение группы</h3>
-                    <div class="terminal-command">
-                        chgrp newgroup file.txt     # изменить группу
-                        chgrp -R newgroup dir/      # рекурсивно для каталога
+                    <div class="code-example">
+                        <pre><code class="bash">
+chgrp newgroup file.txt     # изменить группу
+chgrp -R newgroup dir/      # рекурсивно для каталога</code></pre>
                     </div>
 
                     <div class="info">
@@ -262,7 +264,8 @@
                     </div>
 
                     <h3>Три категории пользователей</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls -l file.txt
                         # -rw-r--r-- 1 user group 1234 Dec 15 10:30 file.txt
                         #  ↑   ↑   ↑
@@ -272,7 +275,8 @@
                     </div>
 
                     <h3>chmod — изменение прав</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         chmod u+x file.txt          # добавить выполнение для владельца
                         chmod g-w file.txt          # убрать запись для группы
                         chmod o+r file.txt          # добавить чтение для остальных
@@ -298,8 +302,8 @@
                     </div>
 
                     <h3>Комбинирование прав</h3>
-                    <div class="terminal-command">
-                        # Права складываются:
+                    <div class="code-example">
+                        <pre><code class="bash"># Права складываются:
                         # 4 (r) + 2 (w) + 1 (x) = 7 (rwx)
                         # 4 (r) + 0 (w) + 1 (x) = 5 (r-x)
                         # 4 (r) + 2 (w) + 0 (x) = 6 (rw-)
@@ -307,7 +311,8 @@
                     </div>
 
                     <h3>Примеры числовых прав</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         chmod 755 file.txt          # rwxr-xr-x
                         chmod 644 file.txt          # rw-r--r--
                         chmod 600 file.txt          # rw-------
@@ -341,7 +346,8 @@
                     <p>Умение читать и анализировать права доступа — важный навык для работы с Linux.</p>
                     
                     <h3>Чтение вывода ls -l</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls -l
                         # -rwxr-xr-x 1 user group 1234 Dec 15 10:30 script.sh
                         # drwxr-xr-x 2 user group 4096 Dec 15 10:30 directory/
@@ -361,8 +367,8 @@
                     </div>
 
                     <h3>Практические примеры</h3>
-                    <div class="terminal-command">
-                        # Файл с правами 644 (rw-r--r--)
+                    <div class="code-example">
+                        <pre><code class="bash"># Файл с правами 644 (rw-r--r--)
                         -rw-r--r-- 1 user group 1024 Dec 15 10:30 document.txt
                         
                         # Исполняемый файл с правами 755 (rwxr-xr-x)
@@ -376,7 +382,8 @@
                     </div>
 
                     <h3>Проверка прав доступа</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         test -r file.txt && echo "Можно читать" || echo "Нельзя читать"
                         test -w file.txt && echo "Можно писать" || echo "Нельзя писать"
                         test -x file.txt && echo "Можно выполнять" || echo "Нельзя выполнять"

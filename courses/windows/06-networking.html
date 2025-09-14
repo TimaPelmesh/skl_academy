@@ -160,39 +160,39 @@
                     <p>Windows предоставляет мощные инструменты для настройки и управления сетевыми подключениями.</p>
                     
                     <h3>Просмотр сетевых адаптеров</h3>
-                    <div class="terminal-command">
-                        # Просмотр всех сетевых адаптеров
-                        Get-NetAdapter
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр всех сетевых адаптеров
+Get-NetAdapter
                         
                         # Просмотр только активных адаптеров
-                        Get-NetAdapter | Where-Object {$_.Status -eq "Up"}
+Get-NetAdapter | Where-Object {$_.Status -eq "Up"}
                         
                         # Детальная информация об адаптере
-                        Get-NetAdapter -Name "Ethernet" | Format-List *
+Get-NetAdapter -Name "Ethernet" | Format-List *
                     </div>
 
                     <h3>Настройка IP-адресов</h3>
-                    <div class="terminal-command">
-                        # Просмотр IP-конфигурации
-                        Get-NetIPConfiguration
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр IP-конфигурации
+Get-NetIPConfiguration
                         
                         # Настройка статического IP
-                        New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress "192.168.1.100" -PrefixLength 24 -DefaultGateway "192.168.1.1"
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress "192.168.1.100" -PrefixLength 24 -DefaultGateway "192.168.1.1"
                         
                         # Настройка DNS
-                        Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses "8.8.8.8", "8.8.4.4"
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses "8.8.8.8", "8.8.4.4"
                     </div>
 
                     <h3>Управление сетевыми профилями</h3>
-                    <div class="terminal-command">
-                        # Просмотр сетевых профилей
-                        Get-NetConnectionProfile
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр сетевых профилей
+Get-NetConnectionProfile
                         
                         # Изменение профиля на "Частная"
-                        Set-NetConnectionProfile -InterfaceAlias "Ethernet" -NetworkCategory Private
+Set-NetConnectionProfile -InterfaceAlias "Ethernet" -NetworkCategory Private
                         
                         # Изменение профиля на "Публичная"
-                        Set-NetConnectionProfile -InterfaceAlias "Ethernet" -NetworkCategory Public
+Set-NetConnectionProfile -InterfaceAlias "Ethernet" -NetworkCategory Public
                     </div>
                 </div>
             </section>
@@ -204,24 +204,24 @@
                     <p>Брандмауэр Windows защищает систему от несанкционированного сетевого доступа.</p>
                     
                     <h3>Управление брандмауэром</h3>
-                    <div class="terminal-command">
-                        # Просмотр статуса брандмауэра
-                        Get-NetFirewallProfile
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр статуса брандмауэра
+Get-NetFirewallProfile
                         
                         # Включение брандмауэра
-                        Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
                         
                         # Отключение брандмауэра
-                        Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
                     </div>
 
                     <h3>Управление правилами</h3>
-                    <div class="terminal-command">
-                        # Просмотр всех правил
-                        Get-NetFirewallRule
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр всех правил
+Get-NetFirewallRule
                         
                         # Создание правила для входящих соединений
-                        New-NetFirewallRule -DisplayName "My App" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
+New-NetFirewallRule -DisplayName "My App" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
                         
                         # Удаление правила
                         Remove-NetFirewallRule -DisplayName "My App"
@@ -236,17 +236,17 @@
                     <p>Windows поддерживает различные методы удаленного доступа для администрирования и работы.</p>
                     
                     <h3>Remote Desktop</h3>
-                    <div class="terminal-command">
-                        # Включение Remote Desktop
-                        Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+                    <div class="code-example">
+                        <pre><code class="bash"># Включение Remote Desktop
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
                         
                         # Настройка NLA (Network Level Authentication)
-                        Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 1
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 1
                     </div>
 
                     <h3>PowerShell Remoting</h3>
-                    <div class="terminal-command">
-                        # Включение PowerShell Remoting
+                    <div class="code-example">
+                        <pre><code class="bash"># Включение PowerShell Remoting
                         Enable-PSRemoting -Force
                         
                         # Подключение к удаленному компьютеру
@@ -265,8 +265,8 @@
                     <p>Диагностика сетевых проблем включает проверку подключения, анализ трафика и мониторинг производительности.</p>
                     
                     <h3>Базовые команды диагностики</h3>
-                    <div class="terminal-command">
-                        # Проверка подключения
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка подключения
                         Test-NetConnection -ComputerName "google.com" -Port 80
                         
                         # Трассировка маршрута
@@ -277,15 +277,15 @@
                     </div>
 
                     <h3>Мониторинг сети</h3>
-                    <div class="terminal-command">
-                        # Просмотр активных соединений
-                        Get-NetTCPConnection
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр активных соединений
+Get-NetTCPConnection
                         
                         # Мониторинг сетевого трафика
-                        Get-Counter "\Network Interface(*)\Bytes Total/sec"
+Get-Counter "\Network Interface(*)\Bytes Total/sec"
                         
                         # Просмотр статистики адаптера
-                        Get-NetAdapterStatistics -Name "Ethernet"
+Get-NetAdapterStatistics -Name "Ethernet"
                     </div>
                 </div>
             </section>

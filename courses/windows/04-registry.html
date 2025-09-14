@@ -186,8 +186,8 @@
                     </div>
 
                     <h3>Открытие редактора реестра</h3>
-                    <div class="terminal-command">
-                        # Открытие редактора реестра через PowerShell
+                    <div class="code-example">
+                        <pre><code class="bash"># Открытие редактора реестра через PowerShell
                         regedit
                         
                         # Или через команду Run
@@ -233,15 +233,15 @@
                     </div>
 
                     <h3>Просмотр структуры в PowerShell</h3>
-                    <div class="terminal-command">
-                        # Просмотр кустов реестра
-                        Get-ChildItem HKCU:\
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр кустов реестра
+Get-ChildItem HKCU:\
                         
                         # Просмотр содержимого конкретного раздела
-                        Get-ChildItem "HKCU:\Software"
+Get-ChildItem "HKCU:\Software"
                         
                         # Просмотр значений в ключе
-                        Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer"
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer"
                     </div>
 
                     <h3>Важные разделы реестра</h3>
@@ -249,15 +249,15 @@
                         <strong>Системные настройки:</strong> Большинство системных настроек Windows хранится в разделе HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion.
                     </div>
 
-                    <div class="terminal-command">
-                        # Настройки автозагрузки
-                        Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+                    <div class="code-example">
+                        <pre><code class="bash"># Настройки автозагрузки
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
                         
                         # Настройки проводника
-                        Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
                         
                         # Настройки рабочего стола
-                        Get-ItemProperty "HKCU:\Control Panel\Desktop"
+Get-ItemProperty "HKCU:\Control Panel\Desktop"
                     </div>
                 </div>
             </section>
@@ -269,36 +269,36 @@
                     <p>PowerShell предоставляет мощные инструменты для работы с реестром, позволяя читать, создавать, изменять и удалять ключи и значения.</p>
                     
                     <h3>Чтение значений реестра</h3>
-                    <div class="terminal-command">
-                        # Чтение значения из реестра
-                        Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray"
+                    <div class="code-example">
+                        <pre><code class="bash"># Чтение значения из реестра
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray"
                         
                         # Чтение всех значений в ключе
-                        Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer"
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer"
                         
                         # Проверка существования ключа
                         Test-Path "HKCU:\Software\MyApp"
                     </div>
 
                     <h3>Создание ключей и значений</h3>
-                    <div class="terminal-command">
-                        # Создание нового ключа
-                        New-Item -Path "HKCU:\Software\MyApp" -Force
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание нового ключа
+New-Item -Path "HKCU:\Software\MyApp" -Force
                         
                         # Создание значения в ключе
-                        New-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting1" -Value "TestValue" -PropertyType String
+New-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting1" -Value "TestValue" -PropertyType String
                         
                         # Создание DWORD значения
-                        New-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting2" -Value 1 -PropertyType DWord
+New-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting2" -Value 1 -PropertyType DWord
                     </div>
 
                     <h3>Изменение значений</h3>
-                    <div class="terminal-command">
-                        # Изменение существующего значения
-                        Set-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting1" -Value "NewValue"
+                    <div class="code-example">
+                        <pre><code class="bash"># Изменение существующего значения
+Set-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting1" -Value "NewValue"
                         
                         # Изменение типа значения
-                        Set-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting2" -Value 0 -Type DWord
+Set-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting2" -Value 0 -Type DWord
                     </div>
 
                     <h3>Удаление ключей и значений</h3>
@@ -306,8 +306,8 @@
                         <strong>Осторожно:</strong> Удаление системных ключей может привести к нестабильной работе системы. Всегда проверяйте, что вы удаляете правильные ключи.
                     </div>
 
-                    <div class="terminal-command">
-                        # Удаление значения
+                    <div class="code-example">
+                        <pre><code class="bash"># Удаление значения
                         Remove-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting1"
                         
                         # Удаление ключа (включая все подключи)
@@ -317,7 +317,8 @@
                     <h3>Практические примеры</h3>
                     <div class="code-example">
                         <h4>Отключение автозапуска CD/DVD</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Отключение автозапуска для всех дисков
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoDriveTypeAutoRun" -Value 255 -Type DWord
 
@@ -328,7 +329,8 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
 
                     <div class="code-example">
                         <h4>Настройка отображения скрытых файлов</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Показать скрытые файлы
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1 -Type DWord
 
@@ -346,8 +348,8 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
                     <p>Создание резервных копий реестра критически важно перед внесением любых изменений, так как повреждение реестра может сделать систему неработоспособной.</p>
                     
                     <h3>Экспорт реестра</h3>
-                    <div class="terminal-command">
-                        # Экспорт всего реестра
+                    <div class="code-example">
+                        <pre><code class="bash"># Экспорт всего реестра
                         reg export HKLM "C:\Backup\HKLM_backup.reg"
                         reg export HKCU "C:\Backup\HKCU_backup.reg"
                         
@@ -356,12 +358,12 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
                     </div>
 
                     <h3>Экспорт через PowerShell</h3>
-                    <div class="terminal-command">
-                        # Создание папки для бэкапа
-                        New-Item -ItemType Directory -Path "C:\RegistryBackup" -Force
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание папки для бэкапа
+New-Item -ItemType Directory -Path "C:\RegistryBackup" -Force
                         
                         # Экспорт через PowerShell
-                        Get-ChildItem "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" | Export-Csv "C:\RegistryBackup\explorer_settings.csv"
+Get-ChildItem "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" | Export-Csv "C:\RegistryBackup\explorer_settings.csv"
                     </div>
 
                     <h3>Восстановление реестра</h3>
@@ -369,20 +371,21 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
                         <strong>Восстановление:</strong> Восстановление реестра из .reg файла перезапишет существующие значения. Убедитесь, что у вас есть актуальная резервная копия.
                     </div>
 
-                    <div class="terminal-command">
-                        # Восстановление из .reg файла
+                    <div class="code-example">
+                        <pre><code class="bash"># Восстановление из .reg файла
                         reg import "C:\Backup\HKCU_backup.reg"
                         
                         # Восстановление через PowerShell
                         Import-Csv "C:\RegistryBackup\explorer_settings.csv" | ForEach-Object {
-                            Set-ItemProperty -Path $_.PSPath -Name $_.Property -Value $_.Value
+    Set-ItemProperty -Path $_.PSPath -Name $_.Property -Value $_.Value
                         }
                     </div>
 
                     <h3>Автоматическое резервное копирование</h3>
                     <div class="code-example">
                         <h4>Скрипт для автоматического бэкапа</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Функция для создания бэкапа реестра
 function Backup-Registry {
     param(
@@ -412,12 +415,12 @@ Backup-Registry
                         <strong>Системные точки восстановления:</strong> Windows автоматически создает точки восстановления, которые включают состояние реестра. Это самый безопасный способ восстановления системы.
                     </div>
 
-                    <div class="terminal-command">
-                        # Создание точки восстановления
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание точки восстановления
                         Checkpoint-Computer -Description "Ручная точка восстановления" -RestorePointType "MODIFY_SETTINGS"
                         
                         # Просмотр доступных точек восстановления
-                        Get-ComputerRestorePoint
+Get-ComputerRestorePoint
                     </div>
 
                     <div class="note">

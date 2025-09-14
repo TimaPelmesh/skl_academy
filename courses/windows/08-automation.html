@@ -162,7 +162,8 @@
                     <h3>Создание пакетного файла</h3>
                     <div class="code-example">
                         <h4>Пример простого .bat файла</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 @echo off
 echo Привет, мир!
 pause
@@ -170,8 +171,8 @@ pause
                     </div>
 
                     <h3>Основные команды</h3>
-                    <div class="terminal-command">
-                        # Комментарии
+                    <div class="code-example">
+                        <pre><code class="bash"># Комментарии
                         REM Это комментарий
                         
                         # Вывод текста
@@ -190,7 +191,8 @@ pause
                     <h3>Переменные и параметры</h3>
                     <div class="code-example">
                         <h4>Использование переменных</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 @echo off
 set MY_VAR=Привет
 echo %MY_VAR%
@@ -213,7 +215,8 @@ pause
                     <h3>Создание скрипта</h3>
                     <div class="code-example">
                         <h4>Пример PowerShell скрипта</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Скрипт для создания резервной копии
 param(
     [string]$SourcePath = "C:\Users\Иван\Documents",
@@ -233,8 +236,8 @@ Write-Host "Резервная копия создана в: $BackupPath"
                     </div>
 
                     <h3>Выполнение скриптов</h3>
-                    <div class="terminal-command">
-                        # Выполнение скрипта
+                    <div class="code-example">
+                        <pre><code class="bash"># Выполнение скрипта
                         .\MyScript.ps1
                         
                         # Выполнение с параметрами
@@ -247,7 +250,8 @@ Write-Host "Резервная копия создана в: $BackupPath"
                     <h3>Функции и модули</h3>
                     <div class="code-example">
                         <h4>Создание функции</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 function Get-SystemInfo {
     param([string]$ComputerName = "localhost")
     
@@ -270,8 +274,8 @@ Write-Host "Память: $($systemInfo.TotalPhysicalMemory / 1GB) GB"
                     <p>Планировщик задач Windows позволяет автоматически запускать программы и скрипты по расписанию.</p>
                     
                     <h3>Создание задачи через PowerShell</h3>
-                    <div class="terminal-command">
-                        # Создание простой задачи
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание простой задачи
                         $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-File C:\Scripts\MyScript.ps1"
                         $trigger = New-ScheduledTaskTrigger -Daily -At "09:00"
                         $settings = New-ScheduledTaskSettingsSet
@@ -280,9 +284,9 @@ Write-Host "Память: $($systemInfo.TotalPhysicalMemory / 1GB) GB"
                     </div>
 
                     <h3>Управление задачами</h3>
-                    <div class="terminal-command">
-                        # Просмотр всех задач
-                        Get-ScheduledTask
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр всех задач
+Get-ScheduledTask
                         
                         # Запуск задачи
                         Start-ScheduledTask -TaskName "МояЗадача"
@@ -308,12 +312,12 @@ Write-Host "Память: $($systemInfo.TotalPhysicalMemory / 1GB) GB"
                     <p>Продвинутые техники автоматизации включают работу с WMI, COM-объектами и удаленным выполнением.</p>
                     
                     <h3>Работа с WMI</h3>
-                    <div class="terminal-command">
-                        # Получение информации о системе
-                        Get-WmiObject -Class Win32_ComputerSystem
+                    <div class="code-example">
+                        <pre><code class="bash"># Получение информации о системе
+Get-WmiObject -Class Win32_ComputerSystem
                         
                         # Мониторинг процессов
-                        Get-WmiObject -Class Win32_Process | Where-Object {$_.Name -like "*notepad*"}
+Get-WmiObject -Class Win32_Process | Where-Object {$_.Name -like "*notepad*"}
                         
                         # Управление службами через WMI
                         $service = Get-WmiObject -Class Win32_Service -Filter "Name='Spooler'"
@@ -321,8 +325,8 @@ Write-Host "Память: $($systemInfo.TotalPhysicalMemory / 1GB) GB"
                     </div>
 
                     <h3>COM-объекты</h3>
-                    <div class="terminal-command">
-                        # Работа с Excel через COM
+                    <div class="code-example">
+                        <pre><code class="bash"># Работа с Excel через COM
                         $excel = New-Object -ComObject Excel.Application
                         $excel.Visible = $true
                         $workbook = $excel.Workbooks.Add()
@@ -332,8 +336,8 @@ Write-Host "Память: $($systemInfo.TotalPhysicalMemory / 1GB) GB"
                     </div>
 
                     <h3>Удаленное выполнение</h3>
-                    <div class="terminal-command">
-                        # Выполнение команды на удаленном компьютере
+                    <div class="code-example">
+                        <pre><code class="bash"># Выполнение команды на удаленном компьютере
                         Invoke-Command -ComputerName "RemotePC" -ScriptBlock {Get-Process}
                         
                         # Создание постоянного сеанса

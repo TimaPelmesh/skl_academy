@@ -223,8 +223,8 @@
                     <h3>Иерархия процессов</h3>
                     <p>Все процессы в Linux образуют дерево. Корневой процесс — <code>init</code> (PID 1), который создается при загрузке системы.</p>
                     
-                    <div class="terminal-command">
-                        # Просмотр дерева процессов
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр дерева процессов
                         pstree
                         # или
                         ps auxf
@@ -243,7 +243,8 @@
                     <p>В Linux есть несколько команд для просмотра информации о процессах.</p>
                     
                     <h3>ps — список процессов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ps                    # процессы текущего пользователя
                         ps aux                # все процессы с подробной информацией
                         ps -ef                # все процессы в формате BSD
@@ -251,7 +252,8 @@
                     </div>
 
                     <h3>Расшифровка вывода ps aux</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
                         root         1  0.0  0.1  78008  9004 ?        Ss   Dec15   0:01 /sbin/init
                         user      1234  2.5  1.2 123456 45678 pts/0    R+   10:30   0:05 firefox
@@ -270,7 +272,8 @@
                     </div>
 
                     <h3>top — интерактивный монитор процессов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         top                   # запустить top
                         # Управление:
                         # q - выход
@@ -280,7 +283,8 @@
                     </div>
 
                     <h3>htop — улучшенный top</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         htop                  # запустить htop (если установлен)
                         # Более удобный интерфейс с цветовой подсветкой
                     </div>
@@ -298,14 +302,16 @@
                     <p>Управление процессами включает запуск, остановку, приостановку и завершение процессов.</p>
                     
                     <h3>Запуск процессов в фоне</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         command &             # запустить команду в фоне
                         nohup command &       # запустить команду в фоне, игнорируя SIGHUP
                         command > output.log 2>&1 &  # запустить с перенаправлением вывода
                     </div>
 
                     <h3>Управление фоновыми задачами</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         jobs                  # показать фоновые задачи
                         fg %1                 # вернуть задачу 1 на передний план
                         bg %1                 # продолжить задачу 1 в фоне
@@ -313,7 +319,8 @@
                     </div>
 
                     <h3>Завершение процессов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         kill PID              # отправить SIGTERM (мягкое завершение)
                         kill -9 PID           # отправить SIGKILL (принудительное завершение)
                         killall firefox       # завершить все процессы firefox
@@ -345,7 +352,8 @@
                     <p>Мониторинг ресурсов системы помогает понять, как работает Linux и где могут быть проблемы.</p>
                     
                     <h3>free — информация о памяти</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         free                  # показать использование памяти
                         free -h               # в удобном формате
                         free -m               # в мегабайтах
@@ -353,7 +361,8 @@
                     </div>
 
                     <h3>df — использование дискового пространства</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         df                   # использование дисков
                         df -h                # в удобном формате
                         df -T                # с типами файловых систем
@@ -361,7 +370,8 @@
                     </div>
 
                     <h3>uptime — время работы системы</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         uptime               # время работы и нагрузка
                         # Вывод: 10:30:45 up 2 days, 3:15, 2 users, load average: 0.52, 0.58, 0.59
                         #        ↑           ↑        ↑        ↑              ↑
@@ -370,13 +380,15 @@
                     </div>
 
                     <h3>iostat — статистика ввода/вывода</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         iostat               # статистика I/O (если установлен)
                         iostat -x 2          # каждые 2 секунды
                     </div>
 
                     <h3>Полезные команды мониторинга</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         vmstat 1             # статистика виртуальной памяти
                         sar -u 1 10          # статистика CPU (если установлен)
                         lscpu                # информация о процессоре

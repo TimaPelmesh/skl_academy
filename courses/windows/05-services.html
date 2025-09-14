@@ -178,15 +178,15 @@
                     </div>
 
                     <h3>Просмотр служб в PowerShell</h3>
-                    <div class="terminal-command">
-                        # Просмотр всех служб
-                        Get-Service
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр всех служб
+Get-Service
                         
                         # Просмотр запущенных служб
-                        Get-Service | Where-Object {$_.Status -eq "Running"}
+Get-Service | Where-Object {$_.Status -eq "Running"}
                         
                         # Просмотр остановленных служб
-                        Get-Service | Where-Object {$_.Status -eq "Stopped"}
+Get-Service | Where-Object {$_.Status -eq "Stopped"}
                     </div>
                 </div>
             </section>
@@ -198,8 +198,8 @@
                     <p>PowerShell предоставляет полный набор команд для управления службами Windows.</p>
                     
                     <h3>Запуск и остановка служб</h3>
-                    <div class="terminal-command">
-                        # Запуск службы
+                    <div class="code-example">
+                        <pre><code class="bash"># Запуск службы
                         Start-Service -Name "Spooler"
                         
                         # Остановка службы
@@ -213,26 +213,26 @@
                     </div>
 
                     <h3>Настройка служб</h3>
-                    <div class="terminal-command">
-                        # Изменение типа запуска службы
-                        Set-Service -Name "Spooler" -StartupType Automatic
-                        Set-Service -Name "Spooler" -StartupType Manual
-                        Set-Service -Name "Spooler" -StartupType Disabled
+                    <div class="code-example">
+                        <pre><code class="bash"># Изменение типа запуска службы
+Set-Service -Name "Spooler" -StartupType Automatic
+Set-Service -Name "Spooler" -StartupType Manual
+Set-Service -Name "Spooler" -StartupType Disabled
                         
                         # Просмотр настроек службы
-                        Get-Service -Name "Spooler" | Select-Object Name, Status, StartType
+Get-Service -Name "Spooler" | Select-Object Name, Status, StartType
                     </div>
 
                     <h3>Фильтрация служб</h3>
-                    <div class="terminal-command">
-                        # Поиск служб по имени
-                        Get-Service -Name "*spool*"
+                    <div class="code-example">
+                        <pre><code class="bash"># Поиск служб по имени
+Get-Service -Name "*spool*"
                         
                         # Фильтрация по статусу
-                        Get-Service | Where-Object {$_.Status -eq "Running" -and $_.StartType -eq "Automatic"}
+Get-Service | Where-Object {$_.Status -eq "Running" -and $_.StartType -eq "Automatic"}
                         
                         # Сортировка служб
-                        Get-Service | Sort-Object Status, Name
+Get-Service | Sort-Object Status, Name
                     </div>
                 </div>
             </section>
@@ -244,30 +244,30 @@
                     <p>Диагностика проблем со службами включает анализ журналов событий, проверку зависимостей и мониторинг производительности.</p>
                     
                     <h3>Анализ зависимостей</h3>
-                    <div class="terminal-command">
-                        # Просмотр зависимостей службы
-                        Get-Service -Name "Spooler" -DependentServices
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр зависимостей службы
+Get-Service -Name "Spooler" -DependentServices
                         
                         # Просмотр служб, от которых зависит данная служба
-                        Get-Service -Name "Spooler" -RequiredServices
+Get-Service -Name "Spooler" -RequiredServices
                     </div>
 
                     <h3>Просмотр журналов событий</h3>
-                    <div class="terminal-command">
-                        # Просмотр событий службы
-                        Get-WinEvent -FilterHashtable @{LogName='System'; ID=7034} | Where-Object {$_.Message -like "*Spooler*"}
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр событий службы
+Get-WinEvent -FilterHashtable @{LogName='System'; ID=7034} | Where-Object {$_.Message -like "*Spooler*"}
                         
                         # Просмотр ошибок служб
-                        Get-WinEvent -FilterHashtable @{LogName='System'; Level=2} | Where-Object {$_.Message -like "*service*"}
+Get-WinEvent -FilterHashtable @{LogName='System'; Level=2} | Where-Object {$_.Message -like "*service*"}
                     </div>
 
                     <h3>Мониторинг производительности</h3>
-                    <div class="terminal-command">
-                        # Просмотр процессов службы
-                        Get-Process | Where-Object {$_.ProcessName -like "*spool*"}
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр процессов службы
+Get-Process | Where-Object {$_.ProcessName -like "*spool*"}
                         
                         # Мониторинг использования ресурсов
-                        Get-Counter "\Process(spoolsv)\% Processor Time"
+Get-Counter "\Process(spoolsv)\% Processor Time"
                     </div>
                 </div>
             </section>
@@ -279,8 +279,8 @@
                     <p>Создание собственных служб позволяет автоматизировать выполнение задач в фоновом режиме.</p>
                     
                     <h3>Создание службы через sc.exe</h3>
-                    <div class="terminal-command">
-                        # Создание службы
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание службы
                         sc create "MyService" binPath= "C:\MyApp\MyService.exe" start= auto
                         
                         # Удаление службы
@@ -293,7 +293,8 @@
                     <h3>Создание службы через PowerShell</h3>
                     <div class="code-example">
                         <h4>Пример создания службы</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Создание службы
 New-Service -Name "MyPowerShellService" -BinaryPathName "powershell.exe -File C:\Scripts\MyService.ps1" -StartupType Automatic -DisplayName "My PowerShell Service"
 
@@ -303,9 +304,9 @@ Remove-Service -Name "MyPowerShellService"
                     </div>
 
                     <h3>Управление службами через WMI</h3>
-                    <div class="terminal-command">
-                        # Просмотр служб через WMI
-                        Get-WmiObject -Class Win32_Service | Where-Object {$_.Name -like "*spool*"}
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр служб через WMI
+Get-WmiObject -Class Win32_Service | Where-Object {$_.Name -like "*spool*"}
                         
                         # Запуск службы через WMI
                         $service = Get-WmiObject -Class Win32_Service -Filter "Name='Spooler'"

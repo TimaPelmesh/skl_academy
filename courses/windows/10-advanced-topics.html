@@ -157,9 +157,9 @@
                     <p>Hyper-V — это технология виртуализации Microsoft, позволяющая создавать и управлять виртуальными машинами.</p>
                     
                     <h3>Установка Hyper-V</h3>
-                    <div class="terminal-command">
-                        # Проверка поддержки Hyper-V
-                        Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка поддержки Hyper-V
+Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
                         
                         # Включение Hyper-V
                         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
@@ -169,12 +169,12 @@
                     </div>
 
                     <h3>Управление виртуальными машинами</h3>
-                    <div class="terminal-command">
-                        # Просмотр виртуальных машин
-                        Get-VM
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр виртуальных машин
+Get-VM
                         
                         # Создание виртуальной машины
-                        New-VM -Name "TestVM" -MemoryStartupBytes 2GB -NewVHDPath "C:\VMs\TestVM.vhdx" -NewVHDSizeBytes 50GB
+New-VM -Name "TestVM" -MemoryStartupBytes 2GB -NewVHDPath "C:\VMs\TestVM.vhdx" -NewVHDSizeBytes 50GB
                         
                         # Запуск виртуальной машины
                         Start-VM -Name "TestVM"
@@ -184,15 +184,15 @@
                     </div>
 
                     <h3>Управление виртуальными дисками</h3>
-                    <div class="terminal-command">
-                        # Создание виртуального диска
-                        New-VHD -Path "C:\VMs\NewDisk.vhdx" -SizeBytes 20GB -Dynamic
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание виртуального диска
+New-VHD -Path "C:\VMs\NewDisk.vhdx" -SizeBytes 20GB -Dynamic
                         
                         # Подключение диска к виртуальной машине
                         Add-VMHardDiskDrive -VMName "TestVM" -Path "C:\VMs\NewDisk.vhdx"
                         
                         # Просмотр дисков виртуальной машины
-                        Get-VMHardDiskDrive -VMName "TestVM"
+Get-VMHardDiskDrive -VMName "TestVM"
                     </div>
                 </div>
             </section>
@@ -204,8 +204,8 @@
                     <p>WSL позволяет запускать Linux-окружение непосредственно в Windows без виртуализации.</p>
                     
                     <h3>Установка WSL</h3>
-                    <div class="terminal-command">
-                        # Включение WSL
+                    <div class="code-example">
+                        <pre><code class="bash"># Включение WSL
                         dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
                         
                         # Включение платформы виртуальных машин
@@ -216,8 +216,8 @@
                     </div>
 
                     <h3>Управление дистрибутивами</h3>
-                    <div class="terminal-command">
-                        # Просмотр установленных дистрибутивов
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр установленных дистрибутивов
                         wsl --list --verbose
                         
                         # Установка дистрибутива из Microsoft Store
@@ -231,8 +231,8 @@
                     </div>
 
                     <h3>Работа с файлами</h3>
-                    <div class="terminal-command">
-                        # Доступ к файлам Linux из Windows
+                    <div class="code-example">
+                        <pre><code class="bash"># Доступ к файлам Linux из Windows
                         # Файлы находятся в: \\wsl$\Ubuntu\home\username\
                         
                         # Доступ к файлам Windows из Linux
@@ -251,8 +251,8 @@
                     <p>Контейнеры Windows позволяют упаковывать приложения с их зависимостями для развертывания в изолированной среде.</p>
                     
                     <h3>Установка Docker Desktop</h3>
-                    <div class="terminal-command">
-                        # Скачивание Docker Desktop
+                    <div class="code-example">
+                        <pre><code class="bash"># Скачивание Docker Desktop
                         # Перейдите на https://www.docker.com/products/docker-desktop
                         
                         # Проверка установки Docker
@@ -263,8 +263,8 @@
                     </div>
 
                     <h3>Работа с контейнерами</h3>
-                    <div class="terminal-command">
-                        # Просмотр образов
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр образов
                         docker images
                         
                         # Запуск контейнера Windows
@@ -280,7 +280,8 @@
                     <h3>Создание Dockerfile</h3>
                     <div class="code-example">
                         <h4>Пример Dockerfile для Windows</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
 # Использование базового образа Windows
 FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
@@ -304,20 +305,20 @@ CMD ["MyApp.exe"]
                     <p>Windows предоставляет множество возможностей для интеграции с облачными сервисами Microsoft Azure.</p>
                     
                     <h3>Azure PowerShell</h3>
-                    <div class="terminal-command">
-                        # Установка модуля Azure PowerShell
+                    <div class="code-example">
+                        <pre><code class="bash"># Установка модуля Azure PowerShell
                         Install-Module -Name Az -Force -AllowClobber
                         
                         # Подключение к Azure
                         Connect-AzAccount
                         
                         # Просмотр подписок
-                        Get-AzSubscription
+Get-AzSubscription
                     </div>
 
                     <h3>Azure CLI</h3>
-                    <div class="terminal-command">
-                        # Установка Azure CLI
+                    <div class="code-example">
+                        <pre><code class="bash"># Установка Azure CLI
                         winget install Microsoft.AzureCLI
                         
                         # Вход в Azure
@@ -328,24 +329,24 @@ CMD ["MyApp.exe"]
                     </div>
 
                     <h3>Azure Active Directory</h3>
-                    <div class="terminal-command">
-                        # Установка модуля Azure AD
+                    <div class="code-example">
+                        <pre><code class="bash"># Установка модуля Azure AD
                         Install-Module -Name AzureAD
                         
                         # Подключение к Azure AD
                         Connect-AzureAD
                         
                         # Просмотр пользователей
-                        Get-AzureADUser
+Get-AzureADUser
                     </div>
 
                     <h3>OneDrive интеграция</h3>
-                    <div class="terminal-command">
-                        # Синхронизация файлов OneDrive
+                    <div class="code-example">
+                        <pre><code class="bash"># Синхронизация файлов OneDrive
                         # OneDrive автоматически синхронизирует файлы
                         
                         # Просмотр статуса синхронизации
-                        Get-Process -Name "OneDrive" -ErrorAction SilentlyContinue
+Get-Process -Name "OneDrive" -ErrorAction SilentlyContinue
                         
                         # Управление синхронизацией через PowerShell
                         # (требует дополнительных модулей)

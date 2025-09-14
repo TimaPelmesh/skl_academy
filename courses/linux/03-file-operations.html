@@ -199,28 +199,30 @@
                     <p>В Linux есть несколько способов создания файлов и каталогов. Рассмотрим основные команды.</p>
                     
                     <h3>mkdir — создание каталогов</h3>
-                    <div class="terminal-command">
-                        mkdir documents              # создать каталог documents
-                        mkdir -p projects/web        # создать вложенные каталоги
-                        mkdir dir1 dir2 dir3         # создать несколько каталогов
+                    <div class="code-example">
+                        <pre><code class="bash">mkdir documents              # создать каталог documents
+mkdir -p projects/web        # создать вложенные каталоги
+mkdir dir1 dir2 dir3         # создать несколько каталогов</code></pre>
                     </div>
 
                     <h3>touch — создание файлов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         touch file.txt              # создать пустой файл
                         touch file1.txt file2.txt   # создать несколько файлов
                         touch -a file.txt           # обновить время доступа
-                        touch -m file.txt           # обновить время модификации
+                        touch -m file.txt           # обновить время модификации</code></pre>
                     </div>
 
                     <h3>Создание структуры каталогов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         mkdir -p project/{src,doc,test}
                         # Создаст:
                         # project/
                         # ├── src/
                         # ├── doc/
-                        # └── test/
+                        # └── test/</code></pre>
                     </div>
 
                     <div class="info">
@@ -236,27 +238,30 @@
                     <p>Основные операции с файлами и каталогами в Linux.</p>
                     
                     <h3>cp — копирование</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         cp file.txt backup.txt      # копировать файл
                         cp -r dir1 dir2             # копировать каталог рекурсивно
                         cp -v file.txt backup/      # копировать с выводом процесса
-                        cp -u file.txt backup/      # копировать только если файл новее
+                        cp -u file.txt backup/      # копировать только если файл новее</code></pre>
                     </div>
 
                     <h3>mv — перемещение и переименование</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         mv file.txt documents/      # переместить файл
                         mv oldname.txt newname.txt  # переименовать файл
                         mv dir1 dir2                # переместить каталог
-                        mv *.txt documents/         # переместить все .txt файлы
+                        mv *.txt documents/         # переместить все .txt файлы</code></pre>
                     </div>
 
                     <h3>rm — удаление</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         rm file.txt                 # удалить файл
                         rm -r directory/            # удалить каталог рекурсивно
                         rm -f file.txt              # принудительное удаление
-                        rm -rf directory/           # принудительное удаление каталога
+                        rm -rf directory/           # принудительное удаление каталога</code></pre>
                     </div>
 
                     <div class="warning">
@@ -264,9 +269,10 @@
                     </div>
 
                     <h3>rmdir — удаление пустых каталогов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         rmdir empty_dir             # удалить пустой каталог
-                        rmdir dir1 dir2 dir3        # удалить несколько пустых каталогов
+                        rmdir dir1 dir2 dir3        # удалить несколько пустых каталогов</code></pre>
                     </div>
                 </div>
             </section>
@@ -278,16 +284,17 @@
                     <p>Различные способы просмотра содержимого файлов в Linux.</p>
                     
                     <h3>cat — вывод всего файла</h3>
-                    <div class="terminal-command">
-                        cat file.txt                # показать весь файл
-                        cat file1.txt file2.txt     # показать несколько файлов
-                        cat -n file.txt             # показать с номерами строк
+                    <div class="code-example">
+                        <pre><code class="bash">cat file.txt                # показать весь файл
+cat file1.txt file2.txt     # показать несколько файлов
+cat -n file.txt             # показать с номерами строк</code></pre>
                     </div>
 
                     <h3>less и more — постраничный просмотр</h3>
-                    <div class="terminal-command">
-                        less file.txt               # постраничный просмотр (рекомендуется)
-                        more file.txt               # постраничный просмотр (старый)
+                    <div class="code-example">
+                        <pre><code class="bash">
+less file.txt               # постраничный просмотр (рекомендуется)
+more file.txt               # постраничный просмотр (старый)</code></pre>
                     </div>
 
                     <div class="info">
@@ -295,20 +302,22 @@
                     </div>
 
                     <h3>head и tail — начало и конец файла</h3>
-                    <div class="terminal-command">
-                        head file.txt               # первые 10 строк
-                        head -n 20 file.txt         # первые 20 строк
-                        tail file.txt               # последние 10 строк
-                        tail -n 5 file.txt          # последние 5 строк
-                        tail -f logfile.txt         # следить за изменениями в реальном времени
+                    <div class="code-example">
+                        <pre><code class="bash">
+head file.txt               # первые 10 строк
+head -n 20 file.txt         # первые 20 строк
+tail file.txt               # последние 10 строк
+tail -n 5 file.txt          # последние 5 строк
+tail -f logfile.txt         # следить за изменениями в реальном времени</code></pre>
                     </div>
 
                     <h3>wc — подсчет строк, слов, символов</h3>
-                    <div class="terminal-command">
-                        wc file.txt                 # строки, слова, символы
-                        wc -l file.txt              # только строки
-                        wc -w file.txt              # только слова
-                        wc -c file.txt              # только символы
+                    <div class="code-example">
+                        <pre><code class="bash">
+wc file.txt                 # строки, слова, символы
+wc -l file.txt              # только строки
+wc -w file.txt              # только слова
+wc -c file.txt              # только символы</code></pre>
                     </div>
                 </div>
             </section>
@@ -320,9 +329,10 @@
                     <p>В Linux есть множество текстовых редакторов. Рассмотрим два самых популярных.</p>
                     
                     <h3>nano — простой редактор</h3>
-                    <div class="terminal-command">
-                        nano file.txt               # открыть файл в nano
-                        nano                        # создать новый файл
+                    <div class="code-example">
+                        <pre><code class="bash">
+nano file.txt               # открыть файл в nano
+nano                        # создать новый файл</code></pre>
                     </div>
 
                     <div class="code-example">
@@ -337,9 +347,10 @@
                     </div>
 
                     <h3>vim — мощный редактор</h3>
-                    <div class="terminal-command">
-                        vim file.txt                # открыть файл в vim
-                        vim                         # создать новый файл
+                    <div class="code-example">
+                        <pre><code class="bash">
+vim file.txt                # открыть файл в vim
+vim                         # создать новый файл</code></pre>
                     </div>
 
                     <div class="code-example">

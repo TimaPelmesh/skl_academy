@@ -229,8 +229,8 @@
                     <p>PowerShell доступен в нескольких вариантах установки в зависимости от ваших потребностей и версии Windows.</p>
                     
                     <h3>Проверка текущей версии</h3>
-                    <div class="terminal-command">
-                        # Проверка версии PowerShell
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка версии PowerShell
                         $PSVersionTable
                         
                         # Или более кратко:
@@ -263,20 +263,21 @@
 
                     <div class="code-example">
                         <h4>Способ 3: Через winget (Windows 10/11)</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
                             # Установка через winget
                             winget install Microsoft.PowerShell
                         </div>
                     </div>
 
                     <h3>Настройка профиля PowerShell</h3>
-                    <div class="terminal-command">
-                        # Проверка существования профиля
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка существования профиля
                         Test-Path $PROFILE
                         
                         # Создание профиля, если его нет
                         if (!(Test-Path $PROFILE)) {
-                            New-Item -ItemType File -Path $PROFILE -Force
+    New-Item -ItemType File -Path $PROFILE -Force
                         }
                         
                         # Открытие профиля для редактирования
@@ -307,15 +308,15 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                         <strong>Безопасность скриптов:</strong> По умолчанию PowerShell блокирует выполнение скриптов из соображений безопасности. Для работы со скриптами необходимо настроить политику выполнения.
                     </div>
 
-                    <div class="terminal-command">
-                        # Проверка текущей политики
-                        Get-ExecutionPolicy
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка текущей политики
+Get-ExecutionPolicy
                         
                         # Установка политики для текущего пользователя
-                        Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
                         
                         # Проверка всех политик
-                        Get-ExecutionPolicy -List
+Get-ExecutionPolicy -List
                     </div>
 
                     <h3>Установка модулей</h3>
@@ -323,9 +324,9 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                         <strong>Модули PowerShell:</strong> Модули расширяют функциональность PowerShell. Многие модули устанавливаются автоматически, но некоторые нужно устанавливать вручную.
                     </div>
 
-                    <div class="terminal-command">
-                        # Просмотр установленных модулей
-                        Get-Module -ListAvailable
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр установленных модулей
+Get-Module -ListAvailable
                         
                         # Установка модуля из PowerShell Gallery
                         Install-Module -Name ModuleName -Force
@@ -343,59 +344,59 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                     <p>Начнем изучение PowerShell с базовых команд, которые помогут вам ориентироваться в системе и выполнять основные задачи.</p>
                     
                     <h3>Навигация по файловой системе</h3>
-                    <div class="terminal-command">
-                        # Показать текущее местоположение
-                        Get-Location
+                    <div class="code-example">
+                        <pre><code class="bash"># Показать текущее местоположение
+Get-Location
                         # или сокращенно:
                         pwd
                         
                         # Перейти в папку
-                        Set-Location C:\Users
+Set-Location C:\Users
                         # или сокращенно:
                         cd C:\Users
                         
                         # Перейти в домашнюю папку
-                        Set-Location $env:USERPROFILE
+Set-Location $env:USERPROFILE
                         # или:
                         cd ~
                     </div>
 
                     <h3>Работа с файлами и папками</h3>
-                    <div class="terminal-command">
-                        # Показать содержимое папки
-                        Get-ChildItem
+                    <div class="code-example">
+                        <pre><code class="bash"># Показать содержимое папки
+Get-ChildItem
                         # или сокращенно:
                         ls
                         # или:
                         dir
                         
                         # Показать только папки
-                        Get-ChildItem -Directory
+Get-ChildItem -Directory
                         
                         # Показать только файлы
-                        Get-ChildItem -File
+Get-ChildItem -File
                         
                         # Показать скрытые файлы
-                        Get-ChildItem -Force
+Get-ChildItem -Force
                     </div>
 
                     <h3>Создание файлов и папок</h3>
-                    <div class="terminal-command">
-                        # Создать папку
-                        New-Item -ItemType Directory -Name "НоваяПапка"
+                    <div class="code-example">
+                        <pre><code class="bash"># Создать папку
+New-Item -ItemType Directory -Name "НоваяПапка"
                         # или сокращенно:
                         mkdir "НоваяПапка"
                         
                         # Создать файл
-                        New-Item -ItemType File -Name "новый_файл.txt"
+New-Item -ItemType File -Name "новый_файл.txt"
                         
                         # Создать файл с содержимым
                         "Привет, мир!" | Out-File -FilePath "привет.txt" -Encoding UTF8
                     </div>
 
                     <h3>Копирование и перемещение</h3>
-                    <div class="terminal-command">
-                        # Копировать файл
+                    <div class="code-example">
+                        <pre><code class="bash"># Копировать файл
                         Copy-Item "исходный_файл.txt" "копия_файла.txt"
                         # или сокращенно:
                         copy "исходный_файл.txt" "копия_файла.txt"
@@ -410,44 +411,44 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                     </div>
 
                     <h3>Удаление файлов и папок</h3>
-                    <div class="terminal-command">
-                        # Удалить файл
-                        Remove-Item "файл.txt"
+                    <div class="code-example">
+                        <pre><code class="bash"># Удалить файл
+Remove-Item "файл.txt"
                         # или сокращенно:
                         del "файл.txt"
                         
                         # Удалить папку с содержимым
-                        Remove-Item "папка" -Recurse -Force
+Remove-Item "папка" -Recurse -Force
                         
                         # Удалить все файлы с определенным расширением
-                        Remove-Item "*.tmp" -Force
+Remove-Item "*.tmp" -Force
                     </div>
 
                     <h3>Получение информации о системе</h3>
-                    <div class="terminal-command">
-                        # Информация о компьютере
-                        Get-ComputerInfo
+                    <div class="code-example">
+                        <pre><code class="bash"># Информация о компьютере
+Get-ComputerInfo
                         
                         # Информация о процессоре
-                        Get-WmiObject -Class Win32_Processor
+Get-WmiObject -Class Win32_Processor
                         
                         # Информация о памяти
-                        Get-WmiObject -Class Win32_PhysicalMemory
+Get-WmiObject -Class Win32_PhysicalMemory
                         
                         # Список запущенных процессов
-                        Get-Process
+Get-Process
                         # или сокращенно:
                         ps
                     </div>
 
                     <h3>Работа с переменными</h3>
-                    <div class="terminal-command">
-                        # Создать переменную
+                    <div class="code-example">
+                        <pre><code class="bash"># Создать переменную
                         $имя = "Иван"
                         $возраст = 25
                         
                         # Показать значение переменной
-                        Write-Host "Имя: $имя, Возраст: $возраст"
+Write-Host "Имя: $имя, Возраст: $возраст"
                         
                         # Переменные окружения
                         $env:USERNAME
@@ -460,27 +461,27 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                         <strong>Конвейеры PowerShell:</strong> Одна из самых мощных возможностей PowerShell — это передача результатов одной команды в другую через символ | (вертикальная черта).
                     </div>
 
-                    <div class="terminal-command">
-                        # Найти все .txt файлы и показать их размер
-                        Get-ChildItem -Filter "*.txt" | Select-Object Name, Length
+                    <div class="code-example">
+                        <pre><code class="bash"># Найти все .txt файлы и показать их размер
+Get-ChildItem -Filter "*.txt" | Select-Object Name, Length
                         
                         # Найти процессы, использующие больше 100MB памяти
-                        Get-Process | Where-Object {$_.WorkingSet -gt 100MB} | Sort-Object WorkingSet -Descending
+Get-Process | Where-Object {$_.WorkingSet -gt 100MB} | Sort-Object WorkingSet -Descending
                         
                         # Получить список служб, которые запущены
-                        Get-Service | Where-Object {$_.Status -eq "Running"} | Select-Object Name, Status
+Get-Service | Where-Object {$_.Status -eq "Running"} | Select-Object Name, Status
                     </div>
 
                     <h3>Форматирование вывода</h3>
-                    <div class="terminal-command">
-                        # Табличный формат
-                        Get-Process | Format-Table Name, CPU, WorkingSet
+                    <div class="code-example">
+                        <pre><code class="bash"># Табличный формат
+Get-Process | Format-Table Name, CPU, WorkingSet
                         
                         # Список
-                        Get-Service | Format-List Name, Status, StartType
+Get-Service | Format-List Name, Status, StartType
                         
                         # Широкий формат
-                        Get-ChildItem | Format-Wide Name -Column 3
+Get-ChildItem | Format-Wide Name -Column 3
                     </div>
 
                     <div class="note">
@@ -496,37 +497,37 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                     <p>PowerShell имеет мощную встроенную систему помощи, которая является одним из главных преимуществ этой оболочки.</p>
                     
                     <h3>Основные команды помощи</h3>
-                    <div class="terminal-command">
-                        # Общая справка по команде
-                        Get-Help Get-Process
+                    <div class="code-example">
+                        <pre><code class="bash"># Общая справка по команде
+Get-Help Get-Process
                         # или сокращенно:
                         help Get-Process
                         
                         # Подробная справка
-                        Get-Help Get-Process -Detailed
+Get-Help Get-Process -Detailed
                         
                         # Полная справка с примерами
-                        Get-Help Get-Process -Full
+Get-Help Get-Process -Full
                         
                         # Только примеры
-                        Get-Help Get-Process -Examples
+Get-Help Get-Process -Examples
                     </div>
 
                     <h3>Поиск команд</h3>
-                    <div class="terminal-command">
-                        # Найти все команды, содержащие "process"
-                        Get-Command *process*
+                    <div class="code-example">
+                        <pre><code class="bash"># Найти все команды, содержащие "process"
+Get-Command *process*
                         
                         # Найти команды для работы с файлами
-                        Get-Command *item*
+Get-Command *item*
                         
                         # Найти команды, начинающиеся с "Get-"
-                        Get-Command Get-*
+Get-Command Get-*
                         
                         # Найти команды по глаголу
-                        Get-Command -Verb Get
-                        Get-Command -Verb Set
-                        Get-Command -Verb New
+Get-Command -Verb Get
+Get-Command -Verb Set
+Get-Command -Verb New
                     </div>
 
                     <h3>Обновление справки</h3>
@@ -534,30 +535,30 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                         <strong>Важно:</strong> Справка PowerShell может быть устаревшей или отсутствовать. Рекомендуется обновить справку при первом использовании PowerShell.
                     </div>
 
-                    <div class="terminal-command">
-                        # Обновить справку (требует прав администратора)
+                    <div class="code-example">
+                        <pre><code class="bash"># Обновить справку (требует прав администратора)
                         Update-Help
                         
                         # Обновить справку для конкретного модуля
                         Update-Help -Module Microsoft.PowerShell.Management
                         
                         # Проверить, доступна ли справка
-                        Get-Help Get-Process -ErrorAction SilentlyContinue
+Get-Help Get-Process -ErrorAction SilentlyContinue
                     </div>
 
                     <h3>Справка по модулям</h3>
-                    <div class="terminal-command">
-                        # Показать все модули
-                        Get-Module -ListAvailable
+                    <div class="code-example">
+                        <pre><code class="bash"># Показать все модули
+Get-Module -ListAvailable
                         
                         # Справка по модулю
-                        Get-Help about_Modules
+Get-Help about_Modules
                         
                         # Импортировать модуль
                         Import-Module ModuleName
                         
                         # Справка по импортированному модулю
-                        Get-Command -Module ModuleName
+Get-Command -Module ModuleName
                     </div>
 
                     <h3>Концептуальная справка</h3>
@@ -565,39 +566,39 @@ Write-Host "PowerShell загружен успешно!" -ForegroundColor Green<
                         <strong>О концептуальной справке:</strong> PowerShell содержит подробные объяснения концепций и принципов работы. Эти статьи начинаются с "about_".
                     </div>
 
-                    <div class="terminal-command">
-                        # Список всех концептуальных статей
-                        Get-Help about_*
+                    <div class="code-example">
+                        <pre><code class="bash"># Список всех концептуальных статей
+Get-Help about_*
                         
                         # Справка по переменным
-                        Get-Help about_Variables
+Get-Help about_Variables
                         
                         # Справка по операторам
-                        Get-Help about_Operators
+Get-Help about_Operators
                         
                         # Справка по конвейерам
-                        Get-Help about_Pipelines
+Get-Help about_Pipelines
                         
                         # Справка по функциям
-                        Get-Help about_Functions
+Get-Help about_Functions
                     </div>
 
                     <h3>Интерактивная справка</h3>
-                    <div class="terminal-command">
-                        # Открыть справку в браузере
-                        Get-Help Get-Process -Online
+                    <div class="code-example">
+                        <pre><code class="bash"># Открыть справку в браузере
+Get-Help Get-Process -Online
                         
                         # Показать справку в отдельном окне
-                        Get-Help Get-Process -ShowWindow
+Get-Help Get-Process -ShowWindow
                     </div>
 
                     <h3>Справка по параметрам</h3>
-                    <div class="terminal-command">
-                        # Показать только параметры команды
-                        Get-Help Get-Process -Parameter *
+                    <div class="code-example">
+                        <pre><code class="bash"># Показать только параметры команды
+Get-Help Get-Process -Parameter *
                         
                         # Справка по конкретному параметру
-                        Get-Help Get-Process -Parameter Name
+Get-Help Get-Process -Parameter Name
                     </div>
 
                     <h3>Полезные алиасы для справки</h3>
@@ -617,15 +618,15 @@ Set-Alias fc Find-Command</code></pre>
                     </div>
 
                     <h3>Справка по синтаксису</h3>
-                    <div class="terminal-command">
-                        # Синтаксис команды
-                        Get-Command Get-Process -Syntax
+                    <div class="code-example">
+                        <pre><code class="bash"># Синтаксис команды
+Get-Command Get-Process -Syntax
                         
                         # Справка по операторам сравнения
-                        Get-Help about_Comparison_Operators
+Get-Help about_Comparison_Operators
                         
                         # Справка по регулярным выражениям
-                        Get-Help about_Regular_Expressions
+Get-Help about_Regular_Expressions
                     </div>
 
                     <div class="note">

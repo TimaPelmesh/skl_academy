@@ -200,21 +200,24 @@
                     
                     <h3>stdin (0) — стандартный ввод</h3>
                     <p>Поток для чтения данных. По умолчанию это клавиатура.</p>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         cat                    # читает из stdin (клавиатура)
                         # Нажмите Ctrl+D для завершения ввода
                     </div>
 
                     <h3>stdout (1) — стандартный вывод</h3>
                     <p>Поток для вывода обычных данных. По умолчанию это экран терминала.</p>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         echo "Hello World"     # выводит в stdout
                         ls                    # выводит список файлов в stdout
                     </div>
 
                     <h3>stderr (2) — стандартный поток ошибок</h3>
                     <p>Поток для вывода сообщений об ошибках. По умолчанию это тоже экран терминала.</p>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls nonexistent_file   # ошибка выводится в stderr
                         # ls: cannot access 'nonexistent_file': No such file or directory
                     </div>
@@ -224,7 +227,8 @@
                         <strong>Важно понимать:</strong> stdout и stderr — это разные потоки. Это позволяет обрабатывать обычный вывод и ошибки отдельно.
                     </div>
 
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Команда выводит и обычные данные, и ошибки
                         ls existing_file nonexistent_file
                         # existing_file          ← stdout
@@ -240,20 +244,23 @@
                     <p>Перенаправление позволяет отправлять вывод команд в файлы или другие программы.</p>
                     
                     <h3>Перенаправление stdout</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         echo "Hello" > file.txt    # записать в файл (перезаписать)
                         echo "World" >> file.txt   # добавить в файл
                         ls > files.txt             # сохранить список файлов
                     </div>
 
                     <h3>Перенаправление stderr</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls nonexistent 2> error.log    # перенаправить ошибки в файл
                         ls existing 2> error.log       # ошибок нет, файл останется пустым
                     </div>
 
                     <h3>Перенаправление обоих потоков</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls existing nonexistent > output.log 2>&1
                         # Перенаправить и stdout, и stderr в один файл
                         
@@ -262,7 +269,8 @@
                     </div>
 
                     <h3>Отбрасывание вывода</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls > /dev/null              # отбросить stdout
                         ls 2> /dev/null            # отбросить stderr
                         ls > /dev/null 2>&1        # отбросить все
@@ -281,14 +289,16 @@
                     <p>Перенаправление ввода позволяет читать данные из файла вместо клавиатуры.</p>
                     
                     <h3>Перенаправление stdin</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         cat < file.txt              # читать из файла
                         sort < unsorted.txt         # сортировать файл
                         wc -l < file.txt            # подсчитать строки в файле
                     </div>
 
                     <h3>Heredoc — многострочный ввод</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         cat << EOF
                         Строка 1
                         Строка 2
@@ -298,13 +308,15 @@
                     </div>
 
                     <h3>Here-string — ввод из переменной</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         text="Hello World"
                         wc -w <<< "$text"           # подсчитать слова в переменной
                     </div>
 
                     <h3>Практические примеры</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Отправить письмо из файла
                         mail user@example.com < message.txt
                         
@@ -324,14 +336,16 @@
                     <p>Конвейер (|) передает stdout одной команды в stdin другой команды. Это основа мощных командных конструкций.</p>
                     
                     <h3>Базовое использование</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls -la | grep "txt"         # найти файлы .txt
                         ps aux | grep firefox       # найти процессы firefox
                         cat file.txt | sort         # отсортировать файл
                     </div>
 
                     <h3>Цепочки команд</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ls -la | grep "txt" | wc -l     # подсчитать .txt файлы
                         ps aux | grep firefox | awk '{print $2}'  # получить PID firefox
                         cat log.txt | grep ERROR | sort | uniq    # уникальные ошибки
@@ -340,7 +354,8 @@
                     <h3>Полезные команды для конвейеров</h3>
                     <div class="code-example">
                         <h4>grep — поиск текста</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
                             ps aux | grep python        # найти процессы python
                             ls -la | grep -v "txt"      # исключить .txt файлы
                             cat file.txt | grep -i error # поиск без учета регистра
@@ -349,7 +364,8 @@
 
                     <div class="code-example">
                         <h4>sort — сортировка</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
                             ls -la | sort -k5 -nr       # сортировать по размеру (убывание)
                             cat names.txt | sort        # отсортировать имена
                         </div>
@@ -357,7 +373,8 @@
 
                     <div class="code-example">
                         <h4>uniq — удаление дубликатов</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
                             cat file.txt | sort | uniq  # уникальные строки
                             cat file.txt | sort | uniq -c  # с подсчетом
                         </div>
@@ -365,14 +382,16 @@
 
                     <div class="code-example">
                         <h4>head и tail — начало и конец</h4>
-                        <div class="terminal-command">
+                        <div class="code-example">
+                        <pre><code class="bash">
                             ls -la | head -10           # первые 10 файлов
                             ps aux | tail -5            # последние 5 процессов
                         </div>
                     </div>
 
                     <h3>Сложные примеры</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Найти 5 самых больших файлов
                         find /home -type f -exec ls -la {} \; | sort -k5 -nr | head -5
                         

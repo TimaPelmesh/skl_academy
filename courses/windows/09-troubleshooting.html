@@ -160,36 +160,36 @@
                     <p>Журнал событий Windows содержит информацию о работе системы, приложений и безопасности.</p>
                     
                     <h3>Основные журналы</h3>
-                    <div class="terminal-command">
-                        # Просмотр доступных журналов
-                        Get-WinEvent -ListLog *
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр доступных журналов
+Get-WinEvent -ListLog *
                         
                         # Просмотр событий из журнала System
-                        Get-WinEvent -LogName System -MaxEvents 10
+Get-WinEvent -LogName System -MaxEvents 10
                         
                         # Просмотр событий из журнала Application
-                        Get-WinEvent -LogName Application -MaxEvents 10
+Get-WinEvent -LogName Application -MaxEvents 10
                     </div>
 
                     <h3>Фильтрация событий</h3>
-                    <div class="terminal-command">
-                        # События за последний час
-                        Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=(Get-Date).AddHours(-1)}
+                    <div class="code-example">
+                        <pre><code class="bash"># События за последний час
+Get-WinEvent -FilterHashtable @{LogName='System'; StartTime=(Get-Date).AddHours(-1)}
                         
                         # Ошибки и предупреждения
-                        Get-WinEvent -FilterHashtable @{LogName='System'; Level=2,3} -MaxEvents 20
+Get-WinEvent -FilterHashtable @{LogName='System'; Level=2,3} -MaxEvents 20
                         
                         # События конкретного источника
-                        Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-Kernel-General'}
+Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-Kernel-General'}
                     </div>
 
                     <h3>Анализ событий</h3>
-                    <div class="terminal-command">
-                        # Группировка событий по источнику
-                        Get-WinEvent -LogName System -MaxEvents 100 | Group-Object ProviderName | Sort-Object Count -Descending
+                    <div class="code-example">
+                        <pre><code class="bash"># Группировка событий по источнику
+Get-WinEvent -LogName System -MaxEvents 100 | Group-Object ProviderName | Sort-Object Count -Descending
                         
                         # Поиск критических ошибок
-                        Get-WinEvent -FilterHashtable @{LogName='System'; Level=1} -MaxEvents 10
+Get-WinEvent -FilterHashtable @{LogName='System'; Level=1} -MaxEvents 10
                     </div>
                 </div>
             </section>
@@ -201,33 +201,33 @@
                     <p>Мониторинг производительности помогает выявить узкие места в работе системы.</p>
                     
                     <h3>Счетчики производительности</h3>
-                    <div class="terminal-command">
-                        # Просмотр доступных счетчиков
-                        Get-Counter -ListSet *
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр доступных счетчиков
+Get-Counter -ListSet *
                         
                         # Мониторинг использования процессора
-                        Get-Counter "\Processor(_Total)\% Processor Time"
+Get-Counter "\Processor(_Total)\% Processor Time"
                         
                         # Мониторинг использования памяти
-                        Get-Counter "\Memory\Available MBytes"
+Get-Counter "\Memory\Available MBytes"
                     </div>
 
                     <h3>Мониторинг в реальном времени</h3>
-                    <div class="terminal-command">
-                        # Мониторинг в течение 10 секунд
-                        Get-Counter "\Processor(_Total)\% Processor Time" -SampleInterval 1 -MaxSamples 10
+                    <div class="code-example">
+                        <pre><code class="bash"># Мониторинг в течение 10 секунд
+Get-Counter "\Processor(_Total)\% Processor Time" -SampleInterval 1 -MaxSamples 10
                         
                         # Мониторинг нескольких счетчиков
-                        Get-Counter @("\Processor(_Total)\% Processor Time", "\Memory\Available MBytes") -SampleInterval 2 -MaxSamples 5
+Get-Counter @("\Processor(_Total)\% Processor Time", "\Memory\Available MBytes") -SampleInterval 2 -MaxSamples 5
                     </div>
 
                     <h3>Анализ процессов</h3>
-                    <div class="terminal-command">
-                        # Процессы, использующие больше всего CPU
-                        Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
+                    <div class="code-example">
+                        <pre><code class="bash"># Процессы, использующие больше всего CPU
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
                         
                         # Процессы, использующие больше всего памяти
-                        Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10
+Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10
                     </div>
                 </div>
             </section>
@@ -239,9 +239,9 @@
                     <p>Восстановление системы позволяет вернуть Windows к предыдущему рабочему состоянию.</p>
                     
                     <h3>Точки восстановления</h3>
-                    <div class="terminal-command">
-                        # Просмотр точек восстановления
-                        Get-ComputerRestorePoint
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр точек восстановления
+Get-ComputerRestorePoint
                         
                         # Создание точки восстановления
                         Checkpoint-Computer -Description "Ручная точка восстановления" -RestorePointType "MODIFY_SETTINGS"
@@ -251,8 +251,8 @@
                     </div>
 
                     <h3>Диагностика загрузки</h3>
-                    <div class="terminal-command">
-                        # Восстановление загрузочных файлов
+                    <div class="code-example">
+                        <pre><code class="bash"># Восстановление загрузочных файлов
                         bootrec /fixmbr
                         bootrec /fixboot
                         bootrec /rebuildbcd
@@ -278,8 +278,8 @@
                     <p>Продвинутые инструменты диагностики предоставляют детальную информацию о состоянии системы.</p>
                     
                     <h3>System File Checker (SFC)</h3>
-                    <div class="terminal-command">
-                        # Проверка системных файлов
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка системных файлов
                         sfc /scannow
                         
                         # Проверка конкретного файла
@@ -290,8 +290,8 @@
                     </div>
 
                     <h3>DISM (Deployment Image Servicing and Management)</h3>
-                    <div class="terminal-command">
-                        # Проверка здоровья образа
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка здоровья образа
                         dism /online /cleanup-image /checkhealth
                         
                         # Восстановление образа
@@ -302,8 +302,8 @@
                     </div>
 
                     <h3>Memory Diagnostic</h3>
-                    <div class="terminal-command">
-                        # Запуск диагностики памяти
+                    <div class="code-example">
+                        <pre><code class="bash"># Запуск диагностики памяти
                         mdsched.exe
                         
                         # Планирование диагностики при следующей перезагрузке
@@ -311,8 +311,8 @@
                     </div>
 
                     <h3>Performance Toolkit</h3>
-                    <div class="terminal-command">
-                        # Создание отчета о производительности
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание отчета о производительности
                         perfmon /report
                         
                         # Мониторинг в реальном времени

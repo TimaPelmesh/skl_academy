@@ -226,14 +226,14 @@
                     </div>
 
                     <h3>Открытие терминала</h3>
-                    <div class="terminal-command">
-                        # Открыть терминал в Ubuntu/Linux Mint
-                        Ctrl + Alt + T
+                    <div class="code-example">
+                        <pre><code class="bash"># Открыть терминал в Ubuntu/Linux Mint
+Ctrl + Alt + T</code></pre>
                     </div>
                     
-                    <div class="terminal-command">
-                        # Или через меню приложений
-                        # Найти "Терминал" или "Terminal"
+                    <div class="code-example">
+                        <pre><code class="bash"># Или через меню приложений
+# Найти "Терминал" или "Terminal"</code></pre>
                     </div>
                 </div>
             </section>
@@ -245,26 +245,26 @@
                     <p>В Linux все организовано в виде единого дерева каталогов, начинающегося с корневого каталога <code>/</code>.</p>
                     
                     <h3>Иерархия каталогов</h3>
-                    <div class="terminal-command">
-                        /
-                        ├── bin/          # Основные исполняемые файлы
-                        ├── boot/         # Файлы загрузчика
-                        ├── dev/          # Устройства
-                        ├── etc/          # Конфигурационные файлы
-                        ├── home/         # Домашние каталоги пользователей
-                        ├── lib/          # Библиотеки
-                        ├── media/        # Съемные носители
-                        ├── mnt/          # Точки монтирования
-                        ├── opt/          # Дополнительное ПО
-                        ├── proc/         # Информация о процессах
-                        ├── root/         # Домашний каталог root
-                        ├── run/          # Временные файлы
-                        ├── sbin/         # Системные исполняемые файлы
-                        ├── srv/          # Данные сервисов
-                        ├── sys/          # Системная информация
-                        ├── tmp/          # Временные файлы
-                        ├── usr/          # Пользовательские программы
-                        └── var/          # Переменные данные
+                    <div class="code-example">
+                        <pre><code class="text">/
+├── bin/          # Основные исполняемые файлы
+├── boot/         # Файлы загрузчика
+├── dev/          # Устройства
+├── etc/          # Конфигурационные файлы
+├── home/         # Домашние каталоги пользователей
+├── lib/          # Библиотеки
+├── media/        # Съемные носители
+├── mnt/          # Точки монтирования
+├── opt/          # Дополнительное ПО
+├── proc/         # Информация о процессах
+├── root/         # Домашний каталог root
+├── run/          # Временные файлы
+├── sbin/         # Системные исполняемые файлы
+├── srv/          # Данные сервисов
+├── sys/          # Системная информация
+├── tmp/          # Временные файлы
+├── usr/          # Пользовательские программы
+└── var/          # Переменные данные</code></pre>
                     </div>
 
                     <h3>Назначение основных каталогов</h3>
@@ -294,18 +294,18 @@
                     
                     <h3>Абсолютные пути</h3>
                     <p>Начинаются с <code>/</code> и указывают полный путь от корня файловой системы:</p>
-                    <div class="terminal-command">
-                        /home/user/documents/file.txt
-                        /etc/passwd
-                        /usr/bin/python3
+                    <div class="code-example">
+                        <pre><code class="text">/home/user/documents/file.txt
+/etc/passwd
+/usr/bin/python3</code></pre>
                     </div>
 
                     <h3>Относительные пути</h3>
                     <p>Указывают путь относительно текущего каталога:</p>
-                    <div class="terminal-command">
-                        documents/file.txt    # файл в подкаталоге
-                        ../other/file.txt     # файл в родительском каталоге
-                        ./script.sh          # файл в текущем каталоге
+                    <div class="code-example">
+                        <pre><code class="text">documents/file.txt    # файл в подкаталоге
+../other/file.txt     # файл в родительском каталоге
+./script.sh          # файл в текущем каталоге</code></pre>
                     </div>
 
                     <h3>Специальные символы</h3>
@@ -328,41 +328,41 @@
                     <p>Основные команды для навигации по файловой системе Linux.</p>
                     
                     <h3>pwd — показать текущий каталог</h3>
-                    <div class="terminal-command">
-                        pwd
-                        # Вывод: /home/user
+                    <div class="code-example">
+                        <pre><code class="bash">pwd
+# Вывод: /home/user</code></pre>
                     </div>
 
                     <h3>ls — список файлов и каталогов</h3>
-                    <div class="terminal-command">
-                        ls                    # простой список
-                        ls -l                 # подробный список
-                        ls -a                 # включая скрытые файлы
-                        ls -h                 # размеры в удобном формате
-                        ls -la                # комбинация флагов
+                    <div class="code-example">
+                        <pre><code class="bash">ls                    # простой список
+ls -l                 # подробный список
+ls -a                 # включая скрытые файлы
+ls -h                 # размеры в удобном формате
+ls -la                # комбинация флагов</code></pre>
                     </div>
 
                     <h3>cd — смена каталога</h3>
-                    <div class="terminal-command">
-                        cd /home/user         # перейти в абсолютный путь
-                        cd documents          # перейти в подкаталог
-                        cd ..                 # перейти в родительский каталог
-                        cd ~                  # перейти в домашний каталог
-                        cd -                  # вернуться в предыдущий каталог
+                    <div class="code-example">
+                        <pre><code class="bash">cd /home/user         # перейти в абсолютный путь
+cd documents          # перейти в подкаталог
+cd ..                 # перейти в родительский каталог
+cd ~                  # перейти в домашний каталог
+cd -                  # вернуться в предыдущий каталог</code></pre>
                     </div>
 
                     <h3>file — определение типа файла</h3>
-                    <div class="terminal-command">
-                        file document.txt     # text file
-                        file image.jpg        # JPEG image
-                        file script.sh        # shell script
+                    <div class="code-example">
+                        <pre><code class="bash">file document.txt     # text file
+file image.jpg        # JPEG image
+file script.sh        # shell script</code></pre>
                     </div>
 
                     <h3>Полезные комбинации</h3>
-                    <div class="terminal-command">
-                        ls -la ~              # подробный список домашнего каталога
-                        cd /var/log && ls     # перейти в /var/log и показать содержимое
-                        pwd && ls -la         # показать путь и содержимое
+                    <div class="code-example">
+                        <pre><code class="bash">ls -la ~              # подробный список домашнего каталога
+cd /var/log && ls     # перейти в /var/log и показать содержимое
+pwd && ls -la         # показать путь и содержимое</code></pre>
                     </div>
                 </div>
             </section>

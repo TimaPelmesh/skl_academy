@@ -160,37 +160,37 @@
                     <p>Управление учетными записями пользователей является основой безопасности Windows.</p>
                     
                     <h3>Создание пользователей</h3>
-                    <div class="terminal-command">
-                        # Создание локального пользователя
-                        New-LocalUser -Name "НовыйПользователь" -Description "Описание пользователя" -NoPassword
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание локального пользователя
+New-LocalUser -Name "НовыйПользователь" -Description "Описание пользователя" -NoPassword
                         
                         # Создание пользователя с паролем
                         $Password = ConvertTo-SecureString "Пароль123!" -AsPlainText -Force
-                        New-LocalUser -Name "ПользовательСПаролем" -Password $Password
+New-LocalUser -Name "ПользовательСПаролем" -Password $Password
                         
                         # Добавление пользователя в группу
                         Add-LocalGroupMember -Group "Пользователи" -Member "НовыйПользователь"
                     </div>
 
                     <h3>Управление группами</h3>
-                    <div class="terminal-command">
-                        # Просмотр локальных групп
-                        Get-LocalGroup
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр локальных групп
+Get-LocalGroup
                         
                         # Создание группы
-                        New-LocalGroup -Name "МояГруппа" -Description "Описание группы"
+New-LocalGroup -Name "МояГруппа" -Description "Описание группы"
                         
                         # Добавление пользователя в группу
                         Add-LocalGroupMember -Group "МояГруппа" -Member "НовыйПользователь"
                     </div>
 
                     <h3>Политики паролей</h3>
-                    <div class="terminal-command">
-                        # Просмотр политик паролей
-                        Get-LocalUser | Select-Object Name, PasswordLastSet, PasswordRequired, UserMayChangePassword
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр политик паролей
+Get-LocalUser | Select-Object Name, PasswordLastSet, PasswordRequired, UserMayChangePassword
                         
                         # Установка требования пароля
-                        Set-LocalUser -Name "НовыйПользователь" -PasswordRequired $true
+Set-LocalUser -Name "НовыйПользователь" -PasswordRequired $true
                     </div>
                 </div>
             </section>
@@ -202,21 +202,21 @@
                     <p>Групповые политики позволяют централизованно управлять настройками безопасности и конфигурацией системы.</p>
                     
                     <h3>Просмотр политик</h3>
-                    <div class="terminal-command">
-                        # Просмотр локальных политик безопасности
-                        Get-LocalSecurityPolicy
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр локальных политик безопасности
+Get-LocalSecurityPolicy
                         
                         # Просмотр политик через реестр
-                        Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
+Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
                     </div>
 
                     <h3>Настройка политик</h3>
-                    <div class="terminal-command">
-                        # Отключение автозапуска
-                        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoAutoplayfornonVolume" -Value 1
+                    <div class="code-example">
+                        <pre><code class="bash"># Отключение автозапуска
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoAutoplayfornonVolume" -Value 1
                         
                         # Ограничение доступа к панели управления
-                        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoControlPanel" -Value 1
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoControlPanel" -Value 1
                     </div>
                 </div>
             </section>
@@ -228,9 +228,9 @@
                     <p>Windows Defender обеспечивает встроенную защиту от вредоносного ПО.</p>
                     
                     <h3>Управление Windows Defender</h3>
-                    <div class="terminal-command">
-                        # Просмотр статуса Windows Defender
-                        Get-MpComputerStatus
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр статуса Windows Defender
+Get-MpComputerStatus
                         
                         # Запуск полного сканирования
                         Start-MpScan -ScanType FullScan
@@ -240,15 +240,15 @@
                     </div>
 
                     <h3>Настройка исключений</h3>
-                    <div class="terminal-command">
-                        # Добавление исключения для папки
+                    <div class="code-example">
+                        <pre><code class="bash"># Добавление исключения для папки
                         Add-MpPreference -ExclusionPath "C:\MyApp"
                         
                         # Добавление исключения для процесса
                         Add-MpPreference -ExclusionProcess "MyApp.exe"
                         
                         # Просмотр исключений
-                        Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
+Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
                     </div>
                 </div>
             </section>
@@ -260,9 +260,9 @@
                     <p>Шифрование обеспечивает защиту конфиденциальных данных от несанкционированного доступа.</p>
                     
                     <h3>BitLocker</h3>
-                    <div class="terminal-command">
-                        # Просмотр статуса BitLocker
-                        Get-BitLockerVolume
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр статуса BitLocker
+Get-BitLockerVolume
                         
                         # Включение BitLocker для диска
                         Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes256 -UsedSpaceOnly
@@ -272,8 +272,8 @@
                     </div>
 
                     <h3>EFS (Encrypting File System)</h3>
-                    <div class="terminal-command">
-                        # Шифрование файла
+                    <div class="code-example">
+                        <pre><code class="bash"># Шифрование файла
                         cipher /e "C:\Users\Иван\Documents\важный_файл.txt"
                         
                         # Расшифровка файла

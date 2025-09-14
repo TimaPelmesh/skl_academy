@@ -199,7 +199,8 @@
                     <p>Сетевые утилиты помогают диагностировать проблемы с подключением и анализировать сетевой трафик.</p>
                     
                     <h3>ping — проверка доступности</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ping google.com                  # проверить доступность сайта
                         ping -c 4 8.8.8.8               # отправить 4 пакета
                         ping -i 2 google.com             # интервал между пакетами 2 сек
@@ -207,28 +208,32 @@
                     </div>
 
                     <h3>traceroute — трассировка маршрута</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         traceroute google.com            # показать маршрут до сервера
                         traceroute -n google.com         # не разрешать имена хостов
                         traceroute -m 10 google.com      # максимум 10 прыжков
                     </div>
 
                     <h3>mtr — комбинация ping и traceroute</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         mtr google.com                   # запустить mtr
                         mtr -r -c 10 google.com          # 10 циклов и завершить
                         mtr -n google.com                 # не разрешать имена
                     </div>
 
                     <h3>nslookup — разрешение DNS</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         nslookup google.com              # найти IP адрес
                         nslookup 8.8.8.8                 # обратный поиск (IP -> имя)
                         nslookup -type=MX google.com     # найти MX записи
                     </div>
 
                     <h3>dig — расширенный DNS запрос</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         dig google.com                   # подробная информация о DNS
                         dig @8.8.8.8 google.com          # использовать конкретный DNS сервер
                         dig -x 8.8.8.8                   # обратный DNS запрос
@@ -250,7 +255,8 @@
                     <p>Команды для просмотра активных сетевых соединений и анализа сетевого трафика.</p>
                     
                     <h3>ss — современная замена netstat</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ss -tuln                         # все TCP и UDP соединения
                         ss -tulnp                        # с процессами
                         ss -tuln | grep :80              # найти соединения на порту 80
@@ -258,7 +264,8 @@
                     </div>
 
                     <h3>netstat — классическая команда</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         netstat -tuln                    # все TCP и UDP соединения
                         netstat -tulnp                   # с процессами
                         netstat -r                       # таблица маршрутизации
@@ -266,7 +273,8 @@
                     </div>
 
                     <h3>lsof — список открытых файлов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         lsof -i                          # все сетевые соединения
                         lsof -i :80                      # соединения на порту 80
                         lsof -i tcp                      # только TCP соединения
@@ -274,14 +282,16 @@
                     </div>
 
                     <h3>iftop — мониторинг трафика</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         sudo iftop                       # мониторинг трафика в реальном времени
                         sudo iftop -i eth0               # конкретный интерфейс
                         sudo iftop -n                    # не разрешать имена хостов
                     </div>
 
                     <h3>nethogs — трафик по процессам</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         sudo nethogs                    # трафик по процессам
                         sudo nethogs eth0                # конкретный интерфейс
                     </div>
@@ -303,7 +313,8 @@
                     <p>wget и curl — основные инструменты для скачивания файлов из интернета.</p>
                     
                     <h3>wget — простой загрузчик</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         wget https://example.com/file.zip    # скачать файл
                         wget -O filename.zip https://example.com/file.zip  # сохранить с другим именем
                         wget -c https://example.com/file.zip # продолжить загрузку
@@ -311,7 +322,8 @@
                     </div>
 
                     <h3>curl — универсальный инструмент</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         curl https://example.com/file.zip    # скачать файл
                         curl -O https://example.com/file.zip # сохранить с оригинальным именем
                         curl -L https://example.com/redirect # следовать редиректам
@@ -319,7 +331,8 @@
                     </div>
 
                     <h3>HTTP запросы с curl</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         curl -X GET https://api.example.com/data     # GET запрос
                         curl -X POST -d "data=value" https://api.example.com  # POST запрос
                         curl -H "Authorization: Bearer token" https://api.example.com  # с заголовками
@@ -327,7 +340,8 @@
                     </div>
 
                     <h3>Пакетная загрузка</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Создать список URL для загрузки
                         echo "https://example.com/file1.zip" > urls.txt
                         echo "https://example.com/file2.zip" >> urls.txt
@@ -337,7 +351,8 @@
                     </div>
 
                     <h3>Ограничение скорости</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         wget --limit-rate=1m https://example.com/file.zip  # ограничить скорость
                         curl --limit-rate 1m https://example.com/file.zip  # ограничить скорость
                     </div>
@@ -357,14 +372,16 @@
                     <p>SSH (Secure Shell) — протокол для безопасного удаленного доступа к серверам.</p>
                     
                     <h3>Базовое подключение</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ssh user@hostname              # подключиться к серверу
                         ssh user@192.168.1.100        # подключиться по IP
                         ssh -p 2222 user@hostname     # подключиться на нестандартном порту
                     </div>
 
                     <h3>Первый вход</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # При первом подключении система спросит:
                         # The authenticity of host 'hostname' can't be established.
                         # Are you sure you want to continue connecting (yes/no)?
@@ -372,26 +389,30 @@
                     </div>
 
                     <h3>Выполнение команд на удаленном сервере</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ssh user@hostname "ls -la"     # выполнить команду и выйти
                         ssh user@hostname "uptime && who"  # выполнить несколько команд
                     </div>
 
                     <h3>Туннелирование портов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ssh -L 8080:localhost:80 user@hostname  # локальный туннель
                         ssh -R 8080:localhost:80 user@hostname  # удаленный туннель
                     </h3>
 
                     <h3>Передача файлов через SSH</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         scp file.txt user@hostname:/home/user/  # скопировать файл на сервер
                         scp user@hostname:/home/user/file.txt . # скопировать файл с сервера
                         scp -r directory/ user@hostname:/home/user/  # скопировать каталог
                     </div>
 
                     <h3>Настройка SSH клиента</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Создать файл ~/.ssh/config
                         Host myserver
                             HostName 192.168.1.100
@@ -416,14 +437,16 @@
                     <p>SSH ключи обеспечивают более безопасную аутентификацию, чем пароли.</p>
                     
                     <h3>Генерация SSH ключа</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ssh-keygen -t rsa -b 4096        # создать RSA ключ
                         ssh-keygen -t ed25519            # создать Ed25519 ключ (рекомендуется)
                         ssh-keygen -t rsa -b 4096 -C "your_email@example.com"  # с комментарием
                     </div>
 
                     <h3>Процесс генерации</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Система спросит:
                         # Enter file in which to save the key (/home/user/.ssh/id_rsa): [Enter]
                         # Enter passphrase (empty for no passphrase): [введите пароль или Enter]
@@ -431,27 +454,31 @@
                     </div>
 
                     <h3>Копирование ключа на сервер</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ssh-copy-id user@hostname        # автоматически скопировать ключ
                         # Или вручную:
                         cat ~/.ssh/id_rsa.pub | ssh user@hostname "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
                     </div>
 
                     <h3>Проверка подключения</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ssh user@hostname                # подключиться без пароля
                         ssh -i ~/.ssh/id_rsa user@hostname  # использовать конкретный ключ
                     </div>
 
                     <h3>Управление ключами</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         ssh-add ~/.ssh/id_rsa            # добавить ключ в ssh-agent
                         ssh-add -l                       # показать загруженные ключи
                         ssh-add -D                       # удалить все ключи из ssh-agent
                     </div>
 
                     <h3>Настройка ssh-agent</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Добавить в ~/.bashrc или ~/.profile:
                         eval "$(ssh-agent -s)"
                         ssh-add ~/.ssh/id_rsa
@@ -473,7 +500,8 @@
                     <p>Различные способы передачи файлов между компьютерами в Linux.</p>
                     
                     <h3>scp — копирование через SSH</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         # Копирование файла на сервер
                         scp file.txt user@hostname:/home/user/
                         scp -r directory/ user@hostname:/home/user/
@@ -487,14 +515,16 @@
                     </div>
 
                     <h3>rsync — синхронизация файлов</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         rsync -avz file.txt user@hostname:/home/user/  # синхронизировать файл
                         rsync -avz --delete local/ user@hostname:/home/user/  # синхронизировать каталог
                         rsync -avz --progress user@hostname:/home/user/ .  # с прогрессом
                     </div>
 
                     <h3>sftp — интерактивная передача</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         sftp user@hostname              # подключиться к SFTP серверу
                         # Команды SFTP:
                         # put file.txt                 # загрузить файл
@@ -505,21 +535,24 @@
                     </div>
 
                     <h3>wget/curl для загрузки</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         wget https://example.com/file.zip
                         curl -O https://example.com/file.zip
                         curl -L -o file.zip https://example.com/file.zip
                     </div>
 
                     <h3>Создание архива перед передачей</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         tar -czf archive.tar.gz directory/  # создать архив
                         scp archive.tar.gz user@hostname:/home/user/
                         ssh user@hostname "cd /home/user && tar -xzf archive.tar.gz"
                     </div>
 
                     <h3>Практический пример резервного копирования</h3>
-                    <div class="terminal-command">
+                    <div class="code-example">
+                        <pre><code class="bash">
                         #!/bin/bash
                         # Скрипт резервного копирования на удаленный сервер
                         
