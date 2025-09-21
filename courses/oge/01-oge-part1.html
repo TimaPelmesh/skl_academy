@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ОГЭ по информатике — задания 1–12 с кратким ответом. Теория, разбор форматов и тренировка. Подготовка к ОГЭ онлайн бесплатно.">
+    <meta name="keywords" content="ОГЭ информатика, задания 1-12, краткий ответ, подготовка к ОГЭ, тренажёр ОГЭ, информатика 9 класс">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ОГЭ по информатике — Часть 1 (задания 1–12)">
+    <meta property="og:description" content="Часть 1: задания 1–12 с кратким ответом. Структура, подсказки и тренировка.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/oge/01-oge-part1.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ОГЭ по информатике — Часть 1 (1–12)">
+    <meta name="twitter:description" content="Задания 1–12 с кратким ответом: теория, форматы и тренировка.">
+    <title>ОГЭ по информатике — Часть 1 (задания 1–12) | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/oge/01-oge-part1.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "ОГЭ по информатике", "item": "https://skl-academy.ru/courses/oge/01-oge-part1.html"}
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ОГЭ по информатике — Часть 1 (задания 1–12)",
+      "description": "Подготовка к ОГЭ по информатике: задания 1–12 с кратким ответом.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "inLanguage": "ru",
+      "dateModified": "2025-09-16",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/oge/01-oge-part1.html"},
+      "keywords": "ОГЭ информатика, задания 1-12, краткий ответ"
+    }
+    </script>
+
+    <style>
+        /* Узкий минимальный каркас, наполнение добавим позже */
+        .topic-section { max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+        .note { background: var(--overlay, #2d333b); border-left: 4px solid #58a6ff; padding: 12px 16px; border-radius: 8px; }
+        /* Читаемость текста внутри заметок */
+        .note, .note p, .note h4, .note li, .note a { color: #fff; }
+        .light-theme .note { background: #f1f1f1; border-left-color: #0366d6; }
+        .light-theme .note, .light-theme .note p, .light-theme .note h4, .light-theme .note li { color: #111827; }
+        .nav-between { text-align: center; margin: 30px 0; }
+        .nav-between a { display: inline-block; padding: 12px 22px; border-radius: 30px; text-decoration: none; background: linear-gradient(90deg,#2188ff,#804eda); color: #fff; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+        <h1 class="header-title">ОГЭ: задания 1–12</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div id="overlay" class="overlay"></div>
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn active">ОГЭ. Часть 1 (1–12)</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#intro" class="subtopic active">Введение</a>
+                        <a href="#topic-1" class="subtopic">1</a>
+                        <a href="#topic-2" class="subtopic">2</a>
+                        <a href="#topic-3" class="subtopic">3</a>
+                        <a href="#topic-4" class="subtopic">4</a>
+                        <a href="#topic-5" class="subtopic">5</a>
+                        <a href="#topic-6" class="subtopic">6</a>
+                        <a href="#topic-7" class="subtopic">7</a>
+                        <a href="#topic-8" class="subtopic">8</a>
+                        <a href="#topic-9" class="subtopic">9</a>
+                        <a href="#topic-10" class="subtopic">10</a>
+                        <a href="#topic-11" class="subtopic">11</a>
+                        <a href="#topic-12" class="subtopic">12</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">Часть 2 (13–16)</button>
+                    <div class="subtopics">
+                        <a href="02-oge-part2.html#overview" class="subtopic">Переход к части 2</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section id="intro" class="topic-section">
+                <h2>Введение в часть 1 (задания 1–12)</h2>
+                <div class="note">
+                    <h4>📋 Структура части 1 ОГЭ по информатике</h4>
+                    <p><strong>Время выполнения:</strong> 45 минут на 12 заданий</p>
+                    <p><strong>Формат ответов:</strong> краткий ответ (число, слово, последовательность символов)</p>
+                    <p><strong>Оценка:</strong> 1 балл за каждое задание, максимум 12 баллов</p>
+                    <p><strong>Особенности:</strong> ответы вносятся в бланк ответов №1, проверяются автоматически</p>
+                </div>
+
+                <h3>🎯 Стратегия выполнения</h3>
+                <ul>
+                    <li><strong>Время на задание:</strong> 3-4 минуты максимум</li>
+                    <li><strong>Порядок:</strong> сначала легкие задания, потом сложные</li>
+                    <li><strong>Проверка:</strong> обязательно пересчитайте вычисления</li>
+                    <li><strong>Формат ответа:</strong> внимательно читайте, что именно требуется</li>
+                </ul>
+
+                <div class="practice">
+                    <h4>📊 Тренировочный тест</h4>
+                    <p>Проверьте свои базовые знания перед изучением конкретных заданий:</p>
+                    <div id="intro-quiz">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Сколько бит в 1 килобайте?</p>
+                            <div>
+                                <label><input type="radio" name="intro-q1" value="a"> 1000</label><br>
+                                <label><input type="radio" name="intro-q1" value="b"> 1024</label><br>
+                                <label><input type="radio" name="intro-q1" value="c"> 8192</label><br>
+                                <label><input type="radio" name="intro-q1" value="d"> 8000</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Какая система счисления используется в компьютерах?</p>
+                            <div>
+                                <label><input type="radio" name="intro-q2" value="a"> Десятичная</label><br>
+                                <label><input type="radio" name="intro-q2" value="b"> Двоичная</label><br>
+                                <label><input type="radio" name="intro-q2" value="c"> Шестнадцатеричная</label><br>
+                                <label><input type="radio" name="intro-q2" value="d"> Восьмеричная</label>
+                            </div>
+                        </div>
+                        <button id="intro-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить ответы</button>
+                        <div id="intro-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topic-1" class="topic-section">
+                <h2>Задание №1: Количественные параметры информационных объектов</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение вычислять объём информации, скорость передачи данных, время передачи. Понимание единиц измерения информации.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Единицы измерения информации</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Основные единицы:</strong></p>
+                    <ul>
+                        <li><strong>1 байт = 8 бит</strong> (основа всех вычислений)</li>
+                        <li><strong>1 КБ = 1024 байта</strong> (двоичная система)</li>
+                        <li><strong>1 МБ = 1024 КБ = 1 048 576 байт</strong></li>
+                        <li><strong>1 ГБ = 1024 МБ = 1 073 741 824 байт</strong></li>
+                </ul>
+                    <p><strong>⚠️ Важно:</strong> В сетевых технологиях часто используются десятичные приставки:</p>
+                    <ul>
+                        <li>1 Мбит/с = 1 000 000 бит/с (не 1 048 576!)</li>
+                        <li>1 Гбит/с = 1 000 000 000 бит/с</li>
+                    </ul>
+                </div>
+
+                <h4>Формулы для вычислений</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Объём информации:</strong></p>
+                    <ul>
+                        <li>V<sub>байт</sub> = N<sub>элементов</sub> × размер<sub>элемента</sub></li>
+                        <li>V<sub>бит</sub> = V<sub>байт</sub> × 8</li>
+                    </ul>
+                    <p><strong>Время передачи:</strong></p>
+                    <ul>
+                        <li>t = V<sub>бит</sub> / R<sub>бит/с</sub></li>
+                        <li>t = V<sub>байт</sub> × 8 / R<sub>бит/с</sub></li>
+                </ul>
+                </div>
+
+                <h4>Типы задач</h4>
+                <ol>
+                    <li><strong>Перевод единиц:</strong> бит ↔ байт ↔ КБ ↔ МБ ↔ ГБ</li>
+                    <li><strong>Объём текста:</strong> количество символов × размер символа</li>
+                    <li><strong>Объём изображения:</strong> ширина × высота × глубина цвета</li>
+                    <li><strong>Время передачи:</strong> объём данных / скорость канала</li>
+                    <li><strong>Скорость передачи:</strong> объём данных / время передачи</li>
+                </ol>
+
+                <h3>🔧 Калькулятор единиц измерения</h3>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:15px 0;">
+                    <p><strong>Быстрый перевод единиц:</strong></p>
+                    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0;">
+                        <input id="calc-input" type="number" placeholder="Введите число" style="padding:8px;border-radius:4px;border:1px solid #ccc;">
+                        <select id="calc-from" style="padding:8px;border-radius:4px;border:1px solid #ccc;">
+                            <option value="bit">бит</option>
+                            <option value="byte">байт</option>
+                            <option value="kb">КБ</option>
+                            <option value="mb">МБ</option>
+                            <option value="gb">ГБ</option>
+                        </select>
+                        <span>→</span>
+                        <select id="calc-to" style="padding:8px;border-radius:4px;border:1px solid #ccc;">
+                            <option value="bit">бит</option>
+                            <option value="byte" selected>байт</option>
+                            <option value="kb">КБ</option>
+                            <option value="mb">МБ</option>
+                            <option value="gb">ГБ</option>
+                        </select>
+                        <button id="calc-convert" style="padding:8px 15px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;">Перевести</button>
+                    </div>
+                    <div id="calc-result" style="font-weight:bold;color:#28a745;margin-top:10px;"></div>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Переводы единиц</strong>: двоичная кратность 1024 против десятичной 1000 в скоростях сети.</li>
+                        <li><strong>Типовые формулы</strong>: объём, время передачи, скорость; внимательнее к бит/байт.</li>
+                        <li><strong>Границы</strong>: нули, большие размеры, округления, целочисленные деления.</li>
+                        <li><strong>Чек-лист</strong>: единицы привести к одной системе; перепроверить порядок действий.</li>
+                    </ul>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Исполнители</strong>: явно фиксируйте начальное состояние (позиция, направление, память).</li>
+                        <li><strong>Трассировка</strong>: ведите таблицу состояний; шаг — команда — новое состояние.</li>
+                        <li><strong>Границы</strong>: поля и препятствия, выход за пределы, изменение пера.</li>
+                        <li><strong>Чек-лист</strong>: не пропускайте шаги; проверяйте соответствие командам.</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+
+                <div class="practice">
+                    <h4>Задача 1.1 (Базовый уровень)</h4>
+                    <p>Сколько <strong>байт</strong> в 2048 <strong>бит</strong>?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q1-1-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q1-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q1-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>1 байт = 8 бит<br>2048 бит ÷ 8 = 256 байт</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 1.2 (Средний уровень)</h4>
+                    <p>Текст содержит 500 символов. Каждый символ кодируется 16 битами. Определите информационный объём текста в <strong>байтах</strong>.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q1-2-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q1-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q1-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>V = 500 символов × 16 бит = 8000 бит<br>8000 бит ÷ 8 = 1000 байт</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 1.3 (Повышенный уровень)</h4>
+                    <p>Скорость передачи данных через ADSL-соединение равна 256 000 бит/с. Через данное соединение передают файл размером 625 Кбайт. Определите время передачи файла в <strong>секундах</strong>.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q1-3-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q1-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q1-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>V = 625 КБ = 625 × 1024 × 8 = 5 120 000 бит<br>R = 256 000 бит/с<br>t = 5 120 000 ÷ 256 000 = 20 секунд</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 1.4 (Высокий уровень)</h4>
+                    <p>Цветное растровое изображение размером 128×128 пикселей передаётся по каналу связи за 2 секунды. Скорость передачи данных составляет 64 000 бит/с. Определите максимально возможное количество цветов в палитре изображения.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q1-4-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q1-4-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q1-4-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>V = 64 000 × 2 = 128 000 бит<br>Пикселей = 128 × 128 = 16 384<br>Бит на пиксель = 128 000 ÷ 16 384 ≈ 7.8 → 7 бит<br>Количество цветов = 2⁷ = 128</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-1">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> 1 МБ равен:</p>
+                            <div>
+                                <label><input type="radio" name="quiz1-q1" value="a"> 1000 КБ</label><br>
+                                <label><input type="radio" name="quiz1-q1" value="b"> 1024 КБ</label><br>
+                                <label><input type="radio" name="quiz1-q1" value="c"> 1000 000 байт</label><br>
+                                <label><input type="radio" name="quiz1-q1" value="d"> 1024 байт</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Скорость 1 Мбит/с равна:</p>
+                            <div>
+                                <label><input type="radio" name="quiz1-q2" value="a"> 1024 бит/с</label><br>
+                                <label><input type="radio" name="quiz1-q2" value="b"> 1000 бит/с</label><br>
+                                <label><input type="radio" name="quiz1-q2" value="c"> 1 000 000 бит/с</label><br>
+                                <label><input type="radio" name="quiz1-q2" value="d"> 1 048 576 бит/с</label>
+                            </div>
+                        </div>
+                        <button id="quiz1-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz1-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topic-2" class="topic-section">
+                <h2>Задание №2: Кодирование и декодирование информации</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение работать с системами счисления, кодировать и декодировать информацию, понимание принципов кодирования.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Системы счисления</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Позиционные системы счисления:</strong></p>
+                    <ul>
+                        <li><strong>Двоичная (2):</strong> цифры 0, 1</li>
+                        <li><strong>Восьмеричная (8):</strong> цифры 0-7</li>
+                        <li><strong>Десятичная (10):</strong> цифры 0-9</li>
+                        <li><strong>Шестнадцатеричная (16):</strong> цифры 0-9, A-F</li>
+                </ul>
+                    <p><strong>Формула разложения:</strong> N<sub>10</sub> = a<sub>n</sub>×b<sup>n</sup> + a<sub>n-1</sub>×b<sup>n-1</sup> + ... + a<sub>0</sub>×b<sup>0</sup></p>
+                </div>
+
+                <h4>Таблицы кодирования</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>ASCII (7 бит):</strong> 128 символов (0-127)</p>
+                    <ul>
+                        <li>0-31: управляющие символы</li>
+                        <li>32-126: печатные символы (пробел, цифры, буквы, знаки)</li>
+                        <li>127: DEL</li>
+                    </ul>
+                    <p><strong>Unicode:</strong> 16-битное кодирование (65 536 символов)</p>
+                    <p><strong>UTF-8:</strong> переменная длина (1-4 байта на символ)</p>
+                </div>
+
+                <h4>Префиксные коды</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Код Хаффмана:</strong> оптимальное кодирование без потерь</p>
+                    <ul>
+                        <li>Частые символы → короткие коды</li>
+                        <li>Редкие символы → длинные коды</li>
+                        <li>Никакой код не является началом другого</li>
+                </ul>
+                </div>
+
+                <h3>🔧 Калькулятор систем счисления</h3>
+                <div style="background:#f0f8ff;padding:15px;border-radius:8px;margin:15px 0;">
+                    <p><strong>Перевод между системами счисления:</strong></p>
+                    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0;">
+                        <input id="num-input" type="text" placeholder="Введите число" style="padding:8px;border-radius:4px;border:1px solid #ccc;">
+                        <select id="num-from" style="padding:8px;border-radius:4px;border:1px solid #ccc;">
+                            <option value="2">Двоичная (2)</option>
+                            <option value="8">Восьмеричная (8)</option>
+                            <option value="10" selected>Десятичная (10)</option>
+                            <option value="16">Шестнадцатеричная (16)</option>
+                        </select>
+                        <span>→</span>
+                        <select id="num-to" style="padding:8px;border-radius:4px;border:1px solid #ccc;">
+                            <option value="2">Двоичная (2)</option>
+                            <option value="8">Восьмеричная (8)</option>
+                            <option value="10">Десятичная (10)</option>
+                            <option value="16" selected>Шестнадцатеричная (16)</option>
+                        </select>
+                        <button id="num-convert" style="padding:8px 15px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;">Перевести</button>
+                    </div>
+                    <div id="num-result" style="font-weight:bold;color:#28a745;margin-top:10px;"></div>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Системы счисления</strong>: перевод через деление/умножение и разложение по степеням основания.</li>
+                        <li><strong>Кодировки</strong>: ASCII vs Unicode/UTF‑8; длина символа в байтах может различаться.</li>
+                        <li><strong>Префиксные коды</strong>: отсутствие префиксов гарантирует однозначную декодировку.</li>
+                        <li><strong>Чек-лист</strong>: следите за основанием; фиксируйте количество бит на символ.</li>
+                    </ul>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Условия</strong>: составные выражения, короткое замыкание, порядок вычислений.</li>
+                        <li><strong>Сравнения</strong>: строгое/нестрогое; модуль и остаток при проверке чётности/знака.</li>
+                        <li><strong>Ошибки</strong>: путаница & и &&, | и ||, присваивание вместо сравнения.</li>
+                        <li><strong>Чек-лист</strong>: выпишите ветки; проверьте границы (==, &lt;, &gt;).</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 2.1 (Базовый уровень)</h4>
+                    <p>Переведите число 1011<sub>2</sub> в десятичную систему счисления.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q2-1-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q2-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q2-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>1011<sub>2</sub> = 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11<sub>10</sub></p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 2.2 (Средний уровень)</h4>
+                    <p>Сколько различных символов можно закодировать, используя 6 бит?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q2-2-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q2-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q2-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>С 6 битами можно закодировать 2⁶ = 64 различных символа</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 2.3 (Повышенный уровень)</h4>
+                    <p>Дана строка символов: "ABC". Каждый символ кодируется 8 битами. Определите информационный объём строки в <strong>байтах</strong>.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q2-3-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q2-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q2-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>3 символа × 8 бит = 24 бита<br>24 бита ÷ 8 = 3 байта</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 2.4 (Высокий уровень)</h4>
+                    <p>Для кодирования букв А, Б, В, Г решили использовать двухразрядные двоичные числа. Каждой букве соответствует код: А — 00, Б — 01, В — 10, Г — 11. Закодируйте последовательность ГБВА. В ответе запишите последовательность цифр без пробелов и разделителей.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q2-4-input" type="text" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q2-4-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q2-4-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Г → 11, Б → 01, В → 10, А → 00<br>ГБВА → 11011000</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-2">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Число 15<sub>10</sub> в двоичной системе:</p>
+                            <div>
+                                <label><input type="radio" name="quiz2-q1" value="a"> 1001</label><br>
+                                <label><input type="radio" name="quiz2-q1" value="b"> 1111</label><br>
+                                <label><input type="radio" name="quiz2-q1" value="c"> 1010</label><br>
+                                <label><input type="radio" name="quiz2-q1" value="d"> 1100</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Минимальное количество бит для кодирования 100 символов:</p>
+                            <div>
+                                <label><input type="radio" name="quiz2-q2" value="a"> 6</label><br>
+                                <label><input type="radio" name="quiz2-q2" value="b"> 7</label><br>
+                                <label><input type="radio" name="quiz2-q2" value="c"> 8</label><br>
+                                <label><input type="radio" name="quiz2-q2" value="d"> 10</label>
+                            </div>
+                        </div>
+                        <button id="quiz2-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz2-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topic-3" class="topic-section">
+                <h2>Задание №3: Значение логического выражения</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение вычислять значения логических выражений, знание логических операций и их приоритетов.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Логические операции</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Основные операции:</strong></p>
+                    <ul>
+                        <li><strong>НЕ (¬, !):</strong> инверсия, отрицание</li>
+                        <li><strong>И (∧, &, AND):</strong> конъюнкция, логическое умножение</li>
+                        <li><strong>ИЛИ (∨, |, OR):</strong> дизъюнкция, логическое сложение</li>
+                        <li><strong>Импликация (→):</strong> "если... то..."</li>
+                        <li><strong>Эквивалентность (↔):</strong> "тогда и только тогда"</li>
+                </ul>
+                </div>
+
+                <h4>Таблицы истинности</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+                        <tr style="background: #f0f0f0;">
+                            <th style="border: 1px solid #ddd; padding: 8px;">A</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">B</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">¬A</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">A ∧ B</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">A ∨ B</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">A → B</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">A ↔ B</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Приоритет операций</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Порядок выполнения (от высшего к низшему):</strong></p>
+                    <ol>
+                        <li><strong>Скобки ( )</strong> — наивысший приоритет</li>
+                        <li><strong>НЕ (¬, !)</strong> — инверсия</li>
+                        <li><strong>И (∧, &)</strong> — конъюнкция</li>
+                        <li><strong>ИЛИ (∨, |)</strong> — дизъюнкция</li>
+                        <li><strong>Импликация (→)</strong></li>
+                        <li><strong>Эквивалентность (↔)</strong></li>
+                    </ol>
+                </div>
+
+                <h4>Эквивалентные преобразования</h4>
+                <div style="background:#f0f8ff;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Основные законы:</strong></p>
+                    <ul>
+                        <li><strong>Импликация:</strong> A → B ≡ ¬A ∨ B</li>
+                        <li><strong>Эквивалентность:</strong> A ↔ B ≡ (A ∧ B) ∨ (¬A ∧ ¬B)</li>
+                        <li><strong>Де Морган:</strong> ¬(A ∧ B) ≡ ¬A ∨ ¬B</li>
+                        <li><strong>Де Морган:</strong> ¬(A ∨ B) ≡ ¬A ∧ ¬B</li>
+                </ul>
+                </div>
+
+                <h3>🔧 Калькулятор логических выражений</h3>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:15px 0;">
+                    <p><strong>Вычислите значение выражения:</strong></p>
+                    <div style="margin:10px 0;">
+                        <input id="logic-expr" type="text" placeholder="Введите выражение (например: A ∧ B ∨ ¬C)" style="width:300px;padding:8px;border-radius:4px;border:1px solid #ccc;">
+                    </div>
+                    <div style="margin:10px 0;">
+                        <label>A: <input id="logic-a" type="checkbox"></label>
+                        <label>B: <input id="logic-b" type="checkbox"></label>
+                        <label>C: <input id="logic-c" type="checkbox"></label>
+                    </div>
+                    <button id="logic-calc" style="padding:8px 15px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;">Вычислить</button>
+                    <div id="logic-result" style="font-weight:bold;color:#28a745;margin-top:10px;"></div>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Таблицы истинности</strong>: удобны для 2–3 переменных; далее — алгебра логики.</li>
+                        <li><strong>Эквивалентности</strong>: импликация, законы де Моргана, свёртки повторов.</li>
+                        <li><strong>Приоритет</strong>: скобки → НЕ → И → ИЛИ → → ↔. Всегда расставляйте скобки.</li>
+                        <li><strong>Чек-лист</strong>: упростите выражение; прогоните 2–3 набора значений.</li>
+                    </ul>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Форматы/расширения</strong>: что чем открывается; потери/без потерь; совместимость.</li>
+                        <li><strong>Носители</strong>: скорость/надёжность/стоимость; где что хранить.</li>
+                        <li><strong>ИБ</strong>: принципы минимизации рисков: обновления, резервные копии, 2FA.</li>
+                        <li><strong>Чек-лист</strong>: сопоставьте задачу и подходящий инструмент/формат.</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 3.1 (Базовый уровень)</h4>
+                    <p>Дано: A = 1, B = 0. Найдите значение выражения A ∧ B.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q3-1-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q3-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q3-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>A ∧ B = 1 ∧ 0 = 0 (конъюнкция истинна только когда оба операнда истинны)</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 3.2 (Средний уровень)</h4>
+                    <p>Дано: A = 1, B = 0, C = 1. Найдите значение выражения (A ∨ B) ∧ C.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q3-2-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q3-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q3-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>(A ∨ B) ∧ C = (1 ∨ 0) ∧ 1 = 1 ∧ 1 = 1</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 3.3 (Повышенный уровень)</h4>
+                    <p>Дано: A = 0, B = 1. Найдите значение выражения A → B.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q3-3-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q3-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q3-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>A → B = 0 → 1 = 1 (импликация ложна только когда A=1, B=0)</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 3.4 (Высокий уровень)</h4>
+                    <p>Дано: A = 1, B = 0, C = 1. Найдите значение выражения (A ∧ B) ∨ (¬A ∧ C).</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q3-4-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q3-4-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q3-4-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>(A ∧ B) ∨ (¬A ∧ C) = (1 ∧ 0) ∨ (¬1 ∧ 1) = 0 ∨ (0 ∧ 1) = 0 ∨ 0 = 0</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-3">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> При A=1, B=0 значение A ∨ B равно:</p>
+                            <div>
+                                <label><input type="radio" name="quiz3-q1" value="a"> 0</label><br>
+                                <label><input type="radio" name="quiz3-q1" value="b"> 1</label><br>
+                                <label><input type="radio" name="quiz3-q1" value="c"> 2</label><br>
+                                <label><input type="radio" name="quiz3-q1" value="d"> Неопределено</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Импликация A → B ложна только когда:</p>
+                            <div>
+                                <label><input type="radio" name="quiz3-q2" value="a"> A=0, B=0</label><br>
+                                <label><input type="radio" name="quiz3-q2" value="b"> A=0, B=1</label><br>
+                                <label><input type="radio" name="quiz3-q2" value="c"> A=1, B=0</label><br>
+                                <label><input type="radio" name="quiz3-q2" value="d"> A=1, B=1</label>
+                            </div>
+                        </div>
+                        <button id="quiz3-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz3-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topic-4" class="topic-section">
+                <h2>Задание №4: Формальные описания реальных объектов и процессов</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение анализировать формальные описания объектов и процессов, работать с таблицами, графами, схемами.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Типы формальных описаний</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>1. Таблицы признаков</strong></p>
+                    <ul>
+                        <li>Строки — объекты, столбцы — признаки</li>
+                        <li>Ячейки содержат значения признаков</li>
+                        <li>Позволяют сравнивать объекты по признакам</li>
+                    </ul>
+                    
+                    <p><strong>2. Графы состояний</strong></p>
+                    <ul>
+                        <li>Вершины — состояния системы</li>
+                        <li>Рёбра — переходы между состояниями</li>
+                        <li>Метки на рёбрах — условия переходов</li>
+                    </ul>
+                    
+                    <p><strong>3. Блок-схемы алгоритмов</strong></p>
+                    <ul>
+                        <li>Прямоугольники — действия</li>
+                        <li>Ромбы — условия (ветвления)</li>
+                        <li>Овалы — начало/конец</li>
+                        <li>Стрелки — направление выполнения</li>
+                    </ul>
+                </div>
+
+                <h4>Алгоритм решения</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ol>
+                        <li><strong>Внимательно прочитайте описание</strong> — выделите ключевые элементы</li>
+                        <li><strong>Определите тип структуры</strong> — таблица, граф, схема</li>
+                        <li><strong>Выделите сущности и связи</strong> — что связано с чем</li>
+                        <li><strong>Проанализируйте условия</strong> — при каких условиях происходят переходы</li>
+                        <li><strong>Ответьте на вопрос</strong> — используя построенную структуру</li>
+                    </ol>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Выбор структуры</strong>: таблица признаков, граф состояний, блок‑схема — распознать по условию.</li>
+                        <li><strong>Метод</strong>: выписать сущности и связи/переходы; отметить условия на рёбрах.</li>
+                        <li><strong>Ошибки</strong>: спутанные направления стрелок, неверные заголовки столбцов.</li>
+                        <li><strong>Чек-лист</strong>: подпишите элементы; проверьте соответствие вопросу.</li>
+                    </ul>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Семантика операторов</strong>: точная фраза, исключение, область, тип файла, булева логика.</li>
+                        <li><strong>Композиции</strong>: группировка кавычками, приоритеты при OR/AND, экранирование.</li>
+                        <li><strong>Ошибки</strong>: пробел после минуса, смешение языков, отсутствие кавычек.</li>
+                        <li><strong>Чек-лист</strong>: уточняйте, убирайте шум, проверяйте выдачу и корректируйте.</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 4.1 (Базовый уровень)</h4>
+                    <p>В таблице приведены данные о трёх автомобилях:</p>
+                    <table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+                        <tr style="background: #f0f0f0;">
+                            <th style="border: 1px solid #ddd; padding: 8px;">Марка</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Цвет</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Год</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Toyota</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Красный</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">2020</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">BMW</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Синий</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">2019</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Audi</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Красный</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">2021</td>
+                        </tr>
+                    </table>
+                    <p>Сколько автомобилей красного цвета?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q4-1-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q4-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q4-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Считаем строки с красным цветом: Toyota (2020) и Audi (2021). Ответ: 2</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 4.2 (Средний уровень)</h4>
+                    <p>Дан граф состояний системы:</p>
+                    <div style="text-align: center; margin: 15px 0;">
+                        <div style="display: inline-block; border: 2px solid #333; border-radius: 50%; width: 60px; height: 60px; line-height: 56px; text-align: center; margin: 5px;">A</div>
+                        <span style="font-size: 20px;">→</span>
+                        <div style="display: inline-block; border: 2px solid #333; border-radius: 50%; width: 60px; height: 60px; line-height: 56px; text-align: center; margin: 5px;">B</div>
+                        <span style="font-size: 20px;">→</span>
+                        <div style="display: inline-block; border: 2px solid #333; border-radius: 50%; width: 60px; height: 60px; line-height: 56px; text-align: center; margin: 5px;">C</div>
+                    </div>
+                    <p>Из какого состояния можно попасть в состояние C?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q4-2-input" type="text" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q4-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q4-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>По стрелкам видно: A → B → C. В состояние C можно попасть из состояния B</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 4.3 (Повышенный уровень)</h4>
+                    <p>Дан фрагмент блок-схемы алгоритма:</p>
+                    <div style="text-align: center; margin: 15px 0; font-family: monospace;">
+                        <div style="border: 2px solid #333; padding: 10px; margin: 5px; display: inline-block;">Начало</div><br>
+                        <div style="border: 2px solid #333; padding: 10px; margin: 5px; display: inline-block;">Ввод X</div><br>
+                        <div style="border: 2px solid #333; padding: 10px; margin: 5px; display: inline-block; border-radius: 0;">X > 0?</div><br>
+                        <div style="display: inline-block; margin: 5px;">
+                            <div style="border: 2px solid #333; padding: 10px; display: inline-block;">Y = X + 1</div>
+                            <span style="margin: 0 10px;">или</span>
+                            <div style="border: 2px solid #333; padding: 10px; display: inline-block;">Y = X - 1</div>
+                        </div><br>
+                        <div style="border: 2px solid #333; padding: 10px; margin: 5px; display: inline-block;">Вывод Y</div><br>
+                        <div style="border: 2px solid #333; padding: 10px; margin: 5px; display: inline-block;">Конец</div>
+                    </div>
+                    <p>При каком значении X будет выведено число 0?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q4-3-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q4-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q4-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Если X > 0, то Y = X + 1 (не может быть 0)<br>Если X ≤ 0, то Y = X - 1<br>Y = 0 при X - 1 = 0, значит X = 1<br>Но X = 1 > 0, поэтому Y = 1 + 1 = 2<br>Проверим X = -1: Y = -1 - 1 = -2<br>Проверим X = 0: Y = 0 - 1 = -1<br>Ответ: такого X не существует</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-4">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> В таблице признаков строки представляют:</p>
+                            <div>
+                                <label><input type="radio" name="quiz4-q1" value="a"> Признаки</label><br>
+                                <label><input type="radio" name="quiz4-q1" value="b"> Объекты</label><br>
+                                <label><input type="radio" name="quiz4-q1" value="c"> Значения</label><br>
+                                <label><input type="radio" name="quiz4-q1" value="d"> Связи</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> В графе состояний вершины представляют:</p>
+                            <div>
+                                <label><input type="radio" name="quiz4-q2" value="a"> Действия</label><br>
+                                <label><input type="radio" name="quiz4-q2" value="b"> Состояния</label><br>
+                                <label><input type="radio" name="quiz4-q2" value="c"> Условия</label><br>
+                                <label><input type="radio" name="quiz4-q2" value="d"> Результаты</label>
+                            </div>
+                        </div>
+                        <button id="quiz4-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz4-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topic-5" class="topic-section">
+                <h2>Задание №5: Простой линейный алгоритм для формального исполнителя</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение выполнять пошагово линейные алгоритмы, отслеживать состояние исполнителя после каждого шага.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Типы формальных исполнителей</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>1. Робот (исполнитель на поле)</strong></p>
+                    <ul>
+                        <li>Позиция: координаты (x, y)</li>
+                        <li>Направление: вверх, вниз, влево, вправо</li>
+                        <li>Команды: вверх, вниз, влево, вправо, закрасить</li>
+                    </ul>
+                    
+                    <p><strong>2. Черепашка (графический исполнитель)</strong></p>
+                    <ul>
+                        <li>Позиция: координаты (x, y)</li>
+                        <li>Направление: угол поворота</li>
+                        <li>Состояние пера: поднято/опущено</li>
+                        <li>Команды: вперёд, назад, поворот, поднять перо, опустить перо</li>
+                    </ul>
+                    
+                    <p><strong>3. Машина Тьюринга</strong></p>
+                    <ul>
+                        <li>Лента: ячейки с символами</li>
+                        <li>Головка: позиция на ленте</li>
+                        <li>Состояние: внутреннее состояние машины</li>
+                        <li>Команды: записать символ, сдвинуться, изменить состояние</li>
+                    </ul>
+                </div>
+
+                <h4>Алгоритм решения</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ol>
+                        <li><strong>Изучите систему команд</strong> — какие команды доступны исполнителю</li>
+                        <li><strong>Определите начальное состояние</strong> — позиция, направление, содержимое памяти</li>
+                        <li><strong>Выполните трассировку</strong> — пошагово выполните каждую команду</li>
+                        <li><strong>Отслеживайте изменения</strong> — фиксируйте состояние после каждого шага</li>
+                        <li><strong>Ответьте на вопрос</strong> — используя финальное состояние</li>
+                    </ol>
+                </div>
+
+                <h4>Таблица трассировки</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Пример таблицы для робота:</strong></p>
+                    <table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+                        <tr style="background: #f0f0f0;">
+                            <th style="border: 1px solid #ddd; padding: 8px;">Шаг</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Команда</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">X</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Y</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Направление</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Начало</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">0</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">вправо</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Сравнение</strong>: перевод в 10‑ю — надёжно; по длине/разрядам — быстрее при одинаковом основании.</li>
+                        <li><strong>Нормализация</strong>: удалите лидирующие нули; приведите регистр.</li>
+                        <li><strong>Чек-лист</strong>: одинаковы ли основания? нет ли ведущих нулей?</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 5.1 (Базовый уровень)</h4>
+                    <p>Робот находится в позиции (2, 3) и смотрит вправо. Выполните команды:</p>
+                    <ol>
+                        <li>вверх</li>
+                        <li>вправо</li>
+                        <li>вниз</li>
+                    </ol>
+                    <p>В какой позиции окажется робот?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q5-1-input" type="text" placeholder="Ваш ответ (x,y)" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q5-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q5-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Начало: (2, 3), направление вправо<br>1. вверх: (2, 4)<br>2. вправо: (3, 4)<br>3. вниз: (3, 3)<br>Ответ: (3, 3)</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 5.2 (Средний уровень)</h4>
+                    <p>Черепашка находится в позиции (0, 0), направление 0° (вправо), перо поднято. Выполните команды:</p>
+                    <ol>
+                        <li>опустить перо</li>
+                        <li>вперёд 3</li>
+                        <li>поворот 90°</li>
+                        <li>вперёд 2</li>
+                    </ol>
+                    <p>В какой позиции окажется черепашка?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q5-2-input" type="text" placeholder="Ваш ответ (x,y)" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q5-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q5-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Начало: (0, 0), направление 0°, перо поднято<br>1. опустить перо: перо опущено<br>2. вперёд 3: (3, 0)<br>3. поворот 90°: направление 90° (вверх)<br>4. вперёд 2: (3, 2)<br>Ответ: (3, 2)</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 5.3 (Повышенный уровень)</h4>
+                    <p>Машина Тьюринга работает с лентой, содержащей символы: 1 0 1 0 1. Головка находится над вторым символом (0). Выполните команды:</p>
+                    <ol>
+                        <li>записать 1</li>
+                        <li>сдвинуться вправо</li>
+                        <li>записать 0</li>
+                        <li>сдвинуться влево</li>
+                    </ol>
+                    <p>Какой символ будет под головкой в конце?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q5-3-input" type="text" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q5-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q5-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Начало: 1 [0] 1 0 1 (головка над 0)<br>1. записать 1: 1 [1] 1 0 1<br>2. сдвинуться вправо: 1 1 [1] 0 1<br>3. записать 0: 1 1 [0] 0 1<br>4. сдвинуться влево: 1 [1] 0 0 1<br>Ответ: 1</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-5">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Линейный алгоритм — это алгоритм:</p>
+                            <div>
+                                <label><input type="radio" name="quiz5-q1" value="a"> С ветвлениями</label><br>
+                                <label><input type="radio" name="quiz5-q1" value="b"> С циклами</label><br>
+                                <label><input type="radio" name="quiz5-q1" value="c"> Без ветвлений и циклов</label><br>
+                                <label><input type="radio" name="quiz5-q1" value="d"> С рекурсией</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> При трассировке алгоритма важно отслеживать:</p>
+                            <div>
+                                <label><input type="radio" name="quiz5-q2" value="a"> Только результат</label><br>
+                                <label><input type="radio" name="quiz5-q2" value="b"> Только команды</label><br>
+                                <label><input type="radio" name="quiz5-q2" value="c"> Состояние исполнителя</label><br>
+                                <label><input type="radio" name="quiz5-q2" value="d"> Только начальные условия</label>
+                            </div>
+                        </div>
+                        <button id="quiz5-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz5-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topic-6" class="topic-section">
+                <h2>Задание №6: Программа с условным оператором</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение анализировать программы с условными операторами, определять результат выполнения при заданных входных данных.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Условные операторы</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Базовый синтаксис:</strong></p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+if (условие) {
+    действие1;
+} else {
+    действие2;
+}</pre>
+                    <p><strong>Операторы сравнения:</strong></p>
+                    <ul>
+                        <li><strong>==</strong> — равно</li>
+                        <li><strong>!=</strong> — не равно</li>
+                        <li><strong>&lt;</strong> — меньше</li>
+                        <li><strong>&gt;</strong> — больше</li>
+                        <li><strong>&lt;=</strong> — меньше или равно</li>
+                        <li><strong>&gt;=</strong> — больше или равно</li>
+                    </ul>
+                </div>
+
+                <h4>Логические операторы в условиях</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Составные условия:</strong></p>
+                    <ul>
+                        <li><strong>&&</strong> — И (логическое умножение)</li>
+                        <li><strong>||</strong> — ИЛИ (логическое сложение)</li>
+                        <li><strong>!</strong> — НЕ (отрицание)</li>
+                    </ul>
+                    <p><strong>Приоритет операций:</strong> ! → && → ||</p>
+                </div>
+
+                <h4>Алгоритм анализа</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ol>
+                        <li><strong>Определите входные данные</strong> — какие значения переменных даны</li>
+                        <li><strong>Вычислите условие</strong> — истинно или ложно</li>
+                        <li><strong>Выберите ветку</strong> — какое действие выполнится</li>
+                        <li><strong>Выполните действие</strong> — вычислите результат</li>
+                        <li><strong>Проверьте граничные случаи</strong> — что происходит на границах</li>
+                    </ol>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Маски</strong>: * — любое кол-во символов; ? — ровно один; диапазоны и наборы.</li>
+                        <li><strong>Поиск в редакторе</strong>: чувствительность к регистру, целые слова, регулярные выражения.</li>
+                        <li><strong>Чек-лист</strong>: уточните путь/область; учитывайте регистр; фильтруйте по типу.</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 6.1 (Базовый уровень)</h4>
+                    <p>Дана программа:</p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:10px 0;">
+if (x > 5) {
+    y = x + 1;
+} else {
+    y = x - 1;
+}</pre>
+                    <p>При x = 7, чему равно значение y?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q6-1-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q6-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q6-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>x = 7, 7 > 5 = true, выполняется y = x + 1 = 7 + 1 = 8</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 6.2 (Средний уровень)</h4>
+                    <p>Дана программа:</p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:10px 0;">
+if (a >= 10 && b < 5) {
+    c = a + b;
+} else {
+    c = a - b;
+}</pre>
+                    <p>При a = 12, b = 3, чему равно значение c?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q6-2-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q6-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q6-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>a = 12, b = 3<br>a >= 10 = 12 >= 10 = true<br>b < 5 = 3 < 5 = true<br>true && true = true<br>c = a + b = 12 + 3 = 15</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 6.3 (Повышенный уровень)</h4>
+                    <p>Дана программа:</p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:10px 0;">
+if (x % 2 == 0) {
+    if (x > 10) {
+        y = x / 2;
+    } else {
+        y = x * 2;
+    }
+} else {
+    y = x + 1;
+}</pre>
+                    <p>При x = 8, чему равно значение y?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q6-3-input" type="number" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q6-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q6-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>x = 8<br>8 % 2 == 0 = true (8 чётное)<br>8 > 10 = false<br>Выполняется y = x * 2 = 8 * 2 = 16</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-6">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> При x = 5, условие x > 5:</p>
+                            <div>
+                                <label><input type="radio" name="quiz6-q1" value="a"> true</label><br>
+                                <label><input type="radio" name="quiz6-q1" value="b"> false</label><br>
+                                <label><input type="radio" name="quiz6-q1" value="c"> неопределено</label><br>
+                                <label><input type="radio" name="quiz6-q1" value="d"> ошибка</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Условие (a > 5 && b < 10) истинно когда:</p>
+                            <div>
+                                <label><input type="radio" name="quiz6-q2" value="a"> a > 5</label><br>
+                                <label><input type="radio" name="quiz6-q2" value="b"> b < 10</label><br>
+                                <label><input type="radio" name="quiz6-q2" value="c"> a > 5 И b < 10</label><br>
+                                <label><input type="radio" name="quiz6-q2" value="d"> a > 5 ИЛИ b < 10</label>
+                            </div>
+                        </div>
+                        <button id="quiz6-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz6-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topic-7" class="topic-section">
+                <h2>Задание №7: Информационно-коммуникационные технологии</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Знание современных ИКТ, форматов файлов, сетевых технологий, основ кибербезопасности.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Форматы файлов</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Текстовые:</strong> TXT, DOCX, PDF, RTF</p>
+                    <p><strong>Графические:</strong> JPG, PNG, GIF, BMP, SVG</p>
+                    <p><strong>Аудио:</strong> MP3, WAV, FLAC, AAC</p>
+                    <p><strong>Видео:</strong> MP4, AVI, MKV, MOV</p>
+                    <p><strong>Архивы:</strong> ZIP, RAR, 7Z</p>
+                    <p><strong>Данные:</strong> CSV, XML, JSON</p>
+                </div>
+
+                <h4>Структура URL (адреса в Интернете)</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Общий вид:</strong> схема://домен/путь/имя_файла.расширение</p>
+                    <ul>
+                        <li><strong>Схема (протокол):</strong> http, https, ftp</li>
+                        <li><strong>Домен:</strong> поддомен.домен_2_уровня.домен_верхнего_уровня (например, <code>ru.net</code>)</li>
+                        <li><strong>Путь и файл:</strong> последовательность каталогов и имя файла (например, <code>/txt.html</code>)</li>
+                    </ul>
+                    <p><strong>Пример сборки:</strong> http + :// + ru + . + net + / + txt + . + html → <code>http://ru.net/txt.html</code></p>
+                </div>
+
+                <h4>Носители информации</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Жёсткие диски (HDD):</strong> магнитные, медленные, дешёвые</p>
+                    <p><strong>SSD:</strong> флеш-память, быстрые, дорогие</p>
+                    <p><strong>Облачные хранилища:</strong> Google Drive, Dropbox, OneDrive</p>
+                    <p><strong>Оптические диски:</strong> CD, DVD, Blu-ray</p>
+                </div>
+
+                <h4>Кибербезопасность</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Надёжные пароли:</strong> 8+ символов, буквы+цифры+символы</p>
+                    <p><strong>Двухфакторная аутентификация (2FA):</strong> SMS, приложения</p>
+                    <p><strong>Фишинг:</strong> поддельные сайты, мошеннические письма</p>
+                    <p><strong>Антивирусы:</strong> защита от вредоносного ПО</p>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Критерии</strong>: дата/размер/тип/содержимое; индексация влияет на скорость и полноту.</li>
+                        <li><strong>Практика</strong>: комбинируйте фильтры; сохраняйте поисковые запросы.</li>
+                        <li><strong>Чек-лист</strong>: правильно ли задан диапазон дат; нет ли скрытых каталогов.</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 7.1 (Базовый уровень)</h4>
+                    <p>Какой формат файла лучше всего подходит для хранения текстового документа с форматированием?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q7-1-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="txt">TXT</option>
+                            <option value="docx">DOCX</option>
+                            <option value="jpg">JPG</option>
+                            <option value="mp3">MP3</option>
+                        </select>
+                        <button id="q7-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q7-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>DOCX — формат Microsoft Word, поддерживает форматирование текста</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 7.2 (Средний уровень)</h4>
+                    <p>Что такое фишинг в контексте информационной безопасности?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q7-2-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="virus">Вредоносная программа</option>
+                            <option value="phishing">Мошенничество через поддельные сайты</option>
+                            <option value="encryption">Шифрование данных</option>
+                            <option value="backup">Резервное копирование</option>
+                        </select>
+                        <button id="q7-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q7-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Фишинг — это мошенничество, при котором злоумышленники создают поддельные сайты для кражи личных данных</p>
+                    </details>
+                </div>
+            </section>
+
+            <section id="topic-8" class="topic-section">
+                <h2>Задание №8: Запросы для поисковых систем</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение составлять эффективные поисковые запросы, знание операторов поиска.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Операторы поиска</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>"точная фраза"</strong> — поиск точного совпадения</p>
+                    <p><strong>-слово</strong> — исключить слово из поиска</p>
+                    <p><strong>site:домен</strong> — поиск только на указанном сайте</p>
+                    <p><strong>filetype:расширение</strong> — поиск файлов определённого типа</p>
+                    <p><strong>OR</strong> — логическое ИЛИ</p>
+                    <p><strong>AND</strong> — логическое И (по умолчанию)</p>
+                </div>
+
+                <h4>Включения–исключения для запросов</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Множества:</strong> A — страницы со словом «Царевна», B — со словом «Лебедь».</p>
+                    <p><strong>Формула:</strong> |A ∪ B| = |A| + |B| − |A ∩ B|.</p>
+                    <p><strong>Отсюда:</strong> |B| = |A ∪ B| − |A| + |A ∩ B| = (Царевна | Лебедь) − (Царевна) + (Царевна & Лебедь).</p>
+                    <p>Подставляем числа из таблицы и получаем ответ для |B|.</p>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 8.1 (Базовый уровень)</h4>
+                    <p>Какой запрос найдёт документы, содержащие слова "информатика" и "программирование", но не содержащие слово "математика"?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q8-1-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="a">информатика программирование математика</option>
+                            <option value="b">информатика программирование -математика</option>
+                            <option value="c">информатика OR программирование</option>
+                            <option value="d">"информатика программирование"</option>
+                        </select>
+                        <button id="q8-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q8-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>информатика программирование -математика — оператор - исключает слово "математика"</p>
+                    </details>
+                </div>
+            </section>
+
+            <section id="topic-9" class="topic-section">
+                <h2>Задание №9: Анализирование информации в виде схем</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение анализировать схемы, блок-схемы, диаграммы и извлекать из них информацию.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Типы схем</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Блок-схемы алгоритмов:</strong> прямоугольники (действия), ромбы (условия), овалы (начало/конец)</p>
+                    <p><strong>Схемы данных:</strong> сущности, связи, атрибуты</p>
+                    <p><strong>Диаграммы состояний:</strong> состояния, переходы, условия</p>
+                    <p><strong>Сетевые диаграммы:</strong> узлы, соединения</p>
+                </div>
+
+                <h4>Подсчёт числа путей в ориентированном графе (DAG)</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ol>
+                        <li>Убедитесь, что граф ацикличен (стрелки не образуют циклов) или рассмотрите фрагмент без циклов.</li>
+                        <li>Отсортируйте вершины в топологическом порядке (от источников к стокам).</li>
+                        <li>Инициализируйте dp[старт] = 1, для остальных 0.</li>
+                        <li>Для каждой вершины v по топпорядку: для каждого ребра v→u выполняйте dp[u] += dp[v].</li>
+                        <li>Ответ: dp[финиш]. Если несколько финишей — суммируйте.</li>
+                    </ol>
+                    <p><strong>Замечание:</strong> при небольшом числе вершин допустим ручной пересчёт путей по разветвлениям.</p>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 9.1 (Базовый уровень)</h4>
+                    <p>В блок-схеме ромб обычно обозначает:</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q9-1-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="action">Действие</option>
+                            <option value="condition">Условие</option>
+                            <option value="start">Начало</option>
+                            <option value="end">Конец</option>
+                        </select>
+                        <button id="q9-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q9-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Ромб в блок-схеме обозначает условие (проверку)</p>
+                    </details>
+                </div>
+            </section>
+
+            <section id="topic-10" class="topic-section">
+                <h2>Задание №10: Сравнение чисел в различных системах счисления</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение сравнивать числа в разных системах счисления, знание правил сравнения.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Методы сравнения</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>1. Перевод в десятичную систему</strong> — универсальный метод</p>
+                    <p><strong>2. Сравнение по длине записи</strong> — если основания одинаковы</p>
+                    <p><strong>3. Поразрядное сравнение</strong> — слева направо</p>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 10.1 (Базовый уровень)</h4>
+                    <p>Какое число больше: 1011₂ или 12₁₀?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q10-1-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="1011">1011₂</option>
+                            <option value="12">12₁₀</option>
+                            <option value="equal">Равны</option>
+                        </select>
+                        <button id="q10-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q10-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>1011₂ = 1×8 + 0×4 + 1×2 + 1×1 = 11₁₀<br>11 < 12, поэтому 12₁₀ больше</p>
+                    </details>
+                </div>
+            </section>
+
+            <section id="topic-11" class="topic-section">
+                <h2>Задание №11: Поиск в ОС и текстовом редакторе</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Знание возможностей поиска в операционных системах и текстовых редакторах.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Маски поиска</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>*</strong> — любое количество символов</p>
+                    <p><strong>?</strong> — один любой символ</p>
+                    <p><strong>[abc]</strong> — один из символов в скобках</p>
+                    <p><strong>[0-9]</strong> — любая цифра</p>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 11.1 (Базовый уровень)</h4>
+                    <p>Какая маска найдёт все файлы с расширением .txt?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q11-1-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="*.txt">*.txt</option>
+                            <option value="?.txt">?.txt</option>
+                            <option value="*.txt*">*.txt*</option>
+                            <option value="txt">txt</option>
+                        </select>
+                        <button id="q11-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q11-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>*.txt — * означает любое имя файла, .txt — расширение</p>
+                    </details>
+                </div>
+            </section>
+
+            <section id="topic-12" class="topic-section">
+                <h2>Задание №12: Поисковые средства операционной системы</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Знание расширенных возможностей поиска в операционных системах.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Критерии поиска</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>По размеру:</strong> больше, меньше, равно определённому размеру</p>
+                    <p><strong>По дате:</strong> создан, изменён в определённый период</p>
+                    <p><strong>По типу:</strong> документы, изображения, видео</p>
+                    <p><strong>По содержимому:</strong> поиск текста внутри файлов</p>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 12.1 (Базовый уровень)</h4>
+                    <p>Какой критерий поиска поможет найти файлы, созданные вчера?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q12-1-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="size">По размеру</option>
+                            <option value="date">По дате создания</option>
+                            <option value="type">По типу файла</option>
+                            <option value="name">По имени файла</option>
+                        </select>
+                        <button id="q12-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q12-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>По дате создания — можно указать конкретную дату или период</p>
+                    </details>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <a href="#" id="contactFab" class="contact-fab" title="Есть вопросы?">i</a>
+    <div id="contactCard" class="contact-card" aria-live="polite" aria-hidden="true">
+        <h4>Есть вопросы или пожелания? — пиши:</h4>
+        <div class="contact-links">
+            <a href="https://t.me/tima_pelmeshka" target="_blank" rel="noopener">Telegram</a>
+            <a href="mailto:mr.tim.pumpkin@gmail.com">Gmail</a>
+        </div>
+    </div>
+</body>
+</html>
+

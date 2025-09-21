@@ -170,3 +170,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100); // Уменьшенная задержка для более быстрой работы
     }
 });
+
+// Кнопка контакта (i) и карточка – авто-добавление для страниц курса Windows
+(function contactFabWindows() {
+    function initContact() {
+        let fab = document.getElementById('contactFab');
+        let card = document.getElementById('contactCard');
+        const frag = document.createDocumentFragment();
+        if (!fab) {
+            fab = document.createElement('a');
+            fab.href = '#';
+            fab.id = 'contactFab';
+            fab.className = 'contact-fab';
+            fab.title = 'Есть вопросы?';
+            fab.setAttribute('aria-label', 'Открыть контакты');
+            fab.textContent = 'i';
+            frag.appendChild(fab);
+        }
+        if (!card) {
+            card = document.createElement('div');
+            card.id = 'contactCard';
+            card.className = 'contact-card';
+            card.setAttribute('aria-live', 'polite');
+            card.setAttribute('aria-hidden', 'true');
+            card.innerHTML = '<h4>Есть вопросы — пиши:</h4>' +
+                '<div class="contact-links">' +
+                '<a href="https://t.me/tima_pelmeshka" target="_blank" rel="noopener">Telegram</a>' +
+                '<a href="mailto:mr.tim.pumpkin@gmail.com">mr.tim.pumpkin@gmail.com</a>' +
+                '</div>';
+            frag.appendChild(card);
+        }
+        if (frag.childNodes.length) document.body.appendChild(frag);
+
+        function toggle(force) {
+            const willOpen = typeof force === 'boolean' ? force : !card.classList.contains('active');
+            card.classList.toggle('active', willOpen);
+            card.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+            fab.textContent = willOpen ? '×' : 'i';
+            fab.setAttribute('aria-label', willOpen ? 'Закрыть контакты' : 'Открыть контакты');
+            fab.setAttribute('title', willOpen ? 'Закрыть' : 'Есть вопросы?');
+        }
+        fab.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggle(); });
+        document.addEventListener('click', (e) => {
+            if (!card.classList.contains('active')) return;
+            const el = e.target;
+            if (el === card || el === fab || card.contains(el)) return;
+            toggle(false);
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initContact, { once: true });
+    } else {
+        initContact();
+    }
+})();

@@ -2,34 +2,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin');
 
 :root {
-    /* Основные цвета в стиле Microsoft */
-    --primary-color: #0078d4;
-    --primary-light: #106ebe;
-    --primary-dark: #005a9e;
-    --secondary-color: #e1f5fe;
-    --accent-color: #0078d4;
-    --text-color: #323130;
-    --light-text: #323130;
+    /* Основные цвета светлой темы */
+    --primary-color: #6c63ff;
+    --primary-light: #8a84ff;
+    --primary-dark: #4b44d1;
+    --secondary-color: #e6e0fc;
+    --accent-color: #5851db;
+    --text-color: #333344;
+    --light-text: #333344;
     --border-color: rgba(0, 0, 0, 0.06);
-    --bg-color: #faf9f8;
-    --bg-gradient-1: #faf9f8;
-    --bg-gradient-2: #f3f2f1;
+    --bg-color: #f9f9fb;
+    --bg-gradient-1: #f9f9fb;
+    --bg-gradient-2: #f0f0f5;
     
     /* Элементы интерфейса */
     --header-height: 70px;
-    --shadow: 0 4px 16px rgba(0, 120, 212, 0.06);
-    --shadow-small: 0 2px 8px rgba(0, 120, 212, 0.04);
-    --shadow-hover: 0 6px 24px rgba(0, 120, 212, 0.1);
+    --shadow: 0 4px 16px rgba(98, 87, 255, 0.06);
+    --shadow-small: 0 2px 8px rgba(98, 87, 255, 0.04);
+    --shadow-hover: 0 6px 24px rgba(98, 87, 255, 0.1);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     --radius: 10px;
     --border-light: 1px solid rgba(255, 255, 255, 0.06);
     --border-dark: 1px solid rgba(0, 0, 0, 0.05);
     
     /* Полупрозрачные фоны */
-    --overlay-light: rgba(0, 120, 212, 0.04);
-    --overlay-dark: rgba(0, 120, 212, 0.06);
-    --glassmorphism: rgba(250, 249, 248, 0.9);
-    --header-bg: rgba(250, 249, 248, 0.98);
+    --overlay-light: rgba(108, 99, 255, 0.04);
+    --overlay-dark: rgba(108, 99, 255, 0.06);
+    --glassmorphism: rgba(249, 249, 251, 0.9);
+    --header-bg: rgba(249, 249, 251, 0.98);
 }
 
 * {
@@ -47,6 +47,145 @@ body {
     transition: all 0.4s ease;
     font-weight: 400;
 }
+
+/* Кнопка контакта (i) и карточка */
+.contact-fab {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: #111827;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 150;
+}
+.contact-fab:hover { background: #1f2937; transform: translateY(-1px); }
+
+.contact-card {
+    position: fixed;
+    right: 16px;
+    bottom: 68px;
+    min-width: 260px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 14px 16px;
+    z-index: 150;
+    display: none;
+}
+.contact-card.active { display: block; }
+.contact-card h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #111827; }
+.contact-links { display: flex; flex-direction: column; gap: 8px; }
+.contact-links a { color: #0366d6; text-decoration: none; font-weight: 600; }
+.contact-links a:hover { text-decoration: underline; }
+
+@media (max-width: 576px) {
+    .contact-fab { right: 12px; bottom: 12px; }
+    .contact-card { right: 12px; bottom: 62px; }
+}
+
+/* Контентная типографика и отступы */
+.topic-section {
+    max-width: 880px;
+}
+
+.topic-section h2 { margin: 24px 0 12px; font-weight: 600; }
+.topic-section h3 { margin: 20px 0 10px; font-weight: 600; }
+.topic-section h4 { margin: 14px 0 8px; font-weight: 600; }
+
+.topic-section p,
+.topic-section ul,
+.topic-section ol,
+.topic-section pre,
+.topic-section table { margin-bottom: 12px; }
+
+.topic-section p { font-size: 1rem; line-height: 1.8; }
+.topic-section pre { font-size: 0.95rem; line-height: 1.6; }
+
+/* Минималистичные маркированные списки */
+.topic-section ul { list-style: none; padding-left: 0; }
+.topic-section ul li { position: relative; padding-left: 22px; margin: 6px 0; }
+.topic-section ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.78em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #58a6ff; /* как в курсе по сетям */
+}
+.light-theme .topic-section ul li::before { background: #0366d6; }
+
+/* Вложенные списки: более светлый маркер */
+.topic-section ul ul li::before { background: rgba(88,166,255,0.6); }
+.light-theme .topic-section ul ul li::before { background: rgba(3,102,214,0.6); }
+
+/* Нумерованные списки с аккуратными номерами */
+.topic-section ol { counter-reset: item; padding-left: 0; list-style: none; }
+.topic-section ol li { counter-increment: item; margin: 8px 0; padding-left: 28px; position: relative; }
+.topic-section ol li::before {
+    content: counters(item, '.') '.';
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    font-weight: 600;
+    color: #58a6ff;
+    width: 22px;
+}
+.light-theme .topic-section ol li::before { color: #0366d6; }
+
+/* Кнопки с инлайн-градиентом → плоские */
+button[style*="linear-gradient"],
+button[style*="gradient"] {
+    background: #111827 !important;
+    color: #fff !important;
+    border: 1px solid #111827 !important;
+}
+
+/* Единый стиль интерактивных кнопок */
+button {
+    border-radius: 8px;
+    padding: 8px 14px;
+}
+
+/* Поля ввода: плоские, чёткие */
+input, select, textarea {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88,166,255,0.2);
+}
+
+/* Отступ текста от кружков вариантов (radio) */
+label input[type="radio"] {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Временная блокировка раскрытия решения после проверки */
+details.details-locked {
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+/* Скрываем кнопки/блоки показа решений на страницах ОГЭ */
+.topic-section details { display: none !important; }
+.topic-section details summary { display: none !important; }
 
 /* Заголовок */
 header {
@@ -72,12 +211,9 @@ header {
 .header-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin-left: 64px; /* 20 (left) + 28 (burger width) + 16 (gap) */
+    margin-left: 64px;
     color: var(--light-text);
     letter-spacing: 0.2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 /* Кнопки в хедере */
@@ -295,7 +431,7 @@ header {
 }
 
 .topic-btn.active {
-    color: #111827; /* Чёрный, как в других курсах */
+    color: #111827; /* Чёрный, как в курсе Networks */
     font-weight: 600;
 }
 
@@ -329,7 +465,7 @@ header {
     color: var(--primary-color);
 }
 
-/* Активная подтема в боковом меню */
+/* Активная подтема в боковом меню: подсветка текста и фона (как в курсе Networks) */
 .subtopic.active {
     color: var(--primary-color);
     background-color: var(--overlay-light);
@@ -347,168 +483,6 @@ header {
 
 .content.sidebar-active {
     margin-left: 260px;
-}
-
-/* Контейнер теории: центрирование и ограничение ширины */
-.topic-section {
-    max-width: 900px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
-}
-
-/* Стили для блоков кода - как в курсе Python */
-.code-example {
-    border-radius: 8px;
-    margin: 15px 0;
-    max-width: 100%;
-    overflow-x: auto;
-}
-
-
-
-
-/* Стили для информационных блоков */
-.info {
-    background: linear-gradient(to right, rgba(0, 120, 212, 0.08), rgba(0, 120, 212, 0.03));
-    border: 1px solid rgba(0, 120, 212, 0.15);
-    border-radius: 10px;
-    padding: 18px 20px 18px 24px;
-    margin: 20px 0;
-    position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-}
-
-.info::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 6px;
-    background: linear-gradient(to bottom, #0078d4, #106ebe);
-    border-radius: 0 3px 3px 0;
-}
-
-.info strong {
-    color: #106ebe;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 6px;
-    font-size: 1.05rem;
-}
-
-.light-theme .info {
-    background: linear-gradient(to right, rgba(0, 120, 212, 0.05), rgba(0, 120, 212, 0.02));
-    border: 1px solid rgba(0, 120, 212, 0.1);
-}
-
-.light-theme .info strong {
-    color: #106ebe;
-}
-
-/* Выделенные боксы с теориями/командами */
-.note,
-.tip,
-.warn,
-.danger {
-    border-radius: 10px;
-    padding: 18px 20px 18px 24px;
-    margin: 20px 0;
-    position: relative;
-    background: linear-gradient(to right, rgba(0, 120, 212, 0.08), rgba(0, 120, 212, 0.03));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 120, 212, 0.15);
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.note:hover,
-.tip:hover,
-.warn:hover,
-.danger:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-}
-
-.note::before,
-.tip::before,
-.warn::before,
-.danger::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 6px;
-    background: linear-gradient(to bottom, var(--accent-color), var(--primary-light));
-    border-radius: 0 3px 3px 0;
-}
-
-.note strong,
-.tip strong,
-.warn strong,
-.danger strong {
-    color: var(--primary-color);
-    font-weight: 600;
-    display: block;
-    margin-bottom: 6px;
-    font-size: 1.05rem;
-}
-
-.tip { 
-    background: linear-gradient(to right, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03));
-    border: 1px solid rgba(16, 185, 129, 0.15);
-}
-.tip::before { 
-    background: linear-gradient(to bottom, #10b981, #34d399);
-}
-.tip strong { color: #059669; }
-
-.warn { 
-    background: linear-gradient(to right, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.03));
-    border: 1px solid rgba(245, 158, 11, 0.15);
-}
-.warn::before { 
-    background: linear-gradient(to bottom, #f59e0b, #fbbf24);
-}
-.warn strong { color: #d97706; }
-
-.danger { 
-    background: linear-gradient(to right, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.03));
-    border: 1px solid rgba(239, 68, 68, 0.15);
-}
-.danger::before { 
-    background: linear-gradient(to bottom, #ef4444, #f87171);
-}
-.danger strong { color: #dc2626; }
-
-.light-theme .note,
-.light-theme .tip,
-.light-theme .warn,
-.light-theme .danger {
-    background: linear-gradient(to right, rgba(0, 120, 212, 0.05), rgba(0, 120, 212, 0.02));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 120, 212, 0.1);
-}
-
-.light-theme .note::before {
-    background: linear-gradient(to bottom, var(--primary-color), var(--primary-light));
-}
-
-.light-theme .tip {
-    background: linear-gradient(to right, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
-    border: 1px solid rgba(16, 185, 129, 0.1);
-}
-
-.light-theme .warn {
-    background: linear-gradient(to right, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.02));
-    border: 1px solid rgba(245, 158, 11, 0.1);
-}
-
-.light-theme .danger {
-    background: linear-gradient(to right, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.02));
-    border: 1px solid rgba(239, 68, 68, 0.1);
 }
 
 .welcome {
@@ -554,31 +528,6 @@ header {
     margin-bottom: 10px;
 }
 
-/* Общие стили для списков */
-ul, ol {
-    margin: 0 0 20px 20px;
-    color: var(--text-color);
-}
-
-ul li, ol li {
-    margin-bottom: 10px;
-    line-height: 1.6;
-}
-
-/* Стили для списков в информационных блоках */
-.info ul, .info ol,
-.note ul, .note ol,
-.tip ul, .tip ol,
-.warn ul, .warn ol,
-.danger ul, .danger ol {
-    margin: 10px 0 10px 20px;
-}
-
-.info li, .note li, .tip li, .warn li, .danger li {
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
 /* Стилизация прокрутки для всей страницы */
 body::-webkit-scrollbar {
     width: 6px;
@@ -607,9 +556,7 @@ body::-webkit-scrollbar-thumb {
         display: none;
     }
     
-    .header-title {
-        margin-left: 20px;
-    }
+    .header-title { margin-left: 64px; }
 }
 
 @media (max-width: 768px) {
@@ -624,31 +571,12 @@ body::-webkit-scrollbar-thumb {
     .welcome h2 {
         font-size: 1.2rem;
     }
-    
-    /* Адаптивные стили для блоков кода */
-    .code-example pre {
-        font-size: 0.85rem;
-    }
-    
-    
-    /* Адаптивные стили для информационных блоков */
-    .note,
-    .tip,
-    .warn,
-    .danger,
-    .info {
-        padding: 15px 18px;
-        margin: 15px 0;
-    }
 }
 
 @media (max-width: 576px) {
     .header-title {
         font-size: 1.3rem;
-        margin-left: 44px; /* больше зазор справа от бургера на узких экранах */
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        margin-left: 56px;
     }
     
     .welcome {
@@ -660,23 +588,30 @@ body::-webkit-scrollbar-thumb {
         gap: 10px;
         margin-right: 10px;
     }
-    
-    /* Адаптивные стили для блоков кода на мобильных */
-    .code-example pre {
-        font-size: 0.8rem;
-    }
-    
-    
-    /* Адаптивные стили для информационных блоков на мобильных */
-    .note,
-    .tip,
-    .warn,
-    .danger,
-    .info {
-        padding: 12px 15px;
-        margin: 12px 0;
-    }
 }
+
+/* Мобильные правки: при открытом сайдбаре контент не сдвигаем */
+@media (max-width: 991px) {
+    .content.sidebar-active { margin-left: 0; }
+}
+
+/* Оверлей для мобильного сайдбара */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 98; /* ниже сайдбара (99) */
+}
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Блокировка прокрутки страницы при открытом меню */
+body.no-scroll { overflow: hidden; }
 
 /* Стили для секции с обратной связью */
 .feedback-section {
@@ -685,53 +620,6 @@ body::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Кнопка контакта (i) и карточка */
-.contact-fab {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    border: 1px solid var(--border-color, #e5e7eb);
-    background: #111827;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 18px;
-    text-decoration: none;
-    box-shadow: none;
-    transition: background 0.2s ease, transform 0.2s ease;
-    z-index: 150;
-}
-.contact-fab:hover { background: #1f2937; transform: translateY(-1px); }
-
-.contact-card {
-    position: fixed;
-    right: 16px;
-    bottom: 68px;
-    min-width: 260px;
-    background: #ffffff;
-    border: 1px solid var(--border-color, #e5e7eb);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    padding: 14px 16px;
-    z-index: 150;
-    display: none;
-}
-.contact-card.active { display: block; }
-.contact-card h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #111827; }
-.contact-links { display: flex; flex-direction: column; gap: 8px; }
-.contact-links a { color: #0366d6; text-decoration: none; font-weight: 600; }
-.contact-links a:hover { text-decoration: underline; }
-
-@media (max-width: 576px) {
-    .contact-fab { right: 12px; bottom: 12px; }
-    .contact-card { right: 12px; bottom: 62px; }
 }
 
 .contact-links {

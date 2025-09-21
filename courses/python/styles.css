@@ -462,6 +462,53 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Кнопка контакта (i) и карточка */
+.contact-fab {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    background: #111827;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 150;
+}
+.contact-fab:hover { background: #1f2937; transform: translateY(-1px); }
+
+.contact-card {
+    position: fixed;
+    right: 16px;
+    bottom: 68px;
+    min-width: 260px;
+    background: #ffffff;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 14px 16px;
+    z-index: 150;
+    display: none;
+}
+.contact-card.active { display: block; }
+.contact-card h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #111827; }
+.contact-links { display: flex; flex-direction: column; gap: 8px; }
+.contact-links a { color: #0366d6; text-decoration: none; font-weight: 600; }
+.contact-links a:hover { text-decoration: underline; }
+
+@media (max-width: 576px) {
+    .contact-fab { right: 12px; bottom: 12px; }
+    .contact-card { right: 12px; bottom: 62px; }
+}
+
 .contact-links {
     display: flex;
     flex-direction: column;

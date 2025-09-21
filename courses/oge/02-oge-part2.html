@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ОГЭ по информатике — задания 13–16 (вторая часть). Разбор заданий с развернутым ответом, шаблоны решений, проверка идей.">
+    <meta name="keywords" content="ОГЭ информатика, задания 13-16, развернутый ответ, подготовка к ОГЭ, алгоритмы, программирование">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ОГЭ по информатике — Часть 2 (задания 13–16)">
+    <meta property="og:description" content="Вторая часть: задания 13–16 с развернутым ответом. Подходы, примеры и каркас тренажёра.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/oge/02-oge-part2.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ОГЭ по информатике — Часть 2 (13–16)">
+    <meta name="twitter:description" content="Разбор заданий 13–16, каркас решений и подготовка.">
+    <title>ОГЭ по информатике — Часть 2 (задания 13–16) | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/oge/02-oge-part2.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "ОГЭ по информатике", "item": "https://skl-academy.ru/courses/oge/02-oge-part2.html"}
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ОГЭ по информатике — Часть 2 (задания 13–16)",
+      "description": "Подготовка к ОГЭ по информатике: задания 13–16 с развернутым ответом.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "inLanguage": "ru",
+      "dateModified": "2025-09-16",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/oge/02-oge-part2.html"},
+      "keywords": "ОГЭ информатика, задания 13-16, развернутый ответ"
+    }
+    </script>
+
+    <style>
+        .topic-section { max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+        .note { background: var(--overlay, #2d333b); border-left: 4px solid #7ee787; padding: 12px 16px; border-radius: 8px; }
+        /* Читаемость текста внутри заметок */
+        .note, .note p, .note h4, .note li, .note a { color: #fff; }
+        .light-theme .note { background: #f1f1f1; border-left-color: #2ea44f; }
+        .light-theme .note, .light-theme .note p, .light-theme .note h4, .light-theme .note li { color: #111827; }
+        .nav-between { text-align: center; margin: 30px 0; }
+        .nav-between a { display: inline-block; padding: 12px 22px; border-radius: 30px; text-decoration: none; background: linear-gradient(90deg,#2188ff,#804eda); color: #fff; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+        <h1 class="header-title">ОГЭ: задания 13–16</h1>
+        <div class="header-buttons">
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div id="overlay" class="overlay"></div>
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">Часть 1 (1–12)</button>
+                    <div class="subtopics">
+                        <a href="01-oge-part1.html#intro" class="subtopic">Назад к части 1</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">ОГЭ. Часть 2 (13–16)</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#overview" class="subtopic active">Введение</a>
+                        <a href="#task-13" class="subtopic">13</a>
+                        <a href="#task-14" class="subtopic">14</a>
+                        <a href="#task-15" class="subtopic">15</a>
+                        <a href="#task-16" class="subtopic">16</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section id="overview" class="topic-section">
+                <h2>Введение во вторую часть (13–16)</h2>
+                
+                <div class="note">
+                    <h4>📋 Структура части 2 ОГЭ по информатике</h4>
+                    <p><strong>Время выполнения:</strong> 45 минут на 4 задания</p>
+                    <p><strong>Формат ответов:</strong> развернутый ответ с обоснованием</p>
+                    <p><strong>Оценка:</strong> 2-3 балла за каждое задание, максимум 10 баллов</p>
+                    <p><strong>Особенности:</strong> ответы вносятся в бланк ответов №2, проверяются экспертами</p>
+                </div>
+
+                <h3>🎯 Стратегия выполнения</h3>
+                <ul>
+                    <li><strong>Время на задание:</strong> 10-12 минут максимум</li>
+                    <li><strong>Порядок:</strong> сначала задания 13-14 (легче), потом 15-16 (сложнее)</li>
+                    <li><strong>Проверка:</strong> обязательно перечитайте условие и проверьте решение</li>
+                    <li><strong>Оформление:</strong> четко и разборчиво, с обоснованием каждого шага</li>
+                </ul>
+
+                <h3>📊 Критерии оценивания</h3>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>2 балла:</strong> полное правильное решение</p>
+                    <p><strong>1 балл:</strong> частично правильное решение с незначительными ошибками</p>
+                    <p><strong>0 баллов:</strong> неверное решение или отсутствие решения</p>
+                </div>
+
+                <h3>⚠️ Типичные ошибки</h3>
+                <ul>
+                    <li>Невнимательное чтение условия</li>
+                    <li>Неправильное оформление ответа</li>
+                    <li>Отсутствие обоснования решения</li>
+                    <li>Арифметические ошибки в вычислениях</li>
+                    <li>Неправильное понимание формата ответа</li>
+                </ul>
+
+                <div class="practice">
+                    <h4>📊 Тренировочный тест</h4>
+                    <p>Проверьте свои знания перед изучением конкретных заданий:</p>
+                    <div id="intro-quiz-part2">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Сколько баллов можно получить за задание 13?</p>
+                            <div>
+                                <label><input type="radio" name="intro2-q1" value="a"> 1 балл</label><br>
+                                <label><input type="radio" name="intro2-q1" value="b"> 2 балла</label><br>
+                                <label><input type="radio" name="intro2-q1" value="c"> 3 балла</label><br>
+                                <label><input type="radio" name="intro2-q1" value="d"> 4 балла</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> В каком бланке оформляются ответы части 2?</p>
+                            <div>
+                                <label><input type="radio" name="intro2-q2" value="a"> Бланк ответов №1</label><br>
+                                <label><input type="radio" name="intro2-q2" value="b"> Бланк ответов №2</label><br>
+                                <label><input type="radio" name="intro2-q2" value="c"> Дополнительный бланк</label><br>
+                                <label><input type="radio" name="intro2-q2" value="d"> Любой бланк</label>
+                            </div>
+                        </div>
+                        <button id="intro2-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить ответы</button>
+                        <div id="intro2-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="task-13" class="topic-section">
+                <h2>Задание №13: Создание презентации или форматирование текста</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение создавать презентации и форматировать текстовые документы с соблюдением правил оформления и принципов читабельности.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Форматирование текстовых документов</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Стили заголовков:</strong></p>
+                    <ul>
+                        <li>Заголовок 1 — для основных разделов</li>
+                        <li>Заголовок 2 — для подразделов</li>
+                        <li>Заголовок 3 — для пунктов</li>
+                    </ul>
+                    
+                    <p><strong>Форматирование текста:</strong></p>
+                    <ul>
+                        <li>Выравнивание: по левому краю для основного текста</li>
+                        <li>Интервалы: 1,5 для основного текста</li>
+                        <li>Отступы: красная строка 1,25 см</li>
+                        <li>Поля: 2 см со всех сторон</li>
+                    </ul>
+                </div>
+
+                <h4>Создание презентаций</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Правило 6×6:</strong></p>
+                    <ul>
+                        <li>Не более 6 строк на слайде</li>
+                        <li>Не более 6 слов в строке</li>
+                        <li>Крупный, читаемый шрифт (24+ пунктов)</li>
+                </ul>
+                    
+                    <p><strong>Дизайн:</strong></p>
+                    <ul>
+                        <li>Единый стиль для всех слайдов</li>
+                        <li>Контрастные цвета (тёмный текст на светлом фоне)</li>
+                        <li>Минимум текста, максимум визуализации</li>
+                        <li>Использование диаграмм, схем, изображений</li>
+                    </ul>
+                </div>
+
+                <h4>Колонтитулы и нумерация</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Колонтитулы:</strong></p>
+                    <ul>
+                        <li>Верхний колонтитул: название документа</li>
+                        <li>Нижний колонтитул: номер страницы</li>
+                        <li>Нумерация: арабскими цифрами</li>
+                    </ul>
+                </div>
+
+                <h4>Расширенная теория (для программирования)</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Типовые форматы входа</strong>: одно число; несколько чисел в строке; N строк; до конца файла.</li>
+                        <li><strong>Паттерны</strong>: однопроходные агрегаты, частоты (dict/Counter), два указателя, префиксные суммы, НОД/НOK.</li>
+                        <li><strong>Строки</strong>: подсчёт подстрок, фильтрация символов, нормализация регистра и пробелов.</li>
+                        <li><strong>Ошибки</strong>: неправильное чтение входа, выход за границы, деление на ноль, O(n²) при n≈10⁵.</li>
+                        <li><strong>Чек-лист</strong>: крайние случаи; сложность ≤ O(n log n); понятные имена; самопроверка на 2–3 тестах.</li>
+                    </ul>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Документы</strong>: стили заголовков для автоматического оглавления и навигации.</li>
+                        <li><strong>Презентации</strong>: правило 6×6, единый стиль, контраст, иерархия визуальных элементов.</li>
+                        <li><strong>Типовые ошибки</strong>: перегрузка текстом, мелкий шрифт, пёстрые цвета, несогласованные отступы.</li>
+                        <li><strong>Чек-лист</strong>: структура, читабельность, единый стиль, корректная нумерация/колонтитулы.</li>
+                    </ul>
+                </div>
+
+                <h4>Быстрый старт Python (для решения Задания 16)</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Ввод до нуля:</strong> читайте числа в цикле, пока не встретите 0.</li>
+                        <li><strong>Проверка условия:</strong> кратность (<code>x % 6 == 0</code>) и последняя цифра (<code>x % 10 == 4</code>).</li>
+                        <li><strong>Суммирование:</strong> поддерживайте переменную <code>total</code>, добавляя подходящие значения.</li>
+                        <li><strong>Вывод:</strong> <code>print(total)</code> в конце.</li>
+                    </ul>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">total = 0
+while True:
+    x = int(input())
+    if x == 0:
+        break
+    if x % 6 == 0 and x % 10 == 4:
+        total += x
+print(total)</pre>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 13.1 (Базовый уровень)</h4>
+                    <p>Вам нужно создать презентацию на тему "Информационные технологии". Какие принципы оформления следует соблюдать?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <textarea id="q13-1-input" placeholder="Ваш ответ" style="width:100%;min-height:100px;padding:8px;border-radius:6px;resize:vertical;"></textarea>
+                    </div>
+                    <button id="q13-1-check" style="margin-top:8px;padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                    <div id="q13-1-result" style="margin-top:8px;"></div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>1. Единый стиль для всех слайдов<br>2. Правило 6×6 (не более 6 строк, 6 слов в строке)<br>3. Крупный читаемый шрифт (24+ пунктов)<br>4. Контрастные цвета<br>5. Минимум текста, максимум визуализации<br>6. Использование диаграмм и схем</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 13.2 (Средний уровень)</h4>
+                    <p>В текстовом документе нужно оформить заголовки разделов. Какой стиль следует использовать для основного заголовка?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q13-2-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="heading1">Заголовок 1</option>
+                            <option value="heading2">Заголовок 2</option>
+                            <option value="heading3">Заголовок 3</option>
+                            <option value="normal">Обычный</option>
+                        </select>
+                        <button id="q13-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q13-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Заголовок 1 — используется для основных разделов документа</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 13.3 (Повышенный уровень)</h4>
+                    <p>В презентации на слайде размещено 8 строк текста по 10 слов в каждой. Соответствует ли это правилам оформления презентаций?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <select id="q13-3-input" style="padding:8px 10px;border-radius:6px;">
+                            <option value="">Выберите ответ</option>
+                            <option value="yes">Да, соответствует</option>
+                            <option value="no">Нет, не соответствует</option>
+                            <option value="partially">Частично соответствует</option>
+                        </select>
+                        <button id="q13-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q13-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Нет, не соответствует. Правило 6×6 требует не более 6 строк и не более 6 слов в строке. Нужно сократить текст и разбить информацию на несколько слайдов.</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-13">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Какой приём улучшит читабельность слайда сильнее всего?</p>
+                            <div>
+                                <label><input type="radio" name="quiz13-q1" value="a"> Текст кегль 10, много предложений</label><br>
+                                <label><input type="radio" name="quiz13-q1" value="b"> Большие поля, единый стиль, правило 6×6</label><br>
+                                <label><input type="radio" name="quiz13-q1" value="c"> Пестрые шрифты на каждом слайде</label><br>
+                                <label><input type="radio" name="quiz13-q1" value="d"> Много анимации</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Для основного текста документа рекомендуется интервал:</p>
+                    <div>
+                                <label><input type="radio" name="quiz13-q2" value="a"> 1,0</label><br>
+                                <label><input type="radio" name="quiz13-q2" value="b"> 1,5</label><br>
+                                <label><input type="radio" name="quiz13-q2" value="c"> 2,0</label><br>
+                                <label><input type="radio" name="quiz13-q2" value="d"> 2,5</label>
+                            </div>
+                        </div>
+                        <button id="quiz13-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz13-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="task-14" class="topic-section">
+                <h2>Задание №14: Обработка большого массива данных</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение работать с электронными таблицами, обрабатывать большие массивы данных, использовать формулы и функции для анализа.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Основные функции Excel</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Математические функции:</strong></p>
+                    <ul>
+                        <li><strong>SUM(диапазон)</strong> — сумма значений</li>
+                        <li><strong>AVERAGE(диапазон)</strong> — среднее арифметическое</li>
+                        <li><strong>MAX(диапазон)</strong> — максимальное значение</li>
+                        <li><strong>MIN(диапазон)</strong> — минимальное значение</li>
+                        <li><strong>COUNT(диапазон)</strong> — количество чисел</li>
+                    </ul>
+                    
+                    <p><strong>Условные функции:</strong></p>
+                    <ul>
+                        <li><strong>COUNTIF(диапазон, условие)</strong> — подсчёт по условию</li>
+                        <li><strong>SUMIF(диапазон, условие, диапазон_суммы)</strong> — сумма по условию</li>
+                        <li><strong>IF(условие, значение_если_истина, значение_если_ложь)</strong> — условная функция</li>
+                    </ul>
+                </div>
+
+                <h4>Функции поиска и ссылок</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>VLOOKUP(искомое_значение, таблица, номер_столбца, [точное_совпадение]):</strong></p>
+                    <ul>
+                        <li>Поиск значения в первом столбце таблицы</li>
+                        <li>Возвращает значение из указанного столбца</li>
+                        <li>0 или FALSE — точное совпадение</li>
+                        <li>1 или TRUE — приблизительное совпадение</li>
+                    </ul>
+                    
+                    <p><strong>XLOOKUP(искомое_значение, массив_поиска, массив_возврата):</strong></p>
+                    <ul>
+                        <li>Современная альтернатива VLOOKUP</li>
+                        <li>Более гибкая и удобная</li>
+                    </ul>
+                </div>
+
+                <h4>Сортировка и фильтрация</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Сортировка:</strong></p>
+                    <ul>
+                        <li>По возрастанию (A→Z, 1→9)</li>
+                        <li>По убыванию (Z→A, 9→1)</li>
+                        <li>Многоуровневая сортировка</li>
+                    </ul>
+                    
+                    <p><strong>Фильтрация:</strong></p>
+                    <ul>
+                        <li>Автофильтр — быстрая фильтрация</li>
+                        <li>Расширенный фильтр — сложные условия</li>
+                        <li>Фильтр по цвету, тексту, числовым значениям</li>
+                    </ul>
+                </div>
+
+                <h4>Сводные таблицы</h4>
+                <div style="background:#f0f8ff;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Назначение:</strong> группировка и агрегирование данных</p>
+                    <p><strong>Компоненты:</strong></p>
+                    <ul>
+                        <li><strong>Строки</strong> — группировка по строкам</li>
+                        <li><strong>Столбцы</strong> — группировка по столбцам</li>
+                        <li><strong>Значения</strong> — агрегируемые данные</li>
+                        <li><strong>Фильтры</strong> — дополнительные ограничения</li>
+                    </ul>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Формулы</strong>: агрегаты (SUM/AVERAGE), условные (IF/COUNTIF/SUMIF), поисковые (VLOOKUP/XLOOKUP).</li>
+                        <li><strong>Практика</strong>: сортировка/фильтрация, абсолютные/относительные ссылки, именованные диапазоны.</li>
+                        <li><strong>Сводные</strong>: поля строк/столбцов/значений/фильтров; группировка, итоги.</li>
+                        <li><strong>Чек-лист</strong>: проверка диапазонов, типы данных в столбцах, отсутствие лишних пробелов.</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 14.1 (Базовый уровень)</h4>
+                    <p>В таблице есть столбец A с оценками от 1 до 5. Какая формула подсчитает количество пятёрок?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q14-1-input" type="text" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;width:300px;">
+                        <button id="q14-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q14-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>=COUNTIF(A:A,5) — подсчитывает количество ячеек в столбце A, равных 5</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 14.2 (Средний уровень)</h4>
+                    <p>В таблице есть столбцы: A (название товара), B (цена), C (количество). Какая формула вычислит общую стоимость всех товаров?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q14-2-input" type="text" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;width:300px;">
+                        <button id="q14-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q14-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>=SUMPRODUCT(B:B,C:C) — умножает каждую цену на количество и суммирует результаты</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 14.3 (Повышенный уровень)</h4>
+                    <p>В таблице есть столбцы: A (фамилия), B (оценка). Нужно найти фамилию студента с максимальной оценкой. Какая формула это сделает?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q14-3-input" type="text" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;width:300px;">
+                        <button id="q14-3-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q14-3-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>=INDEX(A:A,MATCH(MAX(B:B),B:B,0)) — находит максимальную оценку, затем возвращает соответствующую фамилию</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-14">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Функция AVERAGE вычисляет:</p>
+                            <div>
+                                <label><input type="radio" name="quiz14-q1" value="a"> Сумму значений</label><br>
+                                <label><input type="radio" name="quiz14-q1" value="b"> Среднее арифметическое</label><br>
+                                <label><input type="radio" name="quiz14-q1" value="c"> Максимальное значение</label><br>
+                                <label><input type="radio" name="quiz14-q1" value="d"> Количество значений</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Функция VLOOKUP используется для:</p>
+                            <div>
+                                <label><input type="radio" name="quiz14-q2" value="a"> Сортировки данных</label><br>
+                                <label><input type="radio" name="quiz14-q2" value="b"> Поиска значений в таблице</label><br>
+                                <label><input type="radio" name="quiz14-q2" value="c"> Фильтрации данных</label><br>
+                                <label><input type="radio" name="quiz14-q2" value="d"> Создания диаграмм</label>
+                            </div>
+                        </div>
+                        <button id="quiz14-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz14-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="task-15" class="topic-section">
+                <h2>Задание №15: Короткий алгоритм в различных средах исполнения</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение анализировать и выполнять алгоритмы для различных исполнителей, понимание принципов работы алгоритмов.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Типы исполнителей</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>1. Робот на поле:</strong></p>
+                    <ul>
+                        <li>Позиция: координаты (x, y)</li>
+                        <li>Направление: вверх, вниз, влево, вправо</li>
+                        <li>Команды: вверх, вниз, влево, вправо, закрасить</li>
+                        <li>Ограничения: границы поля</li>
+                    </ul>
+                    
+                    <p><strong>2. Черепашка (графический исполнитель):</strong></p>
+                    <ul>
+                        <li>Позиция: координаты (x, y)</li>
+                        <li>Направление: угол поворота</li>
+                        <li>Состояние пера: поднято/опущено</li>
+                        <li>Команды: вперёд, назад, поворот, поднять перо, опустить перо</li>
+                    </ul>
+                </div>
+
+                <h4>Алгоритмы с циклами</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Цикл "пока" (while):</strong></p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+пока условие выполняется:
+    выполнить действие
+    изменить переменную</pre>
+                    
+                    <p><strong>Цикл "для" (for):</strong></p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+для i от 1 до n:
+    выполнить действие</pre>
+                    
+                    <p><strong>Инвариант цикла:</strong> свойство, которое сохраняется на каждой итерации</p>
+                </div>
+
+                <h4>Алгоритм анализа</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ol>
+                        <li><strong>Изучите систему команд</strong> — какие команды доступны</li>
+                        <li><strong>Определите начальное состояние</strong> — позиция, направление, содержимое памяти</li>
+                        <li><strong>Выполните трассировку</strong> — пошагово выполните алгоритм</li>
+                        <li><strong>Проверьте граничные случаи</strong> — что происходит на границах</li>
+                        <li><strong>Найдите инвариант</strong> — что сохраняется в циклах</li>
+                    </ol>
+                </div>
+
+                <h4>Расширенная теория</h4>
+                <div style="background:#fefce8;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Исполнители</strong>: робот/черепашка/Тьюринг — фиксируйте состояния и ограничения.</li>
+                        <li><strong>Циклы</strong>: инварианты, границы, конечность; избегайте бесконечных циклов.</li>
+                        <li><strong>Трассировка</strong>: таблица шагов и состояний, проверка на граничных примерах.</li>
+                        <li><strong>Чек-лист</strong>: корректность команд, соблюдение границ поля/ленты, порядок поворотов.</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 15.1 (Базовый уровень)</h4>
+                    <p>Робот находится в позиции (0, 0) и смотрит вправо. Выполните алгоритм:</p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:10px 0;">
+нц 3 раз
+    вперёд
+    поворот налево
+кц</pre>
+                    <p>В какой позиции окажется робот?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q15-1-input" type="text" placeholder="Ваш ответ (x,y)" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q15-1-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q15-1-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Начало: (0, 0), направление вправо<br>1. вперёд: (1, 0), поворот налево: направление вверх<br>2. вперёд: (1, 1), поворот налево: направление влево<br>3. вперёд: (0, 1), поворот налево: направление вниз<br>Ответ: (0, 1)</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 15.2 (Средний уровень)</h4>
+                    <p>Черепашка находится в позиции (0, 0), направление 0°, перо опущено. Выполните алгоритм:</p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:10px 0;">
+нц 4 раз
+    вперёд 2
+    поворот 90°
+кц</pre>
+                    <p>Какую фигуру нарисует черепашка?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <input id="q15-2-input" type="text" placeholder="Ваш ответ" style="padding:8px 10px;border-radius:6px;">
+                        <button id="q15-2-check" style="padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                        <span id="q15-2-result"></span>
+                    </div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Черепашка нарисует квадрат со стороной 2:<br>1. (0,0)→(2,0) вправо<br>2. (2,0)→(2,2) вверх<br>3. (2,2)→(0,2) влево<br>4. (0,2)→(0,0) вниз</p>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 15.3 (Повышенный уровень)</h4>
+                    <p>Дан алгоритм для робота:</p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:10px 0;">
+нц пока не закрашено
+    вперёд
+    если закрашено справа
+        то поворот налево
+    иначе поворот направо
+    кц
+    вперёд</pre>
+                    <p>Робот начинает в позиции (1, 1), смотрит вправо, справа от него закрашенная клетка. Что произойдёт?</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <textarea id="q15-3-input" placeholder="Ваш ответ" style="width:100%;min-height:80px;padding:8px;border-radius:6px;resize:vertical;"></textarea>
+                    </div>
+                    <button id="q15-3-check" style="margin-top:8px;padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                    <div id="q15-3-result" style="margin-top:8px;"></div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <p>Робот будет двигаться по периметру закрашенной области:<br>1. Вперёд, справа закрашено → поворот налево<br>2. Вперёд, справа не закрашено → поворот направо<br>3. Повторяется до возврата в начальную позицию<br>4. Вперёд — выход из цикла</p>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-15">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Инвариант цикла — это:</p>
+                            <div>
+                                <label><input type="radio" name="quiz15-q1" value="a"> Условие выхода из цикла</label><br>
+                                <label><input type="radio" name="quiz15-q1" value="b"> Свойство, сохраняющееся на каждой итерации</label><br>
+                                <label><input type="radio" name="quiz15-q1" value="c"> Количество итераций цикла</label><br>
+                                <label><input type="radio" name="quiz15-q1" value="d"> Переменная цикла</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> При анализе алгоритма важно проверить:</p>
+                            <div>
+                                <label><input type="radio" name="quiz15-q2" value="a"> Только начальное состояние</label><br>
+                                <label><input type="radio" name="quiz15-q2" value="b"> Только конечное состояние</label><br>
+                                <label><input type="radio" name="quiz15-q2" value="c"> Граничные случаи</label><br>
+                                <label><input type="radio" name="quiz15-q2" value="d"> Только циклы</label>
+                            </div>
+                        </div>
+                        <button id="quiz15-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz15-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="task-16" class="topic-section">
+                <h2>Задание №16: Программирование</h2>
+                
+                <div class="note">
+                    <h4>🎯 Что проверяется</h4>
+                    <p>Умение писать программы на языке программирования, решать алгоритмические задачи, работать с данными различных типов.</p>
+                </div>
+
+                <h3>📚 Теоретическая база</h3>
+                
+                <h4>Основные конструкции языка</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Ввод и вывод данных:</strong></p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+# Ввод
+n = int(input())  # целое число
+s = input()       # строка
+a = list(map(int, input().split()))  # список чисел
+
+# Вывод
+print(n)          # вывод числа
+print(s)          # вывод строки
+print(*a)         # вывод списка через пробел</pre>
+                    
+                    <p><strong>Условные операторы:</strong></p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+if условие:
+    действие1
+elif условие2:
+    действие2
+else:
+    действие3</pre>
+                </div>
+
+                <h4>Циклы</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Цикл for:</strong></p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+for i in range(n):        # от 0 до n-1
+    действие
+
+for i in range(1, n+1):   # от 1 до n
+    действие
+
+for item in список:       # по элементам списка
+    действие</pre>
+                    
+                    <p><strong>Цикл while:</strong></p>
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+while условие:
+    действие
+    изменение_переменной</pre>
+                </div>
+
+                <h4>Работа со строками и списками</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <p><strong>Строки:</strong></p>
+                    <ul>
+                        <li><strong>len(s)</strong> — длина строки</li>
+                        <li><strong>s[i]</strong> — символ по индексу</li>
+                        <li><strong>s[i:j]</strong> — срез строки</li>
+                        <li><strong>s.split()</strong> — разбиение по пробелам</li>
+                        <li><strong>s.strip()</strong> — удаление пробелов</li>
+                    </ul>
+                    
+                    <p><strong>Списки:</strong></p>
+                    <ul>
+                        <li><strong>len(a)</strong> — длина списка</li>
+                        <li><strong>a[i]</strong> — элемент по индексу</li>
+                        <li><strong>a.append(x)</strong> — добавление элемента</li>
+                        <li><strong>a.sort()</strong> — сортировка</li>
+                        <li><strong>sum(a)</strong> — сумма элементов</li>
+                </ul>
+                </div>
+
+                <h4>Алгоритм решения задач</h4>
+                <div style="background:#f0f8ff;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ol>
+                        <li><strong>Внимательно прочитайте условие</strong> — что требуется найти</li>
+                        <li><strong>Определите входные данные</strong> — что дано</li>
+                        <li><strong>Подумайте об алгоритме</strong> — как решить задачу</li>
+                        <li><strong>Проверьте граничные случаи</strong> — пустой ввод, минимумы/максимумы</li>
+                        <li><strong>Напишите код</strong> — реализуйте алгоритм</li>
+                        <li><strong>Протестируйте</strong> — проверьте на примерах</li>
+                    </ol>
+                </div>
+
+                <h4>Типы данных и структуры</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>int, float, bool</strong> — числа и логические значения. Осторожно с делением и остатком.</li>
+                        <li><strong>str</strong> — неизменяемые строки: <code>len</code>, срезы, <code>split</code>, <code>join</code>, <code>count</code>, <code>replace</code>.</li>
+                        <li><strong>list</strong> — динамический массив: индексы, срезы, <code>append</code>, <code>pop</code>, <code>sort</code>, <code>reverse</code>.</li>
+                        <li><strong>tuple</strong> — неизменяемая последовательность; удобно как ключ словаря.</li>
+                        <li><strong>dict</strong> — ассоциативный массив: подсчёт частот, отображения.</li>
+                        <li><strong>set</strong> — множество: быстрое <code>in</code>, устранение повторов, пересечения/разности.</li>
+                    </ul>
+                </div>
+
+                <h4>Шаблоны ввода данных</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+# Одно число
+n = int(input())
+
+# Несколько чисел в строке
+a, b = map(int, input().split())
+
+# Список чисел из одной строки
+arr = list(map(int, input().split()))
+
+# N строк входа
+n = int(input())
+lines = [input().rstrip() for _ in range(n)]
+
+# До конца файла (в интерактивных средах может не потребоваться)
+import sys
+data = sys.stdin.read().strip().split()</pre>
+                </div>
+
+                <h4>Частые приёмы и алгоритмы</h4>
+                <div style="background:#fff3cd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Однопроходные агрегаты</strong>: сумма/минимум/максимум/счётчики за один проход.</li>
+                        <li><strong>Два указателя</strong> (two pointers): поиск подотрезков/пар в отсортированном массиве.</li>
+                        <li><strong>Префиксы</strong>: префиксные суммы/минимумы для быстрых запросов по отрезкам.</li>
+                        <li><strong>Частоты</strong>: <code>dict</code> для подсчёта встречаемости; поиск моды/уникальных.</li>
+                        <li><strong>Множества</strong>: проверка принадлежности/пересечение/удаление повторов за O(1) в среднем.</li>
+                        <li><strong>Сортировка с ключом</strong>: <code>sorted(items, key=...)</code> для кастомного порядка.</li>
+                        <li><strong>Стек</strong>: проверка скобочной последовательности, монотонный стек для ближайших элементов.</li>
+                        <li><strong>Делители и НОД</strong>: алгоритм Евклида, <code>lcm(a,b)=a*b//gcd(a,b)</code>.</li>
+                        <li><strong>Строки</strong>: два указателя, <code>in</code>, <code>count</code>, срезы, табличные замены.</li>
+                    </ul>
+                </div>
+
+                <h4>Оценка сложности</h4>
+                <div style="background:#f0f8ff;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li><strong>Время</strong>: предпочитайте O(n) или O(n log n). Избегайте вложенных полных O(n²), если можно.</li>
+                        <li><strong>Память</strong>: дополнительные структуры используют O(n). Учитывайте ограничения.</li>
+                        <li><strong>Границы</strong>: проверяйте пустые данные, n=1, максимальные значения.</li>
+                    </ul>
+                </div>
+
+                <h4>Подводные камни</h4>
+                <div style="background:#fdecea;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li>Неправильное чтение входа (лишние пробелы/пустые строки).</li>
+                        <li>Деление на ноль, выход за границы массива.</li>
+                        <li>Сравнение float — используйте допуск или работайте с целыми.</li>
+                        <li>Мутация списка при итерации по нему.</li>
+                        <li>Сложность: случайные вложенные циклы по 10⁵ элементов → TLE.</li>
+                    </ul>
+                </div>
+
+                <h4>Шаблоны решений</h4>
+                <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:10px 0;">
+                    <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+# 1) Счётчики/агрегаты
+n = int(input())
+arr = list(map(int, input().split()))
+total = 0
+even = 0
+for x in arr:
+    total += x
+    if x % 2 == 0:
+        even += 1
+print(total, even)
+
+# 2) Частоты
+from collections import Counter
+freq = Counter(arr)
+print(freq.get(5, 0))
+
+# 3) Два указателя (сумма == S в отсортированном массиве)
+S = int(input())
+i, j = 0, len(arr) - 1
+found = False
+while i < j:
+    s = arr[i] + arr[j]
+    if s == S:
+        found = True; break
+    if s < S:
+        i += 1
+    else:
+        j -= 1
+print('YES' if found else 'NO')</pre>
+                </div>
+
+                <h4>Памятка-проверочный список</h4>
+                <div style="background:#e8f4fd;padding:15px;border-radius:8px;margin:10px 0;">
+                    <ul>
+                        <li>Корректно читаю весь ввод? Нет лишних <code>input()</code>?</li>
+                        <li>Обрабатываю пустые случаи, крайние значения?</li>
+                        <li>Сложность приемлема (≤ O(n log n))?</li>
+                        <li>Имена переменных понятные, без затенения встроенных?</li>
+                        <li>Проверил на 2–3 своих тестах и из условия?</li>
+                </ul>
+                </div>
+
+                <h3>📝 Практические задачи</h3>
+                
+                <div class="practice">
+                    <h4>Задача 16.1 (Базовый уровень)</h4>
+                    <p>Напишите программу, которая находит сумму всех чисел от 1 до n (включительно).</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <textarea id="q16-1-input" placeholder="Ваш код" style="width:100%;min-height:100px;padding:8px;border-radius:6px;resize:vertical;font-family:monospace;"></textarea>
+                    </div>
+                    <button id="q16-1-check" style="margin-top:8px;padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                    <div id="q16-1-result" style="margin-top:8px;"></div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+n = int(input())
+sum = 0
+for i in range(1, n + 1):
+    sum += i
+print(sum)</pre>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 16.2 (Средний уровень)</h4>
+                    <p>Напишите программу, которая находит количество чётных чисел в списке.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <textarea id="q16-2-input" placeholder="Ваш код" style="width:100%;min-height:100px;padding:8px;border-radius:6px;resize:vertical;font-family:monospace;"></textarea>
+                    </div>
+                    <button id="q16-2-check" style="margin-top:8px;padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                    <div id="q16-2-result" style="margin-top:8px;"></div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+a = list(map(int, input().split()))
+count = 0
+for x in a:
+    if x % 2 == 0:
+        count += 1
+print(count)</pre>
+                    </details>
+                </div>
+
+                <div class="practice">
+                    <h4>Задача 16.3 (Повышенный уровень)</h4>
+                    <p>Напишите программу, которая находит наибольший общий делитель двух чисел.</p>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                        <textarea id="q16-3-input" placeholder="Ваш код" style="width:100%;min-height:100px;padding:8px;border-radius:6px;resize:vertical;font-family:monospace;"></textarea>
+                    </div>
+                    <button id="q16-3-check" style="margin-top:8px;padding:8px 14px;border-radius:20px;cursor:pointer;">Проверить</button>
+                    <div id="q16-3-result" style="margin-top:8px;"></div>
+                    <details style="margin-top:8px;">
+                        <summary>Решение</summary>
+                        <pre style="background:#f1f3f4;padding:10px;border-radius:4px;margin:5px 0;">
+a, b = map(int, input().split())
+while b:
+    a, b = b, a % b
+print(a)</pre>
+                    </details>
+                </div>
+
+                <h3>🎯 Тренировочный блок</h3>
+                <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:15px 0;">
+                    <h4>Быстрая проверка знаний</h4>
+                    <div id="quiz-16">
+                        <div class="quiz-question">
+                            <p><strong>1.</strong> Как получить длину списка a?</p>
+                            <div>
+                                <label><input type="radio" name="quiz16-q1" value="a"> a.length()</label><br>
+                                <label><input type="radio" name="quiz16-q1" value="b"> len(a)</label><br>
+                                <label><input type="radio" name="quiz16-q1" value="c"> a.size()</label><br>
+                                <label><input type="radio" name="quiz16-q1" value="d"> count(a)</label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <p><strong>2.</strong> Как проверить, что число n чётное?</p>
+                            <div>
+                                <label><input type="radio" name="quiz16-q2" value="a"> n % 2 == 0</label><br>
+                                <label><input type="radio" name="quiz16-q2" value="b"> n / 2 == 0</label><br>
+                                <label><input type="radio" name="quiz16-q2" value="c"> n == 2</label><br>
+                                <label><input type="radio" name="quiz16-q2" value="d"> n > 0</label>
+                            </div>
+                        </div>
+                        <button id="quiz16-check" style="margin-top:15px;padding:10px 20px;border-radius:25px;cursor:pointer;background:linear-gradient(90deg,#2188ff,#804eda);color:white;border:none;">Проверить</button>
+                        <div id="quiz16-result" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <a href="#" id="contactFab" class="contact-fab" title="Есть вопросы?">i</a>
+    <div id="contactCard" class="contact-card" aria-live="polite" aria-hidden="true">
+        <h4>Есть вопросы — пиши:</h4>
+        <div class="contact-links">
+            <a href="https://t.me/tima_pelmeshka" target="_blank" rel="noopener">Telegram</a>
+            <a href="mailto:mr.tim.pumpkin@gmail.com">mr.tim.pumpkin@gmail.com</a>
+        </div>
+    </div>
+</body>
+</html>
+
