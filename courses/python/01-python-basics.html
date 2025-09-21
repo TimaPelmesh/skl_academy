@@ -1285,6 +1285,29 @@ print(a >> 2)     # 15 = 0000 1111 (сдвиг на 2 бита вправо)</co
                 });
             }
             
+           // Переключение темы (светлая/темная)
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            // Загружаем сохраненную тему
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                body.classList.add('light-theme');
+            }
+            
+            // Обработка переключения темы
+            themeToggle.addEventListener('click', () => {
+                // Переключаем класс light-theme у body
+                body.classList.toggle('light-theme');
+                
+                // Сохраняем текущую тему в localStorage
+                let theme = 'dark';
+                if (body.classList.contains('light-theme')) {
+                    theme = 'light';
+                }
+                localStorage.setItem('theme', theme);
+            });
+            
             // Переменные для элементов интерфейса
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
@@ -1409,36 +1432,6 @@ print(a >> 2)     # 15 = 0000 1111 (сдвиг на 2 бита вправо)</co
             window.addEventListener('scroll', setActiveSection);
             setActiveSection();
             
-            // Переключение темы
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-            // Проверка сохраненной темы в localStorage
-            const currentTheme = localStorage.getItem('theme');
-            if (currentTheme) {
-                // Если сохранена светлая тема
-                if (currentTheme === 'light') {
-                    body.classList.add('light-theme');
-                }
-            } else {
-                // Если ничего не сохранено, устанавливаем тему по предпочтениям системы
-                if (!prefersDarkScheme.matches) {
-                    body.classList.add('light-theme');
-                }
-            }
-
-            themeToggle.addEventListener('click', () => {
-                // Переключаем класс light-theme у body
-                body.classList.toggle('light-theme');
-                
-                // Сохраняем текущую тему в localStorage
-                let theme = 'dark';
-                if (body.classList.contains('light-theme')) {
-                    theme = 'light';
-                }
-                localStorage.setItem('theme', theme);
-            });
         });
     </script>
     <script src="script.js"></script>

@@ -501,39 +501,48 @@ body::-webkit-scrollbar-thumb {
 .contact-card.active { display: block; }
 .contact-card h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #111827; }
 .contact-links { display: flex; flex-direction: column; gap: 8px; }
-.contact-links a { color: #0366d6; text-decoration: none; font-weight: 600; }
-.contact-links a:hover { text-decoration: underline; }
+.contact-links a { 
+    color: #0366d6; 
+    text-decoration: none; 
+    font-weight: 600; 
+}
+.contact-links a:visited { 
+    color: #0366d6; 
+    text-decoration: none; 
+}
+.contact-links a:focus { 
+    color: #0366d6; 
+    text-decoration: none; 
+    outline: 2px solid #0366d6; 
+    outline-offset: 2px; 
+}
+.contact-links a:hover { 
+    text-decoration: underline; 
+}
 
 @media (max-width: 576px) {
     .contact-fab { right: 12px; bottom: 12px; }
     .contact-card { right: 12px; bottom: 62px; }
 }
 
-.contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
+/* Стили для светлой темы */
+.light-theme .contact-links a { 
+    color: #0366d6; 
+    text-decoration: none; 
+}
+.light-theme .contact-links a:visited { 
+    color: #0366d6; 
+    text-decoration: none; 
+}
+.light-theme .contact-links a:focus { 
+    color: #0366d6; 
+    text-decoration: none; 
+}
+.light-theme .contact-links a:hover { 
+    text-decoration: underline; 
 }
 
-.contact-link {
-    display: inline-flex;
-    align-items: center;
-    color: #4a9eff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
 
-.contact-link i {
-    margin-right: 8px;
-    font-size: 18px;
-}
-
-.contact-link:hover {
-    color: #6db5ff;
-    transform: translateX(5px);
-}
 
 /* Стили для элементов с темным фоном */
 .resources-section, 

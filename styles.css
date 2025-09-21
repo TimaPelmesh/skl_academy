@@ -3,6 +3,53 @@ body {
   background-color: #f8fafc;
 }
 
+/* Floating contact button and card (global) */
+.contact-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #111827;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  box-shadow: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 150;
+}
+.contact-fab:hover { background: #1f2937; transform: translateY(-1px); }
+
+.contact-card {
+  position: fixed;
+  right: 16px;
+  bottom: 68px;
+  min-width: 260px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 14px 16px;
+  z-index: 150;
+  display: none;
+}
+.contact-card.active { display: block; }
+.contact-card h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #111827; }
+.contact-links { display: flex; flex-direction: column; gap: 8px; }
+.contact-links a { color: #0366d6; text-decoration: none; font-weight: 600; }
+.contact-links a:hover { text-decoration: underline; }
+
+@media (max-width: 576px) {
+  .contact-fab { right: 12px; bottom: 12px; }
+  .contact-card { right: 12px; bottom: 62px; }
+}
+
 h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: -0.01em;
@@ -1000,26 +1047,28 @@ footer {
   position: relative;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
 
 
 .article-card:hover {
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
   border-color: #e2e8f0;
+  transform: translateY(-2px);
 }
 
 .article-card h3 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #0f172a;
 }
 
 .article-card .course-icon-container {
-  background: #f3f4f6;
+  background: #eef2ff;
+  border: 1px solid #e5e7eb;
 }
 
 .article-card .course-button {
@@ -1032,23 +1081,36 @@ footer {
 
 /* Чипы-теги в карточках статей */
 .article-card .mt-3 .inline-block.bg-gray-100 {
-  background: #f3f4f6;
-  color: #374151;
-  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #e2e8f0;
   box-shadow: none;
 }
 
 
 .article-icon-bg {
-  opacity: 0.05;
-  right: -15px;
-  top: -15px;
+  opacity: 0.06;
+  right: -10px;
+  top: -10px;
   transition: all 0.3s ease;
 }
 
 .article-card:hover .article-icon-bg {
-  opacity: 0.09;
+  opacity: 0.12;
   transform: none;
+}
+
+/* Компактный список статей на мобильных */
+@media (max-width: 640px) {
+  .article-card { border-radius: 10px; box-shadow: 0 2px 8px rgba(15,23,42,0.05); }
+  .article-card .p-5 { padding: 14px; }
+  .article-card h3 { font-size: 0.98rem; line-height: 1.3; }
+  .article-card .course-icon-container { padding: 10px; border-radius: 10px; background: #f3f4f6; }
+  .article-card .mt-1 span { padding: 2px 6px; font-size: 10px; }
+  .article-card .mt-3 { margin-top: 10px; }
+  .article-card .mt-3 .inline-block { padding: 2px 8px; font-size: 11px; }
+  .article-card .course-button { padding: 10px 12px; font-size: 0.9rem; }
+  .article-icon-bg { display: none; }
 }
 
 /* ========================================

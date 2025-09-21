@@ -10,18 +10,58 @@ menuToggle.addEventListener('click', () => {
 });
 
 // Раскрытие тем
-document.querySelectorAll('.topic-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        this.classList.toggle('active');
-        const subtopics = this.nextElementSibling;
-        
-        if (subtopics.style.maxHeight) {
-            subtopics.style.maxHeight = null;
-        } else {
-            subtopics.style.maxHeight = subtopics.scrollHeight + 'px';
-        }
+function initSidebarInteractions() {
+    document.querySelectorAll('.topic-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const subtopics = this.nextElementSibling;
+            
+            if (subtopics.style.maxHeight) {
+                subtopics.style.maxHeight = null;
+            } else {
+                subtopics.style.maxHeight = subtopics.scrollHeight + 'px';
+            }
+        });
     });
-});
+
+    // Обработка якорных ссылок для плавной прокрутки
+    document.querySelectorAll('.subtopic').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Если ссылка ведет на текущую страницу (якорь)
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                
+                // Убираем активный класс у всех ссылок
+                document.querySelectorAll('.subtopic').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Добавляем активный класс текущей ссылке
+                this.classList.add('active');
+                
+                // Получаем ID секции для перехода
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                // Прокручиваем к нужной секции с учетом высоты шапки
+                if (targetSection) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const offset = headerHeight + 30; // Увеличенный отступ для лучшей видимости
+                    
+                    // Используем нашу функцию плавной прокрутки
+                    smoothScrollToElement(targetSection, offset);
+                }
+                
+                // Закрытие сайдбара на мобильных устройствах после клика
+                if (sidebar.classList.contains('active') && window.innerWidth <= 991) {
+                    menuToggle.classList.remove('active');
+                    sidebar.classList.remove('active');
+                    content.classList.remove('sidebar-active');
+                }
+            }
+        });
+    });
+}
 
 // Функция плавной прокрутки к элементу
 function smoothScrollToElement(element, offset) {
@@ -54,43 +94,6 @@ function smoothScrollToElement(element, offset) {
     requestAnimationFrame(animation);
 }
 
-// Обработка якорных ссылок для плавной прокрутки
-document.querySelectorAll('.subtopic').forEach(link => {
-    link.addEventListener('click', function(e) {
-        // Если ссылка ведет на текущую страницу (якорь)
-        if (this.getAttribute('href').startsWith('#')) {
-            e.preventDefault();
-            
-            // Убираем активный класс у всех ссылок
-            document.querySelectorAll('.subtopic').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Добавляем активный класс текущей ссылке
-            this.classList.add('active');
-            
-            // Получаем ID секции для перехода
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            // Прокручиваем к нужной секции с учетом высоты шапки
-            if (targetSection) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const offset = headerHeight + 30; // Увеличенный отступ для лучшей видимости
-                
-                // Используем нашу функцию плавной прокрутки
-                smoothScrollToElement(targetSection, offset);
-            }
-            
-            // Закрытие сайдбара на мобильных устройствах после клика
-            if (sidebar.classList.contains('active') && window.innerWidth <= 991) {
-                menuToggle.classList.remove('active');
-                sidebar.classList.remove('active');
-                content.classList.remove('sidebar-active');
-            }
-        }
-    });
-});
 
 // Отслеживание прокрутки для активации ссылок
 function setActiveSection() {
@@ -125,7 +128,10 @@ function setActiveSection() {
 
 // Вызываем функцию при загрузке и при прокрутке
 window.addEventListener('scroll', setActiveSection);
-document.addEventListener('DOMContentLoaded', setActiveSection);
+document.addEventListener('DOMContentLoaded', function() {
+    initSidebarInteractions();
+    setActiveSection();
+});
 
 // Обработка якорей при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
