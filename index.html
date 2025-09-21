@@ -132,8 +132,10 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <link rel="stylesheet" href="styles.css">
 
 </head>
@@ -1491,9 +1493,9 @@
     </div>
   </footer>
 
-  <script src="search-data.js"></script>
-  <script src="search.js"></script>
-  <script src="script.js"></script>
+  <script src="search-data.js" defer></script>
+  <script src="search.js" defer></script>
+  <script src="script.js" defer></script>
   <script>
     // Функция для плавного скролла к контактам
     function scrollToContacts(event) {

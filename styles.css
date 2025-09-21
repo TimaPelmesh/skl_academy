@@ -1,6 +1,9 @@
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Floating contact button and card (global) */
@@ -1605,6 +1608,67 @@ footer {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* Оптимизации для мобильных устройств */
+@media (max-width: 768px) {
+  /* Улучшение производительности на мобильных */
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  /* Оптимизация анимаций */
+  .gradient-bg,
+  .stat-block,
+  .article-card {
+    will-change: transform;
+  }
+  
+  /* Уменьшение сложности теней на мобильных */
+  .article-card {
+    box-shadow: 0 2px 8px rgba(15,23,42,0.08);
+  }
+  
+  /* Оптимизация контейнеров */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Оптимизации для очень маленьких экранов */
+@media (max-width: 480px) {
+  /* Упрощение анимаций */
+  .gradient-bg {
+    background-attachment: scroll;
+  }
+  
+  /* Уменьшение отступов */
+  .gradient-bg .text-center {
+    padding: 1rem;
+  }
+  
+  /* Оптимизация карточек */
+  .article-card {
+    margin-bottom: 1rem;
+  }
+  
+  .article-card .p-5 {
+    padding: 1rem;
+  }
+}
+
+/* Предотвращение горизонтальной прокрутки */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  .container {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
  
