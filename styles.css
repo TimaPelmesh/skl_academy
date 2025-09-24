@@ -1605,12 +1605,6 @@ footer {
 
 /* Оптимизации для мобильных устройств */
 @media (max-width: 768px) {
-  /* Улучшение производительности на мобильных */
-  * {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-  
   /* Оптимизация анимаций */
   .gradient-bg,
   .stat-block,
@@ -1628,6 +1622,12 @@ footer {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+}
+
+/* Tone down heavy filters on mobile to reduce paint cost */
+@media (max-width: 768px) {
+  .gradients-container { filter: none; }
+  .hero-icon { backdrop-filter: blur(6px) saturate(120%); -webkit-backdrop-filter: blur(6px) saturate(120%); }
 }
 
 /* Оптимизации для очень маленьких экранов */
