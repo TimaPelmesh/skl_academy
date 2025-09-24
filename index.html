@@ -131,12 +131,20 @@
   }
   </script>
 
+  <!-- Tailwind (runtime CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin"></noscript>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Critical site styles first to reduce FOUC -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts as regular stylesheet (display=swap prevents FOIT) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin">
+  
+  <!-- Font Awesome as regular stylesheet (avoid delayed media swap) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
 <body class="font-sans">
@@ -750,7 +758,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <p class="text-gray-600">Полная подготовка к ЕГЭ по информатике: от основ до сложных алгоритмов и программирования.</p>
+            <p class="text-gray-600">Полная подготовка к ЕГЭ по информатике: от основ до сложных алгоритмов и программирования. Алгоритмизация и программирование, системы счисления и логика, базы данных и сети.</p>
             <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
@@ -800,7 +808,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <p class="text-gray-600">Подготовка к ОГЭ по информатике: основы программирования, алгоритмы и информационные технологии.</p>
+            <p class="text-gray-600">Подготовка к ОГЭ по информатике: основы программирования, алгоритмы и информационные технологии. Основы программирования на Python, алгоритмы и структуры данных, работа с таблицами и базами данных.</p>
             <ul class="mt-4 space-y-2">
               <li class="flex items-start">
                 <div class="flex-shrink-0 mt-1">
