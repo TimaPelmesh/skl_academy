@@ -1303,6 +1303,7 @@ footer {
   color: #6b7280;
   line-height: 1.4;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -1663,5 +1664,8 @@ footer {
     width: 100%;
   }
 }
+
+/* Validator-friendly override for Font Awesome rotate-by default */
+.fa-rotate-by { transform: rotate(var(--fa-rotate-angle, 0deg)); }
 
  
