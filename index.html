@@ -152,7 +152,7 @@
   <!-- Navigation -->
   <nav class="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-24 items-center">
+      <div class="flex justify-between h-20 items-center">
         <!-- Логотип (слева на десктопе, скрыт на мобильных) -->
         <div class="flex items-center hidden md:flex">
           <div class="flex-shrink-0 flex items-center">
@@ -258,78 +258,35 @@
 
   <!-- Hero Section -->
   <div class="gradient-bg text-white pt-4 relative overflow-hidden">
-    <!-- Размытый градиентный фон без анимаций -->
-    <svg class="hero-goo-defs" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="hero-goo">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
-          <feBlend in="SourceGraphic" in2="goo" />
-        </filter>
-      </defs>
-      </svg>
-    <div class="gradients-container">
-      <div class="g1"></div>
-      <div class="g2"></div>
-      <div class="g3"></div>
-      <div class="g4"></div>
-      <div class="g5"></div>
-    </div>
-    
-    <!-- Декоративные иконки курсов по бокам (только на десктопе) -->
-    <div class="hero-icons-left" aria-hidden="true">
-      <div class="hero-icon hero-icon-s">
-        <i class="fas fa-network-wired"></i>
-      </div>
-      <div class="hero-icon hero-icon-m">
-        <i class="fab fa-python"></i>
-      </div>
-      <div class="hero-icon hero-icon-l">
-        <i class="fab fa-microsoft"></i>
-      </div>
-    </div>
-    <div class="hero-icons-right" aria-hidden="true">
-      <div class="hero-icon hero-icon-m">
-        <i class="fab fa-git-alt"></i>
-      </div>
-      <div class="hero-icon hero-icon-l">
-        <i class="fab fa-html5"></i>
-      </div>
-      <div class="hero-icon hero-icon-s">
-        <i class="fas fa-terminal"></i>
-      </div>
-    </div>
-      
+    <div id="hero-webgl" aria-hidden="true"></div>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:py-8 sm:px-6 lg:px-8">
-      <div class="text-center">
-         <!-- Заголовок с эффектом печатания -->
-         <div class="mb-2">
-             <h1 class="hero-title text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mx-auto">
-               <span class="typing-effect">Добро пожаловать!</span>
-             </h1>
-         </div>
-         
-         <p class="mt-6 max-w-2xl mx-auto text-lg text-indigo-100">
-           Что же тебя тут ждет?
-         </p>
-         
-         <div class="hero-content-wrapper">
-           <!-- Улучшенные блоки статистики -->
-           <div class="stats-container mt-4">
+      <div class="hero-layout">
+        <!-- Текст и статистика -->
+        <div class="hero-content">
+          <div class="mb-4">
+            <h1 class="hero-title text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              Освой ключевые IT‑навыки с нуля
+            </h1>
+          </div>
+          
+          <div class="hero-content-wrapper">
+            <div class="stats-container mt-4 lg:mt-6">
               <div class="stat-block">
-              <div class="stat-number">10</div>
-              <div class="stat-label">Курсов</div>
+                <div class="stat-number">10</div>
+                <div class="stat-label">Курсов</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Доступ</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Бесплатно</div>
+              </div>
             </div>
-             <div class="stat-block">
-               <div class="stat-number">24/7</div>
-               <div class="stat-label">Доступ</div>
-             </div>
-             <div class="stat-block">
-               <div class="stat-number">100%</div>
-               <div class="stat-label">Бесплатно</div>
-             </div>
-           </div>
-         </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -352,8 +309,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Компьютерные сети</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              <div class="mt-2">
+                <span class="status-badge status-ready">Готов</span>
               </div>
             </div>
           </div>
@@ -380,7 +337,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-networks">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -402,8 +359,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Python</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              <div class="mt-2">
+                <span class="status-badge status-ready">Готов</span>
               </div>
             </div>
           </div>
@@ -430,7 +387,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-python">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -452,8 +409,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">C#</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              <div class="mt-2">
+                <span class="status-badge status-planned">Планируется</span>
               </div>
             </div>
           </div>
@@ -480,7 +437,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-csharp">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -502,8 +459,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Git</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              <div class="mt-2">
+                <span class="status-badge status-ready">Готов</span>
               </div>
             </div>
           </div>
@@ -530,7 +487,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-git">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -552,8 +509,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Веб-разработка</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              <div class="mt-2">
+                <span class="status-badge status-ready">Готов</span>
               </div>
             </div>
           </div>
@@ -580,7 +537,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-web">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -602,8 +559,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Linux и Bash</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              <div class="mt-2">
+                <span class="status-badge status-ready">Готов</span>
               </div>
             </div>
           </div>
@@ -630,7 +587,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-linux">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -652,8 +609,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Windows и PowerShell</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Готов</span>
+              <div class="mt-2">
+                <span class="status-badge status-ready">Готов</span>
               </div>
             </div>
           </div>
@@ -680,7 +637,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-windows">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -702,8 +659,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">Unity</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              <div class="mt-2">
+                <span class="status-badge status-planned">Планируется</span>
               </div>
             </div>
           </div>
@@ -730,7 +687,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-unity">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -752,8 +709,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">ЕГЭ по информатике</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              <div class="mt-2">
+                <span class="status-badge status-planned">Планируется</span>
               </div>
             </div>
           </div>
@@ -780,7 +737,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-ege">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -802,8 +759,8 @@
             </div>
             <div class="ml-4">
               <h3 class="text-xl font-medium text-gray-900">ОГЭ по информатике</h3>
-              <div class="mt-1">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Планируется</span>
+              <div class="mt-2">
+                <span class="status-badge status-planned">Планируется</span>
               </div>
             </div>
           </div>
@@ -830,7 +787,7 @@
               </li>
             </ul>
           </div>
-          <div class="mt-4 flex space-x-4">
+          <div class="mt-6 flex space-x-4 course-card-actions">
             <button type="button" class="course-button-secondary" data-modal-target="modal-oge">
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
@@ -958,26 +915,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Изучите компьютерные сети: от основ до продвинутых технологий. Модель OSI, TCP/IP, IP-адресация, коммутация, VLAN, беспроводные сети и безопасность.</p>
-          
+          <p class="modal-lead">Структурированный гайд по сетям: от моделей связи до практики эксплуатации и безопасности.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Модель OSI и TCP/IP</li>
-                <li>• IP-адресация и маршрутизация</li>
-                <li>• Коммутация и VLAN</li>
-                <li>• Беспроводные сети</li>
-                <li>• Сетевая безопасность</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Модели OSI/TCP-IP и адресация</li>
+                <li>• Коммутация, VLAN, динамическая маршрутизация</li>
+                <li>• Безопасность, диагностика и best practices</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Сетевые администраторы</li>
-                <li>• Студенты IT-специальностей</li>
-                <li>• Подготовка к CCNA</li>
-                <li>• Системные администраторы</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Студентам и джунам в администрировании</li>
+                <li>• Сетевым инженерам уровня junior+</li>
+                <li>• Тем, кто готовится к CCNA</li>
               </ul>
             </div>
           </div>
@@ -1002,26 +960,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Освойте Python - от основ до продвинутых техник программирования. Синтаксис, ООП, работа с файлами, модули, декораторы, асинхронность и многое другое.</p>
-          
+          <p class="modal-lead">Изучаем Python с нуля, закрепляем практикой и переходим к продвинутым приёмам.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Основы синтаксиса и типы данных</li>
-                <li>• Функции и ООП</li>
-                <li>• Работа с файлами и модулями</li>
-                <li>• Декораторы и генераторы</li>
-                <li>• Асинхронное программирование</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Типы данных, функции, ООП</li>
+                <li>• Работа с файлами, модулями и виртуальными окружениями</li>
+                <li>• Асинхронность, тестирование и лучшие практики</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Начинающие программисты</li>
-                <li>• Backend-разработчики</li>
-                <li>• Data Science специалисты</li>
-                <li>• DevOps инженеры</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Новичкам в разработке</li>
+                <li>• Будущим backend и data-специалистам</li>
+                <li>• Инженерам автоматизации и DevOps</li>
               </ul>
             </div>
           </div>
@@ -1046,26 +1005,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Освойте C# — мощный язык для веба, десктопа и игр. Синтаксис, LINQ, асинхронность, ASP.NET Core, Entity Framework и разработка игр на Unity.</p>
-          
+          <p class="modal-lead">Концентрированный курс по C#: современный синтаксис, .NET и игровые сценарии.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Основы синтаксиса и ООП</li>
-                <li>• LINQ и асинхронность</li>
-                <li>• ASP.NET Core веб-разработка</li>
-                <li>• Entity Framework</li>
-                <li>• Разработка игр на Unity</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Современный синтаксис C# и ключевые паттерны</li>
+                <li>• LINQ, асинхронность, работа с данными</li>
+                <li>• ASP.NET Core, Entity Framework, Unity</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Начинающие программисты</li>
-                <li>• Веб-разработчики</li>
-                <li>• Разработчики игр</li>
-                <li>• .NET разработчики</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Новичкам в экосистеме .NET</li>
+                <li>• Веб-разработчикам и системным инженерам</li>
+                <li>• Командам, стартующим с Unity</li>
               </ul>
             </div>
           </div>
@@ -1090,26 +1050,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Изучите Git - самую популярную систему контроля версий. Основные команды, ветвление, GitHub, Pull Request, Issues и командная работа.</p>
-          
+          <p class="modal-lead">Git без воды: от базовых команд до грамотной командной работы в репозиториях.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Основные команды Git</li>
-                <li>• Ветвление и слияние</li>
-                <li>• Работа с GitHub</li>
-                <li>• Pull Request и Issues</li>
-                <li>• Командная работа</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Основные команды и работа с локальным репо</li>
+                <li>• Ветвление, слияние, разрешение конфликтов</li>
+                <li>• GitHub, PR-процессы, code review</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Разработчики всех уровней</li>
-                <li>• DevOps инженеры</li>
-                <li>• Студенты IT</li>
-                <li>• Project managers</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Разработчикам любого стека</li>
+                <li>• DevOps и инженерным командам</li>
+                <li>• Студентам и курсовым проектам</li>
               </ul>
             </div>
           </div>
@@ -1134,26 +1095,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Создавайте современные веб-сайты с помощью HTML и CSS. HTML5, семантическая верстка, CSS3, Flexbox, Grid, анимации и адаптивный дизайн.</p>
-          
+          <p class="modal-lead">Практикуем адаптивную вёрстку: чистый HTML, современный CSS и базовый JS.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• HTML5 и семантическая верстка</li>
-                <li>• CSS3, Flexbox, Grid</li>
-                <li>• Адаптивный дизайн</li>
-                <li>• JavaScript основы</li>
-                <li>• Современные инструменты</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Семантический HTML5 и доступность</li>
+                <li>• Flexbox, Grid, работа с анимациями</li>
+                <li>• Адаптив, дизайн-системы, базовый JS</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Начинающие разработчики</li>
-                <li>• Дизайнеры</li>
-                <li>• Маркетологи</li>
-                <li>• Предприниматели</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Начинающим фронтенд-разработчикам</li>
+                <li>• Дизайнерам и продактам</li>
+                <li>• Тем, кто собирает лендинги и MVP</li>
               </ul>
             </div>
           </div>
@@ -1179,26 +1141,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Освойте Linux и Bash - основу современной IT-инфраструктуры. Основы Linux, файловая система, Bash-скрипты, автоматизация и управление процессами.</p>
-          
+          <p class="modal-lead">Сильная база по Linux и Bash: конфигурация системы, автоматизация и ежедневные сценарии.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Основы Linux и файловая система</li>
-                <li>• Bash командная строка</li>
-                <li>• Работа с файлами и текстом</li>
-                <li>• Bash-скриптинг</li>
-                <li>• Управление процессами</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Файловая система, права, процессы</li>
+                <li>• Bash CLI, текстовые утилиты, piping</li>
+                <li>• Скрипты, автоматизация, практики DevOps</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Системные администраторы</li>
-                <li>• DevOps инженеры</li>
-                <li>• Разработчики</li>
-                <li>• IT-специалисты</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Системным администраторам и инженерам</li>
+                <li>• DevOps-специалистам и разработчикам</li>
+                <li>• Тем, кто переходит на Linux как основную ОС</li>
               </ul>
             </div>
           </div>
@@ -1223,26 +1186,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Изучите Windows PowerShell и автоматизацию в экосистеме Microsoft. PowerShell командлеты и модули, управление Windows через CLI и автоматизация.</p>
-          
+          <p class="modal-lead">PowerShell как основной инструмент администрирования и автоматизации Windows-инфраструктуры.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Основы PowerShell</li>
-                <li>• Командлеты и модули</li>
-                <li>• Управление Windows системой</li>
-                <li>• PowerShell скриптинг</li>
-                <li>• Автоматизация задач</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Командлеты, модули, профили</li>
+                <li>• Управление службами, реестром и AD</li>
+                <li>• Скрипты для автоматизации рутины</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Системные администраторы</li>
-                <li>• DevOps инженеры</li>
-                <li>• .NET разработчики</li>
-                <li>• IT-специалисты</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Системным администраторам и инженерам</li>
+                <li>• DevOps и .NET-командам</li>
+                <li>• IT-специалистам, которые хотят ускорить работу</li>
               </ul>
             </div>
           </div>
@@ -1267,26 +1231,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Создавайте 2D и 3D игры с помощью Unity - одного из самых популярных игровых движков. Основы Unity и интерфейс редактора, программирование на C# для Unity, физика, анимация и UI системы.</p>
-          
+          <p class="modal-lead">Создаём свои первые игры в Unity: редактор, скрипты и эффектная подача.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Основы Unity и интерфейс</li>
-                <li>• Программирование на C#</li>
-                <li>• Физика и коллизии</li>
-                <li>• Анимация и визуальные эффекты</li>
-                <li>• UI и звук</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Базовая настройка и интерфейс Unity</li>
+                <li>• Скрипты на C#, физика и взаимодействие объектов</li>
+                <li>• UI, анимации и публикация билда</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Начинающие разработчики игр</li>
-                <li>• Программисты</li>
-                <li>• Художники и дизайнеры</li>
-                <li>• Студенты</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Новичкам в геймдеве</li>
+                <li>• Разработчикам, кто хочет расширить стек</li>
+                <li>• Дизайнерам и студентам профильных направлений</li>
               </ul>
             </div>
           </div>
@@ -1311,26 +1276,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Полная подготовка к ЕГЭ по информатике: от основ до сложных алгоритмов и программирования.</p>
-          
+          <p class="modal-lead">Системная подготовка к ЕГЭ по информатике с упором на практику и типовые задания.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Алгоритмизация и программирование</li>
-                <li>• Системы счисления и логика</li>
-                <li>• Базы данных и сети</li>
-                <li>• Информационные технологии</li>
-                <li>• Решение задач повышенной сложности</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Алгоритмы, программирование, Python</li>
+                <li>• Логика, системы счисления, базы данных</li>
+                <li>• Задачи части C и стратегии решения</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Ученики 10-11 классов</li>
-                <li>• Абитуриенты IT-специальностей</li>
-                <li>• Преподаватели информатики</li>
-                <li>• Подготовка к поступлению</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Ученикам 10–11 классов</li>
+                <li>• Абитуриентам технических вузов</li>
+                <li>• Преподавателям и тьюторам</li>
               </ul>
             </div>
           </div>
@@ -1355,26 +1321,27 @@
       </div>
       <div class="modal-body">
         <div class="modal-section">
-          <p class="text-gray-600 mb-4">Подготовка к ОГЭ по информатике: основы программирования, алгоритмы и информационные технологии.</p>
-          
+          <p class="modal-lead">Подготовим к ОГЭ по информатике: без спешки, с разбором типовых задач и тренажёрами.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Основные темы:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Основы программирования на Python</li>
-                <li>• Алгоритмы и структуры данных</li>
-                <li>• Работа с таблицами и базами данных</li>
-                <li>• Информационные технологии</li>
-                <li>• Практические задания ОГЭ</li>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Базовый Python и алгоритмика</li>
+                <li>• Таблицы, логика, работа с данными</li>
+                <li>• Практика по экзаменационному формату</li>
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-2">Для кого:</h4>
-              <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Ученики 8-9 классов</li>
-                <li>• Подготовка к ОГЭ</li>
-                <li>• Изучение основ программирования</li>
-                <li>• Развитие логического мышления</li>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Ученикам 8–9 классов</li>
+                <li>• Тем, кто переходит к изучению программирования</li>
+                <li>• Родителям и педагогам как готовый план</li>
               </ul>
             </div>
           </div>
@@ -1473,36 +1440,34 @@
   </script>
 
   <!-- Footer -->
-  <footer id="contacts">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-      <div class="footer-column">
-        <h4 class="text-white text-xl font-semibold">О проекте</h4>
-        <p class="mt-4 text-gray-400">SKL Academy - образовательная платформа для изучения IT-технологий с нуля</p>
-        <p class="mt-2 text-gray-400">Бесплатные материалы, практические задания и проекты</p>
+  <footer id="contacts" class="footer-simple">
+    <div class="footer-simple__inner">
+      <div class="footer-simple__about">
+        <h4>О проекте</h4>
+        <p>SKL Academy — платформа с бесплатными IT-курсами и практиками для старта и роста.</p>
       </div>
-      
-      <div class="footer-column">
-        <h4 class="text-white text-xl font-semibold">Контакты</h4>
-        <div class="mt-4 space-y-3">
-          <a href="#" onclick="openGmail(); return false;" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
-            <i class="fas fa-envelope mr-2"></i> Gmail
+      <div class="footer-simple__contacts">
+        <h4>Контакты</h4>
+        <div class="footer-simple__links">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mr.tim.pumpkin@gmail.com" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-envelope"></i>
+            Gmail
           </a>
-          <a href="#" onclick="openTelegram(); return false;" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
-            <i class="fab fa-telegram mr-2"></i> Telegram
+          <a href="#" onclick="openTelegram(); return false;">
+            <i class="fab fa-telegram"></i>
+            Telegram
           </a>
         </div>
       </div>
     </div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-gray-800">
-      <div class="flex justify-center">
-        <p class="text-gray-500 text-sm">SKL Academy. 2025</p>
-      </div>
+    <div class="footer-simple__bottom">
+      <p>SKL Academy · 2025</p>
     </div>
   </footer>
 
   <script src="search-data.js" defer></script>
   <script src="search.js" defer></script>
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js" crossorigin="anonymous" defer></script>
   <script src="script.js" defer></script>
   <script>
     // Функция для плавного скролла к контактам
@@ -1516,11 +1481,7 @@
       }
     }
     
-    // Функции для открытия Gmail и Telegram
-    function openGmail() {
-      window.open('mailto:mr.tim.pumpkin@gmail.com', '_blank');
-    }
-    
+    // Функции для открытия Telegram
     function openTelegram() {
       window.open('https://t.me/tima_pelmeshka', '_blank');
     }
