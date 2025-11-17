@@ -3,7 +3,7 @@
     <!-- Главная страница -->
     <url>
         <loc>https://skl-academy.ru/</loc>
-        <lastmod>2025-11-13</lastmod>
+        <lastmod>2025-11-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -365,6 +365,14 @@
     <url>
         <loc>https://skl-academy.ru/courses/oge/02-oge-part2.html</loc>
         <lastmod>2025-11-13</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Курс Технический английский -->
+    <url>
+        <loc>https://skl-academy.ru/courses/english/01-foundations.html</loc>
+        <lastmod>2025-11-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>

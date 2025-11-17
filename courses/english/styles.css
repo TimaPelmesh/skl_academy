@@ -1,0 +1,1521 @@
+/* Шрифты */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin');
+
+:root {
+    /* Основные цвета светлой темы */
+    --primary-color: #6c63ff;
+    --primary-light: #8a84ff;
+    --primary-dark: #4b44d1;
+    --secondary-color: #e6e0fc;
+    --accent-color: #5851db;
+    --text-color: #333344;
+    --light-text: #333344;
+    --border-color: rgba(0, 0, 0, 0.06);
+    --bg-color: #f9f9fb;
+    --bg-gradient-1: #f9f9fb;
+    --bg-gradient-2: #f0f0f5;
+    
+    /* Элементы интерфейса */
+    --header-height: 70px;
+    --shadow: 0 4px 16px rgba(98, 87, 255, 0.06);
+    --shadow-small: 0 2px 8px rgba(98, 87, 255, 0.04);
+    --shadow-hover: 0 6px 24px rgba(98, 87, 255, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --radius: 10px;
+    --border-light: 1px solid rgba(255, 255, 255, 0.06);
+    --border-dark: 1px solid rgba(0, 0, 0, 0.05);
+    
+    /* Полупрозрачные фоны */
+    --overlay-light: rgba(108, 99, 255, 0.04);
+    --overlay-dark: rgba(108, 99, 255, 0.06);
+    --glassmorphism: rgba(249, 249, 251, 0.9);
+    --header-bg: rgba(249, 249, 251, 0.98);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: all 0.4s ease;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Заголовок */
+header {
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--light-text);
+    height: var(--header-height);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-small);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-left: 50px;
+    color: var(--light-text);
+    letter-spacing: 0.2px;
+}
+
+/* Кнопки в хедере */
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 20px;
+}
+
+/* Кнопка выхода */
+.exit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--light-text);
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.exit-btn:hover {
+    background: var(--overlay-light);
+    transform: translateY(-2px);
+}
+
+.exit-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Кнопка меню */
+.menu-toggle {
+    position: absolute;
+    left: 20px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 200;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light-text);
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Основной контейнер */
+.container {
+    display: flex;
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+    transition: background 0.4s ease;
+    overflow: hidden;
+}
+
+/* Боковое меню */
+.sidebar {
+    width: 260px;
+    background: var(--bg-color);
+    box-shadow: var(--shadow-small);
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    bottom: 0;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease, background 0.4s ease;
+    z-index: 99;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 2px;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+/* Вкладки */
+.tabs {
+    display: flex;
+    background: var(--bg-color);
+    overflow-x: auto;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tabs.hidden {
+    display: none;
+}
+
+.tabs::-webkit-scrollbar {
+    height: 0;
+    display: none;
+}
+
+.tab {
+    flex: 1;
+    padding: 16px;
+    color: var(--light-text);
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+    min-width: 80px;
+    opacity: 0.7;
+}
+
+.tab:hover {
+    background-color: var(--overlay-light);
+    opacity: 0.9;
+}
+
+.tab.active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+/* Содержимое вкладок */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Вкладки через input:checked (без JS) */
+.tab-input {
+    display: none;
+}
+
+.tab-label {
+    flex: 1;
+    padding: 16px;
+    color: var(--light-text);
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+    min-width: 80px;
+    opacity: 0.7;
+    display: block;
+}
+
+.tab-label:hover {
+    background-color: var(--overlay-light);
+    opacity: 0.9;
+}
+
+.tab-input:checked + .tab-label {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.tab-input:checked + .tab-label::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.tab-content-panel {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Контейнер для вкладок */
+.tabs-container {
+    margin-bottom: 20px;
+}
+
+/* Показываем контент при выборе соответствующей вкладки через :has() на родителе */
+.content:has(#tab-vocabulary:checked) .tab-content-panel#vocabulary,
+.content:has(#tab-grammar:checked) .tab-content-panel#grammar,
+.content:has(#tab-dialogues:checked) .tab-content-panel#dialogues,
+.content:has(#tab-it:checked) .tab-content-panel#it-focus,
+.content:has(#tab-travel:checked) .tab-content-panel#travel,
+.content:has(#tab-interview:checked) .tab-content-panel#interview,
+.content:has(#tab-pronunciation:checked) .tab-content-panel#pronunciation,
+.content:has(#tab-final:checked) .tab-content-panel#final-case {
+    display: block;
+}
+
+/* Темы */
+.topic {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.topic-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 15px 16px;
+    text-align: left;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    color: var(--light-text);
+    font-weight: 400;
+}
+
+.topic-btn:hover {
+    background-color: var(--overlay-light);
+    padding-left: 18px;
+}
+
+.topic-btn::after {
+    content: '\002B';
+    font-size: 1.2rem;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.topic-btn.active {
+    color: #111827; /* Чёрный, как в курсе Networks */
+    font-weight: 600;
+}
+
+.topic-btn.active::after {
+    content: '\2212';
+    color: var(--primary-color);
+}
+
+/* Подтемы */
+.subtopics {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background-color: var(--overlay-dark);
+}
+
+.subtopic {
+    display: block;
+    padding: 12px 16px 12px 18px;
+    text-decoration: none;
+    color: var(--light-text);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    padding-left: 32px;
+}
+
+.subtopic:hover {
+    background-color: var(--overlay-light);
+    color: var(--primary-color);
+}
+
+/* Активная подтема в боковом меню: подсветка текста и фона (как в курсе Networks) */
+.subtopic.active {
+    color: var(--primary-color);
+    background-color: var(--overlay-light);
+    font-weight: 600;
+}
+
+/* Основной контент */
+.content {
+    flex-grow: 1;
+    margin-left: 0;
+    padding: 25px;
+    transition: margin 0.4s ease, background 0.4s ease;
+    overflow-x: hidden;
+}
+
+.content.sidebar-active {
+    margin-left: 260px;
+}
+
+.welcome {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(var(--bg-color), 0.6);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s ease;
+}
+
+.welcome h1 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 2rem;
+    position: relative;
+}
+
+.welcome p {
+    margin-bottom: 20px;
+    color: var(--text-color);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.welcome h2 {
+    color: var(--primary-color);
+    margin: 30px 0 15px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.welcome ul {
+    margin: 0 0 20px 20px;
+    color: var(--text-color);
+}
+
+.welcome ul li {
+    margin-bottom: 10px;
+}
+
+/* Стилизация прокрутки для всей страницы */
+body::-webkit-scrollbar {
+    width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 3px;
+}
+
+/* Адаптивный дизайн */
+@media (min-width: 992px) {
+    .sidebar {
+        transform: translateX(0);
+    }
+    
+    .content {
+        margin-left: 260px;
+    }
+    
+    .menu-toggle {
+        display: none;
+    }
+    
+    .header-title {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome {
+        padding: 25px;
+    }
+    
+    .welcome h1 {
+        font-size: 1.6rem;
+    }
+    
+    .welcome h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-title {
+        font-size: 1.3rem;
+        margin-left: 44px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .welcome {
+        padding: 20px;
+        margin: 10px auto;
+    }
+    
+    .header-buttons {
+        gap: 10px;
+        margin-right: 10px;
+    }
+}
+
+/* Стили для секции с обратной связью */
+.feedback-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Кнопка контакта (i) и карточка */
+.contact-fab {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    background: #111827;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 150;
+}
+.contact-fab:hover { background: #1f2937; transform: translateY(-1px); }
+
+.contact-card {
+    position: fixed;
+    right: 16px;
+    bottom: 68px;
+    min-width: 260px;
+    background: #ffffff;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 14px 16px;
+    z-index: 150;
+    display: none;
+}
+.contact-card.active { display: block; }
+.contact-card h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #111827; }
+.contact-links { display: flex; flex-direction: column; gap: 8px; }
+.contact-links a { color: #0366d6; text-decoration: none; font-weight: 600; }
+.contact-links a:hover { text-decoration: underline; }
+
+@media (max-width: 576px) {
+    .contact-fab { right: 12px; bottom: 12px; }
+    .contact-card { right: 12px; bottom: 62px; }
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    color: #4a9eff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.contact-link i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.contact-link:hover {
+    color: #6db5ff;
+    transform: translateX(5px);
+}
+
+/* Стили для элементов с темным фоном */
+.resources-section, 
+.practice-tips, 
+.interactive-resources,
+.next-steps,
+.visual-guide,
+.operators-cheatsheet,
+.conclusion {
+    color: #e6e6e6; /* Светлый текст для темного фона */
+}
+
+/* Стили для важных заметок с темным фоном */
+.resources-section p, 
+.practice-tips p, 
+.interactive-resources p,
+.next-steps p,
+.visual-guide p,
+.operators-cheatsheet p,
+.conclusion p {
+    color: #e6e6e6;
+}
+
+/* Стили для списков в блоках с темным фоном */
+.resources-section li, 
+.practice-tips li, 
+.interactive-resources li,
+.next-steps li,
+.visual-guide li,
+.operators-cheatsheet li {
+    color: #e6e6e6;
+}
+
+/* Стили для заголовка "Важно понимать разницу" */
+.resources-section h4,
+.practice-tips h4,
+.interactive-resources h4,
+.next-steps h4,
+.visual-guide h4,
+.operators-cheatsheet h4,
+.conclusion h4 {
+    color: #58a6ff; /* Яркий голубой для заголовков */
+}
+
+/* Базовый читаемый цвет для всех h4 на светлом фоне в курсе */
+h4 {
+    color: #111827;
+}
+
+/* Сохраняем цвета в тёмных блоках, перекрывая базовый h4 */
+.visual-guide h4 { color: #7ee787; }
+.conclusion h4 { color: #d2a8ff; }
+.light-theme .conclusion h4 { color: #6f42c1; }
+
+/* Улучшенные стили для таблиц в темных блоках */
+.operators-cheatsheet table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    color: #e6e6e6; /* Светлый текст для всей таблицы */
+}
+
+.operators-cheatsheet th,
+.operators-cheatsheet td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #4d5566; /* Более контрастная граница */
+    color: #e6e6e6; /* Явно задаем цвет текста */
+}
+
+.operators-cheatsheet th {
+    background-color: #373e47;
+    color: #58a6ff; /* Голубой цвет для заголовков */
+    font-weight: 600;
+}
+
+.operators-cheatsheet td {
+    background-color: #2d333b; /* Темный фон для ячеек */
+}
+
+/* Стили для светлой темы */
+.light-theme .operators-cheatsheet table {
+    color: #333344; /* Темный текст для светлой темы */
+}
+
+.light-theme .operators-cheatsheet th,
+.light-theme .operators-cheatsheet td {
+    border: 1px solid #d0d7de;
+    color: #333344;
+}
+
+.light-theme .operators-cheatsheet th {
+    background-color: #e6e6e6;
+    color: #0366d6;
+}
+
+.light-theme .operators-cheatsheet td {
+    background-color: #f6f8fa;
+}
+
+/* Улучшенные стили для визуальных блоков */
+.visual-guide {
+    background-color: #2d333b;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-left: 4px solid #7ee787;
+}
+
+.visual-guide h4 {
+    color: #7ee787;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.visual-guide ul {
+    margin-left: 20px;
+}
+
+.visual-guide li {
+    color: #e6e6e6;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.visual-guide strong {
+    color: #7ee787;
+    font-weight: 600;
+}
+
+.visual-guide p {
+    color: #e6e6e6;
+    margin-bottom: 10px;
+}
+
+/* Стили для светлой темы */
+.light-theme .visual-guide {
+    background-color: #f1f1f1;
+    border-left: 4px solid #2ea44f;
+}
+
+.light-theme .visual-guide h4 {
+    color: #2ea44f;
+}
+
+.light-theme .visual-guide li,
+.light-theme .visual-guide p {
+    color: #333344;
+}
+
+.light-theme .visual-guide strong {
+    color: #2ea44f;
+}
+
+/* Исправление: в светлой теме делаем текст в блоке "Следующие шаги" чёрным */
+.light-theme .next-steps,
+.light-theme .next-steps p,
+.light-theme .next-steps li {
+    color: #000;
+}
+
+/* Явно делаем текст в блоке "Следующие шаги" чёрным (для всех тем) */
+.next-steps,
+.next-steps p,
+.next-steps li {
+    color: #000;
+}
+
+/* Явно делаем текст в блоках "Практические советы" чёрным (для всех тем) */
+.practice-tips,
+.practice-tips p,
+.practice-tips li {
+    color: #000;
+}
+
+/* Улучшенные стили для блока заключения */
+.conclusion {
+    background-color: #2d333b;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin: 40px auto;
+    border-left: 4px solid #d2a8ff;
+    text-align: center;
+    max-width: 800px;
+}
+
+.conclusion h3 {
+    color: #d2a8ff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.conclusion p {
+    color: #e6e6e6;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Стили для светлой темы */
+.light-theme .conclusion {
+    background-color: #f1f1f1;
+    border-left: 4px solid #8a63d2;
+}
+
+.light-theme .conclusion h3 {
+    color: #6f42c1;
+}
+
+.light-theme .conclusion p {
+    color: #333344;
+}
+
+/* Центрирование контента как в других курсах */
+.topic-section {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+/* ===== Улучшенная типографика для всего контента ===== */
+
+/* Параграфы */
+.topic-section p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-color);
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.topic-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* Заголовки */
+.topic-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.topic-section h2:first-child {
+    margin-top: 0;
+}
+
+.topic-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.topic-section h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.topic-section h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 1.25rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Маркированные списки */
+.topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5rem 0;
+}
+
+.topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) li::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Вложенные списки */
+.topic-section ul ul {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    margin-left: 1rem;
+}
+
+.topic-section ul ul li::before {
+    content: '◦';
+    color: var(--primary-light);
+    font-size: 1rem;
+}
+
+/* Нумерованные списки */
+.topic-section ol:not(.practice-list) {
+    counter-reset: item;
+    padding-left: 0;
+    list-style: none;
+    margin: 1.5rem 0;
+}
+
+.topic-section ol:not(.practice-list) li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 2.25rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.topic-section ol:not(.practice-list) li::before {
+    content: counter(item) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 1.75rem;
+    line-height: 1.8;
+}
+
+/* Вложенные нумерованные списки */
+.topic-section ol ol {
+    counter-reset: item;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    margin-left: 1rem;
+}
+
+.topic-section ol ol li::before {
+    content: counter(item, lower-alpha) '.';
+    color: var(--primary-light);
+}
+
+/* Улучшенные стили для practice-list */
+.practice-list {
+    margin: 1.5rem 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: item;
+}
+
+.practice-list li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 2.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.85;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.practice-list li::before {
+    content: counter(item) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 1.75rem;
+    line-height: 1.85;
+}
+
+/* Улучшенные стили для checklist */
+.checklist {
+    margin: 1.5rem 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.checklist li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Выделение текста */
+.topic-section strong {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.topic-section em {
+    font-style: italic;
+    color: var(--text-color);
+}
+
+.topic-section code {
+    background: rgba(108, 99, 255, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--primary-dark);
+}
+
+/* Улучшенные отступы для блоков */
+.topic-section > *:first-child {
+    margin-top: 0;
+}
+
+.topic-section > *:last-child {
+    margin-bottom: 0;
+}
+
+/* Исправление поведения на мобильных: контент не должен сдвигаться вправо при открытом меню */
+@media (max-width: 991px) {
+    .content,
+    .content.sidebar-active {
+        margin-left: 0;
+    }
+}
+
+.module-intro {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.module-intro.topic-section {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.module-intro h2 {
+  font-size: 1.85rem;
+  margin-bottom: 14px;
+}
+
+.module-intro p {
+  color: var(--text-color);
+  line-height: 1.85;
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+}
+
+.module-tags {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.module-tag {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.08);
+  color: var(--primary-dark);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.reading-block {
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.reading-block:hover {
+  background: rgba(15, 23, 42, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.reading-block.active {
+  background: rgba(108, 99, 255, 0.08);
+  border-left-color: var(--primary-color);
+}
+
+.reading-block + .reading-block {
+  margin-top: 0;
+}
+
+.english-text {
+  font-weight: 500;
+  color: var(--text-color);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.english-text p {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+}
+
+.english-text p:last-child {
+  margin-bottom: 0;
+}
+
+.translation-block {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.8;
+  font-size: 1rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease, max-height 0.4s ease, margin-top 0.4s ease, padding-top 0.4s ease;
+}
+
+.reading-block.active .translation-block {
+  max-height: 5000px;
+  opacity: 1;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.translation-block p {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+}
+
+.translation-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* Индикатор клика */
+.reading-block::after {
+  content: '👆 Нажмите, чтобы показать перевод';
+  position: absolute;
+  bottom: 12px;
+  right: 20px;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.reading-block.active::after {
+  content: '👆 Нажмите, чтобы скрыть перевод';
+  opacity: 0.7;
+}
+
+.reading-block:hover::after {
+  opacity: 0.8;
+}
+
+.reading-block.active:hover::after {
+  opacity: 0.9;
+}
+
+/* Карточки словаря */
+.vocabulary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.vocab-card {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-small);
+}
+
+.vocab-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+}
+
+.vocab-card-word {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.vocab-card-translation {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.vocab-card-example {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.vocab-card-example-en {
+  margin-bottom: 6px;
+}
+
+.vocab-card-example-ru {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.glossary-grid {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px 18px;
+}
+
+.glossary-grid li {
+  background: rgba(79, 70, 229, 0.06);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.glossary-grid .term {
+  display: block;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+}
+
+.glossary-grid .definition {
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.grammar-card,
+.practice-card,
+.culture-card {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+}
+
+.grammar-card h3,
+.practice-card h3,
+.culture-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+.grammar-card h4,
+.practice-card h4,
+.culture-card h4 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+.grammar-card ul:not(.practice-list):not(.checklist),
+.practice-card ul:not(.practice-list):not(.checklist),
+.culture-card ul:not(.practice-list):not(.checklist) {
+  margin: 1rem 0;
+  padding-left: 0;
+  list-style: none;
+  color: var(--text-color);
+}
+
+.grammar-card ul:not(.practice-list):not(.checklist) li,
+.practice-card ul:not(.practice-list):not(.checklist) li,
+.culture-card ul:not(.practice-list):not(.checklist) li {
+  position: relative;
+  padding-left: 1.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.grammar-card ul:not(.practice-list):not(.checklist) li::before,
+.practice-card ul:not(.practice-list):not(.checklist) li::before,
+.culture-card ul:not(.practice-list):not(.checklist) li::before {
+  content: '•';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.75;
+}
+
+.grammar-card p,
+.practice-card p,
+.culture-card p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.grammar-card p:last-child,
+.practice-card p:last-child,
+.culture-card p:last-child {
+  margin-bottom: 0;
+}
+
+.practice-list li + li {
+  margin-top: 0;
+}
+
+.note-inline {
+  font-size: 0.95rem;
+  color: rgba(15, 23, 42, 0.7);
+  line-height: 1.7;
+}
+
+/* Стили для .note блоков */
+.note {
+  background: rgba(108, 99, 255, 0.06);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.note p {
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.note p:last-child {
+  margin-bottom: 0;
+}
+
+.note ul {
+  margin: 0.75rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.note ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.note ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary-color);
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+
+.two-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.badge-list li {
+  padding: 5px 10px;
+  background: rgba(15, 23, 42, 0.05);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .module-intro {
+    padding: 0 6px;
+  }
+
+  .reading-block {
+    padding: 16px;
+  }
+
+  .glossary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Адаптивная типографика для мобильных */
+  .topic-section h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .topic-section h3 {
+    font-size: 1.35rem;
+    margin-top: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .topic-section h4 {
+    font-size: 1.15rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .topic-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.125rem;
+  }
+
+  .topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) li,
+  .topic-section ol:not(.practice-list) li,
+  .practice-list li,
+  .checklist li {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .vocabulary-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .vocab-card {
+    padding: 16px;
+  }
+
+  .grammar-card,
+  .practice-card,
+  .culture-card {
+    padding: 18px;
+  }
+
+  .reading-block {
+    padding: 16px 18px;
+  }
+
+  .reading-block::after {
+    font-size: 0.7rem;
+    bottom: 8px;
+    right: 12px;
+    padding: 3px 6px;
+  }
+}
