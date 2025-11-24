@@ -112,13 +112,19 @@ function buildEnglishSidebar() {
         },
         {
             index: 2,
-            file: '02-core-vocabulary.html',
-            title: '2. Базовый словарь',
+            file: '02-everyday-life.html',
+            title: '2. Повседневная жизнь и окружение',
             sub: [
-                { id: 'verbs-actions', text: '2.1 Ключевые глаголы' },
-                { id: 'nouns-concepts', text: '2.2 Существительные и термины' },
-                { id: 'grammar-foundations', text: '2.3 Грамматические опоры' },
-                { id: 'practice-cards', text: '2.4 Практика и карточки' }
+                { id: 'module1-review', text: 'Повторение: Модуль 1' },
+                { id: 'family-relationships', text: 'Семья и отношения' },
+                { id: 'home-interior', text: 'Дом и интерьер' },
+                { id: 'city-infrastructure', text: 'Городская инфраструктура' },
+                { id: 'food-drinks', text: 'Еда и напитки' },
+                { id: 'daily-routine', text: 'Распорядок дня' },
+                { id: 'hobbies-interests', text: 'Хобби и интересы' },
+                { id: 'grammar', text: 'Грамматика' },
+                { id: 'dialogues', text: 'Диалоги-ситуации' },
+                { id: 'final-case', text: 'Итоговый кейс' }
             ]
         },
         {
@@ -323,6 +329,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Вызываем функцию при прокрутке
 window.addEventListener('scroll', setActiveSection);
+
+// Прогресс-бар чтения и эффект скролла для header
+(function headerEnhancements() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    
+    function updateReadingProgress() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollableHeight = documentHeight - windowHeight;
+        const progress = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
+        
+        // Обновляем прогресс-бар
+        header.style.setProperty('--scroll-progress', `${Math.min(progress, 100)}%`);
+        
+        // Добавляем класс при скролле
+        if (scrollTop > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+    
+    // Обновляем при загрузке и скролле
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+})();
 
 // Обработка якорей при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
@@ -530,6 +565,133 @@ const flashcardData = {
         { word: 'ticket', translation: 'билет', example: 'I have a ticket.' },
         { word: 'luggage', translation: 'багаж', example: 'Where is my luggage?' },
         { word: 'excuse me', translation: 'извините', example: 'Excuse me, where is the office?' }
+    ],
+    // Модуль 2: Повседневная жизнь и окружение
+    'family-relationships': [
+        { word: 'parents', translation: 'родители', example: 'My parents live in Moscow.' },
+        { word: 'mother / mom', translation: 'мама', example: 'My mother is a teacher.' },
+        { word: 'father / dad', translation: 'папа', example: 'My father works in IT.' },
+        { word: 'siblings', translation: 'братья и сёстры', example: 'I have two siblings.' },
+        { word: 'brother', translation: 'брат', example: 'My brother is older than me.' },
+        { word: 'sister', translation: 'сестра', example: 'My sister studies at university.' },
+        { word: 'grandmother / grandma', translation: 'бабушка', example: 'My grandmother lives with us.' },
+        { word: 'grandfather / grandpa', translation: 'дедушка', example: 'My grandfather is retired.' },
+        { word: 'relatives', translation: 'родственники', example: 'I visit my relatives on holidays.' },
+        { word: 'uncle', translation: 'дядя', example: 'My uncle is a doctor.' },
+        { word: 'aunt', translation: 'тётя', example: 'My aunt lives in another city.' },
+        { word: 'cousin', translation: 'двоюродный брат/сестра', example: 'I have three cousins.' },
+        { word: 'married', translation: 'женат/замужем', example: 'She is married.' },
+        { word: 'single', translation: 'холост/не замужем', example: 'He is single.' },
+        { word: 'husband', translation: 'муж', example: 'My husband is a developer.' },
+        { word: 'wife', translation: 'жена', example: 'My wife works as a designer.' },
+        { word: 'son', translation: 'сын', example: 'My son is ten years old.' },
+        { word: 'daughter', translation: 'дочь', example: 'My daughter goes to school.' },
+        { word: 'close', translation: 'близкий', example: 'We are very close friends.' },
+        { word: 'support', translation: 'поддержка', example: 'My family gives me support.' },
+        { word: 'love', translation: 'любовь, любить', example: 'I love my family.' }
+    ],
+    'home-interior': [
+        { word: 'living room', translation: 'гостиная', example: 'We watch TV in the living room.' },
+        { word: 'bedroom', translation: 'спальня', example: 'My bedroom is small but cozy.' },
+        { word: 'kitchen', translation: 'кухня', example: 'I cook in the kitchen.' },
+        { word: 'bathroom', translation: 'ванная комната', example: 'The bathroom is on the second floor.' },
+        { word: 'dining room', translation: 'столовая', example: 'We eat in the dining room.' },
+        { word: 'study / office', translation: 'кабинет', example: 'I work in my study.' },
+        { word: 'sofa / couch', translation: 'диван', example: 'I sit on the sofa.' },
+        { word: 'table', translation: 'стол', example: 'The table is in the kitchen.' },
+        { word: 'chair', translation: 'стул', example: 'I sit on a chair.' },
+        { word: 'bed', translation: 'кровать', example: 'I sleep in my bed.' },
+        { word: 'wardrobe / closet', translation: 'шкаф', example: 'My clothes are in the wardrobe.' },
+        { word: 'desk', translation: 'письменный стол', example: 'I work at my desk.' },
+        { word: 'shelf / shelves', translation: 'полка / полки', example: 'Books are on the shelves.' },
+        { word: 'refrigerator / fridge', translation: 'холодильник', example: 'Food is in the refrigerator.' },
+        { word: 'microwave', translation: 'микроволновка', example: 'I heat food in the microwave.' },
+        { word: 'washing machine', translation: 'стиральная машина', example: 'I wash clothes in the washing machine.' },
+        { word: 'TV / television', translation: 'телевизор', example: 'We watch TV in the evening.' },
+        { word: 'computer', translation: 'компьютер', example: 'I work on my computer.' }
+    ],
+    'city-infrastructure': [
+        { word: 'bank', translation: 'банк', example: 'I go to the bank to withdraw money.' },
+        { word: 'post office', translation: 'почта', example: 'I send a letter at the post office.' },
+        { word: 'pharmacy', translation: 'аптека', example: 'I buy medicine at the pharmacy.' },
+        { word: 'supermarket', translation: 'супермаркет', example: 'I shop at the supermarket.' },
+        { word: 'hospital', translation: 'больница', example: 'My friend works at the hospital.' },
+        { word: 'school', translation: 'школа', example: 'My children go to school.' },
+        { word: 'university', translation: 'университет', example: 'I study at the university.' },
+        { word: 'restaurant', translation: 'ресторан', example: 'We have dinner at a restaurant.' },
+        { word: 'cafe', translation: 'кафе', example: 'I meet friends at a cafe.' },
+        { word: 'cinema / movie theater', translation: 'кинотеатр', example: 'We watch movies at the cinema.' },
+        { word: 'park', translation: 'парк', example: 'I walk in the park.' },
+        { word: 'library', translation: 'библиотека', example: 'I borrow books from the library.' },
+        { word: 'gym', translation: 'спортзал', example: 'I exercise at the gym.' },
+        { word: 'bus stop', translation: 'автобусная остановка', example: 'I wait at the bus stop.' },
+        { word: 'subway station / metro station', translation: 'станция метро', example: 'I take the subway to work.' },
+        { word: 'taxi', translation: 'такси', example: 'I take a taxi when I\'m late.' },
+        { word: 'car', translation: 'машина', example: 'I drive a car to work.' },
+        { word: 'bicycle / bike', translation: 'велосипед', example: 'I ride a bicycle in the park.' }
+    ],
+    'food-drinks': [
+        { word: 'fruits', translation: 'фрукты', example: 'I eat fruits every day.' },
+        { word: 'apple', translation: 'яблоко', example: 'I eat an apple for breakfast.' },
+        { word: 'banana', translation: 'банан', example: 'I like bananas.' },
+        { word: 'vegetables', translation: 'овощи', example: 'I cook vegetables for dinner.' },
+        { word: 'tomato', translation: 'помидор', example: 'I add tomatoes to the salad.' },
+        { word: 'potato', translation: 'картофель', example: 'I cook potatoes for lunch.' },
+        { word: 'meat', translation: 'мясо', example: 'I eat meat twice a week.' },
+        { word: 'chicken', translation: 'курица', example: 'I cook chicken for dinner.' },
+        { word: 'fish', translation: 'рыба', example: 'I like fish.' },
+        { word: 'dairy', translation: 'молочные продукты', example: 'I buy dairy products every week.' },
+        { word: 'milk', translation: 'молоко', example: 'I drink milk in the morning.' },
+        { word: 'cheese', translation: 'сыр', example: 'I add cheese to sandwiches.' },
+        { word: 'bread', translation: 'хлеб', example: 'I buy bread every day.' },
+        { word: 'rice', translation: 'рис', example: 'I cook rice for lunch.' },
+        { word: 'breakfast', translation: 'завтрак', example: 'I have breakfast at 8 AM.' },
+        { word: 'lunch', translation: 'обед', example: 'I have lunch at 1 PM.' },
+        { word: 'dinner', translation: 'ужин', example: 'I have dinner at 7 PM.' },
+        { word: 'coffee', translation: 'кофе', example: 'I drink coffee in the morning.' },
+        { word: 'tea', translation: 'чай', example: 'I drink tea in the evening.' },
+        { word: 'juice', translation: 'сок', example: 'I drink juice for breakfast.' },
+        { word: 'water', translation: 'вода', example: 'I drink water every day.' }
+    ],
+    'daily-routine': [
+        { word: 'wake up', translation: 'просыпаться', example: 'I wake up at 7 AM.' },
+        { word: 'get up', translation: 'вставать', example: 'I get up at 7:15 AM.' },
+        { word: 'brush teeth', translation: 'чистить зубы', example: 'I brush my teeth every morning.' },
+        { word: 'shower', translation: 'душ, принимать душ', example: 'I take a shower in the morning.' },
+        { word: 'get dressed', translation: 'одеваться', example: 'I get dressed after shower.' },
+        { word: 'have breakfast', translation: 'завтракать', example: 'I have breakfast at 8 AM.' },
+        { word: 'commute', translation: 'ехать на работу', example: 'I commute to work by subway.' },
+        { word: 'work', translation: 'работать', example: 'I work from 9 AM to 6 PM.' },
+        { word: 'meeting', translation: 'встреча', example: 'I have a meeting at 10 AM.' },
+        { word: 'lunch break', translation: 'обеденный перерыв', example: 'I have a lunch break at 1 PM.' },
+        { word: 'finish work', translation: 'заканчивать работу', example: 'I finish work at 6 PM.' },
+        { word: 'relax', translation: 'расслабляться', example: 'I relax after work.' },
+        { word: 'watch TV', translation: 'смотреть телевизор', example: 'I watch TV in the evening.' },
+        { word: 'read', translation: 'читать', example: 'I read before bed.' },
+        { word: 'go to bed', translation: 'ложиться спать', example: 'I go to bed at 11 PM.' },
+        { word: 'sleep', translation: 'спать', example: 'I sleep for 8 hours.' }
+    ],
+    'hobbies-interests': [
+        { word: 'football / soccer', translation: 'футбол', example: 'I play football on weekends.' },
+        { word: 'swimming', translation: 'плавание', example: 'I go swimming twice a week.' },
+        { word: 'running', translation: 'бег', example: 'I go running in the morning.' },
+        { word: 'basketball', translation: 'баскетбол', example: 'I play basketball with friends.' },
+        { word: 'tennis', translation: 'теннис', example: 'I play tennis on Sundays.' },
+        { word: 'cycling', translation: 'велоспорт', example: 'I go cycling in the park.' },
+        { word: 'exercise', translation: 'упражнение, заниматься спортом', example: 'I exercise at the gym.' },
+        { word: 'music', translation: 'музыка', example: 'I listen to music every day.' },
+        { word: 'painting', translation: 'живопись', example: 'I like painting.' },
+        { word: 'photography', translation: 'фотография', example: 'I do photography as a hobby.' },
+        { word: 'drawing', translation: 'рисование', example: 'I enjoy drawing.' },
+        { word: 'singing', translation: 'пение', example: 'I like singing.' },
+        { word: 'dancing', translation: 'танцы', example: 'I go dancing on weekends.' },
+        { word: 'movies / films', translation: 'фильмы', example: 'I watch movies on weekends.' },
+        { word: 'games', translation: 'игры', example: 'I play video games.' },
+        { word: 'books', translation: 'книги', example: 'I read books every evening.' },
+        { word: 'hobby', translation: 'хобби', example: 'My hobby is photography.' },
+        { word: 'interest', translation: 'интерес', example: 'My interests are music and sports.' },
+        { word: 'free time', translation: 'свободное время', example: 'I read books in my free time.' },
+        { word: 'weekend', translation: 'выходные', example: 'I relax on the weekend.' }
     ]
 };
 
@@ -635,10 +797,23 @@ function initFlashcardGame() {
 function loadCards(category) {
     currentCards = [];
     
+    // Определяем, на какой странице мы находимся
+    const currentFile = (location.pathname.split('/').pop() || '').toLowerCase();
+    const isModule2 = currentFile.includes('02-everyday-life');
+    
+    // Категории для модуля 2
+    const module2Categories = ['family-relationships', 'home-interior', 'city-infrastructure', 'food-drinks', 'daily-routine', 'hobbies-interests'];
+    
+    // Категории для модуля 1
+    const module1Categories = ['greetings', 'names-countries', 'professions', 'basic-nouns', 'basic-verbs', 'questions-pronouns', 'useful-phrases', 'numbers', 'it-professions', 'it-terms', 'travel'];
+    
     if (category === 'all') {
-        // Загружаем все карточки из всех категорий
-        Object.keys(flashcardData).forEach(key => {
-            currentCards = currentCards.concat(flashcardData[key]);
+        // Загружаем все карточки из соответствующих категорий модуля
+        const categoriesToUse = isModule2 ? module2Categories : module1Categories;
+        categoriesToUse.forEach(key => {
+            if (flashcardData[key]) {
+                currentCards = currentCards.concat(flashcardData[key]);
+            }
         });
     } else {
         currentCards = flashcardData[category] || [];
