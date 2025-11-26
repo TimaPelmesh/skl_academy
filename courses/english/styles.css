@@ -152,14 +152,7 @@ header .header-buttons {
 
 /* Декоративный элемент рядом с заголовком */
 .header-title::before {
-    content: '';
-    width: 4px;
-    height: 24px;
-    background: linear-gradient(180deg, var(--primary-color), var(--primary-light));
-    border-radius: 2px;
-    margin-right: -4px;
-    opacity: 0.8;
-    animation: pulse 2s ease-in-out infinite;
+    display: none;
 }
 
 @keyframes pulse {
@@ -490,14 +483,14 @@ header .header-buttons {
 
 .subtopic {
     display: block;
-    padding: 12px 16px 12px 18px;
+    padding: 12px 16px 12px 32px;
     text-decoration: none;
     color: var(--light-text);
     font-size: 0.9rem;
     transition: all 0.3s ease;
     border-bottom: 1px solid var(--border-color);
     position: relative;
-    padding-left: 32px;
+    border-left: 2px solid transparent;
 }
 
 .subtopic:hover {
@@ -505,11 +498,13 @@ header .header-buttons {
     color: var(--primary-color);
 }
 
-/* Активная подтема в боковом меню: подсветка текста и фона (как в курсе Networks) */
+/* Активная подтема в боковом меню: тонкая подсветка */
 .subtopic.active {
     color: var(--primary-color);
-    background-color: var(--overlay-light);
-    font-weight: 600;
+    background-color: rgba(108, 99, 255, 0.06);
+    font-weight: 500;
+    border-left: 2px solid var(--primary-color);
+    padding-left: 30px;
 }
 
 /* Основной контент */
@@ -618,15 +613,10 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 576px) {
     .header-title {
         font-size: 1.3rem;
-        margin-left: 44px;
+        margin-left: 70px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-    
-    .header-title::before {
-        height: 20px;
-        width: 3px;
     }
     
     .welcome {
@@ -1201,6 +1191,13 @@ h4 {
 .module-intro h2 {
   font-size: 1.85rem;
   margin-bottom: 14px;
+  border-left: none;
+  padding-left: 0;
+}
+
+.module-intro h2::before,
+.module-intro h2::after {
+  display: none;
 }
 
 .module-intro p {

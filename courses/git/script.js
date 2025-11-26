@@ -415,3 +415,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
 });
+
+// Прогресс-бар чтения и эффект скролла для header
+(function headerEnhancements() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    
+    function updateReadingProgress() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollableHeight = documentHeight - windowHeight;
+        const progress = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
+        
+        // Обновляем прогресс-бар
+        header.style.setProperty('--scroll-progress', `${Math.min(progress, 100)}%`);
+        
+        // Добавляем класс при скролле
+        if (scrollTop > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+    
+    // Обновляем при загрузке и скролле
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+})();

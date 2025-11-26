@@ -63,10 +63,76 @@ header {
     box-shadow: var(--shadow-small);
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: 0;
     justify-content: space-between;
     transition: all 0.4s ease;
     border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+/* Акцентная градиентная полоса сверху */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        var(--primary-color) 0%, 
+        var(--primary-light) 50%, 
+        var(--primary-color) 100%);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+    z-index: 1;
+}
+
+/* Прогресс-бар чтения */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    width: var(--scroll-progress, 0%);
+    transition: width 0.1s ease;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Эффект свечения при скролле */
+header.scrolled {
+    box-shadow: 0 4px 30px rgba(108, 99, 255, 0.12);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 249, 251, 0.98) 100%);
+}
+
+/* Контейнер для контента header */
+header > * {
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+header .menu-toggle {
+    padding: 0 20px;
+}
+
+header .header-title {
+    padding: 0;
+}
+
+header .header-buttons {
+    padding: 0 20px;
 }
 
 .header-title {
@@ -103,8 +169,11 @@ header {
 }
 
 .exit-btn:hover {
-    background: var(--overlay-light);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: #ffffff;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+    border-color: transparent;
 }
 
 .exit-btn svg {
@@ -116,34 +185,52 @@ header {
 .menu-toggle {
     position: absolute;
     left: 20px;
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     z-index: 200;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    padding: 8px;
+}
+
+.menu-toggle:hover {
+    background: var(--overlay-light);
+    transform: scale(1.05);
 }
 
 .menu-toggle span {
     display: block;
-    width: 100%;
+    width: 22px;
     height: 2px;
-    background-color: var(--light-text);
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
     border-radius: 4px;
     transition: var(--transition);
+    box-shadow: 0 1px 2px rgba(108, 99, 255, 0.2);
+}
+
+.menu-toggle.active {
+    background: var(--overlay-light);
 }
 
 .menu-toggle.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
+    background: var(--primary-color);
 }
 
 .menu-toggle.active span:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 
 .menu-toggle.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
+    background: var(--primary-color);
 }
 
 /* Основной контейнер */
