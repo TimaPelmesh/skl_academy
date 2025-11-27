@@ -26,8 +26,36 @@
         <div class="menu-toggle" id="menuToggle">
             <span></span><span></span><span></span>
         </div>
-        <h1 class="header-title">Git — Коммиты и история</h1>
+        <h1 class="header-title">Git</h1>
         <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567l-.091.549c-.05.295-.088.592-.154.855a19.097 19.097 0 00-.306 1.68c-.484 1.328-.65 2.663-.77 3.84l-.102 1.125c-.032.354-.077.708-.14 1.06a3.141 3.141 0 01-1.885 2.23c-.691.228-1.54.034-2.012-.906-.192-.381-.264-.752-.288-1.087a.752.752 0 00-.752-.703h-1.5a.75.75 0 000 1.5h.75v.75H3a.75.75 0 000 1.5h1.038a.75.75 0 00.72-.618l.041-.188c.21-1.012.638-1.637 1.276-1.876a1.641 1.641 0 011.014-.084l1.141.286c.19.047.38.105.56.179l.012-.028c.127-.296.22-.608.279-.931.059-.324.087-.656.087-.988v-1.125c0-.552-.058-1.09-.17-1.614l-.09-.544c-.008-.049.016-.098.06-.136l.67-.624a3.141 3.141 0 010-4.353l-.67-.624a.25.25 0 01-.06-.136l-.09-.544c-.112-.524-.17-1.062-.17-1.614V3.375c0-.332-.028-.664-.087-.988a4.908 4.908 0 00-.279-.931l-.012-.028c-.18-.074-.37-.132-.56-.179L7.145.923a1.641 1.641 0 01-1.014-.084c-.638-.239-1.066-.864-1.276-1.876L4.814-.225a.75.75 0 00-.72-.618H3a.75.75 0 000 1.5h.75v.75H3a.75.75 0 000 1.5h1.5c.415 0 .75.336.75.75 0 .335.096.706.288 1.087.472.94 1.32 1.134 2.012.906a3.141 3.141 0 001.885-2.23c.063-.352.108-.706.14-1.06l.102-1.125c.12-1.177.286-2.512.77-3.84a19.097 19.097 0 01.306-1.68c.066-.263.104-.56.154-.855L11.228.583c.151-.904.933-1.567 1.85-1.567zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
             </a>
@@ -236,6 +264,51 @@ build/
                 <h2>2.12 Форматы вывода и кастомизация</h2>
                 <p><code>git log --pretty=&lt;format&gt;</code> предоставляет гибкую настройку полей (хеш, дата, автор, тема). Комбинация с <code>--decorate</code>, <code>--graph</code> делает ленту истории информативной.</p>
             </section>
+        </div>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     </div>
 

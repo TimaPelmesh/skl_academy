@@ -46,6 +46,9 @@ body {
     min-height: 100vh;
     transition: all 0.4s ease;
     font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 /* Заголовок */
@@ -70,22 +73,7 @@ header {
     overflow: hidden;
 }
 
-/* Акцентная градиентная полоса сверху */
-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, 
-        var(--primary-color) 0%, 
-        var(--primary-light) 50%, 
-        var(--primary-color) 100%);
-    background-size: 200% 100%;
-    animation: gradientShift 3s ease infinite;
-    z-index: 1;
-}
+/* Акцентная градиентная полоса сверху - удалена по запросу */
 
 /* Прогресс-бар чтения */
 header::after {
@@ -147,8 +135,146 @@ header .header-buttons {
 .header-buttons {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     margin-right: 20px;
+}
+
+/* Кнопки переключения цветовой схемы */
+.color-scheme-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.color-scheme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 4px;
+    position: relative;
+}
+
+.color-scheme-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.1);
+}
+
+.color-scheme-btn.active {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.color-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-scheme-btn.active .color-dot {
+    box-shadow: 0 0 0 2px var(--primary-color), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Кнопка настроек (в header) */
+.mobile-settings-btn {
+    display: none; /* По умолчанию скрыта на десктопе */
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--light-text);
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .mobile-settings-btn {
+        display: flex;
+    }
+}
+
+.mobile-settings-btn:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: #ffffff;
+    transform: translateY(-2px) rotate(90deg);
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+    border-color: transparent;
+}
+
+.mobile-settings-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.mobile-settings-btn:hover svg {
+    transform: rotate(90deg);
+}
+
+/* Кнопка переключения темы */
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--light-text);
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.theme-toggle-btn:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+    border-color: transparent;
+}
+
+.theme-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.theme-icon-sun {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.theme-icon-moon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+body.dark-theme .theme-icon-sun {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+body.dark-theme .theme-icon-moon {
+    opacity: 1;
+    transform: rotate(0deg);
 }
 
 /* Кнопка выхода */
@@ -379,7 +505,7 @@ header .header-buttons {
 }
 
 .topic-btn.active {
-    color: #111827; /* Чёрный, как в курсе Networks */
+    color: var(--text-color);
     font-weight: 600;
 }
 
@@ -424,7 +550,7 @@ header .header-buttons {
 .content {
     flex-grow: 1;
     margin-left: 0;
-    padding: 25px;
+    padding: 30px 25px;
     transition: margin 0.4s ease, background 0.4s ease;
     overflow-x: hidden;
 }
@@ -510,6 +636,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media (max-width: 768px) {
+    .header-title {
+        margin-left: 60px;
+    }
+    
     .welcome {
         padding: 25px;
     }
@@ -526,7 +656,7 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 576px) {
     .header-title {
         font-size: 1.3rem;
-        margin-left: 44px;
+        margin-left: 60px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -625,58 +755,10 @@ body::-webkit-scrollbar-thumb {
     transform: translateX(5px);
 }
 
-/* Стили для элементов с темным фоном */
-.resources-section, 
-.practice-tips, 
-.interactive-resources,
-.next-steps,
-.visual-guide,
-.operators-cheatsheet,
-.conclusion {
-    color: #e6e6e6; /* Светлый текст для темного фона */
-}
-
-/* Стили для важных заметок с темным фоном */
-.resources-section p, 
-.practice-tips p, 
-.interactive-resources p,
-.next-steps p,
-.visual-guide p,
-.operators-cheatsheet p,
-.conclusion p {
-    color: #e6e6e6;
-}
-
-/* Стили для списков в блоках с темным фоном */
-.resources-section li, 
-.practice-tips li, 
-.interactive-resources li,
-.next-steps li,
-.visual-guide li,
-.operators-cheatsheet li {
-    color: #e6e6e6;
-}
-
-/* Стили для заголовка "Важно понимать разницу" */
-.resources-section h4,
-.practice-tips h4,
-.interactive-resources h4,
-.next-steps h4,
-.visual-guide h4,
-.operators-cheatsheet h4,
-.conclusion h4 {
-    color: #58a6ff; /* Яркий голубой для заголовков */
-}
-
 /* Базовый читаемый цвет для всех h4 на светлом фоне в курсе */
 h4 {
     color: #111827;
 }
-
-/* Сохраняем цвета в тёмных блоках, перекрывая базовый h4 */
-.visual-guide h4 { color: #7ee787; }
-.conclusion h4 { color: #d2a8ff; }
-.light-theme .conclusion h4 { color: #6f42c1; }
 
 /* Улучшенные стили для таблиц в темных блоках */
 .operators-cheatsheet table {
@@ -724,120 +806,94 @@ h4 {
     background-color: #f6f8fa;
 }
 
-/* Улучшенные стили для визуальных блоков */
+/* ===== Callout блоки (как в курсе английского) ===== */
 .visual-guide {
-    background-color: #2d333b;
+    background: rgba(108, 99, 255, 0.06);
+    border-left: 4px solid var(--primary-color);
     border-radius: 8px;
-    padding: 15px 20px;
-    margin: 20px 0;
-    border-left: 4px solid #7ee787;
+    padding: 1.75rem 2rem;
+    margin: 1.5rem 0;
 }
 
 .visual-guide h4 {
-    color: #7ee787;
+    color: var(--primary-color);
     margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
 }
 
 .visual-guide ul {
-    margin-left: 20px;
+    margin: 1rem 0;
+    padding-left: 0;
+    list-style: none;
 }
 
 .visual-guide li {
-    color: #e6e6e6;
-    margin-bottom: 12px;
-    line-height: 1.5;
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.visual-guide li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    line-height: 1.75;
 }
 
 .visual-guide strong {
-    color: #7ee787;
+    color: var(--primary-dark);
     font-weight: 600;
 }
 
 .visual-guide p {
-    color: #e6e6e6;
-    margin-bottom: 10px;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    line-height: 1.75;
+    font-size: 1rem;
 }
 
-/* Стили для светлой темы */
-.light-theme .visual-guide {
-    background-color: #f1f1f1;
-    border-left: 4px solid #2ea44f;
+.visual-guide p:last-child {
+    margin-bottom: 0;
 }
 
-.light-theme .visual-guide h4 {
-    color: #2ea44f;
+.visual-guide code {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-dark);
 }
 
-.light-theme .visual-guide li,
-.light-theme .visual-guide p {
-    color: #333344;
-}
 
-.light-theme .visual-guide strong {
-    color: #2ea44f;
-}
-
-/* Исправление: в светлой теме делаем текст в блоке "Следующие шаги" чёрным */
-.light-theme .next-steps,
-.light-theme .next-steps p,
-.light-theme .next-steps li {
-    color: #000;
-}
-
-/* Явно делаем текст в блоке "Следующие шаги" чёрным (для всех тем) */
-.next-steps,
-.next-steps p,
-.next-steps li {
-    color: #000;
-}
-
-/* Явно делаем текст в блоках "Практические советы" чёрным (для всех тем) */
-.practice-tips,
-.practice-tips p,
-.practice-tips li {
-    color: #000;
-}
-
-/* Улучшенные стили для блока заключения */
+/* ===== Улучшенные стили для блока заключения ===== */
 .conclusion {
-    background-color: #2d333b;
+    background: rgba(108, 99, 255, 0.06);
+    border-left: 4px solid var(--primary-color);
     border-radius: 8px;
-    padding: 25px 30px;
-    margin: 40px auto;
-    border-left: 4px solid #d2a8ff;
+    padding: 2rem 2.5rem;
+    margin: 2.5rem auto;
     text-align: center;
     max-width: 800px;
 }
 
 .conclusion h3 {
-    color: #d2a8ff;
+    color: var(--primary-color);
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     font-size: 1.5rem;
     font-weight: 600;
 }
 
 .conclusion p {
-    color: #e6e6e6;
+    color: var(--text-color);
     font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-/* Стили для светлой темы */
-.light-theme .conclusion {
-    background-color: #f1f1f1;
-    border-left: 4px solid #8a63d2;
-}
-
-.light-theme .conclusion h3 {
-    color: #6f42c1;
-}
-
-.light-theme .conclusion p {
-    color: #333344;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
 }
 
 /* Центрирование контента как в других курсах */
@@ -847,10 +903,871 @@ h4 {
     padding: 0 20px;
 }
 
+/* ===== Улучшенная типографика для всего контента ===== */
+
+/* Параграфы */
+.topic-section p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-color);
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.topic-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* Заголовки */
+.topic-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.topic-section h2:first-child {
+    margin-top: 0;
+}
+
+.topic-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.topic-section h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.topic-section h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 1.25rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Маркированные списки */
+.topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5rem 0;
+}
+
+.topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) li::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Вложенные списки */
+.topic-section ul ul {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    margin-left: 1rem;
+}
+
+.topic-section ul ul li::before {
+    content: '◦';
+    color: var(--primary-light);
+    font-size: 1rem;
+}
+
+/* Нумерованные списки */
+.topic-section ol:not(.practice-list) {
+    counter-reset: item;
+    padding-left: 0;
+    list-style: none;
+    margin: 1.5rem 0;
+}
+
+.topic-section ol:not(.practice-list) li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 2.25rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+.topic-section ol:not(.practice-list) li::before {
+    content: counter(item) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 1.75rem;
+    line-height: 1.8;
+}
+
+/* Вложенные нумерованные списки */
+.topic-section ol ol {
+    counter-reset: item;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    margin-left: 1rem;
+}
+
+.topic-section ol ol li::before {
+    content: counter(item, lower-alpha) '.';
+    color: var(--primary-light);
+}
+
+/* Выделение текста */
+.topic-section strong {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.topic-section em {
+    font-style: italic;
+    color: var(--text-color);
+}
+
+.topic-section code {
+    background: rgba(108, 99, 255, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--primary-dark);
+}
+
+/* Улучшенные отступы для блоков */
+.topic-section > *:first-child {
+    margin-top: 0;
+}
+
+.topic-section > *:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== Улучшенные стили для блоков кода ===== */
+.code-example {
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+}
+
+.code-example pre {
+    margin: 0;
+    padding: 1.5rem;
+    overflow-x: auto;
+    background: #282c34;
+    color: #abb2bf;
+    font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.code-example code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.code-example pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+.code-example pre::-webkit-scrollbar-track {
+    background: #1e2127;
+}
+
+.code-example pre::-webkit-scrollbar-thumb {
+    background: #3e4451;
+    border-radius: 4px;
+}
+
+.code-example pre::-webkit-scrollbar-thumb:hover {
+    background: #545862;
+}
+
+/* ===== Улучшенные стили для блоков заметок ===== */
+.note {
+    background: rgba(108, 99, 255, 0.06);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    margin: 1.5rem 0;
+}
+
+.note p {
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.note p:last-child {
+    margin-bottom: 0;
+}
+
+.note ul {
+    margin: 0.75rem 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.note ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.note ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    line-height: 1.75;
+}
+
+.note strong {
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+/* ===== Callout блоки для практических советов ===== */
+.practice-tips {
+    background: rgba(108, 99, 255, 0.06);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    margin: 1.5rem 0;
+}
+
+.practice-tips h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.practice-tips p {
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+.practice-tips p:last-child {
+    margin-bottom: 0;
+}
+
+.practice-tips ul {
+    margin: 1rem 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.practice-tips ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.practice-tips ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    line-height: 1.75;
+}
+
+.practice-tips code {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-dark);
+}
+
+/* ===== Улучшенные стили для resources-section ===== */
+.resources-section {
+    background: rgba(108, 99, 255, 0.06);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    margin: 1.5rem 0;
+}
+
+.resources-section h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.resources-section p {
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+.resources-section p:last-child {
+    margin-bottom: 0;
+}
+
+.resources-section ul {
+    margin: 1rem 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.resources-section ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.75;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.resources-section ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    line-height: 1.75;
+}
+
+.resources-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.resources-section a:hover {
+    border-bottom-color: var(--primary-color);
+}
+
+.resources-section code {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-dark);
+}
+
+/* ===== Улучшенные стили для module-intro ===== */
+.module-intro {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.module-intro.topic-section {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+.module-intro h2 {
+    font-size: 1.85rem;
+    margin-bottom: 14px;
+    border-left: none;
+    padding-left: 0;
+}
+
+.module-intro h2::before,
+.module-intro h2::after {
+    display: none;
+}
+
+.module-intro p {
+    color: var(--text-color);
+    line-height: 1.85;
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+}
+
 /* Исправление поведения на мобильных: контент не должен сдвигаться вправо при открытом меню */
 @media (max-width: 991px) {
     .content,
     .content.sidebar-active {
         margin-left: 0;
+    }
+}
+
+/* Адаптивная типографика для мобильных */
+@media (max-width: 768px) {
+    .topic-section h2 {
+        font-size: 1.75rem;
+        margin-top: 2rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .topic-section h3 {
+        font-size: 1.35rem;
+        margin-top: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .topic-section h4 {
+        font-size: 1.15rem;
+        margin-top: 1.25rem;
+        margin-bottom: 0.875rem;
+    }
+
+    .topic-section p {
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 1.125rem;
+    }
+
+    .topic-section ul:not(.glossary-grid):not(.badge-list):not(.checklist):not(.practice-list) li,
+    .topic-section ol:not(.practice-list) li {
+        font-size: 1rem;
+        line-height: 1.75;
+        margin-bottom: 0.75rem;
+    }
+
+    .code-example pre {
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .note,
+    .practice-tips,
+    .resources-section {
+        padding: 1.25rem 1.5rem;
+    }
+}
+
+/* ===== ЦВЕТОВЫЕ СХЕМЫ ===== */
+
+/* Фиолетовая схема (по умолчанию) */
+:root {
+    --color-scheme-primary: #6c63ff;
+    --color-scheme-primary-light: #8a84ff;
+    --color-scheme-primary-dark: #4b44d1;
+    --color-scheme-overlay: rgba(108, 99, 255, 0.04);
+    --color-scheme-overlay-dark: rgba(108, 99, 255, 0.06);
+}
+
+/* Оранжевая цветовая схема */
+body[data-color-scheme="orange"] {
+    --primary-color: #f97316;
+    --primary-light: #fb923c;
+    --primary-dark: #ea580c;
+    --secondary-color: #fed7aa;
+    --accent-color: #fb923c;
+    --overlay-light: rgba(249, 115, 22, 0.04);
+    --overlay-dark: rgba(249, 115, 22, 0.06);
+    --color-scheme-primary: #f97316;
+    --color-scheme-primary-light: #fb923c;
+    --color-scheme-primary-dark: #ea580c;
+    --color-scheme-overlay: rgba(249, 115, 22, 0.04);
+    --color-scheme-overlay-dark: rgba(249, 115, 22, 0.06);
+}
+
+body[data-color-scheme="orange"] .visual-guide,
+body[data-color-scheme="orange"] .practice-tips,
+body[data-color-scheme="orange"] .note,
+body[data-color-scheme="orange"] .resources-section {
+    background: rgba(249, 115, 22, 0.06);
+    border-left-color: #f97316;
+}
+
+body[data-color-scheme="orange"] .visual-guide h4,
+body[data-color-scheme="orange"] .practice-tips h4,
+body[data-color-scheme="orange"] .note strong,
+body[data-color-scheme="orange"] .resources-section h4 {
+    color: #f97316;
+}
+
+body[data-color-scheme="orange"] .visual-guide li::before,
+body[data-color-scheme="orange"] .practice-tips ul li::before,
+body[data-color-scheme="orange"] .note ul li::before,
+body[data-color-scheme="orange"] .resources-section ul li::before {
+    color: #f97316;
+}
+
+/* Синяя цветовая схема */
+body[data-color-scheme="blue"] {
+    --primary-color: #3b82f6;
+    --primary-light: #60a5fa;
+    --primary-dark: #2563eb;
+    --secondary-color: #dbeafe;
+    --accent-color: #60a5fa;
+    --overlay-light: rgba(59, 130, 246, 0.04);
+    --overlay-dark: rgba(59, 130, 246, 0.06);
+    --color-scheme-primary: #3b82f6;
+    --color-scheme-primary-light: #60a5fa;
+    --color-scheme-primary-dark: #2563eb;
+    --color-scheme-overlay: rgba(59, 130, 246, 0.04);
+    --color-scheme-overlay-dark: rgba(59, 130, 246, 0.06);
+}
+
+body[data-color-scheme="blue"] .visual-guide,
+body[data-color-scheme="blue"] .practice-tips,
+body[data-color-scheme="blue"] .note,
+body[data-color-scheme="blue"] .resources-section {
+    background: rgba(59, 130, 246, 0.06);
+    border-left-color: #3b82f6;
+}
+
+body[data-color-scheme="blue"] .visual-guide h4,
+body[data-color-scheme="blue"] .practice-tips h4,
+body[data-color-scheme="blue"] .note strong,
+body[data-color-scheme="blue"] .resources-section h4 {
+    color: #3b82f6;
+}
+
+body[data-color-scheme="blue"] .visual-guide li::before,
+body[data-color-scheme="blue"] .practice-tips ul li::before,
+body[data-color-scheme="blue"] .note ul li::before,
+body[data-color-scheme="blue"] .resources-section ul li::before {
+    color: #3b82f6;
+}
+
+/* ===== ТЕМНАЯ ТЕМА ===== */
+body.dark-theme {
+    --text-color: #e5e7eb;
+    --light-text: #e5e7eb;
+    --bg-color: #111827;
+    --bg-gradient-1: #111827;
+    --bg-gradient-2: #1f2937;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --header-bg: rgba(17, 24, 39, 0.98);
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme header {
+    background: rgba(17, 24, 39, 0.98);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .sidebar {
+    background: #111827;
+    border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Цвет текста кнопок модулей для тёмной темы */
+body.dark-theme .topic-btn {
+    color: #e5e7eb;
+}
+
+body.dark-theme .topic-btn.active {
+    color: #ffffff;
+}
+
+body.dark-theme .topic-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .content {
+    background: #111827;
+}
+
+body.dark-theme .visual-guide,
+body.dark-theme .practice-tips,
+body.dark-theme .note,
+body.dark-theme .resources-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: var(--primary-color);
+}
+
+body.dark-theme .code-example {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .code-example pre {
+    background: #1e293b;
+    color: #cbd5e1;
+}
+
+body.dark-theme .topic-section code {
+    background: rgba(108, 99, 255, 0.2);
+    color: var(--primary-light);
+}
+
+body.dark-theme .color-scheme-buttons {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-theme .color-scheme-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .color-scheme-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== МОБИЛЬНОЕ МЕНЮ НАСТРОЕК ===== */
+
+/* Скрываем кнопки настроек в header на мобильных */
+@media (max-width: 768px) {
+    .color-scheme-buttons,
+    .theme-toggle-btn {
+        display: none;
+    }
+}
+
+
+/* Мобильное меню настроек */
+.mobile-settings-menu {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: var(--header-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
+    z-index: 150;
+    transition: bottom 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    max-height: 80vh;
+    overflow-y: auto;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-settings-menu {
+        display: block;
+    }
+}
+
+.mobile-settings-menu.active {
+    bottom: 0;
+}
+
+.mobile-settings-content {
+    padding: 24px 20px 100px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.mobile-settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-settings-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.mobile-settings-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.mobile-settings-close:hover {
+    background: var(--overlay-light);
+    transform: rotate(90deg);
+}
+
+.mobile-settings-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+.mobile-settings-section {
+    margin-bottom: 32px;
+}
+
+.mobile-settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.mobile-settings-section h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 16px;
+}
+
+/* Кнопки цветовых схем в мобильном меню */
+.mobile-color-scheme-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mobile-color-scheme-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.mobile-color-scheme-btn:hover {
+    border-color: var(--primary-color);
+    background: var(--overlay-light);
+    transform: translateX(4px);
+}
+
+.mobile-color-scheme-btn.active {
+    border-color: var(--primary-color);
+    background: rgba(108, 99, 255, 0.1);
+}
+
+.mobile-color-scheme-btn .color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.mobile-color-scheme-btn.active .color-dot {
+    box-shadow: 0 0 0 3px var(--primary-color), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-color-scheme-btn span:last-child {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Кнопка переключения темы в мобильном меню */
+.mobile-theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-theme-toggle-btn:hover {
+    border-color: var(--primary-color);
+    background: var(--overlay-light);
+}
+
+.mobile-theme-toggle-btn .theme-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.mobile-theme-toggle-btn svg {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+}
+
+.mobile-theme-toggle-btn .theme-icon-sun,
+.mobile-theme-toggle-btn .theme-icon-moon {
+    position: relative;
+    opacity: 1;
+    transform: none;
+}
+
+.mobile-theme-toggle-btn .theme-icon-moon {
+    display: none;
+}
+
+body.dark-theme .mobile-theme-toggle-btn .theme-icon-sun {
+    display: none;
+}
+
+body.dark-theme .mobile-theme-toggle-btn .theme-icon-moon {
+    display: block;
+}
+
+body.dark-theme .mobile-theme-toggle-btn .theme-label::after {
+    content: ' (Тёмная)';
+}
+
+.mobile-theme-toggle-btn .theme-label::after {
+    content: ' (Светлая)';
+}
+
+/* Адаптив для мобильного меню */
+@media (max-width: 576px) {
+    .mobile-settings-trigger {
+        width: 52px;
+        height: 52px;
+        bottom: 16px;
+        right: 16px;
+    }
+    
+    .mobile-settings-content {
+        padding: 20px 16px 90px;
+    }
+    
+    .mobile-settings-header h3 {
+        font-size: 1.3rem;
     }
 }
