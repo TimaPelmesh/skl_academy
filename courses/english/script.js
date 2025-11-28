@@ -1336,6 +1336,13 @@ function showCard() {
     const progressEl = document.getElementById('cardProgress');
     const flashcard = document.getElementById('flashcard');
     
+    // Сначала сбрасываем переворот карточки, чтобы не показывать перевод следующей карточки
+    if (flashcard) {
+        flashcard.classList.remove('flipped');
+        isFlipped = false;
+    }
+    
+    // Затем обновляем содержимое карточки
     if (wordEl) wordEl.textContent = card.word;
     if (translationEl) translationEl.textContent = card.translation;
     if (exampleEl) {
@@ -1347,12 +1354,6 @@ function showCard() {
     if (progressEl) {
         const progress = Math.round(((currentCardIndex + 1) / currentCards.length) * 100);
         progressEl.textContent = `${progress}%`;
-    }
-    
-    // Сбрасываем переворот карточки
-    if (flashcard) {
-        flashcard.classList.remove('flipped');
-        isFlipped = false;
     }
     
     // Обновляем состояние кнопок навигации
@@ -1369,3 +1370,164 @@ function flipCard() {
     isFlipped = !isFlipped;
     flashcard.classList.toggle('flipped', isFlipped);
 }
+
+// ===== Переключение темы и цветовых схем =====
+(function themeAndColorSwitcher() {
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const colorSchemeButtons = document.querySelectorAll('.color-scheme-btn');
+    
+    // Загружаем сохраненные настройки
+    const savedTheme = localStorage.getItem('english-course-theme');
+    const savedColorScheme = localStorage.getItem('english-course-color-scheme');
+    
+    // Применяем сохраненную тему
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+    }
+    
+    // Применяем сохраненную цветовую схему (только если она была выбрана)
+    if (savedColorScheme) {
+        body.setAttribute('data-color-scheme', savedColorScheme);
+        colorSchemeButtons.forEach(btn => {
+            if (btn.getAttribute('data-color') === savedColorScheme) {
+                btn.classList.add('active');
+            }
+        });
+    } else {
+        // Если цвет не выбран, используем фиолетовый по умолчанию, но не выделяем кнопку
+        body.setAttribute('data-color-scheme', 'purple');
+    }
+    
+    // Переключение темы
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            
+            const theme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+            localStorage.setItem('english-course-theme', theme);
+        });
+    }
+    
+    // Переключение цветовых схем
+    colorSchemeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const colorScheme = btn.getAttribute('data-color');
+            
+            // Убираем активность со всех кнопок
+            colorSchemeButtons.forEach(b => b.classList.remove('active'));
+            
+            // Добавляем активность к выбранной
+            btn.classList.add('active');
+            
+            // Применяем цветовую схему
+            body.setAttribute('data-color-scheme', colorScheme);
+            
+            // Сохраняем в localStorage
+            localStorage.setItem('english-course-color-scheme', colorScheme);
+        });
+    });
+})();
+
+// ===== МОБИЛЬНОЕ МЕНЮ НАСТРОЕК =====
+(function() {
+    const mobileSettingsTrigger = document.getElementById('mobileSettingsTrigger');
+    const mobileSettingsMenu = document.getElementById('mobileSettingsMenu');
+    const mobileSettingsClose = document.getElementById('mobileSettingsClose');
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    const mobileColorSchemeBtns = document.querySelectorAll('.mobile-color-scheme-btn');
+    const desktopThemeToggle = document.getElementById('themeToggle');
+    const desktopColorSchemeBtns = document.querySelectorAll('.color-scheme-btn');
+    
+    if (!mobileSettingsTrigger || !mobileSettingsMenu) return;
+    
+    // Открытие мобильного меню
+    mobileSettingsTrigger.addEventListener('click', function() {
+        mobileSettingsMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Закрытие мобильного меню
+    function closeMobileSettings() {
+        mobileSettingsMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    mobileSettingsClose.addEventListener('click', closeMobileSettings);
+    
+    // Закрытие по клику вне меню
+    mobileSettingsMenu.addEventListener('click', function(e) {
+        if (e.target === mobileSettingsMenu) {
+            closeMobileSettings();
+        }
+    });
+    
+    // Закрытие по ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileSettingsMenu.classList.contains('active')) {
+            closeMobileSettings();
+        }
+    });
+    
+    // Синхронизация темы с десктопной кнопкой
+    function syncMobileTheme() {
+        const isDark = document.body.classList.contains('dark-theme');
+        const themeLabel = mobileThemeToggle.querySelector('.theme-label');
+        if (themeLabel) {
+            themeLabel.textContent = isDark ? 'Тёмная' : 'Светлая';
+        }
+    }
+    
+    // Переключение темы из мобильного меню
+    mobileThemeToggle.addEventListener('click', function() {
+        if (desktopThemeToggle) {
+            desktopThemeToggle.click();
+        } else {
+            document.body.classList.toggle('dark-theme');
+            const theme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+            localStorage.setItem('english-course-theme', theme);
+        }
+        setTimeout(syncMobileTheme, 100);
+    });
+    
+    // Синхронизация цветовой схемы с десктопными кнопками
+    function syncMobileColorScheme() {
+        const activeColor = localStorage.getItem('english-course-color-scheme');
+        mobileColorSchemeBtns.forEach(btn => {
+            // Выделяем только если цвет был реально выбран пользователем
+            btn.classList.toggle('active', activeColor && btn.dataset.color === activeColor);
+        });
+    }
+    
+    // Переключение цветовой схемы из мобильного меню
+    mobileColorSchemeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const color = this.dataset.color;
+            
+            // Находим соответствующую десктопную кнопку
+            desktopColorSchemeBtns.forEach(desktopBtn => {
+                if (desktopBtn.dataset.color === color) {
+                    desktopBtn.click();
+                }
+            });
+            
+            // Обновляем активное состояние
+            syncMobileColorScheme();
+        });
+    });
+    
+    // Инициализация при загрузке
+    syncMobileTheme();
+    syncMobileColorScheme();
+    
+    // Синхронизация при изменении темы/цвета
+    const observer = new MutationObserver(function() {
+        syncMobileTheme();
+        syncMobileColorScheme();
+    });
+    
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'data-color-scheme']
+    });
+})();

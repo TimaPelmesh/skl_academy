@@ -79,8 +79,37 @@
             <span></span>
             <span></span>
         </div>
-        <h1 class="header-title">HTML — Структура</h1>
+        <h1 class="header-title">HTML</h1>
         <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
             </a>
@@ -94,7 +123,7 @@
             <div class="course-structure">
                 <!-- Модуль 1 -->
                 <div class="topic">
-                    <button class="topic-btn active">1. HTML — Структура</button>
+                    <button class="topic-btn active">1. HTML</button>
                     <div class="subtopics" style="max-height: 1000px;">
                         <a href="#html-intro" class="subtopic active">1.1 Введение в HTML. Каркас</a>
                         <a href="#text-content" class="subtopic">1.2 Текстовый контент</a>
@@ -110,7 +139,7 @@
 
                 <!-- Модуль 2 -->
                 <div class="topic">
-                    <button class="topic-btn">2. CSS — Визуальное оформление</button>
+                    <button class="topic-btn">2. CSS</button>
                     <div class="subtopics">
                         <a href="02-css-basics.html#css-intro" class="subtopic">2.1 Введение и подключение</a>
                         <a href="02-css-basics.html#specificity" class="subtopic">2.2 Каскадность и специфичность</a>
@@ -127,7 +156,7 @@
 
                 <!-- Модуль 3 -->
                 <div class="topic">
-                    <button class="topic-btn">3. JavaScript — Интерактивность</button>
+                    <button class="topic-btn">3. JS</button>
                     <div class="subtopics">
                         <a href="03-javascript-basics.html#js-intro" class="subtopic">3.1 Введение в JS</a>
                         <a href="03-javascript-basics.html#conditions" class="subtopic">3.2 Операторы и условия</a>
@@ -147,7 +176,7 @@
         <!-- Основной контент -->
         <div id="content" class="content sidebar-active">
             <section class="module-intro">
-                <h2>Модуль 1: HTML — Структура веб‑страницы</h2>
+                <h2>Модуль 1: HTML</h2>
                 <p>В этом модуле вы освоите базовую разметку HTML: узнаете, как устроен каркас документа, какие теги бывают, как использовать атрибуты, семантические элементы и создавать формы.</p>
                 <div class="note"><p><strong>Подготовительный этап (0.1–0.2)</strong>: установка редактора (VS Code), браузеров (Chrome/Firefox), Git и GitHub, публикация «Hello, World!» на GitHub Pages.</p></div>
             </section>

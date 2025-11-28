@@ -89,15 +89,6 @@ header::after {
     box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
 }
 
-@keyframes gradientShift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
 /* Эффект свечения при скролле */
 header.scrolled {
     box-shadow: 0 4px 30px rgba(108, 99, 255, 0.12);

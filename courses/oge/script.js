@@ -1230,3 +1230,132 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateReadingProgress, { passive: true });
     window.addEventListener('resize', updateReadingProgress);
 })();
+
+// Переключение темы и цветовой схемы
+(function themeAndColorSwitcher() {
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const colorSchemeButtons = document.querySelectorAll('.color-scheme-btn');
+    
+    // Загрузка сохраненных настроек
+    const savedTheme = localStorage.getItem('oge-course-theme');
+    const savedColorScheme = localStorage.getItem('oge-course-color-scheme');
+    
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+    }
+    
+    if (savedColorScheme) {
+        body.setAttribute('data-color-scheme', savedColorScheme);
+        colorSchemeButtons.forEach(btn => {
+            if (btn.getAttribute('data-color') === savedColorScheme) {
+                btn.classList.add('active');
+            }
+        });
+    } else {
+        // По умолчанию фиолетовая схема
+        const purpleBtn = document.querySelector('.color-scheme-btn[data-color="purple"]');
+        if (purpleBtn) purpleBtn.classList.add('active');
+    }
+    
+    // Обновление метки темы в мобильном меню
+    function updateThemeLabel() {
+        const mobileThemeLabel = document.querySelector('.mobile-theme-toggle-btn .theme-label');
+        if (mobileThemeLabel) {
+            mobileThemeLabel.textContent = body.classList.contains('dark-theme') ? 'Темная' : 'Светлая';
+        }
+    }
+    
+    // Переключение темы
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            localStorage.setItem('oge-course-theme', isDark ? 'dark' : 'light');
+            updateThemeLabel();
+        });
+    }
+    
+    // Переключение цветовой схемы
+    colorSchemeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const color = btn.getAttribute('data-color');
+            body.setAttribute('data-color-scheme', color);
+            localStorage.setItem('oge-course-color-scheme', color);
+            
+            colorSchemeButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Синхронизация с мобильным меню
+            const mobileBtn = document.querySelector(`.mobile-color-scheme-btn[data-color="${color}"]`);
+            if (mobileBtn) {
+                document.querySelectorAll('.mobile-color-scheme-btn').forEach(b => b.classList.remove('active'));
+                mobileBtn.classList.add('active');
+            }
+        });
+    });
+    
+    updateThemeLabel();
+})();
+
+// Мобильное меню настроек
+(function() {
+    const mobileSettingsTrigger = document.getElementById('mobileSettingsTrigger');
+    const mobileSettingsMenu = document.getElementById('mobileSettingsMenu');
+    const mobileSettingsClose = document.getElementById('mobileSettingsClose');
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    const mobileColorSchemeBtns = document.querySelectorAll('.mobile-color-scheme-btn');
+    const desktopThemeToggle = document.getElementById('themeToggle');
+    const desktopColorSchemeBtns = document.querySelectorAll('.color-scheme-btn');
+    
+    if (!mobileSettingsTrigger || !mobileSettingsMenu) return;
+    
+    // Открытие меню
+    mobileSettingsTrigger.addEventListener('click', () => {
+        mobileSettingsMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Закрытие меню
+    const closeMenu = () => {
+        mobileSettingsMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+    
+    if (mobileSettingsClose) {
+        mobileSettingsClose.addEventListener('click', closeMenu);
+    }
+    
+    // Закрытие по клику вне меню
+    mobileSettingsMenu.addEventListener('click', (e) => {
+        if (e.target === mobileSettingsMenu) {
+            closeMenu();
+        }
+    });
+    
+    // Синхронизация темы между десктопом и мобильным меню
+    if (mobileThemeToggle && desktopThemeToggle) {
+        mobileThemeToggle.addEventListener('click', () => {
+            desktopThemeToggle.click();
+        });
+    }
+    
+    // Синхронизация цветовой схемы между десктопом и мобильным меню
+    mobileColorSchemeBtns.forEach(mobileBtn => {
+        mobileBtn.addEventListener('click', () => {
+            const color = mobileBtn.getAttribute('data-color');
+            const desktopBtn = document.querySelector(`.color-scheme-btn[data-color="${color}"]`);
+            if (desktopBtn) {
+                desktopBtn.click();
+            }
+        });
+    });
+    
+    // Обновление активного состояния мобильных кнопок при загрузке
+    const activeColor = document.body.getAttribute('data-color-scheme') || 'purple';
+    mobileColorSchemeBtns.forEach(btn => {
+        if (btn.getAttribute('data-color') === activeColor) {
+            btn.classList.add('active');
+        }
+    });
+})();
