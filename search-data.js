@@ -9,21 +9,22 @@ const SEARCH_DATA = {
     {
       id: 'networks',
       title: 'Компьютерные сети',
-      description: 'Изучите компьютерные сети: от основ до продвинутых технологий. Модель OSI, TCP/IP, IP-адресация, коммутация, VLAN, беспроводные сети и безопасность.',
-      url: 'courses/networks/01-networks-fundamental.html',
+      description: 'Изучите компьютерные сети: от основ до продвинутых технологий. Модель OSI, TCP/IP, IP-адресация, коммутация, маршрутизация, VLAN, протоколы OSPF, BGP, EIGRP, IS-IS, RIP, MPLS, VXLAN, EVPN, QoS, Multicast, VPN, IPSec, firewall, ACL, NAT, IPv4, IPv6, CIDR, VLSM, STP, LACP, DNS, DHCP, HTTP, FTP, SMTP, беспроводные сети Wi-Fi 802.11, WPA, безопасность, Wireshark, Packet Tracer, GNS3, CCNA, SDN, SD-WAN, LTE, 5G, IoT, MQTT, Kubernetes, data center, cloud networking.',
+      url: 'courses/networks/00-about-course.html',
       icon: 'fas fa-network-wired',
-      tags: ['сети', 'tcp/ip', 'osi', 'ip-адресация', 'коммутация', 'vlan', 'безопасность', 'cisco'],
+      tags: ['сети', 'tcp/ip', 'osi', 'ip-адресация', 'коммутация', 'маршрутизация', 'vlan', 'безопасность', 'cisco', 'ospf', 'bgp', 'eigrp', 'rip', 'is-is', 'mpls', 'vxlan', 'evpn', 'qos', 'multicast', 'vpn', 'ipsec', 'firewall', 'acl', 'nat', 'pat', 'ipv4', 'ipv6', 'cidr', 'vlsm', 'stp', 'rstp', 'mstp', 'lacp', 'etherchannel', 'dns', 'dhcp', 'http', 'https', 'ftp', 'smtp', 'pop3', 'imap', 'tcp', 'udp', 'icmp', 'arp', 'ppp', 'hdlc', 'rsvp', 'ssl', 'tls', 'snmp', 'syslog', 'netflow', 'vtp', 'dtp', 'wireless', '802.11', 'wifi', 'wpa', 'wpa2', 'wpa3', 'wireshark', 'packet tracer', 'gns3', 'eve-ng', 'ccna', 'ccnp', 'sdn', 'sd-wan', 'lte', '5g', 'iot', 'mqtt', 'coap', 'kubernetes', 'docker', 'data center', 'cloud', 'aws', 'azure', 'gcp', 'vpc', 'optics', 'dwdm', 'cwdm', 'подсети', 'суbnetting', 'ids', 'ips', 'campus network'],
       lessons: [
+        { title: 'О курсе', url: 'courses/networks/00-about-course.html', description: 'Обзор курса, практические среды и план обучения' },
         { title: 'Основы сетей', url: 'courses/networks/01-networks-fundamental.html', description: 'Основы компьютерных сетей и модели OSI' },
         { title: 'Модели OSI и TCP/IP', url: 'courses/networks/02-osi-tcp-ip-models.html', description: 'Архитектурные модели сетей' },
         { title: 'Ethernet и коммутация', url: 'courses/networks/03-ethernet-switching.html', description: 'Технологии Ethernet и коммутаторы' },
         { title: 'IP-адресация', url: 'courses/networks/04-ip-addressing-and-routing.html', description: 'IP-адреса и маршрутизация' },
-        { title: 'Маршрутизация', url: 'courses/networks/05-routing.html', description: 'Протоколы маршрутизации' },
+        { title: 'Маршрутизация', url: 'courses/networks/05-routing.html', description: 'Протоколы маршрутизации OSPF, BGP, EIGRP, IS-IS, RIP' },
         { title: 'Транспортный уровень', url: 'courses/networks/06-transport-layer.html', description: 'TCP и UDP протоколы' },
-        { title: 'Прикладные протоколы', url: 'courses/networks/07-application-protocols.html', description: 'HTTP, DNS, SMTP и другие' },
-        { title: 'Безопасность сетей', url: 'courses/networks/08-network-security.html', description: 'VPN, Firewall, шифрование' },
-        { title: 'Диагностика сетей', url: 'courses/networks/09-diagnostics-and-tools.html', description: 'Инструменты диагностики' },
-        { title: 'Продвинутые темы', url: 'courses/networks/10-advanced-topics.html', description: 'Современные технологии сетей' }
+        { title: 'Прикладные протоколы', url: 'courses/networks/07-application-protocols.html', description: 'HTTP, DNS, DHCP, SMTP, FTP и другие' },
+        { title: 'Безопасность сетей', url: 'courses/networks/08-network-security.html', description: 'VPN, IPSec, Firewall, ACL, шифрование' },
+        { title: 'Диагностика сетей', url: 'courses/networks/09-diagnostics-and-tools.html', description: 'Wireshark, Packet Tracer, GNS3 и другие инструменты' },
+        { title: 'Продвинутые темы', url: 'courses/networks/10-advanced-topics.html', description: 'MPLS, VXLAN, EVPN, SDN, SD-WAN, 5G, IoT, Kubernetes' }
       ]
     },
     {

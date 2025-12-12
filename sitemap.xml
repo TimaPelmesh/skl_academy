@@ -394,4 +394,12 @@
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
+    
+    <!-- Тренажер печати -->
+    <url>
+        <loc>https://skl-academy.ru/trainers/index.html</loc>
+        <lastmod>2025-12-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
 </urlset> 
