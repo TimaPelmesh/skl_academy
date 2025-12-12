@@ -789,18 +789,13 @@ body::-webkit-scrollbar-thumb {
 .next-steps,
 .visual-guide,
 .operators-cheatsheet,
-.conclusion {
-    color: #e6e6e6; /* Светлый текст для темного фона */
-}
-
 /* Стили для важных заметок с темным фоном */
 .resources-section p, 
 .practice-tips p, 
 .interactive-resources p,
 .next-steps p,
 .visual-guide p,
-.operators-cheatsheet p,
-.conclusion p {
+.operators-cheatsheet p {
     color: #e6e6e6;
 }
 
@@ -813,6 +808,8 @@ body::-webkit-scrollbar-thumb {
 .operators-cheatsheet li {
     color: #e6e6e6;
 }
+
+/* Стили для conclusion уже определены ниже, не дублируем здесь */
 
 /* Стили для заголовка "Важно понимать разницу" */
 .resources-section h4,
@@ -831,9 +828,9 @@ h4 {
 }
 
 /* Сохраняем цвета в тёмных блоках, перекрывая базовый h4 */
-.visual-guide h4 { color: #7ee787; }
-.conclusion h4 { color: #d2a8ff; }
-.light-theme .conclusion h4 { color: #6f42c1; }
+.visual-guide h4 { color: var(--primary-light); }
+.conclusion h4 { color: var(--primary-light); }
+.light-theme .conclusion h4 { color: var(--primary-color); }
 
 /* Улучшенные стили для таблиц в темных блоках */
 .operators-cheatsheet table {
@@ -918,7 +915,7 @@ h4 {
     font-weight: 700;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     letter-spacing: 0.5px;
-    background: linear-gradient(90deg, #ffffff, #e2e8f0, #ffffff);
+    background: linear-gradient(90deg, #ffffff, var(--primary-light), #ffffff);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -954,6 +951,35 @@ h4 {
     margin-bottom: 10px;
 }
 
+/* Стили для ссылок в визуальных блоках и контенте */
+.visual-guide a,
+.lesson-content a,
+.topic-section a {
+    color: var(--primary-light);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.visual-guide a:hover,
+.lesson-content a:hover,
+.topic-section a:hover {
+    color: var(--primary-color);
+    opacity: 0.9;
+}
+
+.light-theme .visual-guide a,
+.light-theme .lesson-content a,
+.light-theme .topic-section a {
+    color: var(--primary-color);
+}
+
+.light-theme .visual-guide a:hover,
+.light-theme .lesson-content a:hover,
+.light-theme .topic-section a:hover {
+    color: var(--primary-dark);
+}
+
 /* Стили для блоков кода, как в курсе по Python */
 .code-example {
     border-radius: 8px;
@@ -961,7 +987,7 @@ h4 {
     max-width: 100%;
     overflow-x: auto;
     background-color: #282c34; /* Фон как в теме atom-one-dark */
-    border-left: 4px solid #d2a8ff; /* Фиолетовая полоса слева */
+    border-left: 4px solid var(--primary-light); /* Полоса слева адаптируется под цветовую схему */
 }
 
 .code-example pre {
@@ -1002,7 +1028,7 @@ h4 {
 /* Стили для светлой темы */
 .light-theme .code-example {
     background-color: #f1f1f1;
-    border-left: 4px solid #8a63d2;
+    border-left: 4px solid var(--primary-color);
 }
 
 .light-theme .code-example code {
@@ -1082,17 +1108,17 @@ h4 {
 
 /* Улучшенные стили для блока заключения */
 .conclusion {
-    background-color: #f1f1f1;
+    background-color: #2d3748;
     border-radius: 8px;
     padding: 25px 30px;
     margin: 40px auto;
-    border-left: 4px solid #8a63d2;
-    text-align: center;
+    border-left: 4px solid var(--primary-color);
+    text-align: left;
     max-width: 800px;
 }
 
 .conclusion h3 {
-    color: #6f42c1;
+    color: var(--primary-light);
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.5rem;
@@ -1100,10 +1126,45 @@ h4 {
 }
 
 .conclusion p {
-    color: #333344;
+    color: #e6e6e6;
     font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 20px;
+}
+
+.conclusion ul {
+    color: #e6e6e6;
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.conclusion li {
+    color: #e6e6e6;
+    margin-bottom: 8px;
+}
+
+.conclusion strong {
+    color: var(--primary-light);
+}
+
+/* Стили для светлой темы */
+.light-theme .conclusion {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--primary-color);
+}
+
+.light-theme .conclusion h3 {
+    color: var(--primary-color);
+}
+
+.light-theme .conclusion p,
+.light-theme .conclusion ul,
+.light-theme .conclusion li {
+    color: #1f2937;
+}
+
+.light-theme .conclusion strong {
+    color: var(--primary-color);
 }
 
 /* Стили для блока с типами сред передачи данных */
@@ -1546,9 +1607,9 @@ h4 {
     padding: 18px 20px 18px 24px;
     margin: 20px 0;
     position: relative;
-    background: linear-gradient(to right, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.03));
+    background: linear-gradient(to right, var(--overlay-light), var(--overlay-dark));
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(99, 102, 241, 0.15);
+    border: 1px solid var(--overlay-dark);
     overflow: hidden;
     transition: all 0.3s ease;
 }

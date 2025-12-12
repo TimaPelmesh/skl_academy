@@ -58,6 +58,17 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
+                <!-- Модуль 0 -->
+                <div class="topic">
+                    <button class="topic-btn">О курсе</button>
+                    <div class="subtopics">
+                        <a href="00-about-course.html#course-overview" class="subtopic">Обзор курса</a>
+                        <a href="00-about-course.html#how-to-study" class="subtopic">Как изучать</a>
+                        <a href="00-about-course.html#practice-resources" class="subtopic">Где практиковаться</a>
+                        <a href="00-about-course.html#additional-resources" class="subtopic">Дополнительные ресурсы</a>
+                    </div>
+                </div>
+
                 <div class="topic">
                     <button class="topic-btn">1. Основы сетевых технологий</button>
                     <div class="subtopics">
@@ -168,18 +179,102 @@
             <section id="threats" class="topic-section">
                 <h2>8.1 Типы атак</h2>
                 <div class="lesson-content">
-                    <ul>
-                        <li><strong>Сетевые</strong>: MITM (подмена ARP/DNS, прокси), DDoS (Volumetric/Protocol/Application), сканирование и эксплойты сервисов.</li>
-                        <li><strong>Вектор приложений</strong>: инъекции, XSS/CSRF, уязвимости в аутентификации.</li>
-                        <li><strong>Социальная инженерия</strong>: фишинг, spear phishing, vishing/SMShing.</li>
-                    </ul>
+                    <h3>Зачем нужна сетевая безопасность?</h3>
+                    <p>Сети постоянно подвергаются атакам. Понимание типов атак помогает защитить сеть и данные. Безопасность — это не разовое действие, а непрерывный процесс.</p>
+
+                    <h3>Сетевые атаки</h3>
                     <div class="visual-guide">
-                        <h4>Подходы к снижению рисков</h4>
+                        <h4>MITM (Man-in-the-Middle) — атака "человек посередине":</h4>
                         <ul>
-                            <li><strong>Сегментация</strong>: VLAN/VRF, правила доступа по принципу наименьших привилегий.</li>
-                            <li><strong>Защита L2</strong>: DHCP Snooping, Dynamic ARP Inspection, Port Security.</li>
-                            <li><strong>Наблюдаемость</strong>: логи, телеметрия, алерты, ответ на инциденты.</li>
+                            <li><strong>Суть:</strong> Злоумышленник перехватывает и изменяет трафик между двумя сторонами</li>
+                            <li><strong>ARP Spoofing:</strong> Подмена ARP-таблиц, чтобы трафик шел через атакующего</li>
+                            <li><strong>DNS Spoofing:</strong> Подмена DNS-ответов, перенаправление на поддельные сайты</li>
+                            <li><strong>Защита:</strong> Использование HTTPS, DNSSEC, статические ARP-записи, Dynamic ARP Inspection</li>
                         </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>DDoS (Distributed Denial of Service) — распределенная атака на отказ в обслуживании:</h4>
+                        <ul>
+                            <li><strong>Суть:</strong> Множество устройств одновременно атакуют цель, перегружая ее трафиком</li>
+                            <li><strong>Volumetric:</strong> Заполнение канала большим объемом трафика (например, UDP flood)</li>
+                            <li><strong>Protocol:</strong> Использование уязвимостей протоколов (например, SYN flood)</li>
+                            <li><strong>Application:</strong> Атака на прикладном уровне (например, HTTP flood)</li>
+                            <li><strong>Защита:</strong> DDoS-фильтры, CDN, ограничение скорости, изоляция атакуемых ресурсов</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Сканирование и эксплойты:</h4>
+                        <ul>
+                            <li><strong>Сканирование портов:</strong> Поиск открытых портов и уязвимых сервисов</li>
+                            <li><strong>Эксплойты:</strong> Использование найденных уязвимостей для получения доступа</li>
+                            <li><strong>Защита:</strong> Закрытие ненужных портов, регулярные обновления, IDS/IPS</li>
+                        </ul>
+                    </div>
+
+                    <h3>Атаки на приложения</h3>
+                    <div class="visual-guide">
+                        <h4>Основные типы:</h4>
+                        <ul>
+                            <li><strong>SQL Injection:</strong> Внедрение вредоносного SQL-кода в запросы к базе данных</li>
+                            <li><strong>XSS (Cross-Site Scripting):</strong> Внедрение вредоносного JavaScript на веб-страницы</li>
+                            <li><strong>CSRF (Cross-Site Request Forgery):</strong> Выполнение действий от имени пользователя без его ведома</li>
+                            <li><strong>Уязвимости аутентификации:</strong> Слабые пароли, отсутствие многофакторной аутентификации</li>
+                        </ul>
+                    </div>
+
+                    <h3>Социальная инженерия</h3>
+                    <div class="visual-guide">
+                        <h4>Методы атак:</h4>
+                        <ul>
+                            <li><strong>Фишинг:</strong> Поддельные письма/сайты для кражи учетных данных</li>
+                            <li><strong>Spear Phishing:</strong> Целевой фишинг на конкретного человека или организацию</li>
+                            <li><strong>Vishing:</strong> Фишинг по телефону (voice phishing)</li>
+                            <li><strong>SMShing:</strong> Фишинг через SMS</li>
+                        </ul>
+                    </div>
+
+                    <h3>Методы защиты</h3>
+                    <div class="visual-guide">
+                        <h4>Сегментация сети:</h4>
+                        <ul>
+                            <li><strong>VLAN/VRF:</strong> Логическое разделение сетей для изоляции трафика</li>
+                            <li><strong>Принцип наименьших привилегий:</strong> Доступ только к необходимым ресурсам</li>
+                            <li><strong>Микросегментация:</strong> Детальное разделение даже внутри одной сети</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Защита на уровне L2:</h4>
+                        <ul>
+                            <li><strong>DHCP Snooping:</strong> Блокировка неавторизованных DHCP-серверов</li>
+                            <li><strong>Dynamic ARP Inspection:</strong> Проверка ARP-сообщений на подлинность</li>
+                            <li><strong>Port Security:</strong> Ограничение количества MAC-адресов на порту</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Наблюдаемость и мониторинг:</h4>
+                        <ul>
+                            <li><strong>Логирование:</strong> Запись всех важных событий для анализа</li>
+                            <li><strong>Телеметрия:</strong> Сбор метрик в реальном времени</li>
+                            <li><strong>Алерты:</strong> Уведомления о подозрительной активности</li>
+                            <li><strong>SIEM:</strong> Централизованный сбор и анализ логов</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>MITM:</strong> Перехват и изменение трафика (защита: HTTPS, DNSSEC)</li>
+                            <li><strong>DDoS:</strong> Перегрузка ресурсов трафиком (защита: фильтры, CDN)</li>
+                            <li><strong>Атаки на приложения:</strong> SQL Injection, XSS, CSRF (защита: валидация, санитизация)</li>
+                            <li><strong>Социальная инженерия:</strong> Обман пользователей (защита: обучение, многофакторная аутентификация)</li>
+                            <li><strong>Сегментация:</strong> Изоляция сетей для ограничения распространения атак</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Защитить сеть и данные от различных типов атак через многоуровневую защиту и мониторинг.</p>
                     </div>
                 </div>
             </section>
@@ -224,16 +319,121 @@
             <section id="firewall" class="topic-section">
                 <h2>8.3 Межсетевые экраны</h2>
                 <div class="lesson-content">
-                    <p>Современные межсетевые экраны сочетают stateful‑фильтрацию, идентификацию приложений (L7), IPS/IDS и функции прокси. Они применяются на периметре и внутри сегментов (микросегментация).</p>
+                    <h3>Что такое firewall?</h3>
+                    <p><strong>Firewall</strong> (межсетевой экран) — это устройство или программа, которая контролирует и фильтрует сетевой трафик на основе правил безопасности. Это "охранник" на границе сети.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Firewall — это как охрана на входе в здание: проверяет, кто входит и выходит, и блокирует нежелательных посетителей.</p>
+                    </div>
+
+                    <h3>Типы firewall</h3>
                     <div class="visual-guide">
-                        <h4>Практика firewall</h4>
+                        <h4>Stateless (без состояния):</h4>
                         <ul>
-                            <li><strong>Stateful</strong> инспекция и таблицы состояний, таймауты.</li>
-                            <li><strong>Правила</strong>: денай по умолчанию, минимизация экспонированных сервисов.</li>
-                            <li><strong>Логи</strong>: критичны для расследований; централизованный сбор в SIEM.</li>
+                            <li>Проверяет каждый пакет независимо</li>
+                            <li>Фильтрует по IP-адресам, портам, протоколам</li>
+                            <li>Простой, но менее эффективный</li>
+                            <li>Не помнит предыдущие пакеты</li>
                         </ul>
                     </div>
-                    <div class="note"><p><strong>NAT ≠ безопасность:</strong> трансляция адресов не заменяет фильтрацию и сегментацию; используйте явные политики доступа и принцип наименьших привилегий.</p></div>
+
+                    <div class="visual-guide">
+                        <h4>Stateful (с состоянием):</h4>
+                        <ul>
+                            <li>Помнит состояние соединений (таблица состояний)</li>
+                            <li>Понимает контекст трафика (например, ответ на запрос)</li>
+                            <li>Более умный и эффективный</li>
+                            <li>Может отслеживать установленные соединения</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Next-Generation Firewall (NGFW):</h4>
+                        <ul>
+                            <li>Идентификация приложений (L7) — понимает, какое приложение использует трафик</li>
+                            <li>IPS/IDS — обнаружение и предотвращение вторжений</li>
+                            <li>Глубокий анализ пакетов (DPI)</li>
+                            <li>Интеграция с системами безопасности</li>
+                        </ul>
+                    </div>
+
+                    <h3>Принципы настройки firewall</h3>
+                    <div class="visual-guide">
+                        <h4>Правило "Deny by Default":</h4>
+                        <ul>
+                            <li>По умолчанию весь трафик блокируется</li>
+                            <li>Разрешаются только явно указанные правила</li>
+                            <li>Безопаснее, чем разрешать все по умолчанию</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Минимизация экспонированных сервисов:</h4>
+                        <ul>
+                            <li>Открывайте только необходимые порты</li>
+                            <li>Закрывайте неиспользуемые сервисы</li>
+                            <li>Используйте принцип наименьших привилегий</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Порядок правил:</h4>
+                        <ul>
+                            <li>Правила проверяются сверху вниз</li>
+                            <li>Первое совпадение применяется</li>
+                            <li>Важно: более специфичные правила должны быть выше</li>
+                            <li>Общие правила (например, deny all) — в конце</li>
+                        </ul>
+                    </div>
+
+                    <h3>Где размещать firewall?</h3>
+                    <div class="visual-guide">
+                        <h4>Периметр сети:</h4>
+                        <ul>
+                            <li>На границе между внутренней сетью и интернетом</li>
+                            <li>Защищает всю сеть от внешних угроз</li>
+                            <li>Первая линия защиты</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Микросегментация:</h4>
+                        <ul>
+                            <li>Firewall внутри сети, между сегментами</li>
+                            <li>Защита от распространения атак внутри сети</li>
+                            <li>Изоляция критичных систем</li>
+                        </ul>
+                    </div>
+
+                    <h3>Логирование и мониторинг</h3>
+                    <div class="visual-guide">
+                        <h4>Важность логов:</h4>
+                        <ul>
+                            <li><strong>Расследование инцидентов:</strong> Логи показывают, что происходило в сети</li>
+                            <li><strong>Обнаружение атак:</strong> Аномальная активность видна в логах</li>
+                            <li><strong>Аудит:</strong> Кто и когда получал доступ</li>
+                            <li><strong>Централизованный сбор:</strong> SIEM-системы собирают логи со всех устройств</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> NAT (трансляция адресов) — это НЕ безопасность! NAT скрывает внутренние адреса, но не фильтрует трафик. Всегда используйте явные правила firewall для контроля доступа.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Firewall</strong> — контролирует и фильтрует сетевой трафик</li>
+                            <li><strong>Stateless</strong> — проверяет каждый пакет независимо</li>
+                            <li><strong>Stateful</strong> — помнит состояние соединений</li>
+                            <li><strong>NGFW</strong> — идентификация приложений, IPS/IDS</li>
+                            <li><strong>Deny by Default</strong> — блокировать все по умолчанию, разрешать явно</li>
+                            <li><strong>Минимизация</strong> — открывать только необходимые порты</li>
+                            <li><strong>Логирование</strong> — критично для безопасности и расследований</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Контролировать сетевой трафик, блокировать нежелательные соединения и защищать сеть от угроз.</p>
+                    </div>
                 </div>
             </section>
 

@@ -58,6 +58,17 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
+                <!-- Модуль 0 -->
+                <div class="topic">
+                    <button class="topic-btn">О курсе</button>
+                    <div class="subtopics">
+                        <a href="00-about-course.html#course-overview" class="subtopic">Обзор курса</a>
+                        <a href="00-about-course.html#how-to-study" class="subtopic">Как изучать</a>
+                        <a href="00-about-course.html#practice-resources" class="subtopic">Где практиковаться</a>
+                        <a href="00-about-course.html#additional-resources" class="subtopic">Дополнительные ресурсы</a>
+                    </div>
+                </div>
+
                 <div class="topic">
                     <button class="topic-btn">1. Основы сетевых технологий</button>
                     <div class="subtopics">
@@ -235,19 +246,82 @@ dig example.com ANY     # Linux/macOS
             <section id="wireshark" class="topic-section">
                 <h2>9.3 Анализ трафика</h2>
                 <div class="lesson-content">
-                    <div class="code-example">
-<pre><code class="bash"># Перехват трафика
-tcpdump -i eth0 -nn tcp port 80
-tcpdump -i wlan0 -vv icmp
-</code></pre>
+                    <h3>Что такое Wireshark?</h3>
+                    <p><strong>Wireshark</strong> — это анализатор сетевых протоколов, который позволяет "видеть" весь трафик, проходящий через сетевой интерфейс. Это как "рентген" для сети — показывает, что происходит на самом деле.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если ping — это "позвонить и спросить, дома ли", то Wireshark — это "подслушать все телефонные разговоры" и проанализировать их.</p>
                     </div>
+
+                    <h3>Захват трафика</h3>
                     <div class="visual-guide">
-                        <h4>Фильтры и приёмы</h4>
+                        <h4>Как захватить трафик:</h4>
                         <ul>
-                            <li><strong>Display‑фильтры</strong>: ip.addr == 1.1.1.1, tcp.port == 443, dns && !tcp.</li>
-                            <li><strong>Follow TCP Stream</strong>: восстановление диалога; графики RTT/Throughput.</li>
-                            <li><strong>ICMP/TTL</strong>: диагностика недоступности/маршрутизации, PMTUD (Fragmentation needed).</li>
+                            <li><strong>Выбор интерфейса:</strong> Выберите сетевой интерфейс (Ethernet, Wi-Fi)</li>
+                            <li><strong>Promiscuous режим:</strong> Захват всего трафика в сегменте сети (не только адресованного вам)</li>
+                            <li><strong>Фильтры захвата:</strong> Можно сразу фильтровать при захвате (например, только HTTP)</li>
+                            <li><strong>Сохранение:</strong> Сохраняйте захваченный трафик в файл для последующего анализа</li>
                         </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Перехват трафика через tcpdump (командная строка)
+tcpdump -i eth0 -nn tcp port 80    # Захват HTTP-трафика
+tcpdump -i wlan0 -vv icmp          # Захват ICMP с подробным выводом
+
+# Сохранение в файл
+tcpdump -i eth0 -w capture.pcap     # Сохранить в файл для анализа в Wireshark</code></pre>
+                    </div>
+
+                    <h3>Фильтры в Wireshark</h3>
+                    <div class="visual-guide">
+                        <h4>Display фильтры (отображение):</h4>
+                        <ul>
+                            <li><strong>По протоколу:</strong> <code>tcp</code>, <code>udp</code>, <code>http</code>, <code>dns</code></li>
+                            <li><strong>По адресу:</strong> <code>ip.addr == 1.1.1.1</code></li>
+                            <li><strong>По порту:</strong> <code>tcp.port == 443</code></li>
+                            <li><strong>Комбинации:</strong> <code>dns && !tcp</code> (DNS, но не TCP)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Анализ трафика</h3>
+                    <div class="visual-guide">
+                        <h4>Полезные функции:</h4>
+                        <ul>
+                            <li><strong>Follow TCP Stream:</strong> Просмотр всего диалога между клиентом и сервером, восстановление потока данных</li>
+                            <li><strong>Графики:</strong> Визуализация RTT (Round Trip Time), пропускной способности (Throughput)</li>
+                            <li><strong>Статистика:</strong> Анализ протоколов, разговоров, потоков</li>
+                            <li><strong>Экспорт объектов:</strong> Извлечение файлов из HTTP-трафика</li>
+                        </ul>
+                    </div>
+
+                    <h3>Диагностика проблем</h3>
+                    <div class="visual-guide">
+                        <h4>Что искать в Wireshark:</h4>
+                        <ul>
+                            <li><strong>ICMP/TTL:</strong> Диагностика недоступности хостов, проблем с маршрутизацией</li>
+                            <li><strong>PMTUD:</strong> Проблемы с размером пакетов (Fragmentation needed)</li>
+                            <li><strong>Retransmissions:</strong> Повторные передачи пакетов — признак потерь</li>
+                            <li><strong>Высокие задержки:</strong> Большое время между запросом и ответом</li>
+                            <li><strong>Ошибки протоколов:</strong> Неправильно сформированные пакеты</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Этично и законно:</strong> Используйте Wireshark только в своей сети или с разрешения. Захват трафика в чужих сетях без разрешения незаконен.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Wireshark</strong> — анализатор сетевых протоколов для захвата и анализа трафика</li>
+                            <li><strong>Захват:</strong> Выбор интерфейса, promiscuous режим, фильтры захвата</li>
+                            <li><strong>Фильтры:</strong> По протоколам, адресам, портам, комбинации условий</li>
+                            <li><strong>Анализ:</strong> Follow TCP Stream, статистика, графики RTT/Throughput</li>
+                            <li><strong>Диагностика:</strong> Поиск проблем с ICMP/TTL, PMTUD, retransmissions</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Глубокий анализ сетевого трафика для диагностики проблем и понимания работы протоколов.</p>
                     </div>
                 </div>
             </section>

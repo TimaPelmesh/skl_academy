@@ -58,6 +58,17 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
+                <!-- Модуль 0 -->
+                <div class="topic">
+                    <button class="topic-btn">О курсе</button>
+                    <div class="subtopics">
+                        <a href="00-about-course.html#course-overview" class="subtopic">Обзор курса</a>
+                        <a href="00-about-course.html#how-to-study" class="subtopic">Как изучать</a>
+                        <a href="00-about-course.html#practice-resources" class="subtopic">Где практиковаться</a>
+                        <a href="00-about-course.html#additional-resources" class="subtopic">Дополнительные ресурсы</a>
+                    </div>
+                </div>
+
                 <div class="topic">
                     <button class="topic-btn">1. Основы сетевых технологий</button>
                     <div class="subtopics">
@@ -167,25 +178,101 @@
             <section id="dns" class="topic-section">
                 <h2>7.1 DNS</h2>
                 <div class="lesson-content">
-                    <p>DNS — распределённая иерархическая система имён, сопоставляющая доменные имена IP‑адресам и иным записям (MX/TXT/SRV). Клиентский резолвер обращается к рекурсивному резолверу, который при необходимости опрашивает корневые, TLD и авторитативные серверы, кэшируя ответы для ускорения.</p>
+                    <h3>Проблема: как запомнить IP-адреса?</h3>
+                    <p>Людям сложно запоминать IP-адреса (например, 93.184.216.34). Гораздо проще запомнить доменное имя (например, example.com). <strong>DNS</strong> (Domain Name System) — это "телефонная книга интернета", которая переводит доменные имена в IP-адреса.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> DNS — это как телефонный справочник: вы знаете имя (доменное имя), а система находит номер (IP-адрес).</p>
+                    </div>
+
+                    <h3>Как работает DNS?</h3>
                     <div class="visual-guide">
-                        <h4>Записи и безопасность DNS</h4>
+                        <h4>Процесс разрешения имени (DNS lookup):</h4>
+                        <ol>
+                            <li><strong>Запрос:</strong> Браузер хочет открыть сайт "example.com"</li>
+                            <li><strong>Локальный кэш:</strong> Проверяется локальный кэш DNS (на компьютере)</li>
+                            <li><strong>Рекурсивный резолвер:</strong> Если не найдено, запрос идет к DNS-серверу провайдера (рекурсивный резолвер)</li>
+                            <li><strong>Корневой сервер:</strong> Резолвер спрашивает корневой DNS-сервер: "Где находится .com?"</li>
+                            <li><strong>TLD-сервер:</strong> Корневой сервер направляет к серверу домена .com</li>
+                            <li><strong>Авторитативный сервер:</strong> Сервер .com направляет к авторитативному серверу example.com</li>
+                            <li><strong>Ответ:</strong> Авторитативный сервер возвращает IP-адрес example.com</li>
+                            <li><strong>Кэширование:</strong> Ответ сохраняется в кэше для ускорения следующих запросов</li>
+                        </ol>
+                    </div>
+
+                    <h3>Иерархия DNS</h3>
+                    <div class="visual-guide">
+                        <h4>Структура доменных имен:</h4>
                         <ul>
-                            <li><strong>A/AAAA</strong>: IPv4/IPv6 адреса; <strong>CNAME</strong>: каноническое имя (алиас).</li>
-                            <li><strong>NS/SOA</strong>: делегирование зон/метаданные зоны.</li>
-                            <li><strong>MX/TXT/SRV</strong>: почта/произвольный текст/службы.</li>
-                            <li><strong>DNSSEC</strong>: криптографическая целостность записей (RRSIG/DS/DNSKEY), защита от подмены.</li>
-                            <li><strong>TTL и негативное кэширование</strong>: контроль времени жизни записей; отрицательные ответы кэшируются по RFC 2308.</li>
-                            <li><strong>DoT/DoH</strong>: шифрованный резолв (DNS‑over‑TLS/HTTPS) снижает риски перехвата/подмены по пути.</li>
+                            <li><strong>Корневая зона (.)</strong> — верхний уровень иерархии</li>
+                            <li><strong>TLD (Top-Level Domain)</strong> — домены верхнего уровня (.com, .org, .ru, .net)</li>
+                            <li><strong>Домены второго уровня</strong> — example.com, google.com</li>
+                            <li><strong>Поддомены</strong> — www.example.com, mail.example.com</li>
                         </ul>
                     </div>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> В имени "www.example.com" — "com" это TLD, "example" это домен второго уровня, "www" это поддомен.</p>
+                    </div>
+
+                    <h3>Типы DNS-записей</h3>
+                    <div class="visual-guide">
+                        <h4>Основные типы записей:</h4>
+                        <ul>
+                            <li><strong>A</strong> — IPv4-адрес домена (например, example.com → 93.184.216.34)</li>
+                            <li><strong>AAAA</strong> — IPv6-адрес домена</li>
+                            <li><strong>CNAME</strong> — алиас (каноническое имя), указывает на другое доменное имя (например, www → example.com)</li>
+                            <li><strong>MX</strong> — почтовый сервер для домена (для email)</li>
+                            <li><strong>NS</strong> — серверы имен, которые отвечают за домен</li>
+                            <li><strong>TXT</strong> — произвольный текст (используется для SPF, DKIM и других целей)</li>
+                            <li><strong>SRV</strong> — информация о службах (например, для VoIP, XMPP)</li>
+                        </ul>
+                    </div>
+
+                    <h3>TTL: время жизни записей</h3>
+                    <p><strong>TTL</strong> (Time To Live) — время, в течение которого DNS-запись считается действительной и хранится в кэше. После истечения TTL запрос повторяется.</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Если TTL = 3600 секунд (1 час), то DNS-резолвер будет использовать кэшированное значение в течение часа, затем запросит обновление.</p>
+                    </div>
+
+                    <h3>Безопасность DNS</h3>
+                    <div class="visual-guide">
+                        <h4>Методы защиты:</h4>
+                        <ul>
+                            <li><strong>DNSSEC</strong> — криптографическая подпись записей, защищает от подмены (spoofing)</li>
+                            <li><strong>DoT (DNS over TLS)</strong> — шифрование DNS-запросов через TLS</li>
+                            <li><strong>DoH (DNS over HTTPS)</strong> — DNS-запросы через HTTPS, скрывает их от провайдера</li>
+                        </ul>
+                    </div>
+
                     <div class="code-example">
-<pre><code class="bash"># Диагностика DNS
+                        <pre><code class="bash"># Диагностика DNS
 # Windows
-nslookup skl-academy.ru
+nslookup example.com
+nslookup -type=MX example.com
+
 # Linux/macOS
-dig skl-academy.ru ANY +short
-</code></pre>
+dig example.com
+dig example.com MX
+dig example.com ANY
+
+# Быстрый запрос
+dig example.com +short</code></pre>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>DNS</strong> — система перевода доменных имен в IP-адреса</li>
+                            <li><strong>Иерархия:</strong> Корневая зона → TLD → домены второго уровня → поддомены</li>
+                            <li><strong>Процесс:</strong> Локальный кэш → рекурсивный резолвер → корневой сервер → TLD → авторитативный сервер</li>
+                            <li><strong>Записи:</strong> A/AAAA (IP-адреса), CNAME (алиасы), MX (почта), NS (серверы имен)</li>
+                            <li><strong>TTL</strong> — время жизни записей в кэше</li>
+                            <li><strong>Безопасность:</strong> DNSSEC, DoT, DoH для защиты от подмены</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить удобный способ доступа к ресурсам интернета по понятным именам вместо числовых IP-адресов.</p>
                     </div>
                 </div>
             </section>
@@ -210,14 +297,80 @@ dig skl-academy.ru ANY +short
             <section id="dhcp" class="topic-section">
                 <h2>7.3 DHCP</h2>
                 <div class="lesson-content">
-                    <p>DHCP автоматически выдаёт адреса и параметры (маска, шлюз, DNS). Процесс DORA: Discover → Offer → Request → Acknowledge. Поддерживает резервирование адресов, опции (например, 3 — шлюз, 6 — DNS), выпуски/продления аренды.</p>
+                    <h3>Проблема: ручная настройка IP-адресов</h3>
+                    <p>В больших сетях настраивать IP-адреса вручную на каждом устройстве неэффективно и подвержено ошибкам. <strong>DHCP</strong> (Dynamic Host Configuration Protocol) автоматически выдает IP-адреса и другие параметры сети устройствам.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> DHCP — это как "автоматическая выдача номеров" в гостинице. Вы приезжаете, и вам автоматически выдают номер (IP-адрес) и ключ (параметры сети).</p>
+                    </div>
+
+                    <h3>Как работает DHCP?</h3>
+                    <p>Процесс получения IP-адреса называется <strong>DORA</strong> (по первым буквам этапов):</p>
+
                     <div class="visual-guide">
-                        <h4>Практика DHCP и безопасность</h4>
+                        <h4>Процесс DORA:</h4>
+                        <ol>
+                            <li><strong>Discover</strong> — устройство отправляет broadcast-запрос: "Есть ли DHCP-сервер?"</li>
+                            <li><strong>Offer</strong> — DHCP-сервер отвечает: "Да, вот тебе IP-адрес и параметры"</li>
+                            <li><strong>Request</strong> — устройство подтверждает: "Хорошо, я принимаю этот адрес"</li>
+                            <li><strong>Acknowledge</strong> — сервер подтверждает: "Адрес зарезервирован за тобой"</li>
+                        </ol>
+                    </div>
+
+                    <h3>Что выдает DHCP?</h3>
+                    <div class="visual-guide">
+                        <h4>Параметры, выдаваемые DHCP:</h4>
                         <ul>
-                            <li><strong>Резервирование</strong>: привязка IP к MAC для критичных узлов.</li>
-                            <li><strong>Relay (IP Helper)</strong>: ретрансляция запросов между подсетями.</li>
-                            <li><strong>Безопасность</strong>: DHCP Snooping (L2) против фальшивых серверов; ограничение trust‑портов.</li>
+                            <li><strong>IP-адрес</strong> — уникальный адрес устройства</li>
+                            <li><strong>Маска подсети</strong> — определяет размер сети</li>
+                            <li><strong>Шлюз по умолчанию</strong> — маршрутизатор для выхода в другие сети</li>
+                            <li><strong>DNS-серверы</strong> — адреса серверов для разрешения имен</li>
+                            <li><strong>Дополнительные опции</strong> — домен поиска, время аренды и т.д.</li>
                         </ul>
+                    </div>
+
+                    <h3>Аренда адресов</h3>
+                    <p>DHCP выдает адреса не навсегда, а на определенное время — <strong>аренду</strong> (lease). Это позволяет эффективно использовать ограниченное количество адресов.</p>
+
+                    <div class="visual-guide">
+                        <h4>Процесс аренды:</h4>
+                        <ul>
+                            <li><strong>Выдача:</strong> Сервер выдает адрес на определенное время (например, 24 часа)</li>
+                            <li><strong>Обновление:</strong> За 50% времени аренды устройство запрашивает продление</li>
+                            <li><strong>Освобождение:</strong> Если устройство отключается, адрес возвращается в пул</li>
+                            <li><strong>Преимущество:</strong> Адреса не "застревают" у отключенных устройств</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резервирование адресов</h3>
+                    <p>Для важных устройств (серверы, принтеры) можно зарезервировать постоянный IP-адрес на основе их MAC-адреса.</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Сервер с MAC-адресом AA:BB:CC:DD:EE:FF всегда получит IP 192.168.1.100, даже если перезагрузится.</p>
+                    </div>
+
+                    <h3>DHCP-опции</h3>
+                    <div class="visual-guide">
+                        <h4>Стандартные опции:</h4>
+                        <ul>
+                            <li><strong>Опция 3</strong> — шлюз по умолчанию (Router)</li>
+                            <li><strong>Опция 6</strong> — DNS-серверы</li>
+                            <li><strong>Опция 15</strong> — домен поиска</li>
+                            <li><strong>Опция 51</strong> — время аренды адреса</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>DHCP</strong> — автоматическая выдача IP-адресов и параметров сети</li>
+                            <li><strong>Процесс DORA:</strong> Discover → Offer → Request → Acknowledge</li>
+                            <li><strong>Выдает:</strong> IP-адрес, маску, шлюз, DNS-серверы</li>
+                            <li><strong>Аренда:</strong> Адреса выдаются на время, затем обновляются или освобождаются</li>
+                            <li><strong>Резервирование:</strong> Постоянные адреса для важных устройств</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Упростить настройку сетей, автоматизировать выдачу адресов и уменьшить количество ошибок конфигурации.</p>
                     </div>
                 </div>
             </section>
