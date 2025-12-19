@@ -180,6 +180,170 @@
             <section id="basic" class="topic-section">
                 <h2>9.1 Базовые команды</h2>
                 <div class="lesson-content">
+                    <h3>Протокол ICMP: основа диагностики сетей</h3>
+                    <p><strong>ICMP</strong> (Internet Control Message Protocol) — это вспомогательный протокол сетевого уровня (L3), который используется для передачи сообщений об ошибках и диагностики сети. ICMP не передает пользовательские данные, но критически важен для работы сети.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если IP — это "почтовая служба", то ICMP — это "служба оповещения о проблемах": "адрес не найден", "время доставки истекло", "маршрут недоступен".</p>
+                    </div>
+
+                    <h3>Структура ICMP-сообщения</h3>
+                    <div class="visual-guide">
+                        <h4>Формат ICMP-пакета:</h4>
+                        <ul>
+                            <li><strong>Type (8 бит)</strong> — тип сообщения (например, 8 = Echo Request, 0 = Echo Reply)</li>
+                            <li><strong>Code (8 бит)</strong> — уточняет тип сообщения (дополнительная информация об ошибке)</li>
+                            <li><strong>Checksum (16 бит)</strong> — контрольная сумма для проверки целостности</li>
+                            <li><strong>Rest of Header (32 бита)</strong> — зависит от типа сообщения (может содержать ID, Sequence Number и т.д.)</li>
+                            <li><strong>Data</strong> — данные сообщения (часто содержит копию заголовка IP-пакета, вызвавшего ошибку)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Типы ICMP-сообщений</h3>
+                    <div class="visual-guide">
+                        <h4>Основные типы ICMP (для IPv4):</h4>
+                        <ul>
+                            <li><strong>Type 0 — Echo Reply</strong> — ответ на ping-запрос. Используется утилитой ping</li>
+                            <li><strong>Type 3 — Destination Unreachable</strong> — адрес назначения недоступен. Имеет несколько кодов:
+                                <ul>
+                                    <li><strong>Code 0</strong> — сеть недоступна (Network Unreachable)</li>
+                                    <li><strong>Code 1</strong> — хост недоступен (Host Unreachable)</li>
+                                    <li><strong>Code 2</strong> — протокол недоступен (Protocol Unreachable)</li>
+                                    <li><strong>Code 3</strong> — порт недоступен (Port Unreachable)</li>
+                                    <li><strong>Code 4</strong> — требуется фрагментация, но установлен флаг DF (Don't Fragment)</li>
+                                    <li><strong>Code 13</strong> — административно запрещено (Communication Administratively Prohibited)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Type 4 — Source Quench</strong> — устарело, использовалось для уменьшения скорости отправки</li>
+                            <li><strong>Type 5 — Redirect</strong> — перенаправление на другой маршрутизатор</li>
+                            <li><strong>Type 8 — Echo Request</strong> — запрос ping. Используется утилитой ping</li>
+                            <li><strong>Type 11 — Time Exceeded</strong> — время жизни пакета истекло. Имеет коды:
+                                <ul>
+                                    <li><strong>Code 0</strong> — TTL истекло в пути (используется в traceroute)</li>
+                                    <li><strong>Code 1</strong> — время сборки фрагментов истекло</li>
+                                </ul>
+                            </li>
+                            <li><strong>Type 12 — Parameter Problem</strong> — проблема с заголовком IP-пакета</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Type</th><th>Code</th><th>Название</th><th>Описание</th></tr>
+                            <tr><td>0</td><td>0</td><td>Echo Reply</td><td>Ответ на ping</td></tr>
+                            <tr><td>3</td><td>0</td><td>Network Unreachable</td><td>Сеть недоступна</td></tr>
+                            <tr><td>3</td><td>1</td><td>Host Unreachable</td><td>Хост недоступен</td></tr>
+                            <tr><td>3</td><td>3</td><td>Port Unreachable</td><td>Порт недоступен</td></tr>
+                            <tr><td>3</td><td>4</td><td>Fragmentation Needed</td><td>Нужна фрагментация, но DF=1</td></tr>
+                            <tr><td>8</td><td>0</td><td>Echo Request</td><td>Запрос ping</td></tr>
+                            <tr><td>11</td><td>0</td><td>TTL Exceeded</td><td>TTL истекло (traceroute)</td></tr>
+                            <tr><td>11</td><td>1</td><td>Fragment Reassembly Time Exceeded</td><td>Время сборки фрагментов истекло</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>Как работает Ping: Echo Request/Reply</h3>
+                    <div class="visual-guide">
+                        <h4>Процесс ping:</h4>
+                        <ol>
+                            <li><strong>Отправка Echo Request (Type 8):</strong> Утилита ping отправляет ICMP Echo Request с уникальным идентификатором и порядковым номером</li>
+                            <li><strong>Получение Echo Reply (Type 0):</strong> Целевой хост отвечает ICMP Echo Reply с теми же идентификатором и номером</li>
+                            <li><strong>Измерение RTT:</strong> Ping измеряет время между отправкой запроса и получением ответа (Round Trip Time)</li>
+                            <li><strong>Проверка потерь:</strong> Если ответ не приходит, фиксируется потеря пакета</li>
+                        </ol>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Использование ping с различными ключами
+# Windows
+ping 8.8.8.8              # Простой ping (4 пакета)
+ping 8.8.8.8 -n 10        # Отправить 10 пакетов
+ping 8.8.8.8 -t           # Непрерывный ping (до Ctrl+C)
+ping 8.8.8.8 -l 1000      # Размер пакета 1000 байт
+ping 8.8.8.8 -i 64        # TTL = 64
+
+# Linux/macOS
+ping 8.8.8.8              # Непрерывный ping (до Ctrl+C)
+ping 8.8.8.8 -c 10        # Отправить 10 пакетов
+ping 8.8.8.8 -s 1000      # Размер пакета 1000 байт
+ping 8.8.8.8 -t 64        # TTL = 64
+ping 8.8.8.8 -i 0.2       # Интервал 0.2 секунды</code></pre>
+                    </div>
+
+                    <h3>Как работает Traceroute: Time Exceeded</h3>
+                    <p><strong>Traceroute</strong> (tracert в Windows) использует ICMP Type 11 (Time Exceeded) для отслеживания пути пакетов через маршрутизаторы.</p>
+
+                    <div class="visual-guide">
+                        <h4>Процесс traceroute:</h4>
+                        <ol>
+                            <li><strong>TTL = 1:</strong> Отправляется пакет с TTL = 1. Первый маршрутизатор уменьшает TTL до 0 и отправляет ICMP Time Exceeded</li>
+                            <li><strong>TTL = 2:</strong> Отправляется пакет с TTL = 2. Второй маршрутизатор отправляет ICMP Time Exceeded</li>
+                            <li><strong>Продолжение:</strong> TTL увеличивается до тех пор, пока пакет не достигнет целевого хоста</li>
+                            <li><strong>Целевой хост:</strong> Отвечает ICMP Echo Reply (если используется ICMP) или Port Unreachable (если используется UDP)</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Различия в реализации:</strong></p>
+                        <ul>
+                            <li><strong>Windows (tracert):</strong> Использует ICMP Echo Request</li>
+                            <li><strong>Linux/Unix (traceroute):</strong> По умолчанию использует UDP (можно переключить на ICMP с ключом <code>-I</code>)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Использование traceroute
+# Windows
+tracert 1.1.1.1           # Трассировка маршрута
+tracert -h 15 1.1.1.1     # Максимум 15 хопов
+tracert -w 1000 1.1.1.1   # Таймаут 1000 мс
+
+# Linux/macOS
+traceroute 1.1.1.1        # Трассировка маршрута (UDP)
+traceroute -I 1.1.1.1     # Использовать ICMP
+traceroute -m 15 1.1.1.1  # Максимум 15 хопов
+traceroute -w 1 1.1.1.1   # Таймаут 1 секунда</code></pre>
+                    </div>
+
+                    <h3>Path MTU Discovery (PMTUD)</h3>
+                    <p><strong>PMTUD</strong> использует ICMP Type 3 Code 4 (Fragmentation Needed) для определения максимального размера пакета, который может пройти по пути без фрагментации.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает PMTUD:</h4>
+                        <ol>
+                            <li><strong>Отправка с DF=1:</strong> Хост отправляет пакет с флагом Don't Fragment (DF)</li>
+                            <li><strong>Маршрутизатор с меньшим MTU:</strong> Если MTU канала меньше размера пакета, маршрутизатор отправляет ICMP Fragmentation Needed с указанием максимального MTU</li>
+                            <li><strong>Корректировка:</strong> Отправитель уменьшает размер пакета и повторяет отправку</li>
+                            <li><strong>Оптимизация:</strong> Постепенно определяется максимальный размер пакета для данного пути</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Проблема с блокировкой ICMP:</strong> Некоторые администраторы блокируют весь ICMP-трафик для "безопасности". Это нарушает работу PMTUD и может привести к проблемам с недоступностью сайтов или медленной работой.</p>
+                    </div>
+
+                    <h3>Безопасность и ICMP</h3>
+                    <div class="visual-guide">
+                        <h4>Рекомендации по фильтрации ICMP:</h4>
+                        <ul>
+                            <li><strong>Разрешайте:</strong> Echo Request/Reply (Type 0, 8) — для диагностики</li>
+                            <li><strong>Разрешайте:</strong> Destination Unreachable (Type 3) — критично для PMTUD</li>
+                            <li><strong>Разрешайте:</strong> Time Exceeded (Type 11) — для traceroute</li>
+                            <li><strong>Блокируйте:</strong> Redirect (Type 5) — может использоваться для атак</li>
+                            <li><strong>Ограничивайте:</strong> Rate-limiting для Echo Request — защита от ICMP flood</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>ICMP в атаках:</strong> ICMP может использоваться для:</p>
+                        <ul>
+                            <li><strong>ICMP flood</strong> — отправка большого количества Echo Request для перегрузки</li>
+                            <li><strong>Smurf attack</strong> — отправка Echo Request с подменой адреса источника на адрес жертвы</li>
+                            <li><strong>ICMP tunneling</strong> — скрытая передача данных внутри ICMP-пакетов</li>
+                        </ul>
+                        <p>Защита: rate-limiting, фильтрация broadcast ping, мониторинг необычного ICMP-трафика.</p>
+                    </div>
+
+                    <h3>Базовые команды диагностики</h3>
                     <div class="code-example">
 <pre><code class="bash"># Проверка связи
 ping 8.8.8.8
@@ -196,6 +360,20 @@ ss -tulpen              # Linux/macOS
 nslookup example.com    # Windows
 dig example.com ANY     # Linux/macOS
 </code></pre>
+                    </div>
+
+                    <h3>Резюме по ICMP</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>ICMP</strong> — протокол для передачи сообщений об ошибках и диагностики сети</li>
+                            <li><strong>Основные типы:</strong> Echo Request/Reply (ping), Destination Unreachable, Time Exceeded (traceroute)</li>
+                            <li><strong>Ping</strong> — использует Echo Request (Type 8) и Echo Reply (Type 0)</li>
+                            <li><strong>Traceroute</strong> — использует Time Exceeded (Type 11) для отслеживания маршрута</li>
+                            <li><strong>PMTUD</strong> — использует Fragmentation Needed (Type 3 Code 4) для определения MTU</li>
+                            <li><strong>Безопасность:</strong> Не блокируйте весь ICMP, разрешайте критичные типы с rate-limiting</li>
+                        </ul>
+                        <p><strong>Цель:</strong> ICMP обеспечивает критически важную обратную связь о состоянии сети и является основой большинства утилит диагностики.</p>
                     </div>
                     <div class="visual-guide">
                         <h4>Методология диагностики</h4>

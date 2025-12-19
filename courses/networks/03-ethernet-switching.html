@@ -308,8 +308,61 @@ arp -a</code></pre>
                         </ul>
                     </div>
 
+                    <h3>Методы управления доступом к среде передачи</h3>
+                    <p>Когда несколько устройств используют одну среду передачи (кабель, эфир), нужен механизм, чтобы они не передавали данные одновременно, создавая коллизии. Существуют два основных метода:</p>
+
+                    <div class="visual-guide">
+                        <h4>CSMA/CD (Collision Detection) — для проводных сетей Ethernet:</h4>
+                        <ul>
+                            <li><strong>Carrier Sense</strong> — устройство слушает среду передачи перед отправкой данных</li>
+                            <li><strong>Multiple Access</strong> — несколько устройств могут использовать одну среду</li>
+                            <li><strong>Collision Detection</strong> — устройство обнаруживает коллизию во время передачи</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Как работает CSMA/CD:</h4>
+                        <ol>
+                            <li><strong>Прослушивание:</strong> Перед передачей устройство проверяет, свободна ли среда</li>
+                            <li><strong>Передача:</strong> Если среда свободна, устройство начинает передачу и продолжает слушать</li>
+                            <li><strong>Обнаружение коллизии:</strong> Если во время передачи обнаружена коллизия (уровень сигнала выше ожидаемого), передача прерывается</li>
+                            <li><strong>Jam-сигнал:</strong> Отправляется специальный сигнал, чтобы все устройства узнали о коллизии</li>
+                            <li><strong>Backoff:</strong> Устройство ждет случайное время (алгоритм exponential backoff) и повторяет попытку</li>
+                        </ol>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>CSMA/CA (Collision Avoidance) — для беспроводных сетей (Wi-Fi):</h4>
+                        <ul>
+                            <li><strong>Carrier Sense</strong> — устройство слушает эфир перед передачей</li>
+                            <li><strong>Multiple Access</strong> — несколько устройств используют одну частоту</li>
+                            <li><strong>Collision Avoidance</strong> — устройство пытается избежать коллизии, а не обнаружить её</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Почему в Wi-Fi нельзя использовать CSMA/CD:</h4>
+                        <ul>
+                            <li><strong>Проблема "скрытого узла":</strong> Устройство A и C не слышат друг друга, но обе общаются с точкой доступа B — коллизии неизбежны</li>
+                            <li><strong>Невозможность одновременной передачи и приема:</strong> Радиомодули не могут передавать и слушать одновременно на одной частоте</li>
+                            <li><strong>Затухание сигнала:</strong> Отраженные сигналы и слабый уровень делают обнаружение коллизий невозможным</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Параметр</th><th>CSMA/CD (Ethernet)</th><th>CSMA/CA (Wi-Fi)</th></tr>
+                            <tr><td><strong>Обнаружение коллизий</strong></td><td>Да, во время передачи</td><td>Нет, невозможно</td></tr>
+                            <tr><td><strong>Метод работы</strong></td><td>Обнаружение и повтор</td><td>Предотвращение коллизий</td></tr>
+                            <tr><td><strong>RTS/CTS</strong></td><td>Не используется</td><td>Используется для больших пакетов</td></tr>
+                            <tr><td><strong>ACK</strong></td><td>На уровне TCP</td><td>На уровне MAC (802.11)</td></tr>
+                            <tr><td><strong>Эффективность</strong></td><td>Высокая (full-duplex)</td><td>Ниже из-за накладных расходов</td></tr>
+                            <tr><td><strong>Современное применение</strong></td><td>Не используется (full-duplex)</td><td>Активно используется в Wi-Fi</td></tr>
+                        </table>
+                    </div>
+
                     <div class="note">
-                        <p><strong>Полудуплекс и CSMA/CD:</strong> В старых сетях (коаксиальный кабель, концентраторы) использовался полудуплекс — данные могли идти только в одну сторону. При одновременной передаче возникали коллизии. Протокол CSMA/CD (Carrier Sense Multiple Access with Collision Detection) решал эту проблему. В современных сетях с коммутаторами используется полный дуплекс (full-duplex) — данные идут в обе стороны одновременно, коллизий нет.</p>
+                        <p><strong>Современные проводные сети:</strong> В современных сетях Ethernet с коммутаторами используется полный дуплекс (full-duplex) — данные идут в обе стороны одновременно по разным парам проводов. Коллизий не возникает, поэтому CSMA/CD больше не нужен. Однако в старых сетях с концентраторами (hubs) и коаксиальными кабелями использовался полудуплекс, и CSMA/CD был необходим.</p>
                     </div>
 
                     <div class="note">
@@ -482,6 +535,82 @@ interface eth2
                         <p><strong>PCP и QoS:</strong> Поле Priority Code Point в теге 802.1Q может использоваться для базового управления качеством обслуживания на уровне L2, но обычно QoS настраивается на уровне L3 (IP).</p>
                     </div>
 
+                    <h3>VTP: управление VLAN</h3>
+                    <p><strong>VTP</strong> (VLAN Trunking Protocol) — проприетарный протокол Cisco для автоматической синхронизации конфигурации VLAN между коммутаторами. Позволяет создать VLAN на одном коммутаторе, и он автоматически распространится на все остальные.</p>
+
+                    <div class="visual-guide">
+                        <h4>Режимы работы VTP:</h4>
+                        <ul>
+                            <li><strong>Server</strong> — может создавать, изменять и удалять VLAN. Распространяет изменения на другие коммутаторы</li>
+                            <li><strong>Client</strong> — получает информацию о VLAN от серверов, но не может изменять конфигурацию</li>
+                            <li><strong>Transparent</strong> — не участвует в VTP, но пропускает VTP-сообщения через себя. Может создавать локальные VLAN</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Как работает VTP:</h4>
+                        <ol>
+                            <li><strong>VTP Domain:</strong> Все коммутаторы должны быть в одном домене (имя домена)</li>
+                            <li><strong>Revision Number:</strong> Каждое изменение увеличивает номер ревизии</li>
+                            <li><strong>Распространение:</strong> Коммутатор с большим номером ревизии отправляет обновления остальным</li>
+                            <li><strong>Синхронизация:</strong> Коммутаторы принимают изменения и обновляют свою конфигурацию</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Опасность VTP:</strong> Если подключить коммутатор с более высоким номером ревизии и неправильной конфигурацией, он может удалить все VLAN в сети! Рекомендуется использовать Transparent режим или отключать VTP, если не нужна автоматическая синхронизация.</p>
+                    </div>
+
+                    <h3>DTP: автонастройка Trunk</h3>
+                    <p><strong>DTP</strong> (Dynamic Trunking Protocol) — проприетарный протокол Cisco для автоматического согласования режима порта (Access или Trunk) между двумя коммутаторами.</p>
+
+                    <div class="visual-guide">
+                        <h4>Режимы DTP:</h4>
+                        <ul>
+                            <li><strong>Dynamic Auto</strong> — порт становится Trunk, если соседний порт активно предлагает (Dynamic Desirable или Trunk)</li>
+                            <li><strong>Dynamic Desirable</strong> — порт активно пытается стать Trunk, отправляет DTP-запросы</li>
+                            <li><strong>Trunk</strong> — порт всегда работает как Trunk</li>
+                            <li><strong>Access</strong> — порт всегда работает как Access</li>
+                            <li><strong>Nonegotiate</strong> — DTP отключен, порт не отправляет DTP-сообщения</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Локальный порт</th><th>Соседний порт</th><th>Результат</th></tr>
+                            <tr><td>Dynamic Auto</td><td>Dynamic Auto</td><td>Access</td></tr>
+                            <tr><td>Dynamic Auto</td><td>Dynamic Desirable</td><td>Trunk</td></tr>
+                            <tr><td>Dynamic Auto</td><td>Trunk</td><td>Trunk</td></tr>
+                            <tr><td>Dynamic Desirable</td><td>Dynamic Desirable</td><td>Trunk</td></tr>
+                            <tr><td>Dynamic Desirable</td><td>Trunk</td><td>Trunk</td></tr>
+                            <tr><td>Trunk</td><td>Trunk</td><td>Trunk</td></tr>
+                            <tr><td>Access</td><td>Access</td><td>Access</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Безопасность:</strong> DTP может быть использован для атак. Рекомендуется явно настраивать режим портов (Access или Trunk) и отключать DTP командой <code>switchport nonegotiate</code>, особенно на портах, подключенных к конечным устройствам.</p>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Примеры настройки VTP и DTP (концептуальные команды)
+# Настройка VTP
+vtp domain MyCompany
+vtp mode transparent
+vtp password SecurePassword
+
+# Отключение DTP (рекомендуется для безопасности)
+interface eth1
+ switchport mode access
+ switchport nonegotiate
+
+# Явная настройка Trunk без DTP
+interface eth2
+ switchport mode trunk
+ switchport nonegotiate
+ switchport trunk allowed vlan 10,20,30</code></pre>
+                    </div>
+
                     <h3>Резюме</h3>
                     <div class="conclusion">
                         <p><strong>Ключевые моменты:</strong></p>
@@ -491,6 +620,8 @@ interface eth2
                             <li><strong>Trunk-порт</strong> — для соединения коммутаторов, несколько VLAN, кадры с тегом 802.1Q</li>
                             <li><strong>Тег 802.1Q</strong> — 4 байта, содержащие номер VLAN и приоритет</li>
                             <li><strong>Native VLAN</strong> — VLAN без тега на Trunk (по умолчанию VLAN 1)</li>
+                            <li><strong>VTP</strong> — автоматическая синхронизация VLAN между коммутаторами (используйте осторожно!)</li>
+                            <li><strong>DTP</strong> — автоматическое согласование режима порта (рекомендуется отключать для безопасности)</li>
                         </ul>
                         <p><strong>Цель VLAN:</strong> Изоляция трафика, повышение безопасности и управляемости сети без физического разделения.</p>
                     </div>
