@@ -96,6 +96,9 @@
                         <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
                         <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
                         <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
                     </div>
                 </div>
 
@@ -114,10 +117,15 @@
                     <button class="topic-btn">5. Маршрутизация (L3)</button>
                     <div class="subtopics">
                         <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
-                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
-                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
-                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
-                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
                     </div>
                 </div>
 
@@ -138,6 +146,8 @@
                         <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
                         <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
                         <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
                     </div>
                 </div>
 
@@ -590,6 +600,150 @@ route -n</code></pre>
 
                     <div class="note">
                         <p><strong>Преимущество:</strong> Не нужен DHCP-сервер для базовой настройки. Устройство может работать "из коробки", получив только префикс сети от маршрутизатора.</p>
+                    </div>
+
+                    <h3>Процесс EUI-64: формирование IPv6-адреса из MAC-адреса</h3>
+                    <p><strong>EUI-64</strong> (Extended Unique Identifier, 64 бита) — это метод автоматического формирования идентификатора интерфейса (Interface ID) для IPv6-адреса на основе MAC-адреса устройства. Это позволяет создать уникальный 64-битный идентификатор из 48-битного MAC-адреса.</p>
+
+                    <div class="note">
+                        <p><strong>Зачем это нужно?</strong> IPv6-адрес состоит из двух частей: <strong>префикса сети</strong> (64 бита) и <strong>идентификатора интерфейса</strong> (64 бита). EUI-64 позволяет устройству автоматически создать уникальный идентификатор интерфейса, не требуя ручной настройки или DHCP.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Структура MAC-адреса и EUI-64:</h4>
+                        <ul>
+                            <li><strong>MAC-адрес:</strong> 48 бит (6 байт), например: <code>00:1A:2B:3C:4D:5E</code></li>
+                            <li><strong>EUI-64:</strong> 64 бита (8 байт), получается из MAC-адреса путем вставки и модификации</li>
+                            <li><strong>Результат:</strong> Уникальный 64-битный идентификатор, который используется как Interface ID в IPv6-адресе</li>
+                        </ul>
+                    </div>
+
+                    <h4>Пошаговый процесс преобразования MAC → EUI-64:</h4>
+                    <p>Рассмотрим детальный процесс на конкретном примере. Исходный MAC-адрес: <code>00:1A:2B:3C:4D:5E</code></p>
+
+                    <div class="visual-guide">
+                        <h4>Шаг 1: Разделить MAC-адрес пополам</h4>
+                        <p>MAC-адрес состоит из 6 байт. Разделяем его на две части по 3 байта (24 бита):</p>
+                        <ul>
+                            <li><strong>Первая часть (OUI):</strong> <code>00:1A:2B</code> — идентификатор производителя (Organizationally Unique Identifier)</li>
+                            <li><strong>Вторая часть (Device ID):</strong> <code>3C:4D:5E</code> — уникальный идентификатор устройства</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Шаг 2: Вставить FF:FE между двумя частями</h4>
+                        <p>Между двумя частями MAC-адреса вставляем два байта <code>FF:FE</code>, чтобы получить 64 бита:</p>
+                        <ul>
+                            <li><strong>До:</strong> <code>00:1A:2B | 3C:4D:5E</code> (48 бит)</li>
+                            <li><strong>После:</strong> <code>00:1A:2B:FF:FE:3C:4D:5E</code> (64 бита)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Шаг 3: Инвертировать 7-й бит (U/L bit — Universal/Local bit)</h4>
+                        <p>Седьмой бит первого байта называется U/L bit (Universal/Local). Его нужно инвертировать:</p>
+                        <ul>
+                            <li><strong>Первый байт в двоичном виде:</strong> <code>00000000</code> (0x00)</li>
+                            <li><strong>Седьмой бит:</strong> Это второй бит справа (считая от 0): <code>00000<span style="color: red;">0</span>00</code></li>
+                            <li><strong>Инверсия:</strong> Меняем 0 на 1: <code>00000<span style="color: green;">1</span>00</code></li>
+                            <li><strong>Результат:</strong> <code>00000010</code> = <code>0x02</code></li>
+                        </ul>
+                        <p><strong>Итоговый EUI-64:</strong> <code>02:1A:2B:FF:FE:3C:4D:5E</code></p>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Зачем инвертировать 7-й бит?</strong> U/L bit показывает, является ли адрес универсальным (глобально уникальным) или локальным (назначенным администратором). После инверсии бит U/L=1 означает, что адрес глобально уникален. Это соглашение IEEE для идентификаторов EUI-64.</p>
+                    </div>
+
+                    <h4>Примеры преобразования:</h4>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>MAC-адрес</th><th>Первый байт (бинарный)</th><th>После инверсии</th><th>EUI-64</th></tr>
+                            <tr>
+                                <td><code>00:1A:2B:3C:4D:5E</code></td>
+                                <td><code>00000000</code></td>
+                                <td><code>00000010</code> (0x02)</td>
+                                <td><code>02:1A:2B:FF:FE:3C:4D:5E</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>FC:AA:14:D8:E2:4F</code></td>
+                                <td><code>11111100</code></td>
+                                <td><code>11111110</code> (0xFE)</td>
+                                <td><code>FE:AA:14:FF:FE:D8:E2:4F</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>08:00:27:12:34:56</code></td>
+                                <td><code>00001000</code></td>
+                                <td><code>00001010</code> (0x0A)</td>
+                                <td><code>0A:00:27:FF:FE:12:34:56</code></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h4>Формирование полного IPv6-адреса с EUI-64:</h4>
+                    <div class="visual-guide">
+                        <h4>Пример: создание глобального IPv6-адреса</h4>
+                        <ol>
+                            <li><strong>Префикс сети (от маршрутизатора):</strong> <code>2001:0db8:85a3:1234::/64</code></li>
+                            <li><strong>MAC-адрес устройства:</strong> <code>00:1A:2B:3C:4D:5E</code></li>
+                            <li><strong>EUI-64 (Interface ID):</strong> <code>02:1A:2B:FF:FE:3C:4D:5E</code></li>
+                            <li><strong>Преобразование в IPv6-формат:</strong> Разделяем на группы по 2 байта (16 бит): <code>021A:2BFF:FE3C:4D5E</code></li>
+                            <li><strong>Полный IPv6-адрес:</strong> <code>2001:0db8:85a3:1234:021A:2BFF:FE3C:4D5E</code></li>
+                            <li><strong>Сокращенная запись:</strong> <code>2001:db8:85a3:1234:21a:2bff:fe3c:4d5e</code> (убираем ведущие нули)</li>
+                        </ol>
+                    </div>
+
+                    <h4>Link-Local адрес с EUI-64:</h4>
+                    <div class="visual-guide">
+                        <p>Link-local адреса всегда используют префикс <code>fe80::/64</code>. Формирование аналогично:</p>
+                        <ul>
+                            <li><strong>Префикс:</strong> <code>fe80:0000:0000:0000</code> (первые 64 бита)</li>
+                            <li><strong>Interface ID (EUI-64):</strong> <code>021A:2BFF:FE3C:4D5E</code></li>
+                            <li><strong>Полный адрес:</strong> <code>fe80::21a:2bff:fe3c:4d5e</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка IPv6-адресов на интерфейсе (Linux)
+ip -6 addr show
+
+# Пример вывода:
+# inet6 fe80::21a:2bff:fe3c:4d5e/64 scope link
+# inet6 2001:db8:85a3:1234:21a:2bff:fe3c:4d5e/64 scope global dynamic
+
+# Windows
+ipconfig</code></pre>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Плюсы и минусы метода EUI-64:</h4>
+                        <p><strong>Преимущества:</strong></p>
+                        <ul>
+                            <li>Автоматическая генерация уникальных адресов без DHCP</li>
+                            <li>Адрес привязан к MAC-адресу — легко идентифицировать устройство</li>
+                            <li>Нет конфликтов адресов (каждый MAC уникален)</li>
+                        </ul>
+                        <p><strong>Недостатки:</strong></p>
+                        <ul>
+                            <li><strong>Проблемы конфиденциальности:</strong> MAC-адрес виден в публичном IPv6-адресе, можно отследить устройство</li>
+                            <li><strong>Предсказуемость:</strong> Адрес можно предсказать, зная MAC-адрес</li>
+                            <li><strong>Статичность:</strong> Адрес не меняется при смене сети (если не отключить EUI-64)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Privacy Extensions (RFC 4941):</strong> Из-за проблем конфиденциальности современные операционные системы часто используют <strong>Privacy Extensions</strong> — генерируют случайные Interface ID вместо EUI-64. Windows, macOS и Linux по умолчанию используют временные адреса для исходящих соединений, сохраняя EUI-64 адрес только как дополнительный.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Альтернативы EUI-64:</h4>
+                        <ul>
+                            <li><strong>Случайные адреса (Privacy Extensions, RFC 4941):</strong> Генерируются случайные Interface ID, периодически меняются</li>
+                            <li><strong>Stable Privacy Addresses (RFC 7217):</strong> Генерируются стабильные, но непредсказуемые адреса</li>
+                            <li><strong>Ручная настройка:</strong> Администратор назначает адреса вручную</li>
+                            <li><strong>DHCPv6:</strong> Централизованное управление адресами</li>
+                            <li><strong>Cryptographically Generated Addresses (CGA, RFC 3972):</strong> Адреса на основе криптографии</li>
+                        </ul>
                     </div>
 
                     <h3>NDP: замена ARP</h3>

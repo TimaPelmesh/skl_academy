@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="topic">
-                    <button class="topic-btn">2. OSI и TCP/IP</button>
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
                     <div class="subtopics">
                         <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
                         <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
@@ -95,8 +95,8 @@
                         <a href="#ethernet" class="subtopic active">3.1 Ethernet и MAC/ARP</a>
                         <a href="#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
                         <a href="#stp" class="subtopic">3.3 STP/RSTP</a>
-                        <a href="#wifi" class="subtopic">3.4 Беспроводные сети 802.11</a>
-                        <a href="#lacp-security" class="subtopic">3.5 LACP и безопасность портов</a>
+                        <a href="#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
                         <a href="#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
                         <a href="#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
                     </div>
@@ -116,10 +116,15 @@
                     <button class="topic-btn">5. Маршрутизация (L3)</button>
                     <div class="subtopics">
                         <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
-                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
-                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
-                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
-                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
                     </div>
                 </div>
 
@@ -140,6 +145,8 @@
                         <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
                         <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
                         <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
                     </div>
                 </div>
 
@@ -253,6 +260,84 @@ arp -a</code></pre>
 
                     <div class="note">
                         <p><strong>Минимальный размер:</strong> Кадр должен быть минимум 64 байта (включая заголовки). Если данных меньше, добавляются "заполнители" (padding). Максимальный размер — 1518 байт (1522 с тегом VLAN).</p>
+                    </div>
+
+                    <h3>Подуровни канального уровня: LLC и MAC</h3>
+                    <p>Канальный уровень (Data Link Layer) модели OSI разделен на два подуровня, каждый из которых выполняет свои функции. Это разделение помогает четко организовать работу сетевых технологий.</p>
+
+                    <div class="visual-guide">
+                        <h4>MAC (Media Access Control) — подуровень управления доступом к среде:</h4>
+                        <ul>
+                            <li><strong>Назначение:</strong> Управляет физическим доступом к среде передачи данных (кабель, эфир)</li>
+                            <li><strong>Функции:</strong>
+                                <ul>
+                                    <li>Формирование и разбор кадров Ethernet</li>
+                                    <li>Добавление и проверка MAC-адресов (отправителя и получателя)</li>
+                                    <li>Контроль доступа к среде (CSMA/CD для проводных, CSMA/CA для беспроводных)</li>
+                                    <li>Обнаружение ошибок через контрольную сумму FCS (Frame Check Sequence)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Зависимость от технологии:</strong> MAC специфичен для каждой технологии (Ethernet, Wi-Fi, Token Ring и т.д.)</li>
+                            <li><strong>Примеры стандартов:</strong> IEEE 802.3 (Ethernet), 802.11 (Wi-Fi), 802.15 (Bluetooth)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>LLC (Logical Link Control) — подуровень логического управления каналом (IEEE 802.2):</h4>
+                        <ul>
+                            <li><strong>Назначение:</strong> Обеспечивает интерфейс между сетевым уровнем (L3) и подуровнем MAC</li>
+                            <li><strong>Функции:</strong>
+                                <ul>
+                                    <li>Мультиплексирование протоколов сетевого уровня (IPv4, IPv6, IPX и др.)</li>
+                                    <li>Управление потоком данных между узлами</li>
+                                    <li>Обеспечение надежности передачи (опционально)</li>
+                                    <li>Обработка ошибок на уровне соединения</li>
+                                </ul>
+                            </li>
+                            <li><strong>Независимость от технологии:</strong> LLC работает одинаково для любой технологии L2 (Ethernet, Wi-Fi и т.д.)</li>
+                            <li><strong>Заголовок LLC:</strong> Содержит DSAP (Destination Service Access Point), SSAP (Source Service Access Point) и Control поле</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Типы LLC-сервисов:</h4>
+                        <ul>
+                            <li><strong>Тип 1 (LLC1) — без подтверждения:</strong>
+                                <ul>
+                                    <li>Простая доставка без гарантий</li>
+                                    <li>Нет контроля потока и повторной передачи</li>
+                                    <li>Самый распространенный в Ethernet</li>
+                                </ul>
+                            </li>
+                            <li><strong>Тип 2 (LLC2) — с подтверждением:</strong>
+                                <ul>
+                                    <li>Надежная доставка с установлением соединения</li>
+                                    <li>Контроль потока, нумерация кадров, повторная передача</li>
+                                    <li>Используется в критичных приложениях (например, SNA)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Тип 3 (LLC3) — без подтверждения, с повторами:</strong>
+                                <ul>
+                                    <li>Гибрид: без установления соединения, но с подтверждениями</li>
+                                    <li>Используется редко</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Практическое замечание:</strong> В современных Ethernet-сетях заголовок LLC часто не используется явно. Вместо него используется поле <strong>EtherType</strong> в кадре Ethernet II, которое напрямую указывает протокол верхнего уровня (0x0800 для IPv4, 0x86DD для IPv6). Однако стандарт 802.2 LLC остается важным для понимания архитектуры и используется в некоторых протоколах (например, STP использует LLC для своих BPDU).</p>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Параметр</th><th>MAC (802.3, 802.11)</th><th>LLC (802.2)</th></tr>
+                            <tr><td><strong>Уровень</strong></td><td>Нижний подуровень L2</td><td>Верхний подуровень L2</td></tr>
+                            <tr><td><strong>Зависимость от технологии</strong></td><td>Зависит (разный для Ethernet, Wi-Fi)</td><td>Не зависит (универсальный)</td></tr>
+                            <tr><td><strong>Основная функция</strong></td><td>Доступ к физической среде, адресация</td><td>Мультиплексирование протоколов, надежность</td></tr>
+                            <tr><td><strong>Адресация</strong></td><td>MAC-адреса (48 бит)</td><td>SAP-адреса (Service Access Points)</td></tr>
+                            <tr><td><strong>Типичное применение</strong></td><td>Все сетевые технологии L2</td><td>Протоколы, требующие LLC (STP, некоторые промышленные протоколы)</td></tr>
+                        </table>
                     </div>
 
                     <h3>Как работают коммутаторы?</h3>

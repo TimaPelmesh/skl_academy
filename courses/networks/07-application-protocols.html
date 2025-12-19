@@ -96,6 +96,9 @@
                         <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
                         <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
                         <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
                     </div>
                 </div>
 
@@ -106,6 +109,7 @@
                         <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
                         <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
                         <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
                     </div>
                 </div>
 
@@ -113,10 +117,15 @@
                     <button class="topic-btn">5. Маршрутизация (L3)</button>
                     <div class="subtopics">
                         <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
-                        <a href="05-routing.html#ospf" class="subtopic">5.2 OSPF основы</a>
-                        <a href="05-routing.html#bgp" class="subtopic">5.3 BGP основы</a>
-                        <a href="05-routing.html#acl" class="subtopic">5.4 ACL и политики</a>
-                        <a href="05-routing.html#qos" class="subtopic">5.5 QoS основы</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
                     </div>
                 </div>
 
@@ -139,6 +148,7 @@
                         <a href="#dhcp" class="subtopic">7.3 DHCP</a>
                         <a href="#mail" class="subtopic">7.4 Почтовые протоколы</a>
                         <a href="#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
                     </div>
                 </div>
 
@@ -482,6 +492,314 @@ sudo dhclient       # renew</code></pre>
                         </ul>
                     </div>
                     <div class="note"><p><strong>Безопасность:</strong> используйте TLS для SIP и SRTP для медиа; сегментация голосового трафика (VLAN/QoS) снижает взаимное влияние.</p></div>
+                </div>
+            </section>
+
+            <section id="remote-access" class="topic-section">
+                <h2>7.6 Протоколы удаленного доступа</h2>
+                <div class="lesson-content">
+                    <h3>Зачем нужен удаленный доступ?</h3>
+                    <p>Администраторам и пользователям часто нужно управлять удаленными системами: настраивать серверы, управлять сетевым оборудованием, работать на удаленных компьютерах. Для этого используются протоколы удаленного доступа.</p>
+
+                    <div class="note">
+                        <p><strong>Задачи протоколов удаленного доступа:</strong></p>
+                        <ul>
+                            <li>Управление сетевым оборудованием (коммутаторы, маршрутизаторы)</li>
+                            <li>Администрирование серверов</li>
+                            <li>Удаленная работа на рабочих станциях</li>
+                            <li>Техническая поддержка пользователей</li>
+                        </ul>
+                    </div>
+
+                    <h3>SSH — защищенный протокол управления</h3>
+                    <p><strong>SSH</strong> (Secure Shell) — криптографический сетевой протокол для безопасного удаленного управления системами и передачи данных. SSH шифрует весь трафик, включая пароли, что делает его стандартом для удаленного администрирования.</p>
+
+                    <div class="visual-guide">
+                        <h4>Ключевые особенности SSH:</h4>
+                        <ul>
+                            <li><strong>Шифрование:</strong> Все данные передаются в зашифрованном виде</li>
+                            <li><strong>Аутентификация:</strong> Поддержка паролей и ключей (публичный/приватный)</li>
+                            <li><strong>Порт:</strong> 22 (TCP)</li>
+                            <li><strong>Целостность:</strong> Защита от подмены данных через HMAC</li>
+                            <li><strong>Туннелирование:</strong> Возможность создавать защищенные туннели для других протоколов (port forwarding)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Процесс установления SSH-соединения:</h4>
+                        <ol>
+                            <li><strong>Рукопожатие:</strong> Клиент и сервер договариваются об алгоритмах шифрования</li>
+                            <li><strong>Обмен ключами:</strong> Генерируется общий сеансовый ключ (Diffie-Hellman)</li>
+                            <li><strong>Проверка хоста:</strong> Клиент проверяет fingerprint сервера</li>
+                            <li><strong>Аутентификация:</strong> Пользователь вводит пароль или использует SSH-ключ</li>
+                            <li><strong>Сессия:</strong> Устанавливается защищенное соединение для команд</li>
+                        </ol>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Подключение к удаленному хосту
+ssh username@192.168.1.10
+ssh username@server.example.com
+
+# Подключение на нестандартный порт
+ssh -p 2222 username@192.168.1.10
+
+# Подключение с использованием приватного ключа
+ssh -i ~/.ssh/id_rsa username@192.168.1.10
+
+# Копирование файлов через SSH (SCP)
+scp file.txt username@192.168.1.10:/home/username/
+scp username@192.168.1.10:/var/log/app.log ./
+
+# SFTP — защищенная передача файлов
+sftp username@192.168.1.10
+
+# Port Forwarding (туннелирование)
+# Локальное: локальный порт 8080 → удаленный 80
+ssh -L 8080:localhost:80 username@192.168.1.10
+
+# Удаленное: удаленный порт 8080 → локальный 80
+ssh -R 8080:localhost:80 username@192.168.1.10
+
+# Динамическое (SOCKS-прокси)
+ssh -D 1080 username@192.168.1.10</code></pre>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>SSH-ключи vs пароли:</h4>
+                        <ul>
+                            <li><strong>Пароли:</strong> Просто, но уязвимы к перебору и фишингу</li>
+                            <li><strong>SSH-ключи:</strong> Пара ключей (публичный/приватный), намного безопаснее
+                                <ul>
+                                    <li>Публичный ключ размещается на сервере (~/.ssh/authorized_keys)</li>
+                                    <li>Приватный ключ хранится на клиенте (никогда не передается по сети)</li>
+                                    <li>Опционально защищен паролем (passphrase)</li>
+                                    <li>Невозможно подобрать или перехватить</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Генерация SSH-ключей
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "your_email@example.com"  # Современный алгоритм
+
+# Копирование публичного ключа на сервер
+ssh-copy-id username@192.168.1.10
+
+# Настройка SSH-сервера (файл /etc/ssh/sshd_config)
+Port 22                              # Порт SSH
+PermitRootLogin no                   # Запретить вход под root
+PasswordAuthentication no            # Отключить аутентификацию по паролю (только ключи)
+PubkeyAuthentication yes             # Разрешить аутентификацию по ключам
+MaxAuthTries 3                       # Максимум попыток входа
+ClientAliveInterval 300              # Таймаут неактивности
+ClientAliveCountMax 2                # Количество проверок перед отключением</code></pre>
+                    </div>
+
+                    <h3>Telnet — незащищенный предшественник SSH</h3>
+                    <p><strong>Telnet</strong> — протокол для удаленного управления, который передает данные в открытом виде, включая пароли. Исторический протокол, сейчас считается небезопасным.</p>
+
+                    <div class="visual-guide">
+                        <h4>Характеристики Telnet:</h4>
+                        <ul>
+                            <li><strong>Порт:</strong> 23 (TCP)</li>
+                            <li><strong>Шифрование:</strong> Отсутствует — все данные передаются открытым текстом</li>
+                            <li><strong>Аутентификация:</strong> Простая (логин/пароль в открытом виде)</li>
+                            <li><strong>Безопасность:</strong> Крайне низкая — легко перехватить пароли</li>
+                            <li><strong>Применение сегодня:</strong> Только для тестирования или в изолированных сетях</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Подключение через Telnet
+telnet 192.168.1.10
+telnet 192.168.1.10 23
+
+# Telnet для проверки доступности порта (диагностика)
+telnet google.com 80
+telnet smtp.example.com 25
+
+# Пример использования Telnet для проверки HTTP
+telnet google.com 80
+GET / HTTP/1.1
+Host: google.com
+# (Enter дважды)</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Telnet НЕ следует использовать для управления в продакшене! Используйте SSH. Telnet можно применять только для диагностики (проверка доступности порта) в доверенных сетях.</p>
+                    </div>
+
+                    <h3>RDP — удаленный рабочий стол Windows</h3>
+                    <p><strong>RDP</strong> (Remote Desktop Protocol) — протокол Microsoft для удаленного доступа к графическому рабочему столу Windows. Позволяет полностью управлять удаленным компьютером как будто вы сидите за ним.</p>
+
+                    <div class="visual-guide">
+                        <h4>Характеристики RDP:</h4>
+                        <ul>
+                            <li><strong>Порт:</strong> 3389 (TCP/UDP)</li>
+                            <li><strong>Шифрование:</strong> TLS 1.2+ (в современных версиях)</li>
+                            <li><strong>Графический интерфейс:</strong> Полная передача рабочего стола</li>
+                            <li><strong>Функции:</strong> Буфер обмена, принтеры, диски, аудио, USB-устройства</li>
+                            <li><strong>Оптимизация:</strong> Сжатие данных, кэширование, адаптация к пропускной способности</li>
+                            <li><strong>Multi-session:</strong> Поддержка одновременных сессий (Windows Server)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Подключение через RDP
+# Windows: встроенный клиент
+mstsc.exe                            # Графический интерфейс
+mstsc /v:192.168.1.10                # Прямое подключение
+mstsc /v:192.168.1.10:3390           # Нестандартный порт
+
+# Linux: клиент rdesktop или freerdp
+rdesktop 192.168.1.10
+xfreerdp /v:192.168.1.10 /u:username /p:password /cert:ignore
+
+# macOS: Microsoft Remote Desktop (из App Store)
+
+# Настройка RDP на Windows (PowerShell)
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+# Проверка доступности RDP
+Test-NetConnection -ComputerName 192.168.1.10 -Port 3389</code></pre>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Безопасность RDP:</h4>
+                        <ul>
+                            <li><strong>NLA (Network Level Authentication):</strong> Аутентификация до установки сессии</li>
+                            <li><strong>Сильные пароли:</strong> Обязательны для защиты от перебора</li>
+                            <li><strong>Ограничение доступа:</strong> Firewall, белые списки IP</li>
+                            <li><strong>VPN:</strong> Используйте RDP только через VPN, не из интернета напрямую</li>
+                            <li><strong>Multi-factor:</strong> Двухфакторная аутентификация</li>
+                            <li><strong>Обновления:</strong> Регулярные патчи (уязвимости типа BlueKeep)</li>
+                        </ul>
+                    </div>
+
+                    <h3>VNC — кроссплатформенный удаленный рабочий стол</h3>
+                    <p><strong>VNC</strong> (Virtual Network Computing) — открытый протокол для удаленного доступа к графическому интерфейсу. Работает на всех платформах (Windows, Linux, macOS).</p>
+
+                    <div class="visual-guide">
+                        <h4>Характеристики VNC:</h4>
+                        <ul>
+                            <li><strong>Порт:</strong> 5900+ (5900, 5901, 5902... для разных дисплеев)</li>
+                            <li><strong>Протокол:</strong> RFB (Remote Frame Buffer)</li>
+                            <li><strong>Шифрование:</strong> По умолчанию нет (нужно через SSH-туннель или VNC + TLS)</li>
+                            <li><strong>Кроссплатформенность:</strong> Работает везде</li>
+                            <li><strong>Легковесность:</strong> Меньше функций, чем RDP, но проще</li>
+                            <li><strong>Варианты:</strong> TightVNC, RealVNC, TigerVNC, UltraVNC</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Запуск VNC-сервера (Linux)
+vncserver :1                         # Запуск на дисплее :1 (порт 5901)
+vncserver -kill :1                   # Остановка
+
+# Подключение к VNC-серверу
+vncviewer 192.168.1.10:1             # Дисплей :1 (порт 5901)
+vncviewer 192.168.1.10:5901          # Прямое указание порта
+
+# VNC через SSH-туннель (безопасно!)
+ssh -L 5901:localhost:5901 username@192.168.1.10
+vncviewer localhost:1
+
+# Настройка VNC с паролем
+vncpasswd                            # Установка пароля VNC
+
+# Windows: UltraVNC, TightVNC
+# macOS: встроенный "Screen Sharing" или клиенты VNC</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Безопасность VNC:</strong> Базовый VNC не шифрует трафик! Обязательно используйте SSH-туннель или VNC с TLS для защиты. Никогда не открывайте VNC напрямую в интернет.</p>
+                    </div>
+
+                    <h3>Сравнение протоколов</h3>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Протокол</th><th>Порт</th><th>Шифрование</th><th>Применение</th><th>Безопасность</th></tr>
+                            <tr><td><strong>SSH</strong></td><td>22</td><td>✅ Да (обязательно)</td><td>Управление CLI, передача файлов</td><td>🟢 Высокая</td></tr>
+                            <tr><td><strong>Telnet</strong></td><td>23</td><td>❌ Нет</td><td>Устаревший, только для тестов</td><td>🔴 Крайне низкая</td></tr>
+                            <tr><td><strong>RDP</strong></td><td>3389</td><td>✅ TLS (современный)</td><td>Удаленный рабочий стол Windows</td><td>🟡 Средняя (с NLA)</td></tr>
+                            <tr><td><strong>VNC</strong></td><td>5900+</td><td>⚠️ Опционально (через SSH)</td><td>Кроссплатформенный рабочий стол</td><td>🟡 Средняя (с туннелем)</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>Лучшие практики безопасности</h3>
+                    <div class="visual-guide">
+                        <h4>Общие рекомендации:</h4>
+                        <ul>
+                            <li><strong>SSH-ключи вместо паролей:</strong> Для SSH всегда используйте ключи</li>
+                            <li><strong>Отключить Telnet:</strong> Никогда не используйте в продакшене</li>
+                            <li><strong>VPN для графических протоколов:</strong> RDP и VNC только через VPN</li>
+                            <li><strong>Нестандартные порты:</strong> Измените порты по умолчанию (security through obscurity — не основная защита, но помогает)</li>
+                            <li><strong>Firewall:</strong> Ограничьте доступ по IP-адресам</li>
+                            <li><strong>Fail2Ban:</strong> Автоматическая блокировка после неудачных попыток входа</li>
+                            <li><strong>Мониторинг:</strong> Логируйте все попытки доступа</li>
+                            <li><strong>Multi-factor:</strong> Двухфакторная аутентификация где возможно</li>
+                            <li><strong>Обновления:</strong> Своевременные патчи безопасности</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Настройка Fail2Ban для SSH (Linux)
+# /etc/fail2ban/jail.local
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3                         # Максимум попыток
+bantime = 3600                       # Время блокировки (секунды)
+findtime = 600                       # Окно для подсчета попыток
+
+# Проверка заблокированных IP
+fail2ban-client status sshd
+
+# Firewall: разрешить SSH только с определенной подсети
+# iptables (Linux)
+iptables -A INPUT -p tcp --dport 22 -s 192.168.1.0/24 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j DROP
+
+# Windows Firewall
+New-NetFirewallRule -DisplayName "RDP from LAN only" -Direction Inbound -LocalPort 3389 -Protocol TCP -RemoteAddress 192.168.1.0/24 -Action Allow</code></pre>
+                    </div>
+
+                    <h3>Практические сценарии</h3>
+                    <div class="visual-guide">
+                        <h4>Когда использовать:</h4>
+                        <ul>
+                            <li><strong>SSH:</strong> Управление Linux/Unix серверами, сетевым оборудованием, автоматизация через скрипты</li>
+                            <li><strong>Telnet:</strong> Только для диагностики портов (telnet host port) в доверенных сетях</li>
+                            <li><strong>RDP:</strong> Администрирование Windows серверов, удаленная работа на Windows</li>
+                            <li><strong>VNC:</strong> Управление Linux GUI, кроссплатформенный доступ, техподдержка</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Jump Host (Bastion):</strong> В продакшене часто используется архитектура с "прыжковым хостом" — специальный защищенный сервер, через который проходит весь удаленный доступ. Это добавляет дополнительный уровень безопасности и централизованный аудит.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>SSH (порт 22)</strong> — защищенное управление через командную строку, стандарт для администрирования</li>
+                            <li><strong>Telnet (порт 23)</strong> — незащищенный, устаревший, только для диагностики</li>
+                            <li><strong>RDP (порт 3389)</strong> — удаленный рабочий стол Windows с шифрованием</li>
+                            <li><strong>VNC (порт 5900+)</strong> — кроссплатформенный графический доступ, требует SSH-туннель</li>
+                            <li><strong>SSH-ключи</strong> — предпочтительный метод аутентификации вместо паролей</li>
+                            <li><strong>VPN</strong> — обязателен для графических протоколов из интернета</li>
+                            <li><strong>Firewall + Fail2Ban</strong> — защита от атак перебора</li>
+                            <li><strong>Jump Host</strong> — дополнительный уровень безопасности для критичных систем</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить безопасный и эффективный удаленный доступ для администрирования систем и удаленной работы.</p>
+                    </div>
                 </div>
             </section>
 
