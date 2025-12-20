@@ -101,7 +101,7 @@
   </nav>
 
   <!-- Article Header -->
-  <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-8 md:py-12">
+  <div class="gradient-bg text-white py-8 md:py-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h1 class="text-2xl md:text-3xl font-bold mb-3 text-white">Первая программа на Python: от установки до библиотек</h1>
@@ -602,31 +602,28 @@ export OPENWEATHER_API_KEY="ВАШ_КЛЮЧ"
   </div>
 
   <!-- Footer -->
-  <footer id="contacts">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-      <div class="footer-column">
-        <h4 class="text-white text-xl font-semibold">О проекте</h4>
-        <p class="mt-4 text-gray-400">Образовательная платформа для изучения IT-технологий с нуля</p>
-        <p class="mt-2 text-gray-400">Бесплатные материалы, практические задания и проекты</p>
+  <footer id="contacts" class="footer-simple">
+    <div class="footer-simple__inner">
+      <div class="footer-simple__about">
+        <h4>О проекте</h4>
+        <p>SKL Academy — платформа с бесплатными IT-курсами и практиками для старта и роста.</p>
       </div>
-      
-      <div class="footer-column">
-        <h4 class="text-white text-xl font-semibold">Контакты</h4>
-        <div class="mt-4 space-y-3">
-          <a href="#" onclick="openGmail(); return false;" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
-            <i class="fas fa-envelope mr-2"></i> Gmail
+      <div class="footer-simple__contacts">
+        <h4>Контакты</h4>
+        <div class="footer-simple__links">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mr.tim.pumpkin@gmail.com" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-envelope"></i>
+            Gmail
           </a>
-          <a href="#" onclick="openTelegram(); return false;" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-3 px-4 rounded-lg transition duration-300">
-            <i class="fab fa-telegram mr-2"></i> Telegram
+          <a href="#" onclick="openTelegram(); return false;">
+            <i class="fab fa-telegram"></i>
+            Telegram
           </a>
         </div>
       </div>
     </div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-gray-800">
-      <div class="flex justify-center">
-        <p class="text-gray-500 text-sm">2025</p>
-      </div>
+    <div class="footer-simple__bottom">
+      <p>SKL Academy · 2025</p>
     </div>
   </footer>
 

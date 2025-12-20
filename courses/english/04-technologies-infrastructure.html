@@ -121,57 +121,6 @@
       </section>
 
       <!-- Повторение: Ключевые слова из модуля 3 -->
-      <section id="module3-review" class="topic-section">
-        <h2>Повторение: Ключевые слова</h2>
-        <p class="note"><strong>Важно:</strong> В этом модуле мы будем активно использовать слова из предыдущих разделов в новых контекстах. Повтори эти слова перед изучением нового материала.</p>
-        
-        <div class="grammar-card">
-          <h3>Глаголы из модулей 1-3 (используем в модуле 4):</h3>
-          <ul class="glossary-grid">
-            <li><span class="term">work</span><span class="definition">работать</span></li>
-            <li><span class="term">use</span><span class="definition">использовать</span></li>
-            <li><span class="term">connect</span><span class="definition">подключать</span></li>
-            <li><span class="term">configure</span><span class="definition">настраивать</span></li>
-            <li><span class="term">install</span><span class="definition">устанавливать</span></li>
-            <li><span class="term">deploy</span><span class="definition">развёртывать</span></li>
-            <li><span class="term">monitor</span><span class="definition">мониторить</span></li>
-            <li><span class="term">test</span><span class="definition">тестировать</span></li>
-            <li><span class="term">fix</span><span class="definition">исправлять</span></li>
-            <li><span class="term">update</span><span class="definition">обновлять</span></li>
-            <li><span class="term">create</span><span class="definition">создавать</span></li>
-            <li><span class="term">manage</span><span class="definition">управлять</span></li>
-          </ul>
-        </div>
-
-        <div class="grammar-card">
-          <h3>Существительные из модулей 1-3 (используем в модуле 4):</h3>
-          <ul class="glossary-grid">
-            <li><span class="term">computer</span><span class="definition">компьютер</span></li>
-            <li><span class="term">server</span><span class="definition">сервер</span></li>
-            <li><span class="term">network</span><span class="definition">сеть</span></li>
-            <li><span class="term">software</span><span class="definition">программное обеспечение</span></li>
-            <li><span class="term">application</span><span class="definition">приложение</span></li>
-            <li><span class="term">system</span><span class="definition">система</span></li>
-            <li><span class="term">data</span><span class="definition">данные</span></li>
-            <li><span class="term">security</span><span class="definition">безопасность</span></li>
-            <li><span class="term">project</span><span class="definition">проект</span></li>
-            <li><span class="term">team</span><span class="definition">команда</span></li>
-          </ul>
-        </div>
-
-        <div class="practice-card">
-          <h3>Быстрая проверка</h3>
-          <p>Составь 5 предложений, используя слова из модулей 1-3 в контексте модуля 4:</p>
-          <ol class="practice-list">
-            <li>Используй слово <strong>"server"</strong> в предложении об инфраструктуре.</li>
-            <li>Используй слово <strong>"network"</strong> в предложении о сетях.</li>
-            <li>Используй слово <strong>"configure"</strong> в предложении о настройке.</li>
-            <li>Используй слово <strong>"security"</strong> в предложении о безопасности.</li>
-            <li>Используй слово <strong>"deploy"</strong> в предложении о развёртывании.</li>
-          </ol>
-        </div>
-      </section>
-
       <!-- Аппаратное обеспечение -->
       <section id="hardware" class="topic-section">
         <h2>Аппаратное обеспечение (80 слов)</h2>
@@ -1766,6 +1715,83 @@
             <li>Опиши свой опыт работы с облачными технологиями, используя слова из этого раздела.</li>
             <li>Составь план миграции приложения в облако, используя новые слова.</li>
           </ol>
+        </div>
+
+        <div class="practice-card">
+          <h4>Режим изучения словарного запаса</h4>
+          <p>Тренируй запоминание слов с помощью интерактивных карточек! Выбери тему или изучай все слова сразу. Кликай на карточку, чтобы перевернуть её и увидеть перевод.</p>
+            
+          <!-- Выбор категорий -->
+          <div class="flashcard-controls">
+            <div class="category-selector">
+              <label for="categorySelect"><strong>Выбери категорию:</strong></label>
+              <select id="categorySelect" class="category-select">
+                <option value="all">Все слова (450+ слов)</option>
+                <option value="hardware">Аппаратное обеспечение</option>
+                <option value="software">Программное обеспечение</option>
+                <option value="networks-internet">Сети и интернет</option>
+                <option value="databases">Базы данных</option>
+                <option value="cloud-technologies">Облачные технологии</option>
+                <option value="cybersecurity">Кибербезопасность</option>
+              </select>
+            </div>
+            
+            <button id="startFlashcards" class="flashcard-btn">Начать изучение</button>
+            <button id="shuffleFlashcards" class="flashcard-btn secondary" style="display: none;">Перемешать</button>
+          </div>
+          
+          <!-- Игровая зона с карточками -->
+          <div id="flashcardGame" class="flashcard-game" style="display: none;">
+            <div class="flashcard-stats">
+              <span id="cardCounter">1 / 1</span>
+              <span id="cardProgress"></span>
+            </div>
+            
+            <div class="flashcard-container">
+              <div id="flashcard" class="flashcard">
+                <div class="flashcard-inner">
+                  <div class="flashcard-front">
+                    <div class="flashcard-content">
+                      <div class="flashcard-label">Английский</div>
+                      <div id="flashcardWord" class="flashcard-word"></div>
+                    </div>
+                  </div>
+                  <div class="flashcard-back">
+                    <div class="flashcard-content">
+                      <div class="flashcard-label">Русский</div>
+                      <div id="flashcardTranslation" class="flashcard-translation"></div>
+                      <div id="flashcardExample" class="flashcard-example"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flashcard-hint">
+              👆 Кликни на карточку, чтобы перевернуть
+            </div>
+            
+            <div class="flashcard-nav">
+              <button id="prevCard" class="flashcard-nav-btn">← Назад</button>
+              <button id="flipCard" class="flashcard-nav-btn primary">Перевернуть</button>
+              <button id="nextCard" class="flashcard-nav-btn">Вперёд →</button>
+            </div>
+            
+            <div class="flashcard-actions">
+              <button id="resetFlashcards" class="flashcard-btn secondary">Начать заново</button>
+              <button id="closeFlashcards" class="flashcard-btn secondary">Закрыть</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <p><strong>Поздравляем!</strong> Ты завершил четвёртый модуль курса Technical English. Ты освоил:</p>
+          <ul>
+            <li>Словарь технологий и IT-инфраструктуры (450+ слов)</li>
+            <li>Новую грамматику: Present Perfect, Past Continuous, пассивный залог, условные предложения 2 типа</li>
+            <li>Аппаратное и программное обеспечение, сети, базы данных, облачные технологии, кибербезопасность</li>
+          </ul>
+          <p><strong>Следующий модуль:</strong> <a href="05-travel-transport.html" style="color: var(--primary-color); font-weight: bold;">Модуль 5: Путешествия и транспорт</a></p>
         </div>
       </section>
       

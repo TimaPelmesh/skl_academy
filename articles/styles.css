@@ -1,24 +1,80 @@
 /* Минималистичные современные стили для статей */
 
+/* Gradient background в стиле главной страницы */
+.gradient-bg {
+  position: relative;
+  overflow: hidden;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(77, 96, 190, 0.28) 0%, transparent 56%),
+    radial-gradient(circle at 66% 66%, rgba(40, 128, 206, 0.24) 0%, transparent 60%),
+    linear-gradient(128deg, #020309 0%, #050d1d 28%, #0b1a36 62%, #163168 100%);
+  color: #ffffff;
+}
+
+.gradient-bg::before,
+.gradient-bg::after {
+  content: '';
+  position: absolute;
+  inset: -40% -25%;
+  background: radial-gradient(circle at 24% 22%, rgba(24, 68, 170, 0.4) 0%, transparent 62%),
+              radial-gradient(circle at 84% 34%, rgba(70, 90, 205, 0.32) 0%, transparent 65%),
+              radial-gradient(circle at 44% 78%, rgba(30, 102, 204, 0.26) 0%, transparent 63%),
+              radial-gradient(circle at 94% 64%, rgba(168, 54, 138, 0.16) 0%, transparent 60%);
+  filter: blur(12px);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradient-bg::after {
+  inset: -48% -28%;
+  background: radial-gradient(circle at 28% 14%, rgba(18, 92, 190, 0.26) 0%, transparent 62%),
+              radial-gradient(circle at 76% 72%, rgba(94, 40, 180, 0.3) 0%, transparent 60%),
+              radial-gradient(circle at 50% 78%, rgba(38, 120, 228, 0.24) 0%, transparent 64%),
+              radial-gradient(circle at 86% 32%, rgba(186, 54, 128, 0.14) 0%, transparent 58%);
+  filter: blur(28px);
+  opacity: 0.7;
+  animation: heroBloom 28s ease-in-out infinite alternate;
+}
+
+.gradient-bg > .max-w-4xl,
+.gradient-bg > .max-w-7xl {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes heroBloom {
+  0% { transform: translate3d(-3%, -2%, 0) scale(1); }
+  50% { transform: translate3d(2%, 3%, 0) scale(1.02); }
+  100% { transform: translate3d(-2%, 1%, 0) scale(1.03); }
+}
+
 :root {
-  /* Обновленная цветовая палитра */
-  --primary: #6366f1;        /* Индиго вместо синего */
-  --primary-light: #eef2ff;  /* Светлый индиго фон */
-  --primary-dark: #4f46e5;   /* Темный индиго для акцентов */
-  --accent: #8b5cf6;         /* Фиолетовый для акцентов */
-  --accent-light: #f5f3ff;   /* Светлый фиолетовый */
-  --text-primary: #1e293b;   /* Темно-синий для основного текста */
-  --text-secondary: #475569; /* Серо-синий для второстепенного текста */
-  --text-tertiary: #64748b;  /* Светло-серый для третичного текста */
-  --bg-light: #f8fafc;       /* Светло-серый фон */
-  --bg-lighter: #ffffff;     /* Белый фон */
-  --bg-header: #f1f5f9;      /* Нейтральный фон для заголовков */
-  --border-light: #e2e8f0;   /* Светло-серая граница */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* Цветовая палитра в стиле главной страницы */
+  --primary: #4f46e5;        /* indigo-600 - основной цвет */
+  --primary-light: #818cf8;  /* indigo-400 */
+  --primary-dark: #4338ca;   /* indigo-700 */
+  --primary-lighter: #eef2ff; /* indigo-50 */
+  --accent: #6366f1;         /* indigo-500 */
+  --accent-light: #e0e7ff;   /* indigo-100 */
+  --text-primary: #111827;   /* gray-900 - основной текст */
+  --text-secondary: #475569; /* slate-600 */
+  --text-tertiary: #64748b;  /* slate-500 */
+  --bg-light: #f8fafc;       /* slate-50 - фон страницы */
+  --bg-lighter: #ffffff;     /* белый */
+  --bg-header: #f1f5f9;      /* slate-100 */
+  --border-light: #e2e8f0;   /* slate-200 */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 14px 28px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 18px 32px rgba(15, 23, 42, 0.08);
   --radius-sm: 0.375rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
+  --radius-xl: 1rem;
   --font-sans: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', 'Ubuntu Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
 }
@@ -136,7 +192,7 @@
 /* Стили для кода */
 .article-content pre {
   background-color: var(--bg-light);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 1rem;
   margin: 1.5rem 0;
   overflow-x: auto;
@@ -144,6 +200,7 @@
   font-family: var(--font-mono);
   font-size: 0.9rem;
   line-height: 1.6;
+  box-shadow: var(--shadow-sm);
 }
 
 .article-content code {
@@ -171,6 +228,47 @@
 
 .article-content li {
   margin-bottom: 0.5rem;
+  position: relative;
+}
+
+/* Стили для списков с иконками */
+.article-content ul.with-icons {
+  list-style: none;
+  padding-left: 0;
+}
+
+.article-content ul.with-icons li {
+  padding-left: 2rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.article-content ul.with-icons li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 600;
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  color: var(--primary);
+  font-size: 0.875rem;
+}
+
+.article-content ul.with-icons li::before {
+  content: '\f058';
+}
+
+/* Альтернативные иконки для разных типов списков */
+.article-content ul.with-icons.check-list li::before {
+  content: '\f058';
+}
+
+.article-content ul.with-icons.star-list li::before {
+  content: '\f005';
+}
+
+.article-content ul.with-icons.arrow-list li::before {
+  content: '\f061';
 }
 
 /* Стили для блоков с примечаниями */
@@ -178,7 +276,7 @@
   border-left: 4px solid var(--primary);
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
-  background-color: var(--primary-light);
+  background-color: var(--primary-lighter);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
@@ -228,17 +326,20 @@
   display: inline-block;
   background-color: var(--primary);
   color: white;
-  font-weight: 500;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-md);
+  font-weight: 600;
+  padding: 0.85rem 1.65rem;
+  border-radius: 9999px;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   border: none;
   cursor: pointer;
+  box-shadow: 0 18px 35px rgba(79, 70, 229, 0.35);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px rgba(67, 56, 202, 0.42);
 }
 
 .btn-secondary {
@@ -293,7 +394,7 @@
 
 /* Стили для выделенных блоков */
 .article-content .highlight-box {
-  background-color: var(--primary-light);
+  background-color: var(--primary-lighter);
   border: 1px solid var(--primary);
   border-radius: var(--radius-md);
   padding: 1.25rem;
@@ -348,24 +449,30 @@
 .table-of-contents {
   position: sticky;
   top: 100px;
-  width: 250px;
+  width: 240px;
   height: fit-content;
   background-color: var(--bg-lighter);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
   border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-sm);
 }
 
 .table-of-contents h3 {
   margin-top: 0;
   margin-bottom: 1rem;
   color: var(--text-primary);
-  border-left: none;
-  padding-left: 0;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  background-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.table-of-contents h3 i {
+  margin-right: 0.5rem;
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
 }
 
 .table-of-contents ul {
@@ -375,32 +482,26 @@
 }
 
 .table-of-contents li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.375rem;
 }
 
 .table-of-contents a {
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   display: block;
-  padding: 0.375rem 0.5rem;
-  border-radius: var(--radius-sm);
-  border-left: 2px solid transparent;
+  padding: 0.5rem 0;
   font-size: 0.875rem;
-  line-height: 1.4;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 .table-of-contents a:hover {
   color: var(--primary);
-  background-color: var(--primary-light);
-  border-left-color: var(--primary);
-  transform: translateX(2px);
 }
 
 .table-of-contents a.active {
   color: var(--primary);
-  background-color: var(--primary-light);
-  border-left-color: var(--primary);
   font-weight: 500;
 }
 
@@ -414,13 +515,14 @@
 @media (max-width: 1024px) {
   .article-layout {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .table-of-contents {
     position: static;
     width: 100%;
     order: -1;
+    padding: 1.25rem;
   }
 }
 
@@ -471,7 +573,7 @@
   background-color: #1e293b;
   color: #f8fafc;
   padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   font-family: var(--font-mono);
   font-size: 0.875rem;
   border-bottom: 1px solid #334155;
@@ -481,7 +583,7 @@
   background-color: #1e293b;
   color: #f8fafc;
   padding: 1.25rem;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 0.875rem;
@@ -650,21 +752,21 @@
 .nav-button {
   display: inline-flex;
   align-items: center;
-  padding: 0.75rem 1.25rem;
+  padding: 0.85rem 1.65rem;
   background-color: var(--primary);
   color: white;
   text-decoration: none;
-  border-radius: var(--radius-md);
-  font-weight: 500;
+  border-radius: 9999px;
+  font-weight: 600;
   font-size: 0.95rem;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 18px 35px rgba(79, 70, 229, 0.35);
 }
 
 .nav-button:hover {
   background-color: var(--primary-dark);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px rgba(67, 56, 202, 0.42);
   color: white;
   text-decoration: none;
 }

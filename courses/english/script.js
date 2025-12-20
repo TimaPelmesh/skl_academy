@@ -115,7 +115,6 @@ function buildEnglishSidebar() {
             file: '02-everyday-life.html',
             title: '2. Повседневная жизнь и окружение',
             sub: [
-                { id: 'module1-review', text: 'Повторение: Модуль 1' },
                 { id: 'family-relationships', text: 'Семья и отношения' },
                 { id: 'home-interior', text: 'Дом и интерьер' },
                 { id: 'city-infrastructure', text: 'Городская инфраструктура' },
@@ -148,7 +147,6 @@ function buildEnglishSidebar() {
             file: '04-technologies-infrastructure.html',
             title: '4. Технологии и IT-инфраструктура',
             sub: [
-                { id: 'module3-review', text: 'Повторение: Модуль 3' },
                 { id: 'hardware', text: 'Аппаратное обеспечение' },
                 { id: 'software', text: 'Программное обеспечение' },
                 { id: 'networks-internet', text: 'Сети и интернет' },
@@ -161,91 +159,86 @@ function buildEnglishSidebar() {
             ]
         },
         {
-            index: 3,
-            file: '03-development-workflow.html',
-            title: '3. Development workflow',
-            sub: [
-                { id: 'sdlc-vocab', text: '3.1 Этапы SDLC' },
-                { id: 'tickets-templates', text: '3.2 Тикеты и шаблоны' },
-                { id: 'code-review-lang', text: '3.3 Язык code review' },
-                { id: 'retro-language', text: '3.4 Ретроспективы' }
-            ]
-        },
-        {
-            index: 4,
-            file: '04-infrastructure-operations.html',
-            title: '4. Infrastructure & operations',
-            sub: [
-                { id: 'infra-core', text: '4.1 Компоненты инфраструктуры' },
-                { id: 'monitoring-alerts', text: '4.2 Мониторинг и алёрты' },
-                { id: 'incident-phrases', text: '4.3 Инциденты и статус' },
-                { id: 'automation-scripts', text: '4.4 Автоматизация и пайплайны' }
-            ]
-        },
-        {
             index: 5,
-            file: '05-data-analytics.html',
-            title: '5. Data & analytics',
+            file: '05-travel-transport.html',
+            title: '5. Путешествия и транспорт',
             sub: [
-                { id: 'etl-pipeline', text: '5.1 Data pipeline' },
-                { id: 'analysis-language', text: '5.2 Аналитика и выводы' },
-                { id: 'visualization-phrases', text: '5.3 Визуализация' },
-                { id: 'ml-vocabulary', text: '5.4 ML и эксперименты' }
+                { id: 'airports-flights', text: 'Аэропорты и рейсы' },
+                { id: 'accommodation', text: 'Проживание' },
+                { id: 'public-transport', text: 'Общественный транспорт' },
+                { id: 'taxi-car-rental', text: 'Такси и аренда авто' },
+                { id: 'directions-navigation', text: 'Направления и навигация' },
+                { id: 'emergencies-problems', text: 'Экстренные ситуации' },
+                { id: 'grammar', text: 'Грамматика' },
+                { id: 'dialogues', text: 'Диалоги-ситуации' },
+                { id: 'final-case', text: 'Итоговый кейс' }
             ]
         },
         {
             index: 6,
-            file: '06-security-compliance.html',
-            title: '6. Security & compliance',
+            file: '06-shopping-services.html',
+            title: '6. Покупки и сервисы',
             sub: [
-                { id: 'security-basics', text: '6.1 Базовые понятия' },
-                { id: 'access-control', text: '6.2 Identity & access' },
-                { id: 'compliance-terms', text: '6.3 Compliance и нормативы' },
-                { id: 'incident-comms', text: '6.4 Коммуникация по инцидентам' }
+                { id: 'shopping', text: 'Покупки' },
+                { id: 'restaurants-food', text: 'Рестораны и еда' },
+                { id: 'services', text: 'Услуги' },
+                { id: 'money-banking', text: 'Деньги и банки' },
+                { id: 'grammar', text: 'Грамматика' },
+                { id: 'dialogues', text: 'Диалоги-ситуации' },
+                { id: 'final-case', text: 'Итоговый кейс' }
             ]
         },
         {
             index: 7,
-            file: '07-communication-docs.html',
-            title: '7. Communication & docs',
+            file: '07-housing-utilities.html',
+            title: '7. Жильё и коммунальные услуги',
             sub: [
-                { id: 'email-templates', text: '7.1 Письма' },
-                { id: 'chat-etiquette', text: '7.2 Чаты и мессенджеры' },
-                { id: 'docs-structure', text: '7.3 Документация' },
-                { id: 'presentation-language', text: '7.4 Презентации' }
+                { id: 'renting', text: 'Аренда жилья' },
+                { id: 'utilities', text: 'Коммунальные услуги' },
+                { id: 'furniture-appliances', text: 'Мебель и бытовая техника' },
+                { id: 'maintenance', text: 'Ремонт и обслуживание' },
+                { id: 'grammar', text: 'Грамматика' },
+                { id: 'dialogues', text: 'Диалоги-ситуации' },
+                { id: 'final-case', text: 'Итоговый кейс' }
             ]
         },
         {
             index: 8,
-            file: '08-project-collaboration.html',
-            title: '8. Project collaboration',
+            file: '08-health-emergencies.html',
+            title: '8. Здоровье и чрезвычайные ситуации',
             sub: [
-                { id: 'meetings-language', text: '8.1 Митинги и синхроны' },
-                { id: 'feedback-formulas', text: '8.2 Обратная связь' },
-                { id: 'conflict-resolution', text: '8.3 Решение конфликтов' },
-                { id: 'culture-nuances', text: '8.4 Культурные нюансы' }
+                { id: 'health-medicine', text: 'Здоровье и медицина' },
+                { id: 'insurance', text: 'Страховка' },
+                { id: 'safety', text: 'Безопасность' },
+                { id: 'grammar', text: 'Грамматика' },
+                { id: 'dialogues', text: 'Диалоги-ситуации' },
+                { id: 'final-case', text: 'Итоговый кейс' }
             ]
         },
         {
             index: 9,
-            file: '09-interviews-growth.html',
-            title: '9. Interviews & growth',
+            file: '09-professional-content.html',
+            title: '9. Профессиональный контент',
             sub: [
-                { id: 'interview-answers', text: '9.1 Ответы на вопросы' },
-                { id: 'achievement-story', text: '9.2 Истории и достижения' },
-                { id: 'offer-negotiation', text: '9.3 Обсуждение оффера' },
-                { id: 'review-prep', text: '9.4 Performance review' }
+                { id: 'presentations-talks', text: 'Доклады и презентации' },
+                { id: 'articles-blogs', text: 'Статьи и блоги' },
+                { id: 'conferences-networking', text: 'Конференции и нетворкинг' },
+                { id: 'tech-news', text: 'Технические новости' },
+                { id: 'grammar', text: 'Грамматика' },
+                { id: 'dialogues', text: 'Диалоги-ситуации' },
+                { id: 'final-case', text: 'Итоговый кейс' }
             ]
         },
         {
             index: 10,
-            file: '10-b2-progress-check.html',
-            title: '10. B2 progress check',
+            file: '10-culture-etiquette.html',
+            title: '10. Культура, этикет и итоговая проверка',
             sub: [
-                { id: 'self-assessment', text: '10.1 Самопроверка' },
-                { id: 'b2-checklist', text: '10.2 Чек-лист B2' },
-                { id: 'next-steps', text: '10.3 Следующие шаги' },
-                { id: 'resources-trackers', text: '10.4 Ресурсы и трекеры' }
+                { id: 'cultural-differences', text: 'Культурные различия' },
+                { id: 'etiquette', text: 'Этикет' },
+                { id: 'small-talk', text: 'Small talk' },
+                { id: 'final-assessment', text: 'Итоговая проверка' },
+                { id: 'resources', text: 'Ресурсы для развития' }
             ]
         }
     ];
@@ -431,8 +424,8 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 
-                // Находим родительский блок (reading-block или practice-card)
-                let block = this.closest('.reading-block') || this.closest('.practice-card');
+                // Находим родительский блок (reading-block, practice-card или dialogue-card)
+                let block = this.closest('.reading-block') || this.closest('.practice-card') || this.closest('.dialogue-card');
                 
                 if (block) {
                     block.classList.toggle('active');
@@ -1170,6 +1163,251 @@ const flashcardData = {
         { word: 'monitoring', translation: 'мониторинг', example: 'I monitor security events.' },
         { word: 'log', translation: 'лог, журнал', example: 'I analyze security logs.' },
         { word: 'alert', translation: 'предупреждение', example: 'I receive security alerts.' }
+    ],
+    
+    // Модуль 5: Путешествия и транспорт
+    'airports-flights': [
+        { word: 'airport', translation: 'аэропорт', example: 'I arrive at the airport two hours early.' },
+        { word: 'terminal', translation: 'терминал', example: 'My flight departs from terminal 3.' },
+        { word: 'gate', translation: 'выход на посадку', example: 'Boarding starts at gate 12.' },
+        { word: 'check-in', translation: 'регистрация', example: 'I do online check-in.' },
+        { word: 'boarding pass', translation: 'посадочный талон', example: 'Please show your boarding pass.' },
+        { word: 'luggage', translation: 'багаж', example: 'I check my luggage at the counter.' },
+        { word: 'baggage claim', translation: 'выдача багажа', example: 'I collect my suitcase at baggage claim.' },
+        { word: 'carry-on', translation: 'ручная кладь', example: 'I take a carry-on bag.' },
+        { word: 'customs', translation: 'таможня', example: 'I go through customs.' },
+        { word: 'immigration', translation: 'иммиграционный контроль', example: 'I pass immigration control.' },
+        { word: 'passport', translation: 'паспорт', example: 'Please show your passport.' },
+        { word: 'visa', translation: 'виза', example: 'I need a visa for this country.' },
+        { word: 'flight', translation: 'рейс', example: 'My flight is delayed.' },
+        { word: 'departure', translation: 'вылет, отправление', example: 'The departure time is 10 AM.' },
+        { word: 'arrival', translation: 'прибытие', example: 'The arrival time is 3 PM.' },
+        { word: 'delay', translation: 'задержка', example: 'There is a two-hour delay.' },
+        { word: 'cancel', translation: 'отменять', example: 'They cancelled the flight.' },
+        { word: 'boarding', translation: 'посадка', example: 'Boarding starts in 20 minutes.' },
+        { word: 'seat', translation: 'место', example: 'My seat is 15A.' },
+        { word: 'aisle', translation: 'проход', example: 'I prefer an aisle seat.' },
+        { word: 'window', translation: 'окно', example: 'I want a window seat.' },
+        { word: 'direct flight', translation: 'прямой рейс', example: 'I book a direct flight.' },
+        { word: 'connecting flight', translation: 'рейс с пересадкой', example: 'I have a connecting flight in Paris.' },
+        { word: 'layover', translation: 'пересадка', example: 'I have a three-hour layover.' }
+    ],
+    'accommodation': [
+        { word: 'hotel', translation: 'отель', example: 'I book a hotel online.' },
+        { word: 'hostel', translation: 'хостел', example: 'I stay at a hostel to save money.' },
+        { word: 'apartment', translation: 'квартира', example: 'I rent an apartment for a week.' },
+        { word: 'reservation', translation: 'бронирование', example: 'I make a reservation.' },
+        { word: 'booking', translation: 'бронирование', example: 'I confirm my booking.' },
+        { word: 'reception', translation: 'ресепшн', example: 'I check in at reception.' },
+        { word: 'check-in', translation: 'заселение', example: 'Check-in time is 2 PM.' },
+        { word: 'check-out', translation: 'выезд', example: 'Check-out time is 11 AM.' },
+        { word: 'room', translation: 'номер', example: 'I book a single room.' },
+        { word: 'single room', translation: 'одноместный номер', example: 'I need a single room.' },
+        { word: 'double room', translation: 'двухместный номер', example: 'We book a double room.' },
+        { word: 'suite', translation: 'люкс', example: 'I upgrade to a suite.' },
+        { word: 'key', translation: 'ключ', example: 'Here is your room key.' },
+        { word: 'key card', translation: 'карта-ключ', example: 'I use a key card to enter.' },
+        { word: 'bed', translation: 'кровать', example: 'The bed is very comfortable.' },
+        { word: 'bathroom', translation: 'ванная комната', example: 'The bathroom is clean.' },
+        { word: 'shower', translation: 'душ', example: 'I take a shower in the morning.' },
+        { word: 'towel', translation: 'полотенце', example: 'I need clean towels.' },
+        { word: 'Wi-Fi', translation: 'Wi-Fi', example: 'Is there free Wi-Fi?' },
+        { word: 'breakfast', translation: 'завтрак', example: 'Breakfast is included.' },
+        { word: 'amenities', translation: 'удобства', example: 'The hotel has many amenities.' },
+        { word: 'housekeeping', translation: 'уборка номеров', example: 'Housekeeping comes every day.' },
+        { word: 'front desk', translation: 'стойка регистрации', example: 'I ask the front desk for help.' },
+        { word: 'bill', translation: 'счёт', example: 'Can I see the bill, please?' }
+    ],
+    'public-transport': [
+        { word: 'train', translation: 'поезд', example: 'I take the train to the city.' },
+        { word: 'station', translation: 'станция, вокзал', example: 'I wait at the train station.' },
+        { word: 'platform', translation: 'платформа', example: 'The train leaves from platform 5.' },
+        { word: 'ticket', translation: 'билет', example: 'I buy a ticket online.' },
+        { word: 'one-way ticket', translation: 'билет в одну сторону', example: 'I need a one-way ticket.' },
+        { word: 'round-trip ticket', translation: 'билет туда-обратно', example: 'I buy a round-trip ticket.' },
+        { word: 'fare', translation: 'стоимость проезда', example: 'The fare is 5 dollars.' },
+        { word: 'bus', translation: 'автобус', example: 'I take the bus to work.' },
+        { word: 'bus stop', translation: 'автобусная остановка', example: 'I wait at the bus stop.' },
+        { word: 'subway', translation: 'метро', example: 'The subway is fast.' },
+        { word: 'metro', translation: 'метро', example: 'I use the metro every day.' },
+        { word: 'line', translation: 'линия', example: 'Take the red line.' },
+        { word: 'transfer', translation: 'пересадка', example: 'I transfer at the next station.' },
+        { word: 'timetable', translation: 'расписание', example: 'I check the timetable.' },
+        { word: 'schedule', translation: 'расписание', example: 'The bus schedule changes on weekends.' },
+        { word: 'route', translation: 'маршрут', example: 'What is the best route?' },
+        { word: 'stop', translation: 'остановка', example: 'I get off at the next stop.' },
+        { word: 'arrive', translation: 'прибывать', example: 'The train arrives at 3 PM.' },
+        { word: 'depart', translation: 'отправляться', example: 'The bus departs every 20 minutes.' },
+        { word: 'on time', translation: 'вовремя', example: 'The train is on time.' },
+        { word: 'late', translation: 'с опозданием', example: 'The bus is 10 minutes late.' },
+        { word: 'passenger', translation: 'пассажир', example: 'All passengers must have tickets.' },
+        { word: 'conductor', translation: 'кондуктор', example: 'The conductor checks tickets.' },
+        { word: 'driver', translation: 'водитель', example: 'I ask the driver for help.' }
+    ],
+    'taxi-car-rental': [
+        { word: 'taxi', translation: 'такси', example: 'I call a taxi.' },
+        { word: 'cab', translation: 'такси', example: 'I hail a cab on the street.' },
+        { word: 'ride', translation: 'поездка', example: 'The ride costs 20 dollars.' },
+        { word: 'driver', translation: 'водитель', example: 'The driver knows the way.' },
+        { word: 'fare', translation: 'стоимость поездки', example: 'What is the fare to the airport?' },
+        { word: 'meter', translation: 'счётчик', example: 'Please turn on the meter.' },
+        { word: 'tip', translation: 'чаевые', example: 'I give a tip to the driver.' },
+        { word: 'address', translation: 'адрес', example: 'This is my address.' },
+        { word: 'destination', translation: 'пункт назначения', example: 'My destination is the city center.' },
+        { word: 'drop off', translation: 'высадить', example: 'Please drop me off here.' },
+        { word: 'pick up', translation: 'забрать', example: 'Can you pick me up at 8 AM?' },
+        { word: 'car rental', translation: 'прокат автомобилей', example: 'I need a car rental.' },
+        { word: 'rent a car', translation: 'арендовать машину', example: 'I want to rent a car.' },
+        { word: 'driving license', translation: 'водительские права', example: 'I show my driving license.' },
+        { word: 'insurance', translation: 'страховка', example: 'I need full insurance.' },
+        { word: 'fuel', translation: 'топливо', example: 'The car has full fuel.' },
+        { word: 'gas', translation: 'бензин', example: 'I need to buy gas.' },
+        { word: 'gas station', translation: 'заправка', example: 'I stop at a gas station.' },
+        { word: 'parking', translation: 'парковка', example: 'Is there free parking?' },
+        { word: 'highway', translation: 'шоссе, автострада', example: 'I drive on the highway.' },
+        { word: 'traffic', translation: 'дорожное движение', example: 'There is heavy traffic today.' },
+        { word: 'accident', translation: 'авария', example: 'There was an accident on the road.' },
+        { word: 'speed limit', translation: 'ограничение скорости', example: 'The speed limit is 60 km/h.' },
+        { word: 'GPS', translation: 'GPS, навигатор', example: 'I use GPS for navigation.' }
+    ],
+    'directions-navigation': [
+        { word: 'direction', translation: 'направление', example: 'Can you show me the direction?' },
+        { word: 'left', translation: 'налево', example: 'Turn left at the traffic light.' },
+        { word: 'right', translation: 'направо', example: 'Turn right after the bank.' },
+        { word: 'straight', translation: 'прямо', example: 'Go straight for two blocks.' },
+        { word: 'turn', translation: 'поворачивать', example: 'Turn at the corner.' },
+        { word: 'corner', translation: 'угол', example: 'The shop is on the corner.' },
+        { word: 'block', translation: 'квартал', example: 'Walk three blocks.' },
+        { word: 'street', translation: 'улица', example: 'I live on Main Street.' },
+        { word: 'road', translation: 'дорога', example: 'This road goes to the center.' },
+        { word: 'avenue', translation: 'проспект', example: 'The hotel is on Fifth Avenue.' },
+        { word: 'intersection', translation: 'перекрёсток', example: 'Turn left at the intersection.' },
+        { word: 'traffic light', translation: 'светофор', example: 'Stop at the traffic light.' },
+        { word: 'crosswalk', translation: 'пешеходный переход', example: 'Use the crosswalk to cross.' },
+        { word: 'sidewalk', translation: 'тротуар', example: 'Walk on the sidewalk.' },
+        { word: 'bridge', translation: 'мост', example: 'Cross the bridge.' },
+        { word: 'map', translation: 'карта', example: 'I look at the map.' },
+        { word: 'location', translation: 'местоположение', example: 'What is your location?' },
+        { word: 'nearby', translation: 'рядом, поблизости', example: 'Is there a bank nearby?' },
+        { word: 'far', translation: 'далеко', example: 'Is it far from here?' },
+        { word: 'close', translation: 'близко', example: 'The station is very close.' },
+        { word: 'distance', translation: 'расстояние', example: 'What is the distance to the airport?' },
+        { word: 'north', translation: 'север', example: 'Go north.' },
+        { word: 'south', translation: 'юг', example: 'The city is to the south.' },
+        { word: 'east', translation: 'восток', example: 'Drive east.' },
+        { word: 'west', translation: 'запад', example: 'The ocean is to the west.' }
+    ],
+    'emergencies-problems': [
+        { word: 'help', translation: 'помощь', example: 'I need help!' },
+        { word: 'emergency', translation: 'чрезвычайная ситуация', example: 'This is an emergency.' },
+        { word: 'police', translation: 'полиция', example: 'Call the police!' },
+        { word: 'ambulance', translation: 'скорая помощь', example: 'Call an ambulance!' },
+        { word: 'fire department', translation: 'пожарная служба', example: 'There is a fire! Call the fire department!' },
+        { word: 'accident', translation: 'несчастный случай', example: 'There was an accident.' },
+        { word: 'problem', translation: 'проблема', example: 'I have a problem.' },
+        { word: 'lost', translation: 'потерянный', example: 'I am lost.' },
+        { word: 'stolen', translation: 'украденный', example: 'My wallet was stolen.' },
+        { word: 'robbery', translation: 'ограбление', example: 'I want to report a robbery.' },
+        { word: 'report', translation: 'сообщать, докладывать', example: 'I need to report a crime.' },
+        { word: 'hospital', translation: 'больница', example: 'Where is the nearest hospital?' },
+        { word: 'doctor', translation: 'врач', example: 'I need to see a doctor.' },
+        { word: 'injured', translation: 'раненый', example: 'Someone is injured.' },
+        { word: 'sick', translation: 'больной', example: 'I feel sick.' },
+        { word: 'medicine', translation: 'лекарство', example: 'I need medicine.' },
+        { word: 'pharmacy', translation: 'аптека', example: 'Where is the pharmacy?' },
+        { word: 'insurance', translation: 'страховка', example: 'Do you accept my insurance?' },
+        { word: 'embassy', translation: 'посольство', example: 'I need to contact my embassy.' },
+        { word: 'consulate', translation: 'консульство', example: 'Where is the consulate?' },
+        { word: 'document', translation: 'документ', example: 'I lost my documents.' },
+        { word: 'replace', translation: 'заменить', example: 'I need to replace my passport.' },
+        { word: 'safe', translation: 'безопасный', example: 'Is this area safe?' },
+        { word: 'danger', translation: 'опасность', example: 'There is danger ahead.' }
+    ],
+    
+    // Модуль 6: Покупки и сервисы
+    'shopping': [
+        { word: 'shop', translation: 'магазин', example: 'I go to the shop to buy groceries.' },
+        { word: 'store', translation: 'магазин', example: 'This store has good prices.' },
+        { word: 'supermarket', translation: 'супермаркет', example: 'I shop at the supermarket every week.' },
+        { word: 'mall', translation: 'торговый центр', example: 'The mall is very large.' },
+        { word: 'buy', translation: 'покупать', example: 'I want to buy a new phone.' },
+        { word: 'sell', translation: 'продавать', example: 'They sell fresh vegetables.' },
+        { word: 'price', translation: 'цена', example: 'What is the price of this item?' },
+        { word: 'cost', translation: 'стоить', example: 'How much does it cost?' },
+        { word: 'expensive', translation: 'дорогой', example: 'This watch is very expensive.' },
+        { word: 'cheap', translation: 'дешёвый', example: 'I found a cheap flight.' },
+        { word: 'discount', translation: 'скидка', example: 'There is a 20% discount today.' },
+        { word: 'sale', translation: 'распродажа', example: 'Everything is on sale.' },
+        { word: 'cash', translation: 'наличные', example: 'Do you accept cash?' },
+        { word: 'card', translation: 'карта', example: 'I pay with a credit card.' },
+        { word: 'receipt', translation: 'чек', example: 'Can I have a receipt, please?' },
+        { word: 'change', translation: 'сдача', example: 'Keep the change.' },
+        { word: 'size', translation: 'размер', example: 'What size do you need?' },
+        { word: 'try on', translation: 'примерять', example: 'Can I try this on?' },
+        { word: 'fit', translation: 'подходить по размеру', example: 'This shirt fits perfectly.' },
+        { word: 'return', translation: 'возвращать', example: 'Can I return this item?' },
+        { word: 'refund', translation: 'возврат денег', example: 'I want a refund.' }
+    ],
+    'restaurants-food': [
+        { word: 'restaurant', translation: 'ресторан', example: 'We have dinner at a restaurant.' },
+        { word: 'cafe', translation: 'кафе', example: 'I meet friends at a cafe.' },
+        { word: 'menu', translation: 'меню', example: 'Can I see the menu, please?' },
+        { word: 'order', translation: 'заказывать', example: 'I order pizza and salad.' },
+        { word: 'waiter', translation: 'официант', example: 'The waiter brings our food.' },
+        { word: 'waitress', translation: 'официантка', example: 'The waitress is very friendly.' },
+        { word: 'appetizer', translation: 'закуска', example: 'I order an appetizer first.' },
+        { word: 'main course', translation: 'основное блюдо', example: 'What is your main course?' },
+        { word: 'dessert', translation: 'десерт', example: 'I want chocolate cake for dessert.' },
+        { word: 'bill', translation: 'счёт', example: 'Can I have the bill, please?' },
+        { word: 'tip', translation: 'чаевые', example: 'I leave a 15% tip.' },
+        { word: 'reservation', translation: 'бронирование', example: 'I make a reservation for two.' },
+        { word: 'table', translation: 'стол', example: 'A table for two, please.' },
+        { word: 'spicy', translation: 'острый', example: 'This food is too spicy for me.' },
+        { word: 'sweet', translation: 'сладкий', example: 'I like sweet desserts.' },
+        { word: 'salty', translation: 'солёный', example: 'This soup is too salty.' },
+        { word: 'delicious', translation: 'вкусный', example: 'The food is delicious!' },
+        { word: 'taste', translation: 'вкус', example: 'This tastes great!' },
+        { word: 'hungry', translation: 'голодный', example: 'I am very hungry.' },
+        { word: 'thirsty', translation: 'жаждущий', example: 'I am thirsty. Can I have water?' }
+    ],
+    'services': [
+        { word: 'service', translation: 'услуга', example: 'The service here is excellent.' },
+        { word: 'haircut', translation: 'стрижка', example: 'I need a haircut.' },
+        { word: 'hairdresser', translation: 'парикмахер', example: 'I visit the hairdresser monthly.' },
+        { word: 'dry cleaning', translation: 'химчистка', example: 'I take my suit to dry cleaning.' },
+        { word: 'laundry', translation: 'прачечная', example: 'I do laundry on weekends.' },
+        { word: 'repair', translation: 'ремонт', example: 'I need to repair my phone.' },
+        { word: 'fix', translation: 'чинить', example: 'Can you fix this computer?' },
+        { word: 'post office', translation: 'почта', example: 'I send a package at the post office.' },
+        { word: 'mail', translation: 'почта, отправлять', example: 'I mail a letter to my friend.' },
+        { word: 'package', translation: 'посылка', example: 'I receive a package today.' },
+        { word: 'delivery', translation: 'доставка', example: 'Is home delivery available?' },
+        { word: 'appointment', translation: 'встреча, назначение', example: 'I make an appointment with the doctor.' },
+        { word: 'available', translation: 'доступный', example: 'Are you available tomorrow?' },
+        { word: 'book', translation: 'бронировать', example: 'I book a table for tonight.' },
+        { word: 'cancel', translation: 'отменять', example: 'I need to cancel my appointment.' }
+    ],
+    'money-banking': [
+        { word: 'bank', translation: 'банк', example: 'I go to the bank to withdraw money.' },
+        { word: 'ATM', translation: 'банкомат', example: 'I withdraw cash from the ATM.' },
+        { word: 'account', translation: 'счёт', example: 'I open a bank account.' },
+        { word: 'balance', translation: 'баланс', example: 'What is my account balance?' },
+        { word: 'deposit', translation: 'вклад, депозит', example: 'I deposit money into my account.' },
+        { word: 'withdraw', translation: 'снимать', example: 'I withdraw 100 dollars.' },
+        { word: 'credit card', translation: 'кредитная карта', example: 'I pay with a credit card.' },
+        { word: 'debit card', translation: 'дебетовая карта', example: 'I use my debit card for purchases.' },
+        { word: 'PIN', translation: 'PIN-код', example: 'Enter your PIN, please.' },
+        { word: 'currency', translation: 'валюта', example: 'What currency do you accept?' },
+        { word: 'exchange rate', translation: 'курс обмена', example: 'What is the exchange rate today?' },
+        { word: 'exchange', translation: 'обменивать', example: 'I exchange dollars for euros.' },
+        { word: 'loan', translation: 'заём', example: 'I apply for a loan.' },
+        { word: 'interest', translation: 'процент', example: 'What is the interest rate?' },
+        { word: 'payment', translation: 'платёж', example: 'I make a monthly payment.' },
+        { word: 'bill', translation: 'счёт, квитанция', example: 'I pay my electricity bill.' },
+        { word: 'invoice', translation: 'счёт-фактура', example: 'I receive an invoice for services.' },
+        { word: 'owe', translation: 'быть должным', example: 'I owe 50 dollars.' },
+        { word: 'debt', translation: 'долг', example: 'I have no debt.' },
+        { word: 'save', translation: 'копить', example: 'I save money every month.' }
     ]
 };
 
@@ -1280,23 +1518,41 @@ function loadCards(category) {
     const isModule2 = currentFile.includes('02-everyday-life');
     const isModule3 = currentFile.includes('03-work-professional');
     const isModule4 = currentFile.includes('04-technologies-infrastructure');
+    const isModule5 = currentFile.includes('05-travel-transport');
+    const isModule6 = currentFile.includes('06-shopping-services');
+    const isModule7 = currentFile.includes('07-housing-utilities');
+    const isModule8 = currentFile.includes('08-health-emergencies');
+    const isModule9 = currentFile.includes('09-professional-content');
+    const isModule10 = currentFile.includes('10-culture-etiquette');
     
-    // Категории для модуля 4
+    // Категории для модулей
+    const module10Categories = []; // Будет добавлено позже
+    const module9Categories = []; // Будет добавлено позже
+    const module8Categories = []; // Будет добавлено позже
+    const module7Categories = []; // Будет добавлено позже
+    const module6Categories = ['shopping', 'restaurants-food', 'services', 'money-banking'];
+    const module5Categories = ['airports-flights', 'accommodation', 'public-transport', 'taxi-car-rental', 'directions-navigation', 'emergencies-problems'];
     const module4Categories = ['hardware', 'software', 'networks-internet', 'databases', 'cloud-technologies', 'cybersecurity'];
-    
-    // Категории для модуля 3
     const module3Categories = ['office-workplace', 'work-processes', 'work-communication', 'it-professions-advanced', 'career-development', 'business-trips'];
-    
-    // Категории для модуля 2
     const module2Categories = ['family-relationships', 'home-interior', 'city-infrastructure', 'food-drinks', 'daily-routine', 'hobbies-interests'];
-    
-    // Категории для модуля 1
     const module1Categories = ['greetings', 'names-countries', 'professions', 'basic-nouns', 'basic-verbs', 'questions-pronouns', 'useful-phrases', 'numbers', 'it-professions', 'it-terms', 'travel'];
     
     if (category === 'all') {
         // Загружаем все карточки из соответствующих категорий модуля
         let categoriesToUse;
-        if (isModule4) {
+        if (isModule10) {
+            categoriesToUse = module10Categories;
+        } else if (isModule9) {
+            categoriesToUse = module9Categories;
+        } else if (isModule8) {
+            categoriesToUse = module8Categories;
+        } else if (isModule7) {
+            categoriesToUse = module7Categories;
+        } else if (isModule6) {
+            categoriesToUse = module6Categories;
+        } else if (isModule5) {
+            categoriesToUse = module5Categories;
+        } else if (isModule4) {
             categoriesToUse = module4Categories;
         } else if (isModule3) {
             categoriesToUse = module3Categories;
@@ -1336,13 +1592,14 @@ function showCard() {
     const progressEl = document.getElementById('cardProgress');
     const flashcard = document.getElementById('flashcard');
     
-    // Сначала сбрасываем переворот карточки, чтобы не показывать перевод следующей карточки
-    if (flashcard) {
+    // Если карточка была перевернута, сначала переворачиваем её обратно перед обновлением содержимого
+    // Это предотвращает показ старого содержимого при переходе к следующей карточке
+    if (flashcard && (flashcard.classList.contains('flipped') || isFlipped)) {
         flashcard.classList.remove('flipped');
         isFlipped = false;
     }
     
-    // Затем обновляем содержимое карточки
+    // Обновляем содержимое карточки
     if (wordEl) wordEl.textContent = card.word;
     if (translationEl) translationEl.textContent = card.translation;
     if (exampleEl) {

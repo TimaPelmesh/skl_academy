@@ -1358,6 +1358,12 @@ h4 {
   border-left-color: var(--primary-color);
 }
 
+.dialogue-card.active {
+  background: rgba(108, 99, 255, 0.08);
+  border-left-color: var(--primary-color);
+  border-left-width: 4px;
+}
+
 .reading-block + .reading-block {
   margin-top: 0;
 }
@@ -1394,7 +1400,8 @@ h4 {
 }
 
 .reading-block.active .translation-block,
-.practice-card.active .translation-block {
+.practice-card.active .translation-block,
+.dialogue-card.active .translation-block {
   max-height: 5000px;
   opacity: 1;
   margin-top: 16px;
@@ -1526,7 +1533,8 @@ h4 {
 
 .grammar-card,
 .practice-card,
-.culture-card {
+.culture-card,
+.dialogue-card {
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 14px;
   padding: 30px 35px;
@@ -1537,7 +1545,8 @@ h4 {
 
 .grammar-card h3,
 .practice-card h3,
-.culture-card h3 {
+.culture-card h3,
+.dialogue-card h3 {
   margin-top: 0;
   margin-bottom: 1rem;
   font-size: 1.25rem;
@@ -1548,7 +1557,8 @@ h4 {
 
 .grammar-card h4,
 .practice-card h4,
-.culture-card h4 {
+.culture-card h4,
+.dialogue-card h4 {
   margin-top: 1.25rem;
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
@@ -1591,7 +1601,8 @@ h4 {
 
 .grammar-card p,
 .practice-card p,
-.culture-card p {
+.culture-card p,
+.dialogue-card p {
   margin-bottom: 1rem;
   line-height: 1.8;
   color: var(--text-color);
@@ -1600,7 +1611,8 @@ h4 {
 
 .grammar-card p:last-child,
 .practice-card p:last-child,
-.culture-card p:last-child {
+.culture-card p:last-child,
+.dialogue-card p:last-child {
   margin-bottom: 0;
 }
 
@@ -2175,7 +2187,8 @@ body.dark-theme .reading-block.active {
 
 body.dark-theme .practice-card,
 body.dark-theme .culture-card,
-body.dark-theme .grammar-card {
+body.dark-theme .grammar-card,
+body.dark-theme .dialogue-card {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);

@@ -95,6 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Функция для открытия Telegram
+  window.openTelegram = function() {
+    window.open('https://t.me/tima_pelmeshka', '_blank');
+  };
+
   // Кнопки копирования кода
   document.querySelectorAll('.code-block').forEach(block => {
     const codeContent = block.querySelector('.code-block-content');
