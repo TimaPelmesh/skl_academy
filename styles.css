@@ -379,6 +379,23 @@ footer .footer-column h4 {
   color: #4338ca;
 }
 
+/* Стили для карточек тренажеров - более сдержанная ширина */
+#trainers .grid {
+  max-width: 800px;
+}
+
+#trainers .course-card {
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  #trainers .grid {
+    grid-template-columns: repeat(2, minmax(0, 380px));
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -400,6 +417,18 @@ footer .footer-column h4 {
   background: rgba(148, 163, 184, 0.12);
   color: #475569;
   border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.status-badge.status-in-development {
+  background: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  font-size: 0.6rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Buttons */
@@ -1490,6 +1519,43 @@ footer .footer-column h4 {
   background-color: #4f46e5;
 }
 
+.article-read-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  color: white;
+  background-color: #4f46e5;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.article-read-button:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+}
+
+/* Мобильная версия: кнопка под хештегами и больше */
+@media (max-width: 768px) {
+  .article-card .mt-3.flex.flex-wrap.items-center.justify-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .article-read-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    margin-left: 0;
+  }
+}
+
 .article-card .course-button:hover {
   background-color: #4338ca;
 }
@@ -2027,11 +2093,19 @@ footer .footer-column h4 {
 
 /* Оптимизации для мобильных устройств */
 @media (max-width: 768px) {
-  /* Оптимизация анимаций */
-  .gradient-bg,
+  /* Оптимизация анимаций - используем will-change только для активно анимируемых элементов */
+  .gradient-bg::after {
+    will-change: transform, opacity;
+  }
+  
   .stat-block,
   .article-card {
     will-change: transform;
+  }
+  
+  /* Отключаем will-change после анимации для экономии памяти */
+  .article-card:not(:hover) {
+    will-change: auto;
   }
   
   /* Уменьшение сложности теней на мобильных */

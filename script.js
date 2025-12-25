@@ -92,7 +92,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Parallax effect for hero section removed to keep hero static
 
 // WebGL hero scene (Three.js) - Интерактивная 3D сцена
-(function initHeroWebGL() {
+// Экспортируем функцию для lazy loading
+window.initHeroWebGL = function initHeroWebGL() {
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reducedMotion) return;
   if (typeof THREE === 'undefined') return;
@@ -100,17 +101,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   const container = document.getElementById('hero-webgl');
   if (!container) return;
 
+  // Определяем производительность устройства
+  const isLowEnd = navigator.hardwareConcurrency <= 2 || 
+                   (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
+                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x030712, 0.035);
 
   const renderer = new THREE.WebGLRenderer({
-    antialias: true,
+    antialias: !isLowEnd, // Отключаем сглаживание на слабых устройствах
     alpha: true,
-    powerPreference: 'high-performance'
+    powerPreference: isLowEnd ? 'low-power' : 'high-performance'
   });
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Ограничиваем pixel ratio на слабых устройствах
+  renderer.setPixelRatio(isLowEnd ? 1 : Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
@@ -122,7 +129,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   scene.add(mainGroup);
 
   // Создаем сеть частиц (нейронная сеть)
-  const particleCount = 120;
+  // Уменьшаем количество частиц на слабых устройствах
+  const particleCount = isLowEnd ? 60 : 120;
   const particles = [];
   const particleGeometry = new THREE.BufferGeometry();
   const particlePositions = new Float32Array(particleCount * 3);
@@ -320,8 +328,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   reactorGroup.add(outerCore);
 
   // Вращающиеся кольца энергии (орбитальные кольца)
+  // Уменьшаем количество колец на слабых устройствах
   const energyRings = [];
-  const ringConfigs = [
+  const ringConfigs = isLowEnd ? [
+    { radius: 3.2, thickness: 0.12, color: 0x60a5fa, axis: 'x', speed: 0.8 },
+    { radius: 3.5, thickness: 0.1, color: 0x818cf8, axis: 'y', speed: -0.6 },
+    { radius: 3.8, thickness: 0.08, color: 0xa78bfa, axis: 'z', speed: 0.7 }
+  ] : [
     { radius: 3.2, thickness: 0.12, color: 0x60a5fa, axis: 'x', speed: 0.8 },
     { radius: 3.5, thickness: 0.1, color: 0x818cf8, axis: 'y', speed: -0.6 },
     { radius: 3.8, thickness: 0.08, color: 0xa78bfa, axis: 'z', speed: 0.7 },
@@ -360,7 +373,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 
   // Светящиеся лучи, выходящие из центра
-  const rayCount = 12;
+  const rayCount = isLowEnd ? 6 : 12;
   const rays = [];
   for (let i = 0; i < rayCount; i++) {
     const angle = (i / rayCount) * Math.PI * 2;
@@ -393,7 +406,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   // Частицы энергии, вылетающие из реактора
   const energyParticles = [];
-  const energyParticleCount = 40;
+  const energyParticleCount = isLowEnd ? 20 : 40;
   const energyParticleGeometry = new THREE.BufferGeometry();
   const energyParticlePositions = new Float32Array(energyParticleCount * 3);
   const energyParticleSizes = new Float32Array(energyParticleCount);
@@ -459,7 +472,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   reactorGroup.add(innerGlow);
 
   // Электрические разряды (спорадические вспышки)
-  const dischargeCount = 8;
+  const dischargeCount = isLowEnd ? 4 : 8;
   const discharges = [];
   for (let i = 0; i < dischargeCount; i++) {
     const dischargeGeometry = new THREE.ConeGeometry(0.08, 1.5, 6);
@@ -488,7 +501,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   }
 
   // Дополнительные орбитальные частицы вокруг реактора
-  const orbitParticleCount = 24;
+  const orbitParticleCount = isLowEnd ? 12 : 24;
   const orbitParticles = [];
   const orbitGeometry = new THREE.BufferGeometry();
   const orbitPositions = new Float32Array(orbitParticleCount * 3);
@@ -719,5 +732,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     requestAnimationFrame(animate);
   }
 
-  animate();
-})();
+  // Используем requestIdleCallback для отложенного запуска на слабых устройствах
+  if (isLowEnd && 'requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      animate();
+    }, { timeout: 2000 });
+  } else {
+    animate();
+  }
+};

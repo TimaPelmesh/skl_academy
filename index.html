@@ -173,7 +173,7 @@
 
         <!-- Центральная навигация (только на десктопе) -->
         <div class="hidden md:flex md:items-center md:space-x-8 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
-          <a href="trainers/index.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Тренажер печати</a>
+          <a href="#trainers" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Тренажеры</a>
           <a href="#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
           <a href="#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
           <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
@@ -258,6 +258,7 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden">
       <div class="pt-2 pb-3 space-y-1 px-4">
+        <a href="#trainers" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Тренажеры</a>
         <a href="#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
         <a href="#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
         <a href="about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
@@ -817,6 +818,106 @@
     </div>
   </div>
 
+  <!-- Trainers Section -->
+  <div id="trainers" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Тренажеры</h2>
+      <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
+        Практикуйтесь и улучшайте свои навыки
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto">
+      <!-- Trainer 1: Typing -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-keyboard text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Тренажер печати</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Улучшите скорость и точность печати с помощью интерактивного тренажера.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Тренировка слепой печати</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Статистика и прогресс</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Разные уровни сложности</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <a href="trainers/typing/index.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trainer 2: Linux Commands -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fab fa-linux text-indigo-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">Тренажер Linux команд</h3>
+              </div>
+            </div>
+            <span class="status-badge status-in-development">В разработке</span>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Отработайте команды Linux в интерактивном режиме и закрепите знания на практике.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Интерактивные упражнения</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Практика команд Bash</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Разные темы и уровни</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-linux-trainer">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Articles Section -->
   <div id="articles" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="text-center mb-6">
@@ -849,23 +950,23 @@
             </div>
             <div class="mt-3 flex-grow">
               <p class="text-gray-600 text-sm">Пошаговое руководство по созданию первой программы на Python с изучением популярной библиотеки.</p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #python
-                </span>
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #api
-                </span>
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #requests
-                </span>
+              <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #python
+                  </span>
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #api
+                  </span>
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #requests
+                  </span>
+                </div>
+                <a href="articles/first-python-program.html" class="article-read-button">
+                  Читать
+                  <i class="fas fa-arrow-right ml-1.5"></i>
+                </a>
               </div>
-            </div>
-            <div class="mt-3">
-              <a href="articles/first-python-program.html" class="course-button">
-                Читать
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
             </div>
           </div>
         </div>
@@ -892,23 +993,23 @@
             </div>
             <div class="mt-3 flex-grow">
               <p class="text-gray-600 text-sm">Создаем стильное приложение для заметок с современным интерфейсом на Python tkinter.</p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #tkinter
-                </span>
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #python
-                </span>
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #gui
-                </span>
+              <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #tkinter
+                  </span>
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #python
+                  </span>
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #gui
+                  </span>
+                </div>
+                <a href="articles/tkinter-notes-app.html" class="article-read-button">
+                  Читать
+                  <i class="fas fa-arrow-right ml-1.5"></i>
+                </a>
               </div>
-            </div>
-            <div class="mt-3">
-              <a href="articles/tkinter-notes-app.html" class="course-button">
-                Читать
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
             </div>
           </div>
         </div>
@@ -935,23 +1036,23 @@
             </div>
             <div class="mt-3 flex-grow">
               <p class="text-gray-600 text-sm">Простое объяснение искусственного интеллекта для начинающих. Что такое ИИ, как он работает и где применяется.</p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #ии
-                </span>
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #машинное обучение
-                </span>
-                <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                  #ai
-                </span>
+              <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #ии
+                  </span>
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #машинное обучение
+                  </span>
+                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+                    #ai
+                  </span>
+                </div>
+                <a href="articles/ai-for-beginners.html" class="article-read-button">
+                  Читать
+                  <i class="fas fa-arrow-right ml-1.5"></i>
+                </a>
               </div>
-            </div>
-            <div class="mt-3">
-              <a href="articles/ai-for-beginners.html" class="course-button">
-                Читать
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
             </div>
           </div>
         </div>
@@ -1457,8 +1558,50 @@
     </div>
   </div>
 
+  <!-- Модальное окно для тренажера "Linux команд" -->
+  <div class="modal" id="modal-linux-trainer">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-linux text-blue-600 mr-3"></i>Тренажер Linux команд</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Интерактивный тренажер для отработки команд Linux и Bash. Практикуйтесь в безопасной среде без риска повредить систему.</p>
+        </div>
 
+        <div class="modal-divider"></div>
 
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что включено</h4>
+              <ul class="modal-list">
+                <li>• Интерактивные упражнения по командам</li>
+                <li>• Практика работы с файловой системой</li>
+                <li>• Упражнения по правам доступа и процессам</li>
+                <li>• Работа с текстовыми утилитами и piping</li>
+                <li>• Разные уровни сложности</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Изучающим Linux и Bash</li>
+                <li>• Системным администраторам</li>
+                <li>• DevOps-специалистам</li>
+                <li>• Тем, кто хочет закрепить знания на практике</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="text-sm text-gray-500 text-center w-full">Тренажер находится в разработке. Скоро будет доступен!</p>
+      </div>
+    </div>
+  </div>
 
   <!-- JavaScript для работы модальных окон -->
   <script>
@@ -1585,6 +1728,26 @@
     // Функции для открытия Telegram
     function openTelegram() {
       window.open('https://t.me/tima_pelmeshka', '_blank');
+    }
+    
+    // Инициализация WebGL сцены после загрузки всех скриптов
+    function initWebGLScene() {
+      if (typeof THREE !== 'undefined' && typeof window.initHeroWebGL === 'function') {
+        window.initHeroWebGL();
+      } else {
+        // Если скрипты еще не загрузились, ждем еще немного
+        setTimeout(initWebGLScene, 100);
+      }
+    }
+    
+    // Используем load событие для гарантии загрузки всех ресурсов, включая defer скрипты
+    if (document.readyState === 'complete') {
+      // Если страница уже загружена
+      setTimeout(initWebGLScene, 100);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(initWebGLScene, 100);
+      });
     }
   </script>
 </body>
