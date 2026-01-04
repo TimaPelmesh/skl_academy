@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #000;
+    color: #00ffff;
+}
+
+#canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ffff;
+    font-size: 24px;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+#controls-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: rgba(0, 255, 255, 0.7);
+    font-size: 12px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+#controls-hint p {
+    margin: 5px 0;
+}
+
+#info-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 20px;
+    color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    z-index: 200;
+    backdrop-filter: blur(10px);
+    transition: opacity 0.3s ease;
+}
+
+#info-panel.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+#info-panel h2 {
+    font-size: 20px;
+    text-shadow: 0 0 10px #00ffff;
+    margin: 0;
+}
+
+#close-btn {
+    background: transparent;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+#close-btn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 10px #00ffff;
+}
+
+#component-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(0, 255, 255, 0.9);
+}
+
+#component-description strong {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+

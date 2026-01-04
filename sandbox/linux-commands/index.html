@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренажер команд Linux - Освойте терминал | SKL Academy</title>
+  <meta name="description" content="Интерактивный тренажер для изучения команд Linux. Практикуйте cd, ls, mkdir, grep и другие команды в безопасной среде.">
+  <meta name="keywords" content="тренажер linux, команды linux, изучение linux, терминал linux, bash команды, обучение linux, практика linux, интерактивный тренажер linux">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph мета-теги -->
+  <meta property="og:title" content="Тренажер команд Linux - Освойте терминал">
+  <meta property="og:description" content="Интерактивный тренажер для изучения команд Linux. Практикуйте команды в безопасной среде.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skl-academy.ru/sandbox/linux-commands/index.html">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skl-academy.ru/sandbox/linux-commands/index.html">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <a href="../../index.html" class="back-link">
+          <i class="icon-arrow">←</i> На главную
+        </a>
+        <h1 class="title">Тренажер команд Linux</h1>
+        <p class="subtitle">Практикуйте команды терминала в безопасной среде</p>
+      </div>
+    </header>
+
+    <!-- Mode Selection Screen -->
+    <div class="mode-selection" id="mode-selection">
+      <div class="mode-selection-content">
+        <h2 class="mode-title">Выберите режим</h2>
+        <p class="mode-subtitle">Как вы хотите практиковать команды Linux?</p>
+        <div class="mode-cards">
+          <div class="mode-card" data-mode="sandbox">
+            <div class="mode-icon">🏖️</div>
+            <h3 class="mode-card-title">Песочница</h3>
+            <p class="mode-card-description">
+              Свободная практика команд без ограничений. Идеально для экспериментов и изучения команд.
+            </p>
+            <ul class="mode-features">
+              <li>✓ Полная свобода действий</li>
+              <li>✓ Подсказки по командам</li>
+              <li>✓ Справка в любой момент</li>
+            </ul>
+            <button class="mode-btn">Начать</button>
+          </div>
+          <div class="mode-card" data-mode="trainer">
+            <div class="mode-icon">🎯</div>
+            <h3 class="mode-card-title">Тренажер</h3>
+            <p class="mode-card-description">
+              Структурированное обучение с упражнениями. Пошаговое изучение команд с заданиями.
+            </p>
+            <ul class="mode-features">
+              <li>✓ Пошаговые упражнения</li>
+              <li>✓ Отслеживание прогресса</li>
+              <li>✓ Подсказки и помощь</li>
+            </ul>
+            <button class="mode-btn">Начать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content" style="display: none;">
+      <!-- Sidebar with commands list -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Команды</h3>
+          <div class="commands-list" id="commands-list">
+            <!-- Команды будут добавлены через JS -->
+          </div>
+        </div>
+        
+        <div class="sidebar-section" id="progress-section">
+          <h3 class="sidebar-title">Прогресс</h3>
+          <div class="progress-info">
+            <div class="progress-stat">
+              <span class="stat-label">Изучено:</span>
+              <span class="stat-value" id="learned-count">0</span>
+            </div>
+            <div class="progress-stat">
+              <span class="stat-label">Выполнено заданий:</span>
+              <span class="stat-value" id="completed-count">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section" id="help-section">
+          <h3 class="sidebar-title">Справка</h3>
+          <button class="btn-help" id="help-btn">
+            <i class="icon-help">❓</i> Помощь по командам
+          </button>
+          <button class="btn-help" id="command-help-btn" style="display: none;">
+            <i class="icon-help">📖</i> Справка по текущей команде
+          </button>
+        </div>
+
+        <div class="sidebar-section" id="mode-info-section">
+          <h3 class="sidebar-title">Режим</h3>
+          <div class="mode-badge" id="mode-badge"></div>
+          <button class="btn-switch-mode" id="switch-mode-btn">
+            Сменить режим
+          </button>
+        </div>
+      </aside>
+
+      <!-- Terminal and Exercise Area -->
+      <div class="content-area">
+        <!-- Current Command Info -->
+        <div class="command-info" id="command-info">
+          <div class="command-header">
+            <h2 class="command-name" id="command-name">Добро пожаловать!</h2>
+            <button class="btn-reset" id="reset-btn" style="display: none;">
+              <i class="icon-reset">↻</i> Сбросить
+            </button>
+          </div>
+          <p class="command-description" id="command-description">
+            Начните вводить команды в терминале или выберите команду из списка для справки
+          </p>
+          <div class="command-syntax" id="command-syntax" style="display: none;">
+            <strong>Синтаксис:</strong> <code id="syntax-text"></code>
+          </div>
+          <div class="command-examples" id="command-examples" style="display: none;">
+            <strong>Примеры:</strong>
+            <ul id="examples-list"></ul>
+          </div>
+        </div>
+
+        <!-- Terminal -->
+        <div class="terminal-container">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="terminal-btn red"></span>
+              <span class="terminal-btn yellow"></span>
+              <span class="terminal-btn green"></span>
+            </div>
+            <span class="terminal-title">bash</span>
+          </div>
+          <div class="terminal-body" id="terminal">
+            <div class="terminal-line">
+              <span class="terminal-prompt">user@linux:~$</span>
+              <span class="terminal-cursor" id="cursor">█</span>
+            </div>
+          </div>
+          <div class="terminal-input-container">
+            <input 
+              type="text" 
+              class="terminal-input" 
+              id="terminal-input" 
+              placeholder="Введите команду..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+          </div>
+        </div>
+
+        <!-- Exercise Panel (only in trainer mode) -->
+        <div class="exercise-panel" id="exercise-panel" style="display: none;">
+          <div class="exercise-header">
+            <h3 class="exercise-title">Задание</h3>
+            <span class="exercise-number" id="exercise-number">1/5</span>
+          </div>
+          <div class="exercise-content">
+            <p class="exercise-description" id="exercise-description"></p>
+            <div class="exercise-hint" id="exercise-hint" style="display: none;">
+              <i class="icon-hint">💡</i>
+              <span id="hint-text"></span>
+            </div>
+          </div>
+          <div class="exercise-actions">
+            <button class="btn-hint" id="hint-btn">
+              <i class="icon-hint">💡</i> Подсказка
+            </button>
+            <button class="btn-skip" id="skip-btn">
+              Пропустить
+            </button>
+          </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div class="help-modal" id="help-modal" style="display: none;">
+          <div class="help-modal-backdrop" id="help-modal-backdrop"></div>
+          <div class="help-modal-content">
+            <div class="help-modal-header">
+              <h3>Справка по командам</h3>
+              <button class="help-modal-close" id="help-modal-close">×</button>
+            </div>
+            <div class="help-modal-body" id="help-modal-body">
+              <!-- Содержимое будет добавлено через JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- File System Visualization -->
+        <div class="filesystem-view" id="filesystem-view">
+          <div class="filesystem-header">
+            <h3>Файловая система</h3>
+            <span class="current-path" id="current-path">~</span>
+          </div>
+          <div class="filesystem-content" id="filesystem-content">
+            <!-- Файловая система будет отображаться здесь -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

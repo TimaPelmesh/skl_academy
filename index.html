@@ -173,7 +173,7 @@
 
         <!-- Центральная навигация (только на десктопе) -->
         <div class="hidden md:flex md:items-center md:space-x-8 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
-          <a href="#trainers" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Тренажеры</a>
+          <a href="#trainers" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Интерактивные инструменты</a>
           <a href="#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
           <a href="#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
           <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
@@ -258,7 +258,7 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden">
       <div class="pt-2 pb-3 space-y-1 px-4">
-        <a href="#trainers" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Тренажеры</a>
+        <a href="#trainers" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Интерактивные инструменты</a>
         <a href="#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
         <a href="#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
         <a href="about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
@@ -821,9 +821,9 @@
   <!-- Trainers Section -->
   <div id="trainers" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="text-center mb-6">
-      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Тренажеры</h2>
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Интерактивные инструменты</h2>
       <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
-        Практикуйтесь и улучшайте свои навыки
+        Тренажеры, интерактивные песочницы и практические инструменты для обучения
       </p>
     </div>
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto">
@@ -862,7 +862,7 @@
             </ul>
           </div>
           <div class="mt-6 flex space-x-4 course-card-actions">
-            <a href="trainers/typing/index.html" class="course-button">
+            <a href="sandbox/typing/index.html" class="course-button">
               Перейти
               <i class="fas fa-arrow-right ml-2"></i>
             </a>
@@ -912,6 +912,52 @@
               Подробнее
               <i class="fas fa-info-circle ml-2"></i>
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Sandbox: PC Architecture -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fas fa-desktop text-indigo-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">Архитектура ПК</h3>
+              </div>
+            </div>
+            <span class="status-badge status-in-development">В разработке</span>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Изучите внутреннее устройство компьютера в интерактивной 3D-модели. Крутите, рассматривайте и изучайте компоненты ПК.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">3D-модель компьютера с деталями</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Интерактивное вращение и масштабирование</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Подробная информация о компонентах</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <a href="sandbox/pc-architecture/index.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -1599,6 +1645,51 @@
       </div>
       <div class="modal-footer">
         <p class="text-sm text-gray-500 text-center w-full">Тренажер находится в разработке. Скоро будет доступен!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для интерактивной песочницы "Архитектура ПК" -->
+  <div class="modal" id="modal-pc-architecture">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-desktop text-blue-600 mr-3"></i>Архитектура ПК</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Изучите внутреннее устройство компьютера в интерактивной 3D-модели. Вращайте, масштабируйте и изучайте каждый компонент в деталях.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что включено</h4>
+              <ul class="modal-list">
+                <li>• 3D-модель компьютера с детализацией компонентов</li>
+                <li>• Интерактивное вращение и масштабирование</li>
+                <li>• Подробная информация о каждом компоненте</li>
+                <li>• Визуализация связей между компонентами</li>
+                <li>• Образовательные подсказки и описания</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Начинающим изучать устройство компьютера</li>
+                <li>• Студентам IT-направлений</li>
+                <li>• Тем, кто хочет визуально понять архитектуру ПК</li>
+                <li>• Преподавателям для демонстрации</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="text-sm text-gray-500 text-center w-full">Интерактивная песочница находится в разработке. Скоро будет доступна!</p>
       </div>
     </div>
   </div>
