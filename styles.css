@@ -164,15 +164,20 @@ footer .footer-column h4 {
   will-change: transform;
 }
 
+/* === Mobile Hero Minimal Styles === */
+
 @media (max-width: 768px) {
   #hero-webgl {
     display: none;
   }
 
+  /* Hero content mobile - minimal */
   .hero-content {
     align-items: flex-start;
     text-align: left;
     gap: 0.6rem;
+    position: relative;
+    z-index: 2;
   }
 
   .hero-content .mb-4 {
@@ -197,9 +202,30 @@ footer .footer-column h4 {
     margin-top: 0;
   }
 
+  /* Clean stat blocks */
   .stat-block {
-    min-width: 110px;
+    min-width: 100px;
     padding: 1rem 1.15rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
   }
 }
 
@@ -1442,16 +1468,25 @@ footer .footer-column h4 {
   }
   
   .stat-block {
-    padding: 0.75rem 1rem;
-    min-width: 80px;
+    padding: 0.75rem 0.9rem;
+    min-width: 75px;
+    border-radius: 12px;
   }
   
   .stat-number {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
   
   .stat-label {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+  }
+
+  /* Smaller floating icons on very small screens */
+  .tech-icon-float {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    border-radius: 10px;
   }
 
   /* На очень маленьких экранах высота шапки ~56px */
@@ -2002,14 +2037,33 @@ footer .footer-column h4 {
     width: 100%;
   }
 
-  /* Убираем фон у бургера на мобильных */
+  /* Убираем фон и outline у бургера на мобильных */
   #mobile-menu-button {
     background: transparent !important;
     border-radius: 0;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  #mobile-menu-button:hover {
+  #mobile-menu-button:hover,
+  #mobile-menu-button:focus,
+  #mobile-menu-button:active {
     background: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Убираем выделение у поисковика на мобильных */
+  .mobile-search-toggle-btn {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-search-toggle-btn:focus,
+  .mobile-search-toggle-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   /* Выравниваем лупу и бургер по правому краю */
@@ -2176,6 +2230,21 @@ footer .footer-column h4 {
 #courses::before,
 #courses::after {
   content: none;
+}
+
+/* === Accessibility: Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  .tech-icon-float,
+  .stat-block,
+  .hero-title {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .gradient-bg::after {
+    animation: none !important;
+  }
 }
 
  

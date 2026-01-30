@@ -120,15 +120,6 @@ const SEARCH_DATA = {
       ]
     },
     {
-      id: 'csharp',
-      title: 'C#',
-      description: 'Освойте C# — мощный язык для веба, десктопа и игр. Синтаксис, LINQ, асинхронность, ASP.NET Core, Entity Framework и разработка игр на Unity.',
-      url: '404.html',
-      icon: 'fab fa-microsoft',
-      tags: ['csharp', 'dotnet', 'asp.net', 'entity framework', 'unity', 'linq', 'асинхронность'],
-      status: 'planned'
-    },
-    {
       id: 'unity',
       title: 'Unity',
       description: 'Создавайте 2D и 3D игры с помощью Unity - одного из самых популярных игровых движков. Основы Unity и интерфейс редактора, программирование на C# для Unity, физика, анимация и UI системы.',

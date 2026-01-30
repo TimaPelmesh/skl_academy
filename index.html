@@ -29,7 +29,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
   
   <!-- SEO Мета-теги -->
-  <meta name="description" content="SKL Academy - бесплатная образовательная платформа для изучения IT-технологий. Курсы по Python, компьютерным сетям, C#, Git, Web-разработке, техническому английскому. Обучение программированию с нуля.">
+  <meta name="description" content="SKL Academy - бесплатная образовательная платформа для изучения IT-технологий. Курсы по Python, компьютерным сетям, Git, Web-разработке, техническому английскому. Обучение программированию с нуля.">
   <meta name="keywords" content="бесплатные курсы программирования, python курсы, компьютерные сети курсы, технический английский, английский для IT, словарный запас B2, IT образование, обучение программированию, курсы для начинающих, python для начинающих, компьютерные сети для начинающих">
   <meta name="author" content="SKL Academy">
   <meta name="robots" content="index, follow">
@@ -39,7 +39,7 @@
   <meta property="og:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://skl-academy.ru/">
-  <meta property="og:image" content="images/skl-academy-og.jpg">
+  <meta property="og:image" content="https://skl-academy.ru/images/icon.ico">
   
 
   <!-- Для веб мастера -->
@@ -49,7 +49,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SKL Academy - Современное обучение IT">
   <meta name="twitter:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
-  <meta name="twitter:image" content="images/skl-academy-og.jpg">
+  <meta name="twitter:image" content="https://skl-academy.ru/images/icon.ico">
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://skl-academy.ru/">
@@ -174,7 +174,7 @@
         <!-- Центральная навигация (только на десктопе) -->
         <div class="hidden md:flex md:items-center md:space-x-8 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
           <a href="#trainers" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Интерактивные инструменты</a>
-          <a href="#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
+          <a href="#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Библиотека</a>
           <a href="#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
           <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
         </div>
@@ -259,7 +259,7 @@
     <div id="mobile-menu" class="hidden md:hidden">
       <div class="pt-2 pb-3 space-y-1 px-4">
         <a href="#trainers" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Интерактивные инструменты</a>
-        <a href="#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
+        <a href="#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Библиотека</a>
         <a href="#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
         <a href="about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
       </div>
@@ -269,6 +269,7 @@
   <!-- Hero Section -->
   <div class="gradient-bg text-white pt-4 relative overflow-hidden">
     <div id="hero-webgl" aria-hidden="true"></div>
+    
     <div class="max-w-7xl mx-auto py-6 px-4 sm:py-8 sm:px-6 lg:px-8">
       <div class="hero-layout">
         <!-- Текст и статистика -->
@@ -281,15 +282,15 @@
           
           <div class="hero-content-wrapper">
             <div class="stats-container mt-4 lg:mt-6">
-              <div class="stat-block">
-              <div class="stat-number">11</div>
-              <div class="stat-label">Курсов</div>
+              <div class="stat-block" style="--stat-delay: 0.1s;">
+                <div class="stat-number" data-count="10">10</div>
+                <div class="stat-label">Курсов</div>
               </div>
-              <div class="stat-block">
+              <div class="stat-block" style="--stat-delay: 0.2s;">
                 <div class="stat-number">24/7</div>
                 <div class="stat-label">Доступ</div>
               </div>
-              <div class="stat-block">
+              <div class="stat-block" style="--stat-delay: 0.3s;">
                 <div class="stat-number">100%</div>
                 <div class="stat-label">Бесплатно</div>
               </div>
@@ -643,49 +644,6 @@
           </div>
         </div>
 
-        <!-- Planned: C# -->
-        <div class="course-card">
-          <div class="p-6">
-            <div class="flex items-center">
-              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
-                <i class="fab fa-microsoft text-indigo-600 text-xl"></i>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-gray-900">C#</h3>
-              </div>
-            </div>
-            <div class="mt-4">
-              <p class="text-gray-600">Освойте C# — мощный язык для веба, десктопа и игр.</p>
-              <ul class="mt-4 space-y-2">
-                <li class="flex items-start">
-                  <div class="flex-shrink-0 mt-1">
-                    <i class="fas fa-check-circle text-green-500"></i>
-                  </div>
-                  <p class="ml-3 text-gray-600">Синтаксис, LINQ, асинхронность</p>
-                </li>
-                <li class="flex items-start">
-                  <div class="flex-shrink-0 mt-1">
-                    <i class="fas fa-check-circle text-green-500"></i>
-                  </div>
-                  <p class="ml-3 text-gray-600">ASP.NET Core, Entity Framework</p>
-                </li>
-                <li class="flex items-start">
-                  <div class="flex-shrink-0 mt-1">
-                    <i class="fas fa-check-circle text-green-500"></i>
-                  </div>
-                  <p class="ml-3 text-gray-600">Разработка игр на Unity</p>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-6 flex space-x-4 course-card-actions">
-              <button type="button" class="course-button-secondary" data-modal-target="modal-csharp">
-                Подробнее
-                <i class="fas fa-info-circle ml-2"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
         <!-- Planned: Unity -->
         <div class="course-card">
           <div class="p-6">
@@ -961,54 +919,88 @@
           </div>
         </div>
       </div>
+
+      <!-- Interactive Sandbox: Web Playground -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fas fa-code text-orange-500 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">Веб-песочница</h3>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Интерактивная среда для изучения веб-разработки. Пишите HTML, CSS и JavaScript и мгновенно видите результат.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Live-превью в реальном времени</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Готовые шаблоны для изучения</p>
+              </li>
+              <li class="flex items-center">
+                <div class="flex-shrink-0">
+                  <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+                <p class="ml-3 text-gray-600">Консоль JavaScript</p>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <a href="sandbox/web-playground/index.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Articles Section -->
   <div id="articles" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="text-center mb-6">
-      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Наши статьи</h2>
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">SKL Library</h2>
       <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
-        Дада, здесь не только курсы, но и статьи!
+        Глубокие разборы, интересные факты и истории из мира IT
       </p>
     </div>
-    <div class="max-w-4xl mx-auto">
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-        <!-- Article 1 -->
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+        <!-- Article 1: URL Journey -->
         <div class="course-card h-full article-card hover:shadow-lg">
           <div class="p-5 flex flex-col h-full relative overflow-hidden">
             <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
-              <i class="fab fa-python"></i>
+              <i class="fas fa-globe"></i>
             </div>
             <div class="flex items-start relative z-10">
-              <div class="course-icon-container flex-shrink-0 bg-indigo-100 p-3 rounded-xl">
-                <i class="fab fa-python text-indigo-600 text-lg"></i>
+              <div class="course-icon-container flex-shrink-0 bg-purple-100 p-3 rounded-xl">
+                <i class="fas fa-globe text-purple-600 text-lg"></i>
               </div>
               <div class="ml-3">
-                <h3 class="text-lg font-medium text-gray-900">Первая программа на Python: от установки до библиотек</h3>
+                <h3 class="text-lg font-medium text-gray-900">Что происходит при вводе URL?</h3>
                 <div class="mt-1">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">Опубликовано</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-50 text-purple-700">Глубокий разбор</span>
                   <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 ml-2">
-                    <i class="far fa-clock mr-1"></i> 15 мин
+                    <i class="far fa-clock mr-1"></i> 25 мин
                   </span>
                 </div>
               </div>
             </div>
             <div class="mt-3 flex-grow">
-              <p class="text-gray-600 text-sm">Пошаговое руководство по созданию первой программы на Python с изучением популярной библиотеки.</p>
-              <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
-                <div class="flex flex-wrap gap-2">
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #python
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #api
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #requests
-                  </span>
-                </div>
-                <a href="articles/first-python-program.html" class="article-read-button">
+              <p class="text-gray-600 text-sm">DNS, TCP, TLS, HTTP, рендеринг — полный путь запроса от Enter до страницы.</p>
+              <div class="mt-3 flex items-center justify-end">
+                <a href="articles/url-journey.html" class="article-read-button">
                   Читать
                   <i class="fas fa-arrow-right ml-1.5"></i>
                 </a>
@@ -1017,20 +1009,20 @@
           </div>
         </div>
 
-        <!-- Article 2 -->
+        <!-- Article 2: Billion Dollar Bugs -->
         <div class="course-card h-full article-card hover:shadow-lg">
           <div class="p-5 flex flex-col h-full relative overflow-hidden">
             <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
-              <i class="fas fa-sticky-note"></i>
+              <i class="fas fa-bug"></i>
             </div>
             <div class="flex items-start relative z-10">
-              <div class="course-icon-container flex-shrink-0 bg-purple-100 p-3 rounded-xl">
-                <i class="fas fa-sticky-note text-indigo-600 text-lg"></i>
+              <div class="course-icon-container flex-shrink-0 bg-red-100 p-3 rounded-xl">
+                <i class="fas fa-bug text-red-600 text-lg"></i>
               </div>
               <div class="ml-3">
-                <h3 class="text-lg font-medium text-gray-900">Создаем красивое приложение заметок на tkinter</h3>
+                <h3 class="text-lg font-medium text-gray-900">5 багов за миллионы долларов</h3>
                 <div class="mt-1">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">Опубликовано</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-50 text-red-700">IT-истории</span>
                   <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 ml-2">
                     <i class="far fa-clock mr-1"></i> 20 мин
                   </span>
@@ -1038,20 +1030,9 @@
               </div>
             </div>
             <div class="mt-3 flex-grow">
-              <p class="text-gray-600 text-sm">Создаем стильное приложение для заметок с современным интерфейсом на Python tkinter.</p>
-              <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
-                <div class="flex flex-wrap gap-2">
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #tkinter
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #python
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #gui
-                  </span>
-                </div>
-                <a href="articles/tkinter-notes-app.html" class="article-read-button">
+              <p class="text-gray-600 text-sm">Knight Capital, Cloudflare, AWS — истории катастрофических ошибок.</p>
+              <div class="mt-3 flex items-center justify-end">
+                <a href="articles/billion-dollar-bugs.html" class="article-read-button">
                   Читать
                   <i class="fas fa-arrow-right ml-1.5"></i>
                 </a>
@@ -1060,20 +1041,20 @@
           </div>
         </div>
         
-        <!-- Article 3 -->
+        <!-- Article 3: Reading Code -->
         <div class="course-card h-full article-card hover:shadow-lg">
           <div class="p-5 flex flex-col h-full relative overflow-hidden">
             <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
-              <i class="fas fa-brain"></i>
+              <i class="fas fa-code"></i>
             </div>
             <div class="flex items-start relative z-10">
-              <div class="course-icon-container flex-shrink-0 bg-indigo-100 p-3 rounded-xl">
-                <i class="fas fa-brain text-indigo-600 text-lg"></i>
+              <div class="course-icon-container flex-shrink-0 bg-green-100 p-3 rounded-xl">
+                <i class="fas fa-code text-green-600 text-lg"></i>
               </div>
               <div class="ml-3">
-                <h3 class="text-lg font-medium text-gray-900">Искусственный интеллект для начинающих: простое объяснение</h3>
+                <h3 class="text-lg font-medium text-gray-900">Как читать чужой код</h3>
                 <div class="mt-1">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">Опубликовано</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">Карьера</span>
                   <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 ml-2">
                     <i class="far fa-clock mr-1"></i> 15 мин
                   </span>
@@ -1081,20 +1062,9 @@
               </div>
             </div>
             <div class="mt-3 flex-grow">
-              <p class="text-gray-600 text-sm">Простое объяснение искусственного интеллекта для начинающих. Что такое ИИ, как он работает и где применяется.</p>
-              <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
-                <div class="flex flex-wrap gap-2">
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #ии
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #машинное обучение
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
-                    #ai
-                  </span>
-                </div>
-                <a href="articles/ai-for-beginners.html" class="article-read-button">
+              <p class="text-gray-600 text-sm">Методология для понимания незнакомых кодовых баз. Навык, которому не учат.</p>
+              <div class="mt-3 flex items-center justify-end">
+                <a href="articles/reading-code.html" class="article-read-button">
                   Читать
                   <i class="fas fa-arrow-right ml-1.5"></i>
                 </a>
@@ -1102,6 +1072,15 @@
             </div>
           </div>
         </div>
+      </div>
+      
+      <!-- Link to Library -->
+      <div class="text-center mt-8">
+        <a href="library.html" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors">
+          <i class="fas fa-book-open mr-2"></i>
+          Все статьи в библиотеке
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -1191,51 +1170,6 @@
       </div>
       <div class="modal-footer">
         <a href="courses/python/01-python-basics.html" class="course-button">
-          Перейти к курсу
-          <i class="fas fa-arrow-right ml-2"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Модальное окно для курса "C#" -->
-  <div class="modal" id="modal-csharp">
-    <div class="modal-backdrop"></div>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3><i class="fab fa-microsoft text-blue-600 mr-3"></i>C#</h3>
-        <button class="modal-close"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-section">
-          <p class="modal-lead">Концентрированный курс по C#: современный синтаксис, .NET и игровые сценарии.</p>
-        </div>
-
-        <div class="modal-divider"></div>
-
-        <div class="modal-section">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h4 class="modal-subtitle">Что разберём</h4>
-              <ul class="modal-list">
-                <li>• Современный синтаксис C# и ключевые паттерны</li>
-                <li>• LINQ, асинхронность, работа с данными</li>
-                <li>• ASP.NET Core, Entity Framework, Unity</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="modal-subtitle">Кому подойдёт</h4>
-              <ul class="modal-list">
-                <li>• Новичкам в экосистеме .NET</li>
-                <li>• Веб-разработчикам и системным инженерам</li>
-                <li>• Командам, стартующим с Unity</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="404.html" class="course-button">
           Перейти к курсу
           <i class="fas fa-arrow-right ml-2"></i>
         </a>
