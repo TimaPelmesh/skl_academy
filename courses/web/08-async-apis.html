@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Асинхронный JavaScript: Promise, async/await, Fetch API, работа с REST API, обработка ошибок.">
+    <meta name="keywords" content="async await, promise, fetch api, rest api, javascript асинхронность">
+    <meta name="author" content="SKL Academy">
+    <title>Веб‑разработка — Модуль 8: Async & API | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/08-async-apis.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Async</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button>
+                <button class="color-scheme-btn" data-color="orange"><span class="color-dot" style="background: #f97316;"></span></button>
+                <button class="color-scheme-btn" data-color="blue"><span class="color-dot" style="background: #3b82f6;"></span></button>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggle">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z"/></svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger">⚙</button>
+            <a href="../../index.html" class="exit-btn">🏠</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1-7. Предыдущие</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html" class="subtopic">HTML</a>
+                        <a href="02-css-basics.html" class="subtopic">CSS</a>
+                        <a href="03-javascript-basics.html" class="subtopic">JavaScript</a>
+                        <a href="04-responsive-design.html" class="subtopic">Responsive</a>
+                        <a href="05-flexbox-grid.html" class="subtopic">Flex & Grid</a>
+                        <a href="06-forms-validation.html" class="subtopic">Формы</a>
+                        <a href="07-dom-advanced.html" class="subtopic">DOM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">8. Async & API</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#sync-async" class="subtopic active">Синхронность vs Async</a>
+                        <a href="#callbacks" class="subtopic">Callbacks</a>
+                        <a href="#promises" class="subtopic">Promises</a>
+                        <a href="#async-await" class="subtopic">async/await</a>
+                        <a href="#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="#rest-api" class="subtopic">REST API</a>
+                        <a href="#advanced-fetch" class="subtopic">Продвинутый Fetch</a>
+                        <a href="#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="#caching" class="subtopic">Кэширование</a>
+                        <a href="#websockets" class="subtopic">WebSockets</a>
+                        <a href="#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9-10. Следующие</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html" class="subtopic">Оптимизация</a>
+                        <a href="10-projects.html" class="subtopic">Проекты</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 8: Асинхронность и API</h2>
+                <p>Мастерство работы с асинхронным кодом, Promises, async/await и Fetch API.</p>
+            </section>
+
+            <!-- 8.1 Синхронность vs Асинхронность -->
+            <section id="sync-async" class="topic-section">
+                <h2>Синхронность vs Асинхронность</h2>
+
+                <h3>Синхронный код</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Синхронный — выполняется по порядку
+console.log('1');
+console.log('2');
+console.log('3');
+// Вывод: 1, 2, 3
+
+// Блокирующая операция
+const start = Date.now();
+while (Date.now() - start < 3000) {} // Блокирует на 3 сек!
+console.log('Готово'); // Только через 3 секунды</code></pre>
+                </div>
+
+                <h3>Асинхронный код</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Асинхронный — не блокирует
+console.log('1');
+
+setTimeout(() => {
+  console.log('2'); // Выполнится позже
+}, 1000);
+
+console.log('3');
+// Вывод: 1, 3, 2
+
+// Event Loop обрабатывает асинхронные операции</code></pre>
+                </div>
+
+                <h3>Event Loop</h3>
+                
+                <div class="visual-guide">
+                    <h4>Как работает Event Loop</h4>
+                    <ol>
+                        <li><strong>Call Stack</strong> — выполняет синхронный код</li>
+                        <li><strong>Web APIs</strong> — обрабатывают async операции (setTimeout, fetch)</li>
+                        <li><strong>Task Queue (Macrotask)</strong> — setTimeout, setInterval, I/O</li>
+                        <li><strong>Microtask Queue</strong> — Promise, queueMicrotask (приоритет!)</li>
+                        <li>Event Loop переносит задачи из очередей в Call Stack</li>
+                    </ol>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">console.log('1'); // Синхронно
+
+setTimeout(() => console.log('2'), 0); // Macrotask
+
+Promise.resolve().then(() => console.log('3')); // Microtask
+
+console.log('4'); // Синхронно
+
+// Вывод: 1, 4, 3, 2
+// Microtask выполняется раньше macrotask!</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.2 Callbacks -->
+            <section id="callbacks" class="topic-section">
+                <h2>Callbacks</h2>
+
+                <h3>Что такое callback</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Callback — функция, переданная как аргумент
+function fetchData(callback) {
+  setTimeout(() => {
+    const data = { name: 'Иван' };
+    callback(data);
+  }, 1000);
+}
+
+fetchData((data) => {
+  console.log(data.name); // "Иван" через 1 сек
+});</code></pre>
+                </div>
+
+                <h3>Callback Hell</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Проблема: вложенные callbacks
+getUser(userId, (user) => {
+  getOrders(user.id, (orders) => {
+    getOrderDetails(orders[0].id, (details) => {
+      getProduct(details.productId, (product) => {
+        console.log(product);
+        // Это "Callback Hell" или "Pyramid of Doom"
+      });
+    });
+  });
+});</code></pre>
+                </div>
+
+                <div class="warning">
+                    <h4>Проблемы callbacks</h4>
+                    <ul>
+                        <li>Вложенность (Callback Hell)</li>
+                        <li>Сложная обработка ошибок</li>
+                        <li>Трудно читать и поддерживать</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 8.3 Promises -->
+            <section id="promises" class="topic-section">
+                <h2>Promises</h2>
+
+                <h3>Что такое Promise</h3>
+                <p><strong>Promise</strong> — объект, представляющий результат асинхронной операции.</p>
+
+                <div class="code-example">
+<pre><code class="language-javascript">// Создание Promise
+const promise = new Promise((resolve, reject) => {
+  // Асинхронная операция
+  setTimeout(() => {
+    const success = true;
+    if (success) {
+      resolve({ data: 'Данные' }); // Успех
+    } else {
+      reject(new Error('Ошибка'));  // Неудача
+    }
+  }, 1000);
+});
+
+// Использование
+promise
+  .then(result => console.log(result))
+  .catch(error => console.error(error));</code></pre>
+                </div>
+
+                <h3>Состояния Promise</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Состояние</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>pending</code></td>
+                                <td>Ожидание (начальное)</td>
+                            </tr>
+                            <tr>
+                                <td><code>fulfilled</code></td>
+                                <td>Выполнено успешно (resolve)</td>
+                            </tr>
+                            <tr>
+                                <td><code>rejected</code></td>
+                                <td>Отклонено (reject)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Цепочки Promise (Chaining)</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Решение Callback Hell
+getUser(userId)
+  .then(user => getOrders(user.id))
+  .then(orders => getOrderDetails(orders[0].id))
+  .then(details => getProduct(details.productId))
+  .then(product => console.log(product))
+  .catch(error => console.error('Ошибка:', error));
+
+// Каждый .then возвращает новый Promise
+fetch('/api/user')
+  .then(response => response.json())  // Возвращает Promise
+  .then(data => {
+    console.log(data);
+    return data.id;  // Обычное значение — оборачивается в Promise
+  })
+  .then(id => fetch(`/api/orders/${id}`))
+  .then(response => response.json())
+  .then(orders => console.log(orders));</code></pre>
+                </div>
+
+                <h3>Статические методы Promise</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Promise.resolve / Promise.reject
+Promise.resolve(42).then(x => console.log(x)); // 42
+Promise.reject(new Error('Oops')).catch(e => console.error(e));
+
+// Promise.all — ждёт ВСЕ, падает при первой ошибке
+const results = await Promise.all([
+  fetch('/api/users'),
+  fetch('/api/posts'),
+  fetch('/api/comments')
+]);
+
+// Promise.allSettled — ждёт ВСЕ, не падает
+const results = await Promise.allSettled([
+  fetch('/api/users'),
+  fetch('/api/might-fail')
+]);
+// [{status: 'fulfilled', value: ...}, {status: 'rejected', reason: ...}]
+
+// Promise.race — первый завершившийся (успех или ошибка)
+const fastest = await Promise.race([
+  fetch('/api/server1'),
+  fetch('/api/server2')
+]);
+
+// Promise.any — первый УСПЕШНЫЙ
+const firstSuccess = await Promise.any([
+  fetch('/api/might-fail'),
+  fetch('/api/might-succeed')
+]);</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.4 async/await -->
+            <section id="async-await" class="topic-section">
+                <h2>async/await</h2>
+
+                <h3>Синтаксис</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// async функция всегда возвращает Promise
+async function getData() {
+  return 'данные';
+}
+getData().then(console.log); // 'данные'
+
+// await приостанавливает выполнение до resolve
+async function fetchUser() {
+  const response = await fetch('/api/user');
+  const user = await response.json();
+  return user;
+}
+
+// Сравнение
+// Promise:
+function getUser() {
+  return fetch('/api/user')
+    .then(res => res.json())
+    .then(user => user);
+}
+
+// async/await:
+async function getUser() {
+  const res = await fetch('/api/user');
+  const user = await res.json();
+  return user;
+}</code></pre>
+                </div>
+
+                <h3>Последовательные vs Параллельные запросы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Последовательно (медленно!)
+async function fetchAll() {
+  const users = await fetch('/api/users');    // 1 сек
+  const posts = await fetch('/api/posts');    // + 1 сек
+  const comments = await fetch('/api/comments'); // + 1 сек
+  // Итого: 3 секунды
+}
+
+//  Параллельно (быстро!)
+async function fetchAll() {
+  const [users, posts, comments] = await Promise.all([
+    fetch('/api/users'),
+    fetch('/api/posts'),
+    fetch('/api/comments')
+  ]);
+  // Итого: ~1 секунда (самый медленный)
+}
+
+//  Или запустить, потом собрать
+async function fetchAll() {
+  // Запускаем ВСЕ сразу
+  const usersPromise = fetch('/api/users');
+  const postsPromise = fetch('/api/posts');
+  const commentsPromise = fetch('/api/comments');
+  
+  // Ждём результаты
+  const users = await usersPromise;
+  const posts = await postsPromise;
+  const comments = await commentsPromise;
+}</code></pre>
+                </div>
+
+                <h3>await в циклах</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const ids = [1, 2, 3, 4, 5];
+
+//  Последовательно
+for (const id of ids) {
+  const user = await fetchUser(id); // Ждёт каждого
+  console.log(user);
+}
+
+//  Параллельно
+const users = await Promise.all(
+  ids.map(id => fetchUser(id))
+);
+console.log(users);
+
+//  Параллельно с обработкой каждого
+await Promise.all(ids.map(async (id) => {
+  const user = await fetchUser(id);
+  await processUser(user);
+}));</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.5 Обработка ошибок -->
+            <section id="error-handling" class="topic-section">
+                <h2>Обработка ошибок</h2>
+
+                <h3>try/catch с async/await</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">async function fetchData() {
+  try {
+    const response = await fetch('/api/data');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    if (error.name === 'TypeError') {
+      console.error('Сетевая ошибка:', error.message);
+    } else {
+      console.error('Ошибка:', error.message);
+    }
+    throw error; // Пробрасываем дальше
+  } finally {
+    console.log('Запрос завершён');
+  }
+}</code></pre>
+                </div>
+
+                <h3>Обработка ошибок в Promise.all</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Promise.all падает при ПЕРВОЙ ошибке
+try {
+  const results = await Promise.all([
+    fetch('/api/1'),
+    fetch('/api/might-fail'),
+    fetch('/api/3')
+  ]);
+} catch (error) {
+  // Сработает если ЛЮБОЙ запрос упадёт
+}
+
+// Promise.allSettled не падает
+const results = await Promise.allSettled([
+  fetch('/api/1'),
+  fetch('/api/might-fail'),
+  fetch('/api/3')
+]);
+
+results.forEach((result, index) => {
+  if (result.status === 'fulfilled') {
+    console.log(`Запрос ${index}: успех`, result.value);
+  } else {
+    console.error(`Запрос ${index}: ошибка`, result.reason);
+  }
+});</code></pre>
+                </div>
+
+                <h3>Глобальная обработка</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Необработанные Promise rejections
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('Необработанная ошибка Promise:', event.reason);
+  // Отправить в систему логирования
+  sendToErrorTracking(event.reason);
+});
+
+// Глобальный обработчик ошибок
+window.addEventListener('error', (event) => {
+  console.error('Глобальная ошибка:', event.error);
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.6 Fetch API -->
+            <section id="fetch-api" class="topic-section">
+                <h2>Fetch API</h2>
+
+                <h3>Базовое использование</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// GET запрос
+const response = await fetch('https://api.example.com/users');
+const users = await response.json();
+
+// POST запрос
+const response = await fetch('https://api.example.com/users', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: 'Иван',
+    email: 'ivan@example.com'
+  })
+});
+
+// Проверка статуса
+if (!response.ok) {
+  throw new Error(`HTTP error! Status: ${response.status}`);
+}
+
+const newUser = await response.json();</code></pre>
+                </div>
+
+                <h3>Объект Response</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const response = await fetch('/api/data');
+
+// Свойства
+response.ok;         // true если статус 200-299
+response.status;     // 200, 404, 500...
+response.statusText; // "OK", "Not Found"...
+response.headers;    // Headers объект
+response.url;        // URL запроса
+response.type;       // "basic", "cors", "opaque"
+
+// Методы чтения body (можно вызвать только ОДИН раз!)
+const json = await response.json();   // JSON → Object
+const text = await response.text();   // String
+const blob = await response.blob();   // Blob (файлы)
+const buffer = await response.arrayBuffer(); // Binary
+const formData = await response.formData();  // FormData
+
+// Клонирование для многократного чтения
+const clone = response.clone();
+const json1 = await response.json();
+const json2 = await clone.json();</code></pre>
+                </div>
+
+                <h3>Headers</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Чтение заголовков ответа
+response.headers.get('Content-Type');
+response.headers.has('Authorization');
+
+for (const [key, value] of response.headers) {
+  console.log(`${key}: ${value}`);
+}
+
+// Создание заголовков для запроса
+const headers = new Headers();
+headers.append('Content-Type', 'application/json');
+headers.append('Authorization', 'Bearer token123');
+
+// Или объектом
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer token123'
+};</code></pre>
+                </div>
+
+                <h3>Опции fetch</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const response = await fetch(url, {
+  method: 'POST',           // GET, POST, PUT, DELETE, PATCH
+  headers: { ... },
+  body: JSON.stringify(data),
+  
+  mode: 'cors',             // cors, no-cors, same-origin
+  credentials: 'include',   // include, same-origin, omit
+  cache: 'no-cache',        // default, no-cache, reload, force-cache
+  redirect: 'follow',       // follow, error, manual
+  referrerPolicy: 'no-referrer',
+  
+  signal: abortController.signal  // Для отмены
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.7 REST API -->
+            <section id="rest-api" class="topic-section">
+                <h2>Работа с REST API</h2>
+
+                <h3>CRUD операции</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const API_URL = 'https://api.example.com';
+
+// CREATE (POST)
+async function createUser(userData) {
+  const response = await fetch(`${API_URL}/users`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData)
+  });
+  return response.json();
+}
+
+// READ (GET)
+async function getUser(id) {
+  const response = await fetch(`${API_URL}/users/${id}`);
+  return response.json();
+}
+
+async function getUsers(params = {}) {
+  const query = new URLSearchParams(params).toString();
+  const response = await fetch(`${API_URL}/users?${query}`);
+  return response.json();
+}
+
+// UPDATE (PUT/PATCH)
+async function updateUser(id, userData) {
+  const response = await fetch(`${API_URL}/users/${id}`, {
+    method: 'PATCH',  // или PUT для полной замены
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData)
+  });
+  return response.json();
+}
+
+// DELETE
+async function deleteUser(id) {
+  const response = await fetch(`${API_URL}/users/${id}`, {
+    method: 'DELETE'
+  });
+  return response.ok;
+}</code></pre>
+                </div>
+
+                <h3>API клиент</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">class ApiClient {
+  constructor(baseURL, options = {}) {
+    this.baseURL = baseURL;
+    this.defaultHeaders = {
+      'Content-Type': 'application/json',
+      ...options.headers
+    };
+  }
+  
+  async request(endpoint, options = {}) {
+    const url = `${this.baseURL}${endpoint}`;
+    const config = {
+      ...options,
+      headers: {
+        ...this.defaultHeaders,
+        ...options.headers
+      }
+    };
+    
+    if (config.body && typeof config.body === 'object') {
+      config.body = JSON.stringify(config.body);
+    }
+    
+    const response = await fetch(url, config);
+    
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new ApiError(response.status, error.message || 'API Error');
+    }
+    
+    return response.json();
+  }
+  
+  get(endpoint, params) {
+    const query = params ? `?${new URLSearchParams(params)}` : '';
+    return this.request(`${endpoint}${query}`);
+  }
+  
+  post(endpoint, data) {
+    return this.request(endpoint, { method: 'POST', body: data });
+  }
+  
+  put(endpoint, data) {
+    return this.request(endpoint, { method: 'PUT', body: data });
+  }
+  
+  patch(endpoint, data) {
+    return this.request(endpoint, { method: 'PATCH', body: data });
+  }
+  
+  delete(endpoint) {
+    return this.request(endpoint, { method: 'DELETE' });
+  }
+}
+
+// Использование
+const api = new ApiClient('https://api.example.com');
+const users = await api.get('/users', { page: 1, limit: 10 });
+const newUser = await api.post('/users', { name: 'Иван' });</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.8 Продвинутый Fetch -->
+            <section id="advanced-fetch" class="topic-section">
+                <h2>Продвинутый Fetch</h2>
+
+                <h3>Отмена запроса (AbortController)</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const controller = new AbortController();
+
+// Запрос с возможностью отмены
+fetch('/api/data', { signal: controller.signal })
+  .then(response => response.json())
+  .catch(error => {
+    if (error.name === 'AbortError') {
+      console.log('Запрос отменён');
+    }
+  });
+
+// Отмена через 5 секунд (timeout)
+setTimeout(() => controller.abort(), 5000);
+
+// Или по действию пользователя
+button.addEventListener('click', () => controller.abort());
+
+// Timeout helper
+async function fetchWithTimeout(url, options = {}, timeout = 5000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal
+    });
+    return response;
+  } finally {
+    clearTimeout(id);
+  }
+}</code></pre>
+                </div>
+
+                <h3>Загрузка файлов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Загрузка файла
+async function uploadFile(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('name', file.name);
+  
+  const response = await fetch('/api/upload', {
+    method: 'POST',
+    body: formData  // Не устанавливайте Content-Type!
+  });
+  
+  return response.json();
+}
+
+// С прогрессом (через XMLHttpRequest)
+function uploadWithProgress(file, onProgress) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    
+    xhr.upload.addEventListener('progress', (e) => {
+      if (e.lengthComputable) {
+        const percent = (e.loaded / e.total) * 100;
+        onProgress(percent);
+      }
+    });
+    
+    xhr.addEventListener('load', () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(JSON.parse(xhr.responseText));
+      } else {
+        reject(new Error(`HTTP ${xhr.status}`));
+      }
+    });
+    
+    xhr.addEventListener('error', () => reject(new Error('Network error')));
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    xhr.open('POST', '/api/upload');
+    xhr.send(formData);
+  });
+}</code></pre>
+                </div>
+
+                <h3>Скачивание файлов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">async function downloadFile(url, filename) {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  
+  // Создаём ссылку для скачивания
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+  
+  // Освобождаем память
+  URL.revokeObjectURL(link.href);
+}</code></pre>
+                </div>
+
+                <h3>Retry логика</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) return response;
+      
+      // Retry только для определённых статусов
+      if (response.status >= 500) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+      
+      return response; // 4xx — не retry
+    } catch (error) {
+      if (i === retries - 1) throw error;
+      
+      console.log(`Попытка ${i + 1} не удалась, повтор через ${delay}ms`);
+      await new Promise(r => setTimeout(r, delay));
+      delay *= 2; // Exponential backoff
+    }
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.9 Параллельные запросы -->
+            <section id="parallel" class="topic-section">
+                <h2>Параллельные запросы</h2>
+
+                <h3>Promise.all</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Загрузка нескольких ресурсов одновременно
+async function loadDashboard() {
+  const [user, orders, notifications] = await Promise.all([
+    fetch('/api/user').then(r => r.json()),
+    fetch('/api/orders').then(r => r.json()),
+    fetch('/api/notifications').then(r => r.json())
+  ]);
+  
+  return { user, orders, notifications };
+}
+
+// С обработкой ошибок для каждого
+async function loadDashboardSafe() {
+  const results = await Promise.allSettled([
+    fetch('/api/user').then(r => r.json()),
+    fetch('/api/orders').then(r => r.json()),
+    fetch('/api/notifications').then(r => r.json())
+  ]);
+  
+  return {
+    user: results[0].status === 'fulfilled' ? results[0].value : null,
+    orders: results[1].status === 'fulfilled' ? results[1].value : [],
+    notifications: results[2].status === 'fulfilled' ? results[2].value : []
+  };
+}</code></pre>
+                </div>
+
+                <h3>Ограничение параллельности</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Выполнить массив промисов с ограничением
+async function parallelLimit(tasks, limit) {
+  const results = [];
+  const executing = [];
+  
+  for (const task of tasks) {
+    const p = Promise.resolve().then(() => task());
+    results.push(p);
+    
+    if (limit <= tasks.length) {
+      const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+      executing.push(e);
+      
+      if (executing.length >= limit) {
+        await Promise.race(executing);
+      }
+    }
+  }
+  
+  return Promise.all(results);
+}
+
+// Использование
+const urls = [...]; // 100 URL
+const results = await parallelLimit(
+  urls.map(url => () => fetch(url).then(r => r.json())),
+  5  // Максимум 5 одновременных запросов
+);</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.10 Кэширование -->
+            <section id="caching" class="topic-section">
+                <h2>Кэширование</h2>
+
+                <h3>Простой кэш в памяти</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const cache = new Map();
+
+async function fetchWithCache(url, ttl = 60000) {
+  const cached = cache.get(url);
+  
+  if (cached && Date.now() - cached.timestamp < ttl) {
+    return cached.data;
+  }
+  
+  const response = await fetch(url);
+  const data = await response.json();
+  
+  cache.set(url, { data, timestamp: Date.now() });
+  
+  return data;
+}
+
+// Очистка старых записей
+function clearExpiredCache(ttl) {
+  const now = Date.now();
+  for (const [key, value] of cache) {
+    if (now - value.timestamp > ttl) {
+      cache.delete(key);
+    }
+  }
+}</code></pre>
+                </div>
+
+                <h3>Cache API</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Открыть кэш
+const cache = await caches.open('api-cache-v1');
+
+// Добавить в кэш
+await cache.put('/api/data', response);
+await cache.add('/api/data'); // fetch + put
+
+// Получить из кэша
+const cachedResponse = await cache.match('/api/data');
+
+// Стратегия: Cache First, Network Fallback
+async function cacheFirst(url) {
+  const cachedResponse = await caches.match(url);
+  if (cachedResponse) return cachedResponse;
+  
+  const response = await fetch(url);
+  const cache = await caches.open('api-cache');
+  cache.put(url, response.clone());
+  
+  return response;
+}
+
+// Стратегия: Network First, Cache Fallback
+async function networkFirst(url) {
+  try {
+    const response = await fetch(url);
+    const cache = await caches.open('api-cache');
+    cache.put(url, response.clone());
+    return response;
+  } catch {
+    return caches.match(url);
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.11 WebSockets -->
+            <section id="websockets" class="topic-section">
+                <h2>WebSockets</h2>
+
+                <h3>Базовое использование</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const ws = new WebSocket('wss://api.example.com/ws');
+
+// События
+ws.addEventListener('open', () => {
+  console.log('Соединение открыто');
+  ws.send(JSON.stringify({ type: 'subscribe', channel: 'updates' }));
+});
+
+ws.addEventListener('message', (event) => {
+  const data = JSON.parse(event.data);
+  console.log('Получено:', data);
+});
+
+ws.addEventListener('close', (event) => {
+  console.log(`Соединение закрыто: ${event.code} ${event.reason}`);
+});
+
+ws.addEventListener('error', (error) => {
+  console.error('Ошибка WebSocket:', error);
+});
+
+// Отправка сообщений
+ws.send(JSON.stringify({ type: 'message', text: 'Привет!' }));
+
+// Закрытие
+ws.close(1000, 'Нормальное закрытие');</code></pre>
+                </div>
+
+                <h3>WebSocket с реконнектом</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">class ReconnectingWebSocket {
+  constructor(url, options = {}) {
+    this.url = url;
+    this.reconnectInterval = options.reconnectInterval || 1000;
+    this.maxReconnectInterval = options.maxReconnectInterval || 30000;
+    this.handlers = { message: [], open: [], close: [], error: [] };
+    this.connect();
+  }
+  
+  connect() {
+    this.ws = new WebSocket(this.url);
+    
+    this.ws.onopen = () => {
+      this.reconnectInterval = 1000;
+      this.handlers.open.forEach(h => h());
+    };
+    
+    this.ws.onmessage = (e) => {
+      this.handlers.message.forEach(h => h(JSON.parse(e.data)));
+    };
+    
+    this.ws.onclose = () => {
+      this.handlers.close.forEach(h => h());
+      this.reconnect();
+    };
+    
+    this.ws.onerror = (e) => {
+      this.handlers.error.forEach(h => h(e));
+    };
+  }
+  
+  reconnect() {
+    setTimeout(() => {
+      console.log('Переподключение...');
+      this.connect();
+      this.reconnectInterval = Math.min(
+        this.reconnectInterval * 2,
+        this.maxReconnectInterval
+      );
+    }, this.reconnectInterval);
+  }
+  
+  on(event, handler) {
+    this.handlers[event].push(handler);
+  }
+  
+  send(data) {
+    if (this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify(data));
+    }
+  }
+}
+
+// Использование
+const ws = new ReconnectingWebSocket('wss://api.example.com/ws');
+ws.on('message', (data) => console.log(data));</code></pre>
+                </div>
+            </section>
+
+            <!-- 8.12 Реальные проекты -->
+            <section id="real-projects" class="topic-section">
+                <h2>Реальные проекты</h2>
+
+                <h3>Поиск с debounce</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const searchInput = document.getElementById('search');
+const resultsContainer = document.getElementById('results');
+
+let controller = null;
+
+const search = debounce(async (query) => {
+  // Отменяем предыдущий запрос
+  if (controller) controller.abort();
+  controller = new AbortController();
+  
+  if (!query.trim()) {
+    resultsContainer.innerHTML = '';
+    return;
+  }
+  
+  try {
+    const response = await fetch(
+      `/api/search?q=${encodeURIComponent(query)}`,
+      { signal: controller.signal }
+    );
+    
+    const results = await response.json();
+    renderResults(results);
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      console.error('Ошибка поиска:', error);
+    }
+  }
+}, 300);
+
+searchInput.addEventListener('input', (e) => search(e.target.value));</code></pre>
+                </div>
+
+                <h3>Бесконечный скролл</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">let page = 1;
+let loading = false;
+let hasMore = true;
+
+const observer = new IntersectionObserver(async (entries) => {
+  if (entries[0].isIntersecting && !loading && hasMore) {
+    loading = true;
+    showLoader();
+    
+    try {
+      const items = await fetchItems(page);
+      
+      if (items.length === 0) {
+        hasMore = false;
+      } else {
+        appendItems(items);
+        page++;
+      }
+    } catch (error) {
+      console.error('Ошибка загрузки:', error);
+    } finally {
+      loading = false;
+      hideLoader();
+    }
+  }
+});
+
+// Наблюдаем за элементом в конце списка
+observer.observe(document.querySelector('.load-trigger'));</code></pre>
+                </div>
+
+                <div class="exercise">
+                    <h4>Итоговый проект</h4>
+                    <p>Создайте приложение новостей с:</p>
+                    <ul>
+                        <li>Загрузкой новостей из публичного API</li>
+                        <li>Поиском с debounce</li>
+                        <li>Бесконечным скроллом</li>
+                        <li>Кэшированием</li>
+                        <li>Обработкой ошибок и retry</li>
+                        <li>Индикаторами загрузки</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose">✕</button>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Переключить</span></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

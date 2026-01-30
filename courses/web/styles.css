@@ -1653,6 +1653,60 @@ h4 {
     }
 }
 
+/* .warning как алиас для .warn (использует h4 вместо strong) */
+.warning {
+    border-radius: 10px;
+    padding: 18px 20px 18px 24px;
+    margin: 20px 0;
+    position: relative;
+    background: linear-gradient(to right, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.03));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.warning:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.warning::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: linear-gradient(to bottom, #f59e0b, #fbbf24);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+    border-radius: 0 3px 3px 0;
+    animation: pulseGlowYellow 3s infinite alternate;
+}
+
+.warning h4 {
+    color: #d97706;
+    font-weight: 600;
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+}
+
+.warning p {
+    margin: 0;
+}
+
+.warning code {
+    background: rgba(245, 158, 11, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.light-theme .warning {
+    background: linear-gradient(to right, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.02));
+    border: 1px solid rgba(245, 158, 11, 0.1);
+}
+
 .light-theme .note,
 .light-theme .tip,
 .light-theme .warn,
@@ -2265,4 +2319,188 @@ body.dark-theme .mobile-theme-toggle-btn .theme-icon-moon {
 	max-width: 900px;
 	margin: 0 auto 40px;
 	padding: 0 20px;
+}
+
+/* === Компактные карточки на мобильных === */
+@media (max-width: 768px) {
+    /* Секции контента */
+    .topic-section {
+        padding: 0 16px;
+        margin-bottom: 28px;
+    }
+    
+    .topic-section h2 {
+        font-size: 1.4rem;
+        margin-bottom: 14px;
+    }
+    
+    .topic-section h3 {
+        font-size: 1.15rem;
+        margin: 18px 0 10px;
+    }
+    
+    .topic-section p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+    
+    /* Компактные info/tip/warn/danger боксы */
+    .note,
+    .tip,
+    .warn,
+    .danger,
+    .warning {
+        padding: 14px 14px 14px 18px;
+        margin: 14px 0;
+        border-radius: 8px;
+    }
+    
+    .note::before,
+    .tip::before,
+    .warn::before,
+    .danger::before,
+    .warning::before {
+        width: 4px;
+    }
+    
+    .note strong,
+    .tip strong,
+    .warn strong,
+    .danger strong,
+    .warning h4 {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+    }
+    
+    .note p,
+    .tip p,
+    .warn p,
+    .danger p,
+    .warning p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    /* Компактные блоки кода */
+    .code-example {
+        margin: 12px 0;
+        border-radius: 6px;
+        border-left-width: 3px;
+    }
+    
+    .code-example pre {
+        padding: 12px;
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+    
+    /* Компактные таблицы */
+    .info-table,
+    .spec-table-wrapper {
+        margin: 12px 0;
+        padding: 8px;
+        border-radius: 8px;
+    }
+    
+    .info-table table,
+    .spec-table {
+        font-size: 0.85rem;
+    }
+    
+    .info-table th,
+    .info-table td,
+    .spec-table th,
+    .spec-table td {
+        padding: 8px 10px;
+    }
+    
+    /* Компактные списки */
+    .topic-section ul,
+    .topic-section ol {
+        padding-left: 20px;
+        margin: 10px 0;
+    }
+    
+    .topic-section li {
+        font-size: 0.93rem;
+        margin-bottom: 6px;
+        line-height: 1.5;
+    }
+    
+    /* Timeline компактнее */
+    .timeline-item {
+        padding: 12px 14px;
+        margin-bottom: 10px;
+    }
+    
+    .timeline-item strong {
+        font-size: 0.9rem;
+    }
+    
+    .timeline-item p {
+        font-size: 0.85rem;
+        margin: 0;
+    }
+    
+    /* Visual guide компактнее */
+    .visual-guide {
+        padding: 14px;
+        margin: 12px 0;
+    }
+    
+    /* Badges компактнее */
+    .protocol-badges {
+        gap: 8px;
+    }
+    
+    .badge {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ещё компактнее на маленьких экранах */
+    .topic-section {
+        padding: 0 12px;
+        margin-bottom: 24px;
+    }
+    
+    .topic-section h2 {
+        font-size: 1.25rem;
+    }
+    
+    .topic-section h3 {
+        font-size: 1.05rem;
+    }
+    
+    .note,
+    .tip,
+    .warn,
+    .danger,
+    .warning {
+        padding: 12px 12px 12px 16px;
+        margin: 10px 0;
+    }
+    
+    .code-example pre {
+        padding: 10px;
+        font-size: 0.78rem;
+    }
+    
+    .info-table th,
+    .info-table td {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+    }
+    
+    /* Убираем hover-эффекты на тач-устройствах */
+    .note:hover,
+    .tip:hover,
+    .warn:hover,
+    .danger:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
 }
