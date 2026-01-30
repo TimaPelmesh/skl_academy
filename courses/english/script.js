@@ -432,9 +432,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Обновляем текст кнопки
                     if (block.classList.contains('active')) {
-                        this.textContent = '👆 Скрыть перевод';
+                        this.textContent = 'Скрыть перевод';
                     } else {
-                        this.textContent = '👆 Показать перевод';
+                        this.textContent = 'Показать перевод';
                     }
                 }
             });

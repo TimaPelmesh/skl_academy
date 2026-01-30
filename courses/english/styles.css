@@ -2418,3 +2418,37 @@ body.dark-theme .mobile-theme-toggle-btn .theme-icon-sun {
 body.dark-theme .mobile-theme-toggle-btn .theme-icon-moon {
     display: block;
 }
+
+/* Навигация между модулями */
+.nav-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-between a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.nav-between a:hover {
+    background: var(--overlay-light);
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.nav-between > div {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
