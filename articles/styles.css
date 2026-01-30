@@ -241,6 +241,9 @@
   padding-left: 2rem;
   margin-bottom: 0.75rem;
   position: relative;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .article-content ul.with-icons li::before {
@@ -400,6 +403,18 @@
   padding: 1.25rem;
   margin: 1.5rem 0;
   box-shadow: var(--shadow-sm);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.article-content .highlight-box * {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .article-content .warning-box {
@@ -509,6 +524,9 @@
   flex: 1;
   max-width: none;
   margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* Адаптивность для мобильных устройств */
