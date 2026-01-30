@@ -3,23 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Architecture - Cyberpunk Scene</title>
+    <title>Архитектура ПК — Интерактивная 3D модель | SKL Academy</title>
+    <meta name="description" content="Изучите внутреннее устройство компьютера в интерактивной 3D-модели. Вращайте, рассматривайте и изучайте каждый компонент ПК в деталях.">
+    <meta name="keywords" content="архитектура компьютера, устройство ПК, 3D модель компьютера, компоненты компьютера, материнская плата, процессор, видеокарта, оперативная память">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Архитектура ПК — Интерактивная 3D модель">
+    <meta property="og:description" content="Изучите внутреннее устройство компьютера в интерактивной 3D-модели.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skl-academy.ru/sandbox/pc-architecture/index.html">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://skl-academy.ru/sandbox/pc-architecture/index.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Архитектура ПК — Интерактивная 3D модель",
+      "description": "Интерактивная 3D модель компьютера для изучения его компонентов",
+      "url": "https://skl-academy.ru/sandbox/pc-architecture/index.html",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      }
+    }
+    </script>
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <a href="../../index.html" class="nav-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            На главную
+        </a>
+        <span class="nav-title">Архитектура ПК</span>
+        <button class="nav-help" id="helpToggle" aria-label="Показать справку">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- 3D Canvas -->
     <div id="canvas-container"></div>
+    
+    <!-- Info Panel -->
     <div id="info-panel" class="hidden">
         <div class="info-header">
             <h2 id="component-name"></h2>
-            <button id="close-btn">×</button>
+            <button id="close-btn" aria-label="Закрыть">×</button>
         </div>
         <div id="component-description"></div>
     </div>
-    <div id="loading">Загрузка сцены...</div>
+    
+    
+    <!-- Help Modal -->
+    <div id="help-modal" class="help-modal hidden">
+        <div class="help-backdrop" id="helpBackdrop"></div>
+        <div class="help-content">
+            <div class="help-header">
+                <h3>Справка</h3>
+                <button class="help-close" id="helpClose" aria-label="Закрыть справку">×</button>
+            </div>
+            <div class="help-body">
+                <section class="help-section">
+                    <h4>🖥️ О тренажёре</h4>
+                    <p>Интерактивная 3D модель компьютера для изучения его внутреннего устройства. Вы можете вращать камеру, приближаться к компонентам и получать подробную информацию о каждом из них.</p>
+                </section>
+                
+                <section class="help-section">
+                    <h4>🎮 Управление</h4>
+                    <ul>
+                        <li><strong>Вращение камеры:</strong> зажмите левую кнопку мыши и двигайте</li>
+                        <li><strong>Приближение/отдаление:</strong> колёсико мыши или pinch на тачскрине</li>
+                        <li><strong>Информация о компоненте:</strong> кликните по нему</li>
+                    </ul>
+                </section>
+                
+                <section class="help-section">
+                    <h4>🔧 Компоненты ПК</h4>
+                    <ul>
+                        <li><strong>Материнская плата</strong> — основа, объединяющая все компоненты</li>
+                        <li><strong>Процессор (CPU)</strong> — мозг компьютера</li>
+                        <li><strong>Оперативная память (RAM)</strong> — быстрая временная память</li>
+                        <li><strong>Видеокарта (GPU)</strong> — обработка графики</li>
+                        <li><strong>Блок питания (PSU)</strong> — электропитание</li>
+                        <li><strong>SSD/HDD</strong> — хранение данных</li>
+                        <li><strong>Вентиляторы</strong> — охлаждение</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading -->
+    <div id="loading">
+        <div class="loading-spinner"></div>
+        <span>Загрузка сцены...</span>
+    </div>
+    
+    <!-- Component Labels (hidden by default, shown on hover) -->
+    <div id="component-labels"></div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Help modal toggle
+        const helpToggle = document.getElementById('helpToggle');
+        const helpModal = document.getElementById('help-modal');
+        const helpClose = document.getElementById('helpClose');
+        const helpBackdrop = document.getElementById('helpBackdrop');
+        
+        helpToggle.addEventListener('click', () => {
+            helpModal.classList.remove('hidden');
+        });
+        
+        helpClose.addEventListener('click', () => {
+            helpModal.classList.add('hidden');
+        });
+        
+        helpBackdrop.addEventListener('click', () => {
+            helpModal.classList.add('hidden');
+        });
+        
+        
+        // Close help on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                helpModal.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
-

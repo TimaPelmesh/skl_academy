@@ -1,1657 +1,1047 @@
 // Scene setup
-let scene, camera, renderer, composer;
+let scene, camera, renderer;
 let controls;
-let pcCase, motherboard, cpu, ram, gpu, psu, ssd, hdd, fans, cables;
+let pcCase;
 let raycaster, mouse;
 let hoveredObject = null;
-let cameraAnimation = null;
-let dustParticles = null;
+let fanBlades = []; // Массив для всех лопастей вентиляторов
 
 // Component information
 const componentInfo = {
     motherboard: {
         name: "Материнская плата",
-        description: "Основная плата компьютера, которая объединяет все компоненты системы. Содержит сокет для процессора, слоты для оперативной памяти (DIMM), разъемы PCI-E для видеокарт и других устройств, разъемы SATA и M.2 для накопителей, чипсет для управления компонентами. Типы: ATX, microATX, mini-ITX. Обеспечивает связь между всеми частями ПК."
+        description: "Основная плата компьютера, объединяющая все компоненты. Содержит сокет для процессора, слоты DIMM для RAM, разъёмы PCI-E для видеокарт, SATA и M.2 для накопителей. Типы форм-факторов: ATX, microATX, mini-ITX."
     },
     cpu: {
-        name: "Процессор",
-        description: "Центральный процессор (CPU) - мозг компьютера, выполняет все вычисления и обработку данных. Состоит из ядер (от 2 до 64+), каждое ядро может обрабатывать потоки. Типы: Intel (Core i3/i5/i7/i9), AMD (Ryzen 3/5/7/9). Устанавливается в сокет на материнской плате. Требует охлаждения (кулер или водяное охлаждение) для отвода тепла."
+        name: "Процессор (CPU)",
+        description: "Центральный процессор — мозг компьютера. Выполняет все вычисления. Состоит из ядер (2-64+), каждое обрабатывает потоки. Производители: Intel (Core i3/i5/i7/i9), AMD (Ryzen 3/5/7/9). Требует активного охлаждения."
+    },
+    cpuCooler: {
+        name: "Кулер процессора",
+        description: "Система охлаждения CPU. Отводит тепло от процессора через радиатор и вентилятор. Типы: воздушные (башенные, top-flow) и жидкостные (AIO, custom loop). Эффективность зависит от TDP процессора."
     },
     ram: {
-        name: "Оперативная память",
-        description: "Временное хранилище данных для быстрого доступа процессора. Хранит запущенные программы и данные, которые активно используются. При выключении ПК данные теряются. Типы: DDR3, DDR4, DDR5. Объем влияет на производительность - чем больше, тем больше программ можно запустить одновременно. Устанавливается в слоты DIMM на материнской плате."
+        name: "Оперативная память (RAM)",
+        description: "Быстрая временная память для активных программ и данных. При выключении данные теряются. Типы: DDR4, DDR5. Объём влияет на многозадачность. Устанавливается в слоты DIMM парами для dual-channel."
     },
     gpu: {
-        name: "Видеокарта",
-        description: "Графический процессор (GPU) обрабатывает изображение и выводит его на монитор. Незаменима для игр, 3D-моделирования, видеомонтажа. Содержит собственную память (VRAM). Типы: интегрированная (в процессоре) и дискретная (отдельная плата). Мощные видеокарты имеют систему охлаждения с вентиляторами или водяным охлаждением. Подключается через слот PCI-E."
+        name: "Видеокарта (GPU)",
+        description: "Графический процессор для обработки изображений. Необходима для игр, 3D, видеомонтажа. Имеет собственную память VRAM. Производители: NVIDIA (GeForce), AMD (Radeon). Подключается через PCI-E x16."
     },
     psu: {
-        name: "Блок питания",
-        description: "Преобразует переменный ток из розетки (220V) в постоянный ток для компонентов ПК (12V, 5V, 3.3V). Обеспечивает стабильное питание всех устройств. Типы: модульные (кабели отсоединяются), полумодульные, немодульные. Мощность измеряется в ваттах (W). Содержит конденсаторы для сглаживания напряжения и трансформатор для преобразования. Важен для стабильности системы."
+        name: "Блок питания (PSU)",
+        description: "Преобразует 220V из розетки в 12V, 5V, 3.3V для компонентов. Мощность в ваттах (500W-1500W). Типы: модульные и немодульные. Сертификация 80+ показывает КПД. Критически важен для стабильности системы."
     },
     ssd: {
         name: "SSD накопитель",
-        description: "Твердотельный накопитель - быстрая память для хранения данных без движущихся частей. Использует флеш-память. В разы быстрее HDD. Типы: SATA (2.5\"), M.2 SATA, M.2 NVMe (самый быстрый). Используется для операционной системы и программ для быстрой загрузки. Не боится вибраций. Ограниченное количество циклов записи, но для обычного использования хватает на годы."
+        description: "Твердотельный накопитель на флеш-памяти. Быстрее HDD в 5-10 раз, без движущихся частей. Типы: SATA (550 МБ/с), NVMe M.2 (до 7000 МБ/с). Идеален для ОС и программ."
     },
     hdd: {
-        name: "HDD накопитель",
-        description: "Жесткий диск - механическое устройство хранения данных с вращающимися магнитными дисками. Медленнее SSD, но дешевле за гигабайт. Типы: 3.5\" (десктоп), 2.5\" (ноутбук). Скорость вращения: 5400, 7200, 10000 RPM. Используется для хранения больших объемов данных (фото, видео, документы). Подключается через SATA. Боится ударов и вибраций."
+        name: "Жёсткий диск (HDD)",
+        description: "Механический накопитель с магнитными дисками. Дешевле SSD за гигабайт, но медленнее. Скорость: 5400/7200 RPM. Используется для хранения больших файлов. Чувствителен к вибрациям."
     },
     fan: {
         name: "Корпусный вентилятор",
-        description: "Обеспечивает циркуляцию воздуха внутри корпуса для охлаждения компонентов. Создает поток воздуха: всасывает холодный воздух и выдувает горячий. Типы: 80mm, 120mm, 140mm, 200mm. Размещаются на передней, задней, верхней и боковой панелях корпуса. RGB версии добавляют подсветку для эстетики. Важны для поддержания оптимальной температуры компонентов."
+        description: "Обеспечивает циркуляцию воздуха в корпусе. Передние — на вдув холодного воздуха, задние/верхние — на выдув горячего. Размеры: 120mm, 140mm. RGB-подсветка для эстетики."
     }
 };
 
-// Initialize scene
 function init() {
-    // Check if Three.js is loaded
     if (typeof THREE === 'undefined') {
         console.error('Three.js не загружен!');
-        document.getElementById('loading').textContent = 'Ошибка загрузки библиотек';
+        document.getElementById('loading').textContent = 'Ошибка загрузки';
         return;
     }
 
+    const container = document.getElementById('canvas-container');
+    const navHeight = window.innerWidth <= 480 ? 44 : (window.innerWidth <= 768 ? 48 : 56);
+    const width = window.innerWidth;
+    const height = window.innerHeight - navHeight;
+
     // Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x050510);
-    scene.fog = new THREE.Fog(0x050510, 10, 50);
+    scene.background = new THREE.Color(0x0a0a18);
+    scene.fog = new THREE.Fog(0x0a0a18, 6, 15);
 
     // Camera
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 3, 8);
+    camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    camera.position.set(1.8, 1.5, 2.2);
 
     // Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
-    document.getElementById('canvas-container').appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
 
     // Controls
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.minDistance = 0.3;
-    controls.maxDistance = 15;
-    // Отключаем панорамирование правой кнопкой мыши
-    controls.enablePan = false;
-    // Отключаем управление во время начальной анимации
-    controls.enabled = false;
+    controls.minDistance = 0.8;
+    controls.maxDistance = 5;
+    controls.target.set(0.5, 1.0, 0);
+    controls.maxPolarAngle = Math.PI * 0.85;
+    controls.update();
 
-    // Raycaster for interaction
+    // Raycaster
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
 
-    // Lighting
+    // Setup scene
     setupLighting();
-
-    // Create room
     createRoom();
-
-    // Create glass table
-    createGlassTable();
-
-    // Create monitor and keyboard
+    createDesk();
     createMonitor();
-    createKeyboard();
-
-    // Create PC case
+    createKeyboardMouse();
     createPCCase();
 
-    // Create components
-    createMotherboard();
-    createCPU();
-    createRAM();
-    createGPU();
-    createPSU();
-    createStorage();
-    // createCables(); // Провода удалены
-    createCaseFans();
-
-    // Create dust particles
-    createDustParticles();
-
-    // Post-processing (optional, can be enabled later)
-    // setupPostProcessing();
-
-    // Event listeners
+    // Events
     window.addEventListener('resize', onWindowResize);
-    
-    // Event listeners for mouse interaction
     renderer.domElement.addEventListener('mousemove', onMouseMove);
     renderer.domElement.addEventListener('click', onMouseClick);
-    
+    renderer.domElement.addEventListener('touchend', onTouchEnd, { passive: true });
     document.getElementById('close-btn').addEventListener('click', closeInfoPanel);
-
-    // Start camera animation
-    startCameraAnimation();
 
     // Hide loading
     setTimeout(() => {
         document.getElementById('loading').style.display = 'none';
-    }, 1000);
+    }, 800);
 
+    // Start animation loop
     animate();
 }
 
-// Setup lighting
 function setupLighting() {
-    // Ambient light - увеличиваем для лучшей видимости
-    const ambientLight = new THREE.AmbientLight(0x001133, 0.5);
-    scene.add(ambientLight);
+    const ambient = new THREE.AmbientLight(0x303050, 0.3);
+    scene.add(ambient);
 
-    // Main neon light над столом (cyan) - основной источник света
-    const neonLight = new THREE.PointLight(0x00ffff, 3, 25);
-    neonLight.position.set(0, 1.5, 0);
-    neonLight.castShadow = true;
-    scene.add(neonLight);
+    const mainLight = new THREE.SpotLight(0xffffff, 1.5, 8, Math.PI / 5, 0.3);
+    mainLight.position.set(1, 3.5, 1);
+    mainLight.target.position.set(0.5, 1, 0);
+    mainLight.castShadow = true;
+    mainLight.shadow.mapSize.width = 2048;
+    mainLight.shadow.mapSize.height = 2048;
+    scene.add(mainLight);
+    scene.add(mainLight.target);
 
-    // Дополнительный свет внутри корпуса ПК
-    const pcInternalLight = new THREE.PointLight(0x00ffff, 2.5, 8);
-    pcInternalLight.position.set(0, 1.15, 0);
-    scene.add(pcInternalLight);
+    const pcGlow = new THREE.PointLight(0x00ffff, 2, 3);
+    pcGlow.position.set(0.5, 1.1, 0.1);
+    scene.add(pcGlow);
 
-    // Свет от RGB компонентов (имитация)
-    const rgbLight1 = new THREE.PointLight(0x00ffff, 1.5, 6);
-    rgbLight1.position.set(0, 1.2, 0.05);
-    scene.add(rgbLight1);
+    const pcGlow2 = new THREE.PointLight(0x8000ff, 0.8, 2);
+    pcGlow2.position.set(0.5, 0.9, -0.1);
+    scene.add(pcGlow2);
 
-    const rgbLight2 = new THREE.PointLight(0x00ffff, 1.2, 6);
-    rgbLight2.position.set(-0.1, 1.1, -0.08);
-    scene.add(rgbLight2);
-
-    // Дополнительные акцентные огни
-    const accentLight1 = new THREE.PointLight(0x00ffff, 1.2, 15);
-    accentLight1.position.set(-2, 1.2, -2);
-    scene.add(accentLight1);
-
-    const accentLight2 = new THREE.PointLight(0x0088ff, 1, 15);
-    accentLight2.position.set(2, 1.2, -2);
-    scene.add(accentLight2);
-
-    // Directional light для теней и общего освещения
-    const dirLight = new THREE.DirectionalLight(0x00aaff, 0.8);
-    dirLight.position.set(3, 8, 3);
-    dirLight.castShadow = true;
-    dirLight.shadow.camera.left = -5;
-    dirLight.shadow.camera.right = 5;
-    dirLight.shadow.camera.top = 5;
-    dirLight.shadow.camera.bottom = -5;
-    dirLight.shadow.mapSize.width = 2048;
-    dirLight.shadow.mapSize.height = 2048;
-    scene.add(dirLight);
-
-    // Дополнительный направленный свет для подсветки компонентов
-    const fillLight = new THREE.DirectionalLight(0x0066aa, 0.4);
-    fillLight.position.set(-2, 4, 2);
-    scene.add(fillLight);
+    const rimLight = new THREE.DirectionalLight(0x4060ff, 0.5);
+    rimLight.position.set(-2, 2, -2);
+    scene.add(rimLight);
 }
 
-// Create room
 function createRoom() {
-    const roomSize = 15;
-    const roomHeight = 8;
+    const roomWidth = 6;
+    const roomHeight = 4;
+    const roomDepth = 6;
 
-    // Floor
-    const floorGeometry = new THREE.PlaneGeometry(roomSize, roomSize);
-    const floorMaterial = new THREE.MeshStandardMaterial({
-        color: 0x0a0a15,
-        roughness: 0.8,
+    const floorGeo = new THREE.PlaneGeometry(roomWidth, roomDepth);
+    const floorMat = new THREE.MeshStandardMaterial({ 
+        color: 0x12121f,
+        roughness: 0.85,
         metalness: 0.1
     });
-    const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+    const floor = new THREE.Mesh(floorGeo, floorMat);
     floor.rotation.x = -Math.PI / 2;
-    floor.position.y = 0;
     floor.receiveShadow = true;
     scene.add(floor);
 
-    // Walls
-    const wallMaterial = new THREE.MeshStandardMaterial({
-        color: 0x050510,
-        roughness: 0.9,
-        metalness: 0.05
+    const gridHelper = new THREE.GridHelper(roomWidth, 12, 0x00ffff, 0x0a1520);
+    gridHelper.position.y = 0.003;
+    gridHelper.material.opacity = 0.4;
+    gridHelper.material.transparent = true;
+    scene.add(gridHelper);
+
+    const wallMat = new THREE.MeshStandardMaterial({
+        color: 0x0a0a15,
+        roughness: 0.95
     });
 
-    // Back wall
     const backWall = new THREE.Mesh(
-        new THREE.PlaneGeometry(roomSize, roomHeight),
-        wallMaterial
+        new THREE.PlaneGeometry(roomWidth, roomHeight),
+        wallMat
     );
-    backWall.position.z = -roomSize / 2;
-    backWall.position.y = roomHeight / 2;
+    backWall.position.set(0, roomHeight / 2, -roomDepth / 2);
     scene.add(backWall);
 
-    // Side walls
     const leftWall = new THREE.Mesh(
-        new THREE.PlaneGeometry(roomSize, roomHeight),
-        wallMaterial
+        new THREE.PlaneGeometry(roomDepth, roomHeight),
+        wallMat
     );
     leftWall.rotation.y = Math.PI / 2;
-    leftWall.position.x = -roomSize / 2;
-    leftWall.position.y = roomHeight / 2;
+    leftWall.position.set(-roomWidth / 2, roomHeight / 2, 0);
     scene.add(leftWall);
 
-    const rightWall = new THREE.Mesh(
-        new THREE.PlaneGeometry(roomSize, roomHeight),
-        wallMaterial
-    );
-    rightWall.rotation.y = -Math.PI / 2;
-    rightWall.position.x = roomSize / 2;
-    rightWall.position.y = roomHeight / 2;
-    scene.add(rightWall);
-
-    // Ceiling
-    const ceiling = new THREE.Mesh(
-        new THREE.PlaneGeometry(roomSize, roomSize),
-        wallMaterial
-    );
-    ceiling.rotation.x = Math.PI / 2;
-    ceiling.position.y = roomHeight;
-    scene.add(ceiling);
-
-    // Neon grid on floor
-    const gridHelper = new THREE.GridHelper(roomSize, 20, 0x00ffff, 0x003333);
-    gridHelper.position.y = 0.01;
-    scene.add(gridHelper);
-}
-
-// Create glass table
-function createGlassTable() {
-    const tableGroup = new THREE.Group();
-
-    // Table top (glass)
-    const tableTopGeometry = new THREE.BoxGeometry(3, 0.05, 1.5);
-    const tableTopMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.2,
-        roughness: 0.1,
-        metalness: 0.1,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.1,
-        transmission: 0.9
-    });
-    const tableTop = new THREE.Mesh(tableTopGeometry, tableTopMaterial);
-    tableTop.position.y = 0.8;
-    tableTop.castShadow = true;
-    tableTop.receiveShadow = true;
-    tableGroup.add(tableTop);
-
-    // Neon edges
-    const edgeGeometry = new THREE.BoxGeometry(3.1, 0.02, 0.02);
-    const edgeMaterial = new THREE.MeshStandardMaterial({
+    const neonMat = new THREE.MeshStandardMaterial({
         color: 0x00ffff,
         emissive: 0x00ffff,
-        emissiveIntensity: 2
+        emissiveIntensity: 0.5
     });
 
-    // Top edges
-    const topEdge1 = new THREE.Mesh(edgeGeometry, edgeMaterial);
-    topEdge1.position.set(0, 0.825, 0.75);
-    tableGroup.add(topEdge1);
-
-    const topEdge2 = new THREE.Mesh(edgeGeometry, edgeMaterial);
-    topEdge2.position.set(0, 0.825, -0.75);
-    tableGroup.add(topEdge2);
-
-    const sideEdge1 = new THREE.Mesh(
-        new THREE.BoxGeometry(0.02, 0.02, 1.5),
-        edgeMaterial
+    const backNeon = new THREE.Mesh(
+        new THREE.BoxGeometry(roomWidth * 0.6, 0.015, 0.015),
+        neonMat
     );
-    sideEdge1.position.set(1.55, 0.825, 0);
-    tableGroup.add(sideEdge1);
+    backNeon.position.set(0, 0.4, -roomDepth / 2 + 0.02);
+    scene.add(backNeon);
+}
 
-    const sideEdge2 = new THREE.Mesh(
-        new THREE.BoxGeometry(0.02, 0.02, 1.5),
-        edgeMaterial
+function createDesk() {
+    const deskGroup = new THREE.Group();
+
+    const deskWidth = 1.8;
+    const deskDepth = 0.7;
+    const deskHeight = 0.75;
+    const topThickness = 0.035;
+
+    const deskTopMat = new THREE.MeshStandardMaterial({
+        color: 0x1a1a28,
+        roughness: 0.6,
+        metalness: 0.2
+    });
+
+    const deskTop = new THREE.Mesh(
+        new THREE.BoxGeometry(deskWidth, topThickness, deskDepth),
+        deskTopMat
     );
-    sideEdge2.position.set(-1.55, 0.825, 0);
-    tableGroup.add(sideEdge2);
+    deskTop.position.y = deskHeight;
+    deskTop.castShadow = true;
+    deskTop.receiveShadow = true;
+    deskGroup.add(deskTop);
 
-    // Table legs
-    const legGeometry = new THREE.BoxGeometry(0.1, 0.8, 0.1);
-    const legMaterial = new THREE.MeshStandardMaterial({
-        color: 0x1a1a2e,
+    const legMat = new THREE.MeshStandardMaterial({
+        color: 0x151520,
+        roughness: 0.3,
+        metalness: 0.8
+    });
+
+    const legPositions = [
+        [-deskWidth / 2 + 0.08, 0, -deskDepth / 2 + 0.08],
+        [deskWidth / 2 - 0.08, 0, -deskDepth / 2 + 0.08],
+        [-deskWidth / 2 + 0.08, 0, deskDepth / 2 - 0.08],
+        [deskWidth / 2 - 0.08, 0, deskDepth / 2 - 0.08]
+    ];
+
+    legPositions.forEach(pos => {
+        const leg = new THREE.Mesh(
+            new THREE.BoxGeometry(0.04, deskHeight, 0.04),
+            legMat
+        );
+        leg.position.set(pos[0], deskHeight / 2, pos[2]);
+        leg.castShadow = true;
+        deskGroup.add(leg);
+    });
+
+    scene.add(deskGroup);
+}
+
+function createMonitor() {
+    const monitorGroup = new THREE.Group();
+
+    const baseMat = new THREE.MeshStandardMaterial({
+        color: 0x0a0a12,
         roughness: 0.3,
         metalness: 0.7
     });
 
-    const positions = [
-        [1.4, 0.4, 0.7],
-        [-1.4, 0.4, 0.7],
-        [1.4, 0.4, -0.7],
-        [-1.4, 0.4, -0.7]
-    ];
-
-    positions.forEach(pos => {
-        const leg = new THREE.Mesh(legGeometry, legMaterial);
-        leg.position.set(...pos);
-        leg.castShadow = true;
-        tableGroup.add(leg);
-    });
-
-    scene.add(tableGroup);
-}
-
-// Create monitor
-function createMonitor() {
-    const monitorGroup = new THREE.Group();
-
-    // Monitor stand base (шире)
     const standBase = new THREE.Mesh(
-        new THREE.BoxGeometry(0.4, 0.02, 0.25),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a2e,
-            roughness: 0.3,
-            metalness: 0.7
-        })
+        new THREE.BoxGeometry(0.2, 0.012, 0.15),
+        baseMat
     );
-    standBase.position.set(-0.6, 0.8, -0.3);
+    standBase.position.set(0, 0.76, -0.22);
     monitorGroup.add(standBase);
 
-    // Monitor stand
-    const stand = new THREE.Mesh(
-        new THREE.BoxGeometry(0.05, 0.15, 0.05),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a2e,
-            roughness: 0.3,
-            metalness: 0.7
-        })
+    const standNeck = new THREE.Mesh(
+        new THREE.BoxGeometry(0.03, 0.18, 0.03),
+        baseMat
     );
-    stand.position.set(-0.6, 0.875, -0.3);
-    monitorGroup.add(stand);
+    standNeck.position.set(0, 0.86, -0.22);
+    monitorGroup.add(standNeck);
 
-    // Monitor back panel (шире)
-    const backPanel = new THREE.Mesh(
-        new THREE.BoxGeometry(0.7, 0.4, 0.05),
-        new THREE.MeshStandardMaterial({
-            color: 0x0a0a15,
-            roughness: 0.4,
-            metalness: 0.6
-        })
-    );
-    backPanel.position.set(-0.6, 1.05, -0.3);
-    monitorGroup.add(backPanel);
-
-    // Monitor screen (main body) - шире
-    const screenBody = new THREE.Mesh(
-        new THREE.BoxGeometry(0.68, 0.38, 0.03),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a2e,
-            roughness: 0.2,
-            metalness: 0.8
-        })
-    );
-    screenBody.position.set(-0.6, 1.05, -0.28);
-    monitorGroup.add(screenBody);
-
-    // Screen bezel (frame) - шире
-    const bezel = new THREE.Mesh(
-        new THREE.BoxGeometry(0.7, 0.4, 0.02),
-        new THREE.MeshStandardMaterial({
-            color: 0x0a0a15,
-            roughness: 0.3,
-            metalness: 0.7
-        })
-    );
-    bezel.position.set(-0.6, 1.05, -0.27);
-    monitorGroup.add(bezel);
-
-    // Screen display (glowing) - шире, с текстурами/паттерном
-    const displayGeometry = new THREE.PlaneGeometry(0.65, 0.35);
-    const displayMaterial = new THREE.MeshStandardMaterial({
-        color: 0x001122,
-        emissive: 0x003366,
-        emissiveIntensity: 0.8
+    const frameMat = new THREE.MeshStandardMaterial({
+        color: 0x050508,
+        roughness: 0.4,
+        metalness: 0.5
     });
-    
-    // Создаем текстуру с паттерном (имитация изображения на экране)
-    const canvas = document.createElement('canvas');
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext('2d');
-    
-    // Градиент фон
-    const gradient = ctx.createLinearGradient(0, 0, 512, 512);
-    gradient.addColorStop(0, '#001122');
-    gradient.addColorStop(0.5, '#003366');
-    gradient.addColorStop(1, '#001133');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 512, 512);
-    
-    // Добавляем паттерн (сетка/код)
-    ctx.strokeStyle = '#00ffff';
-    ctx.lineWidth = 1;
-    for (let i = 0; i < 20; i++) {
-        ctx.beginPath();
-        ctx.moveTo(i * 25, 0);
-        ctx.lineTo(i * 25, 512);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, i * 25);
-        ctx.lineTo(512, i * 25);
-        ctx.stroke();
-    }
-    
-    // Добавляем текст/символы
-    ctx.fillStyle = '#00ffff';
-    ctx.font = '20px monospace';
-    ctx.fillText('SYSTEM ONLINE', 50, 100);
-    ctx.fillText('> INITIALIZING...', 50, 150);
-    ctx.fillText('> COMPONENTS OK', 50, 200);
-    
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.needsUpdate = true;
-    displayMaterial.map = texture;
-    displayMaterial.emissiveMap = texture;
-    
-    const display = new THREE.Mesh(displayGeometry, displayMaterial);
-    display.rotation.y = Math.PI;
-    display.position.set(-0.6, 1.05, -0.26);
-    monitorGroup.add(display);
 
-    // RGB accent strips on monitor (шире)
-    const rgbStrip1 = new THREE.Mesh(
-        new THREE.BoxGeometry(0.68, 0.01, 0.001),
+    const monitorFrame = new THREE.Mesh(
+        new THREE.BoxGeometry(0.55, 0.35, 0.025),
+        frameMat
+    );
+    monitorFrame.position.set(0, 1.12, -0.25);
+    monitorGroup.add(monitorFrame);
+
+    const screenMat = new THREE.MeshStandardMaterial({
+        color: 0x020204,
+        roughness: 0.1,
+        metalness: 0.3
+    });
+
+    const screen = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.52, 0.32),
+        screenMat
+    );
+    screen.position.set(0, 1.12, -0.237);
+    monitorGroup.add(screen);
+
+    monitorGroup.position.x = -0.35;
+    scene.add(monitorGroup);
+}
+
+function createKeyboardMouse() {
+    // Keyboard
+    const kbGroup = new THREE.Group();
+
+    const kbBase = new THREE.Mesh(
+        new THREE.BoxGeometry(0.35, 0.015, 0.12),
         new THREE.MeshStandardMaterial({
-            color: 0x00ffff,
-            emissive: 0x00ffff,
-            emissiveIntensity: 1.5
+            color: 0x1a1a2a,
+            roughness: 0.4,
+            metalness: 0.5
         })
     );
-    rgbStrip1.position.set(-0.6, 1.24, -0.27);
-    monitorGroup.add(rgbStrip1);
+    kbGroup.add(kbBase);
 
-    const rgbStrip2 = new THREE.Mesh(
-        new THREE.BoxGeometry(0.68, 0.01, 0.001),
-        new THREE.MeshStandardMaterial({
-            color: 0x00ffff,
-            emissive: 0x00ffff,
-            emissiveIntensity: 1.5
-        })
+    const keysArea = new THREE.Mesh(
+        new THREE.BoxGeometry(0.33, 0.008, 0.1),
+        new THREE.MeshStandardMaterial({ color: 0x2a2a3a })
     );
-    rgbStrip2.position.set(-0.6, 0.86, -0.27);
-    monitorGroup.add(rgbStrip2);
+    keysArea.position.y = 0.01;
+    kbGroup.add(keysArea);
 
-    // Monitor logo/brand (decorative)
-    const logo = new THREE.Mesh(
-        new THREE.BoxGeometry(0.08, 0.02, 0.01),
+    // RGB underglow
+    const kbRgb = new THREE.Mesh(
+        new THREE.BoxGeometry(0.34, 0.002, 0.11),
         new THREE.MeshStandardMaterial({
             color: 0x00ffff,
             emissive: 0x00ffff,
             emissiveIntensity: 0.8
         })
     );
-    logo.position.set(-0.6, 0.85, -0.27);
-    monitorGroup.add(logo);
+    kbRgb.position.y = -0.005;
+    kbGroup.add(kbRgb);
 
-    scene.add(monitorGroup);
-}
+    kbGroup.position.set(-0.35, 0.76, 0.15);
+    scene.add(kbGroup);
 
-// Create keyboard
-function createKeyboard() {
-    const keyboardGroup = new THREE.Group();
-
-    // Keyboard base
-    const keyboardBase = new THREE.Mesh(
-        new THREE.BoxGeometry(0.4, 0.02, 0.15),
-        new THREE.MeshStandardMaterial({
-            color: 0x0a0a15,
-            roughness: 0.4,
-            metalness: 0.6
-        })
-    );
-    keyboardBase.position.set(-0.5, 0.81, 0.25);
-    keyboardGroup.add(keyboardBase);
-
-    // Keyboard keys area
-    const keysArea = new THREE.Mesh(
-        new THREE.BoxGeometry(0.38, 0.015, 0.13),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a2e,
-            roughness: 0.3,
-            metalness: 0.5
-        })
-    );
-    keysArea.position.set(-0.5, 0.817, 0.25);
-    keyboardGroup.add(keysArea);
-
-    // Individual keys
-    const keyMaterial = new THREE.MeshStandardMaterial({
-        color: 0x2a2a3e,
-        roughness: 0.2,
-        metalness: 0.3
-    });
-
-    // Function keys row - точно над клавиатурой
-    // Клавиатура: позиция -0.5, 0.81, 0.25, размер 0.4x0.15
-    // Клавиши должны быть от -0.7 до -0.3 по X, от 0.18 до 0.32 по Z
-    for (let i = 0; i < 12; i++) {
-        const key = new THREE.Mesh(
-            new THREE.BoxGeometry(0.025, 0.01, 0.025),
-            keyMaterial
-        );
-        // Центрируем функциональные клавиши на клавиатуре
-        key.position.set(-0.5 - 0.15 + i * 0.027, 0.825, 0.32);
-        keyboardGroup.add(key);
-    }
-
-    // Main keys (QWERTY layout) - точно над клавиатурой
-    const rows = [
-        { start: -0.65, y: 0.825, z: 0.28, count: 13, offset: 0 },
-        { start: -0.64, y: 0.825, z: 0.25, count: 12, offset: 0.015 },
-        { start: -0.63, y: 0.825, z: 0.22, count: 11, offset: 0.03 },
-        { start: -0.62, y: 0.825, z: 0.19, count: 10, offset: 0.045 }
-    ];
-
-    rows.forEach(row => {
-        for (let i = 0; i < row.count; i++) {
-            const key = new THREE.Mesh(
-                new THREE.BoxGeometry(0.025, 0.01, 0.025),
-                keyMaterial
-            );
-            key.position.set(row.start + i * 0.027 + row.offset, row.y, row.z);
-            keyboardGroup.add(key);
-        }
-    });
-
-    // Spacebar (larger key) - точно над клавиатурой
-    const spacebar = new THREE.Mesh(
-        new THREE.BoxGeometry(0.15, 0.01, 0.025),
-        keyMaterial
-    );
-    spacebar.position.set(-0.5, 0.825, 0.16);
-    keyboardGroup.add(spacebar);
-
-    // RGB backlight strip
-    const rgbBacklight = new THREE.Mesh(
-        new THREE.BoxGeometry(0.38, 0.001, 0.13),
-        new THREE.MeshStandardMaterial({
-            color: 0x00ffff,
-            emissive: 0x00ffff,
-            emissiveIntensity: 1.2
-        })
-    );
-    rgbBacklight.position.set(-0.5, 0.815, 0.25);
-    keyboardGroup.add(rgbBacklight);
-
-    // Keyboard cable - идет к задней панели системного блока
-    // После поворота на 90° задняя панель теперь на x = -0.2 (было z = -0.2)
-    const keyboardCable = createCablePath([
-        new THREE.Vector3(-0.5, 0.81, 0.25),
-        new THREE.Vector3(-0.5, 0.81, 0.05),
-        new THREE.Vector3(-0.2, 0.81, 0.05),
-        new THREE.Vector3(-0.2, 0.25, 0.05),
-        new THREE.Vector3(-0.2, 0.25, 0)
-    ], 0.003, 0x1a1a1a);
-    keyboardGroup.add(keyboardCable);
-
-    // Mouse cable - идет к задней панели системного блока
-    const mouseCable = createCablePath([
-        new THREE.Vector3(-0.4, 0.81, 0.25),
-        new THREE.Vector3(-0.4, 0.81, 0.05),
-        new THREE.Vector3(-0.15, 0.81, 0.05),
-        new THREE.Vector3(-0.15, 0.3, 0.05),
-        new THREE.Vector3(-0.2, 0.3, 0)
-    ], 0.002, 0x1a1a1a);
-    keyboardGroup.add(mouseCable);
-
-    scene.add(keyboardGroup);
-}
-
-// Create PC case
-function createPCCase() {
-    pcCase = new THREE.Group();
-
-    // Case dimensions
-    const width = 0.5;
-    const height = 0.6;
-    const depth = 0.4;
-
-    // Case material
-    const caseMaterial = new THREE.MeshStandardMaterial({
-        color: 0x1a1a2e,
-        roughness: 0.4,
-        metalness: 0.8
-    });
-
-    // Back panel - удалена
-    // USB ports - удалены
-
-    // Top panel
-    const topPanel = new THREE.Mesh(
-        new THREE.BoxGeometry(width, 0.02, depth),
-        caseMaterial
-    );
-    topPanel.position.set(0, height, 0);
-    pcCase.add(topPanel);
-
-    // Bottom panel
-    const bottomPanel = new THREE.Mesh(
-        new THREE.BoxGeometry(width, 0.02, depth),
-        caseMaterial
-    );
-    bottomPanel.position.set(0, 0, 0);
-    pcCase.add(bottomPanel);
-
-    // Left panel - удалена
-
-    // Right panel (возвращаем правую стенку - здесь будет материнская плата)
-    const rightPanel = new THREE.Mesh(
-        new THREE.BoxGeometry(0.02, height, depth),
-        caseMaterial
-    );
-    rightPanel.position.set(width / 2, height / 2, 0);
-    pcCase.add(rightPanel);
-
-    // Front panel (возвращаем переднюю стенку)
-    const frontPanel = new THREE.Mesh(
-        new THREE.BoxGeometry(width, height, 0.02),
-        caseMaterial
-    );
-    frontPanel.position.set(0, height / 2, depth / 2);
-    pcCase.add(frontPanel);
-
-    // Position case on table
-    pcCase.position.set(0, 0.85, 0);
-    // Поворачиваем системный блок на 90 градусов, чтобы открытая сторона смотрела в сторону камеры
-    pcCase.rotation.y = Math.PI / 2;
-    scene.add(pcCase);
-}
-
-// Create motherboard
-function createMotherboard() {
-    motherboard = new THREE.Group();
-
-    const mbWidth = 0.3;
-    const mbHeight = 0.24;
-    const mbThickness = 0.01; // Увеличена толщина, чтобы плата была видна
-
-    // Main PCB - вертикально, прикреплена к правой стенке
-    const pcbGeometry = new THREE.BoxGeometry(mbThickness, mbHeight, mbWidth);
-    const pcbMaterial = new THREE.MeshStandardMaterial({
-        color: 0x2d5016,
-        roughness: 0.7,
-        metalness: 0.1
-    });
-    const pcb = new THREE.Mesh(pcbGeometry, pcbMaterial);
-    // Плата прикреплена к правой стенке, центр платы на стенке
-    pcb.position.x = 0;
-    motherboard.add(pcb);
-
-    // PCB traces (decorative lines) - вертикально
-    const traceMaterial = new THREE.MeshStandardMaterial({
-        color: 0x4a7c2a,
-        emissive: 0x2a5a1a,
-        emissiveIntensity: 0.3
-    });
-
-    for (let i = 0; i < 20; i++) {
-        const trace = new THREE.Mesh(
-            new THREE.BoxGeometry(0.001, 0.15, 0.002),
-            traceMaterial
-        );
-        trace.position.set(
-            mbThickness / 2 + 0.001,
-            (Math.random() - 0.5) * mbHeight * 0.8,
-            (Math.random() - 0.5) * mbWidth * 0.8
-        );
-        trace.rotation.x = Math.random() * Math.PI * 2;
-        motherboard.add(trace);
-    }
-
-    // CPU Socket - вертикально
-    const socketGeometry = new THREE.BoxGeometry(0.01, 0.05, 0.05);
-    const socketMaterial = new THREE.MeshStandardMaterial({
-        color: 0x333333,
-        roughness: 0.5,
-        metalness: 0.3
-    });
-    const socket = new THREE.Mesh(socketGeometry, socketMaterial);
-    socket.position.set(mbThickness / 2 + 0.005, 0.05, 0.05);
-    motherboard.add(socket);
-
-    // PCI-E slots - вертикально, правильно размещены на плате
-    for (let i = 0; i < 3; i++) {
-        const pcieSlot = new THREE.Mesh(
-            new THREE.BoxGeometry(0.01, 0.08, 0.002),
-            new THREE.MeshStandardMaterial({ color: 0x1a1a1a })
-        );
-        // Слоты расположены в верхней части платы, по центру по Z
-        pcieSlot.position.set(mbThickness / 2 + 0.005, 0.08, -0.03 + i * 0.03);
-        motherboard.add(pcieSlot);
-    }
-
-    // DIMM slots - вертикально, правильно размещены на плате
-    for (let i = 0; i < 4; i++) {
-        const dimmSlot = new THREE.Mesh(
-            new THREE.BoxGeometry(0.01, 0.12, 0.002),
-            new THREE.MeshStandardMaterial({ color: 0x2a2a2a })
-        );
-        // Слоты расположены в нижней части платы, равномерно по Z
-        dimmSlot.position.set(mbThickness / 2 + 0.005, -0.1, -0.075 + i * 0.05);
-        motherboard.add(dimmSlot);
-    }
-
-    // M.2 slot - вертикально
-    const m2Slot = new THREE.Mesh(
-        new THREE.BoxGeometry(0.01, 0.08, 0.002),
-        new THREE.MeshStandardMaterial({ color: 0x1a1a1a })
-    );
-    m2Slot.position.set(mbThickness / 2 + 0.005, -0.05, 0.08);
-    motherboard.add(m2Slot);
-
-    // Chipset with heatsink - вертикально
-    const chipsetGeometry = new THREE.BoxGeometry(0.015, 0.03, 0.03);
-    const chipsetMaterial = new THREE.MeshStandardMaterial({
-        color: 0x444444,
+    // Mouse
+    const mouseMat = new THREE.MeshStandardMaterial({
+        color: 0x1a1a2a,
         roughness: 0.3,
-        metalness: 0.7
+        metalness: 0.5
     });
-    const chipset = new THREE.Mesh(chipsetGeometry, chipsetMaterial);
-    chipset.position.set(mbThickness / 2 + 0.0075, -0.1, 0.05);
-    motherboard.add(chipset);
 
-    // SATA connectors - вертикально
-    for (let i = 0; i < 4; i++) {
-        const sataConnector = new THREE.Mesh(
-            new THREE.BoxGeometry(0.01, 0.015, 0.01),
-            new THREE.MeshStandardMaterial({ color: 0x333333 })
-        );
-        sataConnector.position.set(mbThickness / 2 + 0.005, 0.12, -0.06 + i * 0.04);
-        motherboard.add(sataConnector);
-    }
-
-    // 24-pin connector - вертикально
-    const power24Pin = new THREE.Mesh(
-        new THREE.BoxGeometry(0.01, 0.02, 0.04),
-        new THREE.MeshStandardMaterial({ color: 0x1a1a1a })
+    const mouseBody = new THREE.Mesh(
+        new THREE.BoxGeometry(0.05, 0.025, 0.09),
+        mouseMat
     );
-    power24Pin.position.set(mbThickness / 2 + 0.005, 0.13, 0.08);
-    motherboard.add(power24Pin);
+    mouseBody.position.set(0, 0.77, 0.15);
+    scene.add(mouseBody);
 
-    // Материнская плата прикреплена к правой стенке корпуса
-    // Размеры корпуса (те же, что в createPCCase)
-    const caseWidth = 0.5;
-    const caseHeight = 0.6;
-    const caseDepth = 0.4;
-    // Позиция: правая стенка на x = caseWidth/2 = 0.25, толщина стенки = 0.02
-    // Внутренняя поверхность стенки: x = 0.25 - 0.02 = 0.23
-    // Плата прижата к внутренней поверхности стенки, центр платы по X: 0.23 - mbThickness/2 = 0.23 - 0.005 = 0.225
-    // Центрирована по высоте и глубине, чтобы все компоненты помещались
-    // mbWidth = 0.3, поэтому центрируем по Z: от -0.15 до +0.15
-    motherboard.position.set(caseWidth / 2 - 0.02 - mbThickness / 2, caseHeight / 2, 0);
-    motherboard.userData = { type: 'motherboard', name: 'motherboard' };
-    pcCase.add(motherboard);
-}
-
-// Create CPU
-function createCPU() {
-    cpu = new THREE.Group();
-
-    // CPU die
-    const cpuGeometry = new THREE.BoxGeometry(0.04, 0.005, 0.04);
-    const cpuMaterial = new THREE.MeshStandardMaterial({
-        color: 0x2a2a2a,
-        roughness: 0.2,
-        metalness: 0.8
-    });
-    const cpuDie = new THREE.Mesh(cpuGeometry, cpuMaterial);
-    cpuDie.position.y = 0.01;
-    cpu.add(cpuDie);
-
-    // CPU pins (visual representation)
-    const pinGeometry = new THREE.BoxGeometry(0.001, 0.01, 0.001);
-    const pinMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa });
-    for (let i = 0; i < 20; i++) {
-        const pin = new THREE.Mesh(pinGeometry, pinMaterial);
-        pin.position.set(
-            (Math.random() - 0.5) * 0.03,
-            0.005,
-            (Math.random() - 0.5) * 0.03
-        );
-        cpu.add(pin);
-    }
-
-    // CPU cooler
-    const coolerBase = new THREE.Mesh(
-        new THREE.BoxGeometry(0.05, 0.01, 0.05),
-        new THREE.MeshStandardMaterial({
-            color: 0x333333,
-            roughness: 0.3,
-            metalness: 0.7
-        })
-    );
-    coolerBase.position.y = 0.025;
-    cpu.add(coolerBase);
-
-    // Heat pipes
-    for (let i = 0; i < 4; i++) {
-        const heatPipe = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.002, 0.002, 0.03, 8),
-            new THREE.MeshStandardMaterial({
-                color: 0x444444,
-                roughness: 0.2,
-                metalness: 0.9
-            })
-        );
-        heatPipe.rotation.x = Math.PI / 2;
-        heatPipe.position.set(
-            (i % 2 - 0.5) * 0.015,
-            0.04,
-            (Math.floor(i / 2) - 0.5) * 0.015
-        );
-        cpu.add(heatPipe);
-    }
-
-    // Fan
-    const fanGroup = new THREE.Group();
-    const fanHousing = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.02, 0.02, 0.005, 32),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a1a,
-            roughness: 0.5,
-            metalness: 0.3
-        })
-    );
-    fanHousing.rotation.x = Math.PI / 2;
-    fanHousing.position.y = 0.055;
-    fanGroup.add(fanHousing);
-
-    // Fan blades
-    const bladeMaterial = new THREE.MeshStandardMaterial({
-        color: 0x2a2a2a,
-        emissive: 0x00ffff,
-        emissiveIntensity: 0.3
-    });
-    for (let i = 0; i < 7; i++) {
-        const blade = new THREE.Mesh(
-            new THREE.BoxGeometry(0.015, 0.001, 0.008),
-            bladeMaterial
-        );
-        blade.rotation.z = (i / 7) * Math.PI * 2;
-        blade.position.y = 0.055;
-        fanGroup.add(blade);
-    }
-    cpu.add(fanGroup);
-
-    // RGB ring
-    const rgbRing = new THREE.Mesh(
-        new THREE.TorusGeometry(0.022, 0.002, 16, 32),
+    // Mouse RGB
+    const mouseRgb = new THREE.Mesh(
+        new THREE.BoxGeometry(0.02, 0.001, 0.06),
         new THREE.MeshStandardMaterial({
             color: 0x00ffff,
             emissive: 0x00ffff,
             emissiveIntensity: 1
         })
     );
-    rgbRing.rotation.x = Math.PI / 2;
-    rgbRing.position.y = 0.055;
-    cpu.add(rgbRing);
-
-    // CPU на материнской плате (вертикально на правой стенке)
-    // Размеры корпуса
-    const caseWidth = 0.5;
-    const caseHeight = 0.6;
-    // Позиция: материнская плата на x = caseWidth/2 - 0.02 - mbThickness/2 = 0.225
-    // CPU должен быть на поверхности платы (правая сторона платы, где сокет)
-    // Сокет CPU на плате имеет позицию x = mbThickness/2 + 0.005 = 0.01 относительно группы платы
-    // Реальная позиция CPU: x = 0.225 + 0.01 = 0.235
-    const mbThickness = 0.01;
-    cpu.position.set(caseWidth / 2 - 0.02 - mbThickness / 2 + 0.01, caseHeight / 2 + 0.05, 0.05);
-    cpu.rotation.x = -Math.PI / 2; // Поворачиваем CPU для вертикальной платы
-    cpu.userData = { type: 'cpu', name: 'cpu' };
-    pcCase.add(cpu);
-
-    // Animate fan
-    function animateFan() {
-        fanGroup.rotation.z += 0.1;
-        requestAnimationFrame(animateFan);
-    }
-    animateFan();
+    mouseRgb.position.set(0, 0.785, 0.15);
+    scene.add(mouseRgb);
 }
 
-// Create RAM
-function createRAM() {
-    ram = new THREE.Group();
+function createPCCase() {
+    pcCase = new THREE.Group();
+
+    const W = 0.22;
+    const H = 0.46;
+    const D = 0.42;
+    const T = 0.012;
+
+    const frameMat = new THREE.MeshStandardMaterial({
+        color: 0x18182a,
+        roughness: 0.3,
+        metalness: 0.85
+    });
+
+    const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0x88ccff,
+        transparent: true,
+        opacity: 0.12,
+        roughness: 0.05,
+        metalness: 0,
+        transmission: 0.92,
+        thickness: 0.004
+    });
+
+    const darkMat = new THREE.MeshStandardMaterial({
+        color: 0x08080f,
+        roughness: 0.5,
+        metalness: 0.6
+    });
+
+    // Frame edges
+    const frameEdge = new THREE.BoxGeometry(0.014, H, 0.014);
+    
+    const fl = new THREE.Mesh(frameEdge, frameMat);
+    fl.position.set(-W/2, H/2, D/2);
+    pcCase.add(fl);
+    
+    const fr = new THREE.Mesh(frameEdge, frameMat);
+    fr.position.set(W/2, H/2, D/2);
+    pcCase.add(fr);
+    
+    const bl = new THREE.Mesh(frameEdge, frameMat);
+    bl.position.set(-W/2, H/2, -D/2);
+    pcCase.add(bl);
+    
+    const br = new THREE.Mesh(frameEdge, frameMat);
+    br.position.set(W/2, H/2, -D/2);
+    pcCase.add(br);
+
+    const topFront = new THREE.Mesh(new THREE.BoxGeometry(W, 0.014, 0.014), frameMat);
+    topFront.position.set(0, H, D/2);
+    pcCase.add(topFront);
+
+    const topBack = new THREE.Mesh(new THREE.BoxGeometry(W, 0.014, 0.014), frameMat);
+    topBack.position.set(0, H, -D/2);
+    pcCase.add(topBack);
+
+    const topLeft = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.014, D), frameMat);
+    topLeft.position.set(-W/2, H, 0);
+    pcCase.add(topLeft);
+
+    const topRight = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.014, D), frameMat);
+    topRight.position.set(W/2, H, 0);
+    pcCase.add(topRight);
+
+    const botFront = new THREE.Mesh(new THREE.BoxGeometry(W, 0.014, 0.014), frameMat);
+    botFront.position.set(0, 0, D/2);
+    pcCase.add(botFront);
+
+    // Glass panels
+    const leftGlass = new THREE.Mesh(
+        new THREE.BoxGeometry(0.003, H * 0.94, D * 0.94),
+        glassMat
+    );
+    leftGlass.position.set(-W/2 - 0.002, H/2, 0);
+    pcCase.add(leftGlass);
+
+    const frontGlass = new THREE.Mesh(
+        new THREE.BoxGeometry(W * 0.94, H * 0.65, 0.003),
+        glassMat
+    );
+    frontGlass.position.set(0, H * 0.58, D/2 + 0.002);
+    pcCase.add(frontGlass);
+
+    // Solid panels
+    const rightPanel = new THREE.Mesh(
+        new THREE.BoxGeometry(T, H, D),
+        frameMat
+    );
+    rightPanel.position.set(W/2 + T/2, H/2, 0);
+    pcCase.add(rightPanel);
+
+    const backPanel = new THREE.Mesh(
+        new THREE.BoxGeometry(W, H, T),
+        darkMat
+    );
+    backPanel.position.set(0, H/2, -D/2 - T/2);
+    pcCase.add(backPanel);
+
+    const topPanel = new THREE.Mesh(
+        new THREE.BoxGeometry(W, T, D),
+        frameMat
+    );
+    topPanel.position.set(0, H + T/2, 0);
+    pcCase.add(topPanel);
+
+    const bottomPanel = new THREE.Mesh(
+        new THREE.BoxGeometry(W, T, D),
+        frameMat
+    );
+    bottomPanel.position.set(0, -T/2, 0);
+    pcCase.add(bottomPanel);
+
+    const frontIO = new THREE.Mesh(
+        new THREE.BoxGeometry(W * 0.94, H * 0.18, T),
+        darkMat
+    );
+    frontIO.position.set(0, H * 0.1, D/2);
+    pcCase.add(frontIO);
+
+    // Power button
+    const powerBtn = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.012, 0.012, 0.004, 16),
+        new THREE.MeshStandardMaterial({
+            color: 0x00ffff,
+            emissive: 0x00ffff,
+            emissiveIntensity: 1
+        })
+    );
+    powerBtn.rotation.x = Math.PI / 2;
+    powerBtn.position.set(0, H * 0.12, D/2 + 0.008);
+    pcCase.add(powerBtn);
+
+    // RGB strips
+    const rgbMat = new THREE.MeshStandardMaterial({
+        color: 0x00ffff,
+        emissive: 0x00ffff,
+        emissiveIntensity: 1.5
+    });
+
+    const bottomRgb = new THREE.Mesh(
+        new THREE.BoxGeometry(W * 0.8, 0.006, D * 0.8),
+        rgbMat
+    );
+    bottomRgb.position.set(0, 0.008, 0);
+    pcCase.add(bottomRgb);
+
+    const frontRgbL = new THREE.Mesh(
+        new THREE.BoxGeometry(0.004, H * 0.45, 0.004),
+        rgbMat
+    );
+    frontRgbL.position.set(-W/2 + 0.018, H * 0.6, D/2 - 0.01);
+    pcCase.add(frontRgbL);
+
+    const frontRgbR = new THREE.Mesh(
+        new THREE.BoxGeometry(0.004, H * 0.45, 0.004),
+        rgbMat
+    );
+    frontRgbR.position.set(W/2 - 0.018, H * 0.6, D/2 - 0.01);
+    pcCase.add(frontRgbR);
+
+    // Create components
+    createMotherboard(W, H, D, T);
+    createCPU(W, H, D);
+    createRAM(W, H, D);
+    createGPU(W, H, D);
+    createPSU(W, H, D, T);
+    createStorage(W, H, D);
+    createFans(W, H, D, T);
+
+    pcCase.position.set(0.55, 0.785, 0);
+    pcCase.castShadow = true;
+    scene.add(pcCase);
+}
+
+function createMotherboard(W, H, D, T) {
+    const mbGroup = new THREE.Group();
+    
+    const mbW = W * 0.8;
+    const mbH = H * 0.52;
+    const mbT = 0.006;
+
+    const pcbMat = new THREE.MeshStandardMaterial({
+        color: 0x1a3a1a,
+        roughness: 0.7,
+        metalness: 0.1
+    });
+    const pcb = new THREE.Mesh(
+        new THREE.BoxGeometry(mbW, mbH, mbT),
+        pcbMat
+    );
+    mbGroup.add(pcb);
+
+    const traceMat = new THREE.MeshStandardMaterial({
+        color: 0x2d5d2d,
+        emissive: 0x1a3d1a,
+        emissiveIntensity: 0.15
+    });
+    for (let i = 0; i < 10; i++) {
+        const trace = new THREE.Mesh(
+            new THREE.BoxGeometry(0.0015, Math.random() * mbH * 0.3 + 0.02, 0.001),
+            traceMat
+        );
+        trace.position.set(
+            (Math.random() - 0.5) * mbW * 0.75,
+            (Math.random() - 0.5) * mbH * 0.6,
+            mbT/2 + 0.001
+        );
+        mbGroup.add(trace);
+    }
+
+    const socket = new THREE.Mesh(
+        new THREE.BoxGeometry(0.042, 0.042, 0.005),
+        new THREE.MeshStandardMaterial({ color: 0x3a3a3a, metalness: 0.5 })
+    );
+    socket.position.set(-mbW * 0.12, mbH * 0.2, mbT/2 + 0.003);
+    mbGroup.add(socket);
 
     for (let i = 0; i < 4; i++) {
-        const ramStick = new THREE.Group();
-
-        // RAM PCB - уменьшен размер, чтобы не выходила за границы
-        const ramPCB = new THREE.Mesh(
-            new THREE.BoxGeometry(0.08, 0.03, 0.002),
-            new THREE.MeshStandardMaterial({
-                color: 0x2d5016,
-                roughness: 0.7,
-                metalness: 0.1
-            })
+        const dimm = new THREE.Mesh(
+            new THREE.BoxGeometry(0.004, 0.07, 0.005),
+            new THREE.MeshStandardMaterial({ color: 0x252530 })
         );
-        ramStick.add(ramPCB);
+        dimm.position.set(mbW * 0.22 + i * 0.009, mbH * 0.15, mbT/2 + 0.003);
+        mbGroup.add(dimm);
+    }
 
-        // RAM chips
-        for (let j = 0; j < 4; j++) {
-            const chip = new THREE.Mesh(
-                new THREE.BoxGeometry(0.015, 0.02, 0.003),
-                new THREE.MeshStandardMaterial({
-                    color: 0x1a1a1a,
-                    roughness: 0.5,
-                    metalness: 0.2
-                })
-            );
-            chip.position.set(-0.04 + j * 0.025, 0, 0.0025);
-            ramStick.add(chip);
-        }
+    for (let i = 0; i < 2; i++) {
+        const pcie = new THREE.Mesh(
+            new THREE.BoxGeometry(0.065, 0.008, 0.005),
+            new THREE.MeshStandardMaterial({ color: 0x151520 })
+        );
+        pcie.position.set(0, -mbH * 0.15 - i * 0.04, mbT/2 + 0.003);
+        mbGroup.add(pcie);
+    }
 
-        // RGB strip - уменьшен размер
-        const rgbStrip = new THREE.Mesh(
-            new THREE.BoxGeometry(0.08, 0.005, 0.001),
+    const chipset = new THREE.Mesh(
+        new THREE.BoxGeometry(0.028, 0.028, 0.01),
+        new THREE.MeshStandardMaterial({ color: 0x404050, metalness: 0.7 })
+    );
+    chipset.position.set(mbW * 0.12, -mbH * 0.28, mbT/2 + 0.005);
+    mbGroup.add(chipset);
+
+    const ioShield = new THREE.Mesh(
+        new THREE.BoxGeometry(mbW * 0.35, 0.028, 0.012),
+        new THREE.MeshStandardMaterial({ color: 0x303040 })
+    );
+    ioShield.position.set(mbW * 0.18, mbH/2 - 0.02, mbT/2 + 0.006);
+    mbGroup.add(ioShield);
+
+    const power24 = new THREE.Mesh(
+        new THREE.BoxGeometry(0.008, 0.035, 0.015),
+        new THREE.MeshStandardMaterial({ color: 0x101015 })
+    );
+    power24.position.set(mbW/2 - 0.01, mbH * 0.1, mbT/2 + 0.008);
+    mbGroup.add(power24);
+
+    mbGroup.rotation.y = Math.PI / 2;
+    mbGroup.position.set(W/2 - T - mbT/2 - 0.006, H * 0.58, 0);
+    mbGroup.userData = { type: 'motherboard', name: 'motherboard' };
+    pcCase.add(mbGroup);
+}
+
+function createCPU(W, H, D) {
+    const cpuGroup = new THREE.Group();
+
+    const cpuDie = new THREE.Mesh(
+        new THREE.BoxGeometry(0.032, 0.032, 0.003),
+        new THREE.MeshStandardMaterial({ color: 0x2a2a35, metalness: 0.8 })
+    );
+    cpuGroup.add(cpuDie);
+
+    cpuGroup.rotation.y = Math.PI / 2;
+    cpuGroup.position.set(W/2 - 0.03, H * 0.68, 0.02);
+    cpuGroup.userData = { type: 'cpu', name: 'cpu' };
+    pcCase.add(cpuGroup);
+
+    createCPUCooler(W, H, D);
+}
+
+function createCPUCooler(W, H, D) {
+    const coolerGroup = new THREE.Group();
+
+    const base = new THREE.Mesh(
+        new THREE.BoxGeometry(0.038, 0.038, 0.006),
+        new THREE.MeshStandardMaterial({ color: 0x404050, metalness: 0.8 })
+    );
+    coolerGroup.add(base);
+
+    const finMat = new THREE.MeshStandardMaterial({ color: 0x505060, metalness: 0.7 });
+    for (let i = 0; i < 8; i++) {
+        const fin = new THREE.Mesh(
+            new THREE.BoxGeometry(0.034, 0.045, 0.0018),
+            finMat
+        );
+        fin.position.set(0, 0.026, 0.005 + i * 0.0035);
+        coolerGroup.add(fin);
+    }
+
+    const fanShroud = new THREE.Mesh(
+        new THREE.BoxGeometry(0.038, 0.045, 0.01),
+        new THREE.MeshStandardMaterial({ color: 0x252530, transparent: true, opacity: 0.7 })
+    );
+    fanShroud.position.set(0, 0.026, 0.045);
+    coolerGroup.add(fanShroud);
+
+    // Fan blades
+    const bladeGroup = new THREE.Group();
+    const bladeMat = new THREE.MeshStandardMaterial({ color: 0x353540 });
+    for (let i = 0; i < 7; i++) {
+        const blade = new THREE.Mesh(
+            new THREE.BoxGeometry(0.014, 0.0025, 0.006),
+            bladeMat
+        );
+        const angle = (i / 7) * Math.PI * 2;
+        blade.rotation.z = angle;
+        blade.position.x = Math.cos(angle) * 0.01;
+        blade.position.y = Math.sin(angle) * 0.01 + 0.026;
+        bladeGroup.add(blade);
+    }
+    bladeGroup.position.z = 0.045;
+    coolerGroup.add(bladeGroup);
+    
+    // Add to animation array
+    fanBlades.push({ group: bladeGroup, speed: 0.15 });
+
+    const rgbRing = new THREE.Mesh(
+        new THREE.TorusGeometry(0.018, 0.0018, 8, 20),
+        new THREE.MeshStandardMaterial({
+            color: 0x00ffff,
+            emissive: 0x00ffff,
+            emissiveIntensity: 1.2
+        })
+    );
+    rgbRing.position.set(0, 0.026, 0.052);
+    coolerGroup.add(rgbRing);
+
+    coolerGroup.rotation.y = Math.PI / 2;
+    coolerGroup.position.set(W/2 - 0.045, H * 0.68, 0.02);
+    coolerGroup.userData = { type: 'cpuCooler', name: 'cpuCooler' };
+    pcCase.add(coolerGroup);
+}
+
+function createRAM(W, H, D) {
+    const ramGroup = new THREE.Group();
+
+    // RAM sticks - уменьшенные размеры чтобы поместились на материнке
+    for (let i = 0; i < 2; i++) {
+        const stick = new THREE.Group();
+
+        // PCB - вертикальная планка
+        const pcb = new THREE.Mesh(
+            new THREE.BoxGeometry(0.003, 0.028, 0.055),
+            new THREE.MeshStandardMaterial({ color: 0x1a3a1a })
+        );
+        stick.add(pcb);
+
+        // Heatspreader
+        const heatspreader = new THREE.Mesh(
+            new THREE.BoxGeometry(0.005, 0.032, 0.052),
+            new THREE.MeshStandardMaterial({ color: 0x252530, metalness: 0.7 })
+        );
+        stick.add(heatspreader);
+
+        // RGB strip on top
+        const rgb = new THREE.Mesh(
+            new THREE.BoxGeometry(0.001, 0.004, 0.048),
             new THREE.MeshStandardMaterial({
                 color: 0x00ffff,
                 emissive: 0x00ffff,
-                emissiveIntensity: 1.5
+                emissiveIntensity: 1.8
             })
         );
-        rgbStrip.position.set(0, 0.015, 0.003);
-        ramStick.add(rgbStrip);
+        rgb.position.y = 0.016;
+        stick.add(rgb);
 
-        // RAM на материнской плате (вертикально на правой стенке)
-        const caseWidth = 0.5;
-        const caseHeight = 0.6;
-        // RAM должна быть на поверхности материнской платы
-        // Материнская плата на x = caseWidth/2 - 0.02 - mbThickness/2 = 0.225
-        // RAM слоты на плате в нижней части (y = -0.1 относительно центра платы)
-        // RAM должна быть на поверхности платы: x = 0.225 + mbThickness/2 = 0.23
-        // z от -0.1 до 0.05 (4 планки с шагом 0.05, в пределах mbWidth=0.3)
-        const mbThickness = 0.01;
-        ramStick.position.set(caseWidth / 2 - 0.02, caseHeight / 2 - 0.1, -0.1 + i * 0.05);
-        ramStick.rotation.x = -Math.PI / 2; // Поворачиваем для вертикальной платы
-        ramStick.userData = { type: 'ram', name: 'ram' };
-        ram.add(ramStick);
+        // Spacing between sticks
+        stick.position.z = i * 0.008;
+        ramGroup.add(stick);
     }
 
-    pcCase.add(ram);
+    // Поворот и позиция - рядом со слотами DIMM на материнке
+    // Материнка на x ≈ 0.089, RAM должна быть чуть левее (внутрь корпуса)
+    ramGroup.rotation.y = Math.PI / 2;
+    ramGroup.position.set(W/2 - 0.038, H * 0.68, -0.035);
+    ramGroup.userData = { type: 'ram', name: 'ram' };
+    pcCase.add(ramGroup);
 }
 
-// Create GPU
-function createGPU() {
-    gpu = new THREE.Group();
+function createGPU(W, H, D) {
+    const gpuGroup = new THREE.Group();
 
-    // GPU PCB - правильно размещена, чтобы не выходила за границы
-    // Корпус: width=0.5 (X: -0.25 до 0.25), правая стенка на x=0.25
-    // GPU повернута на -Math.PI/2 вокруг X
-    // GPU позиция: x=0.245, поэтому максимальный размер по X = 0.25 - 0.245 = 0.005
-    // Но это слишком мало, поэтому уменьшаем GPU и сдвигаем её немного влево
-    // GPU PCB: уменьшена до 0.1 по X (после поворота), чтобы не выходила за x=0.25
-    const gpuPCB = new THREE.Mesh(
-        new THREE.BoxGeometry(0.1, 0.12, 0.005),
-        new THREE.MeshStandardMaterial({
-            color: 0x2d5016,
-            roughness: 0.7,
-            metalness: 0.1
-        })
+    const gpuLength = 0.18;
+    const gpuHeight = 0.09;
+
+    const pcb = new THREE.Mesh(
+        new THREE.BoxGeometry(gpuLength, 0.003, gpuHeight),
+        new THREE.MeshStandardMaterial({ color: 0x1a3a1a })
     );
-    gpuPCB.position.y = 0.005;
-    gpu.add(gpuPCB);
+    gpuGroup.add(pcb);
 
-    // GPU die
-    const gpuDie = new THREE.Mesh(
-        new THREE.BoxGeometry(0.03, 0.03, 0.01),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a1a,
-            roughness: 0.2,
-            metalness: 0.8
-        })
+    const backplate = new THREE.Mesh(
+        new THREE.BoxGeometry(gpuLength - 0.01, 0.0025, gpuHeight - 0.01),
+        new THREE.MeshStandardMaterial({ color: 0x252530, metalness: 0.8 })
     );
-    gpuDie.position.set(0, 0.01, 0.01);
-    gpu.add(gpuDie);
+    backplate.position.y = 0.003;
+    gpuGroup.add(backplate);
 
-    // VRAM chips
-    for (let i = 0; i < 8; i++) {
-        const vramChip = new THREE.Mesh(
-            new THREE.BoxGeometry(0.01, 0.01, 0.005),
-            new THREE.MeshStandardMaterial({
-                color: 0x2a2a2a,
-                roughness: 0.3,
-                metalness: 0.6
-            })
-        );
-        vramChip.position.set(
-            -0.08 + (i % 4) * 0.05,
-            0.01,
-            0.01
-        );
-        gpu.add(vramChip);
-    }
-
-    // Heatsink - правильно размещен, чтобы не выходил за границы
-    // Уменьшен по X, чтобы не выходил за x=0.25
-    const heatsink = new THREE.Mesh(
-        new THREE.BoxGeometry(0.08, 0.08, 0.04),
-        new THREE.MeshStandardMaterial({
-            color: 0x444444,
-            roughness: 0.3,
-            metalness: 0.7
-        })
+    const shroud = new THREE.Mesh(
+        new THREE.BoxGeometry(gpuLength - 0.015, 0.028, gpuHeight - 0.01),
+        new THREE.MeshStandardMaterial({ color: 0x151520 })
     );
-    heatsink.position.set(0, 0.05, 0.02);
-    gpu.add(heatsink);
+    shroud.position.y = -0.017;
+    gpuGroup.add(shroud);
 
-    // Heat fins - правильно размещены
-    for (let i = 0; i < 20; i++) {
-        const fin = new THREE.Mesh(
-            new THREE.BoxGeometry(0.07, 0.06, 0.001),
-            new THREE.MeshStandardMaterial({
-                color: 0x555555,
-                roughness: 0.2,
-                metalness: 0.8
-            })
-        );
-        fin.position.set(0, 0.05, 0.02 + (i - 10) * 0.003);
-        gpu.add(fin);
-    }
-
-    // Fans
-    for (let f = 0; f < 3; f++) {
-        const fanGroup = new THREE.Group();
-        const fanHousing = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.03, 0.03, 0.01, 32),
-            new THREE.MeshStandardMaterial({
-                color: 0x1a1a1a,
-                roughness: 0.5,
-                metalness: 0.3
-            })
-        );
-        fanHousing.rotation.x = Math.PI / 2;
-        fanGroup.add(fanHousing);
-
-        // Fan blades
-        for (let i = 0; i < 9; i++) {
-            const blade = new THREE.Mesh(
-                new THREE.BoxGeometry(0.025, 0.001, 0.01),
-                new THREE.MeshStandardMaterial({
-                    color: 0x2a2a2a,
-                    emissive: 0x00ffff,
-                    emissiveIntensity: 0.2
-                })
-            );
-            blade.rotation.z = (i / 9) * Math.PI * 2;
-            fanGroup.add(blade);
-        }
-
-        // Вентиляторы GPU - правильно размещены
-        fanGroup.position.set(-0.04 + f * 0.04, 0.05, 0.04);
-        fanGroup.rotation.x = Math.PI / 2;
-        gpu.add(fanGroup);
-
-        // Animate fan
-        (function(fan) {
-            function animate() {
-                fan.rotation.z += 0.15;
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })(fanGroup);
-    }
-
-    // PCI-E connector
-    const pcieConnector = new THREE.Mesh(
-        new THREE.BoxGeometry(0.08, 0.01, 0.02),
-        new THREE.MeshStandardMaterial({ color: 0x1a1a1a })
-    );
-    pcieConnector.position.set(0, -0.05, 0);
-    gpu.add(pcieConnector);
-
-    // GPU в слоте PCI-E на материнской плате (вертикально на правой стенке)
-    // Размеры корпуса
-    const caseWidth = 0.5;
-    const caseHeight = 0.6;
-    // GPU должна быть на поверхности материнской платы
-    // Материнская плата на x = caseWidth/2 - 0.02 - mbThickness/2 = 0.225
-    // GPU должна быть в среднем слоте PCI-E (i=1), который находится на z = 0
-    // GPU на поверхности платы: x = 0.225 + mbThickness/2 = 0.23
-    // GPU PCB: 0.1 x 0.12 x 0.005, не выходит за внутреннюю поверхность стенки (x=0.23)
-    const mbThickness = 0.01;
-    gpu.position.set(caseWidth / 2 - 0.02, caseHeight / 2 + 0.08, 0);
-    gpu.rotation.x = -Math.PI / 2; // Поворачиваем для вертикальной платы
-    gpu.userData = { type: 'gpu', name: 'gpu' };
-    pcCase.add(gpu);
-}
-
-// Create PSU
-function createPSU() {
-    psu = new THREE.Group();
-
-    // PSU case
-    const psuCase = new THREE.Mesh(
-        new THREE.BoxGeometry(0.14, 0.08, 0.15),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a1a,
-            roughness: 0.4,
-            metalness: 0.6
-        })
-    );
-    psu.add(psuCase);
-
-    // Fan grill
-    const fanGrill = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.04, 0.04, 0.01, 32),
-        new THREE.MeshStandardMaterial({
-            color: 0x0a0a0a,
-            roughness: 0.5,
-            metalness: 0.5
-        })
-    );
-    fanGrill.rotation.x = Math.PI / 2;
-    fanGrill.position.set(0, 0, -0.08);
-    psu.add(fanGrill);
-
-    // Capacitors
-    for (let i = 0; i < 6; i++) {
-        const capacitor = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.005, 0.005, 0.02, 16),
-            new THREE.MeshStandardMaterial({
-                color: 0x2a2a2a,
-                roughness: 0.3,
-                metalness: 0.7
-            })
-        );
-        capacitor.position.set(
-            -0.04 + (i % 3) * 0.04,
-            0.01,
-            -0.03 + Math.floor(i / 3) * 0.03
-        );
-        psu.add(capacitor);
-    }
-
-    // Transformer
-    const transformer = new THREE.Mesh(
-        new THREE.BoxGeometry(0.04, 0.03, 0.04),
-        new THREE.MeshStandardMaterial({
-            color: 0x333333,
-            roughness: 0.4,
-            metalness: 0.5
-        })
-    );
-    transformer.position.set(0.04, 0.01, 0.02);
-    psu.add(transformer);
-
-    // Cables output
-    const cableOutput = new THREE.Mesh(
-        new THREE.BoxGeometry(0.06, 0.03, 0.01),
-        new THREE.MeshStandardMaterial({ color: 0x0a0a0a })
-    );
-    cableOutput.position.set(0, 0, 0.08);
-    psu.add(cableOutput);
-
-    // PSU в нижнем левом углу - правильно размещен внутри корпуса
-    // PSU размером 0.14 x 0.08 x 0.15
-    // Корпус: width=0.5 (X: -0.25 до 0.25), depth=0.4 (Z: -0.2 до 0.2)
-    psu.position.set(-0.18, 0.04, 0.05);
-    psu.userData = { type: 'psu', name: 'psu' };
-    pcCase.add(psu);
-}
-
-// Create storage
-function createStorage() {
-    // SSD (2.5")
-    ssd = new THREE.Group();
-    const ssdCase = new THREE.Mesh(
-        new THREE.BoxGeometry(0.07, 0.01, 0.1),
-        new THREE.MeshStandardMaterial({
-            color: 0x2a2a2a,
-            roughness: 0.3,
-            metalness: 0.7
-        })
-    );
-    ssd.add(ssdCase);
-
-    // SSD label
-    const ssdLabel = new THREE.Mesh(
-        new THREE.BoxGeometry(0.06, 0.011, 0.09),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a1a,
-            roughness: 0.5,
-            metalness: 0.3
-        })
-    );
-    ssd.add(ssdLabel);
-
-    // SSD правильно размещен внутри корпуса
-    // SSD размером 0.07 x 0.01 x 0.1
-    ssd.position.set(0.12, 0.12, 0.05);
-    ssd.userData = { type: 'ssd', name: 'ssd' };
-    pcCase.add(ssd);
-
-    // HDD (3.5")
-    hdd = new THREE.Group();
-    const hddCase = new THREE.Mesh(
-        new THREE.BoxGeometry(0.1, 0.025, 0.15),
-        new THREE.MeshStandardMaterial({
-            color: 0x2a2a2a,
-            roughness: 0.3,
-            metalness: 0.7
-        })
-    );
-    hdd.add(hddCase);
-
-    // HDD label
-    const hddLabel = new THREE.Mesh(
-        new THREE.BoxGeometry(0.09, 0.026, 0.14),
-        new THREE.MeshStandardMaterial({
-            color: 0x1a1a1a,
-            roughness: 0.5,
-            metalness: 0.3
-        })
-    );
-    hdd.add(hddLabel);
-
-    // SATA connectors
-    const sataConnector = new THREE.Mesh(
-        new THREE.BoxGeometry(0.02, 0.01, 0.01),
-        new THREE.MeshStandardMaterial({ color: 0x333333 })
-    );
-    sataConnector.position.set(0.06, 0, 0);
-    hdd.add(sataConnector);
-
-    // HDD правильно размещен внутри корпуса
-    // HDD размером 0.1 x 0.025 x 0.15
-    hdd.position.set(0.12, 0.08, -0.1);
-    hdd.userData = { type: 'hdd', name: 'hdd' };
-    pcCase.add(hdd);
-}
-
-// Create cables
-function createCables() {
-    cables = new THREE.Group();
-    
-    // Размеры корпуса (те же, что в createPCCase)
-    const caseWidth = 0.5;
-    const caseHeight = 0.6;
-    const caseDepth = 0.4;
-
-    // 24-pin cable - от материнской платы к PSU (вертикально на правой стенке)
-    const cable24Pin = createCablePath([
-        new THREE.Vector3(caseWidth / 2 - 0.005, caseHeight / 2 + 0.13, 0.08),
-        new THREE.Vector3(caseWidth / 2 - 0.1, caseHeight / 2 + 0.13, 0.08),
-        new THREE.Vector3(-0.18, caseHeight / 2 + 0.13, 0.1),
-        new THREE.Vector3(-0.18, 0.08, 0.1)
-    ], 0.003, 0x1a1a1a);
-    cables.add(cable24Pin);
-
-    // SATA cables - от материнской платы к накопителям (вертикально на правой стенке)
+    // GPU Fans
     for (let i = 0; i < 2; i++) {
-        const sataCable = createCablePath([
-            new THREE.Vector3(caseWidth / 2 - 0.005, caseHeight / 2 + 0.12, -0.06 + i * 0.04),
-            new THREE.Vector3(caseWidth / 2 - 0.05, caseHeight / 2 + 0.12, -0.06 + i * 0.04),
-            new THREE.Vector3(0.12, caseHeight / 2 + 0.12, i === 0 ? 0.08 : -0.1),
-            new THREE.Vector3(0.12, i === 0 ? 0.12 : 0.08, i === 0 ? 0.08 : -0.1)
-        ], 0.002, 0x333333);
-        cables.add(sataCable);
-    }
-
-    // CPU power cable - от материнской платы к PSU (вертикально на правой стенке)
-    const cpuCable = createCablePath([
-        new THREE.Vector3(caseWidth / 2 - 0.005, caseHeight / 2 + 0.05, 0.05),
-        new THREE.Vector3(caseWidth / 2 - 0.1, caseHeight / 2 + 0.05, 0.05),
-        new THREE.Vector3(-0.18, caseHeight / 2 + 0.05, 0.1),
-        new THREE.Vector3(-0.18, 0.1, 0.1)
-    ], 0.002, 0x1a1a1a);
-    cables.add(cpuCable);
-
-    pcCase.add(cables);
-}
-
-function createCablePath(points, radius, color) {
-    const curve = new THREE.CatmullRomCurve3(points);
-    const geometry = new THREE.TubeGeometry(curve, 20, radius, 8, false);
-    const material = new THREE.MeshStandardMaterial({
-        color: color,
-        roughness: 0.8,
-        metalness: 0.1
-    });
-    return new THREE.Mesh(geometry, material);
-}
-
-// Create case fans
-function createCaseFans() {
-    fans = new THREE.Group();
-
-    // Вентиляторы корпуса - правильно размещены внутри корпуса
-    // Корпус: width=0.5 (X: -0.25 до 0.25), height=0.6 (Y: 0 до 0.6), depth=0.4 (Z: -0.2 до 0.2)
-    const fanPositions = [
-        { pos: [0.15, 0.3, 0.15], rot: [0, 0, 0] }, // Front top - сдвинут влево
-        { pos: [0.15, 0.15, 0.15], rot: [0, 0, 0] }, // Front bottom - сдвинут влево
-        { pos: [0, 0.3, -0.15], rot: [0, Math.PI, 0] } // Back - исправлен Z
-    ];
-
-    fanPositions.forEach((fanData, index) => {
         const fanGroup = new THREE.Group();
-
-        // Fan housing - более реалистичный
-        const fanHousing = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.04, 0.04, 0.015, 32),
-            new THREE.MeshStandardMaterial({
-                color: 0x2a2a2a,
-                roughness: 0.6,
-                metalness: 0.4
-            })
+        
+        const housing = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.02, 0.02, 0.006, 18),
+            new THREE.MeshStandardMaterial({ color: 0x252530 })
         );
-        fanHousing.rotation.x = Math.PI / 2;
-        fanGroup.add(fanHousing);
+        housing.rotation.x = Math.PI / 2;
+        fanGroup.add(housing);
 
-        // Центральная ступица вентилятора
-        const hub = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.008, 0.008, 0.002, 16),
-            new THREE.MeshStandardMaterial({
-                color: 0x1a1a1a,
-                roughness: 0.5,
-                metalness: 0.5
-            })
-        );
-        hub.rotation.x = Math.PI / 2;
-        fanGroup.add(hub);
-
-        // Fan blades - реалистичные, правильно расположенные
-        const bladeMaterial = new THREE.MeshStandardMaterial({
-            color: 0x3a3a3a,
-            roughness: 0.7,
-            metalness: 0.2
-        });
-        for (let i = 0; i < 7; i++) {
-            // Реалистичная форма лопасти - изогнутая
+        const blades = new THREE.Group();
+        for (let j = 0; j < 9; j++) {
             const blade = new THREE.Mesh(
-                new THREE.BoxGeometry(0.032, 0.0015, 0.01),
-                bladeMaterial
+                new THREE.BoxGeometry(0.016, 0.0018, 0.006),
+                new THREE.MeshStandardMaterial({ color: 0x353540 })
             );
-            const angle = (i / 7) * Math.PI * 2;
-            blade.rotation.z = angle;
-            // Изгиб лопасти для реалистичности
-            blade.rotation.y = Math.sin(angle) * 0.15;
-            blade.position.y = 0;
-            fanGroup.add(blade);
+            blade.rotation.z = (j / 9) * Math.PI * 2;
+            blades.add(blade);
         }
-
-        // Минимальная RGB подсветка (опционально, только для некоторых вентиляторов)
-        if (index === 0) { // Только для первого вентилятора
-            const rgbRing = new THREE.Mesh(
-                new THREE.TorusGeometry(0.041, 0.001, 8, 32),
-                new THREE.MeshStandardMaterial({
-                    color: 0x00ffff,
-                    emissive: 0x00ffff,
-                    emissiveIntensity: 0.5
-                })
-            );
-            rgbRing.rotation.x = Math.PI / 2;
-            fanGroup.add(rgbRing);
-        }
-
-        fanGroup.position.set(...fanData.pos);
-        fanGroup.rotation.set(...fanData.rot);
-        fanGroup.userData = { type: 'fan', name: 'fan' };
-        fans.add(fanGroup);
-
-        // Animate fan
-        (function(fan) {
-            function animate() {
-                fan.rotation.z += 0.12;
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })(fanGroup);
-    });
-
-    pcCase.add(fans);
-}
-
-// Create dust particles
-function createDustParticles() {
-    const particleCount = 500;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const velocities = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 20;
-        positions[i + 1] = Math.random() * 8;
-        positions[i + 2] = (Math.random() - 0.5) * 20;
-        velocities[i] = (Math.random() - 0.5) * 0.01;
-        velocities[i + 1] = Math.random() * 0.005;
-        velocities[i + 2] = (Math.random() - 0.5) * 0.01;
+        fanGroup.add(blades);
+        fanGroup.position.set(-0.04 + i * 0.08, -0.032, 0);
+        gpuGroup.add(fanGroup);
+        
+        // Add to animation array
+        fanBlades.push({ group: blades, speed: 0.2 });
     }
 
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.userData.velocities = velocities;
+    const rgbStrip = new THREE.Mesh(
+        new THREE.BoxGeometry(gpuLength - 0.02, 0.0025, 0.003),
+        new THREE.MeshStandardMaterial({
+            color: 0x00ffff,
+            emissive: 0x00ffff,
+            emissiveIntensity: 1.2
+        })
+    );
+    rgbStrip.position.set(0, -0.033, gpuHeight/2 - 0.01);
+    gpuGroup.add(rgbStrip);
 
-    const material = new THREE.PointsMaterial({
-        color: 0xffffff,
-        size: 0.02,
-        transparent: true,
-        opacity: 0.3,
-        blending: THREE.AdditiveBlending
-    });
+    const pcie = new THREE.Mesh(
+        new THREE.BoxGeometry(0.065, 0.012, 0.008),
+        new THREE.MeshStandardMaterial({ color: 0x8a7030 })
+    );
+    pcie.position.set(0.03, 0.008, gpuHeight/2 - 0.006);
+    gpuGroup.add(pcie);
 
-    dustParticles = new THREE.Points(geometry, material);
-    scene.add(dustParticles);
+    gpuGroup.rotation.z = Math.PI / 2;
+    gpuGroup.position.set(W/2 - 0.07, H * 0.38, 0.01);
+    gpuGroup.userData = { type: 'gpu', name: 'gpu' };
+    pcCase.add(gpuGroup);
 }
 
-// Setup post-processing
-function setupPostProcessing() {
-    try {
-        const renderTarget = new THREE.WebGLRenderTarget(
-            window.innerWidth,
-            window.innerHeight,
-            {
-                minFilter: THREE.LinearFilter,
-                magFilter: THREE.LinearFilter,
-                format: THREE.RGBAFormat
-            }
+function createPSU(W, H, D, T) {
+    const psuGroup = new THREE.Group();
+
+    const body = new THREE.Mesh(
+        new THREE.BoxGeometry(0.13, 0.07, 0.15),
+        new THREE.MeshStandardMaterial({ color: 0x151520, metalness: 0.6 })
+    );
+    psuGroup.add(body);
+
+    const grill = new THREE.Mesh(
+        new THREE.CircleGeometry(0.025, 20),
+        new THREE.MeshStandardMaterial({ color: 0x08080c, side: THREE.DoubleSide })
+    );
+    grill.rotation.x = -Math.PI / 2;
+    grill.position.y = 0.036;
+    psuGroup.add(grill);
+
+    for (let i = 0; i < 3; i++) {
+        const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(0.008 + i * 0.006, 0.001, 6, 16),
+            new THREE.MeshStandardMaterial({ color: 0x303040 })
         );
-
-        composer = new THREE.EffectComposer(renderer, renderTarget);
-
-        const renderPass = new THREE.RenderPass(scene, camera);
-        composer.addPass(renderPass);
-
-        // Bloom pass
-        if (typeof THREE.UnrealBloomPass !== 'undefined') {
-            const bloomPass = new THREE.UnrealBloomPass(
-                new THREE.Vector2(window.innerWidth, window.innerHeight),
-                1.5,
-                0.4,
-                0.85
-            );
-            composer.addPass(bloomPass);
-        }
-    } catch (error) {
-        console.warn('Post-processing не доступен, используем обычный рендеринг:', error);
-        composer = null;
+        ring.rotation.x = -Math.PI / 2;
+        ring.position.y = 0.037;
+        psuGroup.add(ring);
     }
+
+    psuGroup.position.set(0, T + 0.037, -D/2 + 0.085);
+    psuGroup.userData = { type: 'psu', name: 'psu' };
+    pcCase.add(psuGroup);
 }
 
-// Camera animation
-let cameraAnimationActive = false;
-let animationCompleted = false;
+function createStorage(W, H, D) {
+    const ssdGroup = new THREE.Group();
+    const ssdBody = new THREE.Mesh(
+        new THREE.BoxGeometry(0.055, 0.005, 0.075),
+        new THREE.MeshStandardMaterial({ color: 0x252530, metalness: 0.7 })
+    );
+    ssdGroup.add(ssdBody);
 
-function startCameraAnimation() {
-    const totalDuration = 6000; // 6 seconds - общая длительность
-    const startTime = Date.now();
-    cameraAnimationActive = true;
+    const ssdLabel = new THREE.Mesh(
+        new THREE.BoxGeometry(0.038, 0.001, 0.05),
+        new THREE.MeshStandardMaterial({ color: 0x151520 })
+    );
+    ssdLabel.position.y = 0.003;
+    ssdGroup.add(ssdLabel);
 
-    // Этап 1: Начальная позиция (обзор комнаты)
-    const startPos = new THREE.Vector3(0, 3, 8);
-    const startTarget = new THREE.Vector3(0, 1, 0);
-    
-    // Этап 2: Первое приближение (не до конца) - только влево или прямо
-    const midPos1 = new THREE.Vector3(-0.1, 1.8, 1.2);
-    const midTarget1 = new THREE.Vector3(0, 1.1, 0);
-    
-    // Этап 3: Поворот влево (усиленный)
-    const midPos2 = new THREE.Vector3(-0.5, 1.6, 0.8);
-    const midTarget2 = new THREE.Vector3(0, 1.15, 0);
-    
-    // Этап 4: Финальное приближение - только влево
-    const endPos = new THREE.Vector3(-0.2, 1.3, 0.5);
-    const endTarget = new THREE.Vector3(0, 1.15, 0);
+    ssdGroup.position.set(-W/2 + 0.04, 0.08, D/2 - 0.06);
+    ssdGroup.userData = { type: 'ssd', name: 'ssd' };
+    pcCase.add(ssdGroup);
 
-    camera.position.copy(startPos);
-    camera.lookAt(startTarget);
-    controls.target.copy(startTarget);
+    const hddGroup = new THREE.Group();
+    const hddBody = new THREE.Mesh(
+        new THREE.BoxGeometry(0.075, 0.018, 0.12),
+        new THREE.MeshStandardMaterial({ color: 0x303040, metalness: 0.6 })
+    );
+    hddGroup.add(hddBody);
 
-    function animateCamera() {
-        if (!cameraAnimationActive) {
-            return;
-        }
+    const hddLabel = new THREE.Mesh(
+        new THREE.BoxGeometry(0.055, 0.001, 0.09),
+        new THREE.MeshStandardMaterial({ color: 0x202030 })
+    );
+    hddLabel.position.y = 0.01;
+    hddGroup.add(hddLabel);
 
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / totalDuration, 1);
-
-        let currentPos, currentTarget;
-
-        if (progress < 0.3) {
-            // Этап 1: Первое приближение (0-30%)
-            const t = progress / 0.3;
-            const easeT = easeInOutCubic(t);
-            currentPos = new THREE.Vector3().lerpVectors(startPos, midPos1, easeT);
-            currentTarget = new THREE.Vector3().lerpVectors(startTarget, midTarget1, easeT);
-        } else if (progress < 0.5) {
-            // Этап 2: Поворот влево (30-50%)
-            const t = (progress - 0.3) / 0.2;
-            const easeT = easeInOutCubic(t);
-            currentPos = new THREE.Vector3().lerpVectors(midPos1, midPos2, easeT);
-            currentTarget = new THREE.Vector3().lerpVectors(midTarget1, midTarget2, easeT);
-        } else {
-            // Этап 3: Финальное приближение (50-100%)
-            const t = (progress - 0.5) / 0.5;
-            const easeT = easeInOutCubic(t);
-            currentPos = new THREE.Vector3().lerpVectors(midPos2, endPos, easeT);
-            currentTarget = new THREE.Vector3().lerpVectors(midTarget2, endTarget, easeT);
-        }
-
-        camera.position.copy(currentPos);
-        camera.lookAt(currentTarget);
-        controls.target.copy(currentTarget);
-
-        if (progress < 1) {
-            requestAnimationFrame(animateCamera);
-        } else {
-            // Анимация завершена
-            cameraAnimationActive = false;
-            animationCompleted = true;
-            // Разрешаем пользователю управлять камерой
-            controls.enabled = true;
-        }
-    }
-
-    // Функция easing для плавности
-    function easeInOutCubic(t) {
-        return t < 0.5
-            ? 4 * t * t * t
-            : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    // Начинаем анимацию
-    animateCamera();
+    hddGroup.position.set(-W/2 + 0.05, 0.05, D/2 - 0.085);
+    hddGroup.userData = { type: 'hdd', name: 'hdd' };
+    pcCase.add(hddGroup);
 }
 
-// Mouse interaction
+function createFans(W, H, D, T) {
+    for (let i = 0; i < 2; i++) {
+        createCaseFan(0, 0.12 + i * 0.12, D/2 - 0.018, 0, 0, 0, true);
+    }
+    createCaseFan(0, H * 0.72, -D/2 + 0.018, 0, Math.PI, 0, true);
+}
+
+function createCaseFan(x, y, z, rx, ry, rz, hasRgb) {
+    const fanGroup = new THREE.Group();
+
+    const frame = new THREE.Mesh(
+        new THREE.BoxGeometry(0.1, 0.1, 0.02),
+        new THREE.MeshStandardMaterial({ color: 0x252530 })
+    );
+    fanGroup.add(frame);
+
+    const opening = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.04, 0.04, 0.021, 20),
+        new THREE.MeshStandardMaterial({ color: 0x151520 })
+    );
+    opening.rotation.x = Math.PI / 2;
+    fanGroup.add(opening);
+
+    const hub = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.008, 0.008, 0.01, 10),
+        new THREE.MeshStandardMaterial({ color: 0x151520 })
+    );
+    hub.rotation.x = Math.PI / 2;
+    fanGroup.add(hub);
+
+    // Blades
+    const blades = new THREE.Group();
+    const bladeMat = new THREE.MeshStandardMaterial({ color: 0x404050 });
+    for (let i = 0; i < 7; i++) {
+        const blade = new THREE.Mesh(
+            new THREE.BoxGeometry(0.03, 0.0025, 0.01),
+            bladeMat
+        );
+        const angle = (i / 7) * Math.PI * 2;
+        blade.rotation.z = angle;
+        blade.position.x = Math.cos(angle) * 0.02;
+        blade.position.y = Math.sin(angle) * 0.02;
+        blades.add(blade);
+    }
+    fanGroup.add(blades);
+    
+    // Add to animation array
+    fanBlades.push({ group: blades, speed: 0.12 });
+
+    if (hasRgb) {
+        const rgb = new THREE.Mesh(
+            new THREE.TorusGeometry(0.042, 0.0025, 8, 20),
+            new THREE.MeshStandardMaterial({
+                color: 0x00ffff,
+                emissive: 0x00ffff,
+                emissiveIntensity: 1
+            })
+        );
+        rgb.rotation.x = Math.PI / 2;
+        fanGroup.add(rgb);
+    }
+
+    fanGroup.position.set(x, y, z);
+    fanGroup.rotation.set(rx, ry, rz);
+    fanGroup.userData = { type: 'fan', name: 'fan' };
+    pcCase.add(fanGroup);
+}
+
+// Event handlers
+function onWindowResize() {
+    const navHeight = window.innerWidth <= 480 ? 44 : (window.innerWidth <= 768 ? 48 : 56);
+    const width = window.innerWidth;
+    const height = window.innerHeight - navHeight;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+}
+
+function getComponentFromIntersect(intersects) {
+    for (let i = 0; i < intersects.length; i++) {
+        let obj = intersects[i].object;
+        
+        // Traverse up to find component with userData.name
+        while (obj) {
+            if (obj.userData && obj.userData.name && componentInfo[obj.userData.name]) {
+                return obj;
+            }
+            obj = obj.parent;
+        }
+    }
+    return null;
+}
+
 function onMouseMove(event) {
+    const navHeight = window.innerWidth <= 480 ? 44 : (window.innerWidth <= 768 ? 48 : 56);
+    const height = window.innerHeight - navHeight;
+
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouse.y = -((event.clientY - navHeight) / height) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
+    
+    // Check all objects in scene recursively
     const intersects = raycaster.intersectObjects(scene.children, true);
 
-    // Remove previous highlight
+    // Reset previous hover
     if (hoveredObject) {
-        highlightComponent(hoveredObject, false);
+        setHighlight(hoveredObject, false);
         hoveredObject = null;
     }
 
     // Find component
-    if (intersects.length > 0) {
-        let object = intersects[0].object;
-        while (object && !object.userData.name) {
-            object = object.parent;
-        }
-
-        if (object && object.userData.name) {
-            hoveredObject = object;
-            highlightComponent(object, true);
-            renderer.domElement.style.cursor = 'pointer';
-        } else {
-            renderer.domElement.style.cursor = 'default';
-        }
+    const component = getComponentFromIntersect(intersects);
+    
+    if (component) {
+        hoveredObject = component;
+        setHighlight(component, true);
+        renderer.domElement.style.cursor = 'pointer';
     } else {
-        renderer.domElement.style.cursor = 'default';
+        renderer.domElement.style.cursor = 'grab';
     }
 }
 
-function highlightComponent(object, highlight) {
-    if (!object) return;
-    
-    // Сохраняем оригинальные значения emissive для восстановления
-    if (!object.userData.originalEmissive) {
-        object.userData.originalEmissive = new Map();
-    }
-    
+function setHighlight(object, active) {
     object.traverse((child) => {
         if (child.isMesh && child.material) {
-            if (Array.isArray(child.material)) {
-                child.material.forEach((mat, index) => {
-                    if (mat.emissive) {
-                        const key = `${child.uuid}_${index}`;
-                        if (highlight) {
-                            // Сохраняем оригинальное значение
-                            if (!object.userData.originalEmissive.has(key)) {
-                                object.userData.originalEmissive.set(key, {
-                                    color: mat.emissive.getHex(),
-                                    intensity: mat.emissiveIntensity || 0
-                                });
-                            }
-                            // Яркая неоновая подсветка
-                            mat.emissive.setHex(0x00ffff);
-                            mat.emissiveIntensity = 2.0;
-                        } else {
-                            // Восстанавливаем оригинальное значение
-                            const original = object.userData.originalEmissive.get(key);
-                            if (original) {
-                                mat.emissive.setHex(original.color);
-                                mat.emissiveIntensity = original.intensity;
-                            } else {
-                                mat.emissive.setHex(0x000000);
-                                mat.emissiveIntensity = 0;
-                            }
-                        }
-                    }
-                });
-            } else {
+            // Skip transparent materials (glass)
+            if (child.material.transparent && child.material.opacity < 0.5) return;
+            
+            if (active) {
+                if (child.userData.origEmissive === undefined) {
+                    child.userData.origEmissive = child.material.emissive ? child.material.emissive.getHex() : 0;
+                    child.userData.origIntensity = child.material.emissiveIntensity || 0;
+                }
                 if (child.material.emissive) {
-                    const key = child.uuid;
-                    if (highlight) {
-                        // Сохраняем оригинальное значение
-                        if (!object.userData.originalEmissive.has(key)) {
-                            object.userData.originalEmissive.set(key, {
-                                color: child.material.emissive.getHex(),
-                                intensity: child.material.emissiveIntensity || 0
-                            });
-                        }
-                        // Яркая неоновая подсветка
-                        child.material.emissive.setHex(0x00ffff);
-                        child.material.emissiveIntensity = 2.0;
-                    } else {
-                        // Восстанавливаем оригинальное значение
-                        const original = object.userData.originalEmissive.get(key);
-                        if (original) {
-                            child.material.emissive.setHex(original.color);
-                            child.material.emissiveIntensity = original.intensity;
-                        } else {
-                            child.material.emissive.setHex(0x000000);
-                            child.material.emissiveIntensity = 0;
-                        }
-                    }
+                    child.material.emissive.setHex(0x00ffff);
+                    child.material.emissiveIntensity = 0.6;
+                }
+            } else {
+                if (child.material.emissive && child.userData.origEmissive !== undefined) {
+                    child.material.emissive.setHex(child.userData.origEmissive);
+                    child.material.emissiveIntensity = child.userData.origIntensity;
                 }
             }
         }
@@ -1659,23 +1049,40 @@ function highlightComponent(object, highlight) {
 }
 
 function onMouseClick(event) {
+    const navHeight = window.innerWidth <= 480 ? 44 : (window.innerWidth <= 768 ? 48 : 56);
+    const height = window.innerHeight - navHeight;
+
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouse.y = -((event.clientY - navHeight) / height) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
 
-    if (intersects.length > 0) {
-        let object = intersects[0].object;
-        while (object && !object.userData.name) {
-            object = object.parent;
-        }
+    const component = getComponentFromIntersect(intersects);
+    
+    if (component) {
+        showInfoPanel(componentInfo[component.userData.name]);
+    } else if (!document.getElementById('info-panel').classList.contains('hidden')) {
+        closeInfoPanel();
+    }
+}
 
-        if (object && object.userData.name) {
-            const componentType = object.userData.name;
-            if (componentInfo[componentType]) {
-                showInfoPanel(componentInfo[componentType]);
-            }
+function onTouchEnd(event) {
+    if (event.changedTouches.length === 1) {
+        const touch = event.changedTouches[0];
+        const navHeight = window.innerWidth <= 480 ? 44 : (window.innerWidth <= 768 ? 48 : 56);
+        const height = window.innerHeight - navHeight;
+
+        mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -((touch.clientY - navHeight) / height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
+
+        const component = getComponentFromIntersect(intersects);
+        
+        if (component) {
+            showInfoPanel(componentInfo[component.userData.name]);
         }
     }
 }
@@ -1690,51 +1097,19 @@ function closeInfoPanel() {
     document.getElementById('info-panel').classList.add('hidden');
 }
 
-// Window resize
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    if (composer) {
-        composer.setSize(window.innerWidth, window.innerHeight);
-    }
-}
-
-// Animate
 function animate() {
     requestAnimationFrame(animate);
-
-    // Update controls
+    
+    // Animate all fans
+    for (let i = 0; i < fanBlades.length; i++) {
+        fanBlades[i].group.rotation.z += fanBlades[i].speed;
+    }
+    
     controls.update();
-
-    // Animate dust particles
-    if (dustParticles) {
-        const positions = dustParticles.geometry.attributes.position.array;
-        const velocities = dustParticles.geometry.userData.velocities;
-
-        for (let i = 0; i < positions.length; i += 3) {
-            positions[i] += velocities[i];
-            positions[i + 1] += velocities[i + 1];
-            positions[i + 2] += velocities[i + 2];
-
-            // Reset if out of bounds
-            if (positions[i + 1] > 8) positions[i + 1] = 0;
-            if (Math.abs(positions[i]) > 10) velocities[i] *= -1;
-            if (Math.abs(positions[i + 2]) > 10) velocities[i + 2] *= -1;
-        }
-
-        dustParticles.geometry.attributes.position.needsUpdate = true;
-    }
-
-    // Render
-    if (composer) {
-        composer.render();
-    } else {
-        renderer.render(scene, camera);
-    }
+    renderer.render(scene, camera);
 }
 
-// Initialize when page is loaded and Three.js is ready
+// Start
 function waitForThree() {
     if (typeof THREE !== 'undefined' && typeof THREE.OrbitControls !== 'undefined') {
         init();
@@ -1748,4 +1123,3 @@ if (document.readyState === 'loading') {
 } else {
     waitForThree();
 }
-
