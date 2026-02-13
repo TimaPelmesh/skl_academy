@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Транспортный уровень: TCP, UDP, порты и продвинутые особенности">
+    <meta name="keywords" content="TCP, UDP, трехстороннее рукопожатие, порты, QUIC, Window Scaling">
+    <title>Транспортный уровень (TCP/UDP) — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/06-transport-layer.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn active">6. Транспортный уровень</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#tcp" class="subtopic active">6.1 TCP</a>
+                        <a href="#udp" class="subtopic">6.2 UDP</a>
+                        <a href="#ports" class="subtopic">6.3 Порты</a>
+                        <a href="#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">6.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">6.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">6.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">7.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">7.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">7.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">7.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">8.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">8.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">8.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="tcp" class="topic-section">
+                <h2>6.1 TCP</h2>
+                <div class="lesson-content">
+                    <h3>Что такое TCP?</h3>
+                    <p><strong>TCP</strong> (Transmission Control Protocol) — протокол транспортного уровня, который обеспечивает надежную, упорядоченную доставку данных между приложениями. Работает поверх ненадежного IP.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если IP — это "почтовая служба без гарантий", то TCP — это "заказная почта с подтверждением получения". TCP гарантирует, что данные дойдут и в правильном порядке.</p>
+                    </div>
+
+                    <h3>Основные характеристики TCP</h3>
+                    <div class="visual-guide">
+                        <h4>Ключевые особенности:</h4>
+                        <ul>
+                            <li><strong>Надежность:</strong> Гарантирует доставку данных (если пакет потерян, он будет переотправлен)</li>
+                            <li><strong>Упорядочивание:</strong> Данные приходят в правильном порядке</li>
+                            <li><strong>Установление соединения:</strong> Перед передачей данных устанавливается соединение (connection-oriented)</li>
+                            <li><strong>Контроль потока:</strong> Управляет скоростью передачи, чтобы не перегрузить получателя</li>
+                            <li><strong>Управление перегрузкой:</strong> Адаптируется к загрузке сети</li>
+                        </ul>
+                    </div>
+
+                    <h3>Установление соединения: трехстороннее рукопожатие</h3>
+                    <p>Перед передачей данных TCP устанавливает соединение через процесс, называемый "трехстороннее рукопожатие":</p>
+
+                    <div class="visual-guide">
+                        <h4>Процесс установления соединения:</h4>
+                        <ol>
+                            <li><strong>SYN</strong> — клиент отправляет запрос на установление соединения с начальным номером последовательности</li>
+                            <li><strong>SYN-ACK</strong> — сервер подтверждает запрос и отправляет свой начальный номер последовательности</li>
+                            <li><strong>ACK</strong> — клиент подтверждает получение SYN-ACK, соединение установлено</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Порты:</strong> TCP использует порты для идентификации приложений. Например, порт 80 для HTTP, порт 443 для HTTPS, порт 22 для SSH.</p>
+                    </div>
+
+                    <h3>Надежность: подтверждения и повторные передачи</h3>
+                    <div class="visual-guide">
+                        <h4>Как TCP обеспечивает надежность:</h4>
+                        <ul>
+                            <li><strong>Нумерация байтов:</strong> Каждый байт имеет номер последовательности</li>
+                            <li><strong>Подтверждения (ACK):</strong> Получатель подтверждает получение данных</li>
+                            <li><strong>Таймауты:</strong> Если подтверждение не пришло в течение определенного времени, данные переотправляются</li>
+                            <li><strong>Проверка целостности:</strong> Контрольная сумма проверяет, не повреждены ли данные</li>
+                        </ul>
+                    </div>
+
+                    <h3>Контроль потока: окно получателя</h3>
+                    <p><strong>Окно получателя (rwnd)</strong> — это размер буфера получателя, который показывает, сколько данных он может принять. Отправитель не может отправить больше данных, чем позволяет окно получателя.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает контроль потока:</h4>
+                        <ul>
+                            <li>Получатель сообщает размер доступного буфера в поле "Window Size"</li>
+                            <li>Отправитель не отправляет больше данных, чем позволяет окно</li>
+                            <li>Когда получатель обработал данные, он увеличивает окно</li>
+                            <li>Это предотвращает переполнение буфера получателя</li>
+                        </ul>
+                    </div>
+
+                    <h3>Управление перегрузкой</h3>
+                    <p>TCP автоматически адаптируется к загрузке сети, чтобы не перегружать каналы:</p>
+
+                    <div class="visual-guide">
+                        <h4>Механизмы управления перегрузкой:</h4>
+                        <ul>
+                            <li><strong>Медленный старт:</strong> Начинает с малой скорости и постепенно увеличивает</li>
+                            <li><strong>Избегание перегрузок:</strong> При обнаружении потерь уменьшает скорость</li>
+                            <li><strong>Fast Retransmit:</strong> Быстрая переотправка при получении дублирующихся ACK</li>
+                            <li><strong>Congestion Window (cwnd):</strong> Окно перегрузки ограничивает количество неотправленных данных</li>
+                        </ul>
+                    </div>
+
+                    <h3>Завершение соединения: четырехшаговое закрытие</h3>
+                    <div class="visual-guide">
+                        <h4>Процесс закрытия соединения:</h4>
+                        <ol>
+                            <li><strong>FIN</strong> — одна сторона отправляет запрос на закрытие</li>
+                            <li><strong>ACK</strong> — другая сторона подтверждает получение FIN</li>
+                            <li><strong>FIN</strong> — вторая сторона также отправляет FIN (может отправить данные перед этим)</li>
+                            <li><strong>ACK</strong> — первая сторона подтверждает, соединение закрыто</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>TIME_WAIT:</strong> После закрытия соединения сторона, которая инициировала закрытие, ждет 2×MSL (Maximum Segment Lifetime) перед освобождением ресурсов. Это нужно, чтобы убедиться, что все пакеты дошли.</p>
+                    </div>
+
+                    <h3>Состояния TCP-соединения</h3>
+                    <div class="visual-guide">
+                        <h4>Основные состояния:</h4>
+                        <ul>
+                            <li><strong>CLOSED</strong> — соединение закрыто</li>
+                            <li><strong>LISTEN</strong> — сервер ждет входящих соединений</li>
+                            <li><strong>SYN-SENT</strong> — клиент отправил SYN, ждет ответа</li>
+                            <li><strong>SYN-RECEIVED</strong> — сервер получил SYN, отправил SYN-ACK</li>
+                            <li><strong>ESTABLISHED</strong> — соединение установлено, идет передача данных</li>
+                            <li><strong>FIN-WAIT</strong> — ожидание подтверждения закрытия</li>
+                            <li><strong>CLOSE-WAIT</strong> — ожидание закрытия от приложения</li>
+                            <li><strong>TIME-WAIT</strong> — ожидание перед полным закрытием</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>TCP</strong> — надежный протокол транспортного уровня с установлением соединения</li>
+                            <li><strong>Трехстороннее рукопожатие:</strong> SYN → SYN-ACK → ACK для установления соединения</li>
+                            <li><strong>Надежность:</strong> Подтверждения, нумерация, повторные передачи</li>
+                            <li><strong>Контроль потока:</strong> Окно получателя ограничивает скорость передачи</li>
+                            <li><strong>Управление перегрузкой:</strong> Автоматическая адаптация к загрузке сети</li>
+                            <li><strong>Четырехшаговое закрытие:</strong> FIN → ACK → FIN → ACK</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить надежную, упорядоченную доставку данных между приложениями поверх ненадежной сети IP.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="udp" class="topic-section">
+                <h2>6.2 UDP</h2>
+                <div class="lesson-content">
+                    <p>UDP — простой дейтаграммный протокол без установления соединения и подтверждений. Минимальные накладные расходы и отсутствие механизма восстановления потерь делают его подходящим для приложений, где критичны задержки и допускаются потери: голос/видео в реальном времени, DNS, игры.</p>
+                    <div class="visual-guide">
+                        <h4>Особенности UDP</h4>
+                        <ul>
+                            <li><strong>Заголовок 8 байт</strong>: порты источника/назначения, длина, контрольная сумма (обязательна в IPv6).</li>
+                            <li><strong>Отсутствие порядка/доставки</strong>: логика повторов и упорядочивания реализуется приложением при необходимости.</li>
+                            <li><strong>Use‑cases</strong>: QUIC/HTTP/3 (на базе UDP), DNS, RTP/SRTP.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ports" class="topic-section">
+                <h2>6.3 Порты</h2>
+                <div class="lesson-content">
+                    <p>Порты (0–65535) определяют конечную точку взаимодействия на хосте и совместно с IP‑адресом образуют сокет. Диапазоны: известные (0–1023), зарегистрированные (1024–49151), динамические/частные (49152–65535).</p>
+                    <div class="visual-guide">
+                        <h4>Практические аспекты</h4>
+                        <ul>
+                            <li><strong>Сокеты</strong>: {srcIP:srcPort → dstIP:dstPort} уникально идентифицируют соединение TCP.</li>
+                            <li><strong>Эфемерные порты</strong>: динамически выделяются клиентам для исходящих соединений.</li>
+                            <li><strong>Безопасность</strong>: фильтрация/ограничение открытых портов, принцип наименьших привилегий.</li>
+                        </ul>
+                    </div>
+                    <div class="code-example">
+<pre><code class="bash"># Просмотр прослушиваемых портов
+# Windows
+netstat -ano | findstr LISTENING
+# Linux/macOS
+ss -tulpen
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="advanced" class="topic-section">
+                <h2>6.4 Для профессионалов</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>Window Scaling</strong>: расширяет размер окна и повышает Throughput на высоколатентных каналах.</li>
+                        <li><strong>QUIC (HTTP/3)</strong>: транспорт поверх UDP с шифрованием и мультиплексированием потоков.</li>
+                        <li><strong>PMTUD и MSS Clamping</strong>: обнаружение MTU по пути, настройка MSS на границах (особенно при туннелях/VPN).</li>
+                        <li><strong>Алгоритмы перегрузок</strong>: CUBIC (дефолт в Linux), BBR (Google) — выбор влияет на латентность/пропускную способность.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+

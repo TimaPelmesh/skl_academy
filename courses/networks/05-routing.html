@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Маршрутизация (L3): статическая, OSPF, BGP основы, ACL/политики и QoS">
+    <meta name="keywords" content="routing, static routes, OSPF, BGP, ACL, QoS, DSCP, shaping, policing">
+    <title>Маршрутизация (L3) — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/05-routing.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">5. Маршрутизация (L3)</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#static-routing" class="subtopic active">5.1 Статическая маршрутизация</a>
+                        <a href="#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#monitoring" class="subtopic">9.4 Мониторинг и телеметрия</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.5 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="static-routing" class="topic-section">
+                <h2>5.1 Статическая маршрутизация</h2>
+                <div class="lesson-content">
+                    <h3>Что такое маршрутизация?</h3>
+                    <p><strong>Маршрутизация</strong> — это процесс определения пути, по которому пакет должен пройти от источника к получателю через сеть. Маршрутизатор принимает решение на основе таблицы маршрутизации.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Таблица маршрутизации — это как карта дорог. Маршрутизатор смотрит на адрес назначения и выбирает, по какой "дороге" (интерфейсу) отправить пакет.</p>
+                    </div>
+
+                    <h3>Статическая маршрутизация</h3>
+                    <p><strong>Статическая маршрутизация</strong> — это когда администратор вручную настраивает маршруты в таблице маршрутизации. Маршруты не меняются автоматически.</p>
+
+                    <div class="visual-guide">
+                        <h4>Когда использовать статическую маршрутизацию:</h4>
+                        <ul>
+                            <li><strong>Простые сети:</strong> Маленькие сети с несколькими маршрутизаторами</li>
+                            <li><strong>Специальные пути:</strong> Резервные маршруты или обход проблемных участков</li>
+                            <li><strong>Default route:</strong> Маршрут по умолчанию (куда отправлять пакеты, если нет конкретного маршрута)</li>
+                            <li><strong>Blackhole:</strong> Маршрут для отбрасывания нежелательного трафика</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Преимущества:</h4>
+                        <ul>
+                            <li>Простота настройки для малых сетей</li>
+                            <li>Предсказуемость — администратор контролирует все пути</li>
+                            <li>Низкая нагрузка на процессор маршрутизатора</li>
+                            <li>Безопасность — нет обмена служебными сообщениями</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Недостатки:</h4>
+                        <ul>
+                            <li>Не масштабируется — в больших сетях настройка становится сложной</li>
+                            <li>Ручное обновление — при изменениях нужно вручную менять маршруты</li>
+                            <li>Нет автоматического восстановления — при отказе канала маршрут не переключится автоматически</li>
+                        </ul>
+                    </div>
+
+                    <h3>Примеры статических маршрутов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр таблицы маршрутизации
+# Windows
+route print
+
+# Добавление статического маршрута
+# Windows: route add сеть mask маска шлюз
+route add 10.10.0.0 mask 255.255.0.0 192.168.1.1
+
+# Linux
+ip route show
+# или
+route -n
+
+# Добавление статического маршрута
+# Linux: ip route add сеть/префикс via шлюз
+ip route add 10.10.0.0/16 via 192.168.1.1
+
+# Маршрут по умолчанию (default gateway)
+# Windows
+route add 0.0.0.0 mask 0.0.0.0 192.168.1.1
+
+# Linux
+ip route add default via 192.168.1.1</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Маршрут по умолчанию:</strong> Это "последний шанс" — если маршрутизатор не знает, куда отправить пакет, он отправляет его по маршруту по умолчанию. Обычно это шлюз в интернет.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Маршрутизация</strong> — определение пути пакета через сеть</li>
+                            <li><strong>Статическая маршрутизация</strong> — маршруты настраиваются вручную администратором</li>
+                            <li><strong>Подходит для:</strong> Малых сетей, специальных путей, маршрутов по умолчанию</li>
+                            <li><strong>Преимущества:</strong> Простота, предсказуемость, низкая нагрузка</li>
+                            <li><strong>Недостатки:</strong> Не масштабируется, требует ручного обновления</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить доставку пакетов в простых сетях без сложных протоколов динамической маршрутизации.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="fhrp" class="topic-section">
+                <h2>5.2 HSRP/VRRP/GLBP — протоколы резервирования шлюзов</h2>
+                <div class="lesson-content">
+                    <h3>Проблема: единая точка отказа</h3>
+                    <p>Представьте ситуацию: в вашей сети все устройства используют один маршрутизатор как шлюз по умолчанию (default gateway). Если этот маршрутизатор выходит из строя, вся сеть теряет доступ к внешним сетям и интернету.</p>
+
+                    <div class="note">
+                        <p><strong>Проблема:</strong> Статическая настройка шлюза по умолчанию создает единую точку отказа. Если маршрутизатор сломается, все хосты потеряют связь с внешним миром.</p>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Решение:</strong> <strong>FHRP</strong> (First Hop Redundancy Protocol) — протоколы, обеспечивающие резервирование шлюза по умолчанию через виртуальный IP-адрес.</p>
+                    </div>
+
+                    <h3>Что такое HSRP?</h3>
+                    <p><strong>HSRP</strong> (Hot Standby Router Protocol) — проприетарный протокол Cisco для обеспечения отказоустойчивости шлюза по умолчанию. Несколько маршрутизаторов работают как группа и представляются хостам как один виртуальный маршрутизатор с общим IP и MAC адресом.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает HSRP:</h4>
+                        <ul>
+                            <li><strong>Виртуальный IP:</strong> Создается виртуальный IP-адрес, который используется хостами как шлюз по умолчанию</li>
+                            <li><strong>Active router:</strong> Один маршрутизатор выбирается активным и обрабатывает весь трафик</li>
+                            <li><strong>Standby router:</strong> Другой маршрутизатор находится в режиме ожидания, готовый перехватить трафик</li>
+                            <li><strong>Hello-сообщения:</strong> Маршрутизаторы обмениваются сообщениями для контроля доступности (по умолчанию каждые 3 секунды)</li>
+                            <li><strong>Failover:</strong> Если Active router перестает отвечать (10 секунд по умолчанию), Standby автоматически становится Active</li>
+                        </ul>
+                    </div>
+
+                    <h3>Выбор Active и Standby</h3>
+                    <div class="visual-guide">
+                        <h4>Процесс выбора:</h4>
+                        <ol>
+                            <li><strong>Приоритет:</strong> Маршрутизатор с наивысшим приоритетом (0-255, по умолчанию 100) становится Active</li>
+                            <li><strong>IP-адрес:</strong> При равных приоритетах выбирается тот, у кого выше IP-адрес интерфейса</li>
+                            <li><strong>Preemption:</strong> По умолчанию отключено — если Active восстановился, он не забирает роль обратно. Можно включить командой <code>standby preempt</code></li>
+                        </ol>
+                    </div>
+
+                    <h3>Версии HSRP</h3>
+                    <div class="visual-guide">
+                        <h4>HSRP версия 1 vs версия 2:</h4>
+                        <ul>
+                            <li><strong>Версия 1:</strong> Поддерживает до 255 групп (0-255), использует multicast 224.0.0.2</li>
+                            <li><strong>Версия 2:</strong> Поддерживает до 4095 групп (0-4095), использует multicast 224.0.0.102, поддержка IPv6, улучшенные таймеры (миллисекунды)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Базовая настройка HSRP на Cisco (Router1 - Active)
+Router1(config)# interface GigabitEthernet0/0
+Router1(config-if)# ip address 192.168.1.1 255.255.255.0
+Router1(config-if)# standby 1 ip 192.168.1.254          # Виртуальный IP
+Router1(config-if)# standby 1 priority 110              # Приоритет (выше = лучше)
+Router1(config-if)# standby 1 preempt                   # Вернуть роль Active при восстановлении
+
+# Настройка HSRP на Cisco (Router2 - Standby)
+Router2(config)# interface GigabitEthernet0/0
+Router2(config-if)# ip address 192.168.1.2 255.255.255.0
+Router2(config-if)# standby 1 ip 192.168.1.254          # Тот же виртуальный IP
+Router2(config-if)# standby 1 priority 90               # Меньший приоритет
+
+# Проверка состояния HSRP
+Router# show standby
+Router# show standby brief</code></pre>
+                    </div>
+
+                    <h3>VRRP — открытый стандарт</h3>
+                    <p><strong>VRRP</strong> (Virtual Router Redundancy Protocol) — стандартизированный протокол (RFC 5798), аналог HSRP, работающий на оборудовании разных производителей.</p>
+
+                    <div class="visual-guide">
+                        <h4>Отличия VRRP от HSRP:</h4>
+                        <ul>
+                            <li><strong>Стандартизация:</strong> VRRP — открытый стандарт, HSRP — проприетарный Cisco</li>
+                            <li><strong>Терминология:</strong> В VRRP: Master/Backup (вместо Active/Standby в HSRP)</li>
+                            <li><strong>Preemption:</strong> В VRRP включен по умолчанию</li>
+                            <li><strong>IP-адрес:</strong> VRRP может использовать реальный IP интерфейса как виртуальный</li>
+                            <li><strong>Multicast:</strong> VRRP использует 224.0.0.18, HSRP — 224.0.0.2</li>
+                            <li><strong>Таймеры:</strong> В VRRP advertisement interval по умолчанию 1 секунда (в HSRP hello — 3 секунды)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Настройка VRRP на Cisco (Router1 - Master)
+Router1(config)# interface GigabitEthernet0/0
+Router1(config-if)# ip address 192.168.1.1 255.255.255.0
+Router1(config-if)# vrrp 1 ip 192.168.1.254
+Router1(config-if)# vrrp 1 priority 110
+
+# Настройка VRRP на Cisco (Router2 - Backup)
+Router2(config)# interface GigabitEthernet0/0
+Router2(config-if)# ip address 192.168.1.2 255.255.255.0
+Router2(config-if)# vrrp 1 ip 192.168.1.254
+Router2(config-if)# vrrp 1 priority 90
+
+# Проверка состояния VRRP
+Router# show vrrp
+Router# show vrrp brief</code></pre>
+                    </div>
+
+                    <h3>GLBP — балансировка нагрузки</h3>
+                    <p><strong>GLBP</strong> (Gateway Load Balancing Protocol) — проприетарный протокол Cisco, который не только обеспечивает резервирование, но и балансирует нагрузку между несколькими маршрутизаторами.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает GLBP:</h4>
+                        <ul>
+                            <li><strong>AVG (Active Virtual Gateway):</strong> Один маршрутизатор управляет группой</li>
+                            <li><strong>AVF (Active Virtual Forwarder):</strong> Все маршрутизаторы могут одновременно пересылать трафик</li>
+                            <li><strong>Виртуальные MAC:</strong> AVG выдает каждому AVF уникальный виртуальный MAC-адрес</li>
+                            <li><strong>Балансировка:</strong> AVG распределяет MAC-адреса между хостами через ARP-ответы</li>
+                            <li><strong>Отказоустойчивость:</strong> При отказе AVF другой маршрутизатор берет на себя его MAC-адрес</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Методы балансировки GLBP:</h4>
+                        <ul>
+                            <li><strong>Round-robin:</strong> По очереди (по умолчанию)</li>
+                            <li><strong>Weighted:</strong> Пропорционально весу маршрутизатора</li>
+                            <li><strong>Host-dependent:</strong> Один хост всегда получает один и тот же MAC</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Настройка GLBP на Cisco
+Router1(config)# interface GigabitEthernet0/0
+Router1(config-if)# ip address 192.168.1.1 255.255.255.0
+Router1(config-if)# glbp 1 ip 192.168.1.254
+Router1(config-if)# glbp 1 priority 110
+Router1(config-if)# glbp 1 preempt
+Router1(config-if)# glbp 1 load-balancing round-robin   # Метод балансировки
+
+# Проверка состояния GLBP
+Router# show glbp
+Router# show glbp brief</code></pre>
+                    </div>
+
+                    <h3>Сравнение протоколов</h3>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Характеристика</th><th>HSRP</th><th>VRRP</th><th>GLBP</th></tr>
+                            <tr><td>Производитель</td><td>Cisco (проприетарный)</td><td>Открытый стандарт (RFC 5798)</td><td>Cisco (проприетарный)</td></tr>
+                            <tr><td>Активные роутеры</td><td>1 Active</td><td>1 Master</td><td>Все активны (AVF)</td></tr>
+                            <tr><td>Балансировка</td><td>Нет</td><td>Нет</td><td>Да</td></tr>
+                            <tr><td>Preemption</td><td>По умолчанию выкл.</td><td>По умолчанию вкл.</td><td>По умолчанию выкл.</td></tr>
+                            <tr><td>Multicast адрес</td><td>224.0.0.2 (v1)<br>224.0.0.102 (v2)</td><td>224.0.0.18</td><td>224.0.0.102</td></tr>
+                            <tr><td>Таймер по умолчанию</td><td>3 сек (hello)</td><td>1 сек (advertisement)</td><td>3 сек (hello)</td></tr>
+                            <tr><td>Поддержка IPv6</td><td>Да (v2)</td><td>Да (VRRPv3)</td><td>Нет</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>Практические рекомендации</h3>
+                    <div class="visual-guide">
+                        <h4>Когда использовать:</h4>
+                        <ul>
+                            <li><strong>HSRP:</strong> Сети Cisco, нужна простота и надежность</li>
+                            <li><strong>VRRP:</strong> Мультивендорная среда, нужна совместимость</li>
+                            <li><strong>GLBP:</strong> Cisco-сети, нужна балансировка нагрузки между шлюзами</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Лучшие практики:</h4>
+                        <ul>
+                            <li><strong>Тюнинг таймеров:</strong> Уменьшите таймеры для быстрого обнаружения сбоев (но осторожно — может вызвать ложные срабатывания)</li>
+                            <li><strong>Track интерфейсы:</strong> Отслеживайте состояние uplink-портов, чтобы снизить приоритет при их падении</li>
+                            <li><strong>Аутентификация:</strong> Используйте MD5-аутентификацию для защиты от атак</li>
+                            <li><strong>Preempt:</strong> Включайте preempt только если уверены, что это не вызовет нестабильности</li>
+                            <li><strong>Документирование:</strong> Четко документируйте приоритеты и роли маршрутизаторов</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Расширенная настройка HSRP с отслеживанием и аутентификацией
+Router1(config)# interface GigabitEthernet0/0
+Router1(config-if)# ip address 192.168.1.1 255.255.255.0
+Router1(config-if)# standby 1 ip 192.168.1.254
+Router1(config-if)# standby 1 priority 110
+Router1(config-if)# standby 1 preempt
+Router1(config-if)# standby 1 authentication md5 key-string MySecureKey
+Router1(config-if)# standby 1 track GigabitEthernet0/1 20  # Снизить приоритет на 20 при падении uplink
+
+# Таймеры в миллисекундах (осторожно!)
+Router1(config-if)# standby 1 timers msec 200 msec 700    # hello 200ms, hold 700ms</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> FHRP защищает только от отказа маршрутизатора, но не от отказа канала за маршрутизатором. Используйте отслеживание интерфейсов (track) для комплексной отказоустойчивости.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>FHRP</strong> — протоколы резервирования шлюза по умолчанию через виртуальный IP</li>
+                            <li><strong>HSRP</strong> — проприетарный Cisco, 1 Active + 1 Standby, preempt по умолчанию выключен</li>
+                            <li><strong>VRRP</strong> — открытый стандарт, 1 Master + Backup, preempt по умолчанию включен</li>
+                            <li><strong>GLBP</strong> — Cisco, балансировка нагрузки между всеми маршрутизаторами</li>
+                            <li><strong>Выбор Active/Master:</strong> По приоритету (0-255), затем по IP-адресу</li>
+                            <li><strong>Failover:</strong> Автоматическое переключение при отказе активного маршрутизатора</li>
+                            <li><strong>Track:</strong> Отслеживание состояния uplink-портов для умного переключения</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить отказоустойчивость сети через резервирование шлюза по умолчанию, исключив единую точку отказа.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ospf" class="topic-section">
+                <h2>5.3 OSPF основы</h2>
+                <div class="lesson-content">
+                    <h3>Проблема статической маршрутизации</h3>
+                    <p>В больших сетях статическая маршрутизация становится неэффективной: при изменениях нужно вручную обновлять маршруты на всех маршрутизаторах, нет автоматического восстановления при отказе каналов.</p>
+
+                    <div class="note">
+                        <p><strong>Решение:</strong> <strong>Динамическая маршрутизация</strong> — маршрутизаторы автоматически обмениваются информацией о сетях и строят таблицы маршрутизации.</p>
+                    </div>
+
+                    <h3>Что такое OSPF?</h3>
+                    <p><strong>OSPF</strong> (Open Shortest Path First) — протокол динамической маршрутизации, который работает внутри одной организации (внутридоменный протокол). Он использует алгоритм <strong>состояния канала</strong> (Link State).</p>
+
+                    <div class="visual-guide">
+                        <h4>Принцип работы OSPF:</h4>
+                        <ol>
+                            <li><strong>Обнаружение соседей:</strong> Маршрутизаторы находят соседние OSPF-маршрутизаторы</li>
+                            <li><strong>Обмен информацией:</strong> Каждый маршрутизатор сообщает о своих подключенных сетях</li>
+                            <li><strong>Построение карты:</strong> Все маршрутизаторы строят одинаковую "карту" сети</li>
+                            <li><strong>Вычисление путей:</strong> Используя алгоритм Dijkstra, каждый маршрутизатор вычисляет кратчайшие пути ко всем сетям</li>
+                            <li><strong>Обновление:</strong> При изменениях информация обновляется автоматически</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если статическая маршрутизация — это "записная книжка с адресами", то OSPF — это "GPS-навигатор", который автоматически строит маршруты и обновляется при изменениях.</p>
+                    </div>
+
+                    <h3>Области OSPF: иерархическая структура</h3>
+                    <p>OSPF делит сеть на <strong>области</strong> (areas) для масштабирования и уменьшения нагрузки:</p>
+
+                    <div class="visual-guide">
+                        <h4>Структура областей:</h4>
+                        <ul>
+                            <li><strong>Area 0 (Backbone)</strong> — центральная область, через которую проходят все межобластные маршруты. Обязательна в любой OSPF-сети</li>
+                            <li><strong>Обычные области</strong> — подключены к Area 0, содержат сети организации</li>
+                            <li><strong>Преимущества:</strong> Уменьшение размера таблиц маршрутизации, ограничение распространения изменений, упрощение управления</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Все области должны быть подключены к Area 0. Прямое соединение между обычными областями (минуя Area 0) невозможно.</p>
+                    </div>
+
+                    <h3>LSA: как распространяется информация</h3>
+                    <p><strong>LSA</strong> (Link State Advertisement) — это сообщения, которыми маршрутизаторы обмениваются информацией о сетях.</p>
+
+                    <div class="visual-guide">
+                        <h4>Основные типы LSA:</h4>
+                        <ul>
+                            <li><strong>LSA Type 1 (Router LSA)</strong> — описывает маршрутизатор и его подключенные сети внутри области</li>
+                            <li><strong>LSA Type 2 (Network LSA)</strong> — описывает сегмент сети с несколькими маршрутизаторами (выбирается DR)</li>
+                            <li><strong>LSA Type 3 (Summary LSA)</strong> — сводка сетей области для других областей (распространяется ABR)</li>
+                            <li><strong>LSA Type 5 (External LSA)</strong> — внешние маршруты, импортированные из других протоколов (распространяется ASBR)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Метрика: стоимость пути</h3>
+                    <p>OSPF использует <strong>стоимость</strong> (cost) как метрику для выбора лучшего пути. Стоимость обратно пропорциональна пропускной способности канала.</p>
+
+                    <div class="visual-guide">
+                        <h4>Расчет стоимости:</h4>
+                        <ul>
+                            <li>Формула: <strong>Стоимость = Reference Bandwidth / Пропускная способность канала</strong></li>
+                            <li>По умолчанию Reference Bandwidth = 100 Мбит/с</li>
+                            <li>Примеры: 100 Мбит/с = стоимость 1, 10 Мбит/с = стоимость 10, 1 Гбит/с = стоимость 0.1 (округляется до 1)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Для высокоскоростных каналов (10 Гбит/с, 40 Гбит/с) нужно увеличить Reference Bandwidth, иначе все быстрые каналы будут иметь одинаковую стоимость.</p>
+                    </div>
+
+                    <h3>DR и BDR: для многодоступных сетей</h3>
+                    <p>В сетях, где несколько маршрутизаторов подключены к одному сегменту (например, через коммутатор), выбираются:</p>
+
+                    <div class="visual-guide">
+                        <h4>DR (Designated Router) и BDR (Backup Designated Router):</h4>
+                        <ul>
+                            <li><strong>DR</strong> — главный маршрутизатор сегмента, обменивается LSA с другими маршрутизаторами</li>
+                            <li><strong>BDR</strong> — резервный маршрутизатор, заменяет DR при его отказе</li>
+                            <li><strong>Цель:</strong> Уменьшить количество соединений между маршрутизаторами (вместо полносвязной топологии)</li>
+                            <li><strong>Выбор:</strong> По приоритету и Router ID (чем выше приоритет, тем лучше)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> DR/BDR выбираются только на многодоступных сегментах (broadcast, NBMA). На point-to-point соединениях DR/BDR не нужны.</p>
+                    </div>
+
+                    <h3>Состояния соседства OSPF</h3>
+                    <p>Маршрутизаторы проходят через несколько состояний перед установлением полного соседства:</p>
+
+                    <div class="visual-guide">
+                        <h4>Переход к полному соседству:</h4>
+                        <ol>
+                            <li><strong>Down</strong> — нет связи с соседом</li>
+                            <li><strong>Init</strong> — получен Hello от соседа</li>
+                            <li><strong>2-Way</strong> — двусторонняя связь установлена</li>
+                            <li><strong>ExStart</strong> — начало обмена базами данных</li>
+                            <li><strong>Exchange</strong> — обмен LSA</li>
+                            <li><strong>Loading</strong> — загрузка недостающих LSA</li>
+                            <li><strong>Full</strong> — полное соседство, базы данных синхронизированы</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Проблемы:</strong> Соседство не установится, если не совпадают: Area ID, аутентификация, MTU, Hello/Dead интервалы, типы сетей.</p>
+                    </div>
+
+                    <h3>Типы областей для оптимизации</h3>
+                    <div class="visual-guide">
+                        <h4>Специальные типы областей:</h4>
+                        <ul>
+                            <li><strong>Stub Area</strong> — не получает внешние маршруты (LSA Type 5), использует default route</li>
+                            <li><strong>Totally Stub Area</strong> — не получает внешние и межобластные маршруты, только default route</li>
+                            <li><strong>NSSA (Not-So-Stubby Area)</strong> — может импортировать внешние маршруты через LSA Type 7</li>
+                            <li><strong>Цель:</strong> Уменьшить размер таблиц маршрутизации и нагрузку на маршрутизаторы</li>
+                        </ul>
+                    </div>
+
+                    <h3>OSPFv2 и OSPFv3</h3>
+                    <div class="visual-guide">
+                        <h4>Различия:</h4>
+                        <ul>
+                            <li><strong>OSPFv2</strong> — для IPv4, использует протокольный номер 89</li>
+                            <li><strong>OSPFv3</strong> — для IPv6, использует протокольный номер 89, но работает поверх IPv6</li>
+                            <li>Оба протокола могут работать одновременно на одном маршрутизаторе</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>OSPF</strong> — протокол динамической маршрутизации состояния канала</li>
+                            <li><strong>Области</strong> — иерархическая структура с обязательной Area 0 (Backbone)</li>
+                            <li><strong>LSA</strong> — сообщения для обмена информацией о сетях</li>
+                            <li><strong>Метрика</strong> — стоимость пути, обратно пропорциональна пропускной способности</li>
+                            <li><strong>DR/BDR</strong> — для оптимизации в многодоступных сетях</li>
+                            <li><strong>Алгоритм Dijkstra</strong> — вычисление кратчайших путей</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Автоматическое построение оптимальных маршрутов в больших сетях с возможностью быстрого восстановления при изменениях.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="bgp" class="topic-section">
+                <h2>5.4 BGP основы</h2>
+                <div class="lesson-content">
+                    <h3>Что такое BGP?</h3>
+                    <p><strong>BGP</strong> (Border Gateway Protocol) — протокол маршрутизации, который используется для обмена маршрутами между разными организациями в интернете. Это "язык", на котором говорят интернет-провайдеры и крупные организации.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если OSPF — это "внутренняя почта" организации, то BGP — это "международная почта" между разными странами (организациями).</p>
+                    </div>
+
+                    <h3>Автономные системы (AS)</h3>
+                    <p><strong>AS</strong> (Autonomous System) — это сеть или группа сетей под единым административным управлением. Каждая AS имеет уникальный номер (ASN).</p>
+
+                    <div class="visual-guide">
+                        <h4>Примеры AS:</h4>
+                        <ul>
+                            <li>Интернет-провайдер имеет свой ASN (например, AS12345)</li>
+                            <li>Крупная корпорация может иметь свой ASN</li>
+                            <li>Университет может иметь свой ASN</li>
+                            <li>ASN — это как "почтовый индекс" для организации в интернете</li>
+                        </ul>
+                    </div>
+
+                    <h3>iBGP и eBGP</h3>
+                    <div class="visual-guide">
+                        <h4>eBGP (External BGP):</h4>
+                        <ul>
+                            <li>Соединение между маршрутизаторами из <strong>разных</strong> AS</li>
+                            <li>Используется для обмена маршрутами между организациями</li>
+                            <li>Пример: ваш провайдер обменивается маршрутами с другими провайдерами</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>iBGP (Internal BGP):</h4>
+                        <ul>
+                            <li>Соединение между маршрутизаторами внутри <strong>одной</strong> AS</li>
+                            <li>Используется для распространения внешних маршрутов внутри организации</li>
+                            <li>Требует полносвязной топологии или использования Route Reflectors</li>
+                        </ul>
+                    </div>
+
+                    <h3>Атрибуты BGP: как выбирается путь</h3>
+                    <p>BGP использует множество атрибутов для выбора лучшего пути. Маршрутизатор проверяет их в определенном порядке:</p>
+
+                    <div class="visual-guide">
+                        <h4>Порядок выбора пути (Best Path Selection):</h4>
+                        <ol>
+                            <li><strong>Weight</strong> — локальный параметр (только на этом маршрутизаторе), не передается другим</li>
+                            <li><strong>Local Preference</strong> — приоритет внутри AS, влияет на выбор исходящего пути</li>
+                            <li><strong>AS-PATH</strong> — список пройденных AS, чем короче путь, тем лучше</li>
+                            <li><strong>Origin</strong> — источник маршрута (IGP, EGP, Incomplete)</li>
+                            <li><strong>MED</strong> — метрика для влияния на выбор входящего пути</li>
+                            <li><strong>eBGP > iBGP</strong> — внешние маршруты предпочтительнее внутренних</li>
+                            <li><strong>IGP cost</strong> — стоимость пути до next-hop</li>
+                            <li><strong>Router ID</strong> — наименьший Router ID выигрывает</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> BGP выбирает только один лучший путь (best path) для каждого префикса. Этот путь помечается как "best" и используется для маршрутизации.</p>
+                    </div>
+
+                    <h3>Ключевые атрибуты BGP</h3>
+                    <div class="visual-guide">
+                        <h4>AS-PATH:</h4>
+                        <ul>
+                            <li>Список номеров AS, через которые прошел маршрут</li>
+                            <li>Пример: AS-PATH = [64512, 12345, 67890] означает, что маршрут прошел через эти три AS</li>
+                            <li>Используется для предотвращения петель (если маршрутизатор видит свой AS в пути, он отклоняет маршрут)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Local Preference:</h4>
+                        <ul>
+                            <li>Приоритет маршрута внутри AS (выше = лучше)</li>
+                            <li>Используется для выбора исходящего пути (какой провайдер использовать для выхода)</li>
+                            <li>Не передается другим AS</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>MED (Multi-Exit Discriminator):</h4>
+                        <ul>
+                            <li>Метрика для влияния на выбор входящего пути</li>
+                            <li>Используется, когда у организации несколько соединений с провайдером</li>
+                            <li>Меньше = лучше</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Communities:</h4>
+                        <ul>
+                            <li>Метки для группировки маршрутов и применения политик</li>
+                            <li>Примеры: no-export (не экспортировать), blackhole (отбросить), local-preference (установить приоритет)</li>
+                            <li>Упрощают управление маршрутизацией</li>
+                        </ul>
+                    </div>
+
+                    <h3>Масштабирование BGP</h3>
+                    <div class="visual-guide">
+                        <h4>Route Reflectors:</h4>
+                        <ul>
+                            <li>Решают проблему полносвязности iBGP (когда нужно много соединений между маршрутизаторами)</li>
+                            <li>Route Reflector получает маршруты от клиентов и отражает их другим клиентам</li>
+                            <li>Упрощает топологию iBGP</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Конфедерации:</h4>
+                        <ul>
+                            <li>Разделение большой AS на несколько "под-AS"</li>
+                            <li>Внутри конфедерации используется eBGP, но внешне выглядит как одна AS</li>
+                            <li>Упрощает управление и уменьшает количество iBGP-соединений</li>
+                        </ul>
+                    </div>
+
+                    <h3>Безопасность BGP</h3>
+                    <div class="visual-guide">
+                        <h4>Методы защиты:</h4>
+                        <ul>
+                            <li><strong>GTSM/TTL Security</strong> — проверка TTL для защиты от удаленных атак</li>
+                            <li><strong>MD5 аутентификация</strong> — защита от подделки BGP-сообщений</li>
+                            <li><strong>RPKI (Resource Public Key Infrastructure)</strong> — проверка, что организация имеет право объявлять префиксы</li>
+                            <li><strong>Prefix-фильтры</strong> — ограничение принимаемых маршрутов</li>
+                            <li><strong>AS-path фильтры</strong> — блокировка маршрутов от нежелательных AS</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> BGP-утечки (когда организация объявляет чужие префиксы) могут вызвать серьезные проблемы в интернете. Поэтому важна валидация маршрутов через RPKI.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>BGP</strong> — протокол для обмена маршрутами между разными организациями (AS)</li>
+                            <li><strong>AS</strong> — автономная система, сеть под единым управлением</li>
+                            <li><strong>eBGP</strong> — между разными AS, <strong>iBGP</strong> — внутри одной AS</li>
+                            <li><strong>Атрибуты:</strong> AS-PATH, Local Preference, MED, Communities влияют на выбор пути</li>
+                            <li><strong>Best Path Selection</strong> — сложный алгоритм выбора лучшего маршрута</li>
+                            <li><strong>Масштабирование:</strong> Route Reflectors и Конфедерации для больших сетей</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить надежный обмен маршрутами между организациями в интернете с возможностью применения политик маршрутизации.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="acl" class="topic-section">
+                <h2>5.5 ACL (Access Control Lists) и политики</h2>
+                <div class="lesson-content">
+                    <h3>Что такое ACL?</h3>
+                    <p><strong>ACL (Access Control List)</strong> — это список правил фильтрации трафика, которые применяются на маршрутизаторах и коммутаторах L3. ACL позволяют контролировать, какой трафик разрешен или запрещен на основе различных критериев: IP-адресов, протоколов, портов и других параметров.</p>
+
+                    <div class="visual-guide">
+                        <h4>Основные применения ACL:</h4>
+                        <ul>
+                            <li><strong>Безопасность:</strong> Ограничение доступа к определенным ресурсам сети</li>
+                            <li><strong>Фильтрация трафика:</strong> Блокировка нежелательного трафика на границах сети</li>
+                            <li><strong>Управление политиками:</strong> Определение трафика для QoS, NAT, VPN</li>
+                            <li><strong>Контроль маршрутизации:</strong> Фильтрация обновлений протоколов маршрутизации</li>
+                        </ul>
+                    </div>
+
+                    <h3>Типы ACL</h3>
+                    <div class="visual-guide">
+                        <h4>Standard ACL (Стандартные списки контроля доступа):</h4>
+                        <ul>
+                            <li><strong>Номера:</strong> 1-99 и 1300-1999</li>
+                            <li><strong>Фильтрация:</strong> Только по <strong>IP-адресу источника</strong> (source IP)</li>
+                            <li><strong>Ограничения:</strong> Нельзя фильтровать по адресу назначения, портам или протоколам</li>
+                            <li><strong>Применение:</strong> Простая фильтрация, например, запрет доступа с определенной подсети</li>
+                            <li><strong>Рекомендация:</strong> Размещайте Standard ACL как можно ближе к назначению</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Extended ACL (Расширенные списки контроля доступа):</h4>
+                        <ul>
+                            <li><strong>Номера:</strong> 100-199 и 2000-2699</li>
+                            <li><strong>Фильтрация:</strong> По множеству критериев:
+                                <ul>
+                                    <li>IP-адрес источника (source IP)</li>
+                                    <li>IP-адрес назначения (destination IP)</li>
+                                    <li>Протокол (TCP, UDP, ICMP, и др.)</li>
+                                    <li>Номера портов источника и назначения</li>
+                                    <li>Флаги TCP (SYN, ACK, FIN и др.)</li>
+                                    <li>ICMP-сообщения (echo, reply, unreachable и др.)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Применение:</strong> Детальный контроль трафика, например, разрешить HTTP, но запретить Telnet</li>
+                            <li><strong>Рекомендация:</strong> Размещайте Extended ACL как можно ближе к источнику</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Named ACL (Именованные списки контроля доступа):</h4>
+                        <ul>
+                            <li><strong>Идентификация:</strong> Имя вместо номера (например, "BLOCK-GUEST-VLAN")</li>
+                            <li><strong>Тип:</strong> Могут быть Standard или Extended</li>
+                            <li><strong>Преимущества:</strong>
+                                <ul>
+                                    <li>Легче читать и понимать назначение ACL</li>
+                                    <li>Можно редактировать отдельные правила (вставлять/удалять по номеру строки)</li>
+                                    <li>Нет ограничения на количество ACL</li>
+                                </ul>
+                            </li>
+                            <li><strong>Современная практика:</strong> Рекомендуется использовать Named ACL для лучшей читаемости</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Тип ACL</th><th>Диапазон номеров</th><th>Критерии фильтрации</th><th>Где размещать</th></tr>
+                            <tr>
+                                <td><strong>Standard</strong></td>
+                                <td>1-99, 1300-1999</td>
+                                <td>Только source IP</td>
+                                <td>Близко к назначению</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extended</strong></td>
+                                <td>100-199, 2000-2699</td>
+                                <td>Source/Dest IP, протокол, порты</td>
+                                <td>Близко к источнику</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Named Standard</strong></td>
+                                <td>Имя</td>
+                                <td>Только source IP</td>
+                                <td>Близко к назначению</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Named Extended</strong></td>
+                                <td>Имя</td>
+                                <td>Source/Dest IP, протокол, порты</td>
+                                <td>Близко к источнику</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>Ключевые принципы работы ACL</h3>
+                    <div class="visual-guide">
+                        <h4>1. Порядок обработки правил (Top-to-Bottom):</h4>
+                        <ul>
+                            <li>Правила проверяются <strong>сверху вниз</strong> по порядку</li>
+                            <li>Первое совпавшее правило применяется, остальные игнорируются</li>
+                            <li>Важно размещать более специфичные правила в начале, общие — в конце</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>2. Неявный Deny All в конце (Implicit Deny):</h4>
+                        <ul>
+                            <li>В конце каждого ACL автоматически добавляется правило <code>deny ip any any</code></li>
+                            <li>Если пакет не совпал ни с одним правилом, он <strong>блокируется</strong></li>
+                            <li>Всегда добавляйте явное <code>permit</code> правило для разрешенного трафика</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>3. Направление применения (Inbound vs Outbound):</h4>
+                        <ul>
+                            <li><strong>Inbound (входящий):</strong> Фильтрует трафик, приходящий на интерфейс (до маршрутизации)</li>
+                            <li><strong>Outbound (исходящий):</strong> Фильтрует трафик, выходящий с интерфейса (после маршрутизации)</li>
+                            <li>На одном интерфейсе может быть два ACL: один inbound, один outbound</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>4. Wildcard Mask (инверсная маска):</h4>
+                        <ul>
+                            <li>Используется для определения диапазона адресов</li>
+                            <li><strong>0</strong> — этот бит должен совпадать (проверяется)</li>
+                            <li><strong>1</strong> — этот бит игнорируется (любое значение)</li>
+                            <li>Примеры:
+                                <ul>
+                                    <li><code>0.0.0.0</code> — точное совпадение адреса</li>
+                                    <li><code>0.0.0.255</code> — совпадение всей подсети /24</li>
+                                    <li><code>0.0.255.255</code> — совпадение всей подсети /16</li>
+                                    <li><code>255.255.255.255</code> — любой адрес (то же, что <code>any</code>)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3>Примеры настройки Standard ACL</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Пример 1: Блокировать трафик от одного хоста
+Router(config)# access-list 10 deny host 192.168.1.100
+Router(config)# access-list 10 permit any
+
+# Пример 2: Разрешить только трафик из подсети 10.0.0.0/24
+Router(config)# access-list 20 permit 10.0.0.0 0.0.0.255
+Router(config)# access-list 20 deny any
+
+# Пример 3: Named Standard ACL - блокировать гостевую подсеть
+Router(config)# ip access-list standard BLOCK-GUEST
+Router(config-std-nacl)# deny 172.16.100.0 0.0.0.255
+Router(config-std-nacl)# permit any
+Router(config-std-nacl)# exit
+
+# Применение ACL на интерфейс (outbound)
+Router(config)# interface GigabitEthernet0/0
+Router(config-if)# ip access-group BLOCK-GUEST out</code></pre>
+                    </div>
+
+                    <h3>Примеры настройки Extended ACL</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Пример 1: Разрешить HTTP и HTTPS, запретить Telnet
+Router(config)# access-list 100 permit tcp any any eq 80
+Router(config)# access-list 100 permit tcp any any eq 443
+Router(config)# access-list 100 deny tcp any any eq 23
+Router(config)# access-list 100 permit ip any any
+
+# Пример 2: Блокировать ICMP ping от подсети 192.168.1.0/24
+Router(config)# access-list 110 deny icmp 192.168.1.0 0.0.0.255 any echo
+Router(config)# access-list 110 permit ip any any
+
+# Пример 3: Named Extended ACL - контроль доступа к серверу
+Router(config)# ip access-list extended SERVER-ACCESS
+Router(config-ext-nacl)# permit tcp 10.0.0.0 0.0.0.255 host 192.168.1.100 eq 80
+Router(config-ext-nacl)# permit tcp 10.0.0.0 0.0.0.255 host 192.168.1.100 eq 443
+Router(config-ext-nacl)# permit tcp 10.0.1.0 0.0.0.255 host 192.168.1.100 eq 22
+Router(config-ext-nacl)# deny ip any host 192.168.1.100
+Router(config-ext-nacl)# permit ip any any
+Router(config-ext-nacl)# exit
+
+# Применение ACL на интерфейс (inbound)
+Router(config)# interface GigabitEthernet0/1
+Router(config-if)# ip access-group SERVER-ACCESS in</code></pre>
+                    </div>
+
+                    <h3>Детальные примеры Extended ACL</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Пример 4: Разрешить установленные TCP-соединения (established)
+Router(config)# access-list 120 permit tcp any any established
+Router(config)# access-list 120 deny tcp any any
+Router(config)# access-list 120 permit ip any any
+
+# Пример 5: Блокировать доступ к определенному диапазону портов
+Router(config)# ip access-list extended BLOCK-PORTS
+Router(config-ext-nacl)# deny tcp any any range 1024 2000
+Router(config-ext-nacl)# permit ip any any
+
+# Пример 6: Разрешить только DNS и NTP
+Router(config)# ip access-list extended ALLOW-DNS-NTP
+Router(config-ext-nacl)# permit udp any any eq 53     # DNS
+Router(config-ext-nacl)# permit udp any any eq 123    # NTP
+Router(config-ext-nacl)# deny ip any any
+
+# Пример 7: Блокировать исходящий трафик на Facebook (пример)
+Router(config)# ip access-list extended BLOCK-SOCIAL
+Router(config-ext-nacl)# deny ip any 31.13.0.0 0.0.255.255
+Router(config-ext-nacl)# deny ip any 66.220.144.0 0.0.15.255
+Router(config-ext-nacl)# permit ip any any
+Router(config-ext-nacl)# exit
+Router(config)# interface GigabitEthernet0/2
+Router(config-if)# ip access-group BLOCK-SOCIAL out</code></pre>
+                    </div>
+
+                    <h3>Редактирование Named ACL</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Просмотр ACL с номерами строк
+Router# show ip access-lists SERVER-ACCESS
+Extended IP access list SERVER-ACCESS
+    10 permit tcp 10.0.0.0 0.0.0.255 host 192.168.1.100 eq www
+    20 permit tcp 10.0.0.0 0.0.0.255 host 192.168.1.100 eq 443
+    30 deny ip any host 192.168.1.100
+    40 permit ip any any
+
+# Вставка нового правила между существующими
+Router(config)# ip access-list extended SERVER-ACCESS
+Router(config-ext-nacl)# 25 permit tcp 10.0.2.0 0.0.0.255 host 192.168.1.100 eq 8080
+Router(config-ext-nacl)# exit
+
+# Удаление конкретного правила
+Router(config)# ip access-list extended SERVER-ACCESS
+Router(config-ext-nacl)# no 30
+Router(config-ext-nacl)# exit
+
+# Изменение номеров строк (ренумерация)
+Router(config)# ip access-list resequence SERVER-ACCESS 10 10</code></pre>
+                    </div>
+
+                    <h3>Проверка и отладка ACL</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Просмотр всех ACL
+Router# show ip access-lists
+
+# Просмотр конкретного ACL
+Router# show ip access-lists 100
+Router# show ip access-lists SERVER-ACCESS
+
+# Просмотр ACL, применённых на интерфейсы
+Router# show ip interface GigabitEthernet0/0
+... (показывает inbound и outbound ACL)
+
+# Статистика совпадений (сколько пакетов совпало с каждым правилом)
+Router# show ip access-lists
+Extended IP access list SERVER-ACCESS
+    10 permit tcp 10.0.0.0 0.0.0.255 host 192.168.1.100 eq www (1234 matches)
+    20 permit tcp 10.0.0.0 0.0.0.255 host 192.168.1.100 eq 443 (567 matches)
+
+# Очистка счетчиков совпадений
+Router# clear ip access-list counters SERVER-ACCESS
+
+# Отладка ACL (осторожно, может создать много вывода!)
+Router# debug ip packet 100 detail</code></pre>
+                    </div>
+
+                    <h3>Лучшие практики использования ACL</h3>
+                    <div class="visual-guide">
+                        <h4>Рекомендации:</h4>
+                        <ul>
+                            <li><strong>Используйте Named ACL:</strong> Имена более читаемы, чем номера</li>
+                            <li><strong>Добавляйте комментарии:</strong> Документируйте назначение правил с помощью <code>remark</code></li>
+                            <li><strong>Размещение:</strong>
+                                <ul>
+                                    <li>Standard ACL — близко к назначению (чтобы не блокировать весь трафик от источника раньше времени)</li>
+                                    <li>Extended ACL — близко к источнику (чтобы блокировать трафик как можно раньше)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Специфичное в начало:</strong> Размещайте более конкретные правила перед общими</li>
+                            <li><strong>Явный permit в конце:</strong> Добавляйте <code>permit ip any any</code> в конце, если хотите разрешить остальной трафик</li>
+                            <li><strong>Используйте established:</strong> Для разрешения ответов на исходящие соединения без открытия входящих портов</li>
+                            <li><strong>Тестируйте перед применением:</strong> Неправильный ACL может полностью заблокировать доступ к устройству</li>
+                            <li><strong>Логирование:</strong> Добавляйте <code>log</code> к важным правилам для аудита</li>
+                        </ul>
+                    </div>
+
+                    <h3>Пример комментирования ACL</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Использование remark для документирования
+Router(config)# ip access-list extended PRODUCTION-FIREWALL
+Router(config-ext-nacl)# remark === Allow web traffic from internal networks ===
+Router(config-ext-nacl)# permit tcp 10.0.0.0 0.0.255.255 any eq 80
+Router(config-ext-nacl)# permit tcp 10.0.0.0 0.0.255.255 any eq 443
+Router(config-ext-nacl)# remark === Allow DNS queries ===
+Router(config-ext-nacl)# permit udp 10.0.0.0 0.0.255.255 any eq 53
+Router(config-ext-nacl)# remark === Block access to internal DMZ from internet ===
+Router(config-ext-nacl)# deny ip any 172.16.0.0 0.0.255.255 log
+Router(config-ext-nacl)# remark === Allow established connections ===
+Router(config-ext-nacl)# permit tcp any any established
+Router(config-ext-nacl)# remark === Deny all other traffic and log ===
+Router(config-ext-nacl)# deny ip any any log</code></pre>
+                    </div>
+
+                    <h3>Пример сложного ACL для корпоративной сети</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Комплексный ACL для контроля доступа к серверной ферме
+Router(config)# ip access-list extended DMZ-ACCESS-CONTROL
+Router(config-ext-nacl)# remark === Allow HTTP/HTTPS from anywhere to web servers ===
+Router(config-ext-nacl)# permit tcp any 172.16.10.0 0.0.0.255 eq 80
+Router(config-ext-nacl)# permit tcp any 172.16.10.0 0.0.0.255 eq 443
+Router(config-ext-nacl)# 
+Router(config-ext-nacl)# remark === Allow SSH only from admin network ===
+Router(config-ext-nacl)# permit tcp 10.0.99.0 0.0.0.255 172.16.10.0 0.0.0.255 eq 22
+Router(config-ext-nacl)# 
+Router(config-ext-nacl)# remark === Allow database access only from app servers ===
+Router(config-ext-nacl)# permit tcp 172.16.20.0 0.0.0.255 host 172.16.10.50 eq 3306
+Router(config-ext-nacl)# permit tcp 172.16.20.0 0.0.0.255 host 172.16.10.50 eq 5432
+Router(config-ext-nacl)# 
+Router(config-ext-nacl)# remark === Allow ICMP for troubleshooting (limited types) ===
+Router(config-ext-nacl)# permit icmp any any echo-reply
+Router(config-ext-nacl)# permit icmp any any time-exceeded
+Router(config-ext-nacl)# permit icmp any any unreachable
+Router(config-ext-nacl)# 
+Router(config-ext-nacl)# remark === Deny and log suspicious traffic ===
+Router(config-ext-nacl)# deny tcp any 172.16.10.0 0.0.0.255 eq 23 log
+Router(config-ext-nacl)# deny tcp any 172.16.10.0 0.0.0.255 eq 445 log
+Router(config-ext-nacl)# 
+Router(config-ext-nacl)# remark === Implicit deny (logged) ===
+Router(config-ext-nacl)# deny ip any any log</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Производительность:</strong> ACL обрабатываются аппаратно на современных маршрутизаторах и коммутаторах (TCAM), поэтому влияние на производительность минимально. Однако очень большие ACL (тысячи правил) могут замедлить обработку. В таких случаях рассмотрите использование Firewall или объединение правил.</p>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Безопасность:</strong> ACL — это базовая защита, но не замена полноценного Firewall. ACL работают на L3/L4 и не анализируют содержимое пакетов. Для глубокой инспекции используйте Stateful Firewall, IPS/IDS или Next-Generation Firewall (NGFW).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="qos" class="topic-section">
+                <h2>5.6 QoS основы</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>Классификация и маркировка</strong>: определение классов трафика и присвоение DSCP/CoS.</li>
+                        <li><strong>Очереди и планирование</strong>: FIFO, WFQ, CBWFQ, приоритетные очереди (LLQ) для голоса/видео.</li>
+                        <li><strong>Shaping и Policing</strong>: выравнивание трафика и ограничение скорости на границах.</li>
+                        <li><strong>Устранение перегрузок</strong>: WRED/RED, управление буферами.</li>
+                    </ul>
+                    <div class="note"><p><strong>Стандарты и маркировки:</strong> DiffServ (RFC2474/2475), DSCP классы (EF/AF/BE), соотнесение с PCP (802.1Q).</p></div>
+                    <div class="note"><p><strong>Практика:</strong> QoS эффективен только end‑to‑end; согласуйте классы/метки по всей цепочке, учитывайте переписание DSCP.</p></div>
+                    <div class="visual-guide">
+                        <h4>Модели QoS</h4>
+                        <ul>
+                            <li><strong>Best Effort</strong>: отсутствие гарантий; весь трафик одинаков.</li>
+                            <li><strong>IntServ</strong>: RSVP‑резервация ресурсов, масштабируется ограниченно.</li>
+                            <li><strong>DiffServ</strong>: классы обслуживания и PHB (EF/AF/BE), масштабируемая модель для больших сетей.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Политики и границы доверия</h4>
+                        <ul>
+                            <li><strong>Trust boundary</strong>: где принимать метки DSCP/CoS, где переписывать.</li>
+                            <li><strong>Mapping</strong>: DSCP → очереди/профили → приоритеты L2 (PCP), CoS → DSCP на uplink.</li>
+                            <li><strong>Противодействие злоупотреблениям</strong>: полисинг на доступе, приоритизация лишь для критичных классов.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="multicast" class="topic-section">
+                <h2>5.7 Multicast</h2>
+                <div class="lesson-content">
+                    <p>Multicast обеспечивает доставку «один‑ко‑многим» без дублирования трафика на источнике. Используются специальные адреса и протоколы управления группами и деревьями распространения.</p>
+                    <div class="visual-guide">
+                        <h4>Адреса и основы</h4>
+                        <ul>
+                            <li><strong>IPv4</strong>: 224.0.0.0/4 (link‑local 224.0.0.0/24 не маршрутизируется), IGMP для управления членством.</li>
+                            <li><strong>IPv6</strong>: FF00::/8, области (scope) FF0s::/16; MLD вместо IGMP.</li>
+                            <li><strong>RPF (Reverse Path Forwarding)</strong>: проверка обратного пути предотвращает петли.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>PIM‑семейство</h4>
+                        <ul>
+                            <li><strong>PIM Dense‑Mode</strong>: flood‑and‑prune для плотных доменов (редко используется).</li>
+                            <li><strong>PIM Sparse‑Mode (ASM)</strong>: общий RP, регистрация источников, переход на кратчайшие пути (SPT).</li>
+                            <li><strong>SSM (PIM‑SSM)</strong>: подписка на конкретную пару (S,G) без RP, предпочтителен в современных сетях.</li>
+                            <li><strong>MSDP</strong>: обмен источниками между доменами ASM.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика Multicast:</strong> SSM упрощает безопасность и масштабирование; на L2 используйте IGMP/MLD Snooping для ограничения flood.</p></div>
+                </div>
+            </section>
+
+            <section id="igp" class="topic-section">
+                <h2>5.8 IS‑IS/EIGRP/RIP</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>IS‑IS</h4>
+                        <ul>
+                            <li><strong>Тип</strong>: протокол состояния канала (link‑state) поверх CLNS; переносит IP через TLV.</li>
+                            <li><strong>Уровни</strong>: Level‑1 (внутри области), Level‑2 (между областями); иерархия схожа с OSPF.</li>
+                            <li><strong>Дизайн</strong>: масштабируется в провайдерских/фабричных сетях, устойчив к изменениям адресации.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>EIGRP (Enhanced Interior Gateway Routing Protocol)</h4>
+                        <ul>
+                            <li><strong>Тип</strong>: гибридный протокол (сочетает преимущества distance-vector и link-state)</li>
+                            <li><strong>Метрика</strong>: составная (пропускная способность/задержка и др. коэффициенты K-values)</li>
+                            <li><strong>Стандартизация</strong>: RFC 7868 (ранее проприетарный протокол Cisco)</li>
+                            <li><strong>Применение</strong>: исторически — enterprise Cisco; сегодня реже вне одновендорных сетей</li>
+                        </ul>
+                    </div>
+
+                    <h3>DUAL алгоритм (Diffusing Update Algorithm)</h3>
+                    <p><strong>DUAL</strong> — это ключевой алгоритм EIGRP, который обеспечивает быструю сходимость и гарантирует отсутствие петель маршрутизации без необходимости ждать таймеров (как в RIP) или выполнять полный пересчет топологии (как в OSPF).</p>
+
+                    <div class="visual-guide">
+                        <h4>Основные концепции DUAL:</h4>
+                        <ul>
+                            <li><strong>Feasible Distance (FD)</strong> — наименьшая известная метрика до сети назначения с момента последнего расчета</li>
+                            <li><strong>Reported Distance (RD) или Advertised Distance (AD)</strong> — метрика, которую сообщает соседний маршрутизатор до сети назначения</li>
+                            <li><strong>Successor</strong> — лучший следующий маршрутизатор (next-hop) для достижения сети назначения</li>
+                            <li><strong>Feasible Successor (FS)</strong> — резервный маршрутизатор, который может немедленно заменить Successor без риска петель</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Условие Feasibility (Feasibility Condition):</h4>
+                        <p>Маршрут может стать Feasible Successor только если выполняется условие:</p>
+                        <ul>
+                            <li><strong>RD (соседа) &lt; FD (текущий маршрут)</strong></li>
+                            <li>Это означает: "Reported Distance соседа меньше, чем наш текущий Feasible Distance"</li>
+                            <li><strong>Гарантия:</strong> Если это условие выполнено, использование этого маршрута не создаст петли</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Пример работы DUAL:</h4>
+                        <p>Маршрутизатор R1 хочет достичь сети 10.0.0.0/24. Он получает обновления от трех соседей:</p>
+                        <table class="spec-table">
+                            <tr><th>Сосед</th><th>Reported Distance</th><th>Локальная метрика до соседа</th><th>Общая метрика (FD)</th><th>Статус</th></tr>
+                            <tr>
+                                <td>R2</td>
+                                <td>100</td>
+                                <td>50</td>
+                                <td>150</td>
+                                <td><strong>Successor</strong> (лучший маршрут)</td>
+                            </tr>
+                            <tr>
+                                <td>R3</td>
+                                <td>120</td>
+                                <td>60</td>
+                                <td>180</td>
+                                <td><strong>Feasible Successor</strong> (RD=120 &lt; FD=150 ✓)</td>
+                            </tr>
+                            <tr>
+                                <td>R4</td>
+                                <td>160</td>
+                                <td>40</td>
+                                <td>200</td>
+                                <td>Не Feasible Successor (RD=160 &gt; FD=150 ✗)</td>
+                            </tr>
+                        </table>
+                        <p><strong>Результат:</strong> R2 используется как основной маршрут (Successor), R3 — как резервный (Feasible Successor). Если R2 откажет, R1 мгновенно переключится на R3 без пересчета таблицы маршрутизации.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Процесс выбора маршрута DUAL:</h4>
+                        <ol>
+                            <li><strong>Получение обновлений:</strong> Маршрутизатор получает метрики от всех соседей</li>
+                            <li><strong>Расчет FD:</strong> Для каждого маршрута рассчитывается общая метрика (FD)</li>
+                            <li><strong>Выбор Successor:</strong> Маршрут с наименьшим FD становится Successor (активным маршрутом)</li>
+                            <li><strong>Проверка Feasibility:</strong> Остальные маршруты проверяются на условие RD &lt; FD</li>
+                            <li><strong>Определение FS:</strong> Маршруты, удовлетворяющие условию, становятся Feasible Successors</li>
+                            <li><strong>Добавление в топологию:</strong> Successor и FS сохраняются в топологической таблице EIGRP</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Преимущество DUAL:</strong> При отказе основного маршрута (Successor) переключение на резервный (Feasible Successor) происходит мгновенно (sub-second convergence) без запуска алгоритма пересчета. Если резервного маршрута нет, DUAL выполняет запрос (Query) к соседям для поиска альтернативного пути.</p>
+                    </div>
+
+                    <h3>Состояния маршрутов в DUAL</h3>
+                    <div class="visual-guide">
+                        <h4>Passive (пассивное состояние):</h4>
+                        <ul>
+                            <li>Маршрут стабилен, Successor известен</li>
+                            <li>Нормальное рабочее состояние</li>
+                            <li>Маршрутизация работает без задержек</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Active (активное состояние):</h4>
+                        <ul>
+                            <li>Маршрут потерян, нет Feasible Successor</li>
+                            <li>DUAL отправляет Query (запросы) соседям для поиска альтернативного пути</li>
+                            <li>Маршрутизатор ждет Reply (ответы) от всех соседей</li>
+                            <li><strong>Проблема:</strong> Если сосед не отвечает (Stuck-In-Active), маршрут может зависнуть (3 минуты по умолчанию)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Метрика EIGRP: K-values (K-значения)</h3>
+                    <p>EIGRP использует составную метрику, которая рассчитывается на основе нескольких параметров канала. Коэффициенты K-values определяют, какие параметры учитываются при расчете метрики.</p>
+
+                    <div class="visual-guide">
+                        <h4>Пять K-значений:</h4>
+                        <ul>
+                            <li><strong>K1</strong> — коэффициент для пропускной способности (Bandwidth), по умолчанию = 1 (включен)</li>
+                            <li><strong>K2</strong> — коэффициент для загрузки (Load), по умолчанию = 0 (отключен)</li>
+                            <li><strong>K3</strong> — коэффициент для задержки (Delay), по умолчанию = 1 (включен)</li>
+                            <li><strong>K4</strong> — коэффициент для надежности (Reliability), по умолчанию = 0 (отключен)</li>
+                            <li><strong>K5</strong> — дополнительный коэффициент для надежности, по умолчанию = 0 (отключен)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>По умолчанию:</strong> K1=1, K2=0, K3=1, K4=0, K5=0. Это означает, что метрика учитывает только <strong>пропускную способность (Bandwidth)</strong> и <strong>задержку (Delay)</strong>. Загрузка и надежность обычно не используются, так как они динамически меняются и могут вызвать нестабильность маршрутизации.</p>
+                    </div>
+
+                    <h3>Формула расчета метрики EIGRP</h3>
+                    <div class="visual-guide">
+                        <h4>Классическая формула (до EIGRP Wide Metrics):</h4>
+                        <p>Если K5 = 0:</p>
+                        <ul>
+                            <li><strong>Метрика = [K1 × Bandwidth + (K2 × Bandwidth) / (256 - Load) + K3 × Delay] × 256</strong></li>
+                        </ul>
+                        <p>Если K5 ≠ 0:</p>
+                        <ul>
+                            <li><strong>Метрика = [K1 × Bandwidth + (K2 × Bandwidth) / (256 - Load) + K3 × Delay] × [K5 / (Reliability + K4)] × 256</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Упрощенная формула (по умолчанию K1=1, K3=1, остальные=0):</h4>
+                        <ul>
+                            <li><strong>Метрика = (Bandwidth + Delay) × 256</strong></li>
+                        </ul>
+                        <p>Где:</p>
+                        <ul>
+                            <li><strong>Bandwidth</strong> = 10^7 / минимальная пропускная способность на пути (в Kbps)</li>
+                            <li><strong>Delay</strong> = сумма всех задержек на пути / 10 (в микросекундах)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Примеры расчета метрики</h3>
+                    <div class="visual-guide">
+                        <h4>Пример 1: Ethernet 100 Mbps</h4>
+                        <ul>
+                            <li><strong>Bandwidth:</strong> 100,000 Kbps → 10^7 / 100,000 = 100</li>
+                            <li><strong>Delay:</strong> 100 микросекунд (по умолчанию для 100 Mbps) → 100 / 10 = 10</li>
+                            <li><strong>Метрика:</strong> (100 + 10) × 256 = 28,160</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Пример 2: GigabitEthernet (1 Gbps)</h4>
+                        <ul>
+                            <li><strong>Bandwidth:</strong> 1,000,000 Kbps → 10^7 / 1,000,000 = 10</li>
+                            <li><strong>Delay:</strong> 10 микросекунд (по умолчанию для 1 Gbps) → 10 / 10 = 1</li>
+                            <li><strong>Метрика:</strong> (10 + 1) × 256 = 2,816</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Пример 3: Serial 64 Kbps (медленный канал)</h4>
+                        <ul>
+                            <li><strong>Bandwidth:</strong> 64 Kbps → 10^7 / 64 = 156,250</li>
+                            <li><strong>Delay:</strong> 20,000 микросекунд (по умолчанию) → 20,000 / 10 = 2,000</li>
+                            <li><strong>Метрика:</strong> (156,250 + 2,000) × 256 = 40,512,000</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Тип интерфейса</th><th>Bandwidth (Kbps)</th><th>Delay (µs)</th><th>Метрика EIGRP</th></tr>
+                            <tr><td>10 Gigabit Ethernet</td><td>10,000,000</td><td>10</td><td>256</td></tr>
+                            <tr><td>Gigabit Ethernet</td><td>1,000,000</td><td>10</td><td>2,816</td></tr>
+                            <tr><td>FastEthernet (100 Mbps)</td><td>100,000</td><td>100</td><td>28,160</td></tr>
+                            <tr><td>Ethernet (10 Mbps)</td><td>10,000</td><td>1,000</td><td>281,600</td></tr>
+                            <tr><td>T1 (1.544 Mbps)</td><td>1,544</td><td>20,000</td><td>1,794,560</td></tr>
+                            <tr><td>64 Kbps</td><td>64</td><td>20,000</td><td>40,512,000</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>EIGRP Wide Metrics:</strong> Для современных высокоскоростных интерфейсов (10 Gbps и выше) классическая формула недостаточно точна. <strong>EIGRP Wide Metrics</strong> использует 64-битную метрику вместо 32-битной и улучшенные формулы расчета для поддержки каналов до 655 Tbps.</p>
+                    </div>
+
+                    <h3>Настройка K-values (не рекомендуется менять)</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Просмотр текущих K-values
+Router# show ip protocols
+
+# Изменение K-values (ОСТОРОЖНО!)
+Router(config)# router eigrp 100
+Router(config-router)# metric weights 0 1 0 1 0 0
+# Формат: metric weights tos k1 k2 k3 k4 k5
+# tos всегда 0 (не используется)
+
+# По умолчанию: metric weights 0 1 0 1 0 0</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>ВАЖНО:</strong> Все маршрутизаторы в одной автономной системе EIGRP должны использовать одинаковые K-values. Если K-values различаются, маршрутизаторы не станут соседями. Изменение K-values без веской причины может привести к проблемам. Используйте значения по умолчанию, если нет специфических требований.</p>
+                    </div>
+
+                    <h3>Дополнительные возможности EIGRP</h3>
+                    <div class="visual-guide">
+                        <ul>
+                            <li><strong>Поддержка VLSM и CIDR:</strong> Передает маски подсетей в обновлениях</li>
+                            <li><strong>Суммаризация маршрутов:</strong> Автоматическая и ручная агрегация</li>
+                            <li><strong>Балансировка нагрузки:</strong> Равнозначная (Equal-Cost) и неравнозначная (Unequal-Cost с параметром variance)</li>
+                            <li><strong>Аутентификация:</strong> MD5 и SHA для защиты обновлений</li>
+                            <li><strong>Stub маршрутизация:</strong> Ограничение запросов для упрощения топологии</li>
+                            <li><strong>Named EIGRP:</strong> Современная конфигурация с поддержкой нескольких адресных семейств (IPv4, IPv6)</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>RIP (Routing Information Protocol)</h4>
+                        <ul>
+                            <li><strong>Тип</strong>: протокол вектора расстояний (distance-vector)</li>
+                            <li><strong>Метрика</strong>: количество переходов (hop count), максимум 15 (16 = бесконечность, сеть недоступна)</li>
+                            <li><strong>Варианты</strong>: RIPv1, RIPv2, RIPng (для IPv6)</li>
+                            <li><strong>Применение</strong>: учебные/малые сети; ограниченная масштабируемость</li>
+                        </ul>
+                    </div>
+
+                    <h3>Версии протокола RIP</h3>
+                    <div class="visual-guide">
+                        <h4>RIPv1 (RFC 1058, 1988 год):</h4>
+                        <ul>
+                            <li><strong>Классовая маршрутизация (Classful):</strong> Не передает маски подсетей в обновлениях</li>
+                            <li><strong>Broadcast:</strong> Обновления отправляются на адрес 255.255.255.255</li>
+                            <li><strong>Нет аутентификации:</strong> Обновления не защищены, любой может отправить ложные маршруты</li>
+                            <li><strong>Нет поддержки VLSM:</strong> Невозможно использовать разные маски в одной сети</li>
+                            <li><strong>Автоматическая суммаризация:</strong> Маршруты автоматически агрегируются на границах классовых сетей</li>
+                            <li><strong>Метрика:</strong> Только hop count (количество маршрутизаторов до сети)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>RIPv2 (RFC 2453, 1998 год):</h4>
+                        <ul>
+                            <li><strong>Бесклассовая маршрутизация (Classless):</strong> Передает маски подсетей — поддержка VLSM и CIDR</li>
+                            <li><strong>Multicast:</strong> Обновления отправляются на multicast-адрес 224.0.0.9 (меньше нагрузки на сеть)</li>
+                            <li><strong>Аутентификация:</strong> Поддержка MD5 и plain text аутентификации</li>
+                            <li><strong>Route Tags:</strong> Позволяют помечать маршруты для управления политиками</li>
+                            <li><strong>Next Hop:</strong> Может указывать следующий переход, отличный от отправителя обновления</li>
+                            <li><strong>Суммаризация:</strong> Ручная настройка агрегации маршрутов</li>
+                            <li><strong>Совместимость:</strong> Обратно совместим с RIPv1 (можно работать в смешанных сетях)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>RIPng (RIP Next Generation, RFC 2080):</h4>
+                        <ul>
+                            <li><strong>Назначение:</strong> Расширение RIP для IPv6</li>
+                            <li><strong>Multicast адрес:</strong> FF02::9 (IPv6 link-local multicast)</li>
+                            <li><strong>UDP порт:</strong> 521 (отличается от RIPv1/v2, которые используют порт 520)</li>
+                            <li><strong>Префиксы:</strong> Передает IPv6-префиксы и длину префикса</li>
+                            <li><strong>Аутентификация:</strong> Использует IPsec вместо встроенной аутентификации</li>
+                            <li><strong>Next Hop:</strong> Поддерживает IPv6-адреса следующего перехода</li>
+                            <li><strong>Ограничения:</strong> Те же, что и у RIPv2 (максимум 15 хопов, медленная сходимость)</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Параметр</th><th>RIPv1</th><th>RIPv2</th><th>RIPng</th></tr>
+                            <tr><td><strong>Маски подсетей</strong></td><td>Нет (classful)</td><td>Да (classless)</td><td>Да (IPv6 префиксы)</td></tr>
+                            <tr><td><strong>Адрес обновлений</strong></td><td>255.255.255.255 (broadcast)</td><td>224.0.0.9 (multicast)</td><td>FF02::9 (multicast)</td></tr>
+                            <tr><td><strong>Аутентификация</strong></td><td>Нет</td><td>Plain text, MD5</td><td>IPsec</td></tr>
+                            <tr><td><strong>VLSM/CIDR</strong></td><td>Нет</td><td>Да</td><td>Да</td></tr>
+                            <tr><td><strong>UDP порт</strong></td><td>520</td><td>520</td><td>521</td></tr>
+                            <tr><td><strong>Максимум хопов</strong></td><td>15</td><td>15</td><td>15</td></tr>
+                            <tr><td><strong>Протокол IP</strong></td><td>IPv4</td><td>IPv4</td><td>IPv6</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>Механизм обновлений RIP</h3>
+                    <p>RIP использует периодические обновления для распространения информации о маршрутах. Это простой, но не очень эффективный механизм.</p>
+
+                    <div class="visual-guide">
+                        <h4>Типы обновлений:</h4>
+                        <ul>
+                            <li><strong>Регулярные обновления (Regular Updates):</strong>
+                                <ul>
+                                    <li>Отправляются каждые <strong>30 секунд</strong> по умолчанию</li>
+                                    <li>Содержат всю таблицу маршрутизации (или её часть, если она большая)</li>
+                                    <li>Отправляются всем соседям независимо от изменений</li>
+                                    <li>Создают постоянный трафик в сети (недостаток протокола)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Triggered Updates (обновления по событию):</strong>
+                                <ul>
+                                    <li>Отправляются немедленно при изменении маршрута</li>
+                                    <li>Содержат только измененные маршруты</li>
+                                    <li>Ускоряют сходимость сети</li>
+                                    <li>Имеют случайную задержку (1-5 секунд) для предотвращения коллизий</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Таймеры RIP:</h4>
+                        <ul>
+                            <li><strong>Update Timer (30 сек):</strong> Интервал между регулярными обновлениями</li>
+                            <li><strong>Invalid Timer (180 сек):</strong> Время, после которого маршрут считается недействительным, если не получено обновление</li>
+                            <li><strong>Holddown Timer (180 сек):</strong> Время, в течение которого маршрут удерживается перед удалением после объявления недостижимым</li>
+                            <li><strong>Flush Timer (240 сек):</strong> Время, после которого маршрут удаляется из таблицы</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Проблема медленной сходимости:</strong> Из-за периодических обновлений (30 сек) и таймеров (до 240 сек) RIP может требовать несколько минут для полной сходимости после изменений в сети. Это критический недостаток для современных сетей.</p>
+                    </div>
+
+                    <h3>Проблемы и механизмы предотвращения петель</h3>
+                    <p>Протоколы вектора расстояний (как RIP) склонны к созданию петель маршрутизации. RIP использует несколько механизмов для их предотвращения:</p>
+
+                    <div class="visual-guide">
+                        <h4>1. Split Horizon (разделение горизонта):</h4>
+                        <ul>
+                            <li><strong>Правило:</strong> Не отправляй информацию о маршруте обратно в интерфейс, через который она была получена</li>
+                            <li><strong>Логика:</strong> Если маршрутизатор A узнал о сети X от маршрутизатора B, то A не должен сообщать B о сети X</li>
+                            <li><strong>Цель:</strong> Предотвращение петель в простых топологиях</li>
+                        </ul>
+                        <p><strong>Пример:</strong></p>
+                        <ul>
+                            <li>R1 подключен к сети 10.0.0.0/24 напрямую</li>
+                            <li>R1 сообщает R2: "10.0.0.0/24 через меня, метрика 1"</li>
+                            <li>R2 НЕ будет сообщать R1 обратно: "10.0.0.0/24 через меня, метрика 2"</li>
+                            <li>Это предотвращает петлю, если канал R1-10.0.0.0 упадет</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>2. Split Horizon with Poison Reverse (отравленный обратный маршрут):</h4>
+                        <ul>
+                            <li><strong>Правило:</strong> Отправляй информацию о маршруте обратно, но с метрикой 16 (бесконечность)</li>
+                            <li><strong>Логика:</strong> Явно сообщить соседу, что маршрут недоступен через обратное направление</li>
+                            <li><strong>Преимущество:</strong> Быстрее информирует о недоступности маршрута</li>
+                            <li><strong>Недостаток:</strong> Увеличивает размер обновлений</li>
+                        </ul>
+                        <p><strong>Пример:</strong></p>
+                        <ul>
+                            <li>R1 знает о сети 10.0.0.0/24 через интерфейс Eth0</li>
+                            <li>R1 отправляет R2 (через Eth0): "10.0.0.0/24, метрика 16 (недоступно)"</li>
+                            <li>R2 сразу понимает, что не должен использовать R1 для достижения 10.0.0.0/24</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>3. Route Poisoning (отравление маршрута):</h4>
+                        <ul>
+                            <li><strong>Правило:</strong> Когда маршрут становится недоступным, немедленно объявить его с метрикой 16</li>
+                            <li><strong>Цель:</strong> Быстро распространить информацию о недоступности сети</li>
+                            <li><strong>Механизм:</strong> Triggered Update с метрикой 16 для недоступного маршрута</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>4. Holddown Timer (таймер удержания):</h4>
+                        <ul>
+                            <li><strong>Правило:</strong> После получения информации о недоступности маршрута игнорировать обновления с лучшей метрикой на определенное время (180 сек)</li>
+                            <li><strong>Цель:</strong> Предотвратить принятие ложной информации о "восстановлении" маршрута, которая может быть результатом петли</li>
+                            <li><strong>Работа:</strong>
+                                <ol>
+                                    <li>Маршрут объявлен недоступным (метрика 16)</li>
+                                    <li>Запускается Holddown Timer (180 сек)</li>
+                                    <li>В течение этого времени игнорируются обновления с меньшей метрикой от других маршрутизаторов</li>
+                                    <li>Принимаются только обновления от того же маршрутизатора, который сообщил о недоступности</li>
+                                </ol>
+                            </li>
+                            <li><strong>Недостаток:</strong> Замедляет сходимость (до 3 минут)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>5. Maximum Hop Count (максимальное количество переходов):</h4>
+                        <ul>
+                            <li><strong>Правило:</strong> Максимальная метрика = 15, метрика 16 = бесконечность (сеть недоступна)</li>
+                            <li><strong>Цель:</strong> Предотвратить бесконечное увеличение метрики в случае петли</li>
+                            <li><strong>Проблема:</strong> Ограничивает размер сети — нельзя использовать RIP в сетях с более чем 15 переходами</li>
+                        </ul>
+                    </div>
+
+                    <h3>Проблема Count to Infinity (счет до бесконечности)</h3>
+                    <div class="visual-guide">
+                        <h4>Сценарий проблемы:</h4>
+                        <ol>
+                            <li>R1 — R2 — R3, сеть 10.0.0.0/24 подключена к R3</li>
+                            <li>R3 знает: 10.0.0.0/24, метрика 1 (напрямую подключена)</li>
+                            <li>R2 знает: 10.0.0.0/24, метрика 2 (через R3)</li>
+                            <li>R1 знает: 10.0.0.0/24, метрика 3 (через R2 → R3)</li>
+                            <li><strong>Проблема:</strong> Связь R3 ↔ 10.0.0.0/24 обрывается</li>
+                            <li>R3 объявляет: 10.0.0.0/24, метрика 16 (недоступно)</li>
+                            <li>Но R2 еще не получил это обновление и сообщает R3: "У меня есть маршрут до 10.0.0.0/24, метрика 2"</li>
+                            <li>R3 думает: "Отлично! Теперь я могу достичь 10.0.0.0/24 через R2, метрика 3"</li>
+                            <li>R2 получает обновление от R3: "10.0.0.0/24, метрика 3" → обновляет свою метрику на 4</li>
+                            <li>R3 получает: метрика 4 → обновляет на 5... и так далее</li>
+                            <li><strong>Результат:</strong> Метрика растет (4, 5, 6... 16), пока не достигнет 16 (бесконечность)</li>
+                            <li><strong>Время сходимости:</strong> Может занять несколько минут</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Решение проблемы Count to Infinity:</strong> Комбинация механизмов: Split Horizon предотвращает обратную отправку маршрутов, Route Poisoning быстро распространяет недоступность, Holddown Timer предотвращает принятие ложной информации, Maximum Hop Count (16) ограничивает "счет до бесконечности".</p>
+                    </div>
+
+                    <h3>Пример настройки RIP</h3>
+                    <div class="code-example">
+                        <pre><code class="cisco"># Настройка RIPv2
+Router(config)# router rip
+Router(config-router)# version 2                # Использовать RIPv2
+Router(config-router)# network 10.0.0.0         # Объявить сети
+Router(config-router)# network 192.168.1.0
+Router(config-router)# no auto-summary          # Отключить автосуммаризацию
+Router(config-router)# passive-interface GigabitEthernet0/0  # Не отправлять обновления на интерфейс
+
+# Аутентификация MD5
+Router(config)# interface GigabitEthernet0/1
+Router(config-if)# ip rip authentication mode md5
+Router(config-if)# ip rip authentication key-chain MY-KEYS
+
+# Проверка
+Router# show ip protocols
+Router# show ip rip database
+Router# show ip route rip
+Router# debug ip rip</code></pre>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="cisco"># Настройка RIPng (для IPv6)
+Router(config)# ipv6 unicast-routing
+Router(config)# ipv6 router rip MY-RIPNG-PROCESS
+Router(config-rtr)# maximum-paths 4  # Балансировка нагрузки
+
+# На интерфейсах
+Router(config)# interface GigabitEthernet0/0
+Router(config-if)# ipv6 rip MY-RIPNG-PROCESS enable
+
+# Проверка
+Router# show ipv6 protocols
+Router# show ipv6 route rip
+Router# show ipv6 rip database</code></pre>
+                    </div>
+
+                    <h3>Когда использовать RIP</h3>
+                    <div class="visual-guide">
+                        <h4>Подходит для:</h4>
+                        <ul>
+                            <li>Малые сети (до 15 маршрутизаторов)</li>
+                            <li>Учебные лаборатории и демонстрации</li>
+                            <li>Простые топологии без высоких требований к сходимости</li>
+                            <li>Совместимость со старым оборудованием</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>НЕ подходит для:</h4>
+                        <ul>
+                            <li>Крупные корпоративные сети (используйте OSPF или EIGRP)</li>
+                            <li>Сети с требованиями к быстрой сходимости (используйте OSPF, EIGRP, IS-IS)</li>
+                            <li>Сети с более чем 15 переходами</li>
+                            <li>Сети, где важна оптимизация пропускной способности (RIP не учитывает скорость канала)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="te" class="topic-section">
+                <h2>5.9 Traffic Engineering (RSVP‑TE/SR)</h2>
+                <div class="lesson-content">
+                    <p>Traffic Engineering (TE) позволяет направлять трафик по путям, отличным от кратчайших, учитывая ограничения и цели (полоса, задержка, изоляция).</p>
+                    <div class="visual-guide">
+                        <h4>RSVP‑TE</h4>
+                        <ul>
+                            <li><strong>LSP</strong>: выделение меток и резервирование ресурсов по сигнализации RSVP.</li>
+                            <li><strong>Constraints</strong>: атрибуты ссылок (административные метки, полоса) и CSPF для расчёта пути.</li>
+                            <li><strong>Плюсы/минусы</strong>: детальный контроль, но сложность состояния и масштабирования.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Segment Routing</h4>
+                        <ul>
+                            <li><strong>SR‑MPLS</strong>: стек сегментов (labels) кодирует путь без hop‑by‑hop состояния.</li>
+                            <li><strong>SRv6</strong>: сегменты как IPv6 адреса/функции; программируемость dataplane.</li>
+                            <li><strong>Планирование путей</strong>: on‑box (TI‑LFA, SR‑TE Policy) или от контроллера (PCE/PCEP).</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>TE в транспорте:</strong> аналогичные цели достигаются и на оптическом/SDH уровне (A‑/Z‑концы, SLA, защита 1+1/1:1), но с иными технологиями сигнализации.</p></div>
+                </div>
+            </section>
+
+            <section id="qos-deep" class="topic-section">
+                <h2>5.10 QoS углубление</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>DiffServ и PHB</h4>
+                        <ul>
+                            <li><strong>DSCP</strong>: классы EF (голос), AFxy (гарантированные), BE (по умолчанию).</li>
+                            <li><strong>Mapping</strong>: DSCP ↔ очереди/профили, согласование с L2 PCP (802.1p) и WMM.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Очереди и планирование</h4>
+                        <ul>
+                            <li><strong>Strict Priority</strong> для критичных классов (с осторожностью против starvation).</li>
+                            <li><strong>WRR/WFQ/CBWFQ</strong>: взвешенное обслуживание, формирование профилей.</li>
+                            <li><strong>WRED/RED</strong>: ранние отбрасывания для предотвращения глобальных перегрузок.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Policing vs Shaping</h4>
+                        <ul>
+                            <li><strong>Token/Leaky Bucket</strong>: токены как «кредит» на отправку; shaping выравнивает, policing отбрасывает/ремаркирует.</li>
+                            <li><strong>Параметры</strong>: CIR/PIR, burst (Bc/Be), влияние на джиттер и потери.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Network Calculus (базово)</h4>
+                        <ul>
+                            <li><strong>Идея</strong>: оценка худших задержек/буферов при известных ограничениях трафика и сервисных кривых.</li>
+                            <li><strong>Трафик</strong>: (σ, ρ) модель — «скачок и наклон»; сервис — «rate‑latency».</li>
+                            <li><strong>Применение</strong>: проектирование бюджетов задержки и размеров очередей для критичных классов.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+
+

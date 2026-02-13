@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Прикладные протоколы: DNS, HTTP/HTTPS, DHCP, почтовые протоколы">
+    <meta name="keywords" content="DNS, HTTP, HTTPS, DHCP, SMTP, IMAP, POP3">
+    <title>Прикладные протоколы — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/07-application-protocols.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+
+                <div class="topic">
+                    <button class="topic-btn active">7. Прикладные протоколы</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#dns" class="subtopic active">7.1 DNS</a>
+                        <a href="#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="dns" class="topic-section">
+                <h2>7.1 DNS</h2>
+                <div class="lesson-content">
+                    <h3>Проблема: как запомнить IP-адреса?</h3>
+                    <p>Людям сложно запоминать IP-адреса (например, 93.184.216.34). Гораздо проще запомнить доменное имя (например, example.com). <strong>DNS</strong> (Domain Name System) — это "телефонная книга интернета", которая переводит доменные имена в IP-адреса.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> DNS — это как телефонный справочник: вы знаете имя (доменное имя), а система находит номер (IP-адрес).</p>
+                    </div>
+
+                    <h3>Как работает DNS?</h3>
+                    <div class="visual-guide">
+                        <h4>Процесс разрешения имени (DNS lookup):</h4>
+                        <ol>
+                            <li><strong>Запрос:</strong> Браузер хочет открыть сайт "example.com"</li>
+                            <li><strong>Локальный кэш:</strong> Проверяется локальный кэш DNS (на компьютере)</li>
+                            <li><strong>Рекурсивный резолвер:</strong> Если не найдено, запрос идет к DNS-серверу провайдера (рекурсивный резолвер)</li>
+                            <li><strong>Корневой сервер:</strong> Резолвер спрашивает корневой DNS-сервер: "Где находится .com?"</li>
+                            <li><strong>TLD-сервер:</strong> Корневой сервер направляет к серверу домена .com</li>
+                            <li><strong>Авторитативный сервер:</strong> Сервер .com направляет к авторитативному серверу example.com</li>
+                            <li><strong>Ответ:</strong> Авторитативный сервер возвращает IP-адрес example.com</li>
+                            <li><strong>Кэширование:</strong> Ответ сохраняется в кэше для ускорения следующих запросов</li>
+                        </ol>
+                    </div>
+
+                    <h3>Иерархия DNS</h3>
+                    <div class="visual-guide">
+                        <h4>Структура доменных имен:</h4>
+                        <ul>
+                            <li><strong>Корневая зона (.)</strong> — верхний уровень иерархии</li>
+                            <li><strong>TLD (Top-Level Domain)</strong> — домены верхнего уровня (.com, .org, .ru, .net)</li>
+                            <li><strong>Домены второго уровня</strong> — example.com, google.com</li>
+                            <li><strong>Поддомены</strong> — www.example.com, mail.example.com</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> В имени "www.example.com" — "com" это TLD, "example" это домен второго уровня, "www" это поддомен.</p>
+                    </div>
+
+                    <h3>Типы DNS-записей</h3>
+                    <div class="visual-guide">
+                        <h4>Основные типы записей:</h4>
+                        <ul>
+                            <li><strong>A</strong> — IPv4-адрес домена (например, example.com → 93.184.216.34)</li>
+                            <li><strong>AAAA</strong> — IPv6-адрес домена</li>
+                            <li><strong>CNAME</strong> — алиас (каноническое имя), указывает на другое доменное имя (например, www → example.com)</li>
+                            <li><strong>MX</strong> — почтовый сервер для домена (для email)</li>
+                            <li><strong>NS</strong> — серверы имен, которые отвечают за домен</li>
+                            <li><strong>TXT</strong> — произвольный текст (используется для SPF, DKIM и других целей)</li>
+                            <li><strong>SRV</strong> — информация о службах (например, для VoIP, XMPP)</li>
+                        </ul>
+                    </div>
+
+                    <h3>TTL: время жизни записей</h3>
+                    <p><strong>TTL</strong> (Time To Live) — время, в течение которого DNS-запись считается действительной и хранится в кэше. После истечения TTL запрос повторяется.</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Если TTL = 3600 секунд (1 час), то DNS-резолвер будет использовать кэшированное значение в течение часа, затем запросит обновление.</p>
+                    </div>
+
+                    <h3>Безопасность DNS</h3>
+                    <div class="visual-guide">
+                        <h4>Методы защиты:</h4>
+                        <ul>
+                            <li><strong>DNSSEC</strong> — криптографическая подпись записей, защищает от подмены (spoofing)</li>
+                            <li><strong>DoT (DNS over TLS)</strong> — шифрование DNS-запросов через TLS</li>
+                            <li><strong>DoH (DNS over HTTPS)</strong> — DNS-запросы через HTTPS, скрывает их от провайдера</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Диагностика DNS
+# Windows
+nslookup example.com
+nslookup -type=MX example.com
+
+# Linux/macOS
+dig example.com
+dig example.com MX
+dig example.com ANY
+
+# Быстрый запрос
+dig example.com +short</code></pre>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>DNS</strong> — система перевода доменных имен в IP-адреса</li>
+                            <li><strong>Иерархия:</strong> Корневая зона → TLD → домены второго уровня → поддомены</li>
+                            <li><strong>Процесс:</strong> Локальный кэш → рекурсивный резолвер → корневой сервер → TLD → авторитативный сервер</li>
+                            <li><strong>Записи:</strong> A/AAAA (IP-адреса), CNAME (алиасы), MX (почта), NS (серверы имен)</li>
+                            <li><strong>TTL</strong> — время жизни записей в кэше</li>
+                            <li><strong>Безопасность:</strong> DNSSEC, DoT, DoH для защиты от подмены</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить удобный способ доступа к ресурсам интернета по понятным именам вместо числовых IP-адресов.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="http" class="topic-section">
+                <h2>7.2 HTTP/HTTPS</h2>
+                <div class="lesson-content">
+                    <p>HTTP — протокол прикладного уровня с моделью запрос/ответ. HTTPS добавляет шифрование и аутентификацию через TLS. Базовые методы: GET/POST/PUT/PATCH/DELETE; коды статуса: 1xx–5xx.</p>
+                    <div class="visual-guide">
+                        <h4>Ключевые аспекты HTTPS/TLS</h4>
+                        <ul>
+                            <li><strong>TLS рукопожатие</strong>: выбор параметров, обмен ключами, проверка сертификата.</li>
+                            <li><strong>Сертификаты X.509</strong>: цепочка доверия, CA/Intermediate, проверки CN/SAN, OCSP/CRL.</li>
+                            <li><strong>HTTP/2 и HTTP/3</strong>: мультиплексирование потоков, сжатие заголовков (HPACK/QPACK), на базе TLS/QUIC.</li>
+                            <li><strong>Идемпотентность</strong>: GET/PUT/DELETE — идемпотентны; POST — нет. Это влияет на ретраи и прокси.</li>
+                            <li><strong>Кэширование</strong>: Cache‑Control/ETag/Last‑Modified управляют валидностью; Vary влияет на ключи кэша.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dhcp" class="topic-section">
+                <h2>7.3 DHCP</h2>
+                <div class="lesson-content">
+                    <h3>Проблема: ручная настройка IP-адресов</h3>
+                    <p>В больших сетях настраивать IP-адреса вручную на каждом устройстве неэффективно и подвержено ошибкам. <strong>DHCP</strong> (Dynamic Host Configuration Protocol) автоматически выдает IP-адреса и другие параметры сети устройствам.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> DHCP — это как "автоматическая выдача номеров" в гостинице. Вы приезжаете, и вам автоматически выдают номер (IP-адрес) и ключ (параметры сети).</p>
+                    </div>
+
+                    <h3>Как работает DHCP?</h3>
+                    <p>Процесс получения IP-адреса называется <strong>DORA</strong> (по первым буквам этапов):</p>
+
+                    <div class="visual-guide">
+                        <h4>Процесс DORA:</h4>
+                        <ol>
+                            <li><strong>Discover</strong> — устройство отправляет broadcast-запрос: "Есть ли DHCP-сервер?"</li>
+                            <li><strong>Offer</strong> — DHCP-сервер отвечает: "Да, вот тебе IP-адрес и параметры"</li>
+                            <li><strong>Request</strong> — устройство подтверждает: "Хорошо, я принимаю этот адрес"</li>
+                            <li><strong>Acknowledge</strong> — сервер подтверждает: "Адрес зарезервирован за тобой"</li>
+                        </ol>
+                    </div>
+
+                    <h3>Что выдает DHCP?</h3>
+                    <div class="visual-guide">
+                        <h4>Параметры, выдаваемые DHCP:</h4>
+                        <ul>
+                            <li><strong>IP-адрес</strong> — уникальный адрес устройства</li>
+                            <li><strong>Маска подсети</strong> — определяет размер сети</li>
+                            <li><strong>Шлюз по умолчанию</strong> — маршрутизатор для выхода в другие сети</li>
+                            <li><strong>DNS-серверы</strong> — адреса серверов для разрешения имен</li>
+                            <li><strong>Дополнительные опции</strong> — домен поиска, время аренды и т.д.</li>
+                        </ul>
+                    </div>
+
+                    <h3>Аренда адресов</h3>
+                    <p>DHCP выдает адреса не навсегда, а на определенное время — <strong>аренду</strong> (lease). Это позволяет эффективно использовать ограниченное количество адресов.</p>
+
+                    <div class="visual-guide">
+                        <h4>Процесс аренды:</h4>
+                        <ul>
+                            <li><strong>Выдача:</strong> Сервер выдает адрес на определенное время (например, 24 часа)</li>
+                            <li><strong>Обновление:</strong> За 50% времени аренды устройство запрашивает продление</li>
+                            <li><strong>Освобождение:</strong> Если устройство отключается, адрес возвращается в пул</li>
+                            <li><strong>Преимущество:</strong> Адреса не "застревают" у отключенных устройств</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резервирование адресов</h3>
+                    <p>Для важных устройств (серверы, принтеры) можно зарезервировать постоянный IP-адрес на основе их MAC-адреса.</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Сервер с MAC-адресом AA:BB:CC:DD:EE:FF всегда получит IP 192.168.1.100, даже если перезагрузится.</p>
+                    </div>
+
+                    <h3>DHCP-опции</h3>
+                    <div class="visual-guide">
+                        <h4>Стандартные опции:</h4>
+                        <ul>
+                            <li><strong>Опция 3</strong> — шлюз по умолчанию (Router)</li>
+                            <li><strong>Опция 6</strong> — DNS-серверы</li>
+                            <li><strong>Опция 15</strong> — домен поиска</li>
+                            <li><strong>Опция 51</strong> — время аренды адреса</li>
+                        </ul>
+                    </div>
+
+                    <h3>APIPA: автоматический IP без DHCP</h3>
+                    <p><strong>APIPA</strong> (Automatic Private IP Addressing) — это механизм, который позволяет устройству автоматически назначить себе IP-адрес, если DHCP-сервер недоступен. Это часть стандарта Microsoft (начиная с Windows 98) и используется в Windows, macOS и некоторых других системах.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает APIPA:</h4>
+                        <ol>
+                            <li><strong>Попытка получить адрес через DHCP:</strong> Устройство отправляет DHCP Discover и ждет ответа</li>
+                            <li><strong>Таймаут:</strong> Если DHCP-сервер не отвечает в течение определенного времени, запускается APIPA</li>
+                            <li><strong>Генерация адреса:</strong> Устройство случайным образом выбирает адрес из диапазона <strong>169.254.0.0/16</strong> (169.254.1.0 — 169.254.254.255)</li>
+                            <li><strong>Проверка уникальности:</strong> Устройство отправляет ARP-запрос для проверки, не используется ли этот адрес другим устройством</li>
+                            <li><strong>Назначение:</strong> Если адрес свободен, устройство назначает его себе</li>
+                            <li><strong>Повторные попытки:</strong> Устройство продолжает периодически искать DHCP-сервер в фоновом режиме</li>
+                        </ol>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Характеристики APIPA:</h4>
+                        <ul>
+                            <li><strong>Диапазон адресов:</strong> 169.254.0.0/16 (169.254.1.0 — 169.254.254.255)</li>
+                            <li><strong>Маска подсети:</strong> 255.255.0.0 (/16)</li>
+                            <li><strong>Шлюз по умолчанию:</strong> Не назначается (нет выхода за пределы локальной сети)</li>
+                            <li><strong>DNS-серверы:</strong> Не назначаются</li>
+                            <li><strong>Использование:</strong> Только для связи внутри локальной сети (link-local)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Когда появляется APIPA:</strong> Если вы видите адрес 169.254.x.x на вашем устройстве, это значит, что DHCP-сервер недоступен. Возможные причины: сервер не работает, сетевой кабель не подключен, проблемы с коммутатором или настройками сети.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Отличия от приватных адресов:</h4>
+                        <ul>
+                            <li><strong>169.254.0.0/16 (APIPA)</strong> — автоматически назначается при отсутствии DHCP, только для локальной связи</li>
+                            <li><strong>192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12</strong> — приватные адреса для внутренних сетей, могут маршрутизироваться через NAT</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Диагностика:</strong> Если устройство получило APIPA-адрес, проверьте:</p>
+                        <ul>
+                            <li>Работает ли DHCP-сервер?</li>
+                            <li>Подключен ли сетевой кабель?</li>
+                            <li>Правильно ли настроен порт коммутатора (VLAN)?</li>
+                            <li>Достаточно ли адресов в пуле DHCP?</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка APIPA-адреса
+# Windows
+ipconfig /all
+# Если видите адрес 169.254.x.x — это APIPA
+
+# Освобождение и обновление DHCP
+ipconfig /release
+ipconfig /renew
+
+# Linux/macOS
+ip addr show
+# Если видите адрес 169.254.x.x — это APIPA (или link-local в IPv6)
+
+# Освобождение и обновление DHCP
+sudo dhclient -r    # release
+sudo dhclient       # renew</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>IPv6 эквивалент:</strong> В IPv6 существует аналогичный механизм — <strong>Link-Local адреса</strong> (fe80::/10). Они автоматически назначаются всем устройствам и используются для связи внутри локального сегмента сети.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>DHCP</strong> — автоматическая выдача IP-адресов и параметров сети</li>
+                            <li><strong>Процесс DORA:</strong> Discover → Offer → Request → Acknowledge</li>
+                            <li><strong>Выдает:</strong> IP-адрес, маску, шлюз, DNS-серверы</li>
+                            <li><strong>Аренда:</strong> Адреса выдаются на время, затем обновляются или освобождаются</li>
+                            <li><strong>Резервирование:</strong> Постоянные адреса для важных устройств</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Упростить настройку сетей, автоматизировать выдачу адресов и уменьшить количество ошибок конфигурации.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mail" class="topic-section">
+                <h2>7.4 Почтовые протоколы</h2>
+                <div class="lesson-content">
+                    <p>Отправка — SMTP; получение — IMAP/POP3. Для защиты транспорта используются STARTTLS/TLS. Аутентикация домена и защита от подмены — через SPF/DKIM/DMARC.</p>
+                    <div class="visual-guide">
+                        <h4>Практические моменты почты</h4>
+                        <ul>
+                            <li><strong>SMTP submission</strong> порт 587 с аутентификацией; MTA‑to‑MTA — 25 порт.</li>
+                            <li><strong>IMAPS/POP3S</strong>: 993/995; IMAP предпочтителен благодаря синхронизации состояния.</li>
+                            <li><strong>SPF/DKIM/DMARC</strong>: публикация записей, выравнивание доменов, политика reject/quarantine.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="voip" class="topic-section">
+                <h2>7.5 VoIP и SIP</h2>
+                <div class="lesson-content">
+                    <p>VoIP переносит голос по IP. <strong>SIP</strong> управляет сигнализацией (создание/изменение/завершение сессии), а медиа передаются по <strong>RTP/SRTP</strong>.</p>
+                    <div class="visual-guide">
+                        <h4>Базовые элементы</h4>
+                        <ul>
+                            <li><strong>Регистрация</strong>: UA регистрируется на SIP‑сервере (Registrar/Proxy).</li>
+                            <li><strong>Сессия</strong>: INVITE/200 OK/ACK, параметры медиа в SDP (кодеки, порты).</li>
+                            <li><strong>NAT‑траверс</strong>: STUN/TURN/ICE для установления медиапути через NAT.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Качество и кодеки</h4>
+                        <ul>
+                            <li><strong>Кодеки</strong>: G.711 (простой, высокая полоса), Opus (адаптивный), G.729 (низкая полоса).</li>
+                            <li><strong>Буфер джиттера</strong>: сглаживает вариации задержки, компромисс с задержкой.</li>
+                            <li><strong>MOS</strong>: метрика субъективного качества; важны задержка/джиттер/потери.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Безопасность:</strong> используйте TLS для SIP и SRTP для медиа; сегментация голосового трафика (VLAN/QoS) снижает взаимное влияние.</p></div>
+                </div>
+            </section>
+
+            <section id="remote-access" class="topic-section">
+                <h2>7.6 Протоколы удаленного доступа</h2>
+                <div class="lesson-content">
+                    <h3>Зачем нужен удаленный доступ?</h3>
+                    <p>Администраторам и пользователям часто нужно управлять удаленными системами: настраивать серверы, управлять сетевым оборудованием, работать на удаленных компьютерах. Для этого используются протоколы удаленного доступа.</p>
+
+                    <div class="note">
+                        <p><strong>Задачи протоколов удаленного доступа:</strong></p>
+                        <ul>
+                            <li>Управление сетевым оборудованием (коммутаторы, маршрутизаторы)</li>
+                            <li>Администрирование серверов</li>
+                            <li>Удаленная работа на рабочих станциях</li>
+                            <li>Техническая поддержка пользователей</li>
+                        </ul>
+                    </div>
+
+                    <h3>SSH — защищенный протокол управления</h3>
+                    <p><strong>SSH</strong> (Secure Shell) — криптографический сетевой протокол для безопасного удаленного управления системами и передачи данных. SSH шифрует весь трафик, включая пароли, что делает его стандартом для удаленного администрирования.</p>
+
+                    <div class="visual-guide">
+                        <h4>Ключевые особенности SSH:</h4>
+                        <ul>
+                            <li><strong>Шифрование:</strong> Все данные передаются в зашифрованном виде</li>
+                            <li><strong>Аутентификация:</strong> Поддержка паролей и ключей (публичный/приватный)</li>
+                            <li><strong>Порт:</strong> 22 (TCP)</li>
+                            <li><strong>Целостность:</strong> Защита от подмены данных через HMAC</li>
+                            <li><strong>Туннелирование:</strong> Возможность создавать защищенные туннели для других протоколов (port forwarding)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Процесс установления SSH-соединения:</h4>
+                        <ol>
+                            <li><strong>Рукопожатие:</strong> Клиент и сервер договариваются об алгоритмах шифрования</li>
+                            <li><strong>Обмен ключами:</strong> Генерируется общий сеансовый ключ (Diffie-Hellman)</li>
+                            <li><strong>Проверка хоста:</strong> Клиент проверяет fingerprint сервера</li>
+                            <li><strong>Аутентификация:</strong> Пользователь вводит пароль или использует SSH-ключ</li>
+                            <li><strong>Сессия:</strong> Устанавливается защищенное соединение для команд</li>
+                        </ol>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Подключение к удаленному хосту
+ssh username@192.168.1.10
+ssh username@server.example.com
+
+# Подключение на нестандартный порт
+ssh -p 2222 username@192.168.1.10
+
+# Подключение с использованием приватного ключа
+ssh -i ~/.ssh/id_rsa username@192.168.1.10
+
+# Копирование файлов через SSH (SCP)
+scp file.txt username@192.168.1.10:/home/username/
+scp username@192.168.1.10:/var/log/app.log ./
+
+# SFTP — защищенная передача файлов
+sftp username@192.168.1.10
+
+# Port Forwarding (туннелирование)
+# Локальное: локальный порт 8080 → удаленный 80
+ssh -L 8080:localhost:80 username@192.168.1.10
+
+# Удаленное: удаленный порт 8080 → локальный 80
+ssh -R 8080:localhost:80 username@192.168.1.10
+
+# Динамическое (SOCKS-прокси)
+ssh -D 1080 username@192.168.1.10</code></pre>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>SSH-ключи vs пароли:</h4>
+                        <ul>
+                            <li><strong>Пароли:</strong> Просто, но уязвимы к перебору и фишингу</li>
+                            <li><strong>SSH-ключи:</strong> Пара ключей (публичный/приватный), намного безопаснее
+                                <ul>
+                                    <li>Публичный ключ размещается на сервере (~/.ssh/authorized_keys)</li>
+                                    <li>Приватный ключ хранится на клиенте (никогда не передается по сети)</li>
+                                    <li>Опционально защищен паролем (passphrase)</li>
+                                    <li>Невозможно подобрать или перехватить</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Генерация SSH-ключей
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "your_email@example.com"  # Современный алгоритм
+
+# Копирование публичного ключа на сервер
+ssh-copy-id username@192.168.1.10
+
+# Настройка SSH-сервера (файл /etc/ssh/sshd_config)
+Port 22                              # Порт SSH
+PermitRootLogin no                   # Запретить вход под root
+PasswordAuthentication no            # Отключить аутентификацию по паролю (только ключи)
+PubkeyAuthentication yes             # Разрешить аутентификацию по ключам
+MaxAuthTries 3                       # Максимум попыток входа
+ClientAliveInterval 300              # Таймаут неактивности
+ClientAliveCountMax 2                # Количество проверок перед отключением</code></pre>
+                    </div>
+
+                    <h3>Telnet — незащищенный предшественник SSH</h3>
+                    <p><strong>Telnet</strong> — протокол для удаленного управления, который передает данные в открытом виде, включая пароли. Исторический протокол, сейчас считается небезопасным.</p>
+
+                    <div class="visual-guide">
+                        <h4>Характеристики Telnet:</h4>
+                        <ul>
+                            <li><strong>Порт:</strong> 23 (TCP)</li>
+                            <li><strong>Шифрование:</strong> Отсутствует — все данные передаются открытым текстом</li>
+                            <li><strong>Аутентификация:</strong> Простая (логин/пароль в открытом виде)</li>
+                            <li><strong>Безопасность:</strong> Крайне низкая — легко перехватить пароли</li>
+                            <li><strong>Применение сегодня:</strong> Только для тестирования или в изолированных сетях</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Подключение через Telnet
+telnet 192.168.1.10
+telnet 192.168.1.10 23
+
+# Telnet для проверки доступности порта (диагностика)
+telnet google.com 80
+telnet smtp.example.com 25
+
+# Пример использования Telnet для проверки HTTP
+telnet google.com 80
+GET / HTTP/1.1
+Host: google.com
+# (Enter дважды)</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Telnet НЕ следует использовать для управления в продакшене! Используйте SSH. Telnet можно применять только для диагностики (проверка доступности порта) в доверенных сетях.</p>
+                    </div>
+
+                    <h3>RDP — удаленный рабочий стол Windows</h3>
+                    <p><strong>RDP</strong> (Remote Desktop Protocol) — протокол Microsoft для удаленного доступа к графическому рабочему столу Windows. Позволяет полностью управлять удаленным компьютером как будто вы сидите за ним.</p>
+
+                    <div class="visual-guide">
+                        <h4>Характеристики RDP:</h4>
+                        <ul>
+                            <li><strong>Порт:</strong> 3389 (TCP/UDP)</li>
+                            <li><strong>Шифрование:</strong> TLS 1.2+ (в современных версиях)</li>
+                            <li><strong>Графический интерфейс:</strong> Полная передача рабочего стола</li>
+                            <li><strong>Функции:</strong> Буфер обмена, принтеры, диски, аудио, USB-устройства</li>
+                            <li><strong>Оптимизация:</strong> Сжатие данных, кэширование, адаптация к пропускной способности</li>
+                            <li><strong>Multi-session:</strong> Поддержка одновременных сессий (Windows Server)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Подключение через RDP
+# Windows: встроенный клиент
+mstsc.exe                            # Графический интерфейс
+mstsc /v:192.168.1.10                # Прямое подключение
+mstsc /v:192.168.1.10:3390           # Нестандартный порт
+
+# Linux: клиент rdesktop или freerdp
+rdesktop 192.168.1.10
+xfreerdp /v:192.168.1.10 /u:username /p:password /cert:ignore
+
+# macOS: Microsoft Remote Desktop (из App Store)
+
+# Настройка RDP на Windows (PowerShell)
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+# Проверка доступности RDP
+Test-NetConnection -ComputerName 192.168.1.10 -Port 3389</code></pre>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Безопасность RDP:</h4>
+                        <ul>
+                            <li><strong>NLA (Network Level Authentication):</strong> Аутентификация до установки сессии</li>
+                            <li><strong>Сильные пароли:</strong> Обязательны для защиты от перебора</li>
+                            <li><strong>Ограничение доступа:</strong> Firewall, белые списки IP</li>
+                            <li><strong>VPN:</strong> Используйте RDP только через VPN, не из интернета напрямую</li>
+                            <li><strong>Multi-factor:</strong> Двухфакторная аутентификация</li>
+                            <li><strong>Обновления:</strong> Регулярные патчи (уязвимости типа BlueKeep)</li>
+                        </ul>
+                    </div>
+
+                    <h3>VNC — кроссплатформенный удаленный рабочий стол</h3>
+                    <p><strong>VNC</strong> (Virtual Network Computing) — открытый протокол для удаленного доступа к графическому интерфейсу. Работает на всех платформах (Windows, Linux, macOS).</p>
+
+                    <div class="visual-guide">
+                        <h4>Характеристики VNC:</h4>
+                        <ul>
+                            <li><strong>Порт:</strong> 5900+ (5900, 5901, 5902... для разных дисплеев)</li>
+                            <li><strong>Протокол:</strong> RFB (Remote Frame Buffer)</li>
+                            <li><strong>Шифрование:</strong> По умолчанию нет (нужно через SSH-туннель или VNC + TLS)</li>
+                            <li><strong>Кроссплатформенность:</strong> Работает везде</li>
+                            <li><strong>Легковесность:</strong> Меньше функций, чем RDP, но проще</li>
+                            <li><strong>Варианты:</strong> TightVNC, RealVNC, TigerVNC, UltraVNC</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Запуск VNC-сервера (Linux)
+vncserver :1                         # Запуск на дисплее :1 (порт 5901)
+vncserver -kill :1                   # Остановка
+
+# Подключение к VNC-серверу
+vncviewer 192.168.1.10:1             # Дисплей :1 (порт 5901)
+vncviewer 192.168.1.10:5901          # Прямое указание порта
+
+# VNC через SSH-туннель (безопасно!)
+ssh -L 5901:localhost:5901 username@192.168.1.10
+vncviewer localhost:1
+
+# Настройка VNC с паролем
+vncpasswd                            # Установка пароля VNC
+
+# Windows: UltraVNC, TightVNC
+# macOS: встроенный "Screen Sharing" или клиенты VNC</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Безопасность VNC:</strong> Базовый VNC не шифрует трафик! Обязательно используйте SSH-туннель или VNC с TLS для защиты. Никогда не открывайте VNC напрямую в интернет.</p>
+                    </div>
+
+                    <h3>Сравнение протоколов</h3>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Протокол</th><th>Порт</th><th>Шифрование</th><th>Применение</th><th>Безопасность</th></tr>
+                            <tr><td><strong>SSH</strong></td><td>22</td><td>✅ Да (обязательно)</td><td>Управление CLI, передача файлов</td><td>🟢 Высокая</td></tr>
+                            <tr><td><strong>Telnet</strong></td><td>23</td><td>❌ Нет</td><td>Устаревший, только для тестов</td><td>🔴 Крайне низкая</td></tr>
+                            <tr><td><strong>RDP</strong></td><td>3389</td><td>✅ TLS (современный)</td><td>Удаленный рабочий стол Windows</td><td>🟡 Средняя (с NLA)</td></tr>
+                            <tr><td><strong>VNC</strong></td><td>5900+</td><td>⚠️ Опционально (через SSH)</td><td>Кроссплатформенный рабочий стол</td><td>🟡 Средняя (с туннелем)</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>Лучшие практики безопасности</h3>
+                    <div class="visual-guide">
+                        <h4>Общие рекомендации:</h4>
+                        <ul>
+                            <li><strong>SSH-ключи вместо паролей:</strong> Для SSH всегда используйте ключи</li>
+                            <li><strong>Отключить Telnet:</strong> Никогда не используйте в продакшене</li>
+                            <li><strong>VPN для графических протоколов:</strong> RDP и VNC только через VPN</li>
+                            <li><strong>Нестандартные порты:</strong> Измените порты по умолчанию (security through obscurity — не основная защита, но помогает)</li>
+                            <li><strong>Firewall:</strong> Ограничьте доступ по IP-адресам</li>
+                            <li><strong>Fail2Ban:</strong> Автоматическая блокировка после неудачных попыток входа</li>
+                            <li><strong>Мониторинг:</strong> Логируйте все попытки доступа</li>
+                            <li><strong>Multi-factor:</strong> Двухфакторная аутентификация где возможно</li>
+                            <li><strong>Обновления:</strong> Своевременные патчи безопасности</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Настройка Fail2Ban для SSH (Linux)
+# /etc/fail2ban/jail.local
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3                         # Максимум попыток
+bantime = 3600                       # Время блокировки (секунды)
+findtime = 600                       # Окно для подсчета попыток
+
+# Проверка заблокированных IP
+fail2ban-client status sshd
+
+# Firewall: разрешить SSH только с определенной подсети
+# iptables (Linux)
+iptables -A INPUT -p tcp --dport 22 -s 192.168.1.0/24 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j DROP
+
+# Windows Firewall
+New-NetFirewallRule -DisplayName "RDP from LAN only" -Direction Inbound -LocalPort 3389 -Protocol TCP -RemoteAddress 192.168.1.0/24 -Action Allow</code></pre>
+                    </div>
+
+                    <h3>Практические сценарии</h3>
+                    <div class="visual-guide">
+                        <h4>Когда использовать:</h4>
+                        <ul>
+                            <li><strong>SSH:</strong> Управление Linux/Unix серверами, сетевым оборудованием, автоматизация через скрипты</li>
+                            <li><strong>Telnet:</strong> Только для диагностики портов (telnet host port) в доверенных сетях</li>
+                            <li><strong>RDP:</strong> Администрирование Windows серверов, удаленная работа на Windows</li>
+                            <li><strong>VNC:</strong> Управление Linux GUI, кроссплатформенный доступ, техподдержка</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Jump Host (Bastion):</strong> В продакшене часто используется архитектура с "прыжковым хостом" — специальный защищенный сервер, через который проходит весь удаленный доступ. Это добавляет дополнительный уровень безопасности и централизованный аудит.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>SSH (порт 22)</strong> — защищенное управление через командную строку, стандарт для администрирования</li>
+                            <li><strong>Telnet (порт 23)</strong> — незащищенный, устаревший, только для диагностики</li>
+                            <li><strong>RDP (порт 3389)</strong> — удаленный рабочий стол Windows с шифрованием</li>
+                            <li><strong>VNC (порт 5900+)</strong> — кроссплатформенный графический доступ, требует SSH-туннель</li>
+                            <li><strong>SSH-ключи</strong> — предпочтительный метод аутентификации вместо паролей</li>
+                            <li><strong>VPN</strong> — обязателен для графических протоколов из интернета</li>
+                            <li><strong>Firewall + Fail2Ban</strong> — защита от атак перебора</li>
+                            <li><strong>Jump Host</strong> — дополнительный уровень безопасности для критичных систем</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить безопасный и эффективный удаленный доступ для администрирования систем и удаленной работы.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+

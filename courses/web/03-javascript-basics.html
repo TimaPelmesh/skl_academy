@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс по веб‑разработке. Модуль 3: JavaScript — интерактивность, работа с DOM, формы, хранилища и Fetch.">
+    <meta name="keywords" content="веб разработка, javascript, основы js, dom, события, формы, localStorage, fetch, бесплатный курс">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Веб‑разработка — Модуль 3: JavaScript — Интерактивность">
+    <meta property="og:description" content="JavaScript: синтаксис, функции, массивы, DOM, события, формы, хранилища и Fetch.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/web/03-javascript-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Веб‑разработка — JavaScript основы">
+    <meta name="twitter:description" content="Модуль 3: JavaScript — интерактивность и логика.">
+    <title>Веб‑разработка — Модуль 3: JavaScript — Интерактивность | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/03-javascript-basics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <!-- Structured Data: Breadcrumbs for Web course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Веб‑разработка", "item": "https://skl-academy.ru/courses/web/03-javascript-basics.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс по веб‑разработке",
+      "description": "Полный курс по веб‑разработке с нуля: HTML, CSS, JavaScript и практика.",
+      "provider": {"@type": "Organization", "name": "SKL Academy", "sameAs": "https://skl-academy.ru/"},
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "coursePrerequisites": "Базовые знания компьютера",
+      "teaches": ["HTML", "CSS", "JavaScript", "адаптивная верстка", "клиентский JavaScript"],
+      "about": [
+        {"@type": "Thing", "name": "HTML"},
+        {"@type": "Thing", "name": "CSS"},
+        {"@type": "Thing", "name": "JavaScript"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Веб‑разработка — Модуль 3: JavaScript — Интерактивность",
+      "description": "JavaScript: синтаксис, условия, функции, массивы, DOM, события, формы, хранилища и Fetch.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/web/03-javascript-basics.html"},
+      "keywords": "javascript, dom, события, fetch"
+    }
+    </script>
+</head>
+<body data-course="web">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">JS</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">Введение в HTML</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">Формы</a>
+                        <a href="01-html-basics.html#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="01-html-basics.html#seo-html" class="subtopic">SEO</a>
+                        <a href="01-html-basics.html#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">Введение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">Специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">Типографика</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">Box Model</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">@media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">Анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="#js-intro" class="subtopic active">Введение в JS</a>
+                        <a href="#conditions" class="subtopic">Условия</a>
+                        <a href="#functions" class="subtopic">Функции</a>
+                        <a href="#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="#dom-events" class="subtopic">События</a>
+                        <a href="#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="#storage" class="subtopic">Storage</a>
+                        <a href="#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="04-responsive-design.html#intro" class="subtopic">Введение</a>
+                        <a href="04-responsive-design.html#viewport" class="subtopic">Viewport</a>
+                        <a href="04-responsive-design.html#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="04-responsive-design.html#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="04-responsive-design.html#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="04-responsive-design.html#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="04-responsive-design.html#responsive-images" class="subtopic">Изображения</a>
+                        <a href="04-responsive-design.html#container-queries" class="subtopic">Container Queries</a>
+                        <a href="04-responsive-design.html#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="04-responsive-design.html#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="06-forms-validation.html#form-basics" class="subtopic">Основы форм</a>
+                        <a href="06-forms-validation.html#input-types" class="subtopic">Типы полей</a>
+                        <a href="06-forms-validation.html#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="06-forms-validation.html#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="06-forms-validation.html#js-validation" class="subtopic">JS валидация</a>
+                        <a href="06-forms-validation.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="06-forms-validation.html#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="06-forms-validation.html#security" class="subtopic">Безопасность</a>
+                        <a href="06-forms-validation.html#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="07-dom-advanced.html#dom-tree" class="subtopic">Дерево DOM</a>
+                        <a href="07-dom-advanced.html#selectors" class="subtopic">Селекторы</a>
+                        <a href="07-dom-advanced.html#traversal" class="subtopic">Обход</a>
+                        <a href="07-dom-advanced.html#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="07-dom-advanced.html#events-basics" class="subtopic">События</a>
+                        <a href="07-dom-advanced.html#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="07-dom-advanced.html#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="07-dom-advanced.html#observers" class="subtopic">Observers</a>
+                        <a href="07-dom-advanced.html#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html#core-web-vitals" class="subtopic">Core Web Vitals</a>
+                        <a href="09-optimization.html#lcp" class="subtopic">LCP</a>
+                        <a href="09-optimization.html#cls" class="subtopic">CLS</a>
+                        <a href="09-optimization.html#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="09-optimization.html#fonts" class="subtopic">Шрифты</a>
+                        <a href="09-optimization.html#js-perf" class="subtopic">JS производительность</a>
+                        <a href="09-optimization.html#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="09-optimization.html#seo" class="subtopic">SEO</a>
+                        <a href="09-optimization.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="09-optimization.html#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="10-projects.html#intro" class="subtopic">Введение</a>
+                        <a href="10-projects.html#project-1" class="subtopic">Проект 1</a>
+                        <a href="10-projects.html#project-2" class="subtopic">Проект 2</a>
+                        <a href="10-projects.html#project-3" class="subtopic">Проект 3</a>
+                        <a href="10-projects.html#project-4" class="subtopic">Проект 4</a>
+                        <a href="10-projects.html#project-5" class="subtopic">Проект 5</a>
+                        <a href="10-projects.html#project-6" class="subtopic">Проект 6</a>
+                        <a href="10-projects.html#deployment" class="subtopic">Деплой</a>
+                        <a href="10-projects.html#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 3: JS</h2>
+                <p>Освоим основы JavaScript, взаимодействие с DOM, обработку событий, работу с формами и хранилищами, а также Fetch API для получения данных.</p>
+            </section>
+
+            <!-- 3.1 -->
+            <section id="js-intro" class="topic-section">
+                <h2>Введение в JavaScript. Синтаксис и подключение</h2>
+                <p>JS добавляет интерактивность. Подключают перед закрывающим <code>&lt;/body&gt;</code>, чтобы не блокировать загрузку.</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;script src="app.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+                <h3>Переменные и типы</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">let count = 0;         // можно переназначить
+const appName = 'SKL'; // константа
+console.log(typeof 42, typeof 'str', typeof true, typeof null, typeof undefined);</code></pre>
+                </div>
+                <h3>Консоль</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">console.log('info');
+console.warn('warning');
+console.error('error');</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.2 -->
+            <section id="conditions" class="topic-section">
+                <h2>Операторы и условия</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">const hour = new Date().getHours();
+if (hour &lt; 12) {
+  console.log('Доброе утро');
+} else if (hour &lt; 18) {
+  console.log('Добрый день');
+} else {
+  console.log('Добрый вечер');
+}
+
+const role = 'admin';
+switch (role) {
+  case 'admin': console.log('Администратор'); break;
+  case 'user': console.log('Пользователь'); break;
+  default: console.log('Гость');
+}</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Напишите скрипт, который приветствует пользователя в зависимости от времени суток.</p>
+                </div>
+            </section>
+
+            <!-- 3.3 -->
+            <section id="functions" class="topic-section">
+                <h2>Функции</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">function sum(a, b) { return a + b; }          // declaration
+const multiply = (a, b) =&gt; a * b;            // arrow
+const greet = (name = 'мир') =&gt; `Привет, ${name}!`; // значение по умолчанию
+console.log(sum(2,3), multiply(2,3), greet());</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте набор функций‑калькуляторов: сумма, разность, среднее, площадь круга.</p>
+                </div>
+            </section>
+
+            <!-- 3.4 -->
+            <section id="loops-arrays" class="topic-section">
+                <h2>Циклы и массивы</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">const projects = ['Сайт', 'Бот', 'Игра'];
+projects.push('Чат');
+projects.forEach((p, i) =&gt; console.log(i + 1, p));
+for (let i = 0; i &lt; projects.length; i++) {
+  if (i === 2) break;
+  console.log('for:', projects[i]);
+}</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Выведите в консоль нумерованный список проектов и посчитайте их количество.</p>
+                </div>
+            </section>
+
+            <!-- 3.5 -->
+            <section id="dom-basics" class="topic-section">
+                <h2>Работа с DOM — Часть 1 (Поиск и изменение)</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">const title = document.getElementById('title');
+const button = document.querySelector('.btn');
+button.addEventListener('click', () =&gt; {
+  title.textContent = 'Новый заголовок';
+  title.style.color = '#4f46e5';
+});</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>По клику на кнопку меняйте текст и стиль произвольного элемента.</p>
+                </div>
+            </section>
+
+            <!-- 3.6 -->
+            <section id="dom-events" class="topic-section">
+                <h2>Работа с DOM — Часть 2 (События)</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">const modal = document.getElementById('modal');
+const openBtn = document.getElementById('open');
+const closeBtn = document.getElementById('close');
+openBtn.addEventListener('click', () =&gt; modal.classList.add('open'));
+closeBtn.addEventListener('click', () =&gt; modal.classList.remove('open'));
+document.addEventListener('keydown', (e) =&gt; {
+  if (e.key === 'Escape') modal.classList.remove('open');
+});</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Соберите простое модальное окно, которое открывается и закрывается по клику и клавише Esc.</p>
+                </div>
+            </section>
+
+            <!-- 3.7 -->
+            <section id="forms-js" class="topic-section">
+                <h2>Работа с формами в JS</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">const form = document.querySelector('form');
+const email = form.querySelector('input[type="email"]');
+form.addEventListener('submit', (e) =&gt; {
+  e.preventDefault();
+  const value = email.value.trim();
+  const isValid = /.+@.+\..+/.test(value);
+  if (!isValid) {
+    alert('Введите корректный email');
+    return;
+  }
+  alert('Спасибо! Форма принята');
+});</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Соберите форму обратной связи и проверьте обязательные поля (имя, email).</p>
+                </div>
+            </section>
+
+            <!-- 3.8 -->
+            <section id="storage" class="topic-section">
+                <h2>Хранение данных на клиенте</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">// Тема
+const theme = localStorage.getItem('theme') || 'light';
+localStorage.setItem('theme', theme);
+
+// Простые заметки
+const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+notes.push('Сделать портфолио');
+localStorage.setItem('notes', JSON.stringify(notes));</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте список заметок/задач, который сохраняется между перезагрузками.</p>
+                </div>
+            </section>
+
+            <!-- 3.9 -->
+            <section id="async-fetch" class="topic-section">
+                <h2>Асинхронность. Fetch API</h2>
+                <div class="code-example">
+<pre><code class="language-javascript">async function loadPosts() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+  const posts = await res.json();
+  console.log(posts);
+}
+loadPosts();</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Получите 3 поста из JSONPlaceholder и выведите заголовки на страницу.</p>
+                </div>
+            </section>
+
+            <!-- 3.10 -->
+            <section id="es6-modules" class="topic-section">
+                <h2>Современный JS (ES6+) и модули</h2>
+                <ul>
+                    <li>Деструктуризация, rest/spread, шаблонные строки, опциональная цепочка <code>?.</code>, nullish‑объединение <code>??</code>.</li>
+                    <li>Коллекции: <code>Map</code>, <code>Set</code>, <code>WeakMap</code>, <code>WeakSet</code>.</li>
+                    <li>Модули: <code>&lt;script type="module"&gt;</code>, <code>import</code>/<code>export</code>, отложенная загрузка.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;script type="module"&gt;
+  import { sum } from './utils/math.js';
+  console.log(sum(2, 3));
+&lt;/script&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.11 -->
+            <section id="web-apis" class="topic-section">
+                <h2>Web APIs: события, Fetch/Streams, Storage</h2>
+                <h3>События</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">const controller = new AbortController();
+const handler = (e) =&gt; console.log('mousemove');
+document.addEventListener('mousemove', handler, { passive: true, signal: controller.signal });
+setTimeout(() =&gt; controller.abort(), 3000);</code></pre>
+                </div>
+                <h3>Fetch + Streams</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">const res = await fetch('/big.json');
+const reader = res.body.getReader();
+let received = 0;
+while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+  received += value.length;
+  console.log('Получено байт:', received);
+}</code></pre>
+                </div>
+                <h3>Cache/Storage</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">await caches.open('app-v1').then((cache) =&gt; cache.add('/offline.html'));
+const db = await indexedDB.open('app-db', 1);</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.12 -->
+            <section id="perf-vitals" class="topic-section">
+                <h2>Производительность (LCP/CLS/INP)</h2>
+                <ul>
+                    <li><strong>LCP:</strong> оптимизируйте главное изображение: <code>preload</code>/<code>fetchpriority</code>, подходящий формат.</li>
+                    <li><strong>CLS:</strong> резервируйте место медиаконтенту, не вставляйте динамику над контентом.</li>
+                    <li><strong>INP:</strong> обработчики событий — быстрые, используйте <code>passive</code>, делайте работу вне главного потока через <code>requestIdleCallback</code>/<code>Web Workers</code>.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;link rel="preload" as="image" href="/img/hero@1x.avif" imagesrcset="/img/hero@1x.avif 1x, /img/hero@2x.avif 2x" imagesizes="100vw"&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.13 -->
+            <section id="security" class="topic-section">
+                <h2>Безопасность: CSP, XSS, CORS</h2>
+                <ul>
+                    <li><strong>CSP:</strong> ограничивает источники скриптов/стилей/изображений. Избегайте inline‑скриптов, используйте nonce/sha256.</li>
+                    <li><strong>XSS:</strong> никогда не вставляйте пользовательский ввод как HTML; экранируйте, используйте <code>textContent</code>.</li>
+                    <li><strong>CORS:</strong> сервер должен явно разрешать домены/методы/заголовки; на клиенте — используйте <code>mode: 'cors'</code>.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-abc'; img-src 'self' data:; object-src 'none'"&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.14 -->
+            <section id="tooling" class="topic-section">
+                <h2>Инструменты: npm, Vite/Webpack, PostCSS, Sass</h2>
+                <ul>
+                    <li><strong>npm:</strong> управление зависимостями, команды <code>scripts</code>.</li>
+                    <li><strong>Vite:</strong> дев‑сервер, HMR, сборка с esbuild/rollup.</li>
+                    <li><strong>Webpack:</strong> гибкая сборка модулей, код‑сплиттинг.</li>
+                    <li><strong>PostCSS/Sass:</strong> автопрефиксы, nested‑синтаксис, переменные и миксины.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-json">{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.15 -->
+            <section id="testing" class="topic-section">
+                <h2>Тестирование: Jest и Playwright</h2>
+                <ul>
+                    <li><strong>Jest:</strong> модульные тесты, моки, снапшоты.</li>
+                    <li><strong>Playwright:</strong> e2e‑тесты в реальном браузере; авто‑ожидания, тестирование доступности.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-javascript">// jest
+import { sum } from './sum';
+test('adds', () =&gt; expect(sum(1,2)).toBe(3));
+
+// playwright.config.ts
+// test('home page', async ({ page }) =&gt; { await page.goto('/'); await expect(page).toHaveTitle(/SKL/); });</code></pre>
+                </div>
+            </section>
+
+            <!-- 3.16 -->
+            <section id="frameworks" class="topic-section">
+                <h2>Фреймворки: React и Vue</h2>
+                <p>Фреймворки упрощают построение сложных интерфейсов за счёт компонентов и реактивности.</p>
+                <h3>React</h3>
+                <div class="code-example">
+<pre><code class="language-javascript">import { useState } from 'react';
+function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;button onClick={() =&gt; setCount(count + 1)}&gt;{count}&lt;/button&gt;;
+}</code></pre>
+                </div>
+                <h3>Vue</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;script setup&gt;
+import { ref } from 'vue';
+const count = ref(0);
+&lt;/script&gt;
+&lt;template&gt;
+  &lt;button @click="count++"&gt;{{ count }}&lt;/button&gt;
+&lt;/template&gt;</code></pre>
+                </div>
+                <div class="note"><p><strong>Лучшие практики:</strong> компонентная архитектура, состояние как источник истины, типизация (TS), тесты, линтеры (ESLint/Prettier), разделение кода.</p></div>
+            </section>
+
+            <!-- 3.17 -->
+            <section id="best-practices" class="topic-section">
+                <h2>Best practices</h2>
+                <ul>
+                    <li><strong>Прогрессивное улучшение:</strong> базовая функциональность без JS, улучшения поверх.</li>
+                    <li><strong>Доступность по умолчанию:</strong> семантика, фокус‑индикаторы, контраст, клавиатурная навигация.</li>
+                    <li><strong>Производительность:</strong> бюджет по размерам, lazy‑loading, code‑splitting, критический CSS, кэширование.</li>
+                    <li><strong>Безопасность:</strong> CSP, избегать <code>innerHTML</code>, валидация на клиенте и сервере, sanitize.</li>
+                    <li><strong>Код‑стайл:</strong> ESLint + Prettier, единый формат, meaningful‑имена, маленькие функции.</li>
+                    <li><strong>Типизация:</strong> TypeScript для масштабируемости и снижения числа ошибок.</li>
+                    <li><strong>Git‑практики:</strong> маленькие коммиты, осмысленные сообщения, PR‑ревью, CI.</li>
+                    <li><strong>Тесты:</strong> пирамида тестирования: unit &gt; integration &gt; e2e, покрытия критических путей.</li>
+                    <li><strong>Мониторинг:</strong> логирование ошибок (Sentry), метрики Web Vitals, профилирование.</li>
+                </ul>
+            </section>
+
+            <!-- Итоговый проект -->
+            <section id="module3-project" class="topic-section">
+                <h2>Итоговый проект модуля 3</h2>
+                <p>Добавьте интерактивность на сайт‑портфолио: мобильное меню, слайдер галереи, рабочая форма с валидацией, тёмная тема с сохранением в <code>localStorage</code>.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

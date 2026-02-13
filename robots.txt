@@ -1,0 +1,20 @@
+# Основные правила индексации
+User-agent: *
+Allow: /
+
+# Разрешаем индексацию статики для корректного рендеринга страницы
+Allow: /*.js$
+Allow: /*.css$
+Allow: /images/
+
+# Указываем расположение sitemap
+Sitemap: https://skl-academy.ru/sitemap.xml
+
+# Для Яндекса указываем основной хост
+Host: skl-academy.ru
+
+# Запрет индексации служебных и системных директорий
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /node_modules/
+Disallow: /vendor/

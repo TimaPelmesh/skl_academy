@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Структуры данных в Python - изучите работу со списками, кортежами, словарями, множествами и генераторами">
+    <meta name="keywords" content="python, структуры данных, списки, кортежи, словари, множества, генераторы">
+    <title>Структуры в Python</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+
+        .operators-cheatsheet {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #d2a8ff;
+        }
+
+        .light-theme .operators-cheatsheet {
+            background-color: #f1f1f1;
+            border-left: 4px solid #8a63d2;
+        }
+
+        .operators-cheatsheet h4 {
+            color: #d2a8ff;
+            margin-top: 0;
+        }
+
+        .light-theme .operators-cheatsheet h4 {
+            color: #8a63d2;
+        }
+
+        .operators-cheatsheet table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .operators-cheatsheet th,
+        .operators-cheatsheet td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #444c56;
+        }
+
+        .light-theme .operators-cheatsheet th,
+        .light-theme .operators-cheatsheet td {
+            border: 1px solid #d0d7de;
+        }
+
+        .operators-cheatsheet th {
+            background-color: #373e47;
+        }
+
+        .light-theme .operators-cheatsheet th {
+            background-color: #e6e6e6;
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn active">4. Структуры данных</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#lists-tuples" class="subtopic active">4.1 Списки и кортежи</a>
+                        <a href="#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="#sets" class="subtopic">4.3 Множества</a>
+                        <a href="#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <!-- Остальные модули -->
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Содержимое вкладки "Задачи" -->
+            <div id="tasks-content" class="tab-content">
+                <div class="topic">
+                    <button class="topic-btn">Практические задания</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Начальный уровень</a>
+                        <a href="#" class="subtopic">Средний уровень</a>
+                        <a href="#" class="subtopic">Продвинутый уровень</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">Тесты</button>
+                    <div class="subtopics">
+                        <a href="#" class="subtopic">Тест по основам</a>
+                        <a href="#" class="subtopic">Тест по функциям</a>
+                        <a href="#" class="subtopic">Тест по ООП</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Введение в модуль -->
+            <section class="module-intro">
+                <h2>Модуль 4: Структуры данных</h2>
+                <p>Структуры данных — это способы организации и хранения данных, позволяющие эффективно работать с информацией. В Python есть несколько встроенных структур данных, которые делают язык мощным инструментом для обработки информации.</p>
+                
+                <p>В этом модуле вы изучите:</p>
+                <ul>
+                    <li>Списки и кортежи — последовательности для хранения упорядоченных наборов данных</li>
+                    <li>Словари — коллекции пар "ключ-значение" для быстрого доступа к данным</li>
+                    <li>Множества — неупорядоченные коллекции уникальных элементов</li>
+                    <li>Генераторы — мощный механизм для создания последовательностей "на лету"</li>
+                </ul>
+                
+                <p>Понимание структур данных — один из ключевых навыков программиста. Правильный выбор структуры данных может значительно повысить эффективность программы и упростить решение сложных задач.</p>
+            </section>
+            
+            <!-- 4.1 Списки и кортежи -->
+            <section id="lists-tuples" class="topic-section">
+                <h2>4.1 Списки и кортежи</h2>
+                <p>Списки и кортежи — это упорядоченные коллекции элементов, которые могут содержать данные разных типов. Они являются одними из самых часто используемых структур данных в Python.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые отличия:</h4>
+                    <ul>
+                        <li><strong>Списки (list)</strong> — изменяемые, создаются с помощью квадратных скобок <code>[]</code></li>
+                        <li><strong>Кортежи (tuple)</strong> — неизменяемые, создаются с помощью круглых скобок <code>()</code></li>
+                    </ul>
+                </div>
+                
+                <h3>Списки (Lists)</h3>
+                
+                <h4>Создание списков</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Пустой список
+пустой_список = []
+
+# Список с элементами
+числа = [1, 2, 3, 4, 5]
+смешанный_список = [1, "строка", 3.14, True, [1, 2]]
+
+# Создание списка с помощью конструктора list()
+список_из_строки = list("Python")  # ['P', 'y', 't', 'h', 'o', 'n']
+список_из_диапазона = list(range(5))  # [0, 1, 2, 3, 4]</code></pre>
+                </div>
+                
+                <h4>Доступ к элементам списка</h4>
+                <p>Элементы списка индексируются с 0. Также можно использовать отрицательные индексы для доступа с конца списка.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">фрукты = ["яблоко", "банан", "апельсин", "груша", "киви"]
+
+# Доступ по индексу
+первый = фрукты[0]  # "яблоко"
+последний = фрукты[-1]  # "киви"
+предпоследний = фрукты[-2]  # "груша"
+
+# Срезы (slices)
+первые_два = фрукты[0:2]  # ["яблоко", "банан"]
+с_третьего_до_конца = фрукты[2:]  # ["апельсин", "груша", "киви"]
+все_кроме_последних_двух = фрукты[:-2]  # ["яблоко", "банан", "апельсин"]
+
+# Срезы с шагом
+каждый_второй = фрукты[::2]  # ["яблоко", "апельсин", "киви"]
+в_обратном_порядке = фрукты[::-1]  # ["киви", "груша", "апельсин", "банан", "яблоко"]</code></pre>
+                </div>
+                
+                <h4>Изменение списков</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">фрукты = ["яблоко", "банан", "апельсин"]
+
+# Изменение элемента
+фрукты[1] = "виноград"  # ["яблоко", "виноград", "апельсин"]
+
+# Добавление элементов
+фрукты.append("груша")  # Добавляет в конец: ["яблоко", "виноград", "апельсин", "груша"]
+фрукты.insert(1, "манго")  # Вставляет по индексу: ["яблоко", "манго", "виноград", "апельсин", "груша"]
+фрукты.extend(["киви", "ананас"])  # Добавляет несколько элементов: ["яблоко", "манго", "виноград", "апельсин", "груша", "киви", "ананас"]
+
+# Удаление элементов
+удаленный = фрукты.pop()  # Удаляет и возвращает последний элемент: "ананас"
+удаленный_по_индексу = фрукты.pop(1)  # Удаляет и возвращает элемент по индексу: "манго"
+фрукты.remove("виноград")  # Удаляет первое вхождение элемента
+del фрукты[0]  # Удаляет элемент по индексу: ["апельсин", "груша", "киви"]
+фрукты.clear()  # Очищает весь список: []</code></pre>
+                </div>
+                
+                <h4>Полезные методы списков</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">числа = [3, 1, 4, 1, 5, 9, 2, 6]
+
+# Сортировка
+числа.sort()  # Сортирует список на месте: [1, 1, 2, 3, 4, 5, 6, 9]
+числа.sort(reverse=True)  # Сортирует в обратном порядке: [9, 6, 5, 4, 3, 2, 1, 1]
+отсортированный = sorted(числа)  # Возвращает новый отсортированный список
+
+# Обращение списка
+числа.reverse()  # Обращает список на месте: [1, 1, 2, 3, 4, 5, 6, 9]
+
+# Подсчёт и поиск
+количество = числа.count(1)  # Считает вхождения элемента: 2
+индекс = числа.index(5)  # Находит индекс первого вхождения: 4
+
+# Длина списка
+длина = len(числа)  # 8</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Списки — лучшие практики</h4>
+                    <ul>
+                        <li>Используйте списки, когда порядок элементов важен</li>
+                        <li>Используйте списки для данных, которые могут изменяться</li>
+                        <li>Для больших списков операции вставки/удаления в начале или середине могут быть медленными</li>
+                        <li>Списковые включения (list comprehensions) часто более читаемы и эффективны, чем циклы for</li>
+                    </ul>
+                </div>
+                
+                <h4>Списковые включения (List Comprehensions)</h4>
+                <p>Списковые включения — это компактный способ создания списков на основе существующих последовательностей.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Базовое списковое включение
+квадраты = [x**2 for x in range(10)]  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# С условием
+четные_квадраты = [x**2 for x in range(10) if x % 2 == 0]  # [0, 4, 16, 36, 64]
+
+# Вложенные циклы
+координаты = [(x, y) for x in range(3) for y in range(2)]
+# [(0, 0), (0, 1), (1, 0), (1, 1), (2, 0), (2, 1)]
+
+# Преобразование данных
+имена = ["Анна", "Иван", "Мария", "Петр"]
+длины = [len(имя) for имя in имена]  # [4, 4, 5, 4]
+
+# Эквивалент с циклом for
+длины = []
+for имя in имена:
+    длины.append(len(имя))</code></pre>
+                </div>
+                
+                <h3>Кортежи (Tuples)</h3>
+                
+                <h4>Создание кортежей</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Пустой кортеж
+пустой_кортеж = ()
+
+# Кортеж с элементами
+координаты = (10, 20)
+точка_3d = (10, 20, 30)
+
+# Кортеж с одним элементом (обязательно с запятой!)
+одиночный = (42,)  # Без запятой это будет просто число в скобках
+
+# Создание кортежа без скобок (упаковка кортежа)
+имя_возраст = "Иван", 25  # Эквивалентно ("Иван", 25)
+
+# Создание кортежа с помощью конструктора tuple()
+кортеж_из_списка = tuple([1, 2, 3])  # (1, 2, 3)
+кортеж_из_строки = tuple("Python")  # ('P', 'y', 't', 'h', 'o', 'n')</code></pre>
+                </div>
+                
+                <h4>Доступ к элементам кортежа</h4>
+                <p>Доступ к элементам кортежа осуществляется так же, как и к элементам списка:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">координаты = (10, 20, 30, 40, 50)
+
+# Доступ по индексу
+x = координаты[0]  # 10
+y = координаты[1]  # 20
+последний = координаты[-1]  # 50
+
+# Срезы
+первые_три = координаты[:3]  # (10, 20, 30)
+с_третьего = координаты[2:]  # (30, 40, 50)
+каждый_второй = координаты[::2]  # (10, 30, 50)</code></pre>
+                </div>
+                
+                <h4>Распаковка кортежей</h4>
+                <p>Одна из мощных возможностей кортежей — распаковка в отдельные переменные:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Базовая распаковка
+координаты = (10, 20, 30)
+x, y, z = координаты  # x = 10, y = 20, z = 30
+
+# Распаковка с игнорированием некоторых значений
+имя, _, возраст = ("Иван", "Иванов", 25)  # игнорируем фамилию
+
+# Распаковка с оператором *
+первый, *середина, последний = (1, 2, 3, 4, 5)
+# первый = 1, середина = [2, 3, 4], последний = 5
+
+# Обмен значениями переменных
+a, b = 1, 2
+a, b = b, a  # a = 2, b = 1</code></pre>
+                </div>
+                
+                <h4>Неизменяемость кортежей</h4>
+                <p>Кортежи неизменяемы, то есть после создания их нельзя модифицировать:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">координаты = (10, 20, 30)
+
+# Следующие операции вызовут ошибку:
+# координаты[0] = 100  # TypeError: 'tuple' object does not support item assignment
+# координаты.append(40)  # AttributeError: 'tuple' object has no attribute 'append'
+
+# Но можно создать новый кортеж на основе существующего
+новые_координаты = координаты + (40, 50)  # (10, 20, 30, 40, 50)
+повторенный = координаты * 2  # (10, 20, 30, 10, 20, 30)</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Когда использовать кортежи вместо списков?</h4>
+                    <ul>
+                        <li>Когда данные не должны изменяться (неизменяемость как защита от случайных изменений)</li>
+                        <li>Для гетерогенных данных (элементы разных типов, представляющие одну сущность)</li>
+                        <li>В качестве ключей словарей (списки не могут быть ключами)</li>
+                        <li>Для возврата нескольких значений из функции</li>
+                        <li>Кортежи занимают меньше памяти и работают быстрее, чем списки</li>
+                    </ul>
+                </div>
+                
+                <h4>Методы кортежей</h4>
+                <p>Кортежи имеют только два метода, так как они неизменяемы:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">числа = (1, 2, 3, 2, 4, 2)
+
+# Подсчёт вхождений элемента
+количество_двоек = числа.count(2)  # 3
+
+# Поиск первого вхождения элемента
+индекс_тройки = числа.index(3)  # 2</code></pre>
+                </div>
+                
+                <h3>Вложенные структуры</h3>
+                <p>Списки и кортежи могут содержать другие списки и кортежи, создавая многомерные структуры данных:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Матрица (двумерный список)
+матрица = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Доступ к элементам
+элемент = матрица[1][2]  # 6 (второй ряд, третий столбец)
+
+# Список кортежей (часто используется для представления записей)
+студенты = [
+    ("Иван", "Иванов", 20),
+    ("Мария", "Петрова", 19),
+    ("Алексей", "Сидоров", 21)
+]
+
+# Обработка вложенных структур
+for имя, фамилия, возраст in студенты:
+    print(f"{имя} {фамилия}: {возраст} лет")</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Сравнение производительности</h4>
+                    <p>Кортежи обычно работают быстрее списков и потребляют меньше памяти. Это особенно заметно при работе с большими объемами данных.</p>
+                    <p>Однако, если вам нужно часто модифицировать коллекцию, списки будут более эффективным выбором, так как для изменения кортежа придется создавать новый объект.</p>
+                </div>
+                
+                <h3>Практические примеры</h3>
+                
+                <h4>Пример 1: Анализ данных с использованием списков</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Данные о температуре за неделю
+температуры = [22, 24, 19, 21, 25, 23, 20]
+
+# Базовый анализ
+средняя = sum(температуры) / len(температуры)
+максимальная = max(температуры)
+минимальная = min(температуры)
+
+print(f"Средняя температура: {средняя:.1f}°C")
+print(f"Максимальная температура: {максимальная}°C")
+print(f"Минимальная температура: {минимальная}°C")
+
+# Фильтрация данных с помощью спискового включения
+выше_среднего = [т for т in температуры if т > средняя]
+print(f"Дней с температурой выше средней: {len(выше_среднего)}")
+
+# Индекс самого жаркого дня
+самый_жаркий_день = температуры.index(максимальная) + 1  # +1 для перевода из индекса в номер дня
+print(f"Самый жаркий день: {самый_жаркий_день}")</code></pre>
+                </div>
+                
+                <h4>Пример 2: Работа с координатами с использованием кортежей</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import math
+
+# Список точек на плоскости
+точки = [(1, 2), (3, 4), (5, 6), (7, 8)]
+
+# Вычисление расстояний от начала координат
+расстояния = []
+for x, y in точки:
+    расстояние = math.sqrt(x**2 + y**2)
+    расстояния.append((x, y, расстояние))
+
+# Сортировка точек по расстоянию
+расстояния.sort(key=lambda точка: точка[2])
+
+# Вывод отсортированных точек
+print("Точки, отсортированные по расстоянию от начала координат:")
+for x, y, расстояние in расстояния:
+    print(f"Точка ({x}, {y}): {расстояние:.2f} единиц")</code></pre>
+                </div>
+            </section>
+            
+            <!-- 4.2 Словари -->
+            <section id="dictionaries" class="topic-section">
+                <h2>4.2 Словари</h2>
+                <p>Словари (dictionaries) — это неупорядоченные коллекции пар "ключ-значение", обеспечивающие быстрый доступ к данным по ключу. Словари являются одной из самых гибких и мощных структур данных в Python.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые особенности словарей:</h4>
+                    <ul>
+                        <li>Изменяемая структура данных (можно добавлять, изменять и удалять элементы)</li>
+                        <li>Доступ к элементам по ключу, а не по индексу</li>
+                        <li>Ключи должны быть неизменяемыми (строки, числа, кортежи с неизменяемыми элементами)</li>
+                        <li>Значения могут быть любого типа</li>
+                        <li>С версии Python 3.7 словари сохраняют порядок добавления элементов</li>
+                    </ul>
+                </div>
+                
+                <h3>Создание словарей</h3>
+                <div class="code-example">
+                    <pre><code class="language-python"># Пустой словарь
+пустой_словарь = {}
+пустой_словарь_2 = dict()
+
+# Словарь с элементами
+студент = {
+    "имя": "Иван",
+    "фамилия": "Петров",
+    "возраст": 20,
+    "курс": 2,
+    "средний_балл": 4.5
+}
+
+# Словарь с разными типами ключей и значений
+смешанный = {
+    "строка": 42,
+    10: "число как ключ",
+    (1, 2): "кортеж как ключ",
+    True: [1, 2, 3]  # список как значение
+}
+
+# Создание словаря с помощью конструктора dict()
+контакты = dict(Иван="+7-900-123-45-67", Мария="+7-900-765-43-21")
+
+# Создание словаря из списка кортежей
+элементы = [("H", "Водород"), ("O", "Кислород"), ("C", "Углерод")]
+периодическая_таблица = dict(элементы)</code></pre>
+                </div>
+                
+                <h3>Доступ к элементам словаря</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">студент = {
+    "имя": "Иван",
+    "фамилия": "Петров",
+    "возраст": 20,
+    "курс": 2,
+    "средний_балл": 4.5
+}
+
+# Доступ по ключу
+имя = студент["имя"]  # "Иван"
+
+# Безопасный доступ с методом get()
+# Возвращает None, если ключ не существует
+отчество = студент.get("отчество")  # None
+# Можно указать значение по умолчанию
+отчество = студент.get("отчество", "Не указано")  # "Не указано"
+
+# Проверка наличия ключа
+if "курс" in студент:
+    print(f"Студент на {студент['курс']} курсе")
+
+# Получение всех ключей и значений
+ключи = студент.keys()  # dict_keys(['имя', 'фамилия', 'возраст', 'курс', 'средний_балл'])
+значения = студент.values()  # dict_values(['Иван', 'Петров', 20, 2, 4.5])
+
+# Получение пар ключ-значение
+пары = студент.items()  # dict_items([('имя', 'Иван'), ('фамилия', 'Петров'), ...])
+
+# Перебор словаря
+for ключ in студент:
+    print(f"{ключ}: {студент[ключ]}")
+
+# Перебор с items() (более эффективный способ)
+for ключ, значение in студент.items():
+    print(f"{ключ}: {значение}")</code></pre>
+                </div>
+                
+                <h3>Изменение словарей</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">студент = {"имя": "Иван", "фамилия": "Петров", "возраст": 20}
+
+# Добавление новых элементов
+студент["курс"] = 2
+студент["факультет"] = "Информатика"
+
+# Изменение существующих элементов
+студент["возраст"] = 21
+
+# Добавление нескольких элементов
+студент.update({"группа": "И-101", "средний_балл": 4.5})
+
+# Удаление элементов
+удаленное_значение = студент.pop("факультет")  # Удаляет и возвращает значение
+del студент["группа"]  # Просто удаляет элемент
+
+# Удаление и получение последнего добавленного элемента
+последний_элемент = студент.popitem()  # В Python 3.7+ возвращает последний добавленный элемент
+
+# Очистка словаря
+студент.clear()  # Удаляет все элементы</code></pre>
+                </div>
+                
+                <h3>Вложенные словари</h3>
+                <p>Словари могут содержать другие словари, создавая иерархические структуры данных:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Вложенные словари
+университет = {
+    "факультеты": {
+        "информатика": {
+            "декан": "Иванов И.И.",
+            "кафедры": ["Программирование", "Кибербезопасность", "Сети"]
+        },
+        "экономика": {
+            "декан": "Петров П.П.",
+            "кафедры": ["Микроэкономика", "Макроэкономика", "Финансы"]
+        }
+    },
+    "ректор": "Сидоров С.С.",
+    "год_основания": 1965
+}
+
+# Доступ к вложенным элементам
+декан_информатики = университет["факультеты"]["информатика"]["декан"]
+кафедры_экономики = университет["факультеты"]["экономика"]["кафедры"]
+
+# Безопасный доступ к вложенным словарям
+try:
+    кафедры_физики = университет["факультеты"]["физика"]["кафедры"]
+except KeyError:
+    print("Факультет физики не найден")
+
+# Альтернативный безопасный способ с проверками
+физика = университет.get("факультеты", {}).get("физика", {}).get("кафедры", [])</code></pre>
+                </div>
+                
+                <h3>Словарные включения (Dictionary Comprehensions)</h3>
+                <p>Аналогично списковым включениям, словарные включения позволяют компактно создавать словари:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Создание словаря из списка
+имена = ["Анна", "Иван", "Мария", "Петр", "Елена"]
+длины_имен = {имя: len(имя) for имя in имена}
+# {'Анна': 4, 'Иван': 4, 'Мария': 5, 'Петр': 4, 'Елена': 5}
+
+# С условием
+длинные_имена = {имя: len(имя) for имя in имена if len(имя) > 4}
+# {'Мария': 5, 'Елена': 5}
+
+# Преобразование пар ключ-значение
+оценки = {"математика": 5, "физика": 4, "история": 3}
+буквенные_оценки = {
+    предмет: "отлично" if оценка == 5 else "хорошо" if оценка == 4 else "удовлетворительно"
+    for предмет, оценка in оценки.items()
+}
+# {'математика': 'отлично', 'физика': 'хорошо', 'история': 'удовлетворительно'}</code></pre>
+                </div>
+                
+                <h3>Полезные методы словарей</h3>
+                <div class="code-example">
+                    <pre><code class="language-python"># Копирование словаря
+оригинал = {"a": 1, "b": 2}
+копия = оригинал.copy()  # Создает поверхностную копию
+копия["c"] = 3  # Не влияет на оригинал
+
+# Объединение словарей (Python 3.5+)
+словарь1 = {"a": 1, "b": 2}
+словарь2 = {"b": 3, "c": 4}
+объединенный = {**словарь1, **словарь2}  # {'a': 1, 'b': 3, 'c': 4}
+
+# Объединение словарей (Python 3.9+)
+объединенный = словарь1 | словарь2  # {'a': 1, 'b': 3, 'c': 4}
+
+# Получение значения с созданием ключа, если его нет
+счетчики = {}
+слово = "яблоко"
+счетчики.setdefault(слово, 0)  # Создаст ключ "яблоко" со значением 0, если его нет
+счетчики[слово] += 1  # Теперь безопасно увеличиваем счетчик
+
+# Словарь с значениями по умолчанию
+from collections import defaultdict
+
+# Словарь, который по умолчанию создает пустой список для новых ключей
+группы = defaultdict(list)
+студенты = [("И-101", "Иванов"), ("И-102", "Петров"), ("И-101", "Сидоров")]
+
+for группа, студент in студенты:
+    группы[группа].append(студент)  # Не нужно проверять существование ключа
+
+print(группы)  # defaultdict(<class 'list'>, {'И-101': ['Иванов', 'Сидоров'], 'И-102': ['Петров']})</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Лучшие практики работы со словарями</h4>
+                    <ul>
+                        <li>Используйте <code>get()</code> вместо прямого доступа по ключу, если не уверены в наличии ключа</li>
+                        <li>Для часто изменяемых словарей используйте <code>collections.defaultdict</code></li>
+                        <li>Для подсчета элементов используйте <code>collections.Counter</code></li>
+                        <li>Помните, что ключи должны быть неизменяемыми</li>
+                        <li>Используйте словарные включения для компактного создания словарей</li>
+                    </ul>
+                </div>
+                
+                <h3>Специализированные словари</h3>
+                <p>В модуле <code>collections</code> есть несколько специализированных типов словарей:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">from collections import defaultdict, Counter, OrderedDict
+
+# defaultdict - словарь со значением по умолчанию для новых ключей
+int_dict = defaultdict(int)  # По умолчанию будет создавать int() (т.е. 0)
+int_dict["a"] += 1  # Не вызовет ошибки, даже если ключа "a" не существовало
+print(int_dict)  # defaultdict(<class 'int'>, {'a': 1})
+
+# Counter - словарь для подсчета элементов
+текст = "абракадабра"
+счетчик = Counter(текст)
+print(счетчик)  # Counter({'а': 5, 'б': 2, 'р': 2, 'к': 1, 'д': 1})
+
+# Наиболее часто встречающиеся элементы
+популярные = счетчик.most_common(2)  # [('а', 5), ('б', 2)]
+
+# OrderedDict - словарь, сохраняющий порядок добавления элементов
+# Примечание: с Python 3.7+ обычные словари также сохраняют порядок
+упорядоченный = OrderedDict([('c', 3), ('a', 1), ('b', 2)])
+print(list(упорядоченный.items()))  # [('c', 3), ('a', 1), ('b', 2)]</code></pre>
+                </div>
+                
+                <h3>Практические примеры</h3>
+                
+                <h4>Пример 1: Подсчет частоты слов в тексте</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">текст = """
+Python - высокоуровневый язык программирования общего назначения. 
+Python ориентирован на повышение производительности разработчика и 
+читаемости кода. Синтаксис Python минималистичен.
+"""
+
+# Очищаем текст от знаков препинания и приводим к нижнему регистру
+import re
+очищенный_текст = re.sub(r'[^\w\s]', '', текст.lower())
+
+# Разбиваем на слова
+слова = очищенный_текст.split()
+
+# Подсчитываем частоту слов
+частота = {}
+for слово in слова:
+    частота[слово] = частота.get(слово, 0) + 1
+
+# Сортируем по частоте (от большей к меньшей)
+отсортированные = sorted(частота.items(), key=lambda x: x[1], reverse=True)
+
+# Выводим топ-5 самых частых слов
+print("Топ-5 самых частых слов:")
+for слово, количество in отсортированные[:5]:
+    print(f"{слово}: {количество}")</code></pre>
+                </div>
+                
+                <h4>Пример 2: Преобразование данных</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Список студентов с оценками по предметам
+студенты = [
+    {"имя": "Иван", "математика": 5, "физика": 4, "информатика": 5},
+    {"имя": "Мария", "математика": 4, "физика": 5, "информатика": 4},
+    {"имя": "Алексей", "математика": 3, "физика": 4, "информатика": 5}
+]
+
+# Преобразуем в словарь, где ключ - имя студента
+студенты_по_имени = {студент["имя"]: студент for студент in студенты}
+
+# Вычисляем средний балл для каждого студента
+for имя, данные in студенты_по_имени.items():
+    оценки = [данные[предмет] for предмет in данные if предмет != "имя"]
+    средний_балл = sum(оценки) / len(оценки)
+    студенты_по_имени[имя]["средний_балл"] = round(средний_балл, 2)
+
+# Создаем словарь средних оценок по предметам
+предметы = ["математика", "физика", "информатика"]
+средние_по_предметам = {}
+
+for предмет in предметы:
+    оценки = [студент[предмет] for студент in студенты]
+    средние_по_предметам[предмет] = round(sum(оценки) / len(оценки), 2)
+
+print("Средний балл по студентам:")
+for имя, данные in студенты_по_имени.items():
+    print(f"{имя}: {данные['средний_балл']}")
+
+print("\nСредний балл по предметам:")
+for предмет, средняя in средние_по_предметам.items():
+    print(f"{предмет}: {средняя}")</code></pre>
+                </div>
+                
+                <h4>Пример 3: Кэширование результатов функции</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def фибоначчи_с_кэшем():
+    """Функция для вычисления чисел Фибоначчи с кэшированием."""
+    # Создаем словарь для хранения уже вычисленных значений
+    кэш = {}
+    
+    def фиб(n):
+        # Если результат уже в кэше, возвращаем его
+        if n in кэш:
+            return кэш[n]
+        
+        # Базовые случаи
+        if n <= 1:
+            результат = n
+        else:
+            # Рекурсивный случай с использованием кэша
+            результат = фиб(n-1) + фиб(n-2)
+        
+        # Сохраняем результат в кэш
+        кэш[n] = результат
+        return результат
+    
+    return фиб
+
+# Создаем функцию с кэшем
+фиб = фибоначчи_с_кэшем()
+
+# Теперь вычисление даже больших чисел Фибоначчи будет быстрым
+import time
+
+начало = time.time()
+результат = фиб(35)
+конец = time.time()
+
+print(f"Фибоначчи(35) = {результат}")
+print(f"Время выполнения: {(конец - начало):.6f} секунд")</code></pre>
+                </div>
+            </section>
+            
+            <!-- 4.3 Множества -->
+            <section id="sets" class="topic-section">
+                <h2>4.3 Множества</h2>
+                <p>Множества (sets) — это неупорядоченные коллекции уникальных элементов. Они идеально подходят для удаления дубликатов, проверки принадлежности элементов и выполнения математических операций над множествами, таких как объединение, пересечение и разность.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые особенности множеств:</h4>
+                    <ul>
+                        <li>Хранят только уникальные элементы (дубликаты автоматически удаляются)</li>
+                        <li>Элементы должны быть неизменяемыми (числа, строки, кортежи)</li>
+                        <li>Неупорядоченная структура данных (нет индексации)</li>
+                        <li>Очень быстрая операция проверки наличия элемента (O(1))</li>
+                        <li>Изменяемые (можно добавлять и удалять элементы)</li>
+                        <li>Поддерживают математические операции над множествами</li>
+                    </ul>
+                </div>
+                
+                <h3>Создание множеств</h3>
+                <div class="code-example">
+                    <pre><code class="language-python"># Пустое множество
+пустое_множество = set()  # Нельзя использовать {}, так как это создаст пустой словарь
+
+# Множество с элементами
+цвета = {"красный", "зеленый", "синий"}
+
+# Создание множества из других коллекций
+список = [1, 2, 2, 3, 3, 3, 4, 5, 5]
+уникальные_числа = set(список)  # {1, 2, 3, 4, 5}
+
+строка = "абракадабра"
+уникальные_символы = set(строка)  # {'а', 'б', 'р', 'к', 'д'}</code></pre>
+                </div>
+                
+                <h3>Основные операции с множествами</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">фрукты = {"яблоко", "банан", "апельсин", "груша"}
+
+# Добавление элементов
+фрукты.add("киви")  # {"яблоко", "банан", "апельсин", "груша", "киви"}
+
+# Добавление нескольких элементов
+фрукты.update(["манго", "ананас"])  # {"яблоко", "банан", "апельсин", "груша", "киви", "манго", "ананас"}
+
+# Удаление элементов
+фрукты.remove("банан")  # Вызовет KeyError, если элемента нет
+фрукты.discard("виноград")  # Не вызывает ошибку, если элемента нет
+удаленный = фрукты.pop()  # Удаляет и возвращает произвольный элемент
+
+# Очистка множества
+фрукты.clear()  # Удаляет все элементы</code></pre>
+                </div>
+                
+                <h3>Проверка принадлежности</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">фрукты = {"яблоко", "банан", "апельсин", "груша"}
+
+# Проверка наличия элемента
+if "яблоко" in фрукты:
+    print("Яблоко есть в множестве")
+
+if "вишня" not in фрукты:
+    print("Вишни нет в множестве")
+
+# Проверка размера множества
+размер = len(фрукты)  # 4</code></pre>
+                </div>
+                
+                <h3>Математические операции над множествами</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">a = {1, 2, 3, 4, 5}
+b = {4, 5, 6, 7, 8}
+
+# Объединение (элементы, которые есть в A или в B)
+объединение = a | b  # {1, 2, 3, 4, 5, 6, 7, 8}
+объединение_метод = a.union(b)  # То же самое
+
+# Пересечение (элементы, которые есть и в A, и в B)
+пересечение = a & b  # {4, 5}
+пересечение_метод = a.intersection(b)  # То же самое
+
+# Разность (элементы, которые есть в A, но нет в B)
+разность = a - b  # {1, 2, 3}
+разность_метод = a.difference(b)  # То же самое
+
+# Симметрическая разность (элементы, которые есть в A или B, но не в обоих)
+симм_разность = a ^ b  # {1, 2, 3, 6, 7, 8}
+симм_разность_метод = a.symmetric_difference(b)  # То же самое</code></pre>
+                </div>
+                
+                <h3>Методы сравнения множеств</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">a = {1, 2, 3}
+b = {1, 2, 3, 4, 5}
+c = {1, 2, 3}
+d = {6, 7, 8}
+
+# Проверка равенства
+print(a == c)  # True
+print(a == b)  # False
+
+# Проверка, является ли одно множество подмножеством другого
+print(a.issubset(b))  # True - все элементы a содержатся в b
+print(a <= b)  # То же самое
+print(a < b)   # True - строгое подмножество (a подмножество b и a != b)
+
+# Проверка, является ли одно множество надмножеством другого
+print(b.issuperset(a))  # True - b содержит все элементы a
+print(b >= a)  # То же самое
+print(b > a)   # True - строгое надмножество (b надмножество a и a != b)
+
+# Проверка, не пересекаются ли множества
+print(a.isdisjoint(d))  # True - нет общих элементов
+print(a.isdisjoint(b))  # False - есть общие элементы</code></pre>
+                </div>
+                
+                <h3>Изменение множеств "на месте"</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">a = {1, 2, 3, 4, 5}
+b = {4, 5, 6, 7, 8}
+
+# Объединение на месте
+a |= b  # a теперь {1, 2, 3, 4, 5, 6, 7, 8}
+# или a.update(b)
+
+# Пересечение на месте
+a &= {2, 3, 4, 5, 6}  # a теперь {2, 3, 4, 5, 6}
+# или a.intersection_update({2, 3, 4, 5, 6})
+
+# Разность на месте
+a -= {2, 4, 6}  # a теперь {3, 5}
+# или a.difference_update({2, 4, 6})
+
+# Симметрическая разность на месте
+a ^= {3, 5, 7}  # a теперь {7}
+# или a.symmetric_difference_update({3, 5, 7})</code></pre>
+                </div>
+                
+                <h3>Неизменяемые множества (frozenset)</h3>
+                <p>Python также предоставляет неизменяемую версию множества — <code>frozenset</code>. Она имеет те же методы, что и обычное множество, за исключением методов, изменяющих множество.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Создание frozenset
+неизменяемое = frozenset([1, 2, 3, 4, 5])
+
+# Можно использовать методы, не изменяющие множество
+print(неизменяемое.intersection({3, 4, 5, 6}))  # frozenset({3, 4, 5})
+
+# Нельзя изменять frozenset
+# неизменяемое.add(6)  # AttributeError: 'frozenset' object has no attribute 'add'
+
+# Можно использовать как ключ в словаре
+словарь = {неизменяемое: "значение"}
+print(словарь[неизменяемое])  # "значение"</code></pre>
+                </div>
+                
+                <h3>Множественные включения (Set Comprehensions)</h3>
+                <p>Аналогично списковым и словарным включениям, Python поддерживает множественные включения:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Создание множества квадратов чисел
+квадраты = {x**2 for x in range(10)}  # {0, 1, 4, 9, 16, 25, 36, 49, 64, 81}
+
+# С условием
+четные_квадраты = {x**2 for x in range(10) if x % 2 == 0}  # {0, 4, 16, 36, 64}
+
+# Преобразование строк в верхний регистр
+слова = ["python", "java", "c++", "javascript", "python"]
+верхний_регистр = {слово.upper() for слово in слова}  # {'PYTHON', 'JAVA', 'C++', 'JAVASCRIPT'}
+# Обратите внимание, что дубликат "python" автоматически удален</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Когда использовать множества</h4>
+                    <ul>
+                        <li>Для удаления дубликатов из коллекции</li>
+                        <li>Когда нужна быстрая проверка принадлежности элемента</li>
+                        <li>Для выполнения математических операций над множествами</li>
+                        <li>Когда порядок элементов не важен</li>
+                        <li>Когда нужно хранить только уникальные значения</li>
+                    </ul>
+                </div>
+                
+                <h3>Практические примеры</h3>
+                
+                <h4>Пример 1: Удаление дубликатов</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Список с дубликатами
+числа = [1, 2, 2, 3, 4, 4, 4, 5, 5]
+
+# Удаление дубликатов с сохранением порядка
+уникальные = list(dict.fromkeys(числа))  # [1, 2, 3, 4, 5]
+
+# Альтернативный способ (не сохраняет порядок)
+уникальные_множество = list(set(числа))  # [1, 2, 3, 4, 5], но порядок может быть другим
+
+# Подсчет уникальных элементов
+количество_уникальных = len(set(числа))  # 5</code></pre>
+                </div>
+                
+                <h4>Пример 2: Поиск общих элементов</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Два списка с некоторыми общими элементами
+список1 = ["яблоко", "груша", "банан", "апельсин", "киви"]
+список2 = ["виноград", "банан", "манго", "киви", "ананас"]
+
+# Найти общие элементы
+общие = set(список1) & set(список2)  # {"банан", "киви"}
+
+# Найти элементы, которые есть только в первом списке
+только_в_первом = set(список1) - set(список2)  # {"яблоко", "груша", "апельсин"}
+
+# Найти элементы, которые есть только во втором списке
+только_во_втором = set(список2) - set(список1)  # {"виноград", "манго", "ананас"}
+
+# Найти все уникальные элементы из обоих списков
+все_уникальные = set(список1) | set(список2)
+# {"яблоко", "груша", "банан", "апельсин", "киви", "виноград", "манго", "ананас"}</code></pre>
+                </div>
+                
+                <h4>Пример 3: Проверка анаграмм</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def проверить_анаграмму(строка1, строка2):
+    """
+    Проверяет, являются ли две строки анаграммами.
+    Анаграмма - это слово, образованное перестановкой букв другого слова.
+    """
+    # Удаляем пробелы и приводим к нижнему регистру
+    строка1 = строка1.replace(" ", "").lower()
+    строка2 = строка2.replace(" ", "").lower()
+    
+    # Проверяем, совпадают ли множества символов и их количество
+    return sorted(строка1) == sorted(строка2)
+
+# Примеры
+print(проверить_анаграмму("listen", "silent"))  # True
+print(проверить_анаграмму("triangle", "integral"))  # True
+print(проверить_анаграмму("hello", "world"))  # False</code></pre>
+                </div>
+                
+                <h4>Пример 4: Анализ текста</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def анализ_текста(текст):
+    """Анализирует текст и возвращает статистику по словам."""
+    # Очистка и разбиение текста на слова
+    import re
+    слова = re.findall(r'\b\w+\b', текст.lower())
+    
+    # Общее количество слов
+    всего_слов = len(слова)
+    
+    # Уникальные слова
+    уникальные_слова = set(слова)
+    количество_уникальных = len(уникальные_слова)
+    
+    # Слова длиннее 5 символов
+    длинные_слова = {слово for слово in уникальные_слова if len(слово) > 5}
+    
+    return {
+        "всего_слов": всего_слов,
+        "уникальных_слов": количество_уникальных,
+        "процент_уникальных": round(количество_уникальных / всего_слов * 100, 2),
+        "длинных_слов": len(длинные_слова),
+        "примеры_длинных_слов": list(длинные_слова)[:3]  # Первые 3 длинных слова
+    }
+
+текст = """
+Python - высокоуровневый язык программирования общего назначения. 
+Стандартная библиотека Python включает большой набор полезных инструментов.
+Python поддерживает несколько парадигм программирования.
+"""
+
+результат = анализ_текста(текст)
+for ключ, значение in результат.items():
+    print(f"{ключ}: {значение}")</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Сравнение производительности</h4>
+                    <p>Множества обеспечивают очень быструю операцию проверки принадлежности элемента благодаря хеш-таблицам:</p>
+                    <ul>
+                        <li><strong>Список:</strong> <code>x in my_list</code> — O(n) (линейное время)</li>
+                        <li><strong>Множество:</strong> <code>x in my_set</code> — O(1) (константное время)</li>
+                    </ul>
+                    <p>Для больших коллекций разница в производительности может быть значительной:</p>
+                    <pre><code class="language-python">import time
+
+# Создаем большой список и множество
+большой_список = list(range(1000000))
+большое_множество = set(большой_список)
+искомый = 999999
+
+# Измеряем время поиска в списке
+начало = time.time()
+результат_список = искомый in большой_список
+конец = time.time()
+время_список = конец - начало
+
+# Измеряем время поиска в множестве
+начало = time.time()
+результат_множество = искомый in большое_множество
+конец = time.time()
+время_множество = конец - начало
+
+print(f"Время поиска в списке: {время_список:.6f} секунд")
+print(f"Время поиска в множестве: {время_множество:.6f} секунд")
+print(f"Множество быстрее в {время_список / время_множество:.0f} раз")</code></pre>
+                </div>
+            </section>
+            
+            <!-- 4.4 Генераторы -->
+            <section id="generators" class="topic-section">
+                <h2>4.4 Генераторы</h2>
+                <p>Генераторы — это особый тип итераторов, который позволяет создавать последовательности значений "на лету", не храня их все в памяти одновременно. Это делает генераторы чрезвычайно эффективными для работы с большими наборами данных или бесконечными последовательностями.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые особенности генераторов:</h4>
+                    <ul>
+                        <li>Ленивые вычисления — значения создаются только при запросе</li>
+                        <li>Экономия памяти — в памяти хранится только текущее значение</li>
+                        <li>Одноразовый обход — генератор можно обойти только один раз</li>
+                        <li>Возможность работы с бесконечными последовательностями</li>
+                        <li>Поддержка протокола итератора (можно использовать в циклах for)</li>
+                    </ul>
+                </div>
+                
+                <h3>Создание генераторов с помощью функций</h3>
+                <p>Функция-генератор использует ключевое слово <code>yield</code> вместо <code>return</code> для возврата значений:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def счетчик(максимум):
+    """Простой генератор, возвращающий числа от 0 до максимум-1."""
+    счет = 0
+    while счет < максимум:
+        yield счет
+        счет += 1
+
+# Использование генератора
+for число in счетчик(5):
+    print(число)  # Выведет числа 0, 1, 2, 3, 4
+
+# Генератор можно преобразовать в список
+список = list(счетчик(5))  # [0, 1, 2, 3, 4]</code></pre>
+                </div>
+                
+                <h3>Как работают генераторы</h3>
+                <p>Когда функция-генератор вызывается, она не выполняет свой код сразу. Вместо этого она возвращает объект-генератор, который можно итерировать. При каждом запросе нового значения (например, в цикле for) выполнение функции продолжается до следующего оператора <code>yield</code>.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def демонстрация():
+    print("Первый шаг")
+    yield 1
+    print("Второй шаг")
+    yield 2
+    print("Третий шаг")
+    yield 3
+    print("Завершено")
+
+# Создаем генератор
+ген = демонстрация()
+
+# Получаем значения по одному
+print(next(ген))  # Выведет: Первый шаг, затем 1
+print(next(ген))  # Выведет: Второй шаг, затем 2
+print(next(ген))  # Выведет: Третий шаг, затем 3
+# print(next(ген))  # Вызовет StopIteration, так как генератор исчерпан</code></pre>
+                </div>
+                
+                <h3>Генераторные выражения</h3>
+                <p>Генераторные выражения похожи на списковые включения, но используют круглые скобки вместо квадратных и создают генератор вместо списка:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Списковое включение (создает весь список сразу)
+квадраты_список = [x**2 for x in range(10)]  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# Генераторное выражение (создает значения по запросу)
+квадраты_генератор = (x**2 for x in range(10))  # <generator object>
+
+# Использование генераторного выражения
+for квадрат in квадраты_генератор:
+    print(квадрат)
+
+# С условием
+четные_квадраты = (x**2 for x in range(10) if x % 2 == 0)
+
+# Вложенные циклы
+координаты = ((x, y) for x in range(3) for y in range(2))</code></pre>
+                </div>
+                
+                <h3>Преимущества генераторов</h3>
+                <h4>1. Экономия памяти</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import sys
+
+# Сравнение размера списка и генератора
+список = [i for i in range(1000000)]
+генератор = (i for i in range(1000000))
+
+размер_списка = sys.getsizeof(список)
+размер_генератора = sys.getsizeof(генератор)
+
+print(f"Размер списка: {размер_списка:,} байт")
+print(f"Размер генератора: {размер_генератора:,} байт")
+print(f"Список больше генератора в {размер_списка / размер_генератора:.0f} раз")</code></pre>
+                </div>
+                
+                <h4>2. Работа с большими файлами</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def читать_большой_файл(имя_файла):
+    """Читает файл построчно, не загружая его целиком в память."""
+    with open(имя_файла, 'r', encoding='utf-8') as файл:
+        for строка in файл:
+            yield строка.strip()
+
+# Использование
+# for строка in читать_большой_файл('очень_большой_файл.txt'):
+#     обработать(строка)</code></pre>
+                </div>
+                
+                <h4>3. Создание бесконечных последовательностей</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def бесконечные_числа():
+    """Генерирует бесконечную последовательность чисел."""
+    n = 0
+    while True:
+        yield n
+        n += 1
+
+# Использование с ограничением
+счетчик = бесконечные_числа()
+for _ in range(5):
+    print(next(счетчик))  # Выведет 0, 1, 2, 3, 4</code></pre>
+                </div>
+                
+                <h3>Генераторы и контекстные менеджеры</h3>
+                <p>Генераторы можно использовать для создания собственных контекстных менеджеров с помощью декоратора <code>contextlib.contextmanager</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">from contextlib import contextmanager
+
+@contextmanager
+def открыть_файл(имя_файла, режим='r'):
+    """Контекстный менеджер для работы с файлами."""
+    try:
+        файл = open(имя_файла, режим)
+        yield файл
+    finally:
+        файл.close()
+
+# Использование
+# with открыть_файл('пример.txt') as f:
+#     содержимое = f.read()</code></pre>
+                </div>
+                
+                <h3>Расширенные возможности генераторов</h3>
+                <h4>1. Передача значений в генератор</h4>
+                <p>Генераторы могут не только возвращать значения, но и принимать их с помощью метода <code>send()</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def эхо_генератор():
+    """Генератор, который возвращает отправленные ему значения."""
+    значение = yield "Готов к приему"  # Начальное значение
+    while True:
+        значение = yield f"Получено: {значение}"
+
+# Использование
+эхо = эхо_генератор()
+print(next(эхо))  # "Готов к приему" (инициализация генератора)
+print(эхо.send("Привет"))  # "Получено: Привет"
+print(эхо.send(42))  # "Получено: 42"</code></pre>
+                </div>
+                
+                <h4>2. Завершение генератора</h4>
+                <p>Генераторы можно явно завершить с помощью методов <code>close()</code> или <code>throw()</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def генератор_с_очисткой():
+    """Генератор с кодом очистки."""
+    try:
+        yield 1
+        yield 2
+        yield 3
+    finally:
+        print("Генератор завершен, ресурсы освобождены")
+
+# Использование
+ген = генератор_с_очисткой()
+print(next(ген))  # 1
+print(next(ген))  # 2
+ген.close()  # Выведет: "Генератор завершен, ресурсы освобождены"</code></pre>
+                </div>
+                
+                <h4>3. Делегирование генераторов (yield from)</h4>
+                <p>С Python 3.3+ можно использовать <code>yield from</code> для делегирования части работы другому генератору:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def подгенератор():
+    """Генерирует числа от 1 до 3."""
+    yield 1
+    yield 2
+    yield 3
+
+def основной_генератор():
+    """Использует подгенератор и добавляет свои значения."""
+    yield "Начало"
+    yield from подгенератор()  # Делегирует работу подгенератору
+    yield "Конец"
+
+# Использование
+for значение in основной_генератор():
+    print(значение)
+# Выведет: "Начало", 1, 2, 3, "Конец"</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Когда использовать генераторы</h4>
+                    <ul>
+                        <li>Для работы с большими наборами данных, которые не помещаются в память</li>
+                        <li>Для последовательностей, которые требуют сложных вычислений</li>
+                        <li>Для бесконечных последовательностей</li>
+                        <li>Когда нужно обработать данные построчно или поэлементно</li>
+                        <li>Для создания пользовательских итераторов</li>
+                    </ul>
+                </div>
+                
+                <h3>Практические примеры</h3>
+                
+                <h4>Пример 1: Генерация последовательности Фибоначчи</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def фибоначчи(n):
+    """Генератор для первых n чисел Фибоначчи."""
+    a, b = 0, 1
+    счетчик = 0
+    while счетчик < n:
+        yield a
+        a, b = b, a + b
+        счетчик += 1
+
+# Вывод первых 10 чисел Фибоначчи
+for число in фибоначчи(10):
+    print(число)  # 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+
+# Бесконечная последовательность Фибоначчи
+def бесконечный_фибоначчи():
+    """Генератор для бесконечной последовательности Фибоначчи."""
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+# Использование с ограничением
+генератор = бесконечный_фибоначчи()
+for _ in range(10):
+    print(next(генератор))</code></pre>
+                </div>
+                
+                <h4>Пример 2: Обработка данных построчно</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def обработать_лог(имя_файла):
+    """Обрабатывает лог-файл построчно, извлекая IP-адреса."""
+    import re
+    pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'  # Простой паттерн для IP-адресов
+    
+    with open(имя_файла, 'r') as файл:
+        for строка in файл:
+            ip_адреса = re.findall(pattern, строка)
+            if ip_адреса:
+                yield ip_адреса[0], строка.strip()
+
+# Использование
+# for ip, строка in обработать_лог('access.log'):
+#     print(f"IP: {ip}, Строка: {строка[:50]}...")</code></pre>
+                </div>
+                
+                <h4>Пример 3: Пагинация данных</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def пагинация(данные, размер_страницы=10):
+    """Разбивает большой список на страницы заданного размера."""
+    for i in range(0, len(данные), размер_страницы):
+        yield данные[i:i + размер_страницы]
+
+# Пример использования
+элементы = list(range(1, 35))  # Список из 34 элементов
+
+for i, страница in enumerate(пагинация(элементы, 10), 1):
+    print(f"Страница {i}: {страница}")</code></pre>
+                </div>
+                
+                <h4>Пример 4: Генерация комбинаций</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def комбинации(список, длина):
+    """Генерирует все возможные комбинации элементов списка заданной длины."""
+    if длина == 0:
+        yield []
+        return
+        
+    for i in range(len(список)):
+        текущий = список[i]
+        оставшиеся = список[i + 1:]
+        
+        for комб in комбинации(оставшиеся, длина - 1):
+            yield [текущий] + комб
+
+# Использование
+цвета = ["красный", "зеленый", "синий", "желтый"]
+
+print("Комбинации из 2 цветов:")
+for комб in комбинации(цвета, 2):
+    print(комб)</code></pre>
+                </div>
+                
+                <h4>Пример 5: Конвейерная обработка данных</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def читать_числа(файл):
+    """Читает числа из файла."""
+    for строка in файл:
+        for число in строка.split():
+            yield int(число)
+
+def только_четные(числа):
+    """Фильтрует только четные числа."""
+    for число in числа:
+        if число % 2 == 0:
+            yield число
+
+def квадраты(числа):
+    """Возводит числа в квадрат."""
+    for число in числа:
+        yield число ** 2
+
+# Использование конвейера генераторов
+# with open('числа.txt', 'r') as файл:
+#     конвейер = квадраты(только_четные(читать_числа(файл)))
+#     for результат in конвейер:
+#         print(результат)</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Генераторы vs Списки</h4>
+                    <table>
+                        <tr>
+                            <th>Аспект</th>
+                            <th>Списки</th>
+                            <th>Генераторы</th>
+                        </tr>
+                        <tr>
+                            <td>Память</td>
+                            <td>Хранят все элементы сразу</td>
+                            <td>Хранят только текущий элемент</td>
+                        </tr>
+                        <tr>
+                            <td>Производительность</td>
+                            <td>Быстрый доступ к элементам</td>
+                            <td>Меньшее потребление памяти</td>
+                        </tr>
+                        <tr>
+                            <td>Повторное использование</td>
+                            <td>Можно обходить многократно</td>
+                            <td>Только однократный обход</td>
+                        </tr>
+                        <tr>
+                            <td>Синтаксис</td>
+                            <td><code>[x for x in range(10)]</code></td>
+                            <td><code>(x for x in range(10))</code></td>
+                        </tr>
+                        <tr>
+                            <td>Бесконечные последовательности</td>
+                            <td>Невозможно</td>
+                            <td>Возможно</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Заключение модуля -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

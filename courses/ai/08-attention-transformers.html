@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Модуль 8: Attention и Трансформеры — механизм внимания, архитектура, позиционное кодирование, Multi-Head">
+    <title>8. Attention и Трансформеры | Введение в AI | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/ai/08-attention-transformers.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="ai">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Введение в AI</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons"><button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button></div>
+            <button class="theme-toggle-btn" id="themeToggle" aria-label="Тема"><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" aria-label="Настройки"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <a href="../../index.html" class="exit-btn" title="На главную"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
+        </div>
+    </header>
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic"><button class="topic-btn">1–7</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="07-rnn-lstm.html" class="subtopic">7. RNN/LSTM</a></div></div>
+                <div class="topic"><button class="topic-btn active">8. Attention и Трансформеры</button><div class="subtopics" style="max-height: 1000px;"><a href="#attention" class="subtopic active">8.1 Attention</a><a href="#transformer" class="subtopic">8.2 Transformer</a><a href="#positional" class="subtopic">8.3 Позиционное кодирование</a><a href="#multihead" class="subtopic">8.4 Multi-Head Attention</a></div></div>
+                <div class="topic"><button class="topic-btn">9–10</button><div class="subtopics"><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+            </div>
+        </div>
+        <main id="content" class="content sidebar-active">
+            <section id="module-intro" class="topic-section"><h2>Модуль 8: Революция Attention и Трансформеры (движки LLM)</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Объяснить архитектуру, на которой построены все современные ChatGPT и подобные.</p></div></section>
+            <section id="attention" class="topic-section"><h2>Механизм Внимания (Attention)</h2><div class="lesson-content"><p><strong>Интуиция:</strong> при ответе на вопрос вы «обращаете внимание» на ключевые слова в тексте. <strong>Математика:</strong> Query (запрос — «что ищем»), Key (ключ — «по чему ищем»), Value (значение — «что берём»). Скалярное произведение Query и Key даёт оценку близости; после softmax получаем веса внимания. Взвешенная сумма Value по этим весам — выход внимания. Так каждый токен может «смотреть» на любой другой — основа трансформера.</p></div></section>
+            <section id="transformer" class="topic-section"><h2>Архитектура Трансформер (Transformer)</h2><div class="lesson-content"><p>Отказ от RNN: «Attention is all you need». <strong>Энкодер</strong> — понимает вход (каждый токен обогащается контекстом через self-attention). <strong>Декодер</strong> — генерирует выход по одному токену, смотрит на выход энкодера и на уже сгенерированные токены. Огромные матрицы весов — миллиарды параметров в больших моделях. Слои: self-attention, нормализация, feed-forward, снова нормализация; так блоки повторяются.</p></div></section>
+            <section id="positional" class="topic-section"><h2>Позиционное кодирование (Positional Encoding)</h2><div class="lesson-content"><p>Attention сам по себе не различает порядок токенов — только «кто на кого смотрит». Чтобы модель понимала структуру предложения, к эмбеддингам токенов добавляют <strong>позиционное кодирование</strong> — вектор, зависящий от позиции. Классический вариант — синусы и косинусы разной частоты (фиксированные). В современных моделях часто обучаемое позиционное кодирование или относительные позиции.</p></div></section>
+            <section id="multihead" class="topic-section"><h2>Многослойное внимание (Multi-Head Attention)</h2><div class="lesson-content"><p>Не один механизм внимания, а несколько параллельных «голов». Каждая голова имеет свои матрицы Q, K, V и учится искать свои типы связей — грамматические, смысловые, анафорические и т.д. Выходы голов конкатенируются и проходят через линейный слой. Так модель одновременно учитывает разные аспекты контекста.</p></div></section>
+        </main>
+    </div>
+    <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>
+    <script src="../courses.js"></script>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Перенаправление в Linux: стандартные потоки, перенаправление ввода/вывода, конвейеры, pipes. Изучите мощь командной строки Linux.">
+    <meta name="keywords" content="перенаправление linux, pipes конвейеры, stdin stdout stderr, перенаправление вывода, linux команды">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Перенаправление в Linux — Потоки и конвейеры">
+    <meta property="og:description" content="Изучите перенаправление ввода/вывода в Linux: стандартные потоки, конвейеры, мощные команды.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/linux/06-redirection.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Перенаправление в Linux — Потоки и конвейеры">
+    <meta name="twitter:description" content="Изучите перенаправление ввода/вывода в Linux: стандартные потоки, конвейеры, мощные команды.">
+    <title>Перенаправление в Linux — Потоки и конвейеры | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/linux/06-redirection.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Linux course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Linux и Bash",
+          "item": "https://skl-academy.ru/courses/linux/01-linux-basics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Перенаправление",
+          "item": "https://skl-academy.ru/courses/linux/06-redirection.html"
+        }
+      ]
+    }
+    </script>
+    
+    
+</head>
+<body data-course="linux">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Linux</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <a href="05-processes.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="07-search.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Знакомство с Linux</button>
+                    <div class="subtopics">
+                        <a href="01-linux-basics.html#introduction" class="subtopic">1.1 Введение в Linux</a>
+                        <a href="01-linux-basics.html#distributions" class="subtopic">1.2 Дистрибутивы Linux</a>
+                        <a href="01-linux-basics.html#installation" class="subtopic">1.3 Установка на виртуальную машину</a>
+                        <a href="01-linux-basics.html#wsl" class="subtopic">1.4 WSL2 для Windows</a>
+                        <a href="01-linux-basics.html#first-steps" class="subtopic">1.5 Первое знакомство</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="02-file-system.html#terminal-shell" class="subtopic">2.1 Терминал и Shell</a>
+                        <a href="02-file-system.html#file-system" class="subtopic">2.2 Файловая система Linux</a>
+                        <a href="02-file-system.html#paths" class="subtopic">2.3 Пути и навигация</a>
+                        <a href="02-file-system.html#commands" class="subtopic">2.4 Команды навигации</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="03-file-operations.html#creating" class="subtopic">3.1 Создание файлов и каталогов</a>
+                        <a href="03-file-operations.html#managing" class="subtopic">3.2 Копирование, перемещение, удаление</a>
+                        <a href="03-file-operations.html#viewing" class="subtopic">3.3 Просмотр содержимого</a>
+                        <a href="03-file-operations.html#editors" class="subtopic">3.4 Текстовые редакторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Права доступа</button>
+                    <div class="subtopics">
+                        <a href="04-permissions.html#ownership" class="subtopic">4.1 Владелец и группа</a>
+                        <a href="04-permissions.html#permissions" class="subtopic">4.2 Права доступа</a>
+                        <a href="04-permissions.html#numeric" class="subtopic">4.3 Числовое представление</a>
+                        <a href="04-permissions.html#analysis" class="subtopic">4.4 Анализ прав</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Процессы</button>
+                    <div class="subtopics">
+                        <a href="05-processes.html#what-is-process" class="subtopic">5.1 Что такое процесс</a>
+                        <a href="05-processes.html#viewing-processes" class="subtopic">5.2 Просмотр процессов</a>
+                        <a href="05-processes.html#managing-processes" class="subtopic">5.3 Управление процессами</a>
+                        <a href="05-processes.html#monitoring" class="subtopic">5.4 Мониторинг системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn active">6. Перенаправление</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#streams" class="subtopic active">6.1 Стандартные потоки</a>
+                        <a href="#output" class="subtopic">6.2 Перенаправление вывода</a>
+                        <a href="#input" class="subtopic">6.3 Перенаправление ввода</a>
+                        <a href="#pipes" class="subtopic">6.4 Конвейеры</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Поиск</button>
+                    <div class="subtopics">
+                        <a href="07-search.html#find" class="subtopic">7.1 find - поиск файлов</a>
+                        <a href="07-search.html#grep" class="subtopic">7.2 grep - поиск текста</a>
+                        <a href="07-search.html#combination" class="subtopic">7.3 Комбинация find и grep</a>
+                        <a href="07-search.html#locate" class="subtopic">7.4 locate - быстрый поиск</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Bash-скриптинг</button>
+                    <div class="subtopics">
+                        <a href="08-scripting.html#what-is-script" class="subtopic">8.1 Что такое скрипт</a>
+                        <a href="08-scripting.html#creating-scripts" class="subtopic">8.2 Создание и запуск</a>
+                        <a href="08-scripting.html#variables" class="subtopic">8.3 Переменные</a>
+                        <a href="08-scripting.html#input" class="subtopic">8.4 Ввод данных</a>
+                        <a href="08-scripting.html#command-substitution" class="subtopic">8.5 Подстановка команд</a>
+                        <a href="08-scripting.html#math" class="subtopic">8.6 Математические операции</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Сетевые утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-networking.html#diagnostics" class="subtopic">9.1 Сетевая диагностика</a>
+                        <a href="09-networking.html#connections" class="subtopic">9.2 Просмотр соединений</a>
+                        <a href="09-networking.html#download" class="subtopic">9.3 Скачивание файлов</a>
+                        <a href="09-networking.html#ssh" class="subtopic">9.4 SSH подключение</a>
+                        <a href="09-networking.html#keys" class="subtopic">9.5 Аутентификация по ключам</a>
+                        <a href="09-networking.html#file-transfer" class="subtopic">9.6 Передача файлов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 6.1: Стандартные потоки -->
+            <section id="streams" class="topic-section">
+                <h2>6.1 Стандартные потоки</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 15 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <p>В Linux каждый процесс имеет три стандартных потока для ввода и вывода данных.</p>
+                    
+                    <h3>stdin (0) — стандартный ввод</h3>
+                    <p>Поток для чтения данных. По умолчанию это клавиатура.</p>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        cat                    # читает из stdin (клавиатура)
+                        # Нажмите Ctrl+D для завершения ввода
+                    </div>
+
+                    <h3>stdout (1) — стандартный вывод</h3>
+                    <p>Поток для вывода обычных данных. По умолчанию это экран терминала.</p>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        echo "Hello World"     # выводит в stdout
+                        ls                    # выводит список файлов в stdout
+                    </div>
+
+                    <h3>stderr (2) — стандартный поток ошибок</h3>
+                    <p>Поток для вывода сообщений об ошибках. По умолчанию это тоже экран терминала.</p>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        ls nonexistent_file   # ошибка выводится в stderr
+                        # ls: cannot access 'nonexistent_file': No such file or directory
+                    </div>
+
+                    <h3>Разделение потоков</h3>
+                    <div class="info">
+                        <strong>Важно понимать:</strong> stdout и stderr — это разные потоки. Это позволяет обрабатывать обычный вывод и ошибки отдельно.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        # Команда выводит и обычные данные, и ошибки
+                        ls existing_file nonexistent_file
+                        # existing_file          ← stdout
+                        # ls: cannot access...   ← stderr
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.2: Перенаправление вывода -->
+            <section id="output" class="topic-section">
+                <h2>6.2 Перенаправление вывода</h2>
+                <div class="lesson-content">
+                    <p>Перенаправление позволяет отправлять вывод команд в файлы или другие программы.</p>
+                    
+                    <h3>Перенаправление stdout</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        echo "Hello" > file.txt    # записать в файл (перезаписать)
+                        echo "World" >> file.txt   # добавить в файл
+                        ls > files.txt             # сохранить список файлов
+                    </div>
+
+                    <h3>Перенаправление stderr</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        ls nonexistent 2> error.log    # перенаправить ошибки в файл
+                        ls existing 2> error.log       # ошибок нет, файл останется пустым
+                    </div>
+
+                    <h3>Перенаправление обоих потоков</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        ls existing nonexistent > output.log 2>&1
+                        # Перенаправить и stdout, и stderr в один файл
+                        
+                        ls existing nonexistent &> output.log
+                        # Сокращенная запись (bash)
+                    </div>
+
+                    <h3>Отбрасывание вывода</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        ls > /dev/null              # отбросить stdout
+                        ls 2> /dev/null            # отбросить stderr
+                        ls > /dev/null 2>&1        # отбросить все
+                    </div>
+
+                    <div class="info">
+                        <strong>/dev/null</strong> — это специальный файл, который "поглощает" все данные. Полезен для подавления нежелательного вывода.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.3: Перенаправление ввода -->
+            <section id="input" class="topic-section">
+                <h2>6.3 Перенаправление ввода</h2>
+                <div class="lesson-content">
+                    <p>Перенаправление ввода позволяет читать данные из файла вместо клавиатуры.</p>
+                    
+                    <h3>Перенаправление stdin</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        cat < file.txt              # читать из файла
+                        sort < unsorted.txt         # сортировать файл
+                        wc -l < file.txt            # подсчитать строки в файле
+                    </div>
+
+                    <h3>Heredoc — многострочный ввод</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        cat << EOF
+                        Строка 1
+                        Строка 2
+                        Строка 3
+                        EOF
+                        # Создает временный файл с содержимым между EOF
+                    </div>
+
+                    <h3>Here-string — ввод из переменной</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        text="Hello World"
+                        wc -w <<< "$text"           # подсчитать слова в переменной
+                    </div>
+
+                    <h3>Практические примеры</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        # Отправить письмо из файла
+                        mail user@example.com < message.txt
+                        
+                        # Создать архив из списка файлов
+                        tar -czf archive.tar.gz -T filelist.txt
+                        
+                        # Выполнить команды из файла
+                        bash < script.sh
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 6.4: Конвейеры -->
+            <section id="pipes" class="topic-section">
+                <h2>6.4 Конвейеры (Pipes)</h2>
+                <div class="lesson-content">
+                    <p>Конвейер (|) передает stdout одной команды в stdin другой команды. Это основа мощных командных конструкций.</p>
+                    
+                    <h3>Базовое использование</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        ls -la | grep "txt"         # найти файлы .txt
+                        ps aux | grep firefox       # найти процессы firefox
+                        cat file.txt | sort         # отсортировать файл
+                    </div>
+
+                    <h3>Цепочки команд</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        ls -la | grep "txt" | wc -l     # подсчитать .txt файлы
+                        ps aux | grep firefox | awk '{print $2}'  # получить PID firefox
+                        cat log.txt | grep ERROR | sort | uniq    # уникальные ошибки
+                    </div>
+
+                    <h3>Полезные команды для конвейеров</h3>
+                    <div class="code-example">
+                        <h4>grep — поиск текста</h4>
+                        <div class="code-example">
+                        <pre><code class="bash">
+                            ps aux | grep python        # найти процессы python
+                            ls -la | grep -v "txt"      # исключить .txt файлы
+                            cat file.txt | grep -i error # поиск без учета регистра
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>sort — сортировка</h4>
+                        <div class="code-example">
+                        <pre><code class="bash">
+                            ls -la | sort -k5 -nr       # сортировать по размеру (убывание)
+                            cat names.txt | sort        # отсортировать имена
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>uniq — удаление дубликатов</h4>
+                        <div class="code-example">
+                        <pre><code class="bash">
+                            cat file.txt | sort | uniq  # уникальные строки
+                            cat file.txt | sort | uniq -c  # с подсчетом
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>head и tail — начало и конец</h4>
+                        <div class="code-example">
+                        <pre><code class="bash">
+                            ls -la | head -10           # первые 10 файлов
+                            ps aux | tail -5            # последние 5 процессов
+                        </div>
+                    </div>
+
+                    <h3>Сложные примеры</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        # Найти 5 самых больших файлов
+                        find /home -type f -exec ls -la {} \; | sort -k5 -nr | head -5
+                        
+                        # Мониторинг логов в реальном времени
+                        tail -f /var/log/syslog | grep ERROR
+                        
+                        # Статистика использования команд
+                        history | awk '{print $2}' | sort | uniq -c | sort -nr | head -10
+                    </div>
+
+                    <div class="warning">
+                        <strong>Обратите внимание:</strong> stderr не передается через конвейер. Для передачи ошибок используйте <code>2>&1</code>.
+                    </div>
+                </div>
+            </section>
+
+            </main>
+    </div>
+
+    <script src="../courses.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

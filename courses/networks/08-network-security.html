@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Безопасность в сетях: угрозы, шифрование, VPN/IPsec, межсетевые экраны, PKI">
+    <meta name="keywords" content="сетевые атаки, MITM, DDoS, TLS, VPN, IPsec, firewall, PKI">
+    <title>Сетевая безопасность — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/08-network-security.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+
+                <div class="topic">
+                    <button class="topic-btn active">8. Сетевая безопасность</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#threats" class="subtopic active">8.1 Типы атак</a>
+                        <a href="#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="#pki" class="subtopic">8.4 Для профессионалов</a>
+                        <a href="#ids-ips" class="subtopic">8.5 IDS/IPS</a>
+                        <a href="#nac-8021x" class="subtopic">8.6 NAC и 802.1X</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="threats" class="topic-section">
+                <h2>8.1 Типы атак</h2>
+                <div class="lesson-content">
+                    <h3>Зачем нужна сетевая безопасность?</h3>
+                    <p>Сети постоянно подвергаются атакам. Понимание типов атак помогает защитить сеть и данные. Безопасность — это не разовое действие, а непрерывный процесс.</p>
+
+                    <h3>Сетевые атаки</h3>
+                    <div class="visual-guide">
+                        <h4>MITM (Man-in-the-Middle) — атака "человек посередине":</h4>
+                        <ul>
+                            <li><strong>Суть:</strong> Злоумышленник перехватывает и изменяет трафик между двумя сторонами</li>
+                            <li><strong>ARP Spoofing:</strong> Подмена ARP-таблиц, чтобы трафик шел через атакующего</li>
+                            <li><strong>DNS Spoofing:</strong> Подмена DNS-ответов, перенаправление на поддельные сайты</li>
+                            <li><strong>Защита:</strong> Использование HTTPS, DNSSEC, статические ARP-записи, Dynamic ARP Inspection</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>DDoS (Distributed Denial of Service) — распределенная атака на отказ в обслуживании:</h4>
+                        <ul>
+                            <li><strong>Суть:</strong> Множество устройств одновременно атакуют цель, перегружая ее трафиком</li>
+                            <li><strong>Volumetric:</strong> Заполнение канала большим объемом трафика (например, UDP flood)</li>
+                            <li><strong>Protocol:</strong> Использование уязвимостей протоколов (например, SYN flood)</li>
+                            <li><strong>Application:</strong> Атака на прикладном уровне (например, HTTP flood)</li>
+                            <li><strong>Защита:</strong> DDoS-фильтры, CDN, ограничение скорости, изоляция атакуемых ресурсов</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Сканирование и эксплойты:</h4>
+                        <ul>
+                            <li><strong>Сканирование портов:</strong> Поиск открытых портов и уязвимых сервисов</li>
+                            <li><strong>Эксплойты:</strong> Использование найденных уязвимостей для получения доступа</li>
+                            <li><strong>Защита:</strong> Закрытие ненужных портов, регулярные обновления, IDS/IPS</li>
+                        </ul>
+                    </div>
+
+                    <h3>Атаки на приложения</h3>
+                    <div class="visual-guide">
+                        <h4>Основные типы:</h4>
+                        <ul>
+                            <li><strong>SQL Injection:</strong> Внедрение вредоносного SQL-кода в запросы к базе данных</li>
+                            <li><strong>XSS (Cross-Site Scripting):</strong> Внедрение вредоносного JavaScript на веб-страницы</li>
+                            <li><strong>CSRF (Cross-Site Request Forgery):</strong> Выполнение действий от имени пользователя без его ведома</li>
+                            <li><strong>Уязвимости аутентификации:</strong> Слабые пароли, отсутствие многофакторной аутентификации</li>
+                        </ul>
+                    </div>
+
+                    <h3>Социальная инженерия</h3>
+                    <div class="visual-guide">
+                        <h4>Методы атак:</h4>
+                        <ul>
+                            <li><strong>Фишинг:</strong> Поддельные письма/сайты для кражи учетных данных</li>
+                            <li><strong>Spear Phishing:</strong> Целевой фишинг на конкретного человека или организацию</li>
+                            <li><strong>Vishing:</strong> Фишинг по телефону (voice phishing)</li>
+                            <li><strong>SMShing:</strong> Фишинг через SMS</li>
+                        </ul>
+                    </div>
+
+                    <h3>Методы защиты</h3>
+                    <div class="visual-guide">
+                        <h4>Сегментация сети:</h4>
+                        <ul>
+                            <li><strong>VLAN/VRF:</strong> Логическое разделение сетей для изоляции трафика</li>
+                            <li><strong>Принцип наименьших привилегий:</strong> Доступ только к необходимым ресурсам</li>
+                            <li><strong>Микросегментация:</strong> Детальное разделение даже внутри одной сети</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Защита на уровне L2:</h4>
+                        <ul>
+                            <li><strong>DHCP Snooping:</strong> Блокировка неавторизованных DHCP-серверов</li>
+                            <li><strong>Dynamic ARP Inspection:</strong> Проверка ARP-сообщений на подлинность</li>
+                            <li><strong>Port Security:</strong> Ограничение количества MAC-адресов на порту</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Наблюдаемость и мониторинг:</h4>
+                        <ul>
+                            <li><strong>Логирование:</strong> Запись всех важных событий для анализа</li>
+                            <li><strong>Телеметрия:</strong> Сбор метрик в реальном времени</li>
+                            <li><strong>Алерты:</strong> Уведомления о подозрительной активности</li>
+                            <li><strong>SIEM:</strong> Централизованный сбор и анализ логов</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>MITM:</strong> Перехват и изменение трафика (защита: HTTPS, DNSSEC)</li>
+                            <li><strong>DDoS:</strong> Перегрузка ресурсов трафиком (защита: фильтры, CDN)</li>
+                            <li><strong>Атаки на приложения:</strong> SQL Injection, XSS, CSRF (защита: валидация, санитизация)</li>
+                            <li><strong>Социальная инженерия:</strong> Обман пользователей (защита: обучение, многофакторная аутентификация)</li>
+                            <li><strong>Сегментация:</strong> Изоляция сетей для ограничения распространения атак</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Защитить сеть и данные от различных типов атак через многоуровневую защиту и мониторинг.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="crypto" class="topic-section">
+                <h2>8.2 Шифрование и VPN/IPsec</h2>
+                <div class="lesson-content">
+                    <p>TLS защищает приложения (HTTPS); IPsec — защита на сетевом уровне; VPN создаёт защищённый туннель поверх недоверенной сети.</p>
+                    <div class="visual-guide">
+                        <h4>TLS кратко</h4>
+                        <ul>
+                            <li><strong>Рукопожатие</strong>: согласование алгоритмов, проверка сертификата, обмен ключами.</li>
+                            <li><strong>Современные практики</strong>: TLS 1.2/1.3, PFS (ECDHE), отказ от слабых шифров и протоколов.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>IPsec кратко</h4>
+                        <ul>
+                            <li><strong>Режимы</strong>: транспортный/туннельный; протоколы AH/ESP.</li>
+                            <li><strong>IKEv2</strong>: аутентификация и согласование параметров, построение SA.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Криптография и PKI углубление</h4>
+                        <ul>
+                            <li><strong>Ассиметричная/симметричная криптография</strong>: RSA/ECDSA для аутентификации; AES/ChaCha20 для шифрования данных.</li>
+                            <li><strong>Хэш‑функции/целостность</strong>: SHA‑2/SHA‑3, HMAC; назначение и угрозы коллизий.</li>
+                            <li><strong>PKI‑цепочки</strong>: Root/Intermediate/Leaf, OCSP/CRL, OCSP‑stapling.</li>
+                            <li><strong>HSM/KMS</strong>: хранение ключей, разграничение доступа, аудит операций.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>VPN</h4>
+                        <ul>
+                            <li><strong>Site‑to‑Site/Remote Access</strong>: выбор технологий (IPsec, SSL‑VPN, WireGuard), маршрутизация/политики.</li>
+                            <li><strong>PFS</strong>: новые ключи сеанса исключают компрометацию прошлых сессий при утечке долгосрочного ключа.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="firewall" class="topic-section">
+                <h2>8.3 Межсетевые экраны</h2>
+                <div class="lesson-content">
+                    <h3>Что такое firewall?</h3>
+                    <p><strong>Firewall</strong> (межсетевой экран) — это устройство или программа, которая контролирует и фильтрует сетевой трафик на основе правил безопасности. Это "охранник" на границе сети.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Firewall — это как охрана на входе в здание: проверяет, кто входит и выходит, и блокирует нежелательных посетителей.</p>
+                    </div>
+
+                    <h3>Типы firewall</h3>
+                    <div class="visual-guide">
+                        <h4>Stateless (без состояния):</h4>
+                        <ul>
+                            <li>Проверяет каждый пакет независимо</li>
+                            <li>Фильтрует по IP-адресам, портам, протоколам</li>
+                            <li>Простой, но менее эффективный</li>
+                            <li>Не помнит предыдущие пакеты</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Stateful (с состоянием):</h4>
+                        <ul>
+                            <li>Помнит состояние соединений (таблица состояний)</li>
+                            <li>Понимает контекст трафика (например, ответ на запрос)</li>
+                            <li>Более умный и эффективный</li>
+                            <li>Может отслеживать установленные соединения</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Next-Generation Firewall (NGFW):</h4>
+                        <ul>
+                            <li>Идентификация приложений (L7) — понимает, какое приложение использует трафик</li>
+                            <li>IPS/IDS — обнаружение и предотвращение вторжений</li>
+                            <li>Глубокий анализ пакетов (DPI)</li>
+                            <li>Интеграция с системами безопасности</li>
+                        </ul>
+                    </div>
+
+                    <h3>Принципы настройки firewall</h3>
+                    <div class="visual-guide">
+                        <h4>Правило "Deny by Default":</h4>
+                        <ul>
+                            <li>По умолчанию весь трафик блокируется</li>
+                            <li>Разрешаются только явно указанные правила</li>
+                            <li>Безопаснее, чем разрешать все по умолчанию</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Минимизация экспонированных сервисов:</h4>
+                        <ul>
+                            <li>Открывайте только необходимые порты</li>
+                            <li>Закрывайте неиспользуемые сервисы</li>
+                            <li>Используйте принцип наименьших привилегий</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Порядок правил:</h4>
+                        <ul>
+                            <li>Правила проверяются сверху вниз</li>
+                            <li>Первое совпадение применяется</li>
+                            <li>Важно: более специфичные правила должны быть выше</li>
+                            <li>Общие правила (например, deny all) — в конце</li>
+                        </ul>
+                    </div>
+
+                    <h3>Где размещать firewall?</h3>
+                    <div class="visual-guide">
+                        <h4>Периметр сети:</h4>
+                        <ul>
+                            <li>На границе между внутренней сетью и интернетом</li>
+                            <li>Защищает всю сеть от внешних угроз</li>
+                            <li>Первая линия защиты</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Микросегментация:</h4>
+                        <ul>
+                            <li>Firewall внутри сети, между сегментами</li>
+                            <li>Защита от распространения атак внутри сети</li>
+                            <li>Изоляция критичных систем</li>
+                        </ul>
+                    </div>
+
+                    <h3>Логирование и мониторинг</h3>
+                    <div class="visual-guide">
+                        <h4>Важность логов:</h4>
+                        <ul>
+                            <li><strong>Расследование инцидентов:</strong> Логи показывают, что происходило в сети</li>
+                            <li><strong>Обнаружение атак:</strong> Аномальная активность видна в логах</li>
+                            <li><strong>Аудит:</strong> Кто и когда получал доступ</li>
+                            <li><strong>Централизованный сбор:</strong> SIEM-системы собирают логи со всех устройств</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> NAT (трансляция адресов) — это НЕ безопасность! NAT скрывает внутренние адреса, но не фильтрует трафик. Всегда используйте явные правила firewall для контроля доступа.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Firewall</strong> — контролирует и фильтрует сетевой трафик</li>
+                            <li><strong>Stateless</strong> — проверяет каждый пакет независимо</li>
+                            <li><strong>Stateful</strong> — помнит состояние соединений</li>
+                            <li><strong>NGFW</strong> — идентификация приложений, IPS/IDS</li>
+                            <li><strong>Deny by Default</strong> — блокировать все по умолчанию, разрешать явно</li>
+                            <li><strong>Минимизация</strong> — открывать только необходимые порты</li>
+                            <li><strong>Логирование</strong> — критично для безопасности и расследований</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Контролировать сетевой трафик, блокировать нежелательные соединения и защищать сеть от угроз.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pki" class="topic-section">
+                <h2>8.4 Для профессионалов</h2>
+                <div class="lesson-content">
+                    <p>PKI: инфраструктура открытых ключей, цепочки доверия, OCSP/CRL, HSM. Практики: HSTS, CSP, mTLS, TLS 1.3.</p>
+                    <div class="visual-guide">
+                        <h4>Управление ключами и политиками</h4>
+                        <ul>
+                            <li><strong>Выдача/отзыв</strong> сертификатов, автоматизация (ACME), сроки и ротация ключей.</li>
+                            <li><strong>Политики</strong>: pinning (с осторожностью), минимизация доверенных CA, разделение ролей.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Операционная безопасность PKI</h4>
+                        <ul>
+                            <li><strong>Разделение ролей</strong>: офлайн Root CA, онлайн Issuing CA, аудит ключевых операций.</li>
+                            <li><strong>Прозрачность сертификатов</strong>: CT‑логи, отслеживание и отзыв компрометированных сертификатов.</li>
+                            <li><strong>mTLS</strong>: взаимная аутентификация сервис‑сервис, короткоживущие сертификаты.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ids-ips" class="topic-section">
+                <h2>8.5 IDS/IPS</h2>
+                <div class="lesson-content">
+                    <p>IDS/IPS анализируют сетевой трафик и событийные логи для обнаружения атак и аномалий; IPS может активно блокировать трафик. Решения бывают сетевыми (NIDS/NIPS) и хостовыми (HIDS/HIPS).</p>
+                    <div class="visual-guide">
+                        <h4>Подходы к детектированию</h4>
+                        <ul>
+                            <li><strong>Сигнатурный</strong>: сравнение с базой известных шаблонов атак.</li>
+                            <li><strong>Аномальный/поведенческий</strong>: статистика/ML, выявление отклонений.</li>
+                            <li><strong>Stateful L7</strong>: корреляция сессий/протоколов (HTTP/DNS/SMB и др.).</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Развёртывание и интеграция</h4>
+                        <ul>
+                            <li><strong>SPAN/TAP</strong> для зеркалирования трафика в NIDS; in‑line режим для NIPS.</li>
+                            <li><strong>Правила и обновления</strong>: жизненно важны актуальные сигнатуры и исключения (tuning).</li>
+                            <li><strong>SIEM/SOAR</strong>: корреляция событий и автоматизация реакции.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Ложные срабатывания</strong> неизбежны: настраивайте пороги и исключения; комбинируйте с сетевой сегментацией и MFA.</p></div>
+                </div>
+            </section>
+
+            <section id="nac-8021x" class="topic-section">
+                <h2>8.6 NAC и 802.1X</h2>
+                <div class="lesson-content">
+                    <p>Network Access Control (NAC) управляет допуском устройств в сеть на основе аутентификации/авторизации и состояния устройства.</p>
+                    <div class="visual-guide">
+                        <h4>802.1X в двух словах</h4>
+                        <ul>
+                            <li><strong>Роли</strong>: supplicant (клиент), authenticator (коммутатор/AP), authentication server (RADIUS).</li>
+                            <li><strong>EAP‑методы</strong>: PEAP/EAP‑TLS — баланс между удобством и безопасностью (сертификаты).</li>
+                            <li><strong>MAB</strong>: резервная авторизация по MAC, как правило, с ограниченными правами.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Политики доступа</h4>
+                        <ul>
+                            <li><strong>VLAN‑назначение/dACL</strong>: динамическая сегментация на порту по результатам авторизации.</li>
+                            <li><strong>Posture</strong>: проверка соответствия (антивирус, шифрование диска, патчи) и карантинные VLAN.</li>
+                            <li><strong>Гостевой доступ</strong>: временные учётные записи/порталы, изоляция.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика:</strong> начинайте с «low‑impact» режимов (monitor, closed‑mode с исключениями), чтобы не нарушить бизнес‑процессы.</p></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+

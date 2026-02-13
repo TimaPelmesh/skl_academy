@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Файловая система Windows - структура, пути, права доступа, атрибуты файлов. Изучение NTFS и работы с файлами в Windows.">
+    <meta name="keywords" content="файловая система windows, ntfs, права доступа windows, атрибуты файлов, структура папок windows">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <title>Файловая система Windows — Структура и управление файлами | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/windows/03-file-system.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="windows">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Windows</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <a href="04-registry.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Windows</button>
+                    <div class="subtopics">
+                        <a href="01-windows-basics.html#introduction" class="subtopic">1.1 Введение в Windows</a>
+                        <a href="01-windows-basics.html#versions" class="subtopic">1.2 Версии Windows</a>
+                        <a href="01-windows-basics.html#interface" class="subtopic">1.3 Интерфейс Windows</a>
+                        <a href="01-windows-basics.html#file-explorer" class="subtopic">1.4 Проводник Windows</a>
+                        <a href="01-windows-basics.html#settings" class="subtopic">1.5 Настройки системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. PowerShell</button>
+                    <div class="subtopics">
+                        <a href="02-powershell-basics.html#what-is-powershell" class="subtopic">2.1 Что такое PowerShell</a>
+                        <a href="02-powershell-basics.html#installation" class="subtopic">2.2 Установка и настройка</a>
+                        <a href="02-powershell-basics.html#first-commands" class="subtopic">2.3 Первые команды</a>
+                        <a href="02-powershell-basics.html#help-system" class="subtopic">2.4 Система помощи</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn active">3. Файловая система</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#structure" class="subtopic active">3.1 Структура файловой системы</a>
+                        <a href="#paths" class="subtopic">3.2 Пути и навигация</a>
+                        <a href="#permissions" class="subtopic">3.3 Права доступа</a>
+                        <a href="#attributes" class="subtopic">3.4 Атрибуты файлов</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Реестр Windows</button>
+                    <div class="subtopics">
+                        <a href="04-registry.html#what-is-registry" class="subtopic">4.1 Что такое реестр</a>
+                        <a href="04-registry.html#structure" class="subtopic">4.2 Структура реестра</a>
+                        <a href="04-registry.html#editing" class="subtopic">4.3 Редактирование реестра</a>
+                        <a href="04-registry.html#backup" class="subtopic">4.4 Резервное копирование</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Службы Windows</button>
+                    <div class="subtopics">
+                        <a href="05-services.html#what-are-services" class="subtopic">5.1 Что такое службы</a>
+                        <a href="05-services.html#management" class="subtopic">5.2 Управление службами</a>
+                        <a href="05-services.html#troubleshooting" class="subtopic">5.3 Диагностика служб</a>
+                        <a href="05-services.html#custom-services" class="subtopic">5.4 Создание служб</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Сетевые настройки</button>
+                    <div class="subtopics">
+                        <a href="06-networking.html#network-config" class="subtopic">6.1 Настройка сети</a>
+                        <a href="06-networking.html#firewall" class="subtopic">6.2 Брандмауэр Windows</a>
+                        <a href="06-networking.html#remote-access" class="subtopic">6.3 Удаленный доступ</a>
+                        <a href="06-networking.html#troubleshooting" class="subtopic">6.4 Диагностика сети</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Безопасность</button>
+                    <div class="subtopics">
+                        <a href="07-security.html#user-accounts" class="subtopic">7.1 Учетные записи</a>
+                        <a href="07-security.html#group-policy" class="subtopic">7.2 Групповые политики</a>
+                        <a href="07-security.html#antivirus" class="subtopic">7.3 Антивирусная защита</a>
+                        <a href="07-security.html#encryption" class="subtopic">7.4 Шифрование данных</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Автоматизация</button>
+                    <div class="subtopics">
+                        <a href="08-automation.html#batch-files" class="subtopic">8.1 Пакетные файлы</a>
+                        <a href="08-automation.html#powershell-scripts" class="subtopic">8.2 PowerShell скрипты</a>
+                        <a href="08-automation.html#task-scheduler" class="subtopic">8.3 Планировщик задач</a>
+                        <a href="08-automation.html#advanced-automation" class="subtopic">8.4 Продвинутая автоматизация</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика</button>
+                    <div class="subtopics">
+                        <a href="09-troubleshooting.html#event-viewer" class="subtopic">9.1 Просмотр событий</a>
+                        <a href="09-troubleshooting.html#performance" class="subtopic">9.2 Мониторинг производительности</a>
+                        <a href="09-troubleshooting.html#system-recovery" class="subtopic">9.3 Восстановление системы</a>
+                        <a href="09-troubleshooting.html#advanced-tools" class="subtopic">9.4 Продвинутые инструменты</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#hyper-v" class="subtopic">10.1 Hyper-V</a>
+                        <a href="10-advanced-topics.html#wsl" class="subtopic">10.2 WSL (Windows Subsystem for Linux)</a>
+                        <a href="10-advanced-topics.html#containers" class="subtopic">10.3 Контейнеры Windows</a>
+                        <a href="10-advanced-topics.html#cloud-integration" class="subtopic">10.4 Интеграция с облаком</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 3.1: Структура файловой системы -->
+            <section id="structure" class="topic-section">
+                <h2>3.1 Структура файловой системы Windows</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 25 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <p>Файловая система Windows основана на NTFS (New Technology File System) и имеет иерархическую структуру, начинающуюся с корневого каталога каждого диска.</p>
+                    
+                    <h3>Основные диски и разделы</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр всех дисков в системе
+Get-WmiObject -Class Win32_LogicalDisk | Select-Object DeviceID, Size, FreeSpace, FileSystem
+                        
+                        # Или через PowerShell 5.0+
+Get-Volume | Select-Object DriveLetter, FileSystemLabel, Size, SizeRemaining
+                    </div>
+
+                    <h3>Структура диска C:</h3>
+                    <div class="code-example">
+                        <pre><code class="text">C:\
+├── Windows\              # Системные файлы Windows
+├── Program Files\        # 64-битные программы
+├── Program Files (x86)\  # 32-битные программы
+├── Users\               # Профили пользователей
+├── ProgramData\         # Данные программ (скрытая)
+├── PerfLogs\           # Логи производительности
+├── System Volume Information\  # Системная информация (скрытая)
+└── pagefile.sys        # Файл подкачки</code></pre>
+                    </div>
+
+                    <h3>Папка Windows</h3>
+                    <div class="info">
+                        <strong>Системные файлы:</strong> Папка Windows содержит все системные файлы операционной системы. Изменение или удаление файлов в этой папке может привести к нестабильной работе системы.
+                    </div>
+
+                    <div class="code-example">
+                        <h4>Основные подпапки Windows:</h4>
+                        <ul>
+                            <li><strong>System32</strong> — системные библиотеки и исполняемые файлы</li>
+                            <li><strong>SysWOW64</strong> — 32-битные системные файлы для совместимости</li>
+                            <li><strong>System</strong> — дополнительные системные файлы</li>
+                            <li><strong>Temp</strong> — временные файлы системы</li>
+                            <li><strong>Logs</strong> — системные журналы</li>
+                            <li><strong>Fonts</strong> — шрифты системы</li>
+                            <li><strong>Help</strong> — файлы справки</li>
+                        </ul>
+                    </div>
+
+                    <h3>Папка Users</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр структуры папки пользователя
+Get-ChildItem $env:USERPROFILE | Select-Object Name, Attributes
+                    </div>
+
+                    <div class="code-example">
+                        <h4>Структура профиля пользователя:</h4>
+                        <ul>
+                            <li><strong>Desktop</strong> — рабочий стол</li>
+                            <li><strong>Documents</strong> — документы пользователя</li>
+                            <li><strong>Downloads</strong> — загруженные файлы</li>
+                            <li><strong>Pictures</strong> — изображения</li>
+                            <li><strong>Videos</strong> — видеофайлы</li>
+                            <li><strong>Music</strong> — музыкальные файлы</li>
+                            <li><strong>AppData</strong> — данные приложений (скрытая)</li>
+                            <li><strong>Favorites</strong> — избранное браузера</li>
+                        </ul>
+                    </div>
+
+                    <h3>Скрытые папки</h3>
+                    <div class="warn">
+                        <strong>Важно:</strong> Многие системные папки скрыты по умолчанию. Для их отображения в проводнике включите "Показать скрытые файлы, папки и диски" в настройках вида.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Показать скрытые файлы и папки
+Get-ChildItem -Force | Where-Object {$_.Attributes -match "Hidden"}
+                        
+                        # Показать только скрытые папки
+Get-ChildItem -Directory -Force | Where-Object {$_.Attributes -match "Hidden"}
+                    </div>
+
+                    <h3>Специальные папки</h3>
+                    <div class="code-example">
+                        <h4>Переменные окружения для специальных папок:</h4>
+                        <ul>
+                            <li><strong>%USERPROFILE%</strong> — профиль текущего пользователя</li>
+                            <li><strong>%APPDATA%</strong> — AppData\Roaming</li>
+                            <li><strong>%LOCALAPPDATA%</strong> — AppData\Local</li>
+                            <li><strong>%TEMP%</strong> — временная папка пользователя</li>
+                            <li><strong>%PROGRAMDATA%</strong> — ProgramData</li>
+                            <li><strong>%WINDIR%</strong> — папка Windows</li>
+                        </ul>
+                    </div>
+
+                    <h3>Типы файловых систем</h3>
+                    <div class="note">
+                        <strong>NTFS (New Technology File System):</strong> Основная файловая система Windows, поддерживающая сжатие, шифрование, квоты дисков, журналирование и другие продвинутые возможности.
+                    </div>
+
+                    <div class="code-example">
+                        <h4>Сравнение файловых систем:</h4>
+                        <ul>
+                            <li><strong>NTFS</strong> — современная, с поддержкой больших файлов и дисков</li>
+                            <li><strong>FAT32</strong> — совместимая, но с ограничениями по размеру файлов</li>
+                            <li><strong>exFAT</strong> — для внешних накопителей, оптимизированная для флешек</li>
+                            <li><strong>ReFS</strong> — новая файловая система для серверов</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 3.2: Пути и навигация -->
+            <section id="paths" class="topic-section">
+                <h2>3.2 Пути и навигация в файловой системе</h2>
+                <div class="lesson-content">
+                    <p>Понимание путей в Windows критически важно для эффективной работы с файловой системой и написания скриптов.</p>
+                    
+                    <h3>Типы путей</h3>
+                    <div class="code-example">
+                        <h4>Абсолютные пути</h4>
+                        <ul>
+                            <li><strong>Полный путь:</strong> C:\Users\Иван\Documents\файл.txt</li>
+                            <li><strong>UNC путь:</strong> \\server\share\файл.txt</li>
+                            <li><strong>Путь к устройству:</strong> \\.\PhysicalDrive0</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>Относительные пути</h4>
+                        <ul>
+                            <li><strong>Текущая папка:</strong> .\файл.txt</li>
+                            <li><strong>Родительская папка:</strong> ..\файл.txt</li>
+                            <li><strong>Относительный путь:</strong> Documents\файл.txt</li>
+                        </ul>
+                    </div>
+
+                    <h3>Навигация в PowerShell</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Текущее местоположение
+Get-Location
+                        # или
+                        pwd
+                        
+                        # Переход в папку
+Set-Location "C:\Users"
+                        # или
+                        cd "C:\Users"
+                        
+                        # Переход в домашнюю папку
+Set-Location $env:USERPROFILE
+                        # или
+                        cd ~
+                        
+                        # Переход на уровень выше
+Set-Location ..
+                        # или
+                        cd ..
+                    </div>
+
+                    <h3>Работа с переменными путей</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Разделение пути на компоненты
+                        Split-Path "C:\Users\Иван\Documents\файл.txt" -Parent
+                        Split-Path "C:\Users\Иван\Documents\файл.txt" -Leaf
+                        
+                        # Объединение путей
+                        Join-Path "C:\Users" "Иван"
+                        
+                        # Получение абсолютного пути
+                        Resolve-Path ".\файл.txt"
+                        
+                        # Проверка существования пути
+                        Test-Path "C:\Users\Иван\Documents"
+                    </div>
+
+                    <h3>Специальные символы в путях</h3>
+                    <div class="warn">
+                        <strong>Экранирование символов:</strong> В PowerShell некоторые символы имеют специальное значение и должны быть экранированы или заключены в кавычки.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Путь с пробелами (обязательно в кавычках)
+Set-Location "C:\Program Files"
+                        
+                        # Путь с квадратными скобками
+Set-Location "C:\Users\[Иван]"
+                        
+                        # Экранирование специальных символов
+Set-Location "C:\Users\`$Иван"
+                        
+                        # Использование одинарных кавычек (буквальная интерпретация)
+Set-Location 'C:\Users\$Иван'
+                    </div>
+
+                    <h3>Переменные окружения в путях</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Использование переменных окружения
+                        $env:USERPROFILE
+                        $env:PROGRAMFILES
+                        $env:WINDIR
+                        $env:TEMP
+                        
+                        # Переход в папку пользователя
+Set-Location $env:USERPROFILE
+                        
+                        # Создание пути с переменными
+                        $documentsPath = Join-Path $env:USERPROFILE "Documents"
+Set-Location $documentsPath
+                    </div>
+
+                    <h3>Поиск файлов по путям</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Поиск файлов по маске
+Get-ChildItem "C:\Users\*\Documents\*.txt" -Recurse
+                        
+                        # Поиск с использованием переменных
+Get-ChildItem "$env:USERPROFILE\Documents\*.txt"
+                        
+                        # Поиск в нескольких папках
+                        $searchPaths = @("$env:USERPROFILE\Documents", "$env:USERPROFILE\Desktop")
+                        foreach ($path in $searchPaths) {
+    Get-ChildItem $path -Filter "*.txt"
+                        }
+                    </div>
+
+                    <h3>Работа с длинными путями</h3>
+                    <div class="info">
+                        <strong>Ограничения длины путей:</strong> В Windows есть ограничение на длину пути (260 символов по умолчанию). Для работы с длинными путями используйте префикс \\?\ или включите поддержку длинных путей в Windows 10/11.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Работа с длинными путями (префикс \\?\)
+Get-ChildItem "\\?\C:\Very\Long\Path\To\Some\File.txt"
+                        
+                        # Проверка поддержки длинных путей
+Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled"
+                    </div>
+
+                    <h3>Создание и удаление папок</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание папки
+New-Item -ItemType Directory -Path "C:\НоваяПапка"
+                        # или
+                        mkdir "C:\НоваяПапка"
+                        
+                        # Создание вложенных папок
+New-Item -ItemType Directory -Path "C:\Папка1\Папка2\Папка3" -Force
+                        
+                        # Удаление папки
+Remove-Item "C:\НоваяПапка" -Recurse -Force
+                        
+                        # Удаление только пустых папок
+Remove-Item "C:\ПустаяПапка" -Force
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 3.3: Права доступа -->
+            <section id="permissions" class="topic-section">
+                <h2>3.3 Права доступа в Windows</h2>
+                <div class="lesson-content">
+                    <p>Система прав доступа Windows (NTFS permissions) обеспечивает безопасность файлов и папок, контролируя, кто может читать, изменять или выполнять файлы.</p>
+                    
+                    <h3>Основные типы разрешений</h3>
+                    <div class="code-example">
+                        <h4>Стандартные разрешения NTFS:</h4>
+                        <ul>
+                            <li><strong>Полный доступ (Full Control)</strong> — все операции</li>
+                            <li><strong>Изменение (Modify)</strong> — чтение, запись, выполнение, удаление</li>
+                            <li><strong>Чтение и выполнение (Read & Execute)</strong> — чтение и выполнение файлов</li>
+                            <li><strong>Чтение (Read)</strong> — только просмотр содержимого</li>
+                            <li><strong>Запись (Write)</strong> — создание и изменение файлов</li>
+                        </ul>
+                    </div>
+
+                    <h3>Просмотр прав доступа в PowerShell</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр прав доступа к файлу
+Get-Acl "C:\Users\Иван\Documents\файл.txt" | Format-List
+                        
+                        # Просмотр прав доступа к папке
+Get-Acl "C:\Users\Иван\Documents" | Format-List
+                        
+                        # Детальная информация о правах
+                        (Get-Acl "C:\Users\Иван\Documents").Access | Format-Table IdentityReference, FileSystemRights, AccessControlType
+                    </div>
+
+                    <h3>Установка прав доступа</h3>
+                    <div class="warn">
+                        <strong>Внимание:</strong> Изменение прав доступа к системным файлам может привести к нестабильной работе системы. Всегда создавайте резервные копии перед изменением прав.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание нового объекта прав доступа
+                        $acl = Get-Acl "C:\Users\Иван\Documents"
+                        
+                        # Создание правила доступа
+                        $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Пользователи", "ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow")
+                        
+                        # Добавление правила к ACL
+                        $acl.SetAccessRule($accessRule)
+                        
+                        # Применение изменений
+Set-Acl "C:\Users\Иван\Documents" $acl
+                    </div>
+
+                    <h3>Наследование прав доступа</h3>
+                    <div class="info">
+                        <strong>Наследование:</strong> По умолчанию файлы и папки наследуют права доступа от родительской папки. Это упрощает управление правами, но может создавать проблемы безопасности.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Отключение наследования прав
+                        $acl = Get-Acl "C:\Users\Иван\Documents"
+                        $acl.SetAccessRuleProtection($true, $false)
+Set-Acl "C:\Users\Иван\Documents" $acl
+                        
+                        # Включение наследования прав
+                        $acl = Get-Acl "C:\Users\Иван\Documents"
+                        $acl.SetAccessRuleProtection($false, $true)
+Set-Acl "C:\Users\Иван\Documents" $acl
+                    </div>
+
+                    <h3>Работа с группами пользователей</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр групп пользователей
+Get-LocalGroup | Select-Object Name, Description
+                        
+                        # Просмотр пользователей в группе
+Get-LocalGroupMember "Пользователи"
+                        
+                        # Добавление пользователя в группу
+                        Add-LocalGroupMember -Group "Пользователи" -Member "НовыйПользователь"
+                        
+                        # Удаление пользователя из группы
+Remove-LocalGroupMember -Group "Пользователи" -Member "Пользователь"
+                    </div>
+
+                    <h3>Эффективные права доступа</h3>
+                    <div class="note">
+                        <strong>Эффективные права:</strong> Эффективные права пользователя определяются комбинацией его личных прав и прав групп, к которым он принадлежит. PowerShell может помочь определить эффективные права.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка эффективных прав пользователя
+                        $user = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+                        $acl = Get-Acl "C:\Users\Иван\Documents"
+                        
+                        # Проверка конкретного права
+                        $accessRules = $acl.Access | Where-Object {$_.IdentityReference -eq $user.Name}
+                        $accessRules | Format-Table IdentityReference, FileSystemRights, AccessControlType
+                    </div>
+
+                    <h3>Аудит доступа к файлам</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Включение аудита для файла
+                        $acl = Get-Acl "C:\Users\Иван\Documents\важный_файл.txt"
+                        $auditRule = New-Object System.Security.AccessControl.FileSystemAuditRule("Пользователи", "ReadAndExecute", "Success")
+                        $acl.SetAuditRule($auditRule)
+Set-Acl "C:\Users\Иван\Documents\важный_файл.txt" $acl
+                        
+                        # Просмотр настроек аудита
+                        $acl.Audit | Format-Table IdentityReference, FileSystemRights, AuditFlags
+                    </div>
+
+                    <h3>Сброс прав доступа</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Сброс прав доступа к папке (восстановление наследования)
+                        $acl = Get-Acl "C:\Users\Иван\Documents"
+                        $acl.SetAccessRuleProtection($false, $true)
+Set-Acl "C:\Users\Иван\Documents" $acl
+                        
+                        # Применение прав по умолчанию
+                        icacls "C:\Users\Иван\Documents" /reset /T
+                    </div>
+
+                    <h3>Практические примеры</h3>
+                    <div class="code-example">
+                        <h4>Создание папки с ограниченным доступом</h4>
+                        <div class="code-example">
+                        <pre><code class="bash">
+# Создание папки
+$folderPath = "C:\КонфиденциальныеДокументы"
+New-Item -ItemType Directory -Path $folderPath
+
+# Получение ACL
+$acl = Get-Acl $folderPath
+
+# Удаление наследования
+$acl.SetAccessRuleProtection($true, $false)
+
+# Добавление прав для администраторов
+$adminRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Администраторы", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+$acl.SetAccessRule($adminRule)
+
+# Добавление прав для конкретного пользователя
+$userRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Иван", "ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow")
+$acl.SetAccessRule($userRule)
+
+# Применение прав
+Set-Acl $folderPath $acl
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 3.4: Атрибуты файлов -->
+            <section id="attributes" class="topic-section">
+                <h2>3.4 Атрибуты файлов в Windows</h2>
+                <div class="lesson-content">
+                    <p>Атрибуты файлов в Windows предоставляют дополнительную информацию о файлах и папках, а также влияют на их поведение в системе.</p>
+                    
+                    <h3>Основные атрибуты файлов</h3>
+                    <div class="code-example">
+                        <h4>Стандартные атрибуты NTFS:</h4>
+                        <ul>
+                            <li><strong>Archive (A)</strong> — файл изменен с момента последнего резервного копирования</li>
+                            <li><strong>Hidden (H)</strong> — скрытый файл</li>
+                            <li><strong>ReadOnly (R)</strong> — файл только для чтения</li>
+                            <li><strong>System (S)</strong> — системный файл</li>
+                            <li><strong>Compressed (C)</strong> — сжатый файл</li>
+                            <li><strong>Encrypted (E)</strong> — зашифрованный файл</li>
+                        </ul>
+                    </div>
+
+                    <h3>Просмотр атрибутов в PowerShell</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр атрибутов файла
+Get-ItemProperty "C:\Users\Иван\Documents\файл.txt" | Select-Object Attributes
+                        
+                        # Детальная информация о файле
+Get-Item "C:\Users\Иван\Documents\файл.txt" | Format-List *
+                        
+                        # Просмотр атрибутов папки
+Get-Item "C:\Users\Иван\Documents" | Select-Object Attributes
+                        
+                        # Просмотр всех файлов с их атрибутами
+Get-ChildItem "C:\Users\Иван\Documents" | Select-Object Name, Attributes
+                    </div>
+
+                    <h3>Установка атрибутов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Установка атрибута "только для чтения"
+Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value ReadOnly
+                        
+                        # Установка атрибута "скрытый"
+Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value Hidden
+                        
+                        # Установка нескольких атрибутов
+Set-ItemProperty "C:\Users\Иван\Documents\файл.txt" -Name Attributes -Value @("ReadOnly", "Hidden")
+                        
+                        # Снятие атрибута "только для чтения"
+                        $file = Get-Item "C:\Users\Иван\Documents\файл.txt"
+                        $file.Attributes = $file.Attributes -band (-bnot [System.IO.FileAttributes]::ReadOnly)
+                    </div>
+
+                    <h3>Работа с атрибутами через .NET</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Установка атрибутов через .NET
+                        [System.IO.File]::SetAttributes("C:\Users\Иван\Documents\файл.txt", [System.IO.FileAttributes]::ReadOnly)
+                        
+                        # Установка нескольких атрибутов
+                        [System.IO.File]::SetAttributes("C:\Users\Иван\Documents\файл.txt", [System.IO.FileAttributes]::ReadOnly -bor [System.IO.FileAttributes]::Hidden)
+                        
+                        # Проверка наличия атрибута
+                        $attributes = [System.IO.File]::GetAttributes("C:\Users\Иван\Documents\файл.txt")
+                        if ($attributes -band [System.IO.FileAttributes]::ReadOnly) {
+                            Write-Host "Файл имеет атрибут ReadOnly"
+                        }
+                    </div>
+
+                    <h3>Поиск файлов по атрибутам</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Поиск скрытых файлов
+Get-ChildItem "C:\Users\Иван" -Force | Where-Object {$_.Attributes -match "Hidden"}
+                        
+                        # Поиск файлов только для чтения
+Get-ChildItem "C:\Users\Иван" -Recurse | Where-Object {$_.Attributes -match "ReadOnly"}
+                        
+                        # Поиск системных файлов
+Get-ChildItem "C:\Users\Иван" -Force | Where-Object {$_.Attributes -match "System"}
+                        
+                        # Поиск сжатых файлов
+Get-ChildItem "C:\Users\Иван" -Recurse | Where-Object {$_.Attributes -match "Compressed"}
+                    </div>
+
+                    <h3>Альтернативные потоки данных (ADS)</h3>
+                    <div class="info">
+                        <strong>ADS (Alternate Data Streams):</strong> NTFS поддерживает альтернативные потоки данных, которые позволяют хранить дополнительную информацию в файле без изменения его основного содержимого.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Создание файла с альтернативным потоком
+                        "Основное содержимое" | Out-File "C:\Users\Иван\Documents\файл.txt"
+                        "Скрытые данные" | Out-File "C:\Users\Иван\Documents\файл.txt:скрытый_поток"
+                        
+                        # Чтение альтернативного потока
+Get-Content "C:\Users\Иван\Documents\файл.txt:скрытый_поток"
+                        
+                        # Просмотр всех потоков файла
+Get-Item "C:\Users\Иван\Documents\файл.txt" -Stream *
+                    </div>
+
+                    <h3>Расширенные атрибуты</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр расширенных атрибутов
+Get-Item "C:\Users\Иван\Documents\файл.txt" | Get-Member -MemberType Property
+                        
+                        # Информация о времени создания и изменения
+                        $file = Get-Item "C:\Users\Иван\Documents\файл.txt"
+                        $file | Select-Object Name, CreationTime, LastWriteTime, LastAccessTime
+                        
+                        # Изменение времени последнего доступа
+                        $file.LastAccessTime = Get-Date
+                    </div>
+
+                    <h3>Практические примеры</h3>
+                    <div class="code-example">
+                        <h4>Скрипт для массового изменения атрибутов</h4>
+                        <div class="code-example">
+                        <pre><code class="bash">
+# Функция для установки атрибутов файлам в папке
+function Set-FileAttributes {
+    param(
+        [string]$Path,
+        [string[]]$Attributes,
+        [string]$Filter = "*"
+    )
+    
+    $files = Get-ChildItem -Path $Path -Filter $Filter -File
+    
+    foreach ($file in $files) {
+        try {
+            $currentAttributes = $file.Attributes
+            foreach ($attr in $Attributes) {
+                $currentAttributes = $currentAttributes -bor [System.IO.FileAttributes]::$attr
+            }
+            $file.Attributes = $currentAttributes
+            Write-Host "Атрибуты установлены для: $($file.Name)"
+        }
+        catch {
+            Write-Error "Ошибка при установке атрибутов для $($file.Name): $($_.Exception.Message)"
+        }
+    }
+}
+
+# Использование функции
+Set-FileAttributes -Path "C:\Users\Иван\Documents" -Attributes @("ReadOnly", "Hidden") -Filter "*.txt"
+                        </div>
+                    </div>
+
+                    <h3>Проверка целостности файлов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Вычисление хеша файла (MD5)
+Get-FileHash "C:\Users\Иван\Documents\файл.txt" -Algorithm MD5
+                        
+                        # Вычисление хеша файла (SHA256)
+Get-FileHash "C:\Users\Иван\Documents\файл.txt" -Algorithm SHA256
+                        
+                        # Сравнение хешей двух файлов
+                        $hash1 = Get-FileHash "C:\Users\Иван\Documents\файл1.txt" -Algorithm SHA256
+                        $hash2 = Get-FileHash "C:\Users\Иван\Documents\файл2.txt" -Algorithm SHA256
+                        if ($hash1.Hash -eq $hash2.Hash) {
+                            Write-Host "Файлы идентичны"
+                        } else {
+                            Write-Host "Файлы различаются"
+                        }
+                    </div>
+
+                    <div class="note">
+                        <strong>Совет:</strong> Регулярно проверяйте атрибуты важных файлов и используйте хеширование для проверки целостности критически важных данных. Это поможет обнаружить несанкционированные изменения.
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../courses.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+    
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

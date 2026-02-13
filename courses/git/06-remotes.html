@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 6: Удалённые репозитории. clone, remote -v, remote add, fetch, pull, push, upstream, SSH vs HTTPS.">
+    <meta name="keywords" content="git remote, git clone, git fetch, git pull, git push, upstream, SSH, HTTPS">
+    <meta name="author" content="SKL Academy">
+    <meta property="og:title" content="Git — Модуль 6: Удалённые репозитории">
+    <meta property="og:description" content="Работаем с GitHub/GitLab: clone, remotes, fetch/pull/push, upstream‑связь, протоколы SSH/HTTPS.">
+    <title>Курс Git — Модуль 6: Удалённые репозитории | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/06-remotes.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="git">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Философия и основы Git</button>
+                    <div class="subtopics">
+                        <a href="01-git-basics.html#vcs-intro" class="subtopic">1.1 Что такое VCS</a>
+                        <a href="01-git-basics.html#git-advantages" class="subtopic">1.2 Почему Git</a>
+                        <a href="01-git-basics.html#key-concepts" class="subtopic">1.3 Ключевые понятия</a>
+                        <a href="01-git-basics.html#file-states" class="subtopic">1.4 Состояния файла</a>
+                        <a href="01-git-basics.html#git-architecture" class="subtopic">1.5 Архитектура</a>
+                        <a href="01-git-basics.html#first-steps" class="subtopic">1.6 Первые шаги</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Коммиты и история</button>
+                    <div class="subtopics">
+                        <a href="02-commits-and-history.html#log-pro" class="subtopic">2.1 git log</a>
+                        <a href="02-commits-and-history.html#git-show" class="subtopic">2.2 git show</a>
+                        <a href="02-commits-and-history.html#amend" class="subtopic">2.3 amend</a>
+                        <a href="02-commits-and-history.html#add-patch" class="subtopic">2.4 add -p</a>
+                        <a href="02-commits-and-history.html#gitignore" class="subtopic">2.5 .gitignore</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Ветвление</button>
+                    <div class="subtopics">
+                        <a href="03-branching.html#branch-basics" class="subtopic">3.1 Основы веток</a>
+                        <a href="03-branching.html#create-switch" class="subtopic">3.2 Создание/переключение</a>
+                        <a href="03-branching.html#list-delete" class="subtopic">3.3 Список/удаление</a>
+                        <a href="03-branching.html#compare" class="subtopic">3.4 Сравнение</a>
+                        <a href="03-branching.html#workflow" class="subtopic">3.5 Практика</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. Слияние и конфликты</button>
+                    <div class="subtopics">
+                        <a href="04-merging-and-conflicts.html#ff-vs-merge" class="subtopic">4.1 FF vs 3‑way</a>
+                        <a href="04-merging-and-conflicts.html#resolve" class="subtopic">4.2 Разрешение</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">6. Удалённые репозитории</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#clone" class="subtopic active">6.1 Клонирование</a>
+                        <a href="#remotes" class="subtopic">6.2 Remotes</a>
+                        <a href="#fetch-pull" class="subtopic">6.3 fetch/pull</a>
+                        <a href="#push" class="subtopic">6.4 push/upstream</a>
+                        <a href="#protocols" class="subtopic">6.5 SSH/HTTPS</a>
+                        <a href="#tracking" class="subtopic">6.6 Tracking‑ветки</a>
+                        <a href="#refspec" class="subtopic">6.7 Refspec</a>
+                        <a href="#push-default" class="subtopic">6.8 push.default</a>
+                        <a href="#prune" class="subtopic">6.9 Prune и housekeeping</a>
+                        <a href="#shallow-partial" class="subtopic">6.10 Shallow/Partial clone</a>
+                        <a href="#credentials" class="subtopic">6.11 URL и credential helpers</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Командная работа</button>
+                    <div class="subtopics">
+                        <a href="07-teamwork-and-practices.html#pr" class="subtopic">7.1 PR/MR</a>
+                        <a href="07-teamwork-and-practices.html#review" class="subtopic">7.2 Code Review</a>
+                        <a href="07-teamwork-and-practices.html#tags" class="subtopic">7.3 Теги</a>
+                        <a href="07-teamwork-and-practices.html#stash" class="subtopic">7.4 Stash</a>
+                        <a href="07-teamwork-and-practices.html#cherry" class="subtopic">7.5 Cherry-pick</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Спасение и откаты</button>
+                    <div class="subtopics">
+                        <a href="08-recovery-and-troubleshooting.html#restore" class="subtopic">8.1 restore/checkout</a>
+                        <a href="08-recovery-and-troubleshooting.html#restore-source" class="subtopic">8.2 Из коммита</a>
+                        <a href="08-recovery-and-troubleshooting.html#reset-revert" class="subtopic">8.3 reset vs revert</a>
+                        <a href="08-recovery-and-troubleshooting.html#reflog" class="subtopic">8.4 reflog</a>
+                        <a href="08-recovery-and-troubleshooting.html#algorithm" class="subtopic">8.5 Алгоритм</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты и интеграции</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#gui" class="subtopic">9.1 GUI</a>
+                        <a href="09-tools-and-integrations.html#ssh" class="subtopic">9.2 SSH‑ключи</a>
+                        <a href="09-tools-and-integrations.html#hooks" class="subtopic">9.3 Hooks</a>
+                        <a href="09-tools-and-integrations.html#ci" class="subtopic">9.4 CI/CD</a>
+                        <a href="09-tools-and-integrations.html#modern" class="subtopic">9.5 switch/restore</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                        <a href="10-summary-best-practices.html#best" class="subtopic">10.2 Лучшие практики</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 6: Работа с удалёнными репозиториями</h2>
+                <p>Подключим удалённый репозиторий, научимся получать и отправлять изменения, разберём upstream‑связь и протоколы.</p>
+                <p>Удалённые — это не «сервер где‑то там», а набор правил синхронизации ссылок и объектов между вашим локальным графом истории и графом на хостинге. Понимание ссылок и политик push/pull делает работу предсказуемой и безопасной.</p>
+            </section>
+
+            <section id="clone" class="topic-section">
+                <h2>6.1 Клонирование репозитория</h2>
+                <div class="code-example">
+<pre><code class="bash">git clone https://github.com/user/repo.git
+# или по SSH
+git clone git@github.com:user/repo.git
+</code></pre>
+                </div>
+            </section>
+
+            <section id="remotes" class="topic-section">
+                <h2>6.2 Просмотр и добавление удалённых</h2>
+                <div class="code-example">
+<pre><code class="bash">git remote -v
+# добавить remote
+git remote add origin git@github.com:user/repo.git
+# изменить URL
+git remote set-url origin git@github.com:user/repo.git
+</code></pre>
+                </div>
+                <p>Имя remote — это просто ярлык (обычно <code>origin</code>). Вы можете иметь несколько remotes для зеркалирования, форков или реплик, а также настраивать для каждого свой refspec.</p>
+            </section>
+
+            <section id="fetch-pull" class="topic-section">
+                <h2>6.3 Получение изменений: fetch и pull</h2>
+                <ul>
+                    <li><code>git fetch</code> — скачивает объекты и ссылки без изменения рабочих файлов</li>
+                    <li><code>git pull</code> = <code>fetch</code> + <code>merge</code> (или <code>rebase</code> при настройке)</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="bash">git fetch origin
+# обновить текущую ветку с ребейзом
+git pull --rebase
+</code></pre>
+                </div>
+                <p>Выбирайте стратегию <code>pull</code> осознанно. В проектах с линейной историей предпочтителен <code>--rebase</code>; если важны явные точки слияния — оставляйте merge. Главное — договориться в команде и закрепить настройками.</p>
+            </section>
+
+            <section id="push" class="topic-section">
+                <h2>6.4 Отправка изменений: push и upstream</h2>
+                <div class="code-example">
+<pre><code class="bash"># первый пуш и привязка upstream
+git push -u origin feature/login
+# обычный пуш после привязки
+git push
+</code></pre>
+                </div>
+                <p>Привязка upstream упрощает ежедневную работу: короткие команды без параметров используют «запомненные» направления. Следите за политиками проекта: где разрешён force‑push, а где — нет.</p>
+            </section>
+
+            <section id="protocols" class="topic-section">
+                <h2>6.5 Протоколы: SSH vs HTTPS</h2>
+                <ul>
+                    <li><strong>HTTPS</strong>: проще стартовать, может требовать PAT/логин‑пароль</li>
+                    <li><strong>SSH</strong>: ключи, удобен для постоянной работы</li>
+                </ul>
+            </section>
+            <section id="tracking" class="topic-section">
+                <h2>6.6 Tracking‑ветки</h2>
+                <p>Локальная ветка может «отслеживать» удалённую (upstream). Это включает краткие push/pull и подсказки статуса (на сколько коммитов вы опережаете/отстаёте).</p>
+            </section>
+            <section id="refspec" class="topic-section">
+                <h2>6.7 Refspec: правила сопоставления ссылок</h2>
+                <p><em>Refspec</em> определяет, какие refs переносятся при fetch/push (например, <code>+refs/heads/*:refs/remotes/origin/*</code>). Знание refspec важно для зеркалирования и тонкой настройки синхронизации.</p>
+            </section>
+            <section id="push-default" class="topic-section">
+                <h2>6.8 Политика push: push.default</h2>
+                <p>Настройка управляет поведением <code>git push</code> без аргументов (<code>simple</code>, <code>current</code>, <code>upstream</code>, <code>matching</code>). Рекомендуется <code>simple</code> для безопасности.</p>
+            </section>
+            <section id="prune" class="topic-section">
+                <h2>6.9 Prune и обслуживание ссылок</h2>
+                <p><code>git fetch --prune</code> удаляет локальные ссылки на удалённые ветки, которые были удалены на сервере. Полезно для гигиены репозитория.</p>
+            </section>
+            <section id="shallow-partial" class="topic-section">
+                <h2>6.10 Shallow и Partial clone</h2>
+                <p><strong>Shallow clone</strong> (параметры глубины) ограничивает историю для экономии времени/трафика. <strong>Partial clone</strong> и фильтры (promisor) позволяют отложенную загрузку больших файлов.</p>
+            </section>
+            <section id="credentials" class="topic-section">
+                <h2>6.11 URL‑схемы и credential helpers</h2>
+                <p>Форматы URL (SSH/HTTPS), хранение и кэширование учётных данных через <em>credential helpers</em> (Windows/MacOS keychain, менеджеры). Безопасность секретов — ключевой аспект работы с удалёнными.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

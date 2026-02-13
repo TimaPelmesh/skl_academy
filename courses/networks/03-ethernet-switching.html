@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Коммутация и Ethernet: кадры, MAC/ARP, VLAN/802.1Q, STP/RSTP, LACP и безопасность портов">
+    <meta name="keywords" content="Ethernet, MAC, ARP, VLAN, 802.1Q, STP, RSTP, LACP, port security">
+    <title>Коммутация и Ethernet — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/03-ethernet-switching.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">3. Коммутация и Ethernet</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#ethernet" class="subtopic active">3.1 Ethernet и MAC/ARP</a>
+                        <a href="#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="ethernet" class="topic-section">
+                <h2>3.1 Ethernet и MAC/ARP</h2>
+                <div class="lesson-content">
+                    <h3>Что такое Ethernet?</h3>
+                    <p><strong>Ethernet</strong> — это технология передачи данных в локальных сетях (LAN). Представьте, что Ethernet — это "язык", на котором говорят устройства в одной сети, чтобы обмениваться информацией. Это самый распространенный стандарт для проводных сетей.</p>
+                    
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если IP-адрес — это "почтовый адрес" для доставки писем по всему миру, то MAC-адрес — это "номер квартиры" в вашем доме (локальной сети). Почтальон (маршрутизатор) доставляет письмо в нужный дом по IP, а внутри дома нужно найти конкретную квартиру по MAC.</p>
+                    </div>
+
+                    <h3>MAC-адрес: уникальный идентификатор устройства</h3>
+                    <p><strong>MAC-адрес</strong> (Media Access Control) — это уникальный физический адрес сетевой карты устройства. Он состоит из 48 бит (6 байт) и записывается в формате <code>AA:BB:CC:DD:EE:FF</code> (шестнадцатеричные числа).</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Особенности MAC-адресов:</h4>
+                        <ul>
+                            <li><strong>Уникальность:</strong> Каждая сетевая карта имеет свой MAC-адрес, "вшитый" производителем</li>
+                            <li><strong>Локальная сеть:</strong> MAC-адреса работают только в пределах одной локальной сети (L2-домена)</li>
+                            <li><strong>Не маршрутизируется:</strong> В отличие от IP, MAC-адреса не используются для маршрутизации между сетями</li>
+                            <li><strong>Пример:</strong> <code>00:1B:44:11:3A:B7</code> — типичный MAC-адрес</li>
+                        </ul>
+                    </div>
+
+                    <h3>Проблема: как связать IP и MAC?</h3>
+                    <p>Когда устройство хочет отправить данные другому устройству в локальной сети, оно знает только его <strong>IP-адрес</strong>. Но для передачи данных по Ethernet нужен <strong>MAC-адрес</strong>. Как устройство узнает MAC-адрес по IP?</p>
+                    
+                    <p><strong>Решение:</strong> Протокол <strong>ARP</strong> (Address Resolution Protocol) — это "справочник", который переводит IP-адреса в MAC-адреса.</p>
+
+                    <h3>Как работает ARP?</h3>
+                    <div class="visual-guide">
+                        <h4>Процесс ARP-запроса (упрощенно):</h4>
+                        <ol>
+                            <li><strong>Устройство A</strong> хочет отправить данные на IP <code>192.168.1.10</code></li>
+                            <li><strong>Устройство A</strong> проверяет свой ARP-кэш — есть ли там MAC для этого IP?</li>
+                            <li>Если нет, <strong>Устройство A</strong> отправляет <strong>ARP-запрос</strong> (broadcast): "Кто имеет IP 192.168.1.10? Сообщите свой MAC!"</li>
+                            <li><strong>Устройство B</strong> (с IP 192.168.1.10) отвечает: "Это я! Мой MAC: AA:BB:CC:DD:EE:FF"</li>
+                            <li><strong>Устройство A</strong> сохраняет эту пару (IP → MAC) в ARP-кэш и отправляет данные</li>
+                        </ol>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр ARP-кэша (таблица соответствия IP → MAC)
+# Windows
+arp -a
+
+# Linux/macOS
+ip neigh show
+# или
+arp -a</code></pre>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> ARP-кэш хранится временно (обычно 2-4 минуты). Если устройство не используется, запись удаляется для экономии памяти. При следующей отправке данных ARP-запрос повторяется.</p>
+                    </div>
+
+                    <h3>Кадр Ethernet: как упакованы данные</h3>
+                    <p>Данные в Ethernet передаются в виде <strong>кадров</strong> (frames). Кадр — это "конверт" с адресами и содержимым. Представьте почтовое письмо: на конверте указаны адреса отправителя и получателя, а внутри — само письмо.</p>
+
+                    <div class="visual-guide">
+                        <h4>Структура кадра Ethernet (IEEE 802.3):</h4>
+                        <ul>
+                            <li><strong>Destination MAC (6 байт)</strong> — MAC-адрес получателя. Куда отправляем?</li>
+                            <li><strong>Source MAC (6 байт)</strong> — MAC-адрес отправителя. От кого?</li>
+                            <li><strong>EtherType/Length (2 байта)</strong> — тип данных внутри. Например:
+                                <ul>
+                                    <li><code>0x0800</code> — внутри IP-пакет (IPv4)</li>
+                                    <li><code>0x86DD</code> — внутри IP-пакет (IPv6)</li>
+                                    <li><code>0x0806</code> — ARP-сообщение</li>
+                                </ul>
+                            </li>
+                            <li><strong>Payload (46-1500 байт)</strong> — полезные данные (например, IP-пакет с веб-страницей)</li>
+                            <li><strong>FCS (4 байта)</strong> — контрольная сумма для проверки целостности данных</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Минимальный размер:</strong> Кадр должен быть минимум 64 байта (включая заголовки). Если данных меньше, добавляются "заполнители" (padding). Максимальный размер — 1518 байт (1522 с тегом VLAN).</p>
+                    </div>
+
+                    <h3>Подуровни канального уровня: LLC и MAC</h3>
+                    <p>Канальный уровень (Data Link Layer) модели OSI разделен на два подуровня, каждый из которых выполняет свои функции. Это разделение помогает четко организовать работу сетевых технологий.</p>
+
+                    <div class="visual-guide">
+                        <h4>MAC (Media Access Control) — подуровень управления доступом к среде:</h4>
+                        <ul>
+                            <li><strong>Назначение:</strong> Управляет физическим доступом к среде передачи данных (кабель, эфир)</li>
+                            <li><strong>Функции:</strong>
+                                <ul>
+                                    <li>Формирование и разбор кадров Ethernet</li>
+                                    <li>Добавление и проверка MAC-адресов (отправителя и получателя)</li>
+                                    <li>Контроль доступа к среде (CSMA/CD для проводных, CSMA/CA для беспроводных)</li>
+                                    <li>Обнаружение ошибок через контрольную сумму FCS (Frame Check Sequence)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Зависимость от технологии:</strong> MAC специфичен для каждой технологии (Ethernet, Wi-Fi, Token Ring и т.д.)</li>
+                            <li><strong>Примеры стандартов:</strong> IEEE 802.3 (Ethernet), 802.11 (Wi-Fi), 802.15 (Bluetooth)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>LLC (Logical Link Control) — подуровень логического управления каналом (IEEE 802.2):</h4>
+                        <ul>
+                            <li><strong>Назначение:</strong> Обеспечивает интерфейс между сетевым уровнем (L3) и подуровнем MAC</li>
+                            <li><strong>Функции:</strong>
+                                <ul>
+                                    <li>Мультиплексирование протоколов сетевого уровня (IPv4, IPv6, IPX и др.)</li>
+                                    <li>Управление потоком данных между узлами</li>
+                                    <li>Обеспечение надежности передачи (опционально)</li>
+                                    <li>Обработка ошибок на уровне соединения</li>
+                                </ul>
+                            </li>
+                            <li><strong>Независимость от технологии:</strong> LLC работает одинаково для любой технологии L2 (Ethernet, Wi-Fi и т.д.)</li>
+                            <li><strong>Заголовок LLC:</strong> Содержит DSAP (Destination Service Access Point), SSAP (Source Service Access Point) и Control поле</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Типы LLC-сервисов:</h4>
+                        <ul>
+                            <li><strong>Тип 1 (LLC1) — без подтверждения:</strong>
+                                <ul>
+                                    <li>Простая доставка без гарантий</li>
+                                    <li>Нет контроля потока и повторной передачи</li>
+                                    <li>Самый распространенный в Ethernet</li>
+                                </ul>
+                            </li>
+                            <li><strong>Тип 2 (LLC2) — с подтверждением:</strong>
+                                <ul>
+                                    <li>Надежная доставка с установлением соединения</li>
+                                    <li>Контроль потока, нумерация кадров, повторная передача</li>
+                                    <li>Используется в критичных приложениях (например, SNA)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Тип 3 (LLC3) — без подтверждения, с повторами:</strong>
+                                <ul>
+                                    <li>Гибрид: без установления соединения, но с подтверждениями</li>
+                                    <li>Используется редко</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Практическое замечание:</strong> В современных Ethernet-сетях заголовок LLC часто не используется явно. Вместо него используется поле <strong>EtherType</strong> в кадре Ethernet II, которое напрямую указывает протокол верхнего уровня (0x0800 для IPv4, 0x86DD для IPv6). Однако стандарт 802.2 LLC остается важным для понимания архитектуры и используется в некоторых протоколах (например, STP использует LLC для своих BPDU).</p>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Параметр</th><th>MAC (802.3, 802.11)</th><th>LLC (802.2)</th></tr>
+                            <tr><td><strong>Уровень</strong></td><td>Нижний подуровень L2</td><td>Верхний подуровень L2</td></tr>
+                            <tr><td><strong>Зависимость от технологии</strong></td><td>Зависит (разный для Ethernet, Wi-Fi)</td><td>Не зависит (универсальный)</td></tr>
+                            <tr><td><strong>Основная функция</strong></td><td>Доступ к физической среде, адресация</td><td>Мультиплексирование протоколов, надежность</td></tr>
+                            <tr><td><strong>Адресация</strong></td><td>MAC-адреса (48 бит)</td><td>SAP-адреса (Service Access Points)</td></tr>
+                            <tr><td><strong>Типичное применение</strong></td><td>Все сетевые технологии L2</td><td>Протоколы, требующие LLC (STP, некоторые промышленные протоколы)</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>Как работают коммутаторы?</h3>
+                    <p><strong>Коммутатор</strong> (switch) — это "умный" концентратор, который знает, где находится каждое устройство в сети. Он использует MAC-адреса для принятия решений о пересылке кадров.</p>
+
+                    <div class="visual-guide">
+                        <h4>Принцип работы коммутатора:</h4>
+                        <ol>
+                            <li><strong>Обучение:</strong> Когда коммутатор получает кадр, он запоминает: "MAC-адрес отправителя находится на порту X" и сохраняет это в <strong>CAM-таблицу</strong> (Content Addressable Memory)</li>
+                            <li><strong>Принятие решения:</strong> Когда приходит кадр для отправки:
+                                <ul>
+                                    <li>Если MAC получателя <strong>известен</strong> → отправляет кадр только на нужный порт</li>
+                                    <li>Если MAC получателя <strong>неизвестен</strong> → отправляет кадр на все порты (кроме порта отправителя) — это называется <strong>flooding</strong></li>
+                                    <li>Если это <strong>broadcast</strong> (ff:ff:ff:ff:ff:ff) → всегда отправляет на все порты</li>
+                                </ul>
+                            </li>
+                            <li><strong>Старение записей:</strong> Если устройство не отправляет данные 5 минут, запись удаляется из таблицы (aging timeout)</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Преимущество коммутаторов:</strong> В отличие от старых концентраторов (hubs), которые просто копировали все данные на все порты, коммутаторы отправляют данные только нужному получателю. Это повышает безопасность и эффективность сети.</p>
+                    </div>
+
+                    <h3>Связь между IP и MAC: полная картина</h3>
+                    <div class="visual-guide">
+                        <h4>Пример: отправка веб-запроса в локальной сети</h4>
+                        <ol>
+                            <li><strong>Приложение</strong> хочет открыть сайт на IP <code>192.168.1.100</code></li>
+                            <li><strong>Операционная система</strong> проверяет: это устройство в моей сети? (сравнивает подсети)</li>
+                            <li>Если да → нужен MAC-адрес. Проверяется <strong>ARP-кэш</strong></li>
+                            <li>Если MAC неизвестен → отправляется <strong>ARP-запрос</strong> (broadcast)</li>
+                            <li><strong>Устройство 192.168.1.100</strong> отвечает своим MAC</li>
+                            <li>Создается <strong>IP-пакет</strong> (с IP-адресами) и упаковывается в <strong>Ethernet-кадр</strong> (с MAC-адресами)</li>
+                            <li><strong>Коммутатор</strong> получает кадр, смотрит в CAM-таблицу и отправляет на нужный порт</li>
+                            <li><strong>Получатель</strong> получает кадр, проверяет MAC (свой ли?), извлекает IP-пакет и обрабатывает</li>
+                        </ol>
+                    </div>
+
+                    <h3>Технические детали (для углубленного изучения)</h3>
+                    
+                    <div class="visual-guide">
+                        <h4>Расширенный формат кадра (802.1Q для VLAN):</h4>
+                        <ul>
+                            <li><strong>802.1Q Tag (4 байта, опционально)</strong> — добавляется для VLAN:
+                                <ul>
+                                    <li><strong>TPID</strong> (0x8100) — идентификатор тега</li>
+                                    <li><strong>PCP</strong> (Priority Code Point) — приоритет для QoS</li>
+                                    <li><strong>DEI</strong> (Drop Eligible Indicator) — можно ли отбросить при перегрузке</li>
+                                    <li><strong>VID</strong> (VLAN ID) — номер виртуальной сети (1-4094)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3>Методы управления доступом к среде передачи</h3>
+                    <p>Когда несколько устройств используют одну среду передачи (кабель, эфир), нужен механизм, чтобы они не передавали данные одновременно, создавая коллизии. Существуют два основных метода:</p>
+
+                    <div class="visual-guide">
+                        <h4>CSMA/CD (Collision Detection) — для проводных сетей Ethernet:</h4>
+                        <ul>
+                            <li><strong>Carrier Sense</strong> — устройство слушает среду передачи перед отправкой данных</li>
+                            <li><strong>Multiple Access</strong> — несколько устройств могут использовать одну среду</li>
+                            <li><strong>Collision Detection</strong> — устройство обнаруживает коллизию во время передачи</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Как работает CSMA/CD:</h4>
+                        <ol>
+                            <li><strong>Прослушивание:</strong> Перед передачей устройство проверяет, свободна ли среда</li>
+                            <li><strong>Передача:</strong> Если среда свободна, устройство начинает передачу и продолжает слушать</li>
+                            <li><strong>Обнаружение коллизии:</strong> Если во время передачи обнаружена коллизия (уровень сигнала выше ожидаемого), передача прерывается</li>
+                            <li><strong>Jam-сигнал:</strong> Отправляется специальный сигнал, чтобы все устройства узнали о коллизии</li>
+                            <li><strong>Backoff:</strong> Устройство ждет случайное время (алгоритм exponential backoff) и повторяет попытку</li>
+                        </ol>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>CSMA/CA (Collision Avoidance) — для беспроводных сетей (Wi-Fi):</h4>
+                        <ul>
+                            <li><strong>Carrier Sense</strong> — устройство слушает эфир перед передачей</li>
+                            <li><strong>Multiple Access</strong> — несколько устройств используют одну частоту</li>
+                            <li><strong>Collision Avoidance</strong> — устройство пытается избежать коллизии, а не обнаружить её</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Почему в Wi-Fi нельзя использовать CSMA/CD:</h4>
+                        <ul>
+                            <li><strong>Проблема "скрытого узла":</strong> Устройство A и C не слышат друг друга, но обе общаются с точкой доступа B — коллизии неизбежны</li>
+                            <li><strong>Невозможность одновременной передачи и приема:</strong> Радиомодули не могут передавать и слушать одновременно на одной частоте</li>
+                            <li><strong>Затухание сигнала:</strong> Отраженные сигналы и слабый уровень делают обнаружение коллизий невозможным</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Параметр</th><th>CSMA/CD (Ethernet)</th><th>CSMA/CA (Wi-Fi)</th></tr>
+                            <tr><td><strong>Обнаружение коллизий</strong></td><td>Да, во время передачи</td><td>Нет, невозможно</td></tr>
+                            <tr><td><strong>Метод работы</strong></td><td>Обнаружение и повтор</td><td>Предотвращение коллизий</td></tr>
+                            <tr><td><strong>RTS/CTS</strong></td><td>Не используется</td><td>Используется для больших пакетов</td></tr>
+                            <tr><td><strong>ACK</strong></td><td>На уровне TCP</td><td>На уровне MAC (802.11)</td></tr>
+                            <tr><td><strong>Эффективность</strong></td><td>Высокая (full-duplex)</td><td>Ниже из-за накладных расходов</td></tr>
+                            <tr><td><strong>Современное применение</strong></td><td>Не используется (full-duplex)</td><td>Активно используется в Wi-Fi</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Современные проводные сети:</strong> В современных сетях Ethernet с коммутаторами используется полный дуплекс (full-duplex) — данные идут в обе стороны одновременно по разным парам проводов. Коллизий не возникает, поэтому CSMA/CD больше не нужен. Однако в старых сетях с концентраторами (hubs) и коаксиальными кабелями использовался полудуплекс, и CSMA/CD был необходим.</p>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>MTU и размеры кадров:</strong> Стандартный MTU (Maximum Transmission Unit) для IP — 1500 байт. С тегом VLAN кадр может быть до 1522 байт. Некоторые устройства поддерживают "jumbo frames" (до 9000 байт) для повышения производительности в дата-центрах.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Ethernet</strong> — технология передачи данных в локальных сетях</li>
+                            <li><strong>MAC-адрес</strong> — уникальный физический адрес устройства (работает в пределах одной сети)</li>
+                            <li><strong>ARP</strong> — протокол для перевода IP-адресов в MAC-адреса</li>
+                            <li><strong>Кадр Ethernet</strong> — "конверт" с адресами и данными</li>
+                            <li><strong>Коммутатор</strong> — использует MAC-адреса для умной пересылки кадров</li>
+                        </ul>
+                        <p><strong>Связь:</strong> IP-адрес нужен для маршрутизации между сетями, MAC-адрес — для доставки внутри одной сети. ARP связывает их вместе.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="vlans" class="topic-section">
+                <h2>3.2 VLAN и 802.1Q</h2>
+                <div class="lesson-content">
+                    <h3>Проблема: все устройства в одной сети</h3>
+                    <p>Представьте офисную сеть: 100 компьютеров подключены к коммутаторам. По умолчанию все они находятся в одной <strong>L2-домене</strong> (broadcast domain) — это означает, что:</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Проблемы единой сети:</h4>
+                        <ul>
+                            <li><strong>Broadcast-шторм:</strong> Каждое устройство получает все broadcast-сообщения (ARP, DHCP и т.д.) от всех остальных устройств</li>
+                            <li><strong>Безопасность:</strong> Любое устройство может "слушать" трафик других (хотя коммутаторы ограничивают это, но не полностью)</li>
+                            <li><strong>Логическая изоляция:</strong> Невозможно разделить сеть на отделы (бухгалтерия, отдел продаж, гости) без физического разделения</li>
+                            <li><strong>Масштабирование:</strong> При росте сети broadcast-трафик засоряет каналы</li>
+                        </ul>
+                    </div>
+
+                    <h3>Решение: VLAN (Virtual LAN)</h3>
+                    <p><strong>VLAN</strong> (Virtual Local Area Network) — это технология логического разделения одной физической сети на несколько виртуальных сетей. Устройства из разных VLAN не "видят" друг друга на уровне L2, даже если подключены к одному коммутатору.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Представьте многоэтажный дом. Физически все квартиры в одном здании (один коммутатор), но жильцы разных подъездов (разные VLAN) не могут зайти друг к другу без ключа (маршрутизатора).</p>
+                    </div>
+
+                    <h3>Как работают VLAN?</h3>
+                    <p>VLAN работают на канальном уровне (L2). Каждому VLAN присваивается уникальный номер (1-4094). Коммутатор "помечает" кадры номером VLAN и обрабатывает их отдельно.</p>
+
+                    <div class="visual-guide">
+                        <h4>Принцип работы VLAN:</h4>
+                        <ol>
+                            <li><strong>Создание VLAN:</strong> Администратор создает VLAN 10 (например, для отдела продаж) и VLAN 20 (для бухгалтерии)</li>
+                            <li><strong>Назначение портов:</strong> Порты коммутатора назначаются конкретным VLAN</li>
+                            <li><strong>Изоляция:</strong> Устройство из VLAN 10 не может напрямую общаться с устройством из VLAN 20</li>
+                            <li><strong>Маршрутизация:</strong> Для связи между VLAN нужен маршрутизатор (L3-устройство)</li>
+                        </ol>
+                    </div>
+
+                    <h3>Типы портов: Access и Trunk</h3>
+                    
+                    <div class="visual-guide">
+                        <h4>Access-порт (доступный порт):</h4>
+                        <ul>
+                            <li><strong>Назначение:</strong> Подключение конечных устройств (компьютеры, принтеры, серверы)</li>
+                            <li><strong>Особенность:</strong> Порт принадлежит только одному VLAN</li>
+                            <li><strong>Кадры:</strong> Отправляются без тега VLAN (untagged)</li>
+                            <li><strong>Пример:</strong> Порт 1 → VLAN 10, Порт 2 → VLAN 20</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Trunk-порт (магистральный порт):</h4>
+                        <ul>
+                            <li><strong>Назначение:</strong> Соединение между коммутаторами для передачи нескольких VLAN</li>
+                            <li><strong>Особенность:</strong> Может переносить кадры из разных VLAN одновременно</li>
+                            <li><strong>Кадры:</strong> Отправляются с тегом VLAN (tagged) — стандарт 802.1Q</li>
+                            <li><strong>Пример:</strong> Trunk между коммутаторами переносит VLAN 10, 20, 30</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Access-порт — это "дверь в квартиру" (один VLAN), а Trunk-порт — это "лифт в доме" (много VLAN одновременно).</p>
+                    </div>
+
+                    <h3>Тег 802.1Q: как помечаются кадры</h3>
+                    <p>Когда кадр проходит через Trunk-порт, к нему добавляется <strong>тег 802.1Q</strong> — это 4 байта информации, которая содержит номер VLAN.</p>
+
+                    <div class="visual-guide">
+                        <h4>Структура тега 802.1Q:</h4>
+                        <ul>
+                            <li><strong>TPID (Tag Protocol Identifier)</strong> — 0x8100, указывает что это тег 802.1Q</li>
+                            <li><strong>PCP (Priority Code Point)</strong> — приоритет кадра (0-7) для QoS</li>
+                            <li><strong>DEI (Drop Eligible Indicator)</strong> — можно ли отбросить кадр при перегрузке</li>
+                            <li><strong>VID (VLAN ID)</strong> — номер VLAN (1-4094), это главное поле</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Примеры настройки VLAN (концептуальные команды)
+# Создание VLAN 10
+vlan 10
+ name Sales
+
+# Настройка Access-порта (порт 1 → VLAN 10)
+interface eth1
+ switchport mode access
+ switchport access vlan 10
+
+# Настройка Trunk-порта (между коммутаторами)
+interface eth2
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk native vlan 1</code></pre>
+                    </div>
+
+                    <h3>Native VLAN: особый случай</h3>
+                    <p><strong>Native VLAN</strong> — это VLAN, кадры которого отправляются без тега на Trunk-порту. По умолчанию это VLAN 1. Это нужно для совместимости со старым оборудованием, которое не понимает теги.</p>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Native VLAN должен быть одинаковым на обоих концах Trunk-соединения, иначе возникнут проблемы с коммутацией.</p>
+                    </div>
+
+                    <h3>Практический пример: офисная сеть</h3>
+                    <div class="visual-guide">
+                        <h4>Сценарий:</h4>
+                        <p>Офис с тремя отделами: продажи (VLAN 10), бухгалтерия (VLAN 20), гости (VLAN 30).</p>
+                        <ol>
+                            <li><strong>Коммутатор 1:</strong>
+                                <ul>
+                                    <li>Порты 1-5 → Access, VLAN 10 (продажи)</li>
+                                    <li>Порты 6-10 → Access, VLAN 20 (бухгалтерия)</li>
+                                    <li>Порт 24 → Trunk (соединение с коммутатором 2)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Коммутатор 2:</strong>
+                                <ul>
+                                    <li>Порты 1-3 → Access, VLAN 30 (гости)</li>
+                                    <li>Порт 24 → Trunk (соединение с коммутатором 1)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Результат:</strong>
+                                <ul>
+                                    <li>Устройства из VLAN 10 не видят устройства из VLAN 20 и 30</li>
+                                    <li>Все VLAN передаются через Trunk между коммутаторами</li>
+                                    <li>Для связи между VLAN нужен маршрутизатор</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h3>Преимущества VLAN</h3>
+                    <div class="visual-guide">
+                        <h4>Зачем использовать VLAN:</h4>
+                        <ul>
+                            <li><strong>Безопасность:</strong> Изоляция трафика между отделами</li>
+                            <li><strong>Уменьшение broadcast-трафика:</strong> Broadcast не выходит за пределы VLAN</li>
+                            <li><strong>Гибкость:</strong> Логическое разделение без физической перестройки сети</li>
+                            <li><strong>Управление:</strong> Легче применять политики безопасности к группам устройств</li>
+                            <li><strong>Масштабирование:</strong> Сеть легче расширять и управлять</li>
+                        </ul>
+                    </div>
+
+                    <h3>Технические детали (для углубленного изучения)</h3>
+                    
+                    <div class="visual-guide">
+                        <h4>QinQ (802.1ad) — двойная тегировка:</h4>
+                        <p>Используется провайдерами для передачи клиентских VLAN через свою сеть. Добавляется второй тег (S-tag) поверх клиентского тега (C-tag).</p>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>PCP и QoS:</strong> Поле Priority Code Point в теге 802.1Q может использоваться для базового управления качеством обслуживания на уровне L2, но обычно QoS настраивается на уровне L3 (IP).</p>
+                    </div>
+
+                    <h3>VTP: управление VLAN</h3>
+                    <p><strong>VTP</strong> (VLAN Trunking Protocol) — проприетарный протокол Cisco для автоматической синхронизации конфигурации VLAN между коммутаторами. Позволяет создать VLAN на одном коммутаторе, и он автоматически распространится на все остальные.</p>
+
+                    <div class="visual-guide">
+                        <h4>Режимы работы VTP:</h4>
+                        <ul>
+                            <li><strong>Server</strong> — может создавать, изменять и удалять VLAN. Распространяет изменения на другие коммутаторы</li>
+                            <li><strong>Client</strong> — получает информацию о VLAN от серверов, но не может изменять конфигурацию</li>
+                            <li><strong>Transparent</strong> — не участвует в VTP, но пропускает VTP-сообщения через себя. Может создавать локальные VLAN</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Как работает VTP:</h4>
+                        <ol>
+                            <li><strong>VTP Domain:</strong> Все коммутаторы должны быть в одном домене (имя домена)</li>
+                            <li><strong>Revision Number:</strong> Каждое изменение увеличивает номер ревизии</li>
+                            <li><strong>Распространение:</strong> Коммутатор с большим номером ревизии отправляет обновления остальным</li>
+                            <li><strong>Синхронизация:</strong> Коммутаторы принимают изменения и обновляют свою конфигурацию</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Опасность VTP:</strong> Если подключить коммутатор с более высоким номером ревизии и неправильной конфигурацией, он может удалить все VLAN в сети! Рекомендуется использовать Transparent режим или отключать VTP, если не нужна автоматическая синхронизация.</p>
+                    </div>
+
+                    <h3>DTP: автонастройка Trunk</h3>
+                    <p><strong>DTP</strong> (Dynamic Trunking Protocol) — проприетарный протокол Cisco для автоматического согласования режима порта (Access или Trunk) между двумя коммутаторами.</p>
+
+                    <div class="visual-guide">
+                        <h4>Режимы DTP:</h4>
+                        <ul>
+                            <li><strong>Dynamic Auto</strong> — порт становится Trunk, если соседний порт активно предлагает (Dynamic Desirable или Trunk)</li>
+                            <li><strong>Dynamic Desirable</strong> — порт активно пытается стать Trunk, отправляет DTP-запросы</li>
+                            <li><strong>Trunk</strong> — порт всегда работает как Trunk</li>
+                            <li><strong>Access</strong> — порт всегда работает как Access</li>
+                            <li><strong>Nonegotiate</strong> — DTP отключен, порт не отправляет DTP-сообщения</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Локальный порт</th><th>Соседний порт</th><th>Результат</th></tr>
+                            <tr><td>Dynamic Auto</td><td>Dynamic Auto</td><td>Access</td></tr>
+                            <tr><td>Dynamic Auto</td><td>Dynamic Desirable</td><td>Trunk</td></tr>
+                            <tr><td>Dynamic Auto</td><td>Trunk</td><td>Trunk</td></tr>
+                            <tr><td>Dynamic Desirable</td><td>Dynamic Desirable</td><td>Trunk</td></tr>
+                            <tr><td>Dynamic Desirable</td><td>Trunk</td><td>Trunk</td></tr>
+                            <tr><td>Trunk</td><td>Trunk</td><td>Trunk</td></tr>
+                            <tr><td>Access</td><td>Access</td><td>Access</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Безопасность:</strong> DTP может быть использован для атак. Рекомендуется явно настраивать режим портов (Access или Trunk) и отключать DTP командой <code>switchport nonegotiate</code>, особенно на портах, подключенных к конечным устройствам.</p>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Примеры настройки VTP и DTP (концептуальные команды)
+# Настройка VTP
+vtp domain MyCompany
+vtp mode transparent
+vtp password SecurePassword
+
+# Отключение DTP (рекомендуется для безопасности)
+interface eth1
+ switchport mode access
+ switchport nonegotiate
+
+# Явная настройка Trunk без DTP
+interface eth2
+ switchport mode trunk
+ switchport nonegotiate
+ switchport trunk allowed vlan 10,20,30</code></pre>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>VLAN</strong> — логическое разделение одной физической сети на несколько виртуальных</li>
+                            <li><strong>Access-порт</strong> — для конечных устройств, один VLAN, кадры без тега</li>
+                            <li><strong>Trunk-порт</strong> — для соединения коммутаторов, несколько VLAN, кадры с тегом 802.1Q</li>
+                            <li><strong>Тег 802.1Q</strong> — 4 байта, содержащие номер VLAN и приоритет</li>
+                            <li><strong>Native VLAN</strong> — VLAN без тега на Trunk (по умолчанию VLAN 1)</li>
+                            <li><strong>VTP</strong> — автоматическая синхронизация VLAN между коммутаторами (используйте осторожно!)</li>
+                            <li><strong>DTP</strong> — автоматическое согласование режима порта (рекомендуется отключать для безопасности)</li>
+                        </ul>
+                        <p><strong>Цель VLAN:</strong> Изоляция трафика, повышение безопасности и управляемости сети без физического разделения.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stp" class="topic-section">
+                <h2>3.3 STP/RSTP</h2>
+                <div class="lesson-content">
+                    <h3>Проблема: петли в сети</h3>
+                    <p>Представьте сеть с несколькими коммутаторами, соединенными между собой для надежности (избыточность). Если между коммутаторами есть несколько путей, возникает <strong>петля</strong> (loop) — это когда данные могут циркулировать по кругу бесконечно.</p>
+
+                    <div class="visual-guide">
+                        <h4>Что происходит при петле:</h4>
+                        <ol>
+                            <li><strong>Broadcast-шторм:</strong> Broadcast-кадр (например, ARP-запрос) попадает в петлю и начинает циркулировать, создавая копии самого себя</li>
+                            <li><strong>Перегрузка сети:</strong> Трафик растет экспоненциально, забивая все каналы</li>
+                            <li><strong>Нестабильность MAC-таблиц:</strong> Коммутаторы видят один MAC-адрес на разных портах и постоянно обновляют таблицы</li>
+                            <li><strong>Отказ сети:</strong> Сеть становится полностью неработоспособной</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Представьте почтовое отделение, где письма ходят по кругу между отделениями и никогда не доходят до адресата. Это и есть петля в сети.</p>
+                    </div>
+
+                    <h3>Решение: STP (Spanning Tree Protocol)</h3>
+                    <p><strong>STP</strong> (Spanning Tree Protocol) — протокол, который автоматически блокирует избыточные пути в сети, создавая "дерево" без петель. Он оставляет только один активный путь между любыми двумя устройствами, а остальные блокирует.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает STP:</h4>
+                        <ol>
+                            <li><strong>Выбор корневого коммутатора (Root Bridge):</strong> Все коммутаторы выбирают один "главный" коммутатор на основе Bridge ID (приоритет + MAC-адрес). Чем меньше Bridge ID, тем лучше.</li>
+                            <li><strong>Определение путей:</strong> Каждый коммутатор находит кратчайший путь к корневому коммутатору</li>
+                            <li><strong>Блокировка портов:</strong> Порты, которые создают избыточные пути, переводятся в состояние <strong>Blocking</strong> (блокировка)</li>
+                            <li><strong>Активные пути:</strong> Остаются только порты, которые не создают петель</li>
+                        </ol>
+                    </div>
+
+                    <h3>Роли портов в STP</h3>
+                    <div class="visual-guide">
+                        <h4>Типы портов:</h4>
+                        <ul>
+                            <li><strong>Root Port</strong> — порт на каждом коммутаторе (кроме корневого), который ведет к корневому коммутатору кратчайшим путем. У каждого коммутатора только один Root Port.</li>
+                            <li><strong>Designated Port</strong> — активный порт на сегменте сети, который пересылает трафик. На каждом сегменте только один Designated Port.</li>
+                            <li><strong>Alternate/Backup Port</strong> — заблокированный порт, который создает избыточный путь. Эти порты находятся в состоянии Blocking и не пересылают трафик.</li>
+                        </ul>
+                    </div>
+
+                    <h3>Состояния портов STP</h3>
+                    <p>Порты проходят через несколько состояний перед тем, как начать пересылать трафик:</p>
+
+                    <div class="visual-guide">
+                        <h4>Переход порта в активное состояние:</h4>
+                        <ol>
+                            <li><strong>Blocking</strong> (блокировка) — порт не пересылает кадры, но слушает BPDU (Bridge Protocol Data Units) — служебные сообщения STP</li>
+                            <li><strong>Listening</strong> (прослушивание) — порт начинает участвовать в выборе путей, но еще не пересылает данные</li>
+                            <li><strong>Learning</strong> (обучение) — порт изучает MAC-адреса, но еще не пересылает данные</li>
+                            <li><strong>Forwarding</strong> (пересылка) — порт полностью активен и пересылает трафик</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Время перехода:</strong> Переход из Blocking в Forwarding занимает около 30-50 секунд (Forward Delay × 2 + Max Age). Это нужно, чтобы избежать временных петель при изменениях в сети.</p>
+                    </div>
+
+                    <h3>RSTP: быстрая версия STP</h3>
+                    <p><strong>RSTP</strong> (Rapid Spanning Tree Protocol) — улучшенная версия STP, которая ускоряет сходимость (время восстановления после изменений) с 30-50 секунд до 1-2 секунд.</p>
+
+                    <div class="visual-guide">
+                        <h4>Улучшения RSTP:</h4>
+                        <ul>
+                            <li><strong>Быстрая конвергенция:</strong> Порты могут сразу переходить в Forwarding, если нет риска петли</li>
+                            <li><strong>Новые роли портов:</strong> Добавлены Alternate и Backup порты для лучшего управления</li>
+                            <li><strong>Согласование портов:</strong> Порты могут договариваться о быстром переходе в активное состояние</li>
+                            <li><strong>Обратная совместимость:</strong> RSTP работает со старым STP</li>
+                        </ul>
+                    </div>
+
+                    <h3>Bridge ID: как выбирается корневой коммутатор</h3>
+                    <p><strong>Bridge ID</strong> состоит из двух частей:</p>
+                    <ul>
+                        <li><strong>Приоритет</strong> (2 байта) — настраиваемое значение (по умолчанию 32768)</li>
+                        <li><strong>MAC-адрес</strong> (6 байт) — уникальный адрес коммутатора</li>
+                    </ul>
+                    <p>Коммутатор с <strong>наименьшим Bridge ID</strong> становится корневым. Сначала сравнивается приоритет, если равны — сравнивается MAC-адрес.</p>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Пример настройки приоритета STP (концептуальные команды)
+# Установить приоритет коммутатора (чем меньше, тем лучше)
+spanning-tree priority 4096
+
+# Просмотр информации о STP
+show spanning-tree
+show spanning-tree root</code></pre>
+                    </div>
+
+                    <h3>Практические рекомендации</h3>
+                    <div class="visual-guide">
+                        <h4>Настройки для стабильной работы:</h4>
+                        <ul>
+                            <li><strong>PortFast</strong> — на портах, подключенных к конечным устройствам (компьютеры, серверы). Позволяет порту сразу переходить в Forwarding, минуя промежуточные состояния.</li>
+                            <li><strong>BPDU Guard</strong> — защита от подключения неавторизованных коммутаторов. Если на порте с PortFast приходит BPDU, порт блокируется.</li>
+                            <li><strong>Root Guard</strong> — защита от изменения корневого коммутатора. Если на защищенном порте появляется лучший BPDU, порт переходит в состояние "root-inconsistent".</li>
+                        </ul>
+                    </div>
+
+                    <h3>MSTP: множественные экземпляры STP</h3>
+                    <p><strong>MSTP</strong> (Multiple Spanning Tree Protocol) позволяет создавать несколько независимых деревьев STP для разных групп VLAN. Это дает возможность балансировать нагрузку между несколькими путями.</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> VLAN 10-20 используют один путь, VLAN 30-40 используют другой путь. Это повышает эффективность использования каналов.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Проблема:</strong> Петли в сети вызывают broadcast-шторм и отказ сети</li>
+                            <li><strong>Решение:</strong> STP автоматически блокирует избыточные пути, создавая дерево без петель</li>
+                            <li><strong>Корневой коммутатор:</strong> Выбирается по наименьшему Bridge ID (приоритет + MAC)</li>
+                            <li><strong>Роли портов:</strong> Root Port, Designated Port, Alternate/Backup Port</li>
+                            <li><strong>Состояния:</strong> Blocking → Listening → Learning → Forwarding</li>
+                            <li><strong>RSTP:</strong> Быстрая версия STP с конвергенцией 1-2 секунды</li>
+                        </ul>
+                        <p><strong>Цель STP:</strong> Обеспечить отказоустойчивость сети (избыточные пути) без создания петель.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wifi" class="topic-section">
+                <h2>3.4 Беспроводные сети 802.11</h2>
+                <div class="lesson-content">
+                    <h3>Что такое Wi‑Fi?</h3>
+                    <p><strong>Wi‑Fi</strong> (Wireless Fidelity) — это технология беспроводной передачи данных по стандарту IEEE 802.11. В отличие от проводных сетей (Ethernet), Wi‑Fi использует радиоволны для передачи данных между устройствами.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если Ethernet — это "проводной телефон", то Wi‑Fi — это "радио". Данные передаются по воздуху, без кабелей.</p>
+                    </div>
+
+                    <h3>Диапазоны частот Wi‑Fi</h3>
+                    <p>Wi‑Fi работает в нескольких диапазонах радиочастот:</p>
+
+                    <div class="visual-guide">
+                        <h4>Основные диапазоны:</h4>
+                        <ul>
+                            <li><strong>2.4 ГГц</strong> — старый, но широко поддерживаемый диапазон. Плюсы: хорошее проникновение через стены, большая дальность. Минусы: перегружен (много устройств), медленнее.</li>
+                            <li><strong>5 ГГц</strong> — современный диапазон. Плюсы: больше каналов, выше скорость, меньше помех. Минусы: меньшая дальность, хуже проходит через стены.</li>
+                            <li><strong>6 ГГц</strong> — новый диапазон (Wi‑Fi 6E). Плюсы: еще больше каналов, очень высокая скорость. Минусы: требует новых устройств, меньшая дальность.</li>
+                        </ul>
+                    </div>
+
+                    <h3>Каналы и ширина канала</h3>
+                    <p>Каждый диапазон разделен на <strong>каналы</strong> — это как "полосы движения" для данных. <strong>Ширина канала</strong> определяет, сколько данных можно передать одновременно.</p>
+
+                    <div class="visual-guide">
+                        <h4>Ширина каналов:</h4>
+                        <ul>
+                            <li><strong>20 МГц</strong> — узкий канал, меньше помех, подходит для плотных сетей</li>
+                            <li><strong>40 МГц</strong> — средний канал, выше скорость, но больше помех</li>
+                            <li><strong>80 МГц</strong> — широкий канал, очень высокая скорость (5 ГГц)</li>
+                            <li><strong>160 МГц</strong> — очень широкий канал, максимальная скорость (5/6 ГГц)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Чем шире канал, тем выше скорость, но тем больше помех от соседних сетей. В плотных сетях лучше использовать узкие каналы (20/40 МГц).</p>
+                    </div>
+
+                    <h3>Стандарты Wi‑Fi</h3>
+                    <p>Стандарты 802.11 определяют возможности Wi‑Fi. Каждый новый стандарт добавляет скорость и улучшения:</p>
+
+                    <div class="visual-guide">
+                        <h4>Основные стандарты:</h4>
+                        <ul>
+                            <li><strong>802.11n (Wi‑Fi 4)</strong> — поддерживает MIMO, скорость до 600 Мбит/с, работает на 2.4 и 5 ГГц</li>
+                            <li><strong>802.11ac (Wi‑Fi 5)</strong> — только 5 ГГц, скорость до 6.77 Гбит/с, широкие каналы (80/160 МГц)</li>
+                            <li><strong>802.11ax (Wi‑Fi 6)</strong> — работает на 2.4, 5 и 6 ГГц, скорость до 9.6 Гбит/с, лучше для множества устройств</li>
+                            <li><strong>802.11be (Wi‑Fi 7)</strong> — новейший стандарт, скорость до 46 Гбит/с, еще более эффективен</li>
+                        </ul>
+                    </div>
+
+                    <h3>MIMO: множественные антенны</h3>
+                    <p><strong>MIMO</strong> (Multiple Input Multiple Output) — технология использования нескольких антенн для одновременной передачи данных. Это увеличивает скорость и надежность.</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Если одна антенна — это "одна дорога", то MIMO — это "несколько дорог одновременно". Данные передаются параллельно, что ускоряет передачу.</p>
+                    </div>
+
+                    <h3>Безопасность Wi‑Fi</h3>
+                    <p>Беспроводные сети уязвимы, так как данные передаются по воздуху. Важно использовать современные методы защиты:</p>
+
+                    <div class="visual-guide">
+                        <h4>Методы защиты:</h4>
+                        <ul>
+                            <li><strong>WPA3</strong> — самый современный стандарт безопасности. Использует SAE (Simultaneous Authentication of Equals) для защиты от атак перебора паролей.</li>
+                            <li><strong>WPA2</strong> — предыдущий стандарт, все еще широко используется. Использует 4-шаговое рукопожатие для установления соединения.</li>
+                            <li><strong>802.1X</strong> — корпоративный стандарт, требует сервер аутентификации (RADIUS). Каждое устройство аутентифицируется отдельно.</li>
+                            <li><strong>Изоляция клиентов</strong> — устройства в одной сети не могут общаться друг с другом напрямую (важно для гостевых сетей).</li>
+                        </ul>
+                    </div>
+
+                    <h3>CSMA/CA: как избежать коллизий</h3>
+                    <p>В проводных сетях используется CSMA/CD (обнаружение коллизий). В Wi‑Fi это невозможно, так как устройство не может одновременно передавать и слушать. Поэтому используется <strong>CSMA/CA</strong> (Carrier Sense Multiple Access with Collision Avoidance) — предотвращение коллизий.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает CSMA/CA:</h4>
+                        <ol>
+                            <li><strong>Прослушивание:</strong> Устройство слушает эфир перед передачей</li>
+                            <li><strong>Ожидание:</strong> Если эфир занят, устройство ждет случайное время</li>
+                            <li><strong>RTS/CTS:</strong> Для больших пакетов используется RTS (Request To Send) и CTS (Clear To Send) — "разрешение на передачу"</li>
+                            <li><strong>Передача:</strong> Только после получения разрешения начинается передача</li>
+                        </ol>
+                    </div>
+
+                    <h3>Планирование Wi‑Fi сети (RF-планирование)</h3>
+                    <p>Для качественной работы Wi‑Fi важно правильно спланировать размещение точек доступа (AP):</p>
+
+                    <div class="visual-guide">
+                        <h4>Ключевые принципы:</h4>
+                        <ul>
+                            <li><strong>Покрытие:</strong> Точки доступа должны покрывать всю нужную зону без "мертвых зон"</li>
+                            <li><strong>Мощность:</strong> Не делайте мощность слишком высокой — это создаст помехи соседним AP</li>
+                            <li><strong>Каналы:</strong> Используйте непересекающиеся каналы для соседних AP (например, 1, 6, 11 в диапазоне 2.4 ГГц)</li>
+                            <li><strong>Плотность:</strong> В местах с большим количеством устройств используйте больше AP с меньшей мощностью</li>
+                        </ul>
+                    </div>
+
+                    <h3>Роуминг: переход между точками доступа</h3>
+                    <p>Когда устройство перемещается, оно должно переключаться между точками доступа. Это называется <strong>роумингом</strong>.</p>
+
+                    <div class="visual-guide">
+                        <h4>Механизмы роуминга:</h4>
+                        <ul>
+                            <li><strong>802.11k</strong> — точка доступа сообщает клиенту список соседних AP и их характеристики</li>
+                            <li><strong>802.11v</strong> — точка доступа может "подсказать" клиенту, когда лучше переключиться на другую AP</li>
+                            <li><strong>802.11r (FT)</strong> — быстрое переключение (Fast Transition). Ключи шифрования передаются заранее, что ускоряет переход</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Для качественного роуминга соседние AP должны использовать разные каналы, но иметь схожий уровень сигнала. Это позволяет устройству плавно переключаться.</p>
+                    </div>
+
+                    <h3>QoS в Wi‑Fi: приоритизация трафика</h3>
+                    <p><strong>WMM</strong> (Wi‑Fi Multimedia) — стандарт QoS для Wi‑Fi. Он разделяет трафик на категории с разными приоритетами:</p>
+
+                    <div class="visual-guide">
+                        <h4>Категории трафика (Access Categories):</h4>
+                        <ul>
+                            <li><strong>AC_VO (Voice)</strong> — голосовой трафик (высший приоритет)</li>
+                            <li><strong>AC_VI (Video)</strong> — видеотрафик</li>
+                            <li><strong>AC_BE (Best Effort)</strong> — обычный трафик (веб, почта)</li>
+                            <li><strong>AC_BK (Background)</strong> — фоновый трафик (низший приоритет)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Wi‑Fi</strong> — беспроводная технология передачи данных по стандарту 802.11</li>
+                            <li><strong>Диапазоны:</strong> 2.4 ГГц (дальность), 5 ГГц (скорость), 6 ГГц (максимальная скорость)</li>
+                            <li><strong>Каналы:</strong> Ширина канала (20/40/80/160 МГц) влияет на скорость и помехи</li>
+                            <li><strong>Стандарты:</strong> 802.11n/ac/ax/be — каждый новый стандарт быстрее предыдущего</li>
+                            <li><strong>Безопасность:</strong> WPA3 — самый современный, WPA2 — все еще широко используется</li>
+                            <li><strong>CSMA/CA</strong> — предотвращение коллизий в беспроводных сетях</li>
+                            <li><strong>Планирование:</strong> Правильное размещение AP и выбор каналов критичны для качества</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить надежное, быстрое и безопасное беспроводное соединение для множества устройств.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="lacp-security" class="topic-section">
+                <h2>3.5 LACP и безопасность портов</h2>
+                <div class="lesson-content">
+                    <h3>Проблема: один канал недостаточен</h3>
+                    <p>Иногда пропускной способности одного кабеля между коммутаторами недостаточно. Или нужна отказоустойчивость — если один кабель оборвется, связь должна сохраниться.</p>
+
+                    <div class="note">
+                        <p><strong>Решение:</strong> <strong>Агрегация каналов</strong> (Link Aggregation) — объединение нескольких физических каналов в один логический. Это как объединить несколько дорог в одну широкую магистраль.</p>
+                    </div>
+
+                    <h3>LACP: протокол агрегации</h3>
+                    <p><strong>LACP</strong> (Link Aggregation Control Protocol, стандарт 802.1AX) — протокол, который автоматически объединяет несколько физических портов в один логический канал (LAG — Link Aggregation Group).</p>
+
+                    <div class="visual-guide">
+                        <h4>Преимущества агрегации:</h4>
+                        <ul>
+                            <li><strong>Повышение пропускной способности:</strong> Если объединить два канала по 1 Гбит/с, получится канал 2 Гбит/с</li>
+                            <li><strong>Отказоустойчивость:</strong> Если один кабель выйдет из строя, остальные продолжат работать</li>
+                            <li><strong>Балансировка нагрузки:</strong> Трафик распределяется между каналами</li>
+                        </ul>
+                    </div>
+
+                    <h3>Как работает LACP?</h3>
+                    <div class="visual-guide">
+                        <h4>Процесс агрегации:</h4>
+                        <ol>
+                            <li><strong>Обнаружение:</strong> Коммутаторы обмениваются LACP-сообщениями и обнаруживают совместимые порты</li>
+                            <li><strong>Согласование:</strong> Проверяется совместимость портов (скорость, дуплекс, настройки)</li>
+                            <li><strong>Объединение:</strong> Совместимые порты объединяются в одну логическую группу</li>
+                            <li><strong>Распределение трафика:</strong> Трафик распределяется между портами по алгоритму хэширования</li>
+                        </ol>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Пример настройки LACP (концептуальные команды)
+# Создание группы агрегации
+interface port-channel 1
+
+# Настройка портов для агрегации
+interface eth1
+ channel-group 1 mode active
+
+interface eth2
+ channel-group 1 mode active
+
+# Просмотр состояния агрегации
+show etherchannel summary</code></pre>
+                    </div>
+
+                    <h3>Балансировка трафика</h3>
+                    <p>Трафик в агрегированном канале распределяется между физическими линками. Важно понимать:</p>
+
+                    <div class="visual-guide">
+                        <h4>Принцип распределения:</h4>
+                        <ul>
+                            <li><strong>По потокам:</strong> Один поток (например, соединение между двумя устройствами) всегда идет по одному каналу</li>
+                            <li><strong>Хэширование:</strong> Коммутатор вычисляет хэш на основе IP-адресов, MAC-адресов или портов и выбирает канал</li>
+                            <li><strong>Ограничение:</strong> Один поток не может превысить пропускную способность одного физического линка</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Если у вас агрегация 2×1 Гбит/с, один поток не может быть быстрее 1 Гбит/с, но несколько потоков могут использовать оба канала одновременно.</p>
+                    </div>
+
+                    <h3>Port Security: защита портов</h3>
+                    <p><strong>Port Security</strong> — функция безопасности коммутатора, которая ограничивает количество MAC-адресов, которые могут использовать порт.</p>
+
+                    <div class="visual-guide">
+                        <h4>Зачем нужна Port Security:</h4>
+                        <ul>
+                            <li><strong>Защита от несанкционированного доступа:</strong> Если кто-то подключит неавторизованное устройство, порт заблокируется</li>
+                            <li><strong>Ограничение устройств:</strong> Можно разрешить только определенные MAC-адреса на порту</li>
+                            <li><strong>Защита от атак:</strong> Предотвращает атаки, связанные с подменой MAC-адресов</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Настройки Port Security:</h4>
+                        <ul>
+                            <li><strong>Максимальное количество MAC:</strong> Сколько устройств может быть подключено к порту (например, 1 или 5)</li>
+                            <li><strong>Статические MAC:</strong> Можно указать конкретные MAC-адреса, которым разрешен доступ</li>
+                            <li><strong>Реакция на нарушение:</strong> Что делать при нарушении (заблокировать порт, отправить уведомление и т.д.)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Пример настройки Port Security (концептуальные команды)
+interface eth1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+# restrict - отправляет уведомление, но не блокирует порт
+# shutdown - полностью блокирует порт</code></pre>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>LACP</strong> — протокол для объединения нескольких физических каналов в один логический</li>
+                            <li><strong>Преимущества:</strong> Повышение пропускной способности, отказоустойчивость, балансировка нагрузки</li>
+                            <li><strong>Балансировка:</strong> Трафик распределяется по потокам с использованием хэширования</li>
+                            <li><strong>Port Security</strong> — ограничение количества MAC-адресов на порту для безопасности</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Повысить производительность и надежность сети, а также защитить ее от несанкционированного доступа.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ethernet-oam" class="topic-section">
+                <h2>3.6 Ethernet OAM</h2>
+                <div class="lesson-content">
+                    <p>Ethernet OAM — это набор механизмов для мониторинга и диагностики L2‑сервисов. Ключевые стандарты: 802.3ah (канальный OAM), 802.1ag/ITU‑T Y.1731 (CFM/OAM для обслуживания).</p>
+                    <div class="visual-guide">
+                        <h4>Компоненты и функции</h4>
+                        <ul>
+                            <li><strong>CFM домены/уровни (MEG/MD/MA)</strong>: иерархия обслуживаемых сущностей; уровни разделяют клиентские и провайдерские домены.</li>
+                            <li><strong>CCM</strong>: непрерывные контрольные сообщения для проверки целостности пути.</li>
+                            <li><strong>LB/LT</strong>: Loopback/Linktrace — аналог ping/traceroute на L2.</li>
+                            <li><strong>Y.1731 метрики</strong>: задержка, вариация задержки, потери, измерение SLA.</li>
+                            <li><strong>Fault management</strong>: AIS, RDI, локализация и сигнализация отказов.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика:</strong> OAM не заменяет SNMP/телеметрию, а дополняет их для быстрой локализации проблем внутри L2‑сервисов (E‑Line/E‑LAN).</p></div>
+                </div>
+            </section>
+
+            <section id="wifi-frames-controllers" class="topic-section">
+                <h2>3.7 Кадры Wi‑Fi и контроллеры</h2>
+                <div class="lesson-content">
+                    <h3>Типы кадров 802.11</h3>
+                    <p>В Wi‑Fi используются три типа кадров для разных целей:</p>
+
+                    <div class="visual-guide">
+                        <h4>Управляющие кадры (Management Frames):</h4>
+                        <ul>
+                            <li><strong>Beacon</strong> — точка доступа периодически отправляет эти кадры, чтобы объявить о своем существовании и параметрах сети (SSID, скорость, безопасность)</li>
+                            <li><strong>Probe Request/Response</strong> — клиент ищет сети (Probe Request), точка доступа отвечает (Probe Response)</li>
+                            <li><strong>Authentication</strong> — аутентификация клиента перед подключением</li>
+                            <li><strong>Association</strong> — финальный шаг подключения, клиент "регистрируется" в сети</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Контрольные кадры (Control Frames):</h4>
+                        <ul>
+                            <li><strong>RTS (Request To Send)</strong> — запрос на передачу данных</li>
+                            <li><strong>CTS (Clear To Send)</strong> — разрешение на передачу</li>
+                            <li><strong>ACK</strong> — подтверждение получения кадра</li>
+                        </ul>
+                        <p>Эти кадры помогают избежать коллизий и подтверждают успешную передачу.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Кадры данных (Data Frames):</h4>
+                        <ul>
+                            <li>Содержат полезную нагрузку (IP-пакеты, веб-страницы и т.д.)</li>
+                            <li>Могут включать QoS-информацию для приоритизации трафика</li>
+                        </ul>
+                    </div>
+
+                    <h3>Процесс подключения к Wi‑Fi</h3>
+                    <div class="visual-guide">
+                        <h4>Шаги подключения:</h4>
+                        <ol>
+                            <li><strong>Сканирование:</strong> Клиент слушает Beacon-кадры или отправляет Probe Request</li>
+                            <li><strong>Аутентификация:</strong> Клиент и точка доступа обмениваются Authentication-кадрами</li>
+                            <li><strong>Ассоциация:</strong> Клиент отправляет Association Request, точка доступа отвечает Association Response</li>
+                            <li><strong>Безопасность:</strong> Происходит 4-шаговое рукопожатие (WPA2) или SAE (WPA3) для установления шифрования</li>
+                            <li><strong>Передача данных:</strong> Теперь клиент может отправлять и получать данные</li>
+                        </ol>
+                    </div>
+
+                    <h3>Безопасность: WPA2 и WPA3</h3>
+                    <div class="visual-guide">
+                        <h4>WPA2 (4-шаговое рукопожатие):</h4>
+                        <ol>
+                            <li>Точка доступа отправляет случайное число (ANonce)</li>
+                            <li>Клиент вычисляет ключ и отправляет свое число (SNonce)</li>
+                            <li>Точка доступа проверяет и подтверждает</li>
+                            <li>Клиент подтверждает, соединение установлено</li>
+                        </ol>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>WPA3 (SAE — Simultaneous Authentication of Equals):</h4>
+                        <ul>
+                            <li>Более безопасный метод, защищает от атак перебора паролей</li>
+                            <li>Обе стороны доказывают знание пароля одновременно</li>
+                            <li>Даже если злоумышленник перехватит обмен, он не сможет узнать пароль</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>PMF (Protected Management Frames):</strong> Защищает управляющие кадры от подделки. Важно для предотвращения атак отключения устройств от сети.</p>
+                    </div>
+
+                    <h3>Контроллерные архитектуры Wi‑Fi</h3>
+                    <p>В больших сетях с множеством точек доступа используется централизованное управление через контроллеры.</p>
+
+                    <div class="visual-guide">
+                        <h4>WLC + Lightweight AP (централизованная архитектура):</h4>
+                        <ul>
+                            <li><strong>WLC (Wireless LAN Controller)</strong> — центральный контроллер, управляет всеми точками доступа</li>
+                            <li><strong>Lightweight AP</strong> — "легкие" точки доступа, которые получают настройки от контроллера</li>
+                            <li><strong>CAPWAP</strong> — протокол для управления AP и туннелирования данных</li>
+                            <li><strong>Преимущества:</strong> Централизованная политика безопасности, единое управление, упрощенная настройка</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Distributed/Cloud архитектура:</h4>
+                        <ul>
+                            <li><strong>Облачная координация:</strong> Управление через облачный сервис, не нужен локальный контроллер</li>
+                            <li><strong>Локальный breakout:</strong> Трафик может обрабатываться локально, не проходя через облако</li>
+                            <li><strong>Автоподстройка RF:</strong> Система автоматически настраивает мощность и каналы точек доступа</li>
+                            <li><strong>Преимущества:</strong> Масштабируемость, простота развертывания, автоматизация</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Выбор архитектуры:</strong> Централизованная (WLC) подходит для крупных корпоративных сетей. Облачная — для распределенных сетей и упрощенного управления.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Типы кадров:</strong> Управляющие (Beacon, Probe, Auth, Assoc), контрольные (RTS/CTS/ACK), данные</li>
+                            <li><strong>Подключение:</strong> Сканирование → Аутентификация → Ассоциация → Безопасность → Передача данных</li>
+                            <li><strong>WPA2:</strong> 4-шаговое рукопожатие для установления шифрования</li>
+                            <li><strong>WPA3:</strong> SAE — более безопасный метод аутентификации</li>
+                            <li><strong>Контроллеры:</strong> WLC для централизованного управления или облачная архитектура для распределенных сетей</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить безопасное подключение устройств к Wi‑Fi и эффективное управление беспроводной сетью.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+

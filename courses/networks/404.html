@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Страница не найдена - SKL Academy</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/logo.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        .error-container {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, 
+                var(--background) 0%, 
+                rgba(30, 27, 75, 1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .error-code {
+            font-size: clamp(6rem, 20vw, 10rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, 
+                var(--secondary) 0%,
+                var(--primary) 50%,
+                var(--secondary-light) 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            position: relative;
+        }
+        
+        .error-code::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            filter: blur(40px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .error-title {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+        
+        .error-message {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .call-to-action {
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            background: rgba(124, 58, 237, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+        
+        .call-to-action p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .primary-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
+        }
+        
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(124, 58, 237, 0.4);
+        }
+        
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
+        }
+        
+        .particles-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .particles-background::before,
+        .particles-background::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: radial-gradient(circle, var(--text) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            animation: particlesMove 60s linear infinite;
+        }
+        
+        .particles-background::after {
+            background-size: 30px 30px;
+            animation-duration: 40s;
+            opacity: 0.08;
+        }
+        
+        @keyframes particlesMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .error-content {
+                padding: 2rem;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body data-course="networks">
+    <main class="error-container">
+        <div class="particles-background"></div>
+        
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Страница не найдена</h1>
+            <p class="error-message">
+                Похоже, вы перешли по неработающей ссылке или запросили страницу, которая еще не создана. 
+                Возможно, этот раздел находится в разработке.
+            </p>
+            
+            <div class="call-to-action">
+                <p>
+                    <i class="fas fa-lightbulb"></i> 
+                    Хотите помочь в создании этого раздела или присоединиться к проекту?
+                </p>
+                <p>
+                    SKL Academy - это открытый образовательный проект, и мы всегда рады
+                    новым участникам и вашему вкладу в развитие платформы!
+                </p>
+            </div>
+            
+            <div class="buttons-container">
+                <a href="https://forms.gle/XYdCiixeK1hswCAp6" class="action-button primary-button" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-users"></i> Присоединиться к проекту
+                </a>
+                <a href="../../index.html" class="action-button secondary-button">
+                    <i class="fas fa-home"></i> Вернуться на главную
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

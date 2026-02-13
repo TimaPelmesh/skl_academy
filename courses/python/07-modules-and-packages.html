@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Модули и пакеты в Python - изучите импорт модулей, виртуальные окружения и управление пакетами">
+    <meta name="keywords" content="python, модули, пакеты, импорт, виртуальные окружения, pip">
+    <title>Библиотеки в Python</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn active">7. Модули и пакеты</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#import" class="subtopic active">7.1 Импорт модулей</a>
+                        <a href="#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Введение в модуль -->
+            <section class="module-intro">
+                <h2>Модуль 7: Модули и пакеты</h2>
+                <p>В этом модуле вы изучите как организовывать код с помощью модулей и пакетов, а также управлять зависимостями в Python.</p>
+            </section>
+            
+            <!-- 7.1 Импорт модулей -->
+            <section id="import" class="topic-section">
+                <h2>7.1 Импорт модулей</h2>
+                <p>Модули в Python — это файлы с расширением .py, содержащие код, который можно повторно использовать в других программах. Использование модулей помогает организовать код и избежать конфликтов имен.</p>
+                
+                <h3>Что такое модули и зачем они нужны</h3>
+                <p>Модули позволяют:</p>
+                <ul>
+                    <li>Организовать код в логические блоки</li>
+                    <li>Повторно использовать код</li>
+                    <li>Избежать конфликтов имен переменных</li>
+                    <li>Сделать программу более поддерживаемой</li>
+                </ul>
+                
+                <h3>Типы модулей в Python</h3>
+                <ol>
+                    <li><strong>Встроенные модули</strong> — поставляются с Python (например, <code>math</code>, <code>os</code>, <code>random</code>)</li>
+                    <li><strong>Сторонние модули</strong> — устанавливаются отдельно (например, <code>numpy</code>, <code>pandas</code>, <code>requests</code>)</li>
+                    <li><strong>Пользовательские модули</strong> — созданные самим программистом</li>
+                </ol>
+                
+                <h3>Способы импорта модулей</h3>
+                
+                <h4>1. Простой импорт</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import math
+
+# Использование функций модуля с указанием имени модуля
+radius = 5
+area = math.pi * math.pow(radius, 2)
+print(f"Площадь круга: {area}")</code></pre>
+                </div>
+                
+                <h4>2. Импорт с псевдонимом (alias)</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import numpy as np
+import pandas as pd
+
+# Использование сокращённых имён
+data = np.array([1, 2, 3, 4, 5])
+mean_value = np.mean(data)
+print(f"Среднее значение: {mean_value}")</code></pre>
+                </div>
+                
+                <h4>3. Импорт отдельных функций или классов</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">from math import pi, sqrt
+
+# Прямое использование функций без указания имени модуля
+radius = 5
+area = pi * (radius ** 2)
+circumference = 2 * pi * radius
+print(f"Площадь круга: {area}")
+print(f"Длина окружности: {circumference}")
+print(f"Квадратный корень из 16: {sqrt(16)}")</code></pre>
+                </div>
+                
+                <h4>4. Импорт всех функций и классов</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">from math import *
+
+# Все функции модуля доступны напрямую
+print(f"Число Пи: {pi}")
+print(f"Синус 90 градусов: {sin(radians(90))}")
+print(f"Косинус 0 градусов: {cos(radians(0))}")</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Совет</h4>
+                    <p>Импорт всех функций модуля с помощью <code>from module import *</code> обычно не рекомендуется, так как это может привести к конфликтам имен и затруднить понимание кода. Лучше явно импортировать только нужные функции или использовать псевдонимы.</p>
+                </div>
+                
+                <h3>Создание собственных модулей</h3>
+                <p>Создание пользовательского модуля очень просто. Достаточно написать код в Python-файле и сохранить его с расширением <code>.py</code>.</p>
+                
+                <p>Например, создадим модуль <code>my_math.py</code> с некоторыми математическими функциями:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Файл: my_math.py
+
+def add(a, b):
+    """Функция сложения двух чисел"""
+    return a + b
+
+def subtract(a, b):
+    """Функция вычитания двух чисел"""
+    return a - b
+
+def multiply(a, b):
+    """Функция умножения двух чисел"""
+    return a * b
+
+def divide(a, b):
+    """Функция деления двух чисел"""
+    if b == 0:
+        raise ValueError("Деление на ноль недопустимо")
+    return a / b
+
+# Константы
+PI = 3.14159
+E = 2.71828</code></pre>
+                </div>
+                
+                <p>Теперь мы можем использовать этот модуль в другом файле:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Файл: calculator.py
+import my_math
+
+print(f"Сложение: {my_math.add(10, 5)}")
+print(f"Вычитание: {my_math.subtract(10, 5)}")
+print(f"Умножение: {my_math.multiply(10, 5)}")
+print(f"Деление: {my_math.divide(10, 5)}")
+print(f"Значение Пи: {my_math.PI}")</code></pre>
+                </div>
+                
+                <h3>Переменная __name__</h3>
+                <p>Python устанавливает переменную <code>__name__</code> для каждого модуля. Если файл запускается напрямую, значение <code>__name__</code> равно <code>"__main__"</code>. Если файл импортируется, значение <code>__name__</code> будет равно имени модуля.</p>
+                
+                <p>Это позволяет создавать код, который выполняется только при непосредственном запуске файла:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Файл: my_math.py
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+# Код ниже выполнится только если файл запущен напрямую
+if __name__ == "__main__":
+    print("Тестирование модуля my_math")
+    print(f"Сложение 5 и 3: {add(5, 3)}")
+    print(f"Вычитание 10 и 4: {subtract(10, 4)}")</code></pre>
+                </div>
+                
+                <h3>Поиск модулей. Путь поиска</h3>
+                <p>Python ищет модули в следующих местах:</p>
+                <ol>
+                    <li>Текущая директория</li>
+                    <li>Список директорий в переменной среды <code>PYTHONPATH</code></li>
+                    <li>Стандартные директории установки Python</li>
+                </ol>
+                
+                <p>Вы можете проверить текущий путь поиска модулей с помощью переменной <code>sys.path</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import sys
+
+print("Пути поиска модулей:")
+for path in sys.path:
+    print(path)</code></pre>
+                </div>
+                
+                <h3>Пакеты в Python</h3>
+                <p>Пакет — это директория, содержащая один или несколько модулей Python и специальный файл <code>__init__.py</code>. Пакеты позволяют организовать модули в иерархию.</p>
+                
+                <p>Пример структуры пакета:</p>
+                <div class="code-example">
+                    <pre><code>my_package/
+|-- __init__.py
+|-- module1.py
+|-- module2.py
+|-- subpackage/
+    |-- __init__.py
+    |-- module3.py
+    |-- module4.py</code></pre>
+                </div>
+                
+                <p>Импорт из пакетов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Импорт модуля из пакета
+import my_package.module1
+
+# Импорт функции из модуля в пакете
+from my_package.module2 import some_function
+
+# Импорт модуля из подпакета
+import my_package.subpackage.module3
+
+# Импорт функции из модуля в подпакете
+from my_package.subpackage.module4 import another_function</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Зачем нужен файл __init__.py</h4>
+                    <p>Файл <code>__init__.py</code> нужен, чтобы Python распознавал директорию как пакет. В Python 3.3+ этот файл не обязателен (неявные пространства имен), но его использование по-прежнему рекомендуется для совместимости и инициализации пакета.</p>
+                    <p>В файле <code>__init__.py</code> вы можете указать, какие модули или функции должны быть экспортированы при импорте пакета:</p>
+                    <pre><code class="language-python"># Файл: my_package/__init__.py
+from .module1 import function1
+from .module2 import function2
+
+__all__ = ['function1', 'function2']</code></pre>
+                </div>
+                
+                <h3>Относительные импорты</h3>
+                <p>Внутри пакета вы можете использовать относительные импорты для импорта модулей из того же пакета:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Файл: my_package/module2.py
+
+# Относительный импорт из соседнего модуля
+from .module1 import function1
+
+# Относительный импорт из родительского пакета
+from .. import some_module
+
+# Относительный импорт из подпакета
+from .subpackage import module3</code></pre>
+                </div>
+                
+                <h3>Полезные встроенные модули</h3>
+                <p>Python поставляется с множеством полезных модулей:</p>
+                <ul>
+                    <li><code>os</code> — работа с операционной системой</li>
+                    <li><code>sys</code> — системные функции и параметры</li>
+                    <li><code>datetime</code> — работа с датами и временем</li>
+                    <li><code>math</code> — математические функции</li>
+                    <li><code>random</code> — генератор случайных чисел</li>
+                    <li><code>json</code> — работа с данными в формате JSON</li>
+                    <li><code>re</code> — регулярные выражения</li>
+                    <li><code>collections</code> — специализированные типы данных</li>
+                    <li><code>itertools</code> — функции для работы с итерируемыми объектами</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import os
+import sys
+import datetime
+import random
+
+# Получение текущей директории
+print(f"Текущая директория: {os.getcwd()}")
+
+# Информация о версии Python
+print(f"Версия Python: {sys.version}")
+
+# Текущая дата и время
+now = datetime.datetime.now()
+print(f"Текущая дата и время: {now}")
+
+# Случайное целое число от 1 до 100
+print(f"Случайное число: {random.randint(1, 100)}")</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Рекомендации по импорту модулей</h4>
+                    <ol>
+                        <li>Импортируйте стандартные библиотеки в начале файла</li>
+                        <li>После пустой строки импортируйте сторонние библиотеки</li>
+                        <li>После еще одной пустой строки импортируйте локальные/пользовательские модули</li>
+                        <li>Старайтесь импортировать модули в алфавитном порядке</li>
+                        <li>Избегайте импорта <code>*</code></li>
+                    </ol>
+                    
+                    <p>Пример хорошей организации импортов:</p>
+                    <pre><code class="language-python"># Стандартные библиотеки
+import datetime
+import os
+import sys
+
+# Сторонние библиотеки
+import numpy as np
+import pandas as pd
+import requests
+
+# Локальные/пользовательские модули
+import config
+from my_package import helper
+from utils.formatting import format_text</code></pre>
+                </div>
+            </section>
+            
+            <!-- 7.2 Виртуальные окружения -->
+            <section id="virtualenv" class="topic-section">
+                <h2>7.2 Виртуальные окружения</h2>
+                <p>Виртуальное окружение — это изолированная среда Python, которая позволяет устанавливать пакеты и зависимости для конкретного проекта без влияния на другие проекты или системный Python.</p>
+                
+                <h3>Зачем нужны виртуальные окружения?</h3>
+                <p>Представьте, что у вас есть два проекта: один требует Django 2.0, а другой — Django 3.0. Без виртуальных окружений вы не сможете одновременно работать с обоими проектами, так как в системе может быть установлена только одна версия пакета.</p>
+                
+                <p>Виртуальные окружения решают следующие проблемы:</p>
+                <ul>
+                    <li>Конфликты версий пакетов между проектами</li>
+                    <li>Зависимость от системных пакетов</li>
+                    <li>Необходимость прав администратора для установки пакетов</li>
+                    <li>Сложность в воспроизведении окружения разработки</li>
+                </ul>
+                
+                <h3>Инструменты для создания виртуальных окружений</h3>
+                <p>В Python есть несколько инструментов для создания виртуальных окружений:</p>
+                <ol>
+                    <li><code>venv</code> — встроенный модуль в Python 3.3+</li>
+                    <li><code>virtualenv</code> — сторонний пакет, поддерживает Python 2 и 3</li>
+                    <li><code>conda</code> — менеджер пакетов и окружений, часть дистрибутива Anaconda</li>
+                    <li><code>pipenv</code> — комбинирует pip и virtualenv</li>
+                    <li><code>poetry</code> — современный инструмент для управления зависимостями</li>
+                </ol>
+                
+                <h3>Создание и работа с venv (встроенный модуль)</h3>
+                
+                <h4>Создание виртуального окружения</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Windows
+python -m venv myenv
+
+# Linux/macOS
+python3 -m venv myenv</code></pre>
+                </div>
+                
+                <p>Это создаст новую директорию <code>myenv</code> со структурой виртуального окружения.</p>
+                
+                <h4>Активация виртуального окружения</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Windows (командная строка)
+myenv\Scripts\activate.bat
+
+# Windows (PowerShell)
+myenv\Scripts\Activate.ps1
+
+# Linux/macOS
+source myenv/bin/activate</code></pre>
+                </div>
+                
+                <p>После активации командная строка обычно показывает имя активного окружения:</p>
+                <div class="code-example">
+                    <pre><code class="language-bash">(myenv) C:\Projects\my_project></code></pre>
+                </div>
+                
+                <h4>Установка пакетов в виртуальное окружение</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Установка конкретного пакета
+pip install requests
+
+# Установка конкретной версии
+pip install django==3.2.5</code></pre>
+                </div>
+                
+                <h4>Просмотр установленных пакетов</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash">pip list
+pip freeze</code></pre>
+                </div>
+                
+                <h4>Деактивация виртуального окружения</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash">deactivate</code></pre>
+                </div>
+                
+                <h3>Использование virtualenv (для Python 2 и 3)</h3>
+                <p><code>virtualenv</code> — это сторонний инструмент, который нужно установить отдельно:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash">pip install virtualenv</code></pre>
+                </div>
+                
+                <h4>Создание окружения с помощью virtualenv</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Создание окружения
+virtualenv myenv
+
+# Создание окружения с указанием версии Python
+virtualenv -p python3.8 myenv</code></pre>
+                </div>
+                
+                <p>Активация и деактивация выполняются так же, как и для <code>venv</code>.</p>
+                
+                <h3>Управление зависимостями проекта</h3>
+                <p>Чтобы другие разработчики могли воссоздать ваше окружение, можно сохранить список установленных пакетов в файл <code>requirements.txt</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Сохранение списка пакетов
+pip freeze > requirements.txt
+
+# Установка пакетов из файла
+pip install -r requirements.txt</code></pre>
+                </div>
+                
+                <p>Содержимое файла <code>requirements.txt</code> может выглядеть так:</p>
+                
+                <div class="code-example">
+                    <pre><code>django==3.2.5
+requests==2.26.0
+numpy==1.21.0
+pandas==1.3.0
+python-dotenv==0.19.0</code></pre>
+                </div>
+                
+                <h3>Современные инструменты управления зависимостями</h3>
+                
+                <h4>Pipenv</h4>
+                <p>Pipenv объединяет pip, virtualenv и управление файлом зависимостей в единый инструмент:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Установка Pipenv
+pip install pipenv
+
+# Создание окружения и установка пакета
+pipenv install requests
+
+# Установка пакета только для разработки
+pipenv install pytest --dev
+
+# Активация окружения
+pipenv shell</code></pre>
+                </div>
+                
+                <p>Pipenv создает два файла:</p>
+                <ul>
+                    <li><code>Pipfile</code> — содержит информацию о зависимостях</li>
+                    <li><code>Pipfile.lock</code> — содержит точные версии всех установленных пакетов и их зависимостей</li>
+                </ul>
+                
+                <h4>Poetry</h4>
+                <p>Poetry — современный инструмент для управления зависимостями Python и упаковки проектов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Установка Poetry
+pip install poetry
+
+# Создание нового проекта
+poetry new my-project
+
+# Инициализация Poetry в существующем проекте
+cd existing-project
+poetry init
+
+# Добавление зависимостей
+poetry add requests
+
+# Добавление зависимостей для разработки
+poetry add pytest --dev
+
+# Активация окружения
+poetry shell</code></pre>
+                </div>
+                
+                <p>Poetry использует файл <code>pyproject.toml</code> для управления зависимостями и метаданными проекта.</p>
+                
+                <h3>Изоляция виртуальных окружений</h3>
+                <p>По умолчанию, виртуальные окружения создаются внутри проекта. Однако вы можете хранить их в централизованном месте:</p>
+                
+                <h4>Для venv и virtualenv</h4>
+                <p>Просто указывайте полный путь при создании:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Windows
+python -m venv C:\Users\username\.virtualenvs\myproject
+
+# Linux/macOS
+python3 -m venv ~/.virtualenvs/myproject</code></pre>
+                </div>
+                
+                <h4>Для Pipenv</h4>
+                <p>По умолчанию Pipenv хранит все окружения в централизованной локации:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Windows
+%USERPROFILE%\.virtualenvs\
+
+# Linux/macOS
+~/.local/share/virtualenvs/</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Рекомендации по работе с виртуальными окружениями</h4>
+                    <ul>
+                        <li>Создавайте отдельное виртуальное окружение для каждого проекта</li>
+                        <li>Всегда включайте <code>requirements.txt</code> (или эквивалент) в репозиторий проекта</li>
+                        <li>Не добавляйте саму директорию виртуального окружения в систему контроля версий (добавьте в <code>.gitignore</code>)</li>
+                        <li>Периодически обновляйте пакеты в виртуальном окружении для установки исправлений безопасности</li>
+                        <li>Если вы работаете в команде, используйте один инструмент управления окружениями на всех проектах</li>
+                    </ul>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Выбор инструмента для виртуальных окружений</h4>
+                    <table>
+                        <tr>
+                            <th>Инструмент</th>
+                            <th>Когда использовать</th>
+                        </tr>
+                        <tr>
+                            <td><code>venv</code></td>
+                            <td>Простые проекты, только Python 3</td>
+                        </tr>
+                        <tr>
+                            <td><code>virtualenv</code></td>
+                            <td>Если нужна поддержка Python 2</td>
+                        </tr>
+                        <tr>
+                            <td><code>pipenv</code></td>
+                            <td>Средние проекты с чёткими зависимостями</td>
+                        </tr>
+                        <tr>
+                            <td><code>poetry</code></td>
+                            <td>Сложные проекты, упаковка библиотек</td>
+                        </tr>
+                        <tr>
+                            <td><code>conda</code></td>
+                            <td>Научные вычисления, машинное обучение</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h3>Интеграция с IDE</h3>
+                <p>Современные IDE, такие как PyCharm, VS Code и другие, имеют встроенную поддержку виртуальных окружений:</p>
+                
+                <h4>PyCharm</h4>
+                <p>File → Settings → Project → Python Interpreter → Add → Выберите существующее или создайте новое виртуальное окружение</p>
+                
+                <h4>VS Code</h4>
+                <p>Нажмите CTRL+SHIFT+P (или CMD+SHIFT+P на macOS) → Python: Select Interpreter → Выберите или создайте окружение</p>
+                
+                <div class="practice-tips">
+                    <h4>Отладка проблем с виртуальными окружениями</h4>
+                    <ul>
+                        <li>Убедитесь, что окружение активировано (проверьте приглашение командной строки)</li>
+                        <li>Проверьте путь к Python с помощью <code>which python</code> (Linux/macOS) или <code>where python</code> (Windows)</li>
+                        <li>Проверьте установленные пакеты с помощью <code>pip list</code></li>
+                        <li>Если модуль не найден, убедитесь, что он установлен в активное виртуальное окружение</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 7.3 PIP и установка пакетов -->
+            <section id="pip" class="topic-section">
+                <h2>7.3 PIP и установка пакетов</h2>
+                <p>PIP (Package Installer for Python) — это стандартный менеджер пакетов для Python, который позволяет устанавливать и управлять сторонними библиотеками и зависимостями, не входящими в стандартную библиотеку Python.</p>
+                
+                <h3>Что такое PyPI</h3>
+                <p>PyPI (Python Package Index) — это официальный репозиторий сторонних пакетов Python. Сейчас там размещено более 350 000 пакетов для различных задач: от веб-разработки до машинного обучения.</p>
+                <p>Вы можете просмотреть доступные пакеты на <a href="https://pypi.org/" target="_blank">официальном сайте PyPI</a>.</p>
+                
+                <h3>Установка PIP</h3>
+                <p>В современных версиях Python (2.7.9+ и 3.4+) PIP устанавливается автоматически. Если по какой-то причине он отсутствует, его можно установить вручную:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Скачивание скрипта установки
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+# Установка PIP
+python get-pip.py</code></pre>
+                </div>
+                
+                <h3>Проверка версии PIP</h3>
+                <div class="code-example">
+                    <pre><code class="language-bash">pip --version</code></pre>
+                </div>
+                
+                <h3>Основные команды PIP</h3>
+                
+                <h4>Установка пакетов</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Установка последней версии пакета
+pip install package_name
+
+# Установка конкретной версии
+pip install package_name==1.2.3
+
+# Установка минимальной версии
+pip install package_name>=1.2.3
+
+# Установка пакета из Git-репозитория
+pip install git+https://github.com/user/repo.git
+
+# Установка из локального архива
+pip install ./downloads/package-1.2.3.tar.gz
+
+# Установка в режиме разработки (editable mode)
+pip install -e .</code></pre>
+                </div>
+                
+                <h4>Обновление пакетов</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Обновление одного пакета
+pip install --upgrade package_name
+
+# Обновление PIP
+pip install --upgrade pip</code></pre>
+                </div>
+                
+                <h4>Удаление пакетов</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash">pip uninstall package_name</code></pre>
+                </div>
+                
+                <h4>Список установленных пакетов</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Вывод всех установленных пакетов
+pip list
+
+# Вывод в формате requirements.txt
+pip freeze</code></pre>
+                </div>
+                
+                <h4>Поиск пакетов</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash">pip search query_term</code></pre>
+                </div>
+                
+                <h4>Информация о пакете</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash">pip show package_name</code></pre>
+                </div>
+                
+                <h3>Работа с файлом requirements.txt</h3>
+                <p>Файл requirements.txt — это стандартный способ определения зависимостей Python-проекта:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Создание файла requirements.txt со списком установленных пакетов
+pip freeze > requirements.txt
+
+# Установка пакетов из файла requirements.txt
+pip install -r requirements.txt</code></pre>
+                </div>
+                
+                <p>Пример содержимого файла requirements.txt:</p>
+                
+                <div class="code-example">
+                    <pre><code># Веб-фреймворк
+Django==3.2.6
+
+# HTTP-клиент
+requests==2.26.0
+
+# Для работы с данными
+numpy>=1.20.0
+pandas>=1.3.0
+
+# Для работы с окружением
+python-dotenv==0.19.0</code></pre>
+                </div>
+                
+                <h3>Установка пакетов из разных источников</h3>
+                <p>PIP может устанавливать пакеты из различных источников:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-bash"># Из PyPI (по умолчанию)
+pip install package_name
+
+# Из альтернативного индекса пакетов
+pip install --index-url https://alternative-pypi.org/simple/ package_name
+
+# Из Git-репозитория
+pip install git+https://github.com/user/repo.git
+
+# Из определенной ветки Git-репозитория
+pip install git+https://github.com/user/repo.git@branch_name
+
+# Из локальной директории
+pip install -e /path/to/package/
+
+# Из колеса (wheel)
+pip install package-1.0.0-py3-none-any.whl</code></pre>
+                </div>
+                
+                <h3>Создание собственных пакетов</h3>
+                <p>Для создания собственных пакетов вам потребуется настроить структуру проекта и создать файл <code>setup.py</code>:</p>
+                
+                <h4>Структура проекта</h4>
+                <div class="code-example">
+                    <pre><code>my_package/
+|-- setup.py
+|-- README.md
+|-- LICENSE
+|-- my_package/
+    |-- __init__.py
+    |-- module1.py
+    |-- module2.py
+    |-- subpackage/
+        |-- __init__.py
+        |-- module3.py</code></pre>
+                </div>
+                
+                <h4>Пример файла setup.py</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">from setuptools import setup, find_packages
+
+setup(
+    name="my-package",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[
+        "requests>=2.25.0",
+        "numpy>=1.20.0",
+    ],
+    author="Ваше Имя",
+    author_email="your.email@example.com",
+    description="Краткое описание пакета",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+    url="https://github.com/username/my-package",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires=">=3.6",
+)</code></pre>
+                </div>
+                
+                <h4>Сборка и публикация пакета</h4>
+                <div class="code-example">
+                    <pre><code class="language-bash"># Установка инструментов для сборки
+pip install setuptools wheel twine
+
+# Сборка пакета
+python setup.py sdist bdist_wheel
+
+# Публикация пакета на PyPI
+twine upload dist/*</code></pre>
+                </div>
+                
+                <h3>Современные стандарты упаковки</h3>
+                <p>Современный стандарт упаковки Python-проектов использует файл <code>pyproject.toml</code> вместо <code>setup.py</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-toml">[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my-package"
+version = "0.1.0"
+description = "Краткое описание пакета"
+readme = "README.md"
+authors = [
+    {name = "Ваше Имя", email = "your.email@example.com"},
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.6"
+dependencies = [
+    "requests>=2.25.0",
+    "numpy>=1.20.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/username/my-package"
+"Bug Tracker" = "https://github.com/username/my-package/issues"</code></pre>
+                </div>
+                
+                <h3>Безопасность при установке пакетов</h3>
+                <p>При установке пакетов важно соблюдать следующие меры безопасности:</p>
+                
+                <ol>
+                    <li>Проверяйте имена пакетов, чтобы избежать "typosquatting" (пакетов с похожими названиями)</li>
+                    <li>Используйте только проверенные и популярные пакеты</li>
+                    <li>Указывайте конкретные версии в requirements.txt</li>
+                    <li>Регулярно обновляйте пакеты для установки исправлений безопасности</li>
+                </ol>
+                
+                <div class="practice-tips">
+                    <h4>Альтернативы PIP</h4>
+                    <p>Хотя PIP является стандартным менеджером пакетов, существуют альтернативы:</p>
+                    <ul>
+                        <li><code>conda</code> — особенно полезен для научных вычислений и машинного обучения</li>
+                        <li><code>pipenv</code> — объединяет функциональность pip и virtualenv</li>
+                        <li><code>poetry</code> — современный инструмент управления зависимостями</li>
+                    </ul>
+                </div>
+                
+                <h3>Популярные пакеты для разных областей</h3>
+                <div class="visual-guide">
+                    <h4>Научные вычисления и анализ данных</h4>
+                    <ul>
+                        <li><code>numpy</code> — многомерные массивы и математические функции</li>
+                        <li><code>scipy</code> — научные вычисления</li>
+                        <li><code>pandas</code> — анализ и обработка данных</li>
+                        <li><code>matplotlib</code> — визуализация данных</li>
+                    </ul>
+                    
+                    <h4>Веб-разработка</h4>
+                    <ul>
+                        <li><code>django</code> — полнофункциональный веб-фреймворк</li>
+                        <li><code>flask</code> — микрофреймворк для веб-приложений</li>
+                        <li><code>fastapi</code> — современный веб-фреймворк с высокой производительностью</li>
+                        <li><code>requests</code> — HTTP-клиент</li>
+                    </ul>
+                    
+                    <h4>Машинное обучение</h4>
+                    <ul>
+                        <li><code>scikit-learn</code> — инструменты машинного обучения</li>
+                        <li><code>tensorflow</code> — библиотека для глубокого обучения</li>
+                        <li><code>pytorch</code> — альтернативная библиотека для глубокого обучения</li>
+                        <li><code>keras</code> — высокоуровневый API для нейронных сетей</li>
+                    </ul>
+                    
+                    <h4>Утилиты для разработки</h4>
+                    <ul>
+                        <li><code>pytest</code> — тестирование кода</li>
+                        <li><code>black</code> — автоматическое форматирование кода</li>
+                        <li><code>isort</code> — сортировка импортов</li>
+                        <li><code>flake8</code> — проверка стиля кода</li>
+                        <li><code>mypy</code> — статическая типизация для Python</li>
+                    </ul>
+                </div>
+                
+                <div class="interactive-resources">
+                    <h4>Полезные ресурсы</h4>
+                    <ul>
+                        <li><a href="https://pypi.org/" target="_blank">Python Package Index (PyPI)</a> — официальный репозиторий пакетов</li>
+                        <li><a href="https://packaging.python.org/" target="_blank">Python Packaging User Guide</a> — руководство по упаковке Python-проектов</li>
+                        <li><a href="https://pip.pypa.io/" target="_blank">Официальная документация PIP</a></li>
+                    </ul>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по управлению зависимостями</h4>
+                    <ul>
+                        <li>Храните зависимости в системе контроля версий (requirements.txt, Pipfile, pyproject.toml)</li>
+                        <li>Периодически проверяйте наличие обновлений безопасности</li>
+                        <li>Используйте инструменты для анализа уязвимостей (например, safety, pip-audit)</li>
+                        <li>Избегайте избыточных зависимостей, которые могут увеличить поверхность атаки</li>
+                        <li>Рассмотрите возможность "заморозки" окружения в production для обеспечения стабильности</li>
+                    </ul>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Что происходит, когда вы вводите URL в браузер? | SKL Academy</title>
+  
+  <meta name="description" content="Полный путь HTTP-запроса: от нажатия Enter до отображения страницы. DNS, TCP, TLS, HTTP, рендеринг — объясняем простыми словами.">
+  <meta name="keywords" content="как работает интернет, DNS, TCP IP, HTTP, TLS, рендеринг браузера, сетевые протоколы">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Что происходит, когда вы вводите URL в браузер?">
+  <meta property="og:description" content="Полный путь HTTP-запроса: DNS, TCP, TLS, HTTP, рендеринг.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://skl-academy.ru/articles/url-journey.html">
+  
+  <link rel="canonical" href="https://skl-academy.ru/articles/url-journey.html">
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="../index.html" class="flex items-center">
+            <img class="h-8 w-auto" src="../images/icon.ico" alt="SKL Academy">
+            <span class="ml-2 text-lg font-semibold text-gray-900">SKL Academy</span>
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../library.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">
+            <i class="fas fa-book mr-1"></i> Библиотека
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">Глубокий разбор</span>
+        <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 25 мин чтения</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        Что происходит, когда вы вводите URL в браузер?
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        Это один из самых популярных вопросов на технических собеседованиях. И один из самых интересных в Computer Science. Давайте пройдём весь путь от нажатия Enter до появления страницы.
+      </p>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+      
+      <!-- Introduction -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Почему это важно знать?</h2>
+        
+        <p class="text-gray-700 mb-4">
+          Каждый день мы открываем десятки, а то и сотни веб-страниц. Для нас это занимает секунду — ввёл адрес, нажал Enter, страница появилась. Но за этой секундой скрывается удивительная симфония технологий, протоколов и алгоритмов, которые работают с точностью швейцарских часов.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Понимание этого процесса — не просто академическое знание. Это фундамент, на котором строится:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-6">
+          <li><strong>Оптимизация производительности</strong> — зная, где теряется время, вы можете ускорить свои сайты</li>
+          <li><strong>Отладка сетевых проблем</strong> — когда что-то не работает, вы понимаете, где искать</li>
+          <li><strong>Безопасность</strong> — понимание TLS и сертификатов защитит от атак</li>
+          <li><strong>Архитектурные решения</strong> — CDN, кэширование, DNS — всё становится понятнее</li>
+        </ul>
+
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg mb-6">
+          <h4 class="font-bold text-indigo-900 mb-2">Интересный факт</h4>
+          <p class="text-indigo-800 mb-0">
+            Этот вопрос задают на собеседованиях в Google, Facebook, Amazon и других tech-гигантах. Не потому что хотят услышать заученный ответ, а потому что глубина вашего понимания показывает уровень экспертизы.
+          </p>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Давайте разберём каждый шаг детально. Представьте, что вы вводите в браузер адрес <code class="bg-gray-100 px-2 py-1 rounded">https://example.com/page</code> и нажимаете Enter. Что происходит дальше?
+        </p>
+      </section>
+
+      <!-- Step 0: Keyboard -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-gray-600 text-white rounded-full text-lg font-bold mr-4">0</span>
+          Нажатие клавиши Enter
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Да, даже нажатие клавиши — это целый процесс! Когда вы нажимаете Enter:
+        </p>
+        
+        <ol class="list-decimal pl-6 text-gray-700 mb-4">
+          <li class="mb-2"><strong>Механический контакт</strong> — клавиша замыкает электрическую цепь</li>
+          <li class="mb-2"><strong>Сканирование матрицы</strong> — контроллер клавиатуры определяет, какая клавиша нажата</li>
+          <li class="mb-2"><strong>USB/Bluetooth передача</strong> — скан-код отправляется в операционную систему</li>
+          <li class="mb-2"><strong>Обработка ОС</strong> — драйвер клавиатуры преобразует скан-код в символ</li>
+          <li class="mb-2"><strong>Событие в браузере</strong> — браузер получает событие <code class="bg-gray-100 px-2 py-1 rounded">keydown</code></li>
+        </ol>
+        
+        <p class="text-gray-700 mb-4">
+          Всё это занимает несколько миллисекунд. Браузер понимает, что пользователь хочет перейти по адресу, и начинается настоящая магия.
+        </p>
+      </section>
+
+      <!-- Step 1 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">1</span>
+          Парсинг URL
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Первое, что делает браузер — разбирает (парсит) введённый URL на компоненты. URL (Uniform Resource Locator) — это не просто адрес, это структурированные данные:
+        </p>
+        
+        <div class="bg-gray-900 text-indigo-400 p-6 rounded-lg font-mono text-sm mb-6 overflow-x-auto">
+          <pre>https://example.com:443/page?query=1#section
+│       │           │   │    │         │
+│       │           │   │    │         └── Fragment (якорь)
+│       │           │   │    │              Не отправляется на сервер!
+│       │           │   │    │              Используется только браузером
+│       │           │   │    │
+│       │           │   │    └── Query string (параметры запроса)
+│       │           │   │        Передаются серверу
+│       │           │   │
+│       │           │   └── Path (путь к ресурсу)
+│       │           │        Какую страницу/файл запрашиваем
+│       │           │
+│       │           └── Port (порт)
+│       │                443 для HTTPS, 80 для HTTP
+│       │                Обычно скрыт, т.к. используются стандартные порты
+│       │
+│       └── Host (домен/хост)
+│            Человекочитаемое имя сервера
+│
+└── Protocol/Scheme (протокол)
+     http, https, ftp, file и т.д.</pre>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Проверка HSTS</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Но перед тем как продолжить, браузер проверяет HSTS (HTTP Strict Transport Security). Это механизм безопасности, который говорит: "Этот сайт ВСЕГДА должен открываться через HTTPS".
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Если вы ввели <code class="bg-gray-100 px-2 py-1 rounded">http://</code> для сайта с HSTS, браузер автоматически заменит на <code class="bg-gray-100 px-2 py-1 rounded">https://</code>. Это защищает от атак типа "downgrade" — когда злоумышленник пытается заставить вас использовать незащищённое соединение.
+        </p>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg mb-4">
+          <p class="text-indigo-900 mb-0">
+            <strong>Preloaded HSTS:</strong> Chrome, Firefox и другие браузеры имеют встроенный список доменов, которые ВСЕГДА должны использовать HTTPS. Туда входят Google, Facebook, Twitter и тысячи других сайтов.
+          </p>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">А что если ввести что-то непонятное?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Если вы введёте "котики" вместо URL, браузер поймёт, что это не адрес, и перенаправит запрос в поисковую систему. Браузер проверяет:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li>Есть ли точка в строке? (признак домена)</li>
+          <li>Есть ли протокол (http://, https://)?</li>
+          <li>Похоже ли это на IP-адрес?</li>
+          <li>Есть ли пробелы? (поисковый запрос)</li>
+        </ul>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">2</span>
+          DNS Lookup — поиск IP-адреса
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Компьютеры не понимают доменные имена вроде "example.com". Им нужны IP-адреса — числовые идентификаторы вида <code class="bg-gray-100 px-2 py-1 rounded">93.184.216.34</code>. DNS (Domain Name System) — это как телефонная книга интернета, которая переводит имена в адреса.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Каскад поиска</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Браузер ищет IP-адрес в нескольких местах, начиная с самых быстрых:
+        </p>
+        
+        <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <ol class="space-y-4">
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold mr-4">1</span>
+              <div>
+                <strong class="text-gray-900">Кэш браузера</strong>
+                <p class="text-gray-600 text-sm mt-1">Chrome хранит DNS записи ~60 секунд. Посмотреть можно на <code class="bg-gray-100 px-1 rounded">chrome://net-internals/#dns</code></p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold mr-4">2</span>
+              <div>
+                <strong class="text-gray-900">Кэш операционной системы</strong>
+                <p class="text-gray-600 text-sm mt-1">Windows: <code class="bg-gray-100 px-1 rounded">ipconfig /displaydns</code>, Linux: <code class="bg-gray-100 px-1 rounded">systemd-resolve --statistics</code></p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold mr-4">3</span>
+              <div>
+                <strong class="text-gray-900">Файл hosts</strong>
+                <p class="text-gray-600 text-sm mt-1">Локальные записи. Windows: <code class="bg-gray-100 px-1 rounded">C:\Windows\System32\drivers\etc\hosts</code>, Linux/Mac: <code class="bg-gray-100 px-1 rounded">/etc/hosts</code></p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold mr-4">4</span>
+              <div>
+                <strong class="text-gray-900">DNS-сервер роутера</strong>
+                <p class="text-gray-600 text-sm mt-1">Ваш домашний роутер тоже кэширует DNS-запросы</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold mr-4">5</span>
+              <div>
+                <strong class="text-gray-900">DNS-сервер провайдера (ISP)</strong>
+                <p class="text-gray-600 text-sm mt-1">Если нет в кэше — начинается рекурсивный запрос</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Рекурсивный DNS-запрос</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Если IP-адрес нигде не закэширован, DNS-сервер провайдера начинает "расследование":
+        </p>
+        
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono text-sm mb-6 overflow-x-auto">
+          <pre>Запрос: example.com → ?
+
+1. Спросить Root Server (.)
+   "Кто отвечает за .com?"
+   → "Иди к TLD-серверу .com (192.5.6.30)"
+
+2. Спросить TLD Server (.com)
+   "Кто отвечает за example.com?"
+   → "Иди к Authoritative серверу (ns1.example.com)"
+
+3. Спросить Authoritative Server
+   "Какой IP у example.com?"
+   → "93.184.216.34"
+
+Ответ: example.com = 93.184.216.34</pre>
+        </div>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg mb-6">
+          <h4 class="font-bold text-indigo-900 mb-2">Интересный факт о корневых серверах</h4>
+          <p class="text-indigo-800 mb-0">
+            В мире существует ровно <strong>13 "логических" корневых DNS-серверов</strong> (от a.root-servers.net до m.root-servers.net). Почему 13? Исторически это максимум, который помещался в один UDP-пакет (512 байт). Но физически их более 1500 — благодаря технологии Anycast один логический сервер может иметь сотни копий по всему миру.
+          </p>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">DNS over HTTPS (DoH)</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Традиционные DNS-запросы отправляются открытым текстом. Это значит, что ваш провайдер (и кто угодно на пути) видит, какие сайты вы посещаете. 
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Современные браузеры поддерживают <strong>DNS over HTTPS (DoH)</strong> — DNS-запросы шифруются и отправляются через HTTPS. Включить можно в настройках браузера (Firefox → Настройки → Сетевые настройки → DNS через HTTPS).
+        </p>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">3</span>
+          TCP Handshake — установка соединения
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Теперь у браузера есть IP-адрес сервера. Но прежде чем отправить HTTP-запрос, нужно установить надёжное соединение. Для этого используется протокол TCP (Transmission Control Protocol).
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Почему TCP, а не UDP?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          В интернете есть два основных транспортных протокола:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h4 class="font-bold text-blue-900 mb-2">TCP (Transmission Control Protocol)</h4>
+            <ul class="text-blue-800 text-sm space-y-1">
+              <li>✓ Гарантирует доставку пакетов</li>
+              <li>✓ Гарантирует порядок пакетов</li>
+              <li>✓ Обнаруживает и исправляет ошибки</li>
+              <li>✗ Медленнее из-за накладных расходов</li>
+            </ul>
+          </div>
+          <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <h4 class="font-bold text-indigo-900 mb-2">UDP (User Datagram Protocol)</h4>
+            <ul class="text-indigo-800 text-sm space-y-1">
+              <li>✓ Очень быстрый</li>
+              <li>✓ Минимальные накладные расходы</li>
+              <li>✗ Не гарантирует доставку</li>
+              <li>✗ Пакеты могут прийти не по порядку</li>
+            </ul>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Для веб-страниц важно получить ВСЕ данные в правильном порядке, поэтому используется TCP. UDP используется там, где скорость важнее надёжности: видеозвонки, онлайн-игры, DNS.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Трёхстороннее рукопожатие (3-way handshake)</h3>
+        
+        <p class="text-gray-700 mb-4">
+          TCP устанавливает соединение через три сообщения:
+        </p>
+        
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono text-sm mb-6">
+          <pre>Client (ваш браузер)              Server (сайт)
+        │                                   │
+        │                                   │
+   1.   │──── SYN (seq=1000) ──────────────▶│
+        │     "Привет! Хочу соединиться"    │
+        │     "Мой начальный номер: 1000"   │
+        │                                   │
+   2.   │◀──── SYN-ACK (seq=5000, ack=1001) │
+        │     "Привет! Давай соединимся"    │
+        │     "Мой номер: 5000"             │
+        │     "Жду твой пакет 1001"         │
+        │                                   │
+   3.   │──── ACK (ack=5001) ───────────────▶│
+        │     "Отлично! Жду твой 5001"      │
+        │                                   │
+        │    ═══ СОЕДИНЕНИЕ ОТКРЫТО ═══     │
+        │                                   │</pre>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          <strong>Почему три сообщения?</strong> Чтобы обе стороны убедились, что связь работает в обоих направлениях. SYN (synchronize) и ACK (acknowledge) — это флаги в TCP-пакетах.
+        </p>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg mb-4">
+          <p class="text-indigo-900 mb-0">
+            <strong>RTT (Round-Trip Time):</strong> Это время, которое пакет тратит на путь туда-обратно. Для сервера в Европе — ~50-100мс, для США — ~150-200мс, для Австралии — ~300мс. TCP handshake занимает 1 RTT.
+          </p>
+        </div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">4</span>
+          TLS Handshake — шифрование
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Если мы используем HTTPS (а сегодня это ~95% веба), после TCP handshake начинается ещё одно "рукопожатие" — TLS (Transport Layer Security). Это протокол, который шифрует все данные между браузером и сервером.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Зачем шифровать?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Без TLS любой, кто находится между вами и сервером (провайдер, публичный Wi-Fi, хакер) может:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-6">
+          <li>Читать ваши пароли и сообщения</li>
+          <li>Подменять контент страницы</li>
+          <li>Внедрять вредоносный код</li>
+          <li>Следить за вашей активностью</li>
+        </ul>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Этапы TLS Handshake</h3>
+        
+        <div class="bg-white border border-gray-200 rounded-lg divide-y divide-gray-200 mb-6">
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold">1</span>
+              <h4 class="font-bold text-gray-900">ClientHello</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Браузер отправляет: поддерживаемые версии TLS (1.2, 1.3), список шифров, случайное число</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+              <h4 class="font-bold text-gray-900">ServerHello + Certificate</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Сервер выбирает версию TLS и шифр, отправляет свой сертификат (публичный ключ + подпись центра сертификации)</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+              <h4 class="font-bold text-gray-900">Проверка сертификата</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Браузер проверяет: не истёк ли сертификат? Совпадает ли домен? Подписан ли доверенным CA (Certificate Authority)?</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold">4</span>
+              <h4 class="font-bold text-gray-900">Key Exchange</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Браузер и сервер генерируют общий секретный ключ (обычно через ECDHE — Elliptic Curve Diffie-Hellman)</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-bold">5</span>
+              <h4 class="font-bold text-gray-900">Finished</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Обе стороны подтверждают, что шифрование работает. Все дальнейшие данные зашифрованы.</p>
+          </div>
+        </div>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg mb-4">
+          <h4 class="font-bold text-indigo-900 mb-2">TLS 1.3 — быстрее и безопаснее</h4>
+          <p class="text-indigo-800 mb-2">
+            TLS 1.3 (2018) сократил handshake с 2 RTT до 1 RTT. А при повторном соединении возможен режим <strong>0-RTT</strong> — данные отправляются сразу, без ожидания!
+          </p>
+          <p class="text-indigo-800 mb-0">
+            Также TLS 1.3 удалил устаревшие и небезопасные алгоритмы (MD5, SHA-1, RC4, DES).
+          </p>
+        </div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">5</span>
+          HTTP Request — запрос к серверу
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Наконец-то! Соединение установлено, шифрование настроено. Браузер отправляет HTTP-запрос:
+        </p>
+        
+        <div class="bg-gray-900 text-indigo-400 p-6 rounded-lg font-mono text-sm mb-6 overflow-x-auto">
+          <pre>GET /page HTTP/2
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: session=abc123; theme=dark
+Cache-Control: max-age=0</pre>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что означают эти заголовки?</h3>
+        
+        <div class="bg-white border border-gray-200 rounded-lg divide-y divide-gray-200 mb-6">
+          <div class="p-4">
+            <code class="text-indigo-600 font-bold">GET /page HTTP/2</code>
+            <p class="text-gray-600 text-sm mt-1">Метод (GET = получить), путь (/page), версия протокола</p>
+          </div>
+          <div class="p-4">
+            <code class="text-indigo-600 font-bold">Host: example.com</code>
+            <p class="text-gray-600 text-sm mt-1">Какой домен запрашиваем (важно для серверов с несколькими сайтами)</p>
+          </div>
+          <div class="p-4">
+            <code class="text-indigo-600 font-bold">User-Agent</code>
+            <p class="text-gray-600 text-sm mt-1">Информация о браузере и ОС. Сервер может отдавать разный контент разным браузерам</p>
+          </div>
+          <div class="p-4">
+            <code class="text-indigo-600 font-bold">Accept-Encoding: gzip, deflate, br</code>
+            <p class="text-gray-600 text-sm mt-1">Какие алгоритмы сжатия поддерживаем. br = Brotli (самый эффективный)</p>
+          </div>
+          <div class="p-4">
+            <code class="text-indigo-600 font-bold">Cookie</code>
+            <p class="text-gray-600 text-sm mt-1">Данные сессии, авторизации, настроек</p>
+          </div>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">HTTP/2 и HTTP/3</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Современные браузеры используют <strong>HTTP/2</strong> (2015) или <strong>HTTP/3</strong> (2022):
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li><strong>Мультиплексирование</strong> — несколько запросов по одному соединению параллельно</li>
+          <li><strong>Сжатие заголовков</strong> — HPACK/QPACK экономит трафик</li>
+          <li><strong>Server Push</strong> — сервер может отправить файлы до того, как браузер их запросит</li>
+          <li><strong>HTTP/3</strong> использует QUIC (на базе UDP) вместо TCP — ещё быстрее!</li>
+        </ul>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">6</span>
+          Обработка на сервере
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Запрос достиг сервера. Что происходит там?
+        </p>
+        
+        <ol class="list-decimal pl-6 text-gray-700 mb-6">
+          <li class="mb-3">
+            <strong>Load Balancer</strong> — распределяет запросы между серверами (если их несколько)
+          </li>
+          <li class="mb-3">
+            <strong>Reverse Proxy (Nginx/Apache)</strong> — принимает соединение, может отдать статику из кэша
+          </li>
+          <li class="mb-3">
+            <strong>Application Server</strong> — Node.js, Python, PHP, Java выполняют код
+          </li>
+          <li class="mb-3">
+            <strong>Database</strong> — если нужны данные, сервер обращается к БД
+          </li>
+          <li class="mb-3">
+            <strong>Cache (Redis/Memcached)</strong> — часто запрашиваемые данные кэшируются
+          </li>
+          <li class="mb-3">
+            <strong>Template Engine</strong> — генерируется HTML
+          </li>
+        </ol>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">7</span>
+          HTTP Response — ответ сервера
+        </h2>
+        
+        <div class="bg-gray-900 text-indigo-400 p-6 rounded-lg font-mono text-sm mb-6 overflow-x-auto">
+          <pre>HTTP/2 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Encoding: br
+Content-Length: 45123
+Cache-Control: max-age=3600
+ETag: "abc123"
+Set-Cookie: session=xyz789; Secure; HttpOnly
+Strict-Transport-Security: max-age=31536000
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Example&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/style.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;script src="/app.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Важные заголовки ответа</h3>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li><strong>200 OK</strong> — успешно. Другие коды: 301 (редирект), 404 (не найдено), 500 (ошибка сервера)</li>
+          <li><strong>Content-Encoding: br</strong> — контент сжат алгоритмом Brotli</li>
+          <li><strong>Cache-Control</strong> — как долго браузер может хранить ответ в кэше</li>
+          <li><strong>ETag</strong> — "отпечаток" контента для проверки актуальности кэша</li>
+          <li><strong>Strict-Transport-Security</strong> — HSTS, о котором говорили выше</li>
+        </ul>
+      </section>
+
+      <!-- Step 8 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="flex items-center justify-center w-10 h-10 bg-indigo-600 text-white rounded-full text-lg font-bold mr-4">8</span>
+          Рендеринг страницы
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          HTML получен. Теперь самый сложный этап — браузер должен превратить текстовый код в красивую интерактивную страницу. Это называется <strong>Critical Rendering Path</strong>.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Этапы рендеринга</h3>
+        
+        <div class="bg-white border border-gray-200 rounded-lg divide-y divide-gray-200 mb-6">
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+              <h4 class="font-bold text-gray-900">Parsing HTML → DOM</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Браузер читает HTML и строит DOM (Document Object Model) — дерево элементов. Каждый тег становится узлом дерева.</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+              <h4 class="font-bold text-gray-900">Parsing CSS → CSSOM</h4>
+            </div>
+            <p class="text-gray-600 text-sm">CSS парсится в CSSOM (CSS Object Model). Вычисляются финальные стили для каждого элемента (каскад, специфичность, наследование).</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+              <h4 class="font-bold text-gray-900">DOM + CSSOM → Render Tree</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Объединение в дерево рендеринга. Невидимые элементы (display: none, &lt;head&gt;) не включаются.</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">4</span>
+              <h4 class="font-bold text-gray-900">Layout (Reflow)</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Вычисление точных размеров и позиций каждого элемента. Учитывается размер окна, шрифты, отступы.</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">5</span>
+              <h4 class="font-bold text-gray-900">Paint</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Отрисовка пикселей: текст, цвета, изображения, тени, границы. Создаются слои (layers).</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">6</span>
+              <h4 class="font-bold text-gray-900">Composite</h4>
+            </div>
+            <p class="text-gray-600 text-sm">Объединение слоёв в правильном порядке (z-index). Отправка на GPU для отображения.</p>
+          </div>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Блокирующие ресурсы</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Некоторые ресурсы блокируют рендеринг:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li><strong>CSS</strong> — браузер ждёт загрузки CSS, чтобы не показывать "голый" HTML</li>
+          <li><strong>JavaScript (без async/defer)</strong> — блокирует парсинг HTML</li>
+        </ul>
+        
+        <p class="text-gray-700 mb-4">
+          Поэтому CSS ставят в <code class="bg-gray-100 px-2 py-1 rounded">&lt;head&gt;</code>, а JavaScript — перед <code class="bg-gray-100 px-2 py-1 rounded">&lt;/body&gt;</code> или с атрибутами <code class="bg-gray-100 px-2 py-1 rounded">async</code>/<code class="bg-gray-100 px-2 py-1 rounded">defer</code>.
+        </p>
+      </section>
+
+      <!-- Timeline -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">
+          <i class="fas fa-stopwatch text-indigo-600 mr-2"></i>
+          Сколько всё это занимает?
+        </h2>
+        
+        <p class="text-gray-700 mb-4">
+          Давайте посчитаем для типичного сайта при соединении с сервером в 100мс (Европа):
+        </p>
+        
+        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 mb-6">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="text-gray-600">
+                <th class="pb-3">Этап</th>
+                <th class="pb-3">Время</th>
+                <th class="pb-3">Накопленное</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-900">
+              <tr class="border-t border-gray-200">
+                <td class="py-2">DNS Lookup (из кэша)</td>
+                <td class="py-2 font-mono">~1 мс</td>
+                <td class="py-2 font-mono">1 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-2">TCP Handshake</td>
+                <td class="py-2 font-mono">~100 мс</td>
+                <td class="py-2 font-mono">101 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-2">TLS Handshake (TLS 1.3)</td>
+                <td class="py-2 font-mono">~100 мс</td>
+                <td class="py-2 font-mono">201 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-2">HTTP Request + Response</td>
+                <td class="py-2 font-mono">~150 мс</td>
+                <td class="py-2 font-mono">351 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-2">Загрузка CSS/JS</td>
+                <td class="py-2 font-mono">~200 мс</td>
+                <td class="py-2 font-mono">551 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-2">Рендеринг</td>
+                <td class="py-2 font-mono">~150 мс</td>
+                <td class="py-2 font-mono">701 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200 bg-indigo-100">
+                <td class="py-2 font-bold">Итого до First Contentful Paint</td>
+                <td class="py-2 font-mono font-bold" colspan="2">~700-1000 мс</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Вот почему <strong>производительность важна</strong>. Каждый шаг можно оптимизировать: CDN для уменьшения RTT, HTTP/2 для параллельных запросов, кэширование, сжатие, lazy loading.
+        </p>
+      </section>
+
+      <!-- Conclusion -->
+      <section class="bg-gray-900 text-white rounded-2xl p-8 mb-12">
+        <h2 class="text-2xl font-bold mb-4">Заключение</h2>
+        <p class="text-gray-300 mb-4">
+          За простым действием "открыть сайт" скрывается удивительная сложность. Десятки протоколов, сотни миллисекунд ожидания, миллионы строк кода в браузере — всё это работает каждый раз, когда вы нажимаете Enter.
+        </p>
+        <p class="text-gray-300 mb-4">
+          И это мы ещё не затронули: Service Workers, HTTP Caching, Content Negotiation, WebSockets, Preload/Prefetch, Critical CSS, Code Splitting...
+        </p>
+        <p class="text-gray-300 mb-0">
+          Понимание этого процесса отличает новичка от профессионала. Теперь вы знаете, что происходит "под капотом" — используйте это знание для создания быстрых и надёжных веб-приложений!
+        </p>
+      </section>
+      
+    </div>
+
+    <!-- Author -->
+    <footer class="border-t border-gray-200 pt-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-500 text-sm">Опубликовано: 30 января 2026</p>
+          <p class="text-gray-500 text-sm">Категория: Глубокий разбор</p>
+        </div>
+        <a href="../library.html" class="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-800">
+          <i class="fas fa-arrow-left mr-2"></i> Все статьи
+        </a>
+      </div>
+    </footer>
+  </article>
+</body>
+</html>

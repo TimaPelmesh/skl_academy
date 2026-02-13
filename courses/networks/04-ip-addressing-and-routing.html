@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IP-адресация и маршрутизация: IPv4/IPv6, NAT, основы маршрутизации">
+    <meta name="keywords" content="IPv4, IPv6, NAT, подсети, маршрутизация, шлюз, таблица маршрутизации">
+    <title>IP-адресация и маршрутизация — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/04-ip-addressing-and-routing.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">4. IP‑адресация</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#ipv4" class="subtopic active">4.1 IPv4 и подсети</a>
+                        <a href="#nat" class="subtopic">4.2 NAT</a>
+                        <a href="#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="ipv4" class="topic-section">
+                <h2>4.1 IPv4 и подсети</h2>
+                <div class="lesson-content">
+                    <h3>Что такое IP-адрес?</h3>
+                    <p><strong>IPv4-адрес</strong> — это уникальный 32-битный идентификатор устройства в сети. Он записывается в виде четырех чисел от 0 до 255, разделенных точками, например: <code>192.168.1.10</code>.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> IP-адрес — это как почтовый адрес для устройства в интернете. Он показывает, где находится устройство и как к нему доставить данные.</p>
+                    </div>
+
+                    <h3>Структура IP-адреса: сеть и хост</h3>
+                    <p>Каждый IP-адрес состоит из двух частей:</p>
+                    <ul>
+                        <li><strong>Сетевая часть</strong> — идентифицирует сеть, к которой принадлежит устройство</li>
+                        <li><strong>Хостовая часть</strong> — идентифицирует конкретное устройство в этой сети</li>
+                    </ul>
+
+                    <div class="visual-guide">
+                        <h4>Пример: 192.168.1.10/24</h4>
+                        <ul>
+                            <li><strong>192.168.1</strong> — сетевая часть (первые 24 бита)</li>
+                            <li><strong>10</strong> — хостовая часть (последние 8 бит)</li>
+                            <li><strong>/24</strong> — маска подсети, показывает, что первые 24 бита относятся к сети</li>
+                        </ul>
+                    </div>
+
+                    <h3>Маска подсети: как разделить адрес</h3>
+                    <p><strong>Маска подсети</strong> определяет, какая часть IP-адреса относится к сети, а какая — к хосту. Она записывается так же, как IP-адрес, или в формате CIDR (например, /24).</p>
+
+                    <div class="visual-guide">
+                        <h4>Примеры масок:</h4>
+                        <ul>
+                            <li><strong>/24</strong> (255.255.255.0) — первые 24 бита для сети, последние 8 бит для хостов. Позволяет 254 хоста (256 - 2)</li>
+                            <li><strong>/16</strong> (255.255.0.0) — первые 16 бит для сети, последние 16 бит для хостов. Позволяет 65534 хоста</li>
+                            <li><strong>/8</strong> (255.0.0.0) — первые 8 бит для сети, последние 24 бита для хостов. Позволяет миллионы хостов</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Первый адрес в подсети (например, 192.168.1.0) — это адрес сети. Последний адрес (192.168.1.255) — это broadcast-адрес. Их нельзя использовать для устройств.</p>
+                    </div>
+
+                    <h3>Зачем нужны подсети?</h3>
+                    <p><strong>Подсеть</strong> (subnet) — это логическое разделение большой сети на меньшие части. Это нужно для:</p>
+
+                    <div class="visual-guide">
+                        <h4>Преимущества подсетей:</h4>
+                        <ul>
+                            <li><strong>Уменьшение broadcast-трафика:</strong> Broadcast не выходит за пределы подсети</li>
+                            <li><strong>Безопасность:</strong> Можно изолировать отделы или группы устройств</li>
+                            <li><strong>Организация:</strong> Легче управлять сетью, когда она разделена на логические части</li>
+                            <li><strong>Маршрутизация:</strong> Маршрутизаторы работают эффективнее с меньшими таблицами</li>
+                        </ul>
+                    </div>
+
+                    <h3>Классовая адресация: история IPv4</h3>
+                    <p>В начале истории интернета (до 1993 года) IP-адреса распределялись по <strong>классам</strong>. Это была простая, но неэффективная система, которая приводила к огромным потерям адресного пространства.</p>
+
+                    <div class="visual-guide">
+                        <h4>Классы IP-адресов:</h4>
+                        <ul>
+                            <li><strong>Класс A</strong> — первый бит = 0. Диапазон: 1.0.0.0 — 126.255.255.255. Маска: /8 (255.0.0.0). Сетей: 126, хостов в каждой: 16,777,214</li>
+                            <li><strong>Класс B</strong> — первые биты = 10. Диапазон: 128.0.0.0 — 191.255.255.255. Маска: /16 (255.255.0.0). Сетей: 16,384, хостов в каждой: 65,534</li>
+                            <li><strong>Класс C</strong> — первые биты = 110. Диапазон: 192.0.0.0 — 223.255.255.255. Маска: /24 (255.255.255.0). Сетей: 2,097,152, хостов в каждой: 254</li>
+                            <li><strong>Класс D</strong> — первые биты = 1110. Диапазон: 224.0.0.0 — 239.255.255.255. Используется для multicast (групповой рассылки)</li>
+                            <li><strong>Класс E</strong> — первые биты = 1111. Диапазон: 240.0.0.0 — 255.255.255.255. Зарезервирован для экспериментальных целей</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Класс</th><th>Первый октет</th><th>Маска по умолчанию</th><th>Количество сетей</th><th>Хостов в сети</th><th>Пример</th></tr>
+                            <tr><td><strong>A</strong></td><td>1-126</td><td>/8 (255.0.0.0)</td><td>126</td><td>16,777,214</td><td>10.0.0.0</td></tr>
+                            <tr><td><strong>B</strong></td><td>128-191</td><td>/16 (255.255.0.0)</td><td>16,384</td><td>65,534</td><td>172.16.0.0</td></tr>
+                            <tr><td><strong>C</strong></td><td>192-223</td><td>/24 (255.255.255.0)</td><td>2,097,152</td><td>254</td><td>192.168.1.0</td></tr>
+                            <tr><td><strong>D</strong></td><td>224-239</td><td>N/A</td><td>Multicast</td><td>N/A</td><td>224.0.0.1</td></tr>
+                            <tr><td><strong>E</strong></td><td>240-255</td><td>N/A</td><td>Experimental</td><td>N/A</td><td>240.0.0.1</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Как определить класс адреса:</h4>
+                        <ul>
+                            <li><strong>10.5.20.100</strong> — первый октет 10 → Класс A</li>
+                            <li><strong>172.16.5.1</strong> — первый октет 172 → Класс B</li>
+                            <li><strong>192.168.1.10</strong> — первый октет 192 → Класс C</li>
+                            <li><strong>224.0.0.5</strong> — первый октет 224 → Класс D (multicast)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Проблема классовой адресации:</strong> Компании получали целый класс адресов. Класс C (254 хоста) был слишком мал для средних компаний, а класс B (65,534 хоста) был слишком велик — большинство адресов не использовались. Это привело к быстрому исчерпанию адресного пространства.</p>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Специальные адреса:</strong></p>
+                        <ul>
+                            <li><strong>0.0.0.0</strong> — неопределенный адрес, используется для обозначения "любого адреса"</li>
+                            <li><strong>127.0.0.0/8</strong> — loopback-адрес (обратная петля), 127.0.0.1 указывает на само устройство</li>
+                            <li><strong>255.255.255.255</strong> — broadcast-адрес для всей сети</li>
+                        </ul>
+                    </div>
+
+                    <h3>CIDR: современная бесклассовая адресация</h3>
+                    <p><strong>CIDR</strong> (Classless Inter-Domain Routing) — это способ записи маски подсети в формате <code>/число</code>, где число показывает количество бит, отведенных для сети. CIDR был введен в 1993 году и заменил классовую адресацию.</p>
+
+                    <div class="visual-guide">
+                        <h4>Преимущества CIDR:</h4>
+                        <ul>
+                            <li><strong>Гибкость:</strong> Можно создавать сети любого размера, не ограничиваясь классами</li>
+                            <li><strong>Эффективность:</strong> Адреса используются более рационально</li>
+                            <li><strong>Агрегация:</strong> Несколько маленьких сетей можно объединить в одну большую для упрощения маршрутизации</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Примеры CIDR:</h4>
+                        <ul>
+                            <li><code>192.168.1.0/24</code> — сеть с 254 хостами (как старый класс C)</li>
+                            <li><code>10.0.0.0/8</code> — очень большая сеть (как старый класс A)</li>
+                            <li><code>172.16.0.0/16</code> — средняя сеть (как старый класс B)</li>
+                            <li><code>192.168.0.0/22</code> — сеть с 1022 хостами (гибкая маска, невозможная в классовой адресации)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Современная практика:</strong> Классовая адресация больше не используется в интернете. Все современные сети используют CIDR, который позволяет гибко настраивать размеры подсетей в зависимости от реальных потребностей.</p>
+                    </div>
+
+                    <h3>Приватные и публичные адреса</h3>
+                    <p>Не все IP-адреса доступны в интернете. Есть специальные диапазоны для внутренних сетей:</p>
+
+                    <div class="visual-guide">
+                        <h4>Приватные диапазоны (RFC 1918):</h4>
+                        <ul>
+                            <li><strong>10.0.0.0/8</strong> — одна большая сеть (16,777,214 хостов)</li>
+                            <li><strong>172.16.0.0/12</strong> — диапазон из 16 сетей класса B</li>
+                            <li><strong>192.168.0.0/16</strong> — диапазон из 256 сетей класса C</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Приватные адреса не маршрутизируются в интернете. Для выхода в интернет используется NAT (Network Address Translation), который преобразует приватные адреса в публичные.</p>
+                    </div>
+
+                    <h3>Планирование адресного пространства</h3>
+                    <p>При создании сети важно правильно спланировать адресацию:</p>
+
+                    <div class="visual-guide">
+                        <h4>Рекомендации:</h4>
+                        <ul>
+                            <li><strong>Резервирование адресов:</strong> Оставляйте адреса для инфраструктуры (шлюзы, серверы, принтеры)</li>
+                            <li><strong>Рост сети:</strong> Планируйте с запасом, но не слишком большим (чтобы не тратить адреса впустую)</li>
+                            <li><strong>Адреса точка-точка:</strong> Для соединений между маршрутизаторами используйте /30 или /31 (всего 2-4 адреса)</li>
+                            <li><strong>Агрегация:</strong> Используйте CIDR для объединения нескольких подсетей в одну большую (упрощает маршрутизацию)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Шлюз по умолчанию</h3>
+                    <p><strong>Шлюз по умолчанию</strong> (default gateway) — это IP-адрес маршрутизатора, через который устройство отправляет пакеты в другие сети (включая интернет).</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Если ваше устройство имеет адрес 192.168.1.10/24, а шлюз — 192.168.1.1, то все пакеты, адресованные не в сеть 192.168.1.0/24, будут отправляться на 192.168.1.1.</p>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Термин</th><th>Описание</th></tr>
+                            <tr><td><strong>IP-адрес</strong></td><td>32-битный идентификатор устройства в сети (например, 192.168.1.10)</td></tr>
+                            <tr><td><strong>Маска подсети</strong></td><td>Определяет, какая часть адреса — сеть, а какая — хост (например, /24 или 255.255.255.0)</td></tr>
+                            <tr><td><strong>CIDR</strong></td><td>Современная запись маски в формате /число (например, /24 означает первые 24 бита для сети)</td></tr>
+                            <tr><td><strong>Подсеть</strong></td><td>Логическое разделение большой сети на меньшие части для организации и безопасности</td></tr>
+                            <tr><td><strong>Шлюз по умолчанию</strong></td><td>IP-адрес маршрутизатора для выхода в другие сети</td></tr>
+                            <tr><td><strong>Приватные адреса</strong></td><td>Диапазоны для внутренних сетей (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Просмотр IP-адреса и маски подсети
+# Windows
+ipconfig /all
+
+# Просмотр таблицы маршрутизации
+route print
+
+# Linux/macOS
+ip addr show
+# или
+ifconfig
+
+# Просмотр таблицы маршрутизации
+ip route show
+# или
+route -n</code></pre>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>IP-адрес</strong> — уникальный идентификатор устройства (32 бита, записывается как 4 числа)</li>
+                            <li><strong>Маска подсети</strong> — определяет, какая часть адреса относится к сети, а какая — к хосту</li>
+                            <li><strong>CIDR</strong> — современная запись маски в формате /число (например, /24)</li>
+                            <li><strong>Подсети</strong> — логическое разделение сети для организации, безопасности и уменьшения broadcast-трафика</li>
+                            <li><strong>Приватные адреса</strong> — диапазоны для внутренних сетей, не маршрутизируются в интернете</li>
+                            <li><strong>Шлюз по умолчанию</strong> — маршрутизатор для выхода в другие сети</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Правильное планирование адресации обеспечивает эффективную работу сети, безопасность и возможность роста.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="nat" class="topic-section">
+                <h2>4.2 NAT</h2>
+                <div class="lesson-content">
+                    <h3>Проблема: нехватка публичных IP-адресов</h3>
+                    <p>В интернете используется ограниченное количество публичных IP-адресов (IPv4). Если каждому устройству в домашней или офисной сети нужен свой публичный адрес, их быстро не хватит. Кроме того, приватные адреса (192.168.x.x, 10.x.x.x) не маршрутизируются в интернете.</p>
+
+                    <div class="note">
+                        <p><strong>Решение:</strong> <strong>NAT</strong> (Network Address Translation) — технология преобразования приватных адресов в публичные. Один публичный адрес может использоваться множеством устройств.</p>
+                    </div>
+
+                    <h3>Как работает NAT?</h3>
+                    <p><strong>NAT</strong> работает на маршрутизаторе (роутере) и преобразует IP-адреса при прохождении пакетов между внутренней сетью и интернетом.</p>
+
+                    <div class="visual-guide">
+                        <h4>Процесс работы NAT (упрощенно):</h4>
+                        <ol>
+                            <li><strong>Устройство в локальной сети</strong> (например, 192.168.1.10) хочет открыть сайт в интернете</li>
+                            <li><strong>Пакет отправляется на маршрутизатор</strong> с приватным адресом отправителя (192.168.1.10)</li>
+                            <li><strong>Маршрутизатор заменяет</strong> приватный адрес на свой публичный адрес (например, 203.0.113.5) и запоминает это соответствие</li>
+                            <li><strong>Пакет уходит в интернет</strong> с публичным адресом маршрутизатора</li>
+                            <li><strong>Ответ приходит</strong> на публичный адрес маршрутизатора</li>
+                            <li><strong>Маршрутизатор находит</strong> в своей таблице, какому устройству (192.168.1.10) принадлежит ответ, и пересылает его</li>
+                        </ol>
+                    </div>
+
+                    <h3>PAT (NAT Overload): один адрес для многих</h3>
+                    <p><strong>PAT</strong> (Port Address Translation) или <strong>NAT Overload</strong> — самый распространенный тип NAT. Он позволяет множеству устройств использовать один публичный IP-адрес одновременно, используя разные порты.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает PAT:</h4>
+                        <ul>
+                            <li>Маршрутизатор отслеживает не только IP-адреса, но и <strong>порты</strong></li>
+                            <li>Каждое внутреннее соединение получает уникальный <strong>внешний порт</strong></li>
+                            <li>Пример: 192.168.1.10:50000 → 203.0.113.5:60001, 192.168.1.11:50000 → 203.0.113.5:60002</li>
+                            <li>Маршрутизатор использует таблицу соответствий для правильной маршрутизации ответов</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Представьте офисное здание с одним публичным адресом. Когда сотрудники звонят наружу, секретарь (NAT) записывает, кто звонит, и переадресует входящие звонки нужному сотруднику.</p>
+                    </div>
+
+                    <h3>Типы NAT</h3>
+                    <div class="visual-guide">
+                        <h4>SNAT (Source NAT) — исходящая трансляция:</h4>
+                        <ul>
+                            <li>Преобразует адрес отправителя (источника) при выходе в интернет</li>
+                            <li>Самый распространенный тип — используется в домашних роутерах</li>
+                            <li>Пример: 192.168.1.10 → 203.0.113.5</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>DNAT (Destination NAT) — входящая трансляция:</h4>
+                        <ul>
+                            <li>Преобразует адрес получателя (назначения) для входящих соединений</li>
+                            <li>Используется для проброса портов (port forwarding)</li>
+                            <li>Пример: внешний запрос на 203.0.113.5:80 → перенаправляется на 192.168.1.100:80</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Статический NAT:</h4>
+                        <ul>
+                            <li>Постоянное соответствие между приватным и публичным адресом</li>
+                            <li>Один приватный адрес = один публичный адрес</li>
+                            <li>Используется для серверов, которым нужен постоянный публичный адрес</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Динамический NAT:</h4>
+                        <ul>
+                            <li>Публичные адреса выделяются из пула по мере необходимости</li>
+                            <li>Когда соединение заканчивается, адрес возвращается в пул</li>
+                            <li>Более эффективное использование публичных адресов</li>
+                        </ul>
+                    </div>
+
+                    <h3>Проблемы NAT и их решения</h3>
+                    <div class="visual-guide">
+                        <h4>Проблема: входящие соединения</h4>
+                        <p>По умолчанию NAT работает только для исходящих соединений. Если кто-то из интернета хочет подключиться к вашему устройству, NAT не знает, куда переслать пакет.</p>
+                        <p><strong>Решение — проброс портов (Port Forwarding):</strong></p>
+                        <ul>
+                            <li>Настраивается правило: "все запросы на порт 80 публичного адреса → пересылать на 192.168.1.100:80"</li>
+                            <li>Позволяет серверам в локальной сети быть доступными из интернета</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Проблема: некоторые приложения</h4>
+                        <p>Некоторые приложения (VoIP, онлайн-игры, peer-to-peer) требуют прямого соединения между устройствами. NAT может мешать этому.</p>
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>ALG (Application Layer Gateway)</strong> — специальные модули в NAT, которые понимают протоколы приложений</li>
+                            <li><strong>UPnP/NAT-PMP</strong> — протоколы, позволяющие приложениям автоматически настраивать проброс портов</li>
+                            <li><strong>Туннелирование</strong> — обход NAT через VPN или другие туннели</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Нарушение сквозной адресации:</strong> NAT нарушает принцип "сквозной адресации" интернета, где каждое устройство должно иметь уникальный адрес. Это создает проблемы для некоторых протоколов, но решает проблему нехватки адресов.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>NAT</strong> — преобразование приватных адресов в публичные для выхода в интернет</li>
+                            <li><strong>PAT (NAT Overload)</strong> — один публичный адрес для множества устройств через разные порты</li>
+                            <li><strong>SNAT</strong> — исходящая трансляция (приватный → публичный)</li>
+                            <li><strong>DNAT</strong> — входящая трансляция (публичный → приватный, проброс портов)</li>
+                            <li><strong>Статический NAT</strong> — постоянное соответствие адресов</li>
+                            <li><strong>Динамический NAT</strong> — адреса выделяются из пула</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Позволить множеству устройств с приватными адресами выходить в интернет через один публичный адрес, экономя дефицитные публичные адреса.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ipv6" class="topic-section">
+                <h2>4.3 IPv6</h2>
+                <div class="lesson-content">
+                    <h3>Проблема IPv4: нехватка адресов</h3>
+                    <p>IPv4 использует 32-битные адреса, что дает около 4.3 миллиарда возможных адресов. Это казалось много в 1980-х, но сейчас адресов не хватает. <strong>IPv6</strong> решает эту проблему, используя 128-битные адреса — это примерно 340 ундециллионов адресов (340,282,366,920,938,463,463,374,607,431,768,211,456).</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если IPv4 — это телефонная книга одного города, то IPv6 — это телефонная книга всей вселенной. Адресов хватит на миллиарды лет вперед.</p>
+                    </div>
+
+                    <h3>Основные отличия IPv6 от IPv4</h3>
+                    <div class="visual-guide">
+                        <h4>Ключевые различия:</h4>
+                        <ul>
+                            <li><strong>Размер адреса:</strong> 128 бит вместо 32 (в 4 раза больше)</li>
+                            <li><strong>Запись адреса:</strong> Шестнадцатеричная запись (например, 2001:0db8:85a3:0000:0000:8a2e:0370:7334)</li>
+                            <li><strong>Автонастройка:</strong> Устройства могут автоматически получить адрес без DHCP (SLAAC)</li>
+                            <li><strong>NDP вместо ARP:</strong> Neighbor Discovery Protocol заменяет ARP</li>
+                            <li><strong>Нет NAT:</strong> По замыслу, NAT не нужен — адресов хватает всем</li>
+                            <li><strong>Упрощенный заголовок:</strong> Более эффективная обработка маршрутизаторами</li>
+                        </ul>
+                    </div>
+
+                    <h3>Формат IPv6-адреса</h3>
+                    <p>IPv6-адрес записывается в шестнадцатеричном формате, разделенном двоеточиями. Состоит из 8 групп по 4 шестнадцатеричных цифры (16 бит каждая).</p>
+
+                    <div class="visual-guide">
+                        <h4>Примеры IPv6-адресов:</h4>
+                        <ul>
+                            <li><strong>Полная запись:</strong> <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code></li>
+                            <li><strong>Сокращенная запись:</strong> <code>2001:db8:85a3::8a2e:370:7334</code> (нули можно опускать, :: заменяет группы нулей)</li>
+                            <li><strong>Loopback:</strong> <code>::1</code> (аналог 127.0.0.1 в IPv4)</li>
+                            <li><strong>Неопределенный адрес:</strong> <code>::</code> (используется при отсутствии адреса)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Правила сокращения:</strong> Можно опускать ведущие нули в группах. Можно использовать <code>::</code> один раз для замены одной или нескольких групп нулей подряд.</p>
+                    </div>
+
+                    <h3>Типы IPv6-адресов</h3>
+                    <div class="visual-guide">
+                        <h4>Unicast (одноадресная рассылка):</h4>
+                        <ul>
+                            <li><strong>Global Unicast</strong> — публичные адреса для интернета (начинаются с 2000::/3)</li>
+                            <li><strong>Link-local</strong> — адреса для связи в пределах одного сегмента сети (fe80::/10). Обязательны на всех интерфейсах, не маршрутизируются</li>
+                            <li><strong>ULA (Unique Local Address)</strong> — приватные адреса для внутренних сетей (fc00::/7), аналог приватных IPv4</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Multicast (многоадресная рассылка):</h4>
+                        <ul>
+                            <li>Один адрес для группы устройств</li>
+                            <li>Начинаются с <code>ff00::/8</code></li>
+                            <li>Используются для эффективной рассылки данных группе устройств</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Anycast (ближайший узел):</h4>
+                        <ul>
+                            <li>Один адрес назначается нескольким устройствам</li>
+                            <li>Пакет доставляется ближайшему устройству с этим адресом</li>
+                            <li>Используется для балансировки нагрузки и отказоустойчивости</li>
+                        </ul>
+                    </div>
+
+                    <h3>Автонастройка адресов (SLAAC)</h3>
+                    <p><strong>SLAAC</strong> (Stateless Address Autoconfiguration) — устройство может автоматически получить IPv6-адрес без DHCP-сервера.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает SLAAC:</h4>
+                        <ol>
+                            <li>Устройство создает <strong>link-local адрес</strong> из своего MAC-адреса (fe80::...)</li>
+                            <li>Устройство отправляет <strong>Router Solicitation (RS)</strong> — запрос информации о сети</li>
+                            <li>Маршрутизатор отвечает <strong>Router Advertisement (RA)</strong> — сообщает префикс сети и другие параметры</li>
+                            <li>Устройство создает <strong>глобальный адрес</strong>, комбинируя префикс сети и свой идентификатор</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Преимущество:</strong> Не нужен DHCP-сервер для базовой настройки. Устройство может работать "из коробки", получив только префикс сети от маршрутизатора.</p>
+                    </div>
+
+                    <h3>Процесс EUI-64: формирование IPv6-адреса из MAC-адреса</h3>
+                    <p><strong>EUI-64</strong> (Extended Unique Identifier, 64 бита) — это метод автоматического формирования идентификатора интерфейса (Interface ID) для IPv6-адреса на основе MAC-адреса устройства. Это позволяет создать уникальный 64-битный идентификатор из 48-битного MAC-адреса.</p>
+
+                    <div class="note">
+                        <p><strong>Зачем это нужно?</strong> IPv6-адрес состоит из двух частей: <strong>префикса сети</strong> (64 бита) и <strong>идентификатора интерфейса</strong> (64 бита). EUI-64 позволяет устройству автоматически создать уникальный идентификатор интерфейса, не требуя ручной настройки или DHCP.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Структура MAC-адреса и EUI-64:</h4>
+                        <ul>
+                            <li><strong>MAC-адрес:</strong> 48 бит (6 байт), например: <code>00:1A:2B:3C:4D:5E</code></li>
+                            <li><strong>EUI-64:</strong> 64 бита (8 байт), получается из MAC-адреса путем вставки и модификации</li>
+                            <li><strong>Результат:</strong> Уникальный 64-битный идентификатор, который используется как Interface ID в IPv6-адресе</li>
+                        </ul>
+                    </div>
+
+                    <h4>Пошаговый процесс преобразования MAC → EUI-64:</h4>
+                    <p>Рассмотрим детальный процесс на конкретном примере. Исходный MAC-адрес: <code>00:1A:2B:3C:4D:5E</code></p>
+
+                    <div class="visual-guide">
+                        <h4>Шаг 1: Разделить MAC-адрес пополам</h4>
+                        <p>MAC-адрес состоит из 6 байт. Разделяем его на две части по 3 байта (24 бита):</p>
+                        <ul>
+                            <li><strong>Первая часть (OUI):</strong> <code>00:1A:2B</code> — идентификатор производителя (Organizationally Unique Identifier)</li>
+                            <li><strong>Вторая часть (Device ID):</strong> <code>3C:4D:5E</code> — уникальный идентификатор устройства</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Шаг 2: Вставить FF:FE между двумя частями</h4>
+                        <p>Между двумя частями MAC-адреса вставляем два байта <code>FF:FE</code>, чтобы получить 64 бита:</p>
+                        <ul>
+                            <li><strong>До:</strong> <code>00:1A:2B | 3C:4D:5E</code> (48 бит)</li>
+                            <li><strong>После:</strong> <code>00:1A:2B:FF:FE:3C:4D:5E</code> (64 бита)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Шаг 3: Инвертировать 7-й бит (U/L bit — Universal/Local bit)</h4>
+                        <p>Седьмой бит первого байта называется U/L bit (Universal/Local). Его нужно инвертировать:</p>
+                        <ul>
+                            <li><strong>Первый байт в двоичном виде:</strong> <code>00000000</code> (0x00)</li>
+                            <li><strong>Седьмой бит:</strong> Это второй бит справа (считая от 0): <code>00000<span style="color: red;">0</span>00</code></li>
+                            <li><strong>Инверсия:</strong> Меняем 0 на 1: <code>00000<span style="color: green;">1</span>00</code></li>
+                            <li><strong>Результат:</strong> <code>00000010</code> = <code>0x02</code></li>
+                        </ul>
+                        <p><strong>Итоговый EUI-64:</strong> <code>02:1A:2B:FF:FE:3C:4D:5E</code></p>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Зачем инвертировать 7-й бит?</strong> U/L bit показывает, является ли адрес универсальным (глобально уникальным) или локальным (назначенным администратором). После инверсии бит U/L=1 означает, что адрес глобально уникален. Это соглашение IEEE для идентификаторов EUI-64.</p>
+                    </div>
+
+                    <h4>Примеры преобразования:</h4>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>MAC-адрес</th><th>Первый байт (бинарный)</th><th>После инверсии</th><th>EUI-64</th></tr>
+                            <tr>
+                                <td><code>00:1A:2B:3C:4D:5E</code></td>
+                                <td><code>00000000</code></td>
+                                <td><code>00000010</code> (0x02)</td>
+                                <td><code>02:1A:2B:FF:FE:3C:4D:5E</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>FC:AA:14:D8:E2:4F</code></td>
+                                <td><code>11111100</code></td>
+                                <td><code>11111110</code> (0xFE)</td>
+                                <td><code>FE:AA:14:FF:FE:D8:E2:4F</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>08:00:27:12:34:56</code></td>
+                                <td><code>00001000</code></td>
+                                <td><code>00001010</code> (0x0A)</td>
+                                <td><code>0A:00:27:FF:FE:12:34:56</code></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h4>Формирование полного IPv6-адреса с EUI-64:</h4>
+                    <div class="visual-guide">
+                        <h4>Пример: создание глобального IPv6-адреса</h4>
+                        <ol>
+                            <li><strong>Префикс сети (от маршрутизатора):</strong> <code>2001:0db8:85a3:1234::/64</code></li>
+                            <li><strong>MAC-адрес устройства:</strong> <code>00:1A:2B:3C:4D:5E</code></li>
+                            <li><strong>EUI-64 (Interface ID):</strong> <code>02:1A:2B:FF:FE:3C:4D:5E</code></li>
+                            <li><strong>Преобразование в IPv6-формат:</strong> Разделяем на группы по 2 байта (16 бит): <code>021A:2BFF:FE3C:4D5E</code></li>
+                            <li><strong>Полный IPv6-адрес:</strong> <code>2001:0db8:85a3:1234:021A:2BFF:FE3C:4D5E</code></li>
+                            <li><strong>Сокращенная запись:</strong> <code>2001:db8:85a3:1234:21a:2bff:fe3c:4d5e</code> (убираем ведущие нули)</li>
+                        </ol>
+                    </div>
+
+                    <h4>Link-Local адрес с EUI-64:</h4>
+                    <div class="visual-guide">
+                        <p>Link-local адреса всегда используют префикс <code>fe80::/64</code>. Формирование аналогично:</p>
+                        <ul>
+                            <li><strong>Префикс:</strong> <code>fe80:0000:0000:0000</code> (первые 64 бита)</li>
+                            <li><strong>Interface ID (EUI-64):</strong> <code>021A:2BFF:FE3C:4D5E</code></li>
+                            <li><strong>Полный адрес:</strong> <code>fe80::21a:2bff:fe3c:4d5e</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка IPv6-адресов на интерфейсе (Linux)
+ip -6 addr show
+
+# Пример вывода:
+# inet6 fe80::21a:2bff:fe3c:4d5e/64 scope link
+# inet6 2001:db8:85a3:1234:21a:2bff:fe3c:4d5e/64 scope global dynamic
+
+# Windows
+ipconfig</code></pre>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Плюсы и минусы метода EUI-64:</h4>
+                        <p><strong>Преимущества:</strong></p>
+                        <ul>
+                            <li>Автоматическая генерация уникальных адресов без DHCP</li>
+                            <li>Адрес привязан к MAC-адресу — легко идентифицировать устройство</li>
+                            <li>Нет конфликтов адресов (каждый MAC уникален)</li>
+                        </ul>
+                        <p><strong>Недостатки:</strong></p>
+                        <ul>
+                            <li><strong>Проблемы конфиденциальности:</strong> MAC-адрес виден в публичном IPv6-адресе, можно отследить устройство</li>
+                            <li><strong>Предсказуемость:</strong> Адрес можно предсказать, зная MAC-адрес</li>
+                            <li><strong>Статичность:</strong> Адрес не меняется при смене сети (если не отключить EUI-64)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Privacy Extensions (RFC 4941):</strong> Из-за проблем конфиденциальности современные операционные системы часто используют <strong>Privacy Extensions</strong> — генерируют случайные Interface ID вместо EUI-64. Windows, macOS и Linux по умолчанию используют временные адреса для исходящих соединений, сохраняя EUI-64 адрес только как дополнительный.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Альтернативы EUI-64:</h4>
+                        <ul>
+                            <li><strong>Случайные адреса (Privacy Extensions, RFC 4941):</strong> Генерируются случайные Interface ID, периодически меняются</li>
+                            <li><strong>Stable Privacy Addresses (RFC 7217):</strong> Генерируются стабильные, но непредсказуемые адреса</li>
+                            <li><strong>Ручная настройка:</strong> Администратор назначает адреса вручную</li>
+                            <li><strong>DHCPv6:</strong> Централизованное управление адресами</li>
+                            <li><strong>Cryptographically Generated Addresses (CGA, RFC 3972):</strong> Адреса на основе криптографии</li>
+                        </ul>
+                    </div>
+
+                    <h3>NDP: замена ARP</h3>
+                    <p><strong>NDP</strong> (Neighbor Discovery Protocol) — протокол IPv6, который заменяет ARP и выполняет дополнительные функции.</p>
+
+                    <div class="visual-guide">
+                        <h4>Функции NDP:</h4>
+                        <ul>
+                            <li><strong>Обнаружение соседей:</strong> Находит MAC-адреса устройств в локальной сети (замена ARP)</li>
+                            <li><strong>Обнаружение маршрутизаторов:</strong> Находит маршрутизаторы в сети</li>
+                            <li><strong>Автоконфигурация:</strong> Получает информацию для SLAAC</li>
+                            <li><strong>Обнаружение дубликатов адресов:</strong> Проверяет, не используется ли адрес другим устройством</li>
+                        </ul>
+                    </div>
+
+                    <h3>Планирование адресации IPv6</h3>
+                    <div class="visual-guide">
+                        <h4>Рекомендации по префиксам:</h4>
+                        <ul>
+                            <li><strong>/48 для организации</strong> — стандартный размер префикса, выделяемый провайдером</li>
+                            <li><strong>/64 для подсети</strong> — стандартный размер подсети для конечных хостов</li>
+                            <li><strong>/128 для хоста</strong> — полный адрес конкретного устройства</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Префикс /64 — это стандарт для подсетей. Не используйте префиксы длиннее /64 для подсетей с хостами, это может нарушить работу некоторых протоколов.</p>
+                    </div>
+
+                    <h3>ICMPv6: критически важный протокол</h3>
+                    <p><strong>ICMPv6</strong> — улучшенная версия ICMP для IPv6. Он критически важен для работы IPv6 и выполняет множество функций.</p>
+
+                    <div class="visual-guide">
+                        <h4>Функции ICMPv6:</h4>
+                        <ul>
+                            <li><strong>Ошибки:</strong> Сообщения об ошибках (недоступен хост, превышено время и т.д.)</li>
+                            <li><strong>NDP:</strong> Сообщения для Neighbor Discovery (RS/RA/NS/NA)</li>
+                            <li><strong>PMTUD:</strong> Path MTU Discovery — определение максимального размера пакета</li>
+                            <li><strong>Redirect:</strong> Перенаправление на лучший маршрут</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Критично:</strong> Не блокируйте ICMPv6! Без него IPv6 не будет работать. Это не то же самое, что ICMP в IPv4 — ICMPv6 необходим для базовой функциональности.</p>
+                    </div>
+
+                    <h3>Заголовок IPv6: упрощение</h3>
+                    <p>Заголовок IPv6 упрощен по сравнению с IPv4:</p>
+
+                    <div class="visual-guide">
+                        <h4>Особенности заголовка:</h4>
+                        <ul>
+                            <li><strong>Фиксированный размер:</strong> 40 байт (в IPv4 — переменный, минимум 20 байт)</li>
+                            <li><strong>Расширения:</strong> Дополнительные заголовки добавляются при необходимости (Routing, Fragment, AH/ESP)</li>
+                            <li><strong>Упрощенная обработка:</strong> Маршрутизаторы обрабатывают пакеты быстрее</li>
+                            <li><strong>Нет checksum:</strong> Проверка целостности выполняется на других уровнях</li>
+                        </ul>
+                    </div>
+
+                    <h3>Минимальный MTU</h3>
+                    <p>Минимальный MTU (Maximum Transmission Unit) для IPv6 — <strong>1280 байт</strong>. Это больше, чем стандартный 1500 байт для Ethernet, но важно для некоторых типов сетей.</p>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Если сеть не поддерживает MTU 1280 байт, IPv6 использует фрагментацию на уровне отправителя (не на маршрутизаторах, как в IPv4).</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>IPv6</strong> — 128-битная адресация, решает проблему нехватки адресов IPv4</li>
+                            <li><strong>Формат:</strong> 8 групп по 4 шестнадцатеричные цифры, разделенные двоеточиями</li>
+                            <li><strong>Типы адресов:</strong> Global Unicast, Link-local, ULA, Multicast, Anycast</li>
+                            <li><strong>SLAAC</strong> — автоматическая настройка адресов без DHCP</li>
+                            <li><strong>NDP</strong> — замена ARP, выполняет множество функций</li>
+                            <li><strong>ICMPv6</strong> — критически важен, не блокируйте его</li>
+                            <li><strong>Префиксы:</strong> /48 для организации, /64 для подсети</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить достаточное количество адресов для будущего интернета и упростить настройку сетей.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ipv6-advanced" class="topic-section">
+                <h2>4.4 IPv6 углубление</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>SLAAC/RA/ND</strong>: роль RA, параметры префикса, NDP в соседском обнаружении.</li>
+                        <li><strong>DHCPv6</strong>: stateful/stateless сценарии, сочетание с RA.</li>
+                        <li><strong>Dual‑stack и миграция</strong>: NAT64, DNS64, NPTv6, туннели.</li>
+                        <li><strong>Безопасность</strong>: RA Guard, DHCPv6 Guard, контроль ICMPv6; особенности фильтрации.</li>
+                    </ul>
+                    <div class="visual-guide">
+                        <h4>Переход и совместимость</h4>
+                        <ul>
+                            <li><strong>464XLAT</strong>, <strong>DS‑Lite</strong>, <strong>MAP‑T/MAP‑E</strong>: варианты для провайдеров и enterprise.</li>
+                            <li><strong>Нумерация</strong>: EUI‑64, Privacy Extensions (RFC 4941/8981) и влияние на наблюдаемость.</li>
+                            <li><strong>Суммаризация</strong>: агрегируйте префиксы между площадками для устойчивой маршрутизации.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ipv6-services" class="topic-section">
+                <h2>4.5 IPv6 сервисы</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>Сетевые сервисы</h4>
+                        <ul>
+                            <li><strong>DNS</strong>: записи AAAA, обратные зоны ip6.arpa; EDNS0, DNSSEC.</li>
+                            <li><strong>DHCPv6‑опции</strong>: Prefix Delegation (PD), DNS‑сервера, домены поиска.</li>
+                            <li><strong>MLD/IGMPv3</strong>: управление multicast‑подписками; MLD Snooping на L2.</li>
+                            <li><strong>Service Discovery</strong>: mDNS/Bonjour/LLMNR нюансы в IPv6‑сегментах.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>RA‑флаги</strong>: A/M/O управляют режимами SLAAC/DHCPv6; согласуйте с политикой адресации.</p></div>
+                </div>
+            </section>
+
+            
+
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+

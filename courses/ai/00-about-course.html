@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Курс «Введение в AI»: нейросети, LLM, движки, алгоритмы, CatBoost, LightGBM и модели прогнозов">
+    <meta name="keywords" content="искусственный интеллект, нейросети, LLM, машинное обучение, CatBoost, LightGBM, модели прогнозов">
+    <title>О курсе — Введение в AI | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/ai/00-about-course.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="ai">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Введение в AI</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="course-overview" class="topic-section">
+                <h2>О курсе</h2>
+                <div class="lesson-content">
+                    <p><strong>«Введение в AI»</strong> — курс для тех, кто хочет разобраться, как устроен искусственный интеллект: от базовых идей до конкретных технологий.</p>
+                    <p>В курсе рассматриваются:</p>
+                    <ul>
+                        <li><strong>Нейросети</strong> — как устроены, как обучаются, за счёт чего дают результат; типы задач (классификация, регрессия, генерация).</li>
+                        <li><strong>LLM (большие языковые модели)</strong> — движки, алгоритмы, инференс, токенизация, что относится к чат-ботам и генерации текста; трансформеры и внимание.</li>
+                        <li><strong>Модели прогнозов</strong> — регрессия и классификация, градиентный бустинг: CatBoost, LightGBM, XGBoost; когда что выбирать и как оценивать.</li>
+                        <li><strong>Инструменты и практика</strong> — библиотеки (PyTorch, Hugging Face, scikit-learn), пайплайны, выкладка моделей, версионирование.</li>
+                    </ul>
+                    <div class="note">
+                        <p><strong>Важно:</strong> Курс даёт понимание концепций и карту экосистемы. Для глубокой практики понадобятся Python и базовые знания математики/статистики.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="who-its-for" class="topic-section">
+                <h2>Кому подойдёт</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li>Тем, кто хочет <strong>влиться в AI/ML</strong> и нужна структурированная карта темы без воды.</li>
+                        <li>Разработчикам и аналитикам <strong>без глубокого бэкграунда</strong> в машинном обучении.</li>
+                        <li>Для <strong>ориентации</strong> перед более тяжёлыми курсами (Coursera, специализации) и перед первыми проектами или Kaggle.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="prerequisites" class="topic-section">
+                <h2>Что желательно иметь заранее</h2>
+                <div class="lesson-content">
+                    <p>Курс можно проходить и без кода, но для практики и «вливания» полезны:</p>
+                    <ul>
+                        <li><strong>Базовый Python</strong> — циклы, функции, списки/словари; умение читать чужой код и запускать скрипты.</li>
+                        <li><strong>Минимум математики</strong> — что такое производная и градиент, базовые вероятность и статистика (среднее, дисперсия). Без этого курс даст общую картину, но формулы и статьи будут тяжелее.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="how-to-study" class="topic-section">
+                <h2>Как изучать</h2>
+                <div class="lesson-content">
+                    <p>Идите по модулям по порядку: сначала общее представление об ИИ и нейросетях, затем LLM, потом модели прогнозов и инструменты. После каждого урока полезно пробовать примеры в коде (Colab, локальный Jupyter) или смотреть разборы на Kaggle.</p>
+                </div>
+            </section>
+
+            <section id="course-limits" class="topic-section">
+                <h2>Ограничения курса</h2>
+                <div class="lesson-content">
+                    <p>Курс <strong>не заменяет</strong>:</p>
+                    <ul>
+                        <li>Полноценный курс по машинному обучению (типа Andrew Ng или специализаций по deep learning).</li>
+                        <li>Реальную практику: свои проекты, Kaggle, пет-проекты с данными и деплоем.</li>
+                        <li>Углублённую математику (линейная алгебра, матан, теория вероятностей) — здесь даётся минимум для понимания идей.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="strict-assessment" class="topic-section">
+                <h2>Строгая оценка: подойдёт ли для вливания в AI/ML?</h2>
+                <div class="lesson-content">
+                    <p><strong>Да, как первый шаг</strong> — если цель «составить карту» и перестать путаться в терминах (нейросеть vs модель, LLM vs чат-бот, CatBoost vs LightGBM). Курс даёт структуру и снижает порог входа.</p>
+                    <p><strong>Недостаточно одного курса для полноценного вливания.</strong> Чтобы реально влиться в движ, после или параллельно нужны:</p>
+                    <ul>
+                        <li>Практика: хотя бы 1–2 завершённых проекта (табличные данные + бустинг, или простой NLP/LLM пайплайн), участие в Kaggle, код на GitHub.</li>
+                        <li>Системное обучение: курс по ML (Coursera, Stepik и т.п.) и при желании — по deep learning и NLP.</li>
+                        <li>Чтение документации и статей: Hugging Face, блоги компаний, arXiv — курс подводит к этому, но не подменяет.</li>
+                    </ul>
+                    <p>Итог: курс <strong>подходит</strong> как точка входа и навигатор; для трудоустройства и уверенного «вливания» его нужно дополнять практикой и более глубокими курсами.</p>
+                </div>
+            </section>
+
+            <section id="practice-resources" class="topic-section">
+                <h2>Где практиковаться</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>Курсы и книги</h4>
+                        <p>Andrew Ng (Coursera) — ML и нейросети; специализации по NLP и LLM; книги по машинному обучению (например, «Hands-On Machine Learning»).</p>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Библиотеки и фреймворки</h4>
+                        <p>PyTorch, TensorFlow, scikit-learn, Hugging Face, CatBoost, LightGBM, XGBoost — ставьте локально или используйте Colab/Kaggle.</p>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Датасеты и соревнования</h4>
+                        <p>Kaggle, UCI ML Repository, открытые датасеты для языковых моделей — для отработки пайплайнов и моделей прогнозов.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>

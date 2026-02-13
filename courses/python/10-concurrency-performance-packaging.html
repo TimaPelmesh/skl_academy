@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Глубокое погружение: asyncio и экосистема, GIL и модель памяти, параллелизм и процессы, профилирование и оптимизация, упаковка и публикация (pip/poetry/PEP 517/518), архитектурные практики.">
+    <meta name="keywords" content="python asyncio trio anyio GIL память multiprocessing concurrent futures profiling cProfile py-spy packaging poetry PEP 517 PEP 518 архитектура">
+    <title>Модуль 10 — Конкурентность, производительность и упаковка</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        @media (max-width: 768px) {
+            .code-example pre { font-size: 0.85rem; }
+            .sidebar { width: 250px; }
+            .content.sidebar-active { margin-left: 0; }
+        }
+        @media (max-width: 576px) {
+            .code-example pre { font-size: 0.8rem; }
+            .topic-section h2 { font-size: 1.5rem; }
+            .topic-section h3 { font-size: 1.3rem; }
+            .topic-section h4 { font-size: 1.1rem; }
+            ol, ul { padding-left: 20px; }
+        }
+        .topic-section { max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+        .module-intro { max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+        .code-example { border-radius: 8px; margin: 15px 0; max-width: 100%; overflow-x: auto; }
+        p, ul, ol { margin-bottom: 1rem; }
+        ol, ul { padding-left: 30px; }
+        h2, h3, h4 { margin-top: 1.5rem; margin-bottom: 1rem; }
+        @media (max-width: 991px) {
+            .sidebar.active { transform: translateX(0); }
+            .sidebar { transform: translateX(-100%); }
+            .content { margin-left: 0; }
+        }
+        .light-theme .subtopic, .light-theme .topic-btn { color: #000; }
+        .note { background-color: #1f2937; border: 1px solid #2b6cb0; border-left: 4px solid #2188ff; padding: 12px 14px; border-radius: 6px; color: #e6edf3; }
+        .light-theme .note { background-color: #eef3ff; border: 1px solid #b6c6ff; color: #111827; }
+        .conclusion { background-color: #2d333b; border-radius: 8px; padding: 20px 25px; margin: 30px auto; border-left: 4px solid #6f42c1; text-align: center; max-width: 900px; }
+        .light-theme .conclusion { background-color: #f1f1f1; border-left: 4px solid #6f42c1; }
+        .conclusion h3 { color: #d2a8ff; margin-top: 0; font-size: 1.5rem; }
+        .light-theme .conclusion h3 { color: #6f42c1; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body data-course="python">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#asyncio-deep" class="subtopic active">10.1 Asyncio и экосистема</a>
+                        <a href="#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 10: Конкурентность, производительность и упаковка</h2>
+                <p>Понимание параллелизма и инструментов производительности важно для высоконагруженных и I/O‑интенсивных систем. В финале — как правильно оформлять и публиковать пакеты, и какие архитектурные подходы применять.</p>
+            </section>
+
+            <section id="asyncio-deep" class="topic-section">
+                <h2>10.1 Asyncio и экосистема</h2>
+                <p><code>asyncio</code> реализует кооперативную конкурентность на базе цикла событий.</p>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-python">import asyncio
+
+async def fetch(i: int) -> str:
+    await asyncio.sleep(0.2)
+    return f"ok-{i}"
+
+async def main() -> None:
+    tasks = [asyncio.create_task(fetch(i)) for i in range(5)]
+    done = await asyncio.gather(*tasks, return_exceptions=False)
+    print(done)
+
+asyncio.run(main())</code></pre></div>
+                    <div class="code-example"><pre><code class="language-python"># Семафоры, ограничения параллелизма
+import asyncio
+
+async def worker(sem: asyncio.Semaphore, i: int) -> None:
+    async with sem:
+        await asyncio.sleep(0.1)
+        print(i)
+
+async def bounded() -> None:
+    sem = asyncio.Semaphore(3)
+    await asyncio.gather(*(worker(sem, i) for i in range(10)))
+
+asyncio.run(bounded())</code></pre></div>
+                </div>
+                <p>Экосистема: <code>aiohttp</code> (HTTP‑клиент/сервер), <code>asyncpg</code> (PostgreSQL), <code>aiokafka</code>, <code>aiofiles</code>. Альтернативы: <code>trio</code>, унификация через <code>anyio</code>.</p>
+                <div class="note"><p>Не блокируйте цикл событий: для CPU‑задач используйте <code>run_in_executor</code> или вынесите код в процессы.</p></div>
+            </section>
+
+            <section id="gil-memory" class="topic-section">
+                <h2>10.2 GIL и модель памяти</h2>
+                <p>GIL (Global Interpreter Lock) позволяет одновременно исполняться только одному байткоду Python в процессе. Это не мешает I/O‑параллелизму, но ограничивает CPU‑параллелизм с потоками.</p>
+                <div class="code-example"><pre><code class="language-python"># CPU‑bound задача эффективнее масштабировать процессами
+from concurrent.futures import ProcessPoolExecutor
+
+def fib(n: int) -> int:
+    return n if n &lt; 2 else fib(n-1) + fib(n-2)
+
+with ProcessPoolExecutor() as ex:
+    results = list(ex.map(fib, [28, 28, 28, 28]))</code></pre></div>
+                <p>Модель памяти CPython гарантирует атомарность некоторых операций (например, инкремент счётчика не атомарен на уровне приложения). Для потоков используйте примитивы синхронизации: <code>Lock</code>, <code>Event</code>, <code>Queue</code>.</p>
+            </section>
+
+            <section id="multiprocessing" class="topic-section">
+                <h2>10.3 Параллелизм и процессы</h2>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-python"># multiprocessing
+from multiprocessing import Pool, cpu_count
+
+def square(x: int) -> int:
+    return x * x
+
+with Pool(processes=cpu_count()) as pool:
+    print(pool.map(square, range(10)))</code></pre></div>
+                    <div class="code-example"><pre><code class="language-python"># concurrent.futures
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import requests
+
+urls = ["https://example.com"] * 10
+
+with ThreadPoolExecutor(max_workers=5) as ex:
+    futures = [ex.submit(requests.get, u) for u in urls]
+    for fut in as_completed(futures):
+        print(fut.result().status_code)</code></pre></div>
+                </div>
+                <p>Для межпроцессного обмена используйте <code>multiprocessing.Queue</code>, <code>Manager</code>, разделяемую память. При высоких нагрузках рассмотрите распределённые очереди (<code>Redis</code>, <code>RabbitMQ</code>).</p>
+            </section>
+
+            <section id="profiling" class="topic-section">
+                <h2>10.4 Профилирование и оптимизация</h2>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-bash"># CPU‑профилирование
+python -m cProfile -o stats.out app.py
+python -m pstats stats.out</code></pre></div>
+                    <div class="code-example"><pre><code class="language-bash"># Сэмплирующие профилировщики
+py-spy record -o profile.svg -- python app.py
+scalene app.py</code></pre></div>
+                </div>
+                <div class="code-example"><pre><code class="language-python"># Трассировка времени участков кода
+import time
+from contextlib import contextmanager
+
+@contextmanager
+def timer(name: str):
+    t0 = time.perf_counter()
+    try:
+        yield
+    finally:
+        dt = time.perf_counter() - t0
+        print(f"{name}: {dt:.4f}s")
+
+with timer("step"):
+    time.sleep(0.1)</code></pre></div>
+                <ul>
+                    <li>Оптимизируйте алгоритмы и структуры данных прежде чем микроптимизации.</li>
+                    <li>Используйте векторизацию (<code>numpy</code>) и C‑расширения (<code>cython</code>, <code>numba</code>) для горячих участков.</li>
+                    <li>Измеряйте метрики памяти (<code>tracemalloc</code>), ищите утечки.</li>
+                </ul>
+            </section>
+
+            <section id="packaging" class="topic-section">
+                <h2>10.5 Упаковка и публикация</h2>
+                <p>Современная упаковка стандартизована PEP 517/518 (build backend/pyproject.toml). Рекомендуемый стек: <code>pip</code> + <code>build</code> + <code>twine</code> или <code>poetry</code>.</p>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-toml"># pyproject.toml (poetry)
+[tool.poetry]
+name = "awesome-lib"
+version = "0.1.0"
+description = "Пример пакета"
+authors = ["You &lt;you@example.com&gt;"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"</code></pre></div>
+                    <div class="code-example"><pre><code class="language-bash"># Сборка и публикация (poetry)
+poetry install
+poetry build
+poetry publish --username __token__ --password &lt;PYPI_TOKEN&gt;</code></pre></div>
+                </div>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-toml"># pyproject.toml (setuptools + build)
+[build-system]
+requires = ["setuptools>=68", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "awesome-lib"
+version = "0.1.0"
+dependencies = ["requests>=2"]</code></pre></div>
+                    <div class="code-example"><pre><code class="language-bash"># Сборка и публикация (build + twine)
+python -m build
+python -m twine upload dist/*</code></pre></div>
+                </div>
+                <p class="note">Храните версии в одном источнике. Закрепляйте зависимости (<code>poetry.lock</code>/<code>requirements.txt</code>). Следуйте семантическому версионированию.</p>
+            </section>
+
+            <section id="architecture" class="topic-section">
+                <h2>10.6 Архитектурные практики</h2>
+                <ul>
+                    <li><strong>Слои</strong>: разделяйте домен, приложение, инфраструктуру. Ввод/вывод изолируйте в адаптерах.</li>
+                    <li><strong>Чистые функции</strong> и явные побочные эффекты: облегчает тестирование.</li>
+                    <li><strong>Зависимости</strong>: инвертируйте зависимости через интерфейсы/протоколы.</li>
+                    <li><strong>Конфигурация</strong>: 12‑factor, окружение/файл/переменные.</li>
+                    <li><strong>Логи/метрики/трейсинг</strong>: observability по умолчанию.</li>
+                    <li><strong>Документация</strong>: README, ADR, type hints как живая документация.</li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

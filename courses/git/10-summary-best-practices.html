@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 10: Сводная практика и лучшие практики. Сквозной пример и культура работы с Git.">
+    <meta name="keywords" content="git лучшие практики, сквозной пример git, workflow git, code review, rebase">
+    <meta name="author" content="SKL Academy">
+    <meta property="og:title" content="Git — Модуль 10: Сводная практика и лучшие практики">
+    <meta property="og:description" content="Закрепляем знания на сквозном примере и формируем устойчивые привычки работы с Git.">
+    <title>Курс Git — Модуль 10: Сводная практика | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/10-summary-best-practices.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="git">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты и интеграции</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#hooks" class="subtopic">9.1 Hooks</a>
+                        <a href="09-tools-and-integrations.html#ci" class="subtopic">9.2 CI/CD</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">10. Сводная практика и лучшие практики</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#end-to-end" class="subtopic active">10.1 Сквозной пример</a>
+                        <a href="#best" class="subtopic">10.2 Лучшие практики</a>
+                        <a href="#commit-style" class="subtopic">10.3 Стиль коммитов</a>
+                        <a href="#history-hygiene" class="subtopic">10.4 Гигиена истории</a>
+                        <a href="#repo-health" class="subtopic">10.5 Здоровье репозитория</a>
+                        <a href="#security" class="subtopic">10.6 Безопасность секретов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 10: Сводная практика и лучшие практики</h2>
+                <p>Объединяем навыки: пройдём путь от форка репозитория до слияния PR, а затем закрепим правила хорошего тона при работе с Git.</p>
+                <p>Эта глава — о дисциплине: как превратить инструменты в устойчивые привычки. Хорошие практики снижают энтропию в проекте, ускоряют ревью и делают выпуск релизов предсказуемым.</p>
+            </section>
+
+            <section id="end-to-end" class="topic-section">
+                <h2>10.1 Сквозной пример</h2>
+                <ol>
+                    <li>Fork репозитория и <code>git clone</code></li>
+                    <li><code>git switch -c feature/&lt;topic&gt;</code> — создайте ветку</li>
+                    <li>Разработка фичи; коммиты по частям: <code>git add -p</code>, осмысленные сообщения</li>
+                    <li>Перед пушем «почистить» историю: <code>git rebase -i</code> (squash/reword)</li>
+                    <li><code>git push -u origin feature/&lt;topic&gt;</code></li>
+                    <li>Создание PR → Code Review → правки (доп. коммиты или <code>rebase</code>)</li>
+                    <li>Merge (безопасная стратегия, договорённая в проекте)</li>
+                </ol>
+            </section>
+
+            <section id="best" class="topic-section">
+                <h2>10.2 Лучшие практики</h2>
+                <ul>
+                    <li>Делайте <strong>частые и маленькие коммиты</strong></li>
+                    <li>Пишите <strong>осмысленные сообщения</strong> (Conventional Commits приветствуются)</li>
+                    <li>Поддерживайте <code>.gitignore</code></li>
+                    <li>Для синхронизации используйте <code>git pull --rebase</code> (обсуждайте в команде)</li>
+                    <li><strong>Не force‑push</strong> в общие ветки</li>
+                </ul>
+                <p>Выберите минимум правил, которые принесут максимум пользы вашей команде, и применяйте их последовательно. Важна не «идеальность», а предсказуемость.</p>
+            </section>
+            <section id="commit-style" class="topic-section">
+                <h2>10.3 Стиль коммитов и трейлеры</h2>
+                <p>Единый стиль сообщений (Conventional Commits), длина заголовка, осмысленность описания. Используйте трейлеры: <code>Co-authored-by:</code>, <code>Signed-off-by:</code>, ссылки на задачи/тикеты.</p>
+            </section>
+            <section id="history-hygiene" class="topic-section">
+                <h2>10.4 Гигиена истории</h2>
+                <p>Чистая линейная история облегчает поиск причин регрессий и автоматизацию релизов. Используйте rebase/merge согласно политике проекта, удаляйте мёртвые ветки, фиксируйте релизы тегами.</p>
+            </section>
+            <section id="repo-health" class="topic-section">
+                <h2>10.5 Здоровье репозитория</h2>
+                <p>Следите за размером и количеством объектов, периодически выполняйте обслуживание (gc/prune), используйте LFS для больших файлов и partial/shallow clone для оптимизации.</p>
+            </section>
+            <section id="security" class="topic-section">
+                <h2>10.6 Безопасность секретов</h2>
+                <p>Не храните секреты в репозитории; применяйте секрет‑сканеры, политики ревью и удаление утечек (ревок токенов, перевыпуск ключей). Для подтверждения авторства используйте подпись коммитов.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

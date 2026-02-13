@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс Linux и Bash для начинающих. Изучите основы Linux: установку, терминал, файловую систему, команды. Полный курс администрирования Linux с нуля.">
+    <meta name="keywords" content="бесплатный курс linux, linux для начинающих, основы linux, обучение linux, bash скриптинг, linux с нуля, linux tutorial, linux курсы">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Бесплатный курс Linux и Bash для начинающих — Основы администрирования">
+    <meta property="og:description" content="Изучите основы Linux с нуля. Бесплатный курс администрирования для начинающих с практическими примерами.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/linux/01-linux-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Бесплатный курс Linux и Bash для начинающих">
+    <meta name="twitter:description" content="Изучите основы Linux с нуля. Бесплатный курс администрирования для начинающих.">
+    <title>Бесплатный курс Linux и Bash для начинающих — Основы администрирования | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/linux/01-linux-basics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Linux course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Linux и Bash",
+          "item": "https://skl-academy.ru/courses/linux/01-linux-basics.html"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс Linux и Bash для начинающих",
+      "description": "Изучите основы Linux с нуля. Бесплатный курс администрирования для начинающих с практическими примерами.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "url": "https://skl-academy.ru"
+      },
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "instructor": {
+          "@type": "Organization",
+          "name": "SKL Academy"
+        }
+      }
+    }
+    </script>
+    
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Бесплатный курс Linux и Bash для начинающих — Основы администрирования",
+      "description": "Изучите основы Linux с нуля. Бесплатный курс администрирования для начинающих с практическими примерами.",
+      "author": {
+        "@type": "Organization",
+        "name": "SKL Academy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://skl-academy.ru/images/icon.ico"
+        }
+      },
+      "datePublished": "2025-09-13",
+      "dateModified": "2025-09-13",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://skl-academy.ru/courses/linux/01-linux-basics.html"
+      }
+    }
+    </script>
+</head>
+<body data-course="linux">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Linux</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <a href="02-file-system.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn active">1. Знакомство с Linux</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#introduction" class="subtopic active">1.1 Введение в Linux</a>
+                        <a href="#distributions" class="subtopic">1.2 Дистрибутивы Linux</a>
+                        <a href="#installation" class="subtopic">1.3 Установка на виртуальную машину</a>
+                        <a href="#wsl" class="subtopic">1.4 WSL2 для Windows</a>
+                        <a href="#first-steps" class="subtopic">1.5 Первое знакомство</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="02-file-system.html#terminal-shell" class="subtopic">2.1 Терминал и Shell</a>
+                        <a href="02-file-system.html#file-system" class="subtopic">2.2 Файловая система Linux</a>
+                        <a href="02-file-system.html#paths" class="subtopic">2.3 Пути и навигация</a>
+                        <a href="02-file-system.html#commands" class="subtopic">2.4 Команды навигации</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="03-file-operations.html#creating" class="subtopic">3.1 Создание файлов и каталогов</a>
+                        <a href="03-file-operations.html#managing" class="subtopic">3.2 Копирование, перемещение, удаление</a>
+                        <a href="03-file-operations.html#viewing" class="subtopic">3.3 Просмотр содержимого</a>
+                        <a href="03-file-operations.html#editors" class="subtopic">3.4 Текстовые редакторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Права доступа</button>
+                    <div class="subtopics">
+                        <a href="04-permissions.html#ownership" class="subtopic">4.1 Владелец и группа</a>
+                        <a href="04-permissions.html#permissions" class="subtopic">4.2 Права доступа</a>
+                        <a href="04-permissions.html#numeric" class="subtopic">4.3 Числовое представление</a>
+                        <a href="04-permissions.html#analysis" class="subtopic">4.4 Анализ прав</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Процессы</button>
+                    <div class="subtopics">
+                        <a href="05-processes.html#what-is-process" class="subtopic">5.1 Что такое процесс</a>
+                        <a href="05-processes.html#viewing-processes" class="subtopic">5.2 Просмотр процессов</a>
+                        <a href="05-processes.html#managing-processes" class="subtopic">5.3 Управление процессами</a>
+                        <a href="05-processes.html#monitoring" class="subtopic">5.4 Мониторинг системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Перенаправление</button>
+                    <div class="subtopics">
+                        <a href="06-redirection.html#streams" class="subtopic">6.1 Стандартные потоки</a>
+                        <a href="06-redirection.html#output" class="subtopic">6.2 Перенаправление вывода</a>
+                        <a href="06-redirection.html#input" class="subtopic">6.3 Перенаправление ввода</a>
+                        <a href="06-redirection.html#pipes" class="subtopic">6.4 Конвейеры</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Поиск</button>
+                    <div class="subtopics">
+                        <a href="07-search.html#find" class="subtopic">7.1 find - поиск файлов</a>
+                        <a href="07-search.html#grep" class="subtopic">7.2 grep - поиск текста</a>
+                        <a href="07-search.html#combination" class="subtopic">7.3 Комбинация find и grep</a>
+                        <a href="07-search.html#locate" class="subtopic">7.4 locate - быстрый поиск</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Bash-скриптинг</button>
+                    <div class="subtopics">
+                        <a href="08-scripting.html#what-is-script" class="subtopic">8.1 Что такое скрипт</a>
+                        <a href="08-scripting.html#creating-scripts" class="subtopic">8.2 Создание и запуск</a>
+                        <a href="08-scripting.html#variables" class="subtopic">8.3 Переменные</a>
+                        <a href="08-scripting.html#input" class="subtopic">8.4 Ввод данных</a>
+                        <a href="08-scripting.html#command-substitution" class="subtopic">8.5 Подстановка команд</a>
+                        <a href="08-scripting.html#math" class="subtopic">8.6 Математические операции</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Сетевые утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-networking.html#diagnostics" class="subtopic">9.1 Сетевая диагностика</a>
+                        <a href="09-networking.html#connections" class="subtopic">9.2 Просмотр соединений</a>
+                        <a href="09-networking.html#download" class="subtopic">9.3 Скачивание файлов</a>
+                        <a href="09-networking.html#ssh" class="subtopic">9.4 SSH подключение</a>
+                        <a href="09-networking.html#keys" class="subtopic">9.5 Аутентификация по ключам</a>
+                        <a href="09-networking.html#file-transfer" class="subtopic">9.6 Передача файлов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 1.1: Введение в Linux -->
+            <section id="introduction" class="topic-section">
+                <h2>1.1 Введение в Linux</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 10 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <p>Linux — это семейство операционных систем с открытым исходным кодом, основанных на ядре Linux. Это одна из самых популярных операционных систем в мире, особенно в серверной среде и встроенных системах.</p>
+                    
+                    <h3>Краткая история</h3>
+                    <ul>
+                        <li><strong>1991</strong> — Линус Торвальдс создал ядро Linux</li>
+                        <li><strong>1990-е</strong> — Развитие дистрибутивов (Red Hat, Debian, SUSE)</li>
+                        <li><strong>2000-е</strong> — Массовое внедрение в серверной среде</li>
+                        <li><strong>2010-е</strong> — Популяризация в мобильных устройствах (Android)</li>
+                    </ul>
+
+                    <h3>Философия Unix</h3>
+                    <ul>
+                        <li><strong>Все есть файл</strong> — устройства, процессы, сетевые соединения</li>
+                        <li><strong>Малые программы</strong> — каждая программа делает одну вещь хорошо</li>
+                        <li><strong>Комбинирование</strong> — программы можно объединять через конвейеры</li>
+                        <li><strong>Конфигурация через файлы</strong> — настройки хранятся в текстовых файлах</li>
+                    </ul>
+
+                    <div class="note">
+                        <strong>Важно понимать:</strong> Философия Unix делает Linux очень мощной и гибкой системой. В отличие от Windows, где многие операции выполняются через графический интерфейс, в Linux большинство задач решается через командную строку.
+                    </div>
+
+                    <h3>Сферы применения</h3>
+                    <div class="info">
+                        <strong>Серверы:</strong> Веб-серверы (Apache, Nginx), базы данных (MySQL, PostgreSQL), облачные платформы
+                    </div>
+                    <div class="info">
+                        <strong>Встроенные системы:</strong> Роутеры и маршрутизаторы, IoT устройства, автомобильные системы
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.2: Дистрибутивы Linux -->
+            <section id="distributions" class="topic-section">
+                <h2>1.2 Дистрибутивы Linux</h2>
+                <div class="lesson-content">
+                    <p>Дистрибутив — это операционная система, основанная на ядре Linux, включающая набор программного обеспечения, инструментов установки и настройки.</p>
+                    
+                    <h3>Рекомендации для новичков</h3>
+                    
+                    <div class="tip">
+                        <h4>Ubuntu</h4>
+                        <ul>
+                            <li>Самый популярный дистрибутив</li>
+                            <li>Отличная поддержка сообщества</li>
+                            <li>Простая установка и настройка</li>
+                            <li>Большое количество пакетов</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip">
+                        <h4>Linux Mint</h4>
+                        <ul>
+                            <li>Основан на Ubuntu</li>
+                            <li>Интерфейс похож на Windows</li>
+                            <li>Стабильная работа</li>
+                            <li>Подходит для перехода с Windows</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.3: Установка на виртуальную машину -->
+            <section id="installation" class="topic-section">
+                <h2>1.3 Установка на виртуальную машину</h2>
+                <div class="lesson-content">
+                    <p>Виртуальная машина позволяет запускать Linux внутри вашей основной операционной системы, не затрагивая её работу.</p>
+                    
+                    <h3>1. Установка VirtualBox</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Скачайте VirtualBox с официального сайта: virtualbox.org
+# Установите программу, следуя инструкциям
+# Скачайте образ Ubuntu или Linux Mint</code></pre>
+                    </div>
+
+                    <h3>2. Создание виртуальной машины</h3>
+                    <ol>
+                        <li>Запустите VirtualBox</li>
+                        <li>Нажмите "Создать"</li>
+                        <li>Укажите имя: "Ubuntu Linux"</li>
+                        <li>Выберите тип: "Linux", версия: "Ubuntu (64-bit)"</li>
+                        <li>Выделите 4 ГБ RAM (или больше, если возможно)</li>
+                        <li>Создайте виртуальный жесткий диск (20 ГБ минимум)</li>
+                    </ol>
+
+                    <h3>3. Установка дистрибутива</h3>
+                    <ol>
+                        <li>Выберите созданную ВМ и нажмите "Запустить"</li>
+                        <li>Выберите образ диска (.iso файл)</li>
+                        <li>Следуйте инструкциям установщика</li>
+                        <li>Создайте пользователя и пароль</li>
+                        <li>Дождитесь завершения установки</li>
+                    </ol>
+
+                    <h3>4. Настройка общих папок</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># В VirtualBox: Устройства → Общие папки
+# Добавьте папку с хоста
+sudo adduser $USER vboxsf
+# Перезагрузите систему</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.4: WSL2 для Windows -->
+            <section id="wsl" class="topic-section">
+                <h2>1.4 WSL2 для Windows</h2>
+                <div class="lesson-content">
+                    <p>Windows Subsystem for Linux (WSL2) — это слой совместимости, позволяющий запускать Linux внутри Windows без виртуальной машины.</p>
+                    
+                    <h3>Преимущества WSL2</h3>
+                    <ul>
+                        <li>Быстрый запуск и работа</li>
+                        <li>Интеграция с Windows</li>
+                        <li>Доступ к файлам Windows из Linux</li>
+                        <li>Не требует много ресурсов</li>
+                    </ul>
+
+                    <h3>Установка WSL2</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Откройте PowerShell от имени администратора
+wsl --install
+# Перезагрузите компьютер
+# При первом запуске создайте пользователя</code></pre>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Пример команд для проверки WSL2
+wsl --list --verbose
+# Проверка версии WSL
+wsl --version
+# Обновление WSL до последней версии
+wsl --update</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.5: Первое знакомство -->
+            <section id="first-steps" class="topic-section">
+                <h2>1.5 Первое знакомство с системой</h2>
+                <div class="lesson-content">
+                    <p>После установки Linux вы увидите графический интерфейс, но настоящая мощь Linux раскрывается в командной строке.</p>
+                    
+                    <h3>Графический интерфейс vs Терминал</h3>
+                    <div class="code-example">
+                        <h4>Графический интерфейс (GUI)</h4>
+                        <ul>
+                            <li>Знакомый интерфейс</li>
+                            <li>Мышь и меню</li>
+                            <li>Ограниченные возможности</li>
+                            <li>Медленнее для опытных пользователей</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Терминал (CLI)</h4>
+                        <ul>
+                            <li>Полный контроль над системой</li>
+                            <li>Быстрое выполнение команд</li>
+                            <li>Автоматизация задач</li>
+                            <li>Работа на удаленных серверах</li>
+                        </ul>
+                    </div>
+
+                    <h3>Открытие терминала</h3>
+                    <div class="info">
+                        <strong>Ubuntu:</strong> Ctrl+Alt+T или через меню приложений<br>
+                        <strong>Linux Mint:</strong> Ctrl+Alt+T или через меню<br>
+                        <strong>WSL2:</strong> Команда <code>wsl</code> в PowerShell
+                    </div>
+
+                    <div class="warn">
+                        <strong>Важно:</strong> Не бойтесь командной строки! Хотя поначалу она может показаться сложной, именно через терминал вы получите полный контроль над системой Linux.
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

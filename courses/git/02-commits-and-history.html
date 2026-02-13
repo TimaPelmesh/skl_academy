@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 2: Коммиты и история. Анализ истории, amend, add -p, git show, .gitignore.">
+    <meta name="keywords" content="git log, git show, amend, add -p, gitignore, история git">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Git — Модуль 2: Коммиты и история">
+    <meta property="og:description" content="Изучаем структуру коммита, продвинутый git log, amend, add -p и .gitignore.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/git/02-commits-and-history.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Git — Коммиты и история">
+    <meta name="twitter:description" content="Анализ истории и исправление ошибок локально.">
+    <title>Курс Git — Модуль 2: Коммиты и история | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/02-commits-and-history.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="git">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567l-.091.549c-.05.295-.088.592-.154.855a19.097 19.097 0 00-.306 1.68c-.484 1.328-.65 2.663-.77 3.84l-.102 1.125c-.032.354-.077.708-.14 1.06a3.141 3.141 0 01-1.885 2.23c-.691.228-1.54.034-2.012-.906-.192-.381-.264-.752-.288-1.087a.752.752 0 00-.752-.703h-1.5a.75.75 0 000 1.5h.75v.75H3a.75.75 0 000 1.5h1.038a.75.75 0 00.72-.618l.041-.188c.21-1.012.638-1.637 1.276-1.876a1.641 1.641 0 011.014-.084l1.141.286c.19.047.38.105.56.179l.012-.028c.127-.296.22-.608.279-.931.059-.324.087-.656.087-.988v-1.125c0-.552-.058-1.09-.17-1.614l-.09-.544c-.008-.049.016-.098.06-.136l.67-.624a3.141 3.141 0 010-4.353l-.67-.624a.25.25 0 01-.06-.136l-.09-.544c-.112-.524-.17-1.062-.17-1.614V3.375c0-.332-.028-.664-.087-.988a4.908 4.908 0 00-.279-.931l-.012-.028c-.18-.074-.37-.132-.56-.179L7.145.923a1.641 1.641 0 01-1.014-.084c-.638-.239-1.066-.864-1.276-1.876L4.814-.225a.75.75 0 00-.72-.618H3a.75.75 0 000 1.5h.75v.75H3a.75.75 0 000 1.5h1.5c.415 0 .75.336.75.75 0 .335.096.706.288 1.087.472.94 1.32 1.134 2.012.906a3.141 3.141 0 001.885-2.23c.063-.352.108-.706.14-1.06l.102-1.125c.12-1.177.286-2.512.77-3.84a19.097 19.097 0 01.306-1.68c.066-.263.104-.56.154-.855L11.228.583c.151-.904.933-1.567 1.85-1.567zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Философия и основы Git</button>
+                    <div class="subtopics">
+                        <a href="01-git-basics.html#vcs-intro" class="subtopic">1.1 Что такое VCS</a>
+                        <a href="01-git-basics.html#first-steps" class="subtopic">1.2 Первые шаги</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">2. Коммиты и история</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#log-pro" class="subtopic active">2.1 git log — продвинуто</a>
+                        <a href="#git-show" class="subtopic">2.2 git show</a>
+                        <a href="#amend" class="subtopic">2.3 git commit --amend</a>
+                        <a href="#add-patch" class="subtopic">2.4 git add -p</a>
+                        <a href="#gitignore" class="subtopic">2.5 .gitignore</a>
+                        <a href="#commit-anatomy" class="subtopic">2.6 Анатомия коммита</a>
+                        <a href="#author-committer" class="subtopic">2.7 Author vs Committer</a>
+                        <a href="#messages-trailers" class="subtopic">2.8 Сообщения и трейлеры</a>
+                        <a href="#ranges-selectors" class="subtopic">2.9 Диапазоны и селекторы</a>
+                        <a href="#advanced-diff" class="subtopic">2.10 Продв. diff/log опции</a>
+                        <a href="#pickaxe-pathspec" class="subtopic">2.11 Pickaxe и pathspec</a>
+                        <a href="#pretty-formats" class="subtopic">2.12 Форматы вывода</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Ветвление</button>
+                    <div class="subtopics">
+                        <a href="03-branching.html#branch-basics" class="subtopic">3.1 Основы веток</a>
+                        <a href="03-branching.html#compare" class="subtopic">3.2 Сравнение веток</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Слияние и конфликты</button>
+                    <div class="subtopics">
+                        <a href="04-merging-and-conflicts.html#ff-vs-merge" class="subtopic">4.1 Fast‑Forward</a>
+                        <a href="04-merging-and-conflicts.html#conflicts" class="subtopic">4.2 Конфликты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Rebase</button>
+                    <div class="subtopics">
+                        <a href="05-rebase.html#interactive" class="subtopic">5.1 Интерактивный rebase</a>
+                        <a href="05-rebase.html#rules" class="subtopic">5.2 Правила</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Удалённые репозитории</button>
+                    <div class="subtopics">
+                        <a href="06-remotes.html#fetch-pull" class="subtopic">6.1 fetch/pull</a>
+                        <a href="06-remotes.html#push" class="subtopic">6.2 push</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. Командная работа</button>
+                    <div class="subtopics">
+                        <a href="07-teamwork-and-practices.html#pr" class="subtopic">7.1 PR/MR</a>
+                        <a href="07-teamwork-and-practices.html#tags" class="subtopic">7.2 Теги</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Спасение и откаты</button>
+                    <div class="subtopics">
+                        <a href="08-recovery-and-troubleshooting.html#reset-revert" class="subtopic">8.1 reset/revert</a>
+                        <a href="08-recovery-and-troubleshooting.html#reflog" class="subtopic">8.2 reflog</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#gui" class="subtopic">9.1 GUI</a>
+                        <a href="09-tools-and-integrations.html#hooks-ci" class="subtopic">9.2 hooks/CI</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 2: Углубляемся в коммиты и историю</h2>
+                <p>Учимся читать историю, смотреть диффы коммитов, исправлять последний коммит и добавлять изменения частями. Разберём структуру коммита и лучшие практики оформления сообщений.</p>
+                <div class="visual-guide">
+                    <h4>О чём этот модуль</h4>
+                    <ul>
+                        <li><strong>Структура коммита</strong>: дерево файлов, родитель, автор/коммиттер, сообщение</li>
+                        <li><strong>Чтение истории</strong>: oneline/graph/decorate, фильтры по файлам/авторам/датам</li>
+                        <li><strong>Правки</strong>: <code>--amend</code> и аккуратное использование</li>
+                        <li><strong>Точечные добавления</strong>: <code>git add -p</code> для «чистых» коммитов</li>
+                        <li><strong>.gitignore</strong>: исключаем лишнее из истории</li>
+                    </ul>
+                </div>
+                <div class="practice-tips">
+                    <h4>Хорошие сообщения к коммитам</h4>
+                    <ul>
+                        <li>Короткая заголовочная строка (до ~72 символов), затем пустая строка и подробности</li>
+                        <li>Используйте стиль Conventional Commits: <code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>refactor:</code> и т.п.</li>
+                        <li>Пишите <em>почему</em>, а не только <em>что</em></li>
+                    </ul>
+                </div>
+                <p>Чтение истории — это не столько набор флагов к <code>git log</code>, сколько умение формулировать вопрос к истории: «кто и когда трогал этот файл?», «какие коммиты привели к регрессии?», «почему появилось это решение?». Освоив фильтры и форматы вывода, вы превращаете историю в полноценный инструмент анализа.</p>
+            </section>
+
+            <section id="log-pro" class="topic-section">
+                <h2>2.1 Анализ истории: git log</h2>
+                <div class="code-example">
+<pre><code class="bash">git log --oneline --graph --decorate --all
+# Отбор по автору/дате/файлу
+git log --author="Ivan" --since="2024-01-01" -- README.md
+# Показать статистику
+git log --stat
+# Дифф внутри лога
+git log -p -- foo.txt
+</code></pre>
+                </div>
+                <p>Старайтесь подбирать формат под задачу. Краткий «граф» полезен для ориентирования, а детальный <code>-p</code> — для изучения контекста изменений. Помните о диапазонах и селекторах: они позволяют сфокусироваться на интересующем промежутке истории.</p>
+            </section>
+
+            <section id="git-show" class="topic-section">
+                <h2>2.2 Просмотр конкретного коммита: git show</h2>
+                <div class="code-example">
+<pre><code class="bash">git show &lt;commit-hash&gt;
+# Показать только сообщение
+git show -s --format=%B &lt;hash&gt;
+</code></pre>
+                </div>
+                <p><code>git show</code> — это «лупа» для одного коммита: кто автор, какие файлы затронуты, какие строки изменены. Умение быстро читать такие диффы экономит часы на ревью и отладке.</p>
+            </section>
+
+            <section id="amend" class="topic-section">
+                <h2>2.3 Изменение последнего коммита: --amend</h2>
+                <div class="code-example">
+<pre><code class="bash"># Добавить забытые файлы в предыдущий коммит
+git add src/missed.py
+git commit --amend --no-edit
+
+# Изменить сообщение последнего коммита
+git commit --amend -m "fix: корректирует обработку ошибок"
+</code></pre>
+                </div>
+                <p><code>--amend</code> переписывает заголовок истории, создавая новый коммит вместо старого. Это безопасно локально, но опасно для уже опубликованных веток: чужие репозитории потеряют ссылочную целостность.</p>
+                <div class="note"><p><strong>Важно:</strong> не амендьте коммиты, которые уже ушли на общий remote.</p></div>
+            </section>
+
+            <section id="add-patch" class="topic-section">
+                <h2>2.4 Интерактивное добавление: git add -p</h2>
+                <p>Позволяет выбрать части файла (hunks) для включения в коммит, делая коммиты «цельными».</p>
+                <div class="code-example">
+<pre><code class="bash">git add -p
+# Клавиши: y (принять), n (пропустить), e (редактировать), s (разбить), q (выход)
+</code></pre>
+                </div>
+                <p>Мыслите «единицами смысла»: отдельный фикс — отдельный коммит. Интерактивное добавление помогает отделить косметику от логики, а эксперимент — от результата.</p>
+            </section>
+
+            <section id="gitignore" class="topic-section">
+                <h2>2.5 Игнорирование файлов: .gitignore</h2>
+                <div class="code-example">
+<pre><code class="bash"># .gitignore
+__pycache__/
+*.log
+.env
+build/
+</code></pre>
+                </div>
+                <p>Шаблоны в <code>.gitignore</code> работают на уровне путей и масок. Для локальных исключений используйте <code>.git/info/exclude</code>. Не добавляйте в историю артефакты сборки и секреты — это усложняет ревью и раздувает репозиторий.</p>
+            </section>
+            <section id="commit-anatomy" class="topic-section">
+                <h2>2.6 Анатомия коммита</h2>
+                <p>Коммит содержит: ссылку на дерево (snapshot), одного или нескольких родителей, автора и коммиттера (имя, email, время), сообщение. Идентификатор коммита — хеш содержимого объекта.</p>
+            </section>
+            <section id="author-committer" class="topic-section">
+                <h2>2.7 Автор и коммиттер</h2>
+                <p><em>Author</em> — кто написал изменения; <em>Committer</em> — кто записал их в репозиторий (могут различаться при rebase/merge). Метки времени различаются и важны для аудита.</p>
+            </section>
+            <section id="messages-trailers" class="topic-section">
+                <h2>2.8 Сообщения коммитов и трейлеры</h2>
+                <p>Помимо заголовка и описания, сообщения могут включать «трейлеры»: <code>Co-authored-by:</code>, <code>Signed-off-by:</code>, <code>Refs:</code>. Они машинно‑читаемы и поддерживаются инструментами.</p>
+            </section>
+            <section id="ranges-selectors" class="topic-section">
+                <h2>2.9 Диапазоны и селекторы в истории</h2>
+                <p>Выражения диапазонов позволяют адресовать подмножества истории: <code>A..B</code> (что в B, но нет в A), <code>A...B</code> (симметричная разность), каретки и тильды для родителей (<code>HEAD^</code>, <code>HEAD~2</code>), селекторы по датам и авторам.</p>
+            </section>
+            <section id="advanced-diff" class="topic-section">
+                <h2>2.10 Продвинутые опции diff/log</h2>
+                <p>Опции: <code>--word-diff</code> (покомпонентные изменения), <code>--find-renames</code>/<code>--find-copies</code> (эвристики переименований/копий), игнорирование пробелов (<code>-w</code>), цвет и форматирование.</p>
+            </section>
+            <section id="pickaxe-pathspec" class="topic-section">
+                <h2>2.11 Поиск изменений: pickaxe и pathspec</h2>
+                <p><strong>Pickaxe</strong> (<code>-S</code>) ищет коммиты, добавляющие/удаляющие строку/подстроку. <strong>Pathspec</strong> задаёт шаблоны путей, позволяет гибко ограничивать область анализа.</p>
+            </section>
+            <section id="pretty-formats" class="topic-section">
+                <h2>2.12 Форматы вывода и кастомизация</h2>
+                <p><code>git log --pretty=&lt;format&gt;</code> предоставляет гибкую настройку полей (хеш, дата, автор, тема). Комбинация с <code>--decorate</code>, <code>--graph</code> делает ленту истории информативной.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

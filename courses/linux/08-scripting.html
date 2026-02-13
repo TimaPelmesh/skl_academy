@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bash-скриптинг в Linux: создание скриптов, переменные, ввод данных, подстановка команд, математические операции. Изучите автоматизацию задач в Linux.">
+    <meta name="keywords" content="bash скриптинг, shell script, переменные bash, автоматизация linux, bash команды">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Bash-скриптинг в Linux — Автоматизация задач">
+    <meta property="og:description" content="Изучите создание bash-скриптов в Linux: переменные, ввод данных, подстановка команд, математические операции.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/linux/08-scripting.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Bash-скриптинг в Linux — Автоматизация задач">
+    <meta name="twitter:description" content="Изучите создание bash-скриптов в Linux: переменные, ввод данных, подстановка команд, математические операции.">
+    <title>Bash-скриптинг в Linux — Автоматизация задач | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/linux/08-scripting.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Linux course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Linux и Bash",
+          "item": "https://skl-academy.ru/courses/linux/01-linux-basics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Bash-скриптинг",
+          "item": "https://skl-academy.ru/courses/linux/08-scripting.html"
+        }
+      ]
+    }
+    </script>
+    
+    
+</head>
+<body data-course="linux">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Linux</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <a href="07-search.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="09-networking.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Знакомство с Linux</button>
+                    <div class="subtopics">
+                        <a href="01-linux-basics.html#introduction" class="subtopic">1.1 Введение в Linux</a>
+                        <a href="01-linux-basics.html#distributions" class="subtopic">1.2 Дистрибутивы Linux</a>
+                        <a href="01-linux-basics.html#installation" class="subtopic">1.3 Установка на виртуальную машину</a>
+                        <a href="01-linux-basics.html#wsl" class="subtopic">1.4 WSL2 для Windows</a>
+                        <a href="01-linux-basics.html#first-steps" class="subtopic">1.5 Первое знакомство</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="02-file-system.html#terminal-shell" class="subtopic">2.1 Терминал и Shell</a>
+                        <a href="02-file-system.html#file-system" class="subtopic">2.2 Файловая система Linux</a>
+                        <a href="02-file-system.html#paths" class="subtopic">2.3 Пути и навигация</a>
+                        <a href="02-file-system.html#commands" class="subtopic">2.4 Команды навигации</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="03-file-operations.html#creating" class="subtopic">3.1 Создание файлов и каталогов</a>
+                        <a href="03-file-operations.html#managing" class="subtopic">3.2 Копирование, перемещение, удаление</a>
+                        <a href="03-file-operations.html#viewing" class="subtopic">3.3 Просмотр содержимого</a>
+                        <a href="03-file-operations.html#editors" class="subtopic">3.4 Текстовые редакторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Права доступа</button>
+                    <div class="subtopics">
+                        <a href="04-permissions.html#ownership" class="subtopic">4.1 Владелец и группа</a>
+                        <a href="04-permissions.html#permissions" class="subtopic">4.2 Права доступа</a>
+                        <a href="04-permissions.html#numeric" class="subtopic">4.3 Числовое представление</a>
+                        <a href="04-permissions.html#analysis" class="subtopic">4.4 Анализ прав</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Процессы</button>
+                    <div class="subtopics">
+                        <a href="05-processes.html#what-is-process" class="subtopic">5.1 Что такое процесс</a>
+                        <a href="05-processes.html#viewing-processes" class="subtopic">5.2 Просмотр процессов</a>
+                        <a href="05-processes.html#managing-processes" class="subtopic">5.3 Управление процессами</a>
+                        <a href="05-processes.html#monitoring" class="subtopic">5.4 Мониторинг системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Перенаправление</button>
+                    <div class="subtopics">
+                        <a href="06-redirection.html#streams" class="subtopic">6.1 Стандартные потоки</a>
+                        <a href="06-redirection.html#output" class="subtopic">6.2 Перенаправление вывода</a>
+                        <a href="06-redirection.html#input" class="subtopic">6.3 Перенаправление ввода</a>
+                        <a href="06-redirection.html#pipes" class="subtopic">6.4 Конвейеры</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Поиск</button>
+                    <div class="subtopics">
+                        <a href="07-search.html#find" class="subtopic">7.1 find - поиск файлов</a>
+                        <a href="07-search.html#grep" class="subtopic">7.2 grep - поиск текста</a>
+                        <a href="07-search.html#combination" class="subtopic">7.3 Комбинация find и grep</a>
+                        <a href="07-search.html#locate" class="subtopic">7.4 locate - быстрый поиск</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn active">8. Bash-скриптинг</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#what-is-script" class="subtopic active">8.1 Что такое скрипт</a>
+                        <a href="#creating-scripts" class="subtopic">8.2 Создание и запуск</a>
+                        <a href="#variables" class="subtopic">8.3 Переменные</a>
+                        <a href="#input" class="subtopic">8.4 Ввод данных</a>
+                        <a href="#command-substitution" class="subtopic">8.5 Подстановка команд</a>
+                        <a href="#math" class="subtopic">8.6 Математические операции</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Сетевые утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-networking.html#diagnostics" class="subtopic">9.1 Сетевая диагностика</a>
+                        <a href="09-networking.html#connections" class="subtopic">9.2 Просмотр соединений</a>
+                        <a href="09-networking.html#download" class="subtopic">9.3 Скачивание файлов</a>
+                        <a href="09-networking.html#ssh" class="subtopic">9.4 SSH подключение</a>
+                        <a href="09-networking.html#keys" class="subtopic">9.5 Аутентификация по ключам</a>
+                        <a href="09-networking.html#file-transfer" class="subtopic">9.6 Передача файлов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 8.1: Что такое скрипт -->
+            <section id="what-is-script" class="topic-section">
+                <h2>8.1 Что такое скрипт</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 15 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <p>Скрипт — это текстовый файл, содержащий последовательность команд, которые выполняются интерпретатором (shell).</p>
+                    
+                    <h3>Преимущества скриптов</h3>
+                    <div class="code-example">
+                        <h4>Автоматизация</h4>
+                        <p>Выполнение повторяющихся задач без ручного ввода команд</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Экономия времени</h4>
+                        <p>Сложные операции выполняются одной командой</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Надежность</h4>
+                        <p>Исключение человеческих ошибок при выполнении задач</p>
+                    </div>
+
+                    <h3>Shebang (#!/bin/bash)</h3>
+                    <p>Первая строка скрипта, которая указывает интерпретатор для выполнения скрипта.</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+# Это комментарий
+echo "Hello World"</code></pre>
+                    </div>
+
+                    <h3>Типы скриптов</h3>
+                    <div class="code-example">
+                        <h4>Системные скрипты</h4>
+                        <ul>
+                            <li>Автозапуск сервисов</li>
+                            <li>Резервное копирование</li>
+                            <li>Мониторинг системы</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Пользовательские скрипты</h4>
+                        <ul>
+                            <li>Автоматизация рутинных задач</li>
+                            <li>Обработка файлов</li>
+                            <li>Развертывание приложений</li>
+                        </ul>
+                    </div>
+
+                    <div class="info">
+                        <strong>Популярные интерпретаторы:</strong><br>
+                        • <code>#!/bin/bash</code> — Bash (самый популярный)<br>
+                        • <code>#!/bin/sh</code> — POSIX shell<br>
+                        • <code>#!/usr/bin/python3</code> — Python<br>
+                        • <code>#!/usr/bin/perl</code> — Perl
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.2: Создание и запуск -->
+            <section id="creating-scripts" class="topic-section">
+                <h2>8.2 Создание и запуск скриптов</h2>
+                <div class="lesson-content">
+                    <p>Создание и запуск bash-скриптов — основа автоматизации в Linux.</p>
+                    
+                    <h3>Создание скрипта</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        nano hello.sh              # создать скрипт в nano
+                        # Или
+                        vim hello.sh               # создать скрипт в vim
+                    </div>
+
+                    <h3>Содержимое скрипта</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+# Мой первый скрипт
+echo "Привет, мир!"
+echo "Текущая дата: $(date)"
+echo "Текущий пользователь: $USER"</code></pre>
+                    </div>
+
+                    <h3>Сделать скрипт исполняемым</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+chmod +x hello.sh          # добавить права на выполнение
+ls -l hello.sh             # проверить права
+                        # -rwxr-xr-x 1 user group 123 Dec 15 10:30 hello.sh
+                    </div>
+
+                    <h3>Запуск скрипта</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        ./hello.sh                 # запустить скрипт
+                        # Или
+                        bash hello.sh              # запустить через bash
+                    </div>
+
+                    <h3>Проверка синтаксиса</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        bash -n script.sh          # проверить синтаксис без выполнения
+                        bash -x script.sh          # выполнить с выводом команд
+                    </div>
+
+                    <h3>Отладка скрипта</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Добавить в скрипт для отладки:
+                        set -x                     # включить отладку
+echo "Отладочная информация"
+                        set +x                     # выключить отладку
+                    </div>
+
+                    <div class="warning">
+                        <strong>Безопасность:</strong> Всегда проверяйте содержимое скриптов перед запуском, особенно если они получены из интернета.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.3: Переменные -->
+            <section id="variables" class="topic-section">
+                <h2>8.3 Переменные в bash</h2>
+                <div class="lesson-content">
+                    <p>Переменные в bash позволяют хранить и использовать данные в скриптах.</p>
+                    
+                    <h3>Создание переменных</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        name="Иван"                # создать переменную
+                        age=25                    # числовая переменная
+echo "Привет, $name!"     # использовать переменную
+echo "Вам $age лет"       # использовать переменную
+                    </div>
+
+                    <h3>Системные переменные</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+echo $HOME                 # домашний каталог
+echo $USER                 # имя пользователя
+echo $PWD                  # текущий каталог
+echo $PATH                 # пути поиска команд
+echo $0                    # имя скрипта
+                    </div>
+
+                    <h3>Переменные окружения</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        export MY_VAR="значение"   # создать переменную окружения
+echo $MY_VAR               # использовать переменную
+                        env | grep MY_VAR          # показать переменную окружения
+                    </div>
+
+                    <h3>Специальные переменные</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+echo $#                    # количество аргументов
+echo $1                    # первый аргумент
+echo $2                    # второй аргумент
+echo $@                    # все аргументы
+echo $?                    # код возврата последней команды
+                    </div>
+
+                    <h3>Работа с переменными</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка существования переменной
+                        if [ -z "$MY_VAR" ]; then
+    echo "Переменная не задана"
+                        fi
+                        
+                        # Значение по умолчанию
+echo ${MY_VAR:-"по умолчанию"}
+                        
+                        # Длина строки
+                        text="Hello"
+echo ${#text}              # выведет 5
+                    </div>
+
+                    <div class="info">
+                        <strong>Важно:</strong> В bash переменные не имеют типов. Все значения — строки. Для математических операций используются специальные конструкции.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.4: Ввод данных -->
+            <section id="input" class="topic-section">
+                <h2>8.4 Ввод данных</h2>
+                <div class="lesson-content">
+                    <p>Команда read позволяет получать данные от пользователя во время выполнения скрипта.</p>
+                    
+                    <h3>Базовое использование read</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+echo "Введите ваше имя:"
+read name
+echo "Привет, $name!"
+                    </div>
+
+                    <h3>Ввод с приглашением</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+read -p "Введите ваш возраст: " age
+echo "Вам $age лет"
+                    </div>
+
+                    <h3>Скрытый ввод (для паролей)</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+read -s -p "Введите пароль: " password
+echo "Пароль введен"
+                    </div>
+
+                    <h3>Ввод нескольких значений</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+read -p "Введите имя и возраст: " name age
+echo "Имя: $name, Возраст: $age"
+                    </div>
+
+                    <h3>Ввод с таймаутом</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        if read -t 5 -p "Введите что-то за 5 секунд: " input; then
+    echo "Вы ввели: $input"
+                        else
+    echo "Время истекло"
+                        fi
+                    </div>
+
+                    <h3>Чтение из файла</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Читать файл построчно
+                        while read line; do
+    echo "Строка: $line"
+                        done < file.txt
+                    </div>
+
+                    <h3>Практический пример</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+echo "=== Создание пользователя ==="
+read -p "Имя пользователя: " username
+read -s -p "Пароль: " password
+echo
+read -p "Полное имя: " fullname
+                        
+echo "Создаем пользователя $username..."
+                        # Здесь была бы команда создания пользователя
+echo "Пользователь $username создан"
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.5: Подстановка команд -->
+            <section id="command-substitution" class="topic-section">
+                <h2>8.5 Подстановка команд</h2>
+                <div class="lesson-content">
+                    <p>Подстановка команд позволяет использовать результат выполнения команды как значение переменной или аргумента.</p>
+                    
+                    <h3>Синтаксис подстановки</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Старый синтаксис (обратные кавычки)
+                        current_date=`date`
+echo "Сегодня: $current_date"
+                        
+                        # Новый синтаксис (рекомендуется)
+                        current_date=$(date)
+echo "Сегодня: $current_date"
+                    </div>
+
+                    <h3>Использование в переменных</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Получить имя хоста
+                        hostname=$(hostname)
+echo "Имя компьютера: $hostname"
+                        
+                        # Получить количество файлов
+                        file_count=$(ls -1 | wc -l)
+echo "Файлов в каталоге: $file_count"
+                        
+                        # Получить размер каталога
+                        dir_size=$(du -sh . | cut -f1)
+echo "Размер каталога: $dir_size"
+                    </div>
+
+                    <h3>Использование в командах</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Создать резервную копию с датой
+cp important.txt backup_$(date +%Y%m%d).txt
+                        
+                        # Показать файлы, измененные сегодня
+ls -la $(find . -mtime 0)
+                        
+                        # Подсчитать строки в файлах
+echo "Всего строк: $(cat *.txt | wc -l)"
+                    </div>
+
+                    <h3>Вложенные подстановки</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Получить имя каталога из полного пути
+                        current_dir=$(basename $(pwd))
+echo "Текущий каталог: $current_dir"
+                        
+                        # Получить количество процессов
+                        process_count=$(ps aux | wc -l)
+echo "Процессов запущено: $process_count"
+                    </div>
+
+                    <h3>Практические примеры</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+                        # Скрипт для создания резервной копии
+                        
+backup_dir="backup_$(date +%Y%m%d_%H%M%S)"
+mkdir "$backup_dir"
+                        
+echo "Создаем резервную копию в $backup_dir"
+cp -r /home/user/documents "$backup_dir/"
+                        
+echo "Резервная копия создана"
+echo "Размер: $(du -sh "$backup_dir" | cut -f1)"
+                    </div>
+
+                    <div class="info">
+                        <strong>Совет:</strong> Используйте <code>$()</code> вместо обратных кавычек, так как это более читаемо и поддерживает вложенность.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.6: Математические операции -->
+            <section id="math" class="topic-section">
+                <h2>8.6 Математические операции</h2>
+                <div class="lesson-content">
+                    <p>В bash есть несколько способов выполнения математических операций.</p>
+                    
+                    <h3>Арифметическое расширение $(( ))</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        a=10
+                        b=5
+                        result=$((a + b))
+echo "Сумма: $result"
+                        
+                        # Различные операции
+echo "Сложение: $((a + b))"      # 15
+echo "Вычитание: $((a - b))"     # 5
+echo "Умножение: $((a * b))"     # 50
+echo "Деление: $((a / b))"       # 2
+echo "Остаток: $((a % b))"       # 0
+                    </div>
+
+                    <h3>Команда expr</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        a=10
+                        b=5
+                        result=$(expr $a + $b)
+echo "Результат: $result"
+                        
+                        # Обратите внимание на пробелы вокруг операторов
+echo "Умножение: $(expr $a \* $b)"  # экранирование *
+                    </div>
+
+                    <h3>Команда bc (калькулятор)</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Простые вычисления
+echo "2 + 3" | bc                # 5
+echo "10 / 3" | bc               # 3
+echo "scale=2; 10 / 3" | bc      # 3.33 (2 знака после запятой)
+                        
+                        # Сложные вычисления
+echo "sqrt(16)" | bc             # 4
+echo "2^3" | bc                  # 8
+                    </div>
+
+                    <h3>Инкремент и декремент</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        counter=0
+echo "Начальное значение: $counter"
+                        
+                        counter=$((counter + 1))
+echo "После увеличения: $counter"
+                        
+                        counter=$((counter - 1))
+echo "После уменьшения: $counter"
+                        
+                        # Сокращенная запись
+                        counter=$((counter++))           # постфиксный инкремент
+                        counter=$((++counter))           # префиксный инкремент
+                    </div>
+
+                    <h3>Сравнения</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        a=10
+                        b=5
+                        
+                        if [ $a -gt $b ]; then
+    echo "$a больше $b"
+                        fi
+        
+                        if [ $a -eq 10 ]; then
+    echo "$a равно 10"
+                        fi
+                    </div>
+
+                    <h3>Практический пример</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+                        # Калькулятор
+                        
+read -p "Введите первое число: " num1
+read -p "Введите второе число: " num2
+read -p "Введите операцию (+, -, *, /): " op
+                        
+                        case $op in
+                            +) result=$((num1 + num2)) ;;
+                            -) result=$((num1 - num2)) ;;
+                            \*) result=$((num1 * num2)) ;;
+                            /) result=$((num1 / num2)) ;;
+                            *) echo "Неизвестная операция"; exit 1 ;;
+                        esac
+                        
+echo "Результат: $result"
+                    </div>
+
+                    <div class="info">
+                        <strong>Операторы сравнения:</strong><br>
+                        • <code>-eq</code> — равно<br>
+                        • <code>-ne</code> — не равно<br>
+                        • <code>-gt</code> — больше<br>
+                        • <code>-lt</code> — меньше<br>
+                        • <code>-ge</code> — больше или равно<br>
+                        • <code>-le</code> — меньше или равно
+                    </div>
+                </div>
+            </section>
+
+            </main>
+    </div>
+
+    <script src="../courses.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Курс по Git. Модуль 1: Философия и основы Git, первые коммиты, статус, diff, add, commit, log.">
+    <meta name="keywords" content="git, курс git, основы git, коммиты, ветки, репозиторий, контроль версий">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Git — Модуль 1: Философия и основы Git">
+    <meta property="og:description" content="Зачем нужен Git, ключевые понятия, три состояния файлов, базовые команды и первый коммит.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/git/01-git-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Git — Модуль 1: Основы">
+    <meta name="twitter:description" content="Первые шаги в Git: init, status, diff, add, commit, log.">
+    <title>Курс Git — Модуль 1: Философия и основы Git | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/01-git-basics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <!-- Structured Data: Breadcrumbs for Git course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Git", "item": "https://skl-academy.ru/courses/git/01-git-basics.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Курс по Git",
+      "description": "Полный практический курс по Git: основы, коммиты, ветвление, слияние, rebase, remote, командная работа, инструменты.",
+      "provider": {"@type": "Organization", "name": "SKL Academy", "sameAs": "https://skl-academy.ru/"},
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "teaches": ["Git", "контроль версий", "ветвление", "слияние", "rebase", "remote"],
+      "about": [
+        {"@type": "Thing", "name": "Git"},
+        {"@type": "Thing", "name": "контроль версий"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Git — Модуль 1: Философия и основы Git",
+      "description": "Понимание VCS, преимущества Git, ключевые понятия и первые коммиты.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/git/01-git-basics.html"},
+      "keywords": "git, основы git, vcs, коммиты, репозиторий"
+    }
+    </script>
+</head>
+<body data-course="git">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn active">1. Философия и основы Git</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#vcs-intro" class="subtopic active">1.1 Что такое VCS и зачем Git</a>
+                        <a href="#git-advantages" class="subtopic">1.2 Преимущества Git</a>
+                        <a href="#key-concepts" class="subtopic">1.3 Репозиторий, коммит, SHA‑1</a>
+                        <a href="#file-states" class="subtopic">1.4 modified/staged/committed</a>
+                        <a href="#git-architecture" class="subtopic">1.5 Рабочая папка, index, .git</a>
+                        <a href="#first-steps" class="subtopic">1.6 Первые шаги: init → add → commit → log</a>
+                        <a href="#object-model" class="subtopic">1.7 Объектная модель Git</a>
+                        <a href="#hashing" class="subtopic">1.8 Хеширование: SHA‑1 → SHA‑256</a>
+                        <a href="#porcelain-vs-plumbing" class="subtopic">1.9 Porcelain vs Plumbing</a>
+                        <a href="#index-deep-dive" class="subtopic">1.10 Индекс (staging) в деталях</a>
+                        <a href="#snapshots-vs-diffs" class="subtopic">1.11 Снимки vs диффы</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Коммиты и история</button>
+                    <div class="subtopics">
+                        <a href="02-commits-and-history.html#log-pro" class="subtopic">2.1 Анализ истории (log)</a>
+                        <a href="02-commits-and-history.html#amend" class="subtopic">2.2 Изменение коммита (amend)</a>
+                        <a href="02-commits-and-history.html#add-patch" class="subtopic">2.3 Добавление частями (add -p)</a>
+                        <a href="02-commits-and-history.html#gitignore" class="subtopic">2.4 .gitignore</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Ветвление</button>
+                    <div class="subtopics">
+                        <a href="03-branching.html#branch-basics" class="subtopic">3.1 Основы веток</a>
+                        <a href="03-branching.html#create-switch" class="subtopic">3.2 Переключение/создание</a>
+                        <a href="03-branching.html#compare" class="subtopic">3.3 Сравнение веток</a>
+                        <a href="03-branching.html#list-delete" class="subtopic">3.4 Удаление</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Слияние и конфликты</button>
+                    <div class="subtopics">
+                        <a href="04-merging-and-conflicts.html#ff-vs-merge" class="subtopic">4.1 Fast‑Forward vs 3‑way</a>
+                        <a href="04-merging-and-conflicts.html#conflicts" class="subtopic">4.2 Конфликты и маркеры</a>
+                        <a href="04-merging-and-conflicts.html#resolve" class="subtopic">4.3 Разрешение и завершение</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Rebase</button>
+                    <div class="subtopics">
+                        <a href="05-rebase.html#rebase-vs-merge" class="subtopic">5.1 Rebase vs Merge</a>
+                        <a href="05-rebase.html#interactive" class="subtopic">5.2 Интерактивный rebase</a>
+                        <a href="05-rebase.html#rules" class="subtopic">5.3 Правила и безопасность</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Удалённые репозитории</button>
+                    <div class="subtopics">
+                        <a href="06-remotes.html#clone" class="subtopic">6.1 Клонирование</a>
+                        <a href="06-remotes.html#fetch-pull" class="subtopic">6.2 fetch/pull</a>
+                        <a href="06-remotes.html#push" class="subtopic">6.3 push и upstream</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Командная работа</button>
+                    <div class="subtopics">
+                        <a href="07-teamwork-and-practices.html#pr" class="subtopic">7.1 PR/MR и Code Review</a>
+                        <a href="07-teamwork-and-practices.html#tags" class="subtopic">7.2 Теги и релизы</a>
+                        <a href="07-teamwork-and-practices.html#stash" class="subtopic">7.3 stash и cherry-pick</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Спасение и откаты</button>
+                    <div class="subtopics">
+                        <a href="08-recovery-and-troubleshooting.html#restore" class="subtopic">8.1 restore/checkout</a>
+                        <a href="08-recovery-and-troubleshooting.html#reset-revert" class="subtopic">8.2 reset vs revert</a>
+                        <a href="08-recovery-and-troubleshooting.html#reflog" class="subtopic">8.3 reflog</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты и интеграции</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#gui" class="subtopic">9.1 GUI‑клиенты</a>
+                        <a href="09-tools-and-integrations.html#ssh" class="subtopic">9.2 SSH‑ключи</a>
+                        <a href="09-tools-and-integrations.html#hooks-ci" class="subtopic">9.3 hooks и CI/CD</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                        <a href="10-summary-best-practices.html#best" class="subtopic">10.2 Лучшие практики</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- 1.1 -->
+            <section id="vcs-intro" class="topic-section">
+                <h2>1.1 Что такое Git? Ваше первое знакомство</h2>
+                
+                <p>Если вы только начинаете свой путь в разработке или хотите освоить Git с нуля, вы попали по адресу. Давайте разберёмся, что такое Git и зачем он нужен, простыми словами.</p>
+                
+                <h3>Проблема, которую решает Git</h3>
+                <p>Представьте ситуацию: вы работаете над проектом — пишете код, создаёте файлы, вносите изменения. Через неделю понимаете, что ваша последняя версия работала лучше, чем текущая. Или вам нужно вернуться к коду, который вы написали месяц назад. Как быть?</p>
+                
+                <p>Без системы контроля версий вы:</p>
+                <ul>
+                    <li>Создаёте копии файлов вручную: <code>project_v1.txt</code>, <code>project_v2.txt</code>, <code>project_FINAL.txt</code></li>
+                    <li>Теряетесь в версиях и не помните, что именно изменилось</li>
+                    <li>Не можете работать в команде — изменения конфликтуют</li>
+                    <li>Боитесь что-то сломать, потому что нет возможности откатиться</li>
+                </ul>
+                
+                <p><strong>Git решает все эти проблемы.</strong> Он автоматически сохраняет историю всех изменений, позволяет откатываться к любой версии, работать в команде и не бояться экспериментов.</p>
+                
+                <h3>Что такое система контроля версий (VCS)?</h3>
+                <p><strong>VCS</strong> (Version Control System, система контроля версий) — это инструмент, который:</p>
+                <ul>
+                    <li><strong>Хранит историю</strong> всех изменений в вашем проекте</li>
+                    <li><strong>Позволяет откатиться</strong> к любой предыдущей версии</li>
+                    <li><strong>Обеспечивает командную работу</strong> — несколько человек могут работать над одним проектом</li>
+                    <li><strong>Помогает отслеживать</strong>, кто и когда внес изменения</li>
+                    <li><strong>Защищает от потери данных</strong> — даже если вы удалили файл, его можно восстановить</li>
+                </ul>
+                
+                <h3>Что такое Git?</h3>
+                <p><strong>Git</strong> — это самая популярная система контроля версий в мире. Он был создан в 2005 году Линусом Торвальдсом (создателем Linux) для управления разработкой ядра Linux и с тех пор стал стандартом индустрии.</p>
+                
+                <p>Git — это <strong>распределённая</strong> система контроля версий. Что это значит?</p>
+                
+                <div class="visual-guide">
+                    <h4>Централизованная vs Распределённая VCS</h4>
+                    <ul>
+                        <li><strong>Централизованная</strong> (старый подход): есть один сервер, все работают через него. Если сервер упадёт — работа останавливается.</li>
+                        <li><strong>Распределённая</strong> (как Git): у каждого разработчика есть полная копия истории на компьютере. Можно работать офлайн, независимо от сервера.</li>
+                    </ul>
+                </div>
+                
+                <p>Благодаря распределённой модели:</p>
+                <ul>
+                    <li>Вы можете работать <strong>без интернета</strong> — все операции выполняются локально</li>
+                    <li>Операции выполняются <strong>мгновенно</strong> — не нужно ждать ответа от сервера</li>
+                    <li>Вы можете <strong>экспериментировать</strong> — если что-то пошло не так, легко вернуться назад</li>
+                    <li>Каждый разработчик имеет <strong>полную копию истории</strong> — надёжнее и безопаснее</li>
+                </ul>
+                
+                <div class="visual-guide">
+                    <h4>Что вы освоите в этом модуле</h4>
+                    <ul>
+                        <li><strong>Понять зачем нужен Git</strong>: решаемые проблемы, преимущества</li>
+                        <li><strong>Освоить ключевые понятия</strong>: репозиторий, коммит, хеш, ветки</li>
+                        <li><strong>Понять три состояния файлов</strong>: modified → staged → committed</li>
+                        <li><strong>Изучить архитектуру Git</strong>: рабочая директория, индекс, база данных</li>
+                        <li><strong>Сделать первые коммиты</strong>: установка, настройка, базовые команды</li>
+                        <li><strong>Понять как Git хранит данные</strong>: снимки (snapshots) вместо патчей</li>
+                    </ul>
+                </div>
+                
+                <h3>Главная цель модуля</h3>
+                <p>Наша главная цель — не просто выучить команды, а <strong>понять, как Git «думает» о данных</strong>. Если вы уловите общую картину, отдельные команды станут логичными и понятными.</p>
+                
+                <p>Мы разберём:</p>
+                <ul>
+                    <li>Почему Git работает со <strong>снимками</strong> (snapshots), а не с патчами</li>
+                    <li>Чем обусловлены <strong>три состояния</strong> файлов</li>
+                    <li>Как из объектов складывается <strong>граф истории</strong></li>
+                    <li>Почему Git такой <strong>быстрый и надёжный</strong></li>
+                </ul>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы для начинающих</h4>
+                    <ul>
+                        <li>Не пытайтесь выучить все команды сразу — начните с базовых</li>
+                        <li>Экспериментируйте! Git прощает ошибки, почти всё можно исправить</li>
+                        <li>Используйте <code>git status</code> постоянно — он покажет текущее состояние</li>
+                        <li>Пишите понятные сообщения к коммитам — вы будете благодарны себе позже</li>
+                        <li>Делайте маленькие коммиты — так проще понять, что изменилось</li>
+                    </ul>
+                </div>
+
+                <h3>Короткая история VCS</h3>
+                <p>Системы контроля версий существуют давно, но подходы менялись:</p>
+                <ul>
+                    <li><strong>CVS, Subversion</strong> (1990-2000-е) — централизованные системы. Медленное ветвление и слияние, зависимость от сервера</li>
+                    <li><strong>Mercurial, Git</strong> (2005) — распределённые системы. Быстрые операции, локальная история, независимость от сервера</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>Интересный факт:</strong> Git создан Линусом Торвальдсом в 2005 году для разработки Linux‑ядра. За несколько месяцев он стал настолько популярным, что сегодня используется практически во всех проектах разработки программного обеспечения.</p>
+                </div>
+                
+                <p>Теперь, когда вы понимаете, зачем нужен Git, давайте разберёмся, чем он отличается от других инструментов и почему он стал таким популярным.</p>
+            </section>
+
+            <!-- 1.2 -->
+            <section id="git-advantages" class="topic-section">
+                <h2>1.2 Почему Git?</h2>
+                <ul>
+                    <li><strong>Скорость и офлайн</strong>: коммиты/лог/дифф — локально, мгновенно</li>
+                    <li><strong>Ветвление/слияние</strong>: дешёвые операции, богатые сценарии</li>
+                    <li><strong>Надёжность</strong>: объекты по хешам, контроль целостности</li>
+                </ul>
+                <p>Практически все современные процессы разработки (code review, CI/CD, feature‑ветки) выросли на возможностях Git. Он поощряет короткоживущие ветки, частые коммиты и чёткую историю, что ускоряет интеграцию изменений и снижает риски релизов.</p>
+                <div class="resources-section">
+                    <h4>Рекомендуемые материалы</h4>
+                    <ul>
+                        <li><a href="https://git-scm.com/book/ru/v2" target="_blank" rel="noopener noreferrer">Pro Git (ru)</a> — база и продвинутая практика</li>
+                        <li><a href="https://learngitbranching.js.org/?locale=ru_RU" target="_blank" rel="noopener noreferrer">Интерактивный тренажёр Git</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 1.3 -->
+            <section id="key-concepts" class="topic-section">
+                <h2>1.3 Ключевые понятия</h2>
+                <ul>
+                    <li><strong>Репозиторий</strong>: папка проекта + каталог <code>.git</code> с историей</li>
+                    <li><strong>Коммит</strong>: снимок состояния проекта + метаданные (автор, дата, сообщение)</li>
+                    <li><strong>Хеш (SHA‑1)</strong>: уникальный идентификатор коммита/объекта</li>
+                    <li><strong>Дерево</strong> и <strong>блоб</strong>: каталоги и содержимое файлов в базе Git</li>
+                </ul>
+                <div class="visual-guide">
+                    <h4>Модель данных Git (упрощённо)</h4>
+                    <ul>
+                        <li>Коммит → указывает на <em>дерево</em> (root) + на родителя(ей)</li>
+                        <li>Дерево → указывает на другие деревья/блоки (файлы)</li>
+                        <li>Блоб → содержимое файла (контент)</li>
+                    </ul>
+                </div>
+                <p>Важно помнить: коммит — это не «набор патчей», а указатель на полное состояние проекта на момент фиксации. Благодаря этому Git легко сравнивает любые два состояния и быстро строит диффы «по требованию».</p>
+            </section>
+
+            <!-- 1.4 -->
+            <section id="file-states" class="topic-section">
+                <h2>1.4 Три состояния файла</h2>
+                <ul>
+                    <li><strong>modified</strong> — изменён в рабочей директории</li>
+                    <li><strong>staged</strong> — добавлен в индекс (staging)</li>
+                    <li><strong>committed</strong> — сохранён в истории (в базе Git)</li>
+                </ul>
+                <div class="practice-tips">
+                    <h4>Советы</h4>
+                    <ul>
+                        <li>Используйте <code>git add -p</code>, чтобы собирать «чистые» коммиты по смыслу</li>
+                        <li>Хорошие сообщения повышают качество ревью и ускоряют поиск ошибок</li>
+                    </ul>
+                </div>
+                <p>Индекс — это сознательный отбор изменений в будущий коммит. Разделяйте независимые правки по разным коммитам: история станет понятнее, а откаты — безопаснее.</p>
+            </section>
+
+            <!-- 1.5 -->
+            <section id="git-architecture" class="topic-section">
+                <h2>1.5 Базовая архитектура Git</h2>
+                <p>Поток данных: <strong>Working Directory</strong> → <strong>Index (Staging)</strong> → <strong>Git Database (.git)</strong>.</p>
+                <ul>
+                    <li><strong>Working Directory</strong> — редактируете файлы</li>
+                    <li><strong>Index</strong> — собираете будущий коммит</li>
+                    <li><strong>.git</strong> — база объектов истории (коммиты, деревья, блобы)</li>
+                </ul>
+                <p>Эти три «слоя» образуют основу всех операций. Команды Git, по сути, двигают данные между рабочей директорией, индексом и базой объектов, меняя лишь то, что вы явно указали.</p>
+            </section>
+
+            <!-- 1.6 -->
+            <section id="first-steps" class="topic-section">
+                <h2>1.6 Практика: первые шаги</h2>
+                <div class="code-example">
+<pre><code class="bash"># Установка и конфигурация
+# Windows: https://git-scm.com/download/win, macOS: brew install git, Linux: apt/yum/pacman
+
+git --version
+
+git config --global user.name "Ваше Имя"
+git config --global user.email "you@example.com"
+# Опционально задайте ветку по умолчанию
+git config --global init.defaultBranch main
+
+# Создание репозитория и базовые команды
+mkdir my-project && cd my-project
+git init
+
+echo "Hello" &gt; README.md
+
+git status           # состояние
+
+git diff             # изменения в рабочих файлах (до add)
+
+git add README.md    # добавить файл в staging
+# или добавить все изменения:
+# git add .
+
+git commit -m "feat: add README"
+
+git log --oneline --graph --decorate
+</code></pre>
+                </div>
+                <div class="resources-section">
+                    <h4>Полезные настройки</h4>
+                    <ul>
+                        <li><code>git config --global core.autocrlf true</code> (Windows) — управление переводами строк</li>
+                        <li><code>git config --global pull.rebase false|true</code> — стратегия pull</li>
+                        <li><code>git config --global init.defaultBranch main</code> — название основной ветки</li>
+                    </ul>
+                </div>
+                <p>На старте уделите время настройке: имя/почта, стратегия <code>pull</code>, правила перевода строк. Это избавит от множества мелких проблем и приведёт к предсказуемому поведению на всех машинах.</p>
+            </section>
+            <!-- 1.7 -->
+            <section id="object-model" class="topic-section">
+                <h2>1.7 Объектная модель Git: blob, tree, commit, tag</h2>
+                <p>Git хранит данные как <strong>контент‑адресуемые объекты</strong> в каталоге <code>.git/objects</code>. Базовые типы: <em>blob</em> (содержимое файла), <em>tree</em> (каталог: имена, режимы, ссылки на объекты), <em>commit</em> (метаданные + ссылка на корневое дерево и родителей), <em>tag</em> (подписанная ссылка на объект).</p>
+                <p>Коммит указывает на дерево и на родителя(ей), формируя <strong>DAG</strong> (ориентированный ациклический граф) истории. Идентификаторы — хеши от содержимого и заголовка объекта.</p>
+                <p>Контент‑адресуемость означает, что объект определяется своим содержимым. Если содержимое совпадает — хеш совпадает, а значит, объекты переиспользуются. Это делает Git экономным и надёжным.</p>
+            </section>
+            <!-- 1.8 -->
+            <section id="hashing" class="topic-section">
+                <h2>1.8 Хеширование: от SHA‑1 к SHA‑256</h2>
+                <p>Изначально Git использует SHA‑1 для адресации объектов. Из‑за уязвимостей введён режим <strong>SHA‑256</strong>. Переход требует согласованности на уровне репозитория и инструментов. Основная идея неизменна: хеш = адрес объекта, что гарантирует целостность.</p>
+                <p>Для большинства повседневных сценариев выбор алгоритма прозрачен. Важно понимать сам принцип: неизменяемое содержимое → стабильный идентификатор → проверяемая целостность по всей истории.</p>
+            </section>
+            <!-- 1.9 -->
+            <section id="porcelain-vs-plumbing" class="topic-section">
+                <h2>1.9 Porcelain vs Plumbing</h2>
+                <p><em>Porcelain</em> — «пользовательские» команды (<code>git switch</code>, <code>git commit</code>). <em>Plumbing</em> — низкоуровневые команды (<code>git hash-object</code>, <code>git cat-file</code>), раскрывающие внутренности. Понимание plumbing помогает глубже разбираться в поведении Git.</p>
+                <p>Иногда, столкнувшись с нетривиальной ситуацией, полезно «нырнуть» на уровень plumbing, чтобы увидеть, какие объекты и ссылки действительно создаются и куда они указывают.</p>
+            </section>
+            <!-- 1.10 -->
+            <section id="index-deep-dive" class="topic-section">
+                <h2>1.10 Индекс (staging) в деталях</h2>
+                <p>Индекс — это «макет» следующего коммита. Он хранит тройки (путь, режим, хеш объекта). Частичные добавления (<code>add -p</code>) формируют осмысленные коммиты. Конфликты представляются несколькими записями на один путь (stage 1/2/3).</p>
+                <p>Мыслите индексом как «списком намерений»: вы явно решаете, что войдёт в снимок. Это дисциплинирует и помогает строить линейную, понятную историю.</p>
+            </section>
+            <!-- 1.11 -->
+            <section id="snapshots-vs-diffs" class="topic-section">
+                <h2>1.11 Снимки против диффов</h2>
+                <p>Git мыслит <strong>снимками состояний</strong>, а не патчами. Диффы вычисляются на лету при сравнении снимков. Такой подход ускоряет операции, упрощает ветвление и повышает надёжность хранения.</p>
+                <p>Это — фундаментальное отличие от многих старых VCS. Снимки упрощают ветвление, слияние и повторное использование данных, что и делает Git практичным стандартом индустрии.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

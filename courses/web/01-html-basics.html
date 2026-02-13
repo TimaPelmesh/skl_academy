@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс по веб‑разработке. Модуль 1: HTML — структура веб‑страницы: теги, атрибуты, каркас документа, семантика, формы.">
+    <meta name="keywords" content="веб разработка, html, курс html, основы html, семантика html, формы html, бесплатный курс веб">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Веб‑разработка — Модуль 1: HTML — Структура">
+    <meta property="og:description" content="Изучите HTML с нуля: теги, атрибуты, структура документа, семантическая разметка и формы.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/web/01-html-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Веб‑разработка — HTML основы">
+    <meta name="twitter:description" content="Модуль 1: HTML — структура веб‑страницы.">
+    <title>Веб‑разработка — Модуль 1: HTML — Структура | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/01-html-basics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <!-- Structured Data: Breadcrumbs for Web course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Веб‑разработка", "item": "https://skl-academy.ru/courses/web/01-html-basics.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс по веб‑разработке",
+      "description": "Полный курс по веб‑разработке с нуля: HTML, CSS, JavaScript и практика.",
+      "provider": {"@type": "Organization", "name": "SKL Academy", "sameAs": "https://skl-academy.ru/"},
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "coursePrerequisites": "Базовые знания компьютера",
+      "teaches": ["HTML", "CSS", "JavaScript", "адаптивная верстка", "клиентский JavaScript"],
+      "about": [
+        {"@type": "Thing", "name": "HTML"},
+        {"@type": "Thing", "name": "CSS"},
+        {"@type": "Thing", "name": "JavaScript"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Веб‑разработка — Модуль 1: HTML — Структура",
+      "description": "HTML: теги, атрибуты, структура документа, семантика и формы.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/web/01-html-basics.html"},
+      "keywords": "веб разработка, html, семантика, формы"
+    }
+    </script>
+</head>
+<body data-course="web">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">HTML</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn active">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="#html-intro" class="subtopic active">Введение в HTML</a>
+                        <a href="#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="#forms" class="subtopic">Формы</a>
+                        <a href="#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="#seo-html" class="subtopic">SEO</a>
+                        <a href="#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">Введение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">Специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">Типографика</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">Box Model</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">@media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">Анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">Условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">События</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">Storage</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="04-responsive-design.html#intro" class="subtopic">Введение</a>
+                        <a href="04-responsive-design.html#viewport" class="subtopic">Viewport</a>
+                        <a href="04-responsive-design.html#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="04-responsive-design.html#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="04-responsive-design.html#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="04-responsive-design.html#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="04-responsive-design.html#responsive-images" class="subtopic">Изображения</a>
+                        <a href="04-responsive-design.html#container-queries" class="subtopic">Container Queries</a>
+                        <a href="04-responsive-design.html#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="04-responsive-design.html#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="06-forms-validation.html#form-basics" class="subtopic">Основы форм</a>
+                        <a href="06-forms-validation.html#input-types" class="subtopic">Типы полей</a>
+                        <a href="06-forms-validation.html#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="06-forms-validation.html#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="06-forms-validation.html#js-validation" class="subtopic">JS валидация</a>
+                        <a href="06-forms-validation.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="06-forms-validation.html#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="06-forms-validation.html#security" class="subtopic">Безопасность</a>
+                        <a href="06-forms-validation.html#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="07-dom-advanced.html#dom-tree" class="subtopic">Дерево DOM</a>
+                        <a href="07-dom-advanced.html#selectors" class="subtopic">Селекторы</a>
+                        <a href="07-dom-advanced.html#traversal" class="subtopic">Обход</a>
+                        <a href="07-dom-advanced.html#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="07-dom-advanced.html#events-basics" class="subtopic">События</a>
+                        <a href="07-dom-advanced.html#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="07-dom-advanced.html#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="07-dom-advanced.html#observers" class="subtopic">Observers</a>
+                        <a href="07-dom-advanced.html#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html#core-web-vitals" class="subtopic">Core Web Vitals</a>
+                        <a href="09-optimization.html#lcp" class="subtopic">LCP</a>
+                        <a href="09-optimization.html#cls" class="subtopic">CLS</a>
+                        <a href="09-optimization.html#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="09-optimization.html#fonts" class="subtopic">Шрифты</a>
+                        <a href="09-optimization.html#js-perf" class="subtopic">JS производительность</a>
+                        <a href="09-optimization.html#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="09-optimization.html#seo" class="subtopic">SEO</a>
+                        <a href="09-optimization.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="09-optimization.html#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="10-projects.html#intro" class="subtopic">Введение</a>
+                        <a href="10-projects.html#project-1" class="subtopic">Проект 1</a>
+                        <a href="10-projects.html#project-2" class="subtopic">Проект 2</a>
+                        <a href="10-projects.html#project-3" class="subtopic">Проект 3</a>
+                        <a href="10-projects.html#project-4" class="subtopic">Проект 4</a>
+                        <a href="10-projects.html#project-5" class="subtopic">Проект 5</a>
+                        <a href="10-projects.html#project-6" class="subtopic">Проект 6</a>
+                        <a href="10-projects.html#deployment" class="subtopic">Деплой</a>
+                        <a href="10-projects.html#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 1: HTML</h2>
+                <p>В этом модуле вы освоите базовую разметку HTML: узнаете, как устроен каркас документа, какие теги бывают, как использовать атрибуты, семантические элементы и создавать формы.</p>
+                <div class="note"><p><strong>Подготовительный этап (0.1–0.2)</strong>: установка редактора (VS Code), браузеров (Chrome/Firefox), Git и GitHub, публикация «Hello, World!» на GitHub Pages.</p></div>
+            </section>
+
+            <!-- 1.1 -->
+            <section id="html-intro" class="topic-section">
+                <h2>Введение в HTML. Базовый каркас документа</h2>
+                <p>Представьте, что вы строите дом. HTML — это как чертёж и каркас здания. Он не красит стены (это делает CSS) и не добавляет электричество (это JavaScript), но без него не было бы ни стен, ни комнат, ни самого дома. HTML (HyperText Markup Language) — это язык разметки, который создаёт структуру веб-страницы. Он не программирует логику, а просто говорит браузеру: "здесь заголовок", "здесь абзац", "здесь кнопка". Основные строительные блоки HTML — это <strong>элементы</strong> (теги) и их <strong>атрибуты</strong>.</p>
+                
+                <h3>Что такое HTML и зачем он нужен</h3>
+                <p>Если бы интернет был книгой, HTML был бы её содержанием и структурой. Он определяет, где находится каждая глава, где начинается новый абзац, какие слова важные (заголовки), а какие обычные (текст). Браузер читает этот "чертёж" и превращает его в красивую страницу, которую вы видите на экране. Без HTML веб-страница просто не существовала бы — это фундамент, на котором строится всё остальное.</p>
+                
+                <p>Давайте разберёмся с основными понятиями на простых примерах:</p>
+                <ul>
+                    <li><strong>Элемент</strong> — это как контейнер с содержимым. Представьте коробку с подарком: <code>&lt;p&gt;</code> — это открывающая крышка, <code>Текст абзаца</code> — это сам подарок, а <code>&lt;/p&gt;</code> — закрывающая крышка. Получается: <code>&lt;p&gt;Текст абзаца&lt;/p&gt;</code>. Внутри элемента может быть текст, другие элементы (как матрёшка) или он может быть пустым.</li>
+                    <li><strong>Атрибут</strong> — это как наклейка на коробке, которая говорит: "хрупкое", "верх не переворачивать" или "адрес получателя". Например, в ссылке <code>&lt;a href="/about" target="_blank"&gt;О нас&lt;/a&gt;</code> атрибут <code>href</code> — это адрес, куда ведёт ссылка, а <code>target="_blank"</code> — инструкция открыть её в новой вкладке. Без атрибутов элементы были бы "слепыми" — они бы знали, что это ссылка, но не знали бы, куда она ведёт.</li>
+                    <li><strong>Структура документа</strong> — это как паспорт и адрес дома. Каждый HTML-документ должен иметь обязательные элементы: <code>&lt;!DOCTYPE html&gt;</code> говорит браузеру "это современный HTML", <code>&lt;html&gt;</code> — корневой контейнер (весь документ), <code>&lt;head&gt;</code> — "служебная информация" (метаданные, стили, скрипты), <code>&lt;body&gt;</code> — "видимое содержимое" (то, что видит пользователь). Без этой структуры браузер не поймёт, что делать с вашим кодом.</li>
+                </ul>
+                
+                <h3>Как браузер превращает код в страницу: магия DOM</h3>
+                <p>Вы написали HTML-код, нажали F5, и на экране появилась красивая страница. Что произошло за эти миллисекунды? Браузер проделал удивительную работу, превратив ваш текст в визуальную реальность. Давайте заглянем "под капот":</p>
+                <ol>
+                    <li><strong>Парсинг — чтение кода</strong> — браузер читает ваш HTML-код, как человек читает книгу, но со скоростью света. Он анализирует каждую строку, распознаёт теги, атрибуты и содержимое. Всё это преобразуется в <strong>дерево DOM</strong> (Document Object Model) — особую структуру данных, похожую на генеалогическое древо.</li>
+                    <li><strong>Построение DOM — создание структуры</strong> — представьте семейное дерево: <code>&lt;html&gt;</code> — это прародитель, <code>&lt;body&gt;</code> — его ребёнок, <code>&lt;div&gt;</code> — внук, а <code>&lt;p&gt;</code> внутри — правнук. Каждый элемент становится <em>узлом</em> этого дерева со своими атрибутами (как характеристики человека) и дочерними элементами (как дети). Это создаёт иерархию, которую браузер понимает.</li>
+                    <li><strong>Рендеринг — рисование на экране</strong> — теперь браузер берёт это дерево и "рисует" его на экране. Он смотрит на каждый элемент: "Это заголовок? Сделаю его большим и жирным. Это ссылка? Подчеркну и сделаю синим." CSS добавляет краски и стили, превращая чёрно-белую структуру в красочную страницу.</li>
+                    <li><strong>Интерактивность — оживление</strong> — JavaScript может "шевелить ветками" этого дерева в реальном времени. Нажали кнопку? JavaScript добавил новый элемент в DOM. Ввели текст? DOM обновился. Всё это происходит без перезагрузки страницы — магия современного веба!</li>
+                </ol>
+                <p>DOM — это не просто структура, это живой организм. Представьте, что DOM — это кукольный театр, а JavaScript — кукловод, который может двигать кукол, менять их костюмы и даже создавать новых персонажей прямо во время представления. Любые изменения в DOM мгновенно отражаются на экране — это и есть основа интерактивности современных сайтов.</p>
+                <h3>Пустые элементы: теги-одиночки</h3>
+                <p>Большинство HTML-элементов — это "контейнеры" с открывающим и закрывающим тегом. Но есть особые элементы, которые не могут содержать внутри себя ничего — они самодостаточные, как дверной звонок или выключатель. Их называют пустыми (void) элементами, и они не требуют закрывающего тега.</p>
+                <p>Почему они пустые? Потому что их "содержимое" — это не текст, а что-то другое: файл изображения, метаданные или просто действие (перенос строки). Вот основные "одиночки":</p>
+                <ul>
+                    <li><code>&lt;br&gt;</code> — перенос строки. Как нажатие Enter в текстовом редакторе. <strong>Совет:</strong> используйте осторожно! Чаще лучше управлять отступами через CSS — это даёт больше контроля.</li>
+                    <li><code>&lt;img&gt;</code> — изображение. Его содержимое — это сам файл картинки, а не текст. Поэтому тег самозакрывающийся: <code>&lt;img src="photo.jpg" alt="Описание"&gt;</code>.</li>
+                    <li><code>&lt;input&gt;</code> — поле ввода формы. Это как пустая коробочка, куда пользователь вводит данные. Само по себе поле не содержит текста — текст появляется, когда пользователь что-то печатает.</li>
+                    <li><code>&lt;meta&gt;</code> — метаинформация о странице. Это "заметки на полях" для браузера и поисковиков. Они не видны пользователю, но очень важны для SEO.</li>
+                    <li><code>&lt;link&gt;</code> — подключение внешних ресурсов. Как провод, который подключает CSS-файл или иконку сайта. Сам тег ничего не содержит, он просто указывает путь к файлу.</li>
+                    <li><code>&lt;hr&gt;</code> — горизонтальная линия-разделитель. Визуально разделяет контент, как линия в тетради между темами.</li>
+                </ul>
+                <p><strong>Интересный факт:</strong> В HTML5 можно писать эти теги как <code>&lt;br&gt;</code> или <code>&lt;br /&gt;</code> — оба варианта валидны. Но если вы работаете с XHTML (более строгий стандарт), обязательно нужен слэш: <code>&lt;br /&gt;</code>. Большинство современных разработчиков используют короткий вариант без слэша.</p>
+                
+                <h3>Глобальные атрибуты: универсальные инструменты</h3>
+                <p>Представьте, что у вас есть набор универсальных инструментов, которые работают с любым элементом на странице. Это и есть глобальные атрибуты — они как швейцарский нож веб-разработчика. Их можно применить к любому тегу, и они всегда работают одинаково. Давайте познакомимся с самыми полезными:</p>
+                <ul>
+                    <li><code>id</code> — это как паспорт элемента, его уникальное имя. Представьте класс в школе: у каждого ученика уникальный номер в журнале. Так и здесь — <code>id</code> должен быть единственным на странице. Используется для создания якорей (ссылок внутри страницы типа <code>#section1</code>), для JavaScript-селекторов и CSS. <strong>Важно помнить:</strong> если два элемента имеют одинаковый <code>id</code>, браузер запутается — это как если бы у двух людей был один паспорт!</li>
+                    <li><code>class</code> — это как ярлык или категория. В отличие от <code>id</code>, класс можно использовать многократно. Представьте наклейки: наклейка "важное" может быть на нескольких документах. Один элемент может иметь несколько классов через пробел: <code>class="button primary large"</code> — это элемент одновременно и кнопка, и основная, и большая. Очень удобно для стилизации!</li>
+                    <li><code>data‑*</code> — это ваш личный "карман" для хранения информации. Можно создать любой атрибут вида <code>data-название="значение"</code>, например <code>data-user-id="123"</code> или <code>data-price="999"</code>. Это как заметки, которые вы приклеиваете к элементу. JavaScript может легко их прочитать: <code>element.dataset.userId</code> (обратите внимание: дефисы превращаются в camelCase). Очень полезно для передачи данных из HTML в JavaScript!</li>
+                    <li><code>aria‑*</code> — это "переводчик" для людей с ограниченными возможностями. Скринридеры (программы, которые читают страницу вслух) используют эти атрибуты, чтобы понять, что происходит на странице. Например, <code>aria-label="Закрыть меню"</code> подскажет, что кнопка закрывает меню, даже если на ней только иконка. Делая сайт доступным, вы помогаете миллионам людей!</li>
+                    <li><code>hidden</code> — это как невидимая шапка-невидимка. Элемент остаётся в коде (в DOM), но пользователь его не видит. Полезно, когда элемент должен быть скрыт по умолчанию, но может появиться при определённых условиях. В отличие от <code>display: none</code> в CSS, это семантический способ скрытия.</li>
+                    <li><code>title</code> — это как подсказка в игре. При наведении курсора появляется маленькое окошко с дополнительной информацией. Полезно для уточнений, но помните: не все пользователи видят подсказки (особенно на мобильных), поэтому не кладите туда критически важную информацию.</li>
+                    <li><code>tabindex</code> — это как номер в очереди для клавиатурной навигации. Когда пользователь нажимает Tab, фокус переходит от элемента к элементу. <code>tabindex="0"</code> — элемент в естественном порядке, <code>tabindex="-1"</code> — элемент пропускается при Tab, но может получить фокус программно. <strong>Осторожно:</strong> положительные значения (<code>tabindex="1"</code> и выше) — это как "пройти без очереди", они нарушают естественный порядок и могут запутать пользователей.</li>
+                    <li><code>lang</code> — это как флаг страны для текста. Браузер, поисковики и скринридеры используют его, чтобы правильно обработать текст. Например, <code>lang="ru"</code> для русского или <code>lang="en"</code> для английского. Это особенно важно для правильного произношения скринридерами и для SEO.</li>
+                    <li><code>contenteditable</code> — это как превращение обычного текста в блокнот. Элемент становится редактируемым прямо на странице, как в Google Docs. Используется редко, в основном для WYSIWYG-редакторов (What You See Is What You Get — "что видишь, то и получаешь").</li>
+                </ul>
+                <h3>Пути к файлам: как найти нужный файл</h3>
+                <p>Представьте, что вы в большом городе и вам нужно найти адрес. В HTML тоже есть "адреса" — пути к файлам. Когда вы хотите подключить картинку, стили или перейти на другую страницу, нужно указать, где этот файл находится. Есть три способа "навигации" по файловой структуре сайта, и каждый подходит для своих задач:</p>
+                
+                <h4>1. Абсолютные пути — полный адрес с индексом</h4>
+                <p>Это как сказать: "Москва, улица Ленина, дом 10, квартира 5" — полный адрес от страны до квартиры. В вебе это выглядит так: <code>https://site.ru/page</code> или <code>http://example.com/images/logo.png</code>.</p>
+                <p><strong>Когда это полезно:</strong> когда вы ссылаетесь на внешние сайты (другие домены), подключаете ресурсы с CDN (Content Delivery Network — сеть доставки контента), или когда нужно гарантировать, что путь точно не изменится.</p>
+                <p><strong>Подводные камни:</strong> если вы решите сменить домен (например, с <code>mysite.com</code> на <code>newsite.com</code>), все абсолютные пути сломаются, и вам придётся искать и заменять их по всему сайту. Также они не работают, если вы просто открываете HTML-файл в браузере без сервера — браузер не знает, что такое "site.ru".</p>
+                
+                <h4>2. Относительные пути — "от того места, где я нахожусь"</h4>
+                <p>Это как сказать: "иди на два квартала вперёд, потом поверни направо" — инструкция относительно вашего текущего положения. Браузер ищет файл, начиная от места, где находится текущий HTML-файл.</p>
+                <p>Примеры "навигации":</p>
+                <ul>
+                    <li><code>about.html</code> — "файл в той же папке, где я нахожусь" (как сосед по лестничной площадке)</li>
+                    <li><code>images/logo.png</code> — "зайди в папку images, там найдёшь logo.png" (как "спустись на этаж ниже")</li>
+                    <li><code>../img/cat.png</code> — "поднимись на уровень выше (родительская папка), затем зайди в img" (две точки <code>..</code> означают "на уровень выше")</li>
+                    <li><code>../../css/styles.css</code> — "поднимись на два уровня выше, затем зайди в css" (как "поднимись на два этажа")</li>
+                </ul>
+                <p><strong>Когда это удобно:</strong> для всех внутренних ссылок на вашем сайте. Это самый гибкий вариант для локальной разработки — вы можете перемещать папки, и пути будут работать, пока структура относительно друг друга не изменится.</p>
+                <p><strong>Важный нюанс:</strong> относительные пути — это как маршрут от точки A до точки B. Если вы переместите точку A (ваш HTML-файл), маршрут может сломаться. Например, если файл был в <code>/pages/about.html</code> и ссылался на <code>../images/logo.png</code>, а вы переместили его в <code>/about.html</code>, путь сломается.</p>
+                
+                <h4>3. Пути от корня сайта — "от главного входа"</h4>
+                <p>Это как сказать: "от главного входа в здание иди в комнату 205" — всегда от одной фиксированной точки. Путь начинается со слэша <code>/</code>, что означает "корень сайта" (главная папка вашего сайта). Примеры: <code>/images/icon.ico</code>, <code>/css/styles.css</code>, <code>/about.html</code>.</p>
+                <p><strong>Когда это идеально:</strong> когда файл всегда находится в одном и том же месте относительно корня сайта, независимо от того, на какой странице вы находитесь. Это самый надёжный вариант для продакшена (готового сайта).</p>
+                <p><strong>Преимущества:</strong> пути не ломаются, когда вы перемещаете страницы по структуре сайта. Легко понять структуру — сразу видно, что <code>/images/</code> — это папка с изображениями в корне.</p>
+                <p><strong>Ограничение:</strong> не работают, если вы просто открываете HTML-файл двойным кликом в браузере (без запущенного сервера). Браузер не знает, что такое "корень сайта" без сервера. Но это не проблема, если вы используете локальный сервер для разработки (что и рекомендуется).</p>
+                
+                <div class="note">
+                    <p><strong>Практический совет от опытных разработчиков:</strong> Используйте пути от корня (<code>/</code>) для продакшена — это надёжнее. Для локальной разработки можно использовать относительные пути, если вам так удобнее. Многие современные сборщики (Webpack, Vite, Parcel) автоматически преобразуют относительные пути в правильные при сборке проекта, так что вы можете писать как удобно, а они всё исправят.</p>
+                </div>
+                <h3>Экранирование специальных символов: когда символы "бунтуют"</h3>
+                <p>Представьте ситуацию: вы хотите написать в тексте "<code>&lt;div&gt;</code>", но браузер видит это и думает: "О! Это HTML-тег, нужно его обработать!" И вместо текста на странице появляется пустой блок. Проблема? Да! Решение? Экранирование.</p>
+                <p>Некоторые символы в HTML имеют "магические" свойства — браузер воспринимает их как команды, а не как обычный текст. Чтобы показать эти символы как текст, нужно их "экранировать" — заменить на специальные коды, которые браузер понимает как "это просто символ, не команда".</p>
+                <p>Вот основные "бунтари" и как с ними справиться (HTML-сущности):</p>
+                <ul>
+                    <li><code>&amp;lt;</code> или <code>&amp;#60;</code> → <code>&lt;</code> (символ "меньше", открывающая скобка тега)</li>
+                    <li><code>&amp;gt;</code> или <code>&amp;#62;</code> → <code>&gt;</code> (символ "больше", закрывающая скобка тега)</li>
+                    <li><code>&amp;amp;</code> или <code>&amp;#38;</code> → <code>&amp;</code> (амперсанд, используется для начала сущности)</li>
+                    <li><code>&amp;quot;</code> или <code>&amp;#34;</code> → <code>"</code> (двойная кавычка)</li>
+                    <li><code>&amp;apos;</code> или <code>&amp;#39;</code> → <code>'</code> (одинарная кавычка, но можно использовать обычную)</li>
+                    <li><code>&amp;nbsp;</code> → неразрывный пробел (полезен для предотвращения переноса слов)</li>
+                    <li><code>&amp;copy;</code> → <code>©</code> (символ копирайта)</li>
+                    <li><code>&amp;mdash;</code> → <code>—</code> (длинное тире)</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Примеры использования --&gt;
+&lt;p&gt;Чтобы написать &amp;lt;div&amp;gt; в тексте, используйте &amp;amp;lt;div&amp;amp;gt;&lt;/p&gt;
+&lt;p&gt;Цена: 1000&amp;nbsp;₽ (неразрывный пробел)&lt;/p&gt;
+&lt;p&gt;Компания &amp;copy; 2026&lt;/p&gt;</code></pre>
+                </div>
+                <p><strong>Когда нужно экранировать — три главных случая:</strong></p>
+                <ul>
+                    <li><strong>Показываете код как текст</strong> — например, в учебных материалах (как сейчас в этом курсе!), в документации или в комментариях. Если вы пишете статью "Как использовать тег &lt;div&gt;", вам нужно экранировать угловые скобки, иначе браузер попытается создать реальный div.</li>
+                    <li><strong>Специальные символы в атрибутах</strong> — иногда в значении атрибута нужно использовать кавычки или другие специальные символы. Экранирование помогает браузеру понять, где заканчивается атрибут.</li>
+                    <li><strong>Гарантия безопасности</strong> — когда вы не уверены, как браузер интерпретирует символ, лучше перестраховаться и экранировать. Особенно это важно при динамической вставке контента через JavaScript.</li>
+                </ul>
+                <p><strong>Хорошая новость:</strong> В большинстве случаев современные браузеры умные и правильно обрабатывают символы даже без экранирования. Но для "большой тройки" — <code>&lt;</code>, <code>&gt;</code> и <code>&amp;</code> — экранирование обязательно, если они не являются частью разметки. Это как правило дорожного движения: можно не всегда следовать, но лучше следовать всегда, чтобы избежать проблем.</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Моя первая страница&lt;/title&gt;
+    &lt;meta name="description" content="Краткое описание страницы" /&gt;
+    &lt;link rel="icon" href="/images/icon.ico" type="image/x-icon" /&gt;
+    &lt;link rel="stylesheet" href="/css/styles.css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;&lt;h1&gt;О себе&lt;/h1&gt;&lt;/header&gt;
+    &lt;main&gt;
+      &lt;p&gt;Привет! Это моя первая HTML‑страница.&lt;/p&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;© 2025&lt;/footer&gt;
+    &lt;script src="/js/script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+                <div class="note">
+                    <p><strong>Важно:</strong> <code>&lt;meta name="viewport"&gt;</code> обеспечивает адаптивность. Атрибут <code>lang="ru"</code> у <code>&lt;html&gt;</code> помогает SEO и ассистивным технологиям.</p>
+                </div>
+                <h3>Частые мета‑теги</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;meta name="robots" content="index, follow" /&gt;
+&lt;meta name="author" content="Имя автора" /&gt;
+&lt;meta property="og:title" content="Заголовок для соцсетей" /&gt;</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <ul>
+                        <li>Создайте <code>index.html</code> с корректным доктайпом, <code>lang</code>, <code>charset</code>, <code>viewport</code>.</li>
+                        <li>Подключите внешний CSS/JS, добавьте осмысленный <code>&lt;title&gt;</code> и <code>description</code>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 1.2 -->
+            <section id="text-content" class="topic-section">
+                <h2>Работа с текстовым контентом</h2>
+                <p>Текст — это душа любого веб-сайта. Без текста даже самый красивый дизайн останется пустой оболочкой. Но просто написать текст недостаточно — нужно сделать его структурированным, понятным и доступным. Представьте книгу без глав, параграфов и абзацев — читать её было бы невозможно! Так и с веб-страницами: правильная структура текста критически важна для читаемости, SEO (чтобы поисковики понимали ваш контент) и доступности (чтобы люди с ограниченными возможностями могли легко навигироваться).</p>
+                
+                <h3>Заголовки: создаём иерархию, как в книге</h3>
+                <p>HTML предоставляет вам шесть уровней заголовков — от <code>&lt;h1&gt;</code> (самый важный, как название книги) до <code>&lt;h6&gt;</code> (наименее важный, как подпункт в подразделе). Это как система заголовков в учебнике: сначала название главы (h1), потом разделы (h2), подразделы (h3) и так далее. Заголовки создают "скелет" документа — они помогают и людям, и поисковым системам понять структуру и важность информации.</p>
+                
+                <p><strong>Правила использования заголовков:</strong></p>
+                <ul>
+                    <li><code>&lt;h1&gt;</code> — главный заголовок страницы. <strong>Должен быть только один</strong> на странице. Обычно содержит название страницы или основную тему.</li>
+                    <li><code>&lt;h2&gt;</code> — основные разделы страницы. Используйте для крупных тематических блоков.</li>
+                    <li><code>&lt;h3&gt;</code> — подразделы внутри <code>h2</code>. Для более детального деления контента.</li>
+                    <li><code>&lt;h4&gt;</code> — подпункты внутри <code>h3</code>. И так далее до <code>h6</code>.</li>
+                </ul>
+                
+                <p><strong>Золотое правило:</strong> Не пропускайте уровни! Это как лестница — нельзя перепрыгнуть со второго этажа на четвёртый, минуя третий. Нельзя использовать <code>h1</code>, затем сразу <code>h3</code>, минуя <code>h2</code>. Представьте оглавление книги: сначала "Глава 1", потом "Раздел 1.1", затем "Подраздел 1.1.1" — всё по порядку. Правильная последовательность: <code>h1</code> → <code>h2</code> → <code>h3</code> → <code>h4</code>... Это не просто формальность — нарушение иерархии сбивает с толку и людей, и поисковые системы.</p>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Правильная структура заголовков --&gt;
+&lt;h1&gt;Главный заголовок страницы&lt;/h1&gt;
+&lt;h2&gt;Первый основной раздел&lt;/h2&gt;
+&lt;h3&gt;Подраздел первого раздела&lt;/h3&gt;
+&lt;h2&gt;Второй основной раздел&lt;/h2&gt;
+&lt;h3&gt;Подраздел второго раздела&lt;/h3&gt;
+&lt;h4&gt;Детали подраздела&lt;/h4&gt;</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Почему правильная иерархия заголовков — это не просто "хороший тон", а необходимость:</strong></p>
+                    <ul>
+                        <li><strong>SEO — дружба с поисковиками:</strong> Google и другие поисковые системы "читают" заголовки, чтобы понять структуру и важность контента. Правильная иерархия помогает вашему сайту лучше ранжироваться в поиске. Это как правильно оформленная научная работа — её легче понять и оценить.</li>
+                        <li><strong>Доступность — помощь всем пользователям:</strong> скринридеры (программы для людей с нарушениями зрения) используют заголовки для навигации. Пользователь может "прыгать" от заголовка к заголовку, быстро находя нужный раздел. Представьте, что вы читаете книгу вслепую — оглавление с правильной структурой критически важно!</li>
+                        <li><strong>UX — удобство для всех:</strong> исследования показывают, что пользователи не читают страницы слово за словом — они сканируют их глазами, останавливаясь на заголовках. Правильная структура помогает людям быстро найти нужную информацию, не тратя время на чтение всего текста.</li>
+                        <li><strong>Стилизация — радость для разработчика:</strong> когда заголовки правильно структурированы, CSS-стили применяются логично и предсказуемо. Вы можете легко задать стили для всех h2 или всех h3, зная, что они используются по назначению.</li>
+                    </ul>
+                </div>
+                
+                <h3>Абзацы: создаём читаемый текст</h3>
+                <p>Абзацы — это как дыхание в тексте. Они разбивают длинный текст на логические куски, делая его читаемым и понятным. В HTML абзацы создаются тегом <code>&lt;p&gt;</code>. Каждый абзац — это отдельный "блок" текста, который визуально отделён от других абзацев отступами (обычно сверху и снизу).</p>
+                <p>Представьте, что вы читаете статью без абзацев — сплошная стена текста. Глаза устают, сложно найти нужное место, если отвлёкся. Абзацы делают текст "дышащим" и структурированным.</p>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;p&gt;Это первый абзац текста. Он содержит несколько предложений, которые образуют законченную мысль. Когда мысль закончена, начинается новый абзац.&lt;/p&gt;
+&lt;p&gt;Это второй абзац. Он отделён от первого визуально (отступом) и логически (новой мыслью). Каждый абзац — это как отдельный "кирпичик" в здании текста.&lt;/p&gt;</code></pre>
+                </div>
+                
+                <p><strong>Перенос строки — инструмент, который требует осторожности:</strong> Тег <code>&lt;br&gt;</code> создаёт принудительный перенос строки внутри абзаца. Это как нажатие Enter в середине предложения. <strong>Используйте его очень осторожно!</strong> В 95% случаев лучше использовать отдельные абзацы или управлять отступами через CSS. Почему? Потому что <code>&lt;br&gt;</code> — это "жёсткий" перенос, который сложно контролировать. На разных экранах он может выглядеть по-разному, а CSS даёт вам полный контроль.</p>
+                
+                <p><strong>Когда &lt;br&gt; действительно нужен — редкие, но важные случаи:</strong></p>
+                <ul>
+                    <li><strong>Адреса</strong> — каждая строка адреса должна быть на новой строке: улица, дом, город. Это не разные абзацы, а части одного адреса.</li>
+                    <li><strong>Стихи или тексты с фиксированной структурой</strong> — когда важна именно структура строк, а не смысловые блоки.</li>
+                    <li><strong>Короткие подписи</strong> — например, под изображением, где нужен перенос, но это не полноценный абзац.</li>
+                </ul>
+                <p>Во всех остальных случаях — используйте <code>&lt;p&gt;</code> для абзацев и CSS для управления отступами. Ваш будущий я (и ваши коллеги) скажут вам спасибо!</p>
+                
+                <p><strong>Когда НЕ использовать &lt;br&gt;:</strong></p>
+                <ul>
+                    <li>Для создания отступов между абзацами (используйте <code>&lt;p&gt;</code> или CSS <code>margin</code>)</li>
+                    <li>Для создания списков (используйте <code>&lt;ul&gt;</code> или <code>&lt;ol&gt;</code>)</li>
+                    <li>Для структурирования контента (используйте семантические теги)</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Плохо: много &lt;br&gt; для структуры --&gt;
+&lt;p&gt;Имя: Иван&lt;br&gt;Фамилия: Петров&lt;br&gt;Email: ivan@example.com&lt;/p&gt;
+
+&lt;!-- Хорошо: используйте списки или структурированные данные --&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Имя:&lt;/dt&gt;
+  &lt;dd&gt;Иван&lt;/dd&gt;
+  &lt;dt&gt;Фамилия:&lt;/dt&gt;
+  &lt;dd&gt;Петров&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                </div>
+                <h3>Списки</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;ul&gt;
+  &lt;li&gt;Маркированный пункт&lt;/li&gt;
+  &lt;li&gt;Ещё пункт&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+  &lt;li&gt;Нумерованный пункт&lt;/li&gt;
+  &lt;li&gt;Ещё пункт&lt;/li&gt;
+&lt;/ol&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Термин&lt;/dt&gt;
+  &lt;dd&gt;Определение&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                </div>
+                <h3>Блочные и строчные элементы: два разных мира</h3>
+                <p>Представьте, что HTML-элементы живут в двух разных "мирах" по способу отображения: <strong>блочные</strong> и <strong>строчные</strong> (inline). Это как разница между кирпичами и цементом: кирпичи (блочные) занимают целую строку и создают структуру, а цемент (строчные) заполняет пространство между кирпичами. Понимание этой разницы — это фундамент верстки. Без него вы будете бороться с элементами, которые ведут себя не так, как ожидаете.</p>
+                
+                <h4>Блочные элементы: "захватчики строк"</h4>
+                <p>Блочные элементы — это "эгоисты" пространства. Они занимают всю доступную ширину родителя (как будто говорят: "Вся эта строка моя!") и всегда начинаются с новой строки, выталкивая следующий элемент вниз. Они создают "блок" контента — визуально отдельный прямоугольник.</p>
+                <p><strong>Характеристики:</strong></p>
+                <ul>
+                    <li>Занимают всю ширину контейнера</li>
+                    <li>Начинаются с новой строки</li>
+                    <li>Могут содержать другие блочные и строчные элементы</li>
+                    <li>Можно задавать ширину, высоту, отступы (margin, padding)</li>
+                </ul>
+                <p><strong>Примеры блочных элементов:</strong> <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>.</p>
+                
+                <h4>Строчные элементы: "скромные помощники"</h4>
+                <p>Строчные элементы — полная противоположность блочным. Они скромные и занимают только столько места, сколько им нужно для содержимого. Они не создают новую строку и "встраиваются" в поток текста, как слова в предложении. Если блочный элемент — это отдельный абзац, то строчный — это выделенное слово внутри абзаца.</p>
+                <p><strong>Характеристики:</strong></p>
+                <ul>
+                    <li>Занимают только необходимое пространство</li>
+                    <li>Не создают новую строку</li>
+                    <li>Могут содержать только текст и другие строчные элементы</li>
+                    <li>Нельзя задавать ширину и высоту (игнорируются)</li>
+                    <li>Вертикальные отступы (margin-top, margin-bottom) не работают</li>
+                </ul>
+                <p><strong>Примеры строчных элементов:</strong> <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;button&gt;</code>.</p>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Блочные элементы --&gt;
+&lt;div&gt;Это блочный элемент&lt;/div&gt;
+&lt;p&gt;Это тоже блочный элемент&lt;/p&gt;
+
+&lt;!-- Строчные элементы --&gt;
+&lt;p&gt;Это &lt;strong&gt;строчный&lt;/strong&gt; элемент внутри &lt;em&gt;абзаца&lt;/em&gt;.&lt;/p&gt;
+&lt;span&gt;Строчный элемент&lt;/span&gt; &lt;span&gt;рядом со строчным&lt;/span&gt;</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Важно:</strong> В HTML5 появились inline-block элементы и можно изменить тип отображения через CSS свойство <code>display</code>. Но базовое понимание блочных и строчных элементов остаётся фундаментальным.</p>
+                </div>
+                
+                <h3>Пробелы и переносы: когда браузер "упрощает" ваш код</h3>
+                <p>HTML имеет интересную особенность, которая часто удивляет новичков: браузер автоматически "схлопывает" множественные пробелы и переносы строк в один пробел. Представьте, что вы написали в коде:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;p&gt;Это    текст    с    множественными    пробелами&lt;/p&gt;</code></pre>
+                </div>
+                <p>А браузер показывает: "Это текст с множественными пробелами" (все пробелы стали одним). Это сделано для удобства — вы можете форматировать код как угодно (с отступами, переносами), и браузер всё равно покажет текст правильно. Но иногда это создаёт неожиданные результаты, особенно когда вы хотите сохранить форматирование "как есть".</p>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- В коде много пробелов --&gt;
+&lt;p&gt;Это    текст    с    множественными    пробелами&lt;/p&gt;
+
+&lt;!-- В браузере отобразится как: --&gt;
+&lt;!-- Это текст с множественными пробелами (все пробелы схлопнуты в один) --&gt;</code></pre>
+                </div>
+                
+                <p><strong>Как сохранить форматирование:</strong></p>
+                <ul>
+                    <li><code>&lt;pre&gt;</code> — сохраняет все пробелы и переносы строк как есть. Используется для кода, стихов, ASCII-арта.</li>
+                    <li>CSS <code>white-space: pre</code> — сохраняет пробелы и переносы</li>
+                    <li>CSS <code>white-space: pre-wrap</code> — сохраняет пробелы, но переносит текст по ширине</li>
+                    <li>HTML-сущность <code>&amp;nbsp;</code> — неразрывный пробел (не схлопывается)</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Сохранение форматирования --&gt;
+&lt;pre&gt;
+function hello() {
+    console.log('Hello, World!');
+}
+&lt;/pre&gt;
+
+&lt;!-- Или через CSS --&gt;
+&lt;p style="white-space: pre-wrap"&gt;Текст
+    с    пробелами
+        и переносами&lt;/p&gt;</code></pre>
+                </div>
+                
+                <h3>Семантические инлайн‑элементы для форматирования</h3>
+                <p>HTML предоставляет семантические теги для выделения текста. Важно использовать их по назначению, а не только для визуального оформления (для этого есть CSS).</p>
+                
+                <ul>
+                    <li><code>&lt;strong&gt;</code> — <strong>важный текст</strong>. Используется для логически важной информации. По умолчанию отображается жирным, но смысл — в важности, а не в оформлении.</li>
+                    <li><code>&lt;em&gt;</code> — <em>акцент/интонация</em>. Используется для выделения интонации или акцента. По умолчанию отображается курсивом, но смысл — в интонации.</li>
+                    <li><code>&lt;mark&gt;</code> — <mark>выделенный текст</mark>. Используется для выделения текста, как маркером (например, результаты поиска).</li>
+                    <li><code>&lt;small&gt;</code> — <small>мелкий текст</small>. Используется для мелкого текста (например, копирайт, юридическая информация).</li>
+                    <li><code>&lt;code&gt;</code> — <code>код</code>. Используется для фрагментов кода внутри текста.</li>
+                    <li><code>&lt;kbd&gt;</code> — <kbd>клавиши</kbd>. Используется для обозначения клавиш клавиатуры.</li>
+                    <li><code>&lt;samp&gt;</code> — <samp>пример вывода</samp>. Используется для примеров вывода программы.</li>
+                    <li><code>&lt;var&gt;</code> — <var>переменная</var>. Используется для обозначения переменных в коде.</li>
+                    <li><code>&lt;span&gt;</code> — универсальный строчный контейнер без семантического значения. Используется для группировки элементов для стилизации или JavaScript.</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;p&gt;
+    Это &lt;strong&gt;важный&lt;/strong&gt; текст. 
+    Обратите &lt;em&gt;особое внимание&lt;/em&gt; на это.
+    Для кода используйте &lt;code&gt;console.log()&lt;/code&gt;.
+    Нажмите &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt; для копирования.
+&lt;/p&gt;</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Правило:</strong> Используйте семантические теги по их назначению, а не только для визуального оформления. Если нужно просто сделать текст жирным или курсивом без смысловой нагрузки, используйте CSS (<code>font-weight: bold</code> или <code>font-style: italic</code>).</p>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Добавьте на страницу «О себе» разделы с заголовками, абзацами, маркированным и нумерованным списками, а также списком определений.</p>
+                </div>
+            </section>
+
+            <!-- 1.3 -->
+            <section id="links-images" class="topic-section">
+                <h2>Ссылки и изображения</h2>
+                <p>Ссылки и изображения — это основа навигации и визуального контента на веб-страницах. Правильное использование этих элементов критически важно для пользовательского опыта, SEO и доступности.</p>
+                
+                <h3>Ссылки: создание навигации</h3>
+                <p>Тег <code>&lt;a&gt;</code> (anchor — якорь) создаёт гиперссылки — основной способ навигации в интернете. Ссылки могут вести на другие страницы, файлы, секции текущей страницы или выполнять специальные действия (открыть почту, позвонить).</p>
+                
+                <h4>Типы ссылок</h4>
+                
+                <p><strong>1. Внешние ссылки</strong> — ведут на другие сайты:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;a href="https://example.com" target="_blank" rel="noopener noreferrer"&gt;
+    Внешняя ссылка
+&lt;/a&gt;</code></pre>
+                </div>
+                <p><strong>Атрибуты:</strong></p>
+                <ul>
+                    <li><code>href</code> — обязательный атрибут, содержит URL назначения</li>
+                    <li><code>target="_blank"</code> — открывает ссылку в новой вкладке</li>
+                    <li><code>rel="noopener noreferrer"</code> — <strong>обязательно</strong> при <code>target="_blank"</code> для безопасности</li>
+                </ul>
+                
+                <div class="note">
+                    <p><strong>Безопасность:</strong> Без <code>rel="noopener"</code> новая страница получает доступ к объекту <code>window.opener</code> вашей страницы и может выполнить вредоносный код. <code>noreferrer</code> также скрывает информацию о том, откуда пришёл пользователь.</p>
+                </div>
+                
+                <p><strong>2. Внутренние ссылки</strong> — ведут на другие страницы вашего сайта:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;a href="/about.html"&gt;О нас&lt;/a&gt;
+&lt;a href="contact.html"&gt;Контакты&lt;/a&gt;
+&lt;a href="../blog/index.html"&gt;Блог&lt;/a&gt;</code></pre>
+                </div>
+                
+                <p><strong>3. Якорные ссылки</strong> — прокручивают к секции на текущей странице:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Ссылка на секцию --&gt;
+&lt;a href="#contacts"&gt;Перейти к контактам&lt;/a&gt;
+
+&lt;!-- Секция с соответствующим id --&gt;
+&lt;section id="contacts"&gt;
+    &lt;h2&gt;Контакты&lt;/h2&gt;
+    &lt;p&gt;Наши контакты...&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+                </div>
+                <p><strong>Как это работает:</strong> Браузер ищет элемент с <code>id</code>, равным значению после <code>#</code>, и плавно прокручивает к нему. Это полезно для навигации по длинным страницам.</p>
+                
+                <p><strong>4. Специальные протоколы</strong> — для выполнения действий:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Email ссылка --&gt;
+&lt;a href="mailto:hi@example.com?subject=Вопрос&amp;body=Здравствуйте!"&gt;
+    Написать письмо
+&lt;/a&gt;
+
+&lt;!-- Телефон (работает на мобильных) --&gt;
+&lt;a href="tel:+79001234567"&gt;+7 (900) 123-45-67&lt;/a&gt;
+
+&lt;!-- SMS (на мобильных) --&gt;
+&lt;a href="sms:+79001234567?body=Привет!"&gt;Отправить SMS&lt;/a&gt;
+
+&lt;!-- Скачать файл --&gt;
+&lt;a href="/files/document.pdf" download&gt;Скачать PDF&lt;/a&gt;</code></pre>
+                </div>
+                
+                <h4>Дополнительные атрибуты ссылок</h4>
+                <ul>
+                    <li><code>title</code> — всплывающая подсказка при наведении. Полезно для дополнительной информации, но не полагайтесь на него для важного контента.</li>
+                    <li><code>download</code> — заставляет браузер скачать файл вместо перехода по ссылке. Можно указать имя файла: <code>download="myfile.pdf"</code>.</li>
+                    <li><code>rel</code> — отношения между документами. Значения: <code>nofollow</code> (не передавать вес страницы), <code>noopener</code>, <code>noreferrer</code>, <code>external</code>.</li>
+                    <li><code>hreflang</code> — язык целевой страницы: <code>hreflang="en"</code> для английской версии.</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Полный пример ссылки с атрибутами --&gt;
+&lt;a 
+    href="https://example.com/article" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    title="Откроется в новой вкладке"
+    hreflang="ru"
+&gt;
+    Читать статью
+&lt;/a&gt;</code></pre>
+                </div>
+                <h3>Изображения: выбор формата и оптимизация</h3>
+                <p>Изображения делают веб-страницы визуально привлекательными, но неправильное их использование может замедлить загрузку страницы и ухудшить пользовательский опыт. Важно правильно выбирать формат и оптимизировать изображения.</p>
+                
+                <h4>Выбор формата изображения</h4>
+                <p>Разные форматы подходят для разных задач:</p>
+                <ul>
+                    <li><strong>JPEG</strong> — для фотографий и изображений с множеством цветов. Хорошее сжатие, но без прозрачности. Используйте качество 80-85% для веба.</li>
+                    <li><strong>PNG</strong> — для графики с прозрачностью, скриншотов, изображений с текстом. Больший размер файла, но сохраняет качество.</li>
+                    <li><strong>WebP</strong> — современный формат от Google. На 25-35% меньше размер при том же качестве, чем JPEG/PNG. Поддерживает прозрачность. <strong>Рекомендуется использовать везде, где возможно.</strong></li>
+                    <li><strong>AVIF</strong> — ещё более современный формат. На 50% меньше размер, чем JPEG. Поддержка в браузерах растёт, но пока не везде.</li>
+                    <li><strong>SVG</strong> — векторный формат для иконок, логотипов, простой графики. Масштабируется без потери качества, маленький размер для простых изображений.</li>
+                    <li><strong>GIF</strong> — только для анимаций. Для статичных изображений не используйте — размер файла будет огромным.</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Базовое использование изображения --&gt;
+&lt;img 
+    src="/images/cat.png" 
+    alt="Милый котёнок сидит на подоконнике" 
+    width="400" 
+    height="300" 
+    loading="lazy"
+&gt;</code></pre>
+                </div>
+                
+                <h4>Обязательные и важные атрибуты</h4>
+                <ul>
+                    <li><code>src</code> — <strong>обязательный</strong> атрибут. Путь к файлу изображения.</li>
+                    <li><code>alt</code> — <strong>обязательный</strong> атрибут. Описательный текст для изображения. Критически важен для:
+                        <ul>
+                            <li><strong>Доступности:</strong> скринридеры читают этот текст пользователям с нарушениями зрения</li>
+                            <li><strong>SEO:</strong> поисковые системы используют alt для понимания содержания изображения</li>
+                            <li><strong>UX:</strong> отображается, если изображение не загрузилось</li>
+                        </ul>
+                        <p><strong>Правила написания alt:</strong></p>
+                        <ul>
+                            <li>Описывайте содержание изображения, а не его назначение</li>
+                            <li>Будьте конкретны, но кратки (до 125 символов)</li>
+                            <li>Для декоративных изображений используйте пустой <code>alt=""</code></li>
+                            <li>Не начинайте с "Изображение..." или "Картинка..." — скринридеры уже сообщают, что это изображение</li>
+                        </ul>
+                    </li>
+                    <li><code>width</code> и <code>height</code> — <strong>настоятельно рекомендуется</strong> указывать. Помогают браузеру:
+                        <ul>
+                            <li>Резервировать место для изображения до его загрузки</li>
+                            <li>Избегать CLS (Cumulative Layout Shift) — "прыжков" верстки</li>
+                            <li>Улучшить Core Web Vitals и SEO</li>
+                        </ul>
+                        <p>Указывайте реальные размеры изображения в пикселях. CSS может изменить визуальный размер, но браузер использует эти значения для резервирования места.</p>
+                    </li>
+                    <li><code>loading="lazy"</code> — отложенная загрузка. Изображение загружается только когда пользователь прокручивает страницу к нему. <strong>Используйте для всех изображений, кроме первого (LCP-изображения)</strong>.</li>
+                    <li><code>decoding="async"</code> — асинхронное декодирование. Изображение декодируется параллельно с рендерингом страницы, не блокируя его.</li>
+                    <li><code>fetchpriority="high"</code> — приоритет загрузки. Используйте только для LCP-изображения (самого важного изображения на странице).</li>
+                </ul>
+                
+                <h4>Семантическая обёртка: &lt;figure&gt; и &lt;figcaption&gt;</h4>
+                <p>Для изображений с подписями используйте семантическую структуру:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;figure&gt;
+    &lt;img 
+        src="/images/cat.png" 
+        alt="Милый котёнок сидит на подоконнике" 
+        width="400" 
+        height="300" 
+        loading="lazy"
+    &gt;
+    &lt;figcaption&gt;Наш талисман — котёнок по имени Мурзик&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                </div>
+                <p><code>&lt;figure&gt;</code> — семантический контейнер для иллюстраций, диаграмм, фотографий с подписями. Может содержать несколько изображений или другой контент.</p>
+                <p><code>&lt;figcaption&gt;</code> — подпись к содержимому <code>&lt;figure&gt;</code>. Может быть до или после изображения, но обычно размещается после.</p>
+                
+                <h3>Адаптивные изображения: srcset и sizes</h3>
+                <p>Современные веб-сайты должны корректно отображаться на устройствах с разными размерами экранов и плотностью пикселей (retina-дисплеи). HTML5 предоставляет инструменты для адаптивных изображений.</p>
+                
+                <h4>srcset для разных размеров</h4>
+                <p>Атрибут <code>srcset</code> позволяет указать несколько версий изображения для разных размеров экрана:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;img 
+    src="/images/photo-800.jpg" 
+    srcset="/images/photo-400.jpg 400w, 
+            /images/photo-800.jpg 800w, 
+            /images/photo-1200.jpg 1200w" 
+    sizes="(max-width: 600px) 100vw, 600px"
+    alt="Красивый пейзаж" 
+    width="600" 
+    height="400" 
+    loading="lazy"
+&gt;</code></pre>
+                </div>
+                
+                <p><strong>Как это работает:</strong></p>
+                <ul>
+                    <li><code>400w</code>, <code>800w</code>, <code>1200w</code> — ширина изображения в пикселях (descriptor)</li>
+                    <li>Браузер выбирает подходящее изображение на основе размера экрана и плотности пикселей</li>
+                    <li><code>sizes</code> — указывает браузеру, какой размер будет у изображения на экране</li>
+                </ul>
+                
+                <p><strong>Разбор sizes:</strong></p>
+                <ul>
+                    <li><code>(max-width: 600px) 100vw</code> — если экран меньше 600px, изображение займёт 100% ширины viewport</li>
+                    <li><code>600px</code> — иначе изображение будет 600px шириной</li>
+                </ul>
+                
+                <h4>srcset для retina-дисплеев</h4>
+                <p>Для поддержки дисплеев с высокой плотностью пикселей (2x, 3x):</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;img 
+    src="/images/logo@1x.png" 
+    srcset="/images/logo@1x.png 1x, 
+            /images/logo@2x.png 2x,
+            /images/logo@3x.png 3x" 
+    alt="Логотип компании" 
+    width="200" 
+    height="50"
+&gt;</code></pre>
+                </div>
+                <p>Браузер автоматически выберет подходящую версию: на обычном экране — 1x, на retina — 2x или 3x.</p>
+                
+                <h4>Оптимизация изображений: практические советы</h4>
+                <ul>
+                    <li><strong>Сжимайте изображения:</strong> используйте инструменты типа TinyPNG, ImageOptim, Squoosh для уменьшения размера без потери качества</li>
+                    <li><strong>Используйте современные форматы:</strong> WebP или AVIF вместо JPEG/PNG где возможно</li>
+                    <li><strong>Создавайте несколько размеров:</strong> не загружайте огромное изображение на мобильный</li>
+                    <li><strong>Указывайте width/height:</strong> предотвращает CLS и улучшает производительность</li>
+                    <li><strong>Lazy loading:</strong> загружайте изображения по мере необходимости</li>
+                    <li><strong>CDN:</strong> используйте CDN для быстрой доставки изображений пользователям по всему миру</li>
+                </ul>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Соберите меню из 4 ссылок (включая якорь и mailto) и вставьте 2 изображения: обычное и адаптивное с <code>srcset</code>.</p>
+                </div>
+            </section>
+
+            <!-- 1.4 -->
+            <section id="semantic-markup" class="topic-section">
+                <h2>Семантическая разметка</h2>
+                <p>Семантические теги описывают <em>смысл</em> блоков: поисковики и ассистивные технологии лучше понимают структуру, пользователям проще навигация.</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;header&gt;
+  &lt;nav&gt;Меню&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;header&gt;&lt;h1&gt;Заголовок статьи&lt;/h1&gt;&lt;/header&gt;
+    &lt;section aria-labelledby="s1"&gt;
+      &lt;h2 id="s1"&gt;Основной контент&lt;/h2&gt;
+      ...
+    &lt;/section&gt;
+    &lt;footer&gt;Автор и дата&lt;/footer&gt;
+  &lt;/article&gt;
+  &lt;aside&gt;Боковая колонка&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;Подвал&lt;/footer&gt;</code></pre>
+                </div>
+                <h3>Лендмарки доступности</h3>
+                <ul>
+                    <li><code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code> — могут быть у страницы и у статьи/секции</li>
+                    <li><code>&lt;main&gt;</code> — только один на странице, основной контент</li>
+                    <li><code>&lt;nav&gt;</code> — группы ссылок (меню/хлебные крошки)</li>
+                    <li><code>&lt;aside&gt;</code> — боковой/вспомогательный контент</li>
+                    <li><code>&lt;article&gt;</code> — самостоятельный, самодостаточный блок (статья, карточка)</li>
+                </ul>
+                <p>Если подходящего тега нет — используйте <code>&lt;div&gt;</code> (блочный) или <code>&lt;span&gt;</code> (строчный) и при необходимости ARIA‑атрибуты.</p>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Преобразуйте страницу «О себе» в семантический макет с <code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>aside</code>, <code>footer</code>.</p>
+                </div>
+            </section>
+
+            <!-- 1.5 -->
+            <section id="forms" class="topic-section">
+                <h2>Формы: сбор данных от пользователей</h2>
+                <p>Формы — это основной способ взаимодействия пользователей с веб-сайтом. Они позволяют собирать данные, отправлять запросы, выполнять поиск и многое другое. Правильная работа с формами критически важна для пользовательского опыта и безопасности.</p>
+                
+                <h3>Структура формы</h3>
+                <p>Форма создаётся тегом <code>&lt;form&gt;</code>, который содержит поля ввода и кнопку отправки. Каждая форма должна иметь атрибуты <code>action</code> (куда отправлять) и <code>method</code> (как отправлять).</p>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;form action="/submit" method="post" autocomplete="on" novalidate&gt;
+    &lt;!-- Поля формы --&gt;
+    &lt;button type="submit"&gt;Отправить&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                
+                <h4>Атрибуты формы</h4>
+                <ul>
+                    <li><code>action</code> — URL, куда отправляются данные. Может быть относительным (<code>/submit</code>) или абсолютным (<code>https://api.example.com/submit</code>). Если не указан, форма отправляется на текущую страницу.</li>
+                    <li><code>method</code> — HTTP-метод отправки: <code>GET</code> или <code>POST</code> (по умолчанию <code>GET</code>).</li>
+                    <li><code>autocomplete</code> — включает/выключает автозаполнение браузера. Значения: <code>on</code> (включено) или <code>off</code> (выключено).</li>
+                    <li><code>novalidate</code> — отключает встроенную HTML5-валидацию. Используйте, если валидация выполняется через JavaScript.</li>
+                    <li><code>enctype</code> — тип кодирования данных. По умолчанию <code>application/x-www-form-urlencoded</code>. Для загрузки файлов используйте <code>multipart/form-data</code>.</li>
+                </ul>
+                
+                <h3>Типы полей ввода</h3>
+                <p>HTML5 предоставляет множество типов полей <code>&lt;input&gt;</code>, каждый оптимизирован для своего типа данных:</p>
+                
+                <h4>Текстовые поля</h4>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Обычный текст --&gt;
+&lt;input type="text" name="username" placeholder="Введите имя"&gt;
+
+&lt;!-- Email с валидацией --&gt;
+&lt;input type="email" name="email" required&gt;
+
+&lt;!-- Пароль (скрывается) --&gt;
+&lt;input type="password" name="password" minlength="8"&gt;
+
+&lt;!-- Поиск --&gt;
+&lt;input type="search" name="q" placeholder="Поиск..."&gt;
+
+&lt;!-- URL --&gt;
+&lt;input type="url" name="website"&gt;
+
+&lt;!-- Телефон --&gt;
+&lt;input type="tel" name="phone" pattern="[0-9]{10}"&gt;
+
+&lt;!-- Число --&gt;
+&lt;input type="number" name="age" min="18" max="100" step="1"&gt;
+
+&lt;!-- Ползунок для чисел --&gt;
+&lt;input type="range" name="volume" min="0" max="100" value="50"&gt;</code></pre>
+                </div>
+                
+                <h4>Дата и время</h4>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Дата --&gt;
+&lt;input type="date" name="birthday"&gt;
+
+&lt;!-- Время --&gt;
+&lt;input type="time" name="meeting-time"&gt;
+
+&lt;!-- Дата и время --&gt;
+&lt;input type="datetime-local" name="event-datetime"&gt;
+
+&lt;!-- Месяц --&gt;
+&lt;input type="month" name="month"&gt;
+
+&lt;!-- Неделя --&gt;
+&lt;input type="week" name="week"&gt;</code></pre>
+                </div>
+                
+                <h4>Выбор значений</h4>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Чекбокс (можно выбрать несколько) --&gt;
+&lt;label&gt;
+    &lt;input type="checkbox" name="interests" value="coding" checked&gt;
+    Программирование
+&lt;/label&gt;
+&lt;label&gt;
+    &lt;input type="checkbox" name="interests" value="design"&gt;
+    Дизайн
+&lt;/label&gt;
+
+&lt;!-- Радио-кнопки (можно выбрать только одно) --&gt;
+&lt;label&gt;
+    &lt;input type="radio" name="gender" value="male" checked&gt;
+    Мужской
+&lt;/label&gt;
+&lt;label&gt;
+    &lt;input type="radio" name="gender" value="female"&gt;
+    Женский
+&lt;/label&gt;
+
+&lt;!-- Выпадающий список --&gt;
+&lt;select name="country" required&gt;
+    &lt;option value=""&gt;Выберите страну&lt;/option&gt;
+    &lt;option value="ru" selected&gt;Россия&lt;/option&gt;
+    &lt;option value="us"&gt;США&lt;/option&gt;
+    &lt;option value="de"&gt;Германия&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- Множественный выбор --&gt;
+&lt;select name="languages" multiple size="4"&gt;
+    &lt;option value="ru"&gt;Русский&lt;/option&gt;
+    &lt;option value="en"&gt;Английский&lt;/option&gt;
+    &lt;option value="de"&gt;Немецкий&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                </div>
+                
+                <h4>Специальные поля</h4>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Цвет --&gt;
+&lt;input type="color" name="fav-color" value="#4f46e5"&gt;
+
+&lt;!-- Файл --&gt;
+&lt;input type="file" name="avatar" accept="image/*"&gt;
+
+&lt;!-- Скрытое поле (не видно пользователю) --&gt;
+&lt;input type="hidden" name="token" value="abc123"&gt;
+
+&lt;!-- Кнопка отправки --&gt;
+&lt;button type="submit"&gt;Отправить&lt;/button&gt;
+
+&lt;!-- Кнопка сброса --&gt;
+&lt;button type="reset"&gt;Очистить&lt;/button&gt;
+
+&lt;!-- Обычная кнопка (для JavaScript) --&gt;
+&lt;button type="button"&gt;Нажми меня&lt;/button&gt;</code></pre>
+                </div>
+                
+                <h3>Многострочный текст: textarea</h3>
+                <p>Для длинных текстов используйте <code>&lt;textarea&gt;</code>:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;label for="message"&gt;Сообщение&lt;/label&gt;
+&lt;textarea 
+    id="message" 
+    name="message" 
+    rows="6" 
+    cols="50"
+    placeholder="Введите ваше сообщение..."
+    maxlength="500"
+    required
+&gt;&lt;/textarea&gt;
+&lt;small&gt;Осталось символов: &lt;span id="char-count"&gt;500&lt;/span&gt;&lt;/small&gt;</code></pre>
+                </div>
+                <p><strong>Атрибуты:</strong></p>
+                <ul>
+                    <li><code>rows</code> — количество видимых строк (можно изменить через CSS)</li>
+                    <li><code>cols</code> — количество видимых символов в строке (устаревший, лучше управлять через CSS <code>width</code>)</li>
+                    <li><code>maxlength</code> — максимальное количество символов</li>
+                    <li><code>wrap</code> — перенос строк: <code>soft</code> (по умолчанию) или <code>hard</code></li>
+                </ul>
+                
+                <h3>Связывание label и input</h3>
+                <p>Каждое поле должно иметь связанную метку (<code>&lt;label&gt;</code>). Это критически важно для доступности и UX.</p>
+                
+                <h4>Способ 1: через атрибут for (рекомендуется)</h4>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;label for="email"&gt;Email адрес&lt;/label&gt;
+&lt;input id="email" type="email" name="email" required&gt;
+&lt;!-- При клике на label фокус переходит на input --&gt;</code></pre>
+                </div>
+                
+                <h4>Способ 2: обёртка</h4>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;label&gt;
+    Email адрес
+    &lt;input type="email" name="email" required&gt;
+&lt;/label&gt;
+&lt;!-- label автоматически связан с input внутри --&gt;</code></pre>
+                </div>
+                
+                <p><strong>Почему это важно:</strong></p>
+                <ul>
+                    <li>Скринридеры объявляют метку при фокусе на поле</li>
+                    <li>Клик по метке активирует поле (особенно удобно для чекбоксов и радио)</li>
+                    <li>Улучшает UX на мобильных устройствах</li>
+                    <li>Помогает SEO и поисковым системам</li>
+                </ul>
+                
+                <h3>Валидация форм</h3>
+                <p>HTML5 предоставляет встроенную валидацию без JavaScript. Это первая линия защиты от некорректных данных.</p>
+                
+                <h4>Атрибуты валидации</h4>
+                <ul>
+                    <li><code>required</code> — поле обязательно для заполнения</li>
+                    <li><code>minlength</code> / <code>maxlength</code> — минимальная/максимальная длина текста</li>
+                    <li><code>min</code> / <code>max</code> — минимальное/максимальное значение для чисел</li>
+                    <li><code>step</code> — шаг для чисел (например, 0.5 для десятичных)</li>
+                    <li><code>pattern</code> — регулярное выражение для проверки формата</li>
+                    <li><code>type</code> — тип поля автоматически валидируется (email, url, number и т.д.)</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Примеры валидации --&gt;
+&lt;input 
+    type="email" 
+    name="email" 
+    required 
+    placeholder="example@mail.com"
+&gt;
+
+&lt;input 
+    type="password" 
+    name="password" 
+    required 
+    minlength="8"
+    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    title="Пароль должен содержать минимум 8 символов, включая цифру, строчную и заглавную букву"
+&gt;
+
+&lt;input 
+    type="number" 
+    name="age" 
+    min="18" 
+    max="100" 
+    step="1"
+    required
+&gt;
+
+&lt;input 
+    type="tel" 
+    name="phone" 
+    pattern="[0-9]{10}" 
+    placeholder="1234567890"
+    title="Введите 10 цифр"
+&gt;</code></pre>
+                </div>
+                
+                <h4>Сообщения об ошибках</h4>
+                <p>Браузер автоматически показывает сообщения об ошибках при невалидных данных. Можно кастомизировать через JavaScript или использовать атрибут <code>title</code> для подсказки.</p>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;input 
+    type="email" 
+    name="email" 
+    required
+    oninvalid="this.setCustomValidity('Пожалуйста, введите корректный email')"
+    oninput="this.setCustomValidity('')"
+&gt;</code></pre>
+                </div>
+                
+                <h3>Группировка полей: fieldset и legend</h3>
+                <p>Для логической группировки связанных полей используйте <code>&lt;fieldset&gt;</code> и <code>&lt;legend&gt;</code>:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;fieldset&gt;
+    &lt;legend&gt;Контактная информация&lt;/legend&gt;
+    
+    &lt;label for="name"&gt;Имя&lt;/label&gt;
+    &lt;input id="name" type="text" name="name" required&gt;
+    
+    &lt;label for="email"&gt;Email&lt;/label&gt;
+    &lt;input id="email" type="email" name="email" required&gt;
+&lt;/fieldset&gt;
+
+&lt;fieldset&gt;
+    &lt;legend&gt;Предпочтения&lt;/legend&gt;
+    
+    &lt;label&gt;
+        &lt;input type="checkbox" name="news"&gt;
+        Подписаться на новости
+    &lt;/label&gt;
+    
+    &lt;label&gt;
+        &lt;input type="checkbox" name="promo"&gt;
+        Получать промо-предложения
+    &lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+                </div>
+                <p><strong>Преимущества:</strong> улучшает доступность (скринридеры объявляют группу), визуально группирует связанные поля, улучшает UX.</p>
+                
+                <h3>GET vs POST: когда что использовать</h3>
+                <p>Выбор метода отправки формы критически важен для безопасности и правильной работы приложения.</p>
+                
+                <h4>GET — для получения данных</h4>
+                <p><strong>Характеристики:</strong></p>
+                <ul>
+                    <li>Данные отправляются в URL как параметры: <code>?name=Иван&email=ivan@mail.com</code></li>
+                    <li>Запрос можно закладкировать, отправить ссылкой</li>
+                    <li>Ограничение длины URL (обычно ~2000 символов)</li>
+                    <li>Данные видны в истории браузера, логах сервера</li>
+                    <li>Идемпотентный — повторный запрос не изменяет состояние</li>
+                </ul>
+                <p><strong>Когда использовать:</strong></p>
+                <ul>
+                    <li>Поисковые запросы</li>
+                    <li>Фильтры и сортировка</li>
+                    <li>Пагинация</li>
+                    <li>Любые запросы, которые только читают данные</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Форма поиска --&gt;
+&lt;form action="/search" method="get"&gt;
+    &lt;input type="search" name="q" placeholder="Поиск..."&gt;
+    &lt;button type="submit"&gt;Найти&lt;/button&gt;
+&lt;/form&gt;
+&lt;!-- Результат: /search?q=python --&gt;</code></pre>
+                </div>
+                
+                <h4>POST — для отправки данных</h4>
+                <p><strong>Характеристики:</strong></p>
+                <ul>
+                    <li>Данные отправляются в теле запроса, не видны в URL</li>
+                    <li>Нет ограничений по размеру (практически)</li>
+                    <li>Безопаснее для чувствительных данных</li>
+                    <li>Не идемпотентный — повторная отправка может создать дубликаты</li>
+                    <li>Нельзя закладкировать результат</li>
+                </ul>
+                <p><strong>Когда использовать:</strong></p>
+                <ul>
+                    <li>Регистрация и авторизация</li>
+                    <li>Отправка форм обратной связи</li>
+                    <li>Загрузка файлов</li>
+                    <li>Любые действия, которые изменяют данные на сервере</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- Форма регистрации --&gt;
+&lt;form action="/register" method="post" enctype="application/x-www-form-urlencoded"&gt;
+    &lt;input type="text" name="username" required&gt;
+    &lt;input type="email" name="email" required&gt;
+    &lt;input type="password" name="password" required&gt;
+    &lt;button type="submit"&gt;Зарегистрироваться&lt;/button&gt;
+&lt;/form&gt;
+&lt;!-- Данные отправляются в теле запроса, не видны в URL --&gt;</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Важно для безопасности:</strong></p>
+                    <ul>
+                        <li><strong>Никогда</strong> не используйте GET для паролей, персональных данных, финансовых операций</li>
+                        <li>Валидация на клиенте (HTML5) — это только удобство для пользователя. <strong>Всегда</strong> валидируйте данные на сервере</li>
+                        <li>Для защиты от CSRF-атак используйте токены</li>
+                        <li>Используйте HTTPS для всех форм с чувствительными данными</li>
+                    </ul>
+                </div>
+                
+                <h3>Атрибуты autocomplete: улучшение UX</h3>
+                <p>Атрибут <code>autocomplete</code> помогает браузерам и менеджерам паролей правильно заполнять формы. Это значительно улучшает пользовательский опыт.</p>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;form autocomplete="on"&gt;
+    &lt;input type="text" name="name" autocomplete="name"&gt;
+    &lt;input type="email" name="email" autocomplete="email"&gt;
+    &lt;input type="tel" name="phone" autocomplete="tel"&gt;
+    &lt;input type="text" name="address" autocomplete="street-address"&gt;
+    &lt;input type="text" name="city" autocomplete="address-level2"&gt;
+    &lt;input type="text" name="zip" autocomplete="postal-code"&gt;
+    &lt;input type="password" name="current-password" autocomplete="current-password"&gt;
+    &lt;input type="password" name="new-password" autocomplete="new-password"&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                
+                <p><strong>Популярные значения autocomplete:</strong></p>
+                <ul>
+                    <li><code>name</code>, <code>given-name</code>, <code>family-name</code> — имя</li>
+                    <li><code>email</code> — email адрес</li>
+                    <li><code>tel</code> — телефон</li>
+                    <li><code>street-address</code>, <code>address-level1</code> (регион), <code>address-level2</code> (город), <code>postal-code</code> — адрес</li>
+                    <li><code>current-password</code>, <code>new-password</code> — пароли</li>
+                    <li><code>cc-name</code>, <code>cc-number</code>, <code>cc-exp</code> — данные кредитной карты</li>
+                </ul>
+                
+                <h3>Загрузка файлов</h3>
+                <p>Для загрузки файлов нужно:</p>
+                <ol>
+                    <li>Использовать <code>type="file"</code></li>
+                    <li>Установить <code>enctype="multipart/form-data"</code> в форме</li>
+                    <li>Использовать метод <code>POST</code></li>
+                </ol>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;form action="/upload" method="post" enctype="multipart/form-data"&gt;
+    &lt;label for="avatar"&gt;Загрузить аватар&lt;/label&gt;
+    &lt;input 
+        id="avatar" 
+        type="file" 
+        name="avatar" 
+        accept="image/png, image/jpeg, image/webp"
+        multiple
+    &gt;
+    &lt;small&gt;Максимальный размер: 5MB. Форматы: PNG, JPEG, WebP&lt;/small&gt;
+    &lt;button type="submit"&gt;Загрузить&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                
+                <p><strong>Атрибут accept:</strong> ограничивает типы файлов, которые можно выбрать. Можно указать MIME-типы (<code>image/*</code>, <code>application/pdf</code>) или расширения (<code>.pdf,.doc</code>).</p>
+                
+                <h3>Практические советы по формам</h3>
+                <ul>
+                    <li><strong>Всегда используйте label:</strong> не заменяйте его на placeholder. Placeholder — это подсказка, label — это описание поля.</li>
+                    <li><strong>Группируйте связанные поля:</strong> используйте <code>fieldset</code> для визуальной и логической группировки</li>
+                    <li><strong>Показывайте прогресс:</strong> для длинных форм используйте индикаторы прогресса или разбивайте на шаги</li>
+                    <li><strong>Валидируйте в реальном времени:</strong> показывайте ошибки сразу, а не только при отправке</li>
+                    <li><strong>Используйте правильные типы полей:</strong> это улучшает UX на мобильных (правильная клавиатура) и валидацию</li>
+                    <li><strong>Предоставляйте обратную связь:</strong> показывайте сообщения об успешной отправке или ошибках</li>
+                    <li><strong>Защищайте от спама:</strong> используйте CAPTCHA, honeypot-поля или другие методы</li>
+                </ul>
+                
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Создайте полноценную форму регистрации со следующими полями:</p>
+                    <ul>
+                        <li>Имя и фамилия (отдельные поля)</li>
+                        <li>Email с валидацией</li>
+                        <li>Пароль с требованиями (минимум 8 символов, буквы и цифры)</li>
+                        <li>Подтверждение пароля</li>
+                        <li>Дата рождения (date picker)</li>
+                        <li>Пол (radio buttons)</li>
+                        <li>Интересы (checkboxes — можно выбрать несколько)</li>
+                        <li>Страна (select с несколькими опциями)</li>
+                        <li>О себе (textarea)</li>
+                        <li>Согласие с условиями (checkbox, обязательное)</li>
+                        <li>Кнопка отправки</li>
+                    </ul>
+                    <p><strong>Требования:</strong></p>
+                    <ul>
+                        <li>Все поля должны иметь связанные label</li>
+                        <li>Используйте правильные типы input</li>
+                        <li>Добавьте валидацию через HTML5-атрибуты</li>
+                        <li>Используйте fieldset для группировки</li>
+                        <li>Добавьте autocomplete атрибуты</li>
+                        <li>Используйте метод POST</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 1.6 -->
+            <section id="a11y-aria" class="topic-section">
+                <h2>Доступность (A11y) и ARIA</h2>
+                <p>Доступность — это про то, чтобы интерфейсом могли пользоваться люди с разными возможностями и устройствами. Следуйте стандартам <strong>WCAG</strong>, используйте нативную семантику и дополняйте её <strong>ARIA</strong>, когда это необходимо.</p>
+                <h3>Фокус и клавиатурная навигация</h3>
+                <ul>
+                    <li>Порядок табуляции следует логике документа. Не используйте <code>tabindex</code> &gt; 0, предпочитайте нативный порядок.</li>
+                    <li>Кнопки должны быть <code>&lt;button&gt;</code>, а не <code>&lt;div role="button"&gt;</code>. Если всё же нужен кастом — добавляйте <code>role</code>, <code>tabindex="0"</code>, обрабатывайте клавиши Enter/Space.</li>
+                    <li>Добавляйте ссылку «пропустить к содержимому» в самом начале: <code>&lt;a class="skip-link" href="#content"&gt;К основному содержимому&lt;/a&gt;</code>.</li>
+                </ul>
+                <h3>ARIA-атрибуты и лендмарки</h3>
+                <ul>
+                    <li><code>role</code> для уточнения роли, когда нет подходящего тега.</li>
+                    <li><code>aria-label</code>, <code>aria-labelledby</code>, <code>aria-describedby</code> — альтернативные/связанные подписи.</li>
+                    <li><code>aria-expanded</code>, <code>aria-controls</code> — состояние раскрывающихся областей.</li>
+                    <li><code>aria-live="polite|assertive"</code>, <code>aria-busy</code> — живые области и загрузка.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;button aria-expanded="false" aria-controls="acc-1" id="acc-btn-1"&gt;Развернуть&lt;/button&gt;
+&lt;section id="acc-1" role="region" aria-labelledby="acc-btn-1" hidden&gt;
+  &lt;p&gt;Скрываемый контент&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+                </div>
+                <h3>Формы и ошибки</h3>
+                <ul>
+                    <li>Каждое поле связано с <code>&lt;label for&gt;</code>. Не используйте <code>placeholder</code> вместо метки.</li>
+                    <li>Ошибки сообщайте текстом, связывайте с полем через <code>aria-describedby</code>, фокусируйте первую ошибку.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" type="email" aria-describedby="email-err" required&gt;
+&lt;p id="email-err" role="alert" hidden&gt;Введите корректный email&lt;/p&gt;</code></pre>
+                </div>
+                <h3>Контраст и медиа</h3>
+                <ul>
+                    <li>Контраст текста к фону: минимум 4.5:1 для обычного текста.</li>
+                    <li>У изображений обязателен осмысленный <code>alt</code> (декоративным — пустой <code>alt=""</code>).</li>
+                    <li>Для иконок SVG: добавляйте <code>role="img"</code> и <code>aria-label</code> при необходимости.</li>
+                </ul>
+                <div class="note"><p><strong>Правило:</strong> Сначала используйте семантические теги. ARIA — только если нельзя иначе.</p></div>
+            </section>
+
+            <!-- 1.7 -->
+            <section id="seo-html" class="topic-section">
+                <h2>SEO для HTML</h2>
+                <ul>
+                    <li><strong>Title/Description:</strong> уникальные на страницу; title ≈ 50–60 знаков, description ≈ 140–160.</li>
+                    <li><strong>Заголовки:</strong> один <code>h1</code>, далее иерархия <code>h2–h3</code>.</li>
+                    <li><strong>Open Graph/Twitter:</strong> корректные превью при шаринге.</li>
+                    <li><strong>Canonical:</strong> укажите канонический URL, чтобы избежать дублей.</li>
+                    <li><strong>Structured Data:</strong> JSON‑LD для статей, курсов, хлебных крошек (см. в &lt;head&gt;).</li>
+                    <li><strong>robots.txt / sitemap.xml:</strong> помогайте поисковикам индексировать сайт.</li>
+                    <li><strong>Core Web Vitals:</strong> LCP, CLS, INP влияют на ранжирование — оптимизируйте критический рендеринг и изображения.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;link rel="canonical" href="https://example.com/page" /&gt;
+&lt;meta property="og:title" content="Заголовок" /&gt;
+&lt;meta property="og:description" content="Описание" /&gt;
+&lt;meta property="og:image" content="https://example.com/preview.jpg" /&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 1.8 -->
+            <section id="media-retina" class="topic-section">
+                <h2>Адаптивные изображения и ретина</h2>
+                <p>Используйте правильные форматы и отдавайте изображения под размер экрана и плотность пикселей. Указывайте явные <code>width/height</code> для предотвращения CLS.</p>
+                <h3>&lt;picture&gt;, <code>srcset</code> и плотности</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;picture&gt;
+  &lt;source type="image/avif" srcset="/img/hero@1x.avif 1x, /img/hero@2x.avif 2x"&gt;
+  &lt;source type="image/webp" srcset="/img/hero@1x.webp 1x, /img/hero@2x.webp 2x"&gt;
+  &lt;img src="/img/hero@1x.jpg" srcset="/img/hero@2x.jpg 2x" sizes="(max-width: 768px) 100vw, 1200px" alt="Обложка" width="1200" height="600" loading="lazy" decoding="async" fetchpriority="high"&gt;
+&lt;/picture&gt;</code></pre>
+                </div>
+                <h3>SVG и иконки</h3>
+                <ul>
+                    <li>Для одноцветных иконок используйте SVG‑спрайты, меняйте цвет через CSS.</li>
+                    <li>Добавляйте <code>aria-hidden="true"</code> декоративным иконкам.</li>
+                </ul>
+                <h3>Фоновые изображения и ретина в CSS</h3>
+                <div class="code-example">
+<pre><code class="language-css">.hero {
+  background-image: image-set(
+    url('/img/hero-bg@1x.jpg') 1x,
+    url('/img/hero-bg@2x.jpg') 2x
+  );
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}</code></pre>
+                </div>
+                <div class="note"><p><strong>Подсказка:</strong> Для LCP‑изображения используйте <code>fetchpriority="high"</code> и не лените загрузку.</p></div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Замените изображения на главной на AVIF/WebP с ретина‑вариантами, добавьте <code>width/height</code> и корректные <code>alt</code>.</p>
+                </div>
+            </section>
+
+            <!-- Итоговый проект -->
+            <section id="module1-project" class="topic-section">
+                <h2>Итоговый проект модуля 1</h2>
+                <p>Сверстайте главную страницу портфолио без стилей. Обязательные секции: «Обо мне», «Навыки», «Проекты», «Контакты»; шапка с меню, подвал. Используйте семантические теги и добавьте форму обратной связи.</p>
+                <ul>
+                    <li>Структура: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code> с 3–4 <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code></li>
+                    <li>Доступность: корректные <code>alt</code> у изображений, иерархия заголовков</li>
+                    <li>Проверка: валидируйте документ на <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Validator</a></li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html> 

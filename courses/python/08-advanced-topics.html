@@ -1,0 +1,2474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Продвинутые темы в Python - изучите декораторы, итераторы, многопоточность и асинхронное программирование">
+    <meta name="keywords" content="python, декораторы, итераторы, многопоточность, асинхронное программирование">
+    <title>Продвинутые темы</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn active">8. Продвинутые темы</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#decorators" class="subtopic active">8.1 Декораторы</a>
+                        <a href="#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Введение в модуль -->
+            <section class="module-intro">
+                <h2>Модуль 8: Продвинутые темы</h2>
+                <p>В этом модуле вы изучите продвинутые концепции и техники программирования на Python.</p>
+            </section>
+            
+            <!-- 8.1 Декораторы -->
+            <section id="decorators" class="topic-section">
+                <h2>8.1 Декораторы</h2>
+                <p>Декораторы — это мощный инструмент в Python, который позволяет модифицировать поведение функций или классов, не изменяя их исходный код. Они широко используются во фреймворках и библиотеках, таких как Flask, Django и других.</p>
+                
+                <h3>Что такое декораторы?</h3>
+                <p>Декоратор — это функция, которая принимает другую функцию в качестве аргумента, добавляет к ней какую-то функциональность и возвращает модифицированную функцию, не изменяя исходный код оригинальной функции.</p>
+                
+                <p>Основные применения декораторов:</p>
+                <ul>
+                    <li>Проверка аргументов</li>
+                    <li>Логирование</li>
+                    <li>Измерение времени выполнения</li>
+                    <li>Кэширование</li>
+                    <li>Аутентификация и авторизация</li>
+                    <li>Управление контекстом</li>
+                </ul>
+                
+                <h3>Функции как объекты первого класса</h3>
+                <p>Для понимания декораторов важно знать, что в Python функции являются объектами первого класса. Это означает, что функции можно:</p>
+                <ul>
+                    <li>Присваивать переменным</li>
+                    <li>Передавать как аргументы другим функциям</li>
+                    <li>Возвращать из других функций</li>
+                    <li>Хранить в структурах данных</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Функции как объекты первого класса
+def greet(name):
+    return f"Привет, {name}!"
+
+# Присваивание функции переменной
+say_hello = greet
+print(say_hello("Иван"))  # Вывод: Привет, Иван!
+
+# Передача функции в качестве аргумента
+def execute_function(func, arg):
+    return func(arg)
+
+result = execute_function(greet, "Мария")
+print(result)  # Вывод: Привет, Мария!
+
+# Возврат функции из другой функции
+def get_greeting_function():
+    def hello(name):
+        return f"Добрый день, {name}!"
+    return hello
+
+new_greeting = get_greeting_function()
+print(new_greeting("Алексей"))  # Вывод: Добрый день, Алексей!</code></pre>
+                </div>
+                
+                <h3>Простейший декоратор</h3>
+                <p>Давайте создадим простой декоратор, который будет выводить информацию о вызове функции:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Определяем декоратор
+def log_function_call(func):
+    def wrapper(*args, **kwargs):
+        print(f"Вызов функции {func.__name__} с аргументами {args} и {kwargs}")
+        result = func(*args, **kwargs)
+        print(f"Функция {func.__name__} вернула {result}")
+        return result
+    return wrapper
+
+# Применяем декоратор
+def add_numbers(a, b):
+    return a + b
+
+decorated_add = log_function_call(add_numbers)
+result = decorated_add(3, 5)
+# Вывод:
+# Вызов функции add_numbers с аргументами (3, 5) и {}
+# Функция add_numbers вернула 8</code></pre>
+                </div>
+                
+                <h3>Синтаксис декоратора с @</h3>
+                <p>Python предоставляет специальный синтаксис для применения декораторов, используя символ <code>@</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Декоратор
+def log_function_call(func):
+    def wrapper(*args, **kwargs):
+        print(f"Вызов функции {func.__name__} с аргументами {args} и {kwargs}")
+        result = func(*args, **kwargs)
+        print(f"Функция {func.__name__} вернула {result}")
+        return result
+    return wrapper
+
+# Применение декоратора с синтаксисом @
+@log_function_call
+def add_numbers(a, b):
+    return a + b
+
+# Теперь add_numbers автоматически декорирована
+result = add_numbers(3, 5)
+# Вывод тот же:
+# Вызов функции add_numbers с аргументами (3, 5) и {}
+# Функция add_numbers вернула 8</code></pre>
+                </div>
+                
+                <p>Запись <code>@log_function_call</code> над определением функции <code>add_numbers</code> эквивалентна выражению <code>add_numbers = log_function_call(add_numbers)</code>.</p>
+                
+                <h3>Сохранение метаданных оригинальной функции</h3>
+                <p>При декорировании функции мы теряем ее оригинальное имя, документацию и другие метаданные. Для решения этой проблемы можно использовать декоратор <code>functools.wraps</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import functools
+
+def log_function_call(func):
+    @functools.wraps(func)  # Сохраняет метаданные оригинальной функции
+    def wrapper(*args, **kwargs):
+        print(f"Вызов функции {func.__name__} с аргументами {args} и {kwargs}")
+        result = func(*args, **kwargs)
+        print(f"Функция {func.__name__} вернула {result}")
+        return result
+    return wrapper
+
+@log_function_call
+def add_numbers(a, b):
+    """Функция складывает два числа и возвращает результат."""
+    return a + b
+
+# Теперь метаданные сохранены
+print(add_numbers.__name__)  # Вывод: add_numbers
+print(add_numbers.__doc__)   # Вывод: Функция складывает два числа и возвращает результат.</code></pre>
+                </div>
+                
+                <h3>Декораторы с аргументами</h3>
+                <p>Иногда необходимо передать аргументы самому декоратору. Для этого создаётся функция-обертка над декоратором:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import functools
+
+def repeat(times):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            result = None
+            for _ in range(times):
+                result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator
+
+@repeat(times=3)
+def say_hello(name):
+    print(f"Привет, {name}!")
+    return name
+
+# Эта функция выполнится 3 раза
+say_hello("Иван")
+# Вывод:
+# Привет, Иван!
+# Привет, Иван!
+# Привет, Иван!</code></pre>
+                </div>
+                
+                <h3>Класс как декоратор</h3>
+                <p>Декоратором может быть не только функция, но и класс. Для этого класс должен реализовывать метод <code>__call__</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import functools
+
+class CountCalls:
+    def __init__(self, func):
+        functools.update_wrapper(self, func)
+        self.func = func
+        self.count = 0
+    
+    def __call__(self, *args, **kwargs):
+        self.count += 1
+        print(f"Функция {self.func.__name__} была вызвана {self.count} раз")
+        return self.func(*args, **kwargs)
+
+@CountCalls
+def say_hello(name):
+    return f"Привет, {name}!"
+
+print(say_hello("Иван"))   # Вызов 1
+print(say_hello("Мария"))  # Вызов 2
+print(say_hello("Петр"))   # Вызов 3
+
+# Вывод:
+# Функция say_hello была вызвана 1 раз
+# Привет, Иван!
+# Функция say_hello была вызвана 2 раз
+# Привет, Мария!
+# Функция say_hello была вызвана 3 раз
+# Привет, Петр!</code></pre>
+                </div>
+                
+                <h3>Несколько декораторов</h3>
+                <p>К одной функции можно применить несколько декораторов. Они будут применяться в порядке снизу вверх:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import functools
+
+def bold(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"<b>{func(*args, **kwargs)}</b>"
+    return wrapper
+
+def italic(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"<i>{func(*args, **kwargs)}</i>"
+    return wrapper
+
+@bold
+@italic
+def greet(name):
+    return f"Привет, {name}!"
+
+# Сначала применяется italic, затем bold
+print(greet("Иван"))  # Вывод: <b><i>Привет, Иван!</i></b></code></pre>
+                </div>
+                
+                <h3>Практические примеры декораторов</h3>
+                
+                <h4>Измерение времени выполнения</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import time
+import functools
+
+def timer(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"Функция {func.__name__} выполнялась {end_time - start_time:.6f} секунд")
+        return result
+    return wrapper
+
+@timer
+def slow_function():
+    time.sleep(1)
+    return "Функция выполнена"
+
+slow_function()
+# Вывод: Функция slow_function выполнялась 1.001234 секунд</code></pre>
+                </div>
+                
+                <h4>Проверка типов аргументов</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import functools
+
+def enforce_types(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        # Получаем аннотации типов из функции
+        annotations = func.__annotations__
+        
+        # Проверяем типы аргументов
+        for arg, arg_name in zip(args, func.__code__.co_varnames):
+            if arg_name in annotations and not isinstance(arg, annotations[arg_name]):
+                raise TypeError(f"Аргумент {arg_name} должен быть типа {annotations[arg_name].__name__}")
+        
+        # Проверяем типы именованных аргументов
+        for arg_name, arg in kwargs.items():
+            if arg_name in annotations and not isinstance(arg, annotations[arg_name]):
+                raise TypeError(f"Аргумент {arg_name} должен быть типа {annotations[arg_name].__name__}")
+        
+        return func(*args, **kwargs)
+    return wrapper
+
+@enforce_types
+def add_numbers(a: int, b: int) -> int:
+    return a + b
+
+print(add_numbers(1, 2))  # OK: 3
+try:
+    print(add_numbers("1", 2))  # Ошибка: "1" не int
+except TypeError as e:
+    print(e)  # Вывод: Аргумент a должен быть типа int</code></pre>
+                </div>
+                
+                <h4>Кэширование результатов</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import functools
+
+# Для кэширования можно использовать встроенный декоратор lru_cache
+@functools.lru_cache(maxsize=128)
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# Без кэширования эта функция работала бы очень медленно
+print(fibonacci(30))  # Быстрый результат благодаря кэшированию
+
+# Создание собственного декоратора кэширования
+def cache(func):
+    cache_data = {}
+    @functools.wraps(func)
+    def wrapper(*args):
+        if args not in cache_data:
+            cache_data[args] = func(*args)
+        return cache_data[args]
+    return wrapper
+
+@cache
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n-1)
+
+print(factorial(10))  # Результат будет кэширован</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по работе с декораторами</h4>
+                    <ul>
+                        <li>Всегда используйте <code>@functools.wraps</code> для сохранения метаданных исходной функции</li>
+                        <li>Помните о порядке применения нескольких декораторов</li>
+                        <li>Не злоупотребляйте декораторами — слишком много декораторов может сделать код сложным для понимания</li>
+                        <li>Декораторы должны быть "прозрачными" для пользователя функции — они не должны менять интерфейс функции</li>
+                        <li>Для часто используемых задач существуют стандартные декораторы, например <code>functools.lru_cache</code> для кэширования</li>
+                    </ul>
+                </div>
+                
+                <h3>Встроенные декораторы Python</h3>
+                <p>Python предоставляет несколько встроенных декораторов:</p>
+                <ul>
+                    <li><code>@staticmethod</code> — для создания статического метода класса</li>
+                    <li><code>@classmethod</code> — для создания метода класса</li>
+                    <li><code>@property</code> — для создания геттеров и сеттеров</li>
+                    <li><code>@functools.lru_cache</code> — для кэширования результатов функции</li>
+                    <li><code>@functools.wraps</code> — для копирования метаданных функции</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Temperature:
+    def __init__(self, celsius=0):
+        self._celsius = celsius
+
+    @property
+    def celsius(self):
+        return self._celsius
+    
+    @celsius.setter
+    def celsius(self, value):
+        if value < -273.15:
+            raise ValueError("Температура не может быть ниже абсолютного нуля")
+        self._celsius = value
+    
+    @property
+    def fahrenheit(self):
+        return self._celsius * 9/5 + 32
+    
+    @staticmethod
+    def is_valid_temperature(temperature):
+        return temperature >= -273.15
+    
+    @classmethod
+    def from_fahrenheit(cls, fahrenheit):
+        celsius = (fahrenheit - 32) * 5/9
+        return cls(celsius)
+
+# Использование
+temp = Temperature(25)
+print(temp.celsius)      # Использование геттера: 25
+temp.celsius = 30        # Использование сеттера
+print(temp.fahrenheit)   # Использование свойства: 86.0
+
+print(Temperature.is_valid_temperature(-300))   # Статический метод: False
+
+# Создание экземпляра через метод класса
+temp2 = Temperature.from_fahrenheit(77)
+print(temp2.celsius)     # Примерно 25.0</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Схема работы декоратора</h4>
+                    <p>Упрощенная схема работы декоратора выглядит так:</p>
+                    <ol>
+                        <li>Декоратор получает на вход функцию (или класс)</li>
+                        <li>Создает новую функцию-обертку, которая модифицирует поведение исходной функции</li>
+                        <li>Возвращает эту функцию-обертку вместо исходной</li>
+                        <li>При вызове декорированной функции фактически вызывается функция-обертка</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- 8.2 Итераторы -->
+            <section id="iterators" class="topic-section">
+                <h2>8.2 Итераторы</h2>
+                <p>Итераторы — один из фундаментальных концептов Python, который позволяет эффективно обрабатывать последовательности данных. Они тесно связаны с циклами for и генераторами, и являются основой для многих мощных возможностей языка.</p>
+                
+                <h3>Что такое итерация и итераторы</h3>
+                <p>Итерация — это процесс последовательного перебора элементов коллекции, таких как список, кортеж, словарь и т.д. Итератор — это объект, который представляет поток данных и позволяет извлекать из него элементы по одному.</p>
+                
+                <p>Основные понятия, связанные с итераторами:</p>
+                <ul>
+                    <li><strong>Итерируемый объект (Iterable)</strong> — объект, который может возвращать итератор (например, списки, кортежи, строки)</li>
+                    <li><strong>Итератор (Iterator)</strong> — объект, который реализует методы <code>__iter__</code> и <code>__next__</code></li>
+                    <li><strong>Протокол итератора</strong> — набор правил, которым должен следовать итератор</li>
+                </ul>
+                
+                <h3>Протокол итератора</h3>
+                <p>Чтобы объект был итератором, он должен реализовать два специальных метода:</p>
+                <ol>
+                    <li><code>__iter__(self)</code> — должен возвращать сам объект</li>
+                    <li><code>__next__(self)</code> — должен возвращать следующий элемент или вызывать исключение <code>StopIteration</code>, если элементы закончились</li>
+                </ol>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Пример простого итератора, который возвращает числа от 0 до n-1
+class Counter:
+    def __init__(self, limit):
+        self.limit = limit
+        self.counter = 0
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.counter < self.limit:
+            value = self.counter
+            self.counter += 1
+            return value
+        else:
+            raise StopIteration
+
+# Использование итератора в цикле for
+for i in Counter(5):
+    print(i)  # Выведет числа от 0 до 4
+
+# Ручное использование итератора
+counter = Counter(3)
+print(next(counter))  # 0
+print(next(counter))  # 1
+print(next(counter))  # 2
+try:
+    print(next(counter))  # Вызовет StopIteration
+except StopIteration:
+    print("Итератор исчерпан")</code></pre>
+                </div>
+                
+                <h3>Итерируемый объект (Iterable)</h3>
+                <p>Итерируемый объект — это объект, который реализует метод <code>__iter__</code>, возвращающий итератор. Большинство встроенных коллекций в Python (списки, кортежи, строки, словари и т.д.) являются итерируемыми объектами.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Пример итерируемого объекта (но не итератора)
+class NumberSequence:
+    def __init__(self, numbers):
+        self.numbers = numbers
+    
+    def __iter__(self):
+        # Возвращаем новый итератор для последовательности
+        return NumberIterator(self.numbers)
+
+# Итератор для NumberSequence
+class NumberIterator:
+    def __init__(self, numbers):
+        self.numbers = numbers
+        self.index = 0
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.index < len(self.numbers):
+            value = self.numbers[self.index]
+            self.index += 1
+            return value
+        else:
+            raise StopIteration
+
+# Использование
+sequence = NumberSequence([1, 2, 3, 4, 5])
+for number in sequence:
+    print(number)  # Выведет числа от 1 до 5
+
+# Можно получить новый итератор и начать перебор заново
+iterator1 = iter(sequence)
+print(next(iterator1))  # 1
+print(next(iterator1))  # 2
+
+# Другой итератор начинает с начала
+iterator2 = iter(sequence)
+print(next(iterator2))  # 1</code></pre>
+                </div>
+                
+                <p>Отличие итератора от итерируемого объекта заключается в том, что итератор помнит свое состояние (позицию в последовательности), а итерируемый объект просто может порождать итераторы.</p>
+                
+                <h3>Встроенные функции для работы с итераторами</h3>
+                <p>Python предоставляет несколько встроенных функций для работы с итераторами:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Функция iter() создает итератор из итерируемого объекта
+numbers = [1, 2, 3]
+iterator = iter(numbers)
+print(next(iterator))  # 1
+print(next(iterator))  # 2
+print(next(iterator))  # 3
+
+# Функция next() получает следующий элемент итератора
+# Можно указать значение по умолчанию, если итератор исчерпан
+letters = iter("abc")
+print(next(letters, "конец"))  # a
+print(next(letters, "конец"))  # b
+print(next(letters, "конец"))  # c
+print(next(letters, "конец"))  # конец (не вызывает исключение)</code></pre>
+                </div>
+                
+                <h3>Генераторы - простой способ создания итераторов</h3>
+                <p>Генераторы — это специальный тип итераторов, который можно создать с помощью функций с ключевым словом <code>yield</code> или генераторных выражений. Генераторы значительно упрощают создание итераторов.</p>
+                
+                <h4>Функции-генераторы</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Функция-генератор для создания последовательности чисел
+def count_up_to(limit):
+    count = 0
+    while count < limit:
+        yield count
+        count += 1
+
+# Использование генератора
+for i in count_up_to(5):
+    print(i)  # Выведет числа от 0 до 4
+
+# Генератор Фибоначчи
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+# Выведем первые 10 чисел Фибоначчи
+print(list(fibonacci(10)))  # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</code></pre>
+                </div>
+                
+                <h4>Генераторные выражения</h4>
+                <p>Генераторные выражения похожи на списковые включения, но создают итераторы вместо списков, что более эффективно с точки зрения памяти:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Списковое включение - создает весь список сразу
+squares_list = [x**2 for x in range(10)]
+print(squares_list)  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# Генераторное выражение - создает итератор
+squares_generator = (x**2 for x in range(10))
+print(squares_generator)  # <generator object <genexpr> at 0x...>
+print(list(squares_generator))  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# Обработка больших объемов данных
+# Эта операция не загружает весь файл в память
+def read_large_file(file_path):
+    with open(file_path, 'r') as file:
+        for line in file:
+            yield line.strip()
+
+# Эффективная обработка файла построчно
+# for line in read_large_file('huge_file.txt'):
+#     process_line(line)</code></pre>
+                </div>
+                
+                <h4>Особенности генераторов</h4>
+                <ul>
+                    <li>Генераторы вычисляют значения "на лету", что позволяет эффективно работать с большими наборами данных</li>
+                    <li>Они сохраняют состояние между вызовами</li>
+                    <li>Генераторы могут использоваться только один раз (после исчерпания их нужно пересоздавать)</li>
+                    <li>Они поддерживают дополнительные методы <code>send()</code>, <code>throw()</code> и <code>close()</code>, позволяющие взаимодействовать с генератором во время его выполнения</li>
+                </ul>
+                
+                <h3>Продвинутая работа с генераторами</h3>
+                
+                <h4>Метод send()</h4>
+                <p>Позволяет отправлять значения внутрь генератора:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def echo_generator():
+    value = yield "Начало"
+    print(f"Получено: {value}")
+    
+    value = yield "Продолжение"
+    print(f"Получено: {value}")
+    
+    yield "Конец"
+
+gen = echo_generator()
+print(next(gen))     # "Начало"
+print(gen.send("Привет"))  # Выводит "Получено: Привет" и возвращает "Продолжение"
+print(gen.send("Мир"))     # Выводит "Получено: Мир" и возвращает "Конец"</code></pre>
+                </div>
+                
+                <h4>Метод throw()</h4>
+                <p>Позволяет генерировать исключение внутри генератора:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def generator_with_exception():
+    try:
+        yield 1
+        yield 2
+        yield 3
+    except ValueError:
+        yield "Поймано исключение ValueError"
+    yield 4
+
+gen = generator_with_exception()
+print(next(gen))  # 1
+print(next(gen))  # 2
+print(gen.throw(ValueError, "Ошибка"))  # "Поймано исключение ValueError"
+print(next(gen))  # 4</code></pre>
+                </div>
+                
+                <h4>Метод close()</h4>
+                <p>Позволяет закрыть генератор, что вызывает исключение GeneratorExit:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def closeable_generator():
+    try:
+        yield 1
+        yield 2
+        yield 3
+    except GeneratorExit:
+        print("Генератор закрыт")
+    
+gen = closeable_generator()
+print(next(gen))  # 1
+gen.close()       # Выведет "Генератор закрыт"
+
+try:
+    print(next(gen))  # Вызовет StopIteration
+except StopIteration:
+    print("Генератор уже исчерпан")</code></pre>
+                </div>
+                
+                <h3>Связь итераторов с циклом for</h3>
+                <p>Цикл for в Python работает с итераторами "за кулисами". Когда мы пишем цикл for, Python фактически делает следующее:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Этот цикл
+for item in iterable:
+    # обработка item
+    
+# Примерно эквивалентен этому коду
+iterator = iter(iterable)
+while True:
+    try:
+        item = next(iterator)
+        # обработка item
+    except StopIteration:
+        break</code></pre>
+                </div>
+                
+                <h3>Бесконечные итераторы и генераторы</h3>
+                <p>Итераторы и генераторы могут быть бесконечными. Встроенный модуль <code>itertools</code> предоставляет множество полезных бесконечных итераторов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import itertools
+
+# Создание собственного бесконечного генератора
+def count_forever(start=0, step=1):
+    num = start
+    while True:
+        yield num
+        num += step
+
+# Используем с ограничением (иначе цикл будет бесконечным)
+counter = count_forever(10, 5)
+for _ in range(5):
+    print(next(counter))  # 10, 15, 20, 25, 30
+
+# Встроенные функции из itertools
+# count - бесконечная арифметическая прогрессия
+for i in itertools.islice(itertools.count(0, 2), 5):
+    print(i)  # 0, 2, 4, 6, 8
+
+# cycle - бесконечный цикл по итерируемому объекту
+colors = itertools.cycle(['red', 'green', 'blue'])
+for _ in range(5):
+    print(next(colors))  # red, green, blue, red, green
+
+# repeat - бесконечное повторение объекта
+for i in itertools.islice(itertools.repeat("привет"), 3):
+    print(i)  # привет, привет, привет</code></pre>
+                </div>
+                
+                <h3>Полезные функции из модуля itertools</h3>
+                <p>Модуль <code>itertools</code> содержит множество полезных функций для работы с итераторами:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import itertools
+
+# chain - объединяет несколько итераторов в один
+combined = itertools.chain([1, 2, 3], ['a', 'b'], (True, False))
+print(list(combined))  # [1, 2, 3, 'a', 'b', True, False]
+
+# islice - выбирает подмножество из итератора
+print(list(itertools.islice(range(10), 3, 8)))  # [3, 4, 5, 6, 7]
+
+# zip_longest - аналог zip, но продолжает до самого длинного итератора
+list1 = [1, 2, 3]
+list2 = ['a', 'b', 'c', 'd', 'e']
+print(list(itertools.zip_longest(list1, list2, fillvalue='?')))
+# [(1, 'a'), (2, 'b'), (3, 'c'), ('?', 'd'), ('?', 'e')]
+
+# product - декартово произведение итераторов
+print(list(itertools.product('AB', '12')))
+# [('A', '1'), ('A', '2'), ('B', '1'), ('B', '2')]
+
+# combinations - все возможные комбинации длины r без повторений
+print(list(itertools.combinations('ABC', 2)))
+# [('A', 'B'), ('A', 'C'), ('B', 'C')]
+
+# permutations - все возможные перестановки
+print(list(itertools.permutations('ABC', 2)))
+# [('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]</code></pre>
+                </div>
+                
+                <h3>Ленивые вычисления</h3>
+                <p>Итераторы используют подход "ленивых вычислений" (lazy evaluation) — значения генерируются только по мере необходимости. Это обеспечивает эффективную работу с большими наборами данных и позволяет работать с потенциально бесконечными последовательностями.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Пример, демонстрирующий ленивые вычисления
+def fibonacci_generator():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+# Создаем генератор, но он не вычисляет значения сразу
+fib = fibonacci_generator()
+
+# Вычисляем только первые 10 чисел Фибоначчи
+first_ten = list(itertools.islice(fib, 10))
+print(first_ten)  # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Когда использовать итераторы и генераторы</h4>
+                    <ul>
+                        <li>Для эффективной обработки больших наборов данных, когда нет необходимости загружать всё в память</li>
+                        <li>При работе с последовательностями, которые вычисляются на лету</li>
+                        <li>Для реализации паттерна "производитель-потребитель"</li>
+                        <li>Для создания функций, которые могут быть возобновлены с предыдущего состояния</li>
+                    </ul>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Итераторы vs. генераторы vs. списковые включения</h4>
+                    <table>
+                        <tr>
+                            <th>Характеристика</th>
+                            <th>Итераторы</th>
+                            <th>Генераторы</th>
+                            <th>Списковые включения</th>
+                        </tr>
+                        <tr>
+                            <td>Реализация</td>
+                            <td>Класс с методами <code>__iter__</code> и <code>__next__</code></td>
+                            <td>Функция с <code>yield</code> или выражение в скобках</td>
+                            <td>Выражение в квадратных скобках</td>
+                        </tr>
+                        <tr>
+                            <td>Память</td>
+                            <td>Эффективно, вычисляет элементы по требованию</td>
+                            <td>Эффективно, вычисляет элементы по требованию</td>
+                            <td>Создает весь список сразу в памяти</td>
+                        </tr>
+                        <tr>
+                            <td>Повторное использование</td>
+                            <td>Одноразовое</td>
+                            <td>Одноразовое</td>
+                            <td>Многоразовое</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- 8.3 Многопоточность -->
+            <section id="threading" class="topic-section">
+                <h2>8.3 Многопоточность</h2>
+                <p>Многопоточность — это техника программирования, которая позволяет выполнять несколько частей программы параллельно. В Python многопоточность реализуется через встроенный модуль <code>threading</code>. Однако из-за особенностей реализации Python (GIL - Global Interpreter Lock), многопоточность больше подходит для задач ввода-вывода, чем для CPU-интенсивных вычислений.</p>
+                
+                <h3>Основы многопоточного программирования</h3>
+                <p>В многопоточном программировании программа создает и управляет несколькими потоками выполнения, которые могут работать параллельно, делясь ресурсами процесса, такими как память.</p>
+                
+                <h4>Основные понятия</h4>
+                <ul>
+                    <li><strong>Процесс</strong> — экземпляр программы, который выполняется в отдельном адресном пространстве</li>
+                    <li><strong>Поток</strong> — легковесная единица выполнения внутри процесса, разделяющая его ресурсы</li>
+                    <li><strong>GIL (Global Interpreter Lock)</strong> — механизм, который гарантирует, что только один поток выполняет байт-код Python в любой момент времени</li>
+                    <li><strong>Параллелизм</strong> — одновременное выполнение нескольких частей программы</li>
+                    <li><strong>Конкурентность</strong> — обработка нескольких задач, переключаясь между ними</li>
+                </ul>
+                
+                <h3>Модуль threading</h3>
+                <p>Модуль <code>threading</code> предоставляет высокоуровневый интерфейс для работы с потоками:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+# Функция, которую будем выполнять в отдельном потоке
+def print_numbers(name, delay):
+    for i in range(5):
+        time.sleep(delay)  # Имитация работы
+        print(f"{name}: {i}")
+
+# Создание потоков
+thread1 = threading.Thread(target=print_numbers, args=("Thread 1", 0.5))
+thread2 = threading.Thread(target=print_numbers, args=("Thread 2", 1))
+
+# Запуск потоков
+thread1.start()
+thread2.start()
+
+# Ожидание завершения потоков
+thread1.join()
+thread2.join()
+
+print("Все потоки завершили работу")
+
+# Вывод будет вперемешку, так как потоки выполняются параллельно:
+# Thread 1: 0
+# Thread 2: 0
+# Thread 1: 1
+# Thread 1: 2
+# Thread 2: 1
+# Thread 1: 3
+# Thread 2: 2
+# Thread 1: 4
+# Thread 2: 3
+# Thread 2: 4
+# Все потоки завершили работу</code></pre>
+                </div>
+                
+                <h4>Создание потоков через наследование</h4>
+                <p>Вы также можете создать поток, наследуя класс <code>threading.Thread</code> и переопределяя метод <code>run()</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+class MyThread(threading.Thread):
+    def __init__(self, name, delay):
+        super().__init__()
+        self.name = name
+        self.delay = delay
+    
+    def run(self):
+        print(f"Поток {self.name} начал работу")
+        for i in range(5):
+            time.sleep(self.delay)
+            print(f"{self.name}: {i}")
+        print(f"Поток {self.name} завершил работу")
+
+# Создание экземпляров потоков
+thread1 = MyThread("Thread 1", 0.5)
+thread2 = MyThread("Thread 2", 1)
+
+# Запуск потоков
+thread1.start()
+thread2.start()
+
+# Ожидание завершения потоков
+thread1.join()
+thread2.join()
+
+print("Все потоки завершили работу")</code></pre>
+                </div>
+                
+                <h3>Методы управления потоками</h3>
+                <p>Модуль <code>threading</code> предоставляет несколько методов для управления потоками:</p>
+                <ul>
+                    <li><code>start()</code> — запускает поток, вызывая его метод <code>run()</code></li>
+                    <li><code>join()</code> — блокирует вызывающий поток до завершения вызванного потока</li>
+                    <li><code>is_alive()</code> — проверяет, активен ли поток</li>
+                    <li><code>daemon</code> — свойство, которое определяет, завершится ли программа, если остались только демон-потоки</li>
+                    <li><code>name</code> — имя потока, полезно для отладки</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+def worker():
+    print(f"{threading.current_thread().name} начал работу")
+    time.sleep(2)
+    print(f"{threading.current_thread().name} закончил работу")
+
+# Создаем поток
+thread = threading.Thread(target=worker, name="WorkerThread")
+
+# Проверяем, активен ли поток
+print(f"Поток активен перед запуском: {thread.is_alive()}")
+
+# Запускаем поток
+thread.start()
+
+# Проверяем, активен ли поток после запуска
+print(f"Поток активен после запуска: {thread.is_alive()}")
+
+# Ждем завершения потока
+thread.join()
+
+# Проверяем, активен ли поток после завершения
+print(f"Поток активен после завершения: {thread.is_alive()}")</code></pre>
+                </div>
+                
+                <h3>Демон-потоки</h3>
+                <p>Демон-потоки завершаются автоматически при выходе из программы, не блокируя ее завершение:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+def daemon_worker():
+    while True:
+        print("Демон работает")
+        time.sleep(1)
+
+# Создаем демон-поток
+daemon_thread = threading.Thread(target=daemon_worker, daemon=True)
+daemon_thread.start()
+
+# Основной поток выполняет свою работу
+time.sleep(3)
+
+print("Основной поток завершил работу")
+# Программа завершится здесь, даже если демон-поток еще работает</code></pre>
+                </div>
+                
+                <h3>GIL (Global Interpreter Lock)</h3>
+                <p>GIL — это механизм в CPython (стандартной реализации Python), который позволяет только одному потоку выполнять байт-код Python в любой момент времени. Это ограничение значительно влияет на многопоточность в Python:</p>
+                
+                <div class="visual-guide">
+                    <h4>Влияние GIL на многопоточность:</h4>
+                    <ul>
+                        <li><strong>CPU-bound задачи</strong> (вычисления) — многопоточность не даст прироста производительности и может даже замедлить выполнение из-за накладных расходов на переключение контекста</li>
+                        <li><strong>I/O-bound задачи</strong> (ввод-вывод) — многопоточность очень эффективна, так как потоки могут быть освобождены от GIL во время ожидания завершения I/O операций</li>
+                    </ul>
+                </div>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Пример: GIL ограничивает производительность CPU-bound задач
+import threading
+import time
+
+def cpu_bound_task(n):
+    # Имитация CPU-интенсивной задачи
+    count = 0
+    for i in range(n):
+        count += i
+    return count
+
+def single_thread():
+    start = time.time()
+    cpu_bound_task(100_000_000)
+    cpu_bound_task(100_000_000)
+    end = time.time()
+    print(f"Однопоточное выполнение: {end - start:.2f} секунд")
+
+def multi_thread():
+    start = time.time()
+    
+    t1 = threading.Thread(target=cpu_bound_task, args=(100_000_000,))
+    t2 = threading.Thread(target=cpu_bound_task, args=(100_000_000,))
+    
+    t1.start()
+    t2.start()
+    
+    t1.join()
+    t2.join()
+    
+    end = time.time()
+    print(f"Многопоточное выполнение: {end - start:.2f} секунд")
+
+# Из-за GIL, многопоточная версия работает примерно так же, 
+# или даже медленнее, чем однопоточная
+single_thread()
+multi_thread()</code></pre>
+                </div>
+                
+                <h3>Синхронизация потоков</h3>
+                <p>При работе с несколькими потоками, которые обращаются к общим данным, необходимо использовать механизмы синхронизации, чтобы избежать проблем, таких как состояние гонки (race condition).</p>
+                
+                <h4>1. Lock (Блокировка)</h4>
+                <p>Блокировка — это примитив синхронизации, который может быть в одном из двух состояний: заблокирован или разблокирован. Она обеспечивает эксклюзивный доступ к общему ресурсу:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+# Общий ресурс
+counter = 0
+counter_lock = threading.Lock()
+
+def increment(n):
+    global counter
+    for _ in range(n):
+        # Захват блокировки
+        counter_lock.acquire()
+        try:
+            # Критическая секция
+            counter += 1
+        finally:
+            # Освобождение блокировки
+            counter_lock.release()
+
+# Альтернативный синтаксис с использованием контекстного менеджера
+def increment_with_context(n):
+    global counter
+    for _ in range(n):
+        with counter_lock:  # Автоматически захватывает и освобождает блокировку
+            counter += 1
+
+# Создаем потоки
+thread1 = threading.Thread(target=increment, args=(1000000,))
+thread2 = threading.Thread(target=increment, args=(1000000,))
+
+# Запускаем потоки
+thread1.start()
+thread2.start()
+
+# Ожидаем завершения
+thread1.join()
+thread2.join()
+
+print(f"Финальное значение счетчика: {counter}")  # 2000000 (верно)</code></pre>
+                </div>
+                
+                <h4>2. RLock (Reentrant Lock)</h4>
+                <p>RLock позволяет одному и тому же потоку повторно захватить блокировку, которую он уже держит, без блокировки самого себя:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+
+rlock = threading.RLock()
+
+def function_with_nested_locks():
+    with rlock:
+        print("Внешняя секция")
+        
+        # Тот же поток может снова захватить rlock
+        with rlock:
+            print("Вложенная секция")
+        
+        print("Обратно во внешней секции")
+
+# Если бы мы использовали обычный Lock, произошла бы мертвая блокировка (deadlock)
+thread = threading.Thread(target=function_with_nested_locks)
+thread.start()
+thread.join()</code></pre>
+                </div>
+                
+                <h4>3. Condition (Условие)</h4>
+                <p>Условие позволяет одному или нескольким потокам ждать, пока не будет выполнено определенное условие:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+# Реализация очереди с ограниченным размером
+class BoundedQueue:
+    def __init__(self, size):
+        self.queue = []
+        self.size = size
+        self.condition = threading.Condition()
+    
+    def put(self, item):
+        with self.condition:
+            # Если очередь полна, ждем
+            while len(self.queue) >= self.size:
+                print("Очередь полна, ожидание...")
+                self.condition.wait()
+            
+            # Добавляем элемент и уведомляем потоки, которые могут ждать
+            self.queue.append(item)
+            print(f"Добавлен элемент: {item}")
+            self.condition.notify()
+    
+    def get(self):
+        with self.condition:
+            # Если очередь пуста, ждем
+            while len(self.queue) == 0:
+                print("Очередь пуста, ожидание...")
+                self.condition.wait()
+            
+            # Извлекаем элемент и уведомляем потоки, которые могут ждать
+            item = self.queue.pop(0)
+            print(f"Извлечен элемент: {item}")
+            self.condition.notify()
+            return item
+
+# Пример использования
+queue = BoundedQueue(2)
+
+def producer():
+    for i in range(5):
+        queue.put(i)
+        time.sleep(0.5)
+
+def consumer():
+    for _ in range(5):
+        item = queue.get()
+        time.sleep(1)
+
+# Запускаем потоки производителя и потребителя
+prod_thread = threading.Thread(target=producer)
+cons_thread = threading.Thread(target=consumer)
+
+prod_thread.start()
+cons_thread.start()
+
+prod_thread.join()
+cons_thread.join()</code></pre>
+                </div>
+                
+                <h4>4. Semaphore (Семафор)</h4>
+                <p>Семафор позволяет ограничить доступ к ресурсу определенным количеством потоков:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+import random
+
+# Имитация пула соединений с базой данных
+class ConnectionPool:
+    def __init__(self, max_connections):
+        self.semaphore = threading.Semaphore(max_connections)
+    
+    def get_connection(self):
+        self.semaphore.acquire()
+        return f"Connection-{random.randint(1, 1000)}"
+    
+    def release_connection(self, connection):
+        print(f"Освобождение {connection}")
+        self.semaphore.release()
+
+# Создаем пул с максимум 3 соединениями
+pool = ConnectionPool(3)
+
+def worker(worker_id):
+    connection = pool.get_connection()
+    print(f"Работник {worker_id} получил {connection}")
+    
+    # Имитация работы с соединением
+    time.sleep(random.uniform(1, 3))
+    
+    pool.release_connection(connection)
+    print(f"Работник {worker_id} завершил работу")
+
+# Запускаем 5 потоков, но одновременно будут работать максимум 3
+threads = []
+for i in range(5):
+    t = threading.Thread(target=worker, args=(i,))
+    threads.append(t)
+    t.start()
+
+for t in threads:
+    t.join()</code></pre>
+                </div>
+                
+                <h4>5. Event (Событие)</h4>
+                <p>Событие — это объект синхронизации, который позволяет одному потоку сигнализировать о наступлении определенного события другим потокам:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+# Создаем объект события
+event = threading.Event()
+
+def waiter(name):
+    print(f"{name} ожидает событие")
+    event.wait()  # Поток блокируется здесь до установки события
+    print(f"{name} получил уведомление!")
+
+def setter():
+    print("Готовим данные...")
+    time.sleep(2)
+    print("Данные готовы, уведомляем ожидающие потоки")
+    event.set()  # Устанавливаем событие, разблокируя все ожидающие потоки
+
+# Запускаем ожидающие потоки
+for i in range(3):
+    threading.Thread(target=waiter, args=(f"Ожидающий-{i}",)).start()
+
+# Запускаем поток, который установит событие
+threading.Thread(target=setter).start()
+
+# Основной поток продолжает работу
+time.sleep(5)
+
+# Сбрасываем событие
+event.clear()
+print("Событие сброшено")</code></pre>
+                </div>
+                
+                <h3>Пул потоков (Thread Pool)</h3>
+                <p>Пул потоков — это группа потоков, которые ожидают задачи и выполняют их по мере появления. Это полезно, когда нужно выполнить множество небольших задач.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import concurrent.futures
+import time
+import random
+
+def task(task_id):
+    print(f"Задача {task_id} начала выполнение")
+    # Имитация работы
+    sleep_time = random.uniform(0.5, 2)
+    time.sleep(sleep_time)
+    print(f"Задача {task_id} завершена за {sleep_time:.2f} секунд")
+    return task_id, sleep_time
+
+# Создаем пул потоков с 3 рабочими потоками
+with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    # Отправляем задачи на выполнение
+    futures = [executor.submit(task, i) for i in range(10)]
+    
+    # Ждем результаты по мере выполнения задач
+    for future in concurrent.futures.as_completed(futures):
+        task_id, sleep_time = future.result()
+        print(f"Получен результат задачи {task_id}: {sleep_time:.2f} секунд")
+        
+# При выходе из блока with все потоки завершатся
+
+# Альтернативный способ с map
+with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    # Выполняем map задач на пул потоков
+    for task_id, sleep_time in executor.map(task, range(10, 15)):
+        print(f"Map: Задача {task_id} выполнялась {sleep_time:.2f} секунд")</code></pre>
+                </div>
+                
+                <h3>Проблемы многопоточного программирования</h3>
+                <p>Многопоточное программирование имеет ряд потенциальных проблем, о которых нужно помнить:</p>
+                
+                <h4>1. Состояние гонки (Race Condition)</h4>
+                <p>Состояние гонки возникает, когда несколько потоков пытаются изменить одни и те же данные одновременно:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+
+# Общая переменная
+counter = 0
+
+def increment(n):
+    global counter
+    for _ in range(n):
+        # Здесь может произойти состояние гонки
+        # Операция counter += 1 на самом деле состоит из трех шагов:
+        # 1. Прочитать текущее значение counter
+        # 2. Увеличить значение на 1
+        # 3. Записать новое значение обратно в counter
+        counter += 1
+
+# Запускаем два потока, которые инкрементируют счетчик
+t1 = threading.Thread(target=increment, args=(100000,))
+t2 = threading.Thread(target=increment, args=(100000,))
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+print(f"Ожидаемое значение: 200000")
+print(f"Фактическое значение: {counter}")
+# Скорее всего, counter будет меньше 200000 из-за состояния гонки</code></pre>
+                </div>
+                
+                <h4>2. Deadlock (Взаимная блокировка)</h4>
+                <p>Deadlock возникает, когда два или более потоков ожидают друг друга, чтобы освободить ресурс:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+# Создаем две блокировки
+lock1 = threading.Lock()
+lock2 = threading.Lock()
+
+def thread1_function():
+    print("Поток 1: Пытается захватить блокировку 1")
+    lock1.acquire()
+    print("Поток 1: Блокировка 1 захвачена")
+    
+    time.sleep(0.5)  # Небольшая задержка для гарантии возникновения deadlock
+    
+    print("Поток 1: Пытается захватить блокировку 2")
+    lock2.acquire()
+    print("Поток 1: Блокировка 2 захвачена")
+    
+    # Освобождаем блокировки
+    lock2.release()
+    lock1.release()
+
+def thread2_function():
+    print("Поток 2: Пытается захватить блокировку 2")
+    lock2.acquire()
+    print("Поток 2: Блокировка 2 захвачена")
+    
+    time.sleep(0.5)  # Небольшая задержка для гарантии возникновения deadlock
+    
+    print("Поток 2: Пытается захватить блокировку 1")
+    lock1.acquire()  # Здесь произойдет deadlock
+    print("Поток 2: Блокировка 1 захвачена")
+    
+    # Освобождаем блокировки
+    lock1.release()
+    lock2.release()
+
+# Запускаем потоки
+t1 = threading.Thread(target=thread1_function)
+t2 = threading.Thread(target=thread2_function)
+
+t1.start()
+t2.start()
+
+# Эта программа "зависнет" из-за deadlock
+# Чтобы избежать deadlock, всегда захватывайте блокировки в одинаковом порядке во всех потоках</code></pre>
+                </div>
+                
+                <h4>3. Решение: Избегание deadlock</h4>
+                <p>Чтобы избежать deadlock, можно использовать таймауты при захвате блокировок и всегда захватывать их в одинаковом порядке:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import time
+
+# Создаем две блокировки
+lock1 = threading.Lock()
+lock2 = threading.Lock()
+
+def safe_thread1_function():
+    print("Безопасный поток 1: Пытается захватить блокировку 1")
+    if lock1.acquire(timeout=1):  # Добавляем таймаут
+        print("Безопасный поток 1: Блокировка 1 захвачена")
+        
+        time.sleep(0.5)
+        
+        print("Безопасный поток 1: Пытается захватить блокировку 2")
+        if lock2.acquire(timeout=1):  # Добавляем таймаут
+            print("Безопасный поток 1: Блокировка 2 захвачена")
+            # Работа с защищенными ресурсами
+            lock2.release()
+        else:
+            print("Безопасный поток 1: Не удалось захватить блокировку 2. Освобождаем ресурсы.")
+        
+        lock1.release()
+    else:
+        print("Безопасный поток 1: Не удалось захватить блокировку 1")
+
+def safe_thread2_function():
+    # Захватываем блокировки в том же порядке, что и в safe_thread1_function
+    print("Безопасный поток 2: Пытается захватить блокировку 1")
+    if lock1.acquire(timeout=1):
+        print("Безопасный поток 2: Блокировка 1 захвачена")
+        
+        time.sleep(0.5)
+        
+        print("Безопасный поток 2: Пытается захватить блокировку 2")
+        if lock2.acquire(timeout=1):
+            print("Безопасный поток 2: Блокировка 2 захвачена")
+            # Работа с защищенными ресурсами
+            lock2.release()
+        else:
+            print("Безопасный поток 2: Не удалось захватить блокировку 2. Освобождаем ресурсы.")
+        
+        lock1.release()
+    else:
+        print("Безопасный поток 2: Не удалось захватить блокировку 1")</code></pre>
+                </div>
+                
+                <h3>Многопоточность vs. многопроцессорность</h3>
+                <p>Из-за ограничений GIL, для CPU-интенсивных задач часто более эффективно использовать многопроцессорность вместо многопоточности:</p>
+                
+                <div class="visual-guide">
+                    <table>
+                        <tr>
+                            <th>Характеристика</th>
+                            <th>Многопоточность (threading)</th>
+                            <th>Многопроцессорность (multiprocessing)</th>
+                        </tr>
+                        <tr>
+                            <td>Механизм</td>
+                            <td>Потоки выполняются в одном процессе</td>
+                            <td>Каждый процесс имеет свое пространство памяти</td>
+                        </tr>
+                        <tr>
+                            <td>Память</td>
+                            <td>Общая память между потоками</td>
+                            <td>Раздельная память для каждого процесса</td>
+                        </tr>
+                        <tr>
+                            <td>GIL</td>
+                            <td>Ограничение из-за GIL</td>
+                            <td>Нет ограничений (каждый процесс имеет свой GIL)</td>
+                        </tr>
+                        <tr>
+                            <td>Подходит для</td>
+                            <td>I/O-связанных задач</td>
+                            <td>CPU-связанных задач</td>
+                        </tr>
+                        <tr>
+                            <td>Накладные расходы</td>
+                            <td>Низкие</td>
+                            <td>Высокие (создание процесса более ресурсоемко)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import threading
+import multiprocessing
+import time
+
+def cpu_intensive_task(n):
+    # Имитация CPU-интенсивной задачи
+    result = 0
+    for i in range(n):
+        result += i * i
+    return result
+
+# Функция для тестирования многопоточности
+def test_threading():
+    start_time = time.time()
+    
+    threads = []
+    for _ in range(4):
+        t = threading.Thread(target=cpu_intensive_task, args=(10000000,))
+        threads.append(t)
+        t.start()
+    
+    for t in threads:
+        t.join()
+    
+    end_time = time.time()
+    print(f"Многопоточность: {end_time - start_time:.2f} секунд")
+
+# Функция для тестирования многопроцессорности
+def test_multiprocessing():
+    start_time = time.time()
+    
+    processes = []
+    for _ in range(4):
+        p = multiprocessing.Process(target=cpu_intensive_task, args=(10000000,))
+        processes.append(p)
+        p.start()
+    
+    for p in processes:
+        p.join()
+    
+    end_time = time.time()
+    print(f"Многопроцессорность: {end_time - start_time:.2f} секунд")
+
+# Тестируем оба подхода
+if __name__ == "__main__":
+    test_threading()
+    test_multiprocessing()
+    # Для CPU-интенсивных задач многопроцессорность работает быстрее</code></pre>
+                </div>
+                
+                <h3>Рекомендации по использованию многопоточности в Python</h3>
+                <ul>
+                    <li>Используйте многопоточность для задач с интенсивным вводом-выводом (сетевые запросы, чтение/запись файлов)</li>
+                    <li>Используйте многопроцессорность для CPU-интенсивных задач</li>
+                    <li>Избегайте сложной синхронизации, если возможно</li>
+                    <li>Используйте высокоуровневые абстракции, такие как <code>concurrent.futures</code></li>
+                    <li>Тщательно тестируйте многопоточный код на возможные состояния гонки и deadlocks</li>
+                    <li>Рассмотрите асинхронное программирование (asyncio) как альтернативу для задач ввода-вывода</li>
+                </ul>
+                
+                <div class="practice-tips">
+                    <h4>Когда использовать многопоточность?</h4>
+                    <p>Многопоточность в Python наиболее полезна в следующих случаях:</p>
+                    <ul>
+                        <li>Параллельные запросы к API или веб-серверам</li>
+                        <li>Одновременная работа с несколькими файлами</li>
+                        <li>Пользовательские интерфейсы (например, GUI-приложения)</li>
+                        <li>Обработка сетевых соединений</li>
+                        <li>Фоновые задачи, которые не должны блокировать основной поток</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 8.4 Асинхронное программирование -->
+            <section id="async" class="topic-section">
+                <h2>8.4 Асинхронное программирование</h2>
+                <p>Асинхронное программирование — это парадигма, позволяющая программам эффективно работать с операциями ввода-вывода без блокировки основного потока выполнения. В Python асинхронное программирование реализовано в модуле <code>asyncio</code>, который стал стандартной частью языка начиная с Python 3.5.</p>
+                
+                <h3>Что такое асинхронное программирование?</h3>
+                <p>В синхронном (обычном) программировании операции выполняются последовательно, и каждая операция блокирует выполнение программы до своего завершения. В асинхронном программировании операции могут быть запущены и оставлены "в ожидании", в то время как программа продолжает выполнять другие задачи. Когда асинхронная операция завершается, программа возвращается к ней и обрабатывает результат.</p>
+                
+                <p>Это особенно полезно для операций ввода-вывода (I/O), таких как:</p>
+                <ul>
+                    <li>Сетевые запросы</li>
+                    <li>Файловые операции</li>
+                    <li>Запросы к базам данных</li>
+                    <li>Ожидание внешних событий</li>
+                </ul>
+                
+                <h3>Модуль asyncio</h3>
+                <p>Модуль <code>asyncio</code> предоставляет основу для написания однопоточного конкурентного кода, используя синтаксис <code>async</code>/<code>await</code>, а также набор инструментов для асинхронного программирования.</p>
+                
+                <h4>Основные концепции asyncio</h4>
+                <ul>
+                    <li><strong>Корутины (coroutines)</strong> — функции, определенные с ключевым словом <code>async def</code>, которые могут приостанавливать свое выполнение с помощью <code>await</code></li>
+                    <li><strong>Задачи (tasks)</strong> — обёртки вокруг корутин, представляющие собой асинхронные операции, которые можно отслеживать</li>
+                    <li><strong>Цикл событий (event loop)</strong> — механизм, который управляет выполнением задач и обработкой I/O событий</li>
+                    <li><strong>Будущие объекты (futures)</strong> — специальные объекты, которые представляют результат асинхронной операции, который еще не доступен</li>
+                </ul>
+                
+                <h4>Простая асинхронная программа</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+
+# Определяем асинхронную функцию (корутину)
+async def say_hello(name, delay):
+    # await может использоваться только внутри async функций
+    await asyncio.sleep(delay)  # Неблокирующая пауза
+    print(f"Привет, {name}!")
+    return f"{name} поприветствован"
+
+# Создаем и запускаем асинхронные задачи
+async def main():
+    # Запускаем несколько корутин параллельно
+    results = await asyncio.gather(
+        say_hello("Алиса", 1),
+        say_hello("Боб", 2),
+        say_hello("Чарли", 3)
+    )
+    print(f"Результаты: {results}")
+
+# Запускаем асинхронную программу
+asyncio.run(main())  # В Python 3.7+
+
+# Вывод (с задержками):
+# Привет, Алиса! (через 1 сек)
+# Привет, Боб! (через 2 сек)
+# Привет, Чарли! (через 3 сек)
+# Результаты: ['Алиса поприветствован', 'Боб поприветствован', 'Чарли поприветствован']</code></pre>
+                </div>
+                
+                <h3>Ключевые слова async и await</h3>
+                <p>Ключевые слова <code>async</code> и <code>await</code> являются основой для асинхронного программирования в Python:</p>
+                <ul>
+                    <li><code>async def</code> — объявляет асинхронную функцию (корутину)</li>
+                    <li><code>await</code> — приостанавливает выполнение корутины до завершения ожидаемого объекта (корутины, задачи или будущего объекта)</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+
+async def fetch_data(url):
+    print(f"Начинаем загрузку данных с {url}")
+    # Имитация сетевого запроса
+    await asyncio.sleep(2)
+    print(f"Данные с {url} загружены")
+    return f"Данные от {url}"
+
+async def process_data(data):
+    print(f"Начинаем обработку {data}")
+    # Имитация обработки данных
+    await asyncio.sleep(1)
+    print(f"Обработка {data} завершена")
+    return f"Обработанные {data}"
+
+async def main():
+    # Получаем данные асинхронно
+    raw_data = await fetch_data("example.com/api")
+    
+    # Обрабатываем данные асинхронно
+    processed_data = await process_data(raw_data)
+    
+    print(f"Итоговый результат: {processed_data}")
+
+asyncio.run(main())</code></pre>
+                </div>
+                
+                <h3>Создание и управление задачами</h3>
+                <p>Задачи (tasks) — это высокоуровневые абстракции, построенные поверх корутин. Они позволяют запускать корутины конкурентно и отслеживать их состояние.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+import time
+
+async def do_work(name, seconds):
+    print(f"{name} начинает работу")
+    await asyncio.sleep(seconds)
+    print(f"{name} закончил работу после {seconds} секунд")
+    return f"Результат от {name}"
+
+async def main():
+    # Создаем задачи из корутин
+    task1 = asyncio.create_task(do_work("Задача 1", 3))
+    task2 = asyncio.create_task(do_work("Задача 2", 1))
+    task3 = asyncio.create_task(do_work("Задача 3", 2))
+    
+    # Запускаем все задачи параллельно
+    start_time = time.time()
+    
+    # Ждем завершения всех задач
+    results = await asyncio.gather(task1, task2, task3)
+    
+    end_time = time.time()
+    print(f"Все задачи завершены за {end_time - start_time:.2f} секунд")
+    print(f"Результаты: {results}")
+
+asyncio.run(main())
+
+# Вывод:
+# Задача 1 начинает работу
+# Задача 2 начинает работу
+# Задача 3 начинает работу
+# Задача 2 закончил работу после 1 секунд
+# Задача 3 закончил работу после 2 секунд
+# Задача 1 закончил работу после 3 секунд
+# Все задачи завершены за 3.00 секунд
+# Результаты: ['Результат от Задача 1', 'Результат от Задача 2', 'Результат от Задача 3']</code></pre>
+                </div>
+                
+                <h3>Управление асинхронными задачами</h3>
+                <p>Модуль <code>asyncio</code> предоставляет несколько функций для запуска и управления асинхронными задачами:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+
+async def delayed_task(delay):
+    await asyncio.sleep(delay)
+    return f"Задача с задержкой {delay} с"
+
+async def main():
+    # asyncio.gather - запускает несколько корутин параллельно
+    # и ждет результаты всех
+    results = await asyncio.gather(
+        delayed_task(1),
+        delayed_task(2),
+        delayed_task(3)
+    )
+    print(f"gather: {results}")  # Все результаты в порядке задач
+    
+    # asyncio.wait_for - выполняет корутину с таймаутом
+    try:
+        result = await asyncio.wait_for(delayed_task(5), timeout=2)
+        print(f"wait_for: {result}")
+    except asyncio.TimeoutError:
+        print("wait_for: Превышено время ожидания!")
+    
+    # asyncio.as_completed - возвращает итератор завершенных задач
+    # в порядке их завершения
+    tasks = [
+        asyncio.create_task(delayed_task(3)),
+        asyncio.create_task(delayed_task(1)),
+        asyncio.create_task(delayed_task(2))
+    ]
+    
+    for coro in asyncio.as_completed(tasks):
+        result = await coro
+        print(f"as_completed: {result}")  # Результаты в порядке завершения
+
+asyncio.run(main())
+
+# Вывод:
+# gather: ['Задача с задержкой 1 с', 'Задача с задержкой 2 с', 'Задача с задержкой 3 с']
+# wait_for: Превышено время ожидания!
+# as_completed: Задача с задержкой 1 с
+# as_completed: Задача с задержкой 2 с
+# as_completed: Задача с задержкой 3 с</code></pre>
+                </div>
+                
+                <h3>Асинхронные контекстные менеджеры</h3>
+                <p>Python поддерживает асинхронные контекстные менеджеры, которые можно использовать с ключевым словом <code>async with</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+
+class AsyncContextManager:
+    async def __aenter__(self):
+        print("Входим в контекст")
+        await asyncio.sleep(1)
+        return "контекстный объект"
+    
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        print("Выходим из контекста")
+        await asyncio.sleep(0.5)
+
+async def main():
+    async with AsyncContextManager() as context:
+        print(f"Внутри контекста с объектом: {context}")
+        await asyncio.sleep(1)
+        print("Работаем внутри контекста")
+
+asyncio.run(main())
+
+# Вывод:
+# Входим в контекст
+# Внутри контекста с объектом: контекстный объект
+# Работаем внутри контекста
+# Выходим из контекста</code></pre>
+                </div>
+                
+                <h3>Асинхронные итераторы</h3>
+                <p>Python также поддерживает асинхронные итераторы, которые можно использовать с <code>async for</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+
+class AsyncCounter:
+    def __init__(self, limit):
+        self.limit = limit
+        self.counter = 0
+    
+    def __aiter__(self):
+        return self
+    
+    async def __anext__(self):
+        if self.counter < self.limit:
+            await asyncio.sleep(0.5)  # Имитация асинхронной работы
+            self.counter += 1
+            return self.counter - 1
+        else:
+            raise StopAsyncIteration
+
+async def main():
+    # Используем асинхронный итератор
+    async for i in AsyncCounter(5):
+        print(f"Получено число: {i}")
+
+asyncio.run(main())
+
+# Вывод (с паузами в 0.5 секунды):
+# Получено число: 0
+# Получено число: 1
+# Получено число: 2
+# Получено число: 3
+# Получено число: 4</code></pre>
+                </div>
+                
+                <h3>Асинхронные генераторы</h3>
+                <p>Асинхронные генераторы — это функции, определенные с <code>async def</code> и использующие <code>yield</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+
+async def async_range(start, stop):
+    for i in range(start, stop):
+        await asyncio.sleep(0.5)  # Имитация асинхронной работы
+        yield i
+
+async def main():
+    # Используем асинхронный генератор
+    async for i in async_range(5, 10):
+        print(f"Получено число: {i}")
+
+asyncio.run(main())
+
+# Вывод (с паузами в 0.5 секунды):
+# Получено число: 5
+# Получено число: 6
+# Получено число: 7
+# Получено число: 8
+# Получено число: 9</code></pre>
+                </div>
+                
+                <h3>Параллельный HTTP-клиент с aiohttp</h3>
+                <p>Одним из самых популярных случаев использования асинхронного программирования является выполнение параллельных HTTP-запросов. Библиотека <code>aiohttp</code> предоставляет асинхронный HTTP-клиент и сервер:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Для использования этого примера требуется установить aiohttp:
+# pip install aiohttp
+
+import asyncio
+import aiohttp
+import time
+
+async def fetch_url(session, url):
+    print(f"Запрос к {url}")
+    async with session.get(url) as response:
+        data = await response.text()
+        print(f"Получен ответ от {url}, размер: {len(data)} байт")
+        return len(data)
+
+async def main():
+    urls = [
+        "https://python.org",
+        "https://www.google.com",
+        "https://github.com",
+        "https://stackoverflow.com",
+        "https://www.wikipedia.org"
+    ]
+    
+    start_time = time.time()
+    
+    # Создаем сессию для всех запросов
+    async with aiohttp.ClientSession() as session:
+        # Запускаем все запросы параллельно
+        tasks = [fetch_url(session, url) for url in urls]
+        results = await asyncio.gather(*tasks)
+    
+    end_time = time.time()
+    
+    print(f"Все запросы выполнены за {end_time - start_time:.2f} секунд")
+    print(f"Общий размер данных: {sum(results)} байт")
+
+# asyncio.run(main())  # Раскомментируйте для запуска</code></pre>
+                </div>
+                
+                <h3>Асинхронная обработка файлов</h3>
+                <p>Начиная с Python 3.7, стандартная библиотека включает модуль <code>aiofiles</code>, который позволяет работать с файлами асинхронно:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Для использования этого примера требуется установить aiofiles:
+# pip install aiofiles
+
+import asyncio
+import aiofiles
+
+async def read_file(filename):
+    try:
+        async with aiofiles.open(filename, "r") as file:
+            content = await file.read()
+            print(f"Прочитано {len(content)} байт из файла {filename}")
+            return content
+    except Exception as e:
+        print(f"Ошибка при чтении {filename}: {e}")
+        return ""
+
+async def write_file(filename, content):
+    async with aiofiles.open(filename, "w") as file:
+        await file.write(content)
+        print(f"Записано {len(content)} байт в файл {filename}")
+
+async def main():
+    # Чтение нескольких файлов параллельно
+    contents = await asyncio.gather(
+        read_file("file1.txt"),
+        read_file("file2.txt"),
+        read_file("file3.txt")
+    )
+    
+    # Объединяем содержимое
+    combined = "\n".join(contents)
+    
+    # Записываем в новый файл
+    await write_file("combined.txt", combined)
+
+# asyncio.run(main())  # Раскомментируйте для запуска</code></pre>
+                </div>
+                
+                <h3>asyncio vs threading vs multiprocessing</h3>
+                <p>У каждой из этих технологий параллельного программирования есть свои преимущества и недостатки:</p>
+                
+                <div class="visual-guide">
+                    <table>
+                        <tr>
+                            <th>Характеристика</th>
+                            <th>asyncio</th>
+                            <th>threading</th>
+                            <th>multiprocessing</th>
+                        </tr>
+                        <tr>
+                            <td>Модель выполнения</td>
+                            <td>Конкурентная (однопоточная)</td>
+                            <td>Параллельная (многопоточная)</td>
+                            <td>Параллельная (многопроцессорная)</td>
+                        </tr>
+                        <tr>
+                            <td>Подходит для</td>
+                            <td>I/O-связанных задач</td>
+                            <td>I/O-связанных задач</td>
+                            <td>CPU-связанных задач</td>
+                        </tr>
+                        <tr>
+                            <td>GIL (Global Interpreter Lock)</td>
+                            <td>Не влияет (выполняется в одном потоке)</td>
+                            <td>Ограничивает параллелизм для CPU-задач</td>
+                            <td>Нет влияния (каждый процесс имеет свой GIL)</td>
+                        </tr>
+                        <tr>
+                            <td>Переключение контекста</td>
+                            <td>Очень дешёвое (явные точки yield/await)</td>
+                            <td>Средняя стоимость</td>
+                            <td>Высокая стоимость</td>
+                        </tr>
+                        <tr>
+                            <td>Общий доступ к данным</td>
+                            <td>Безопасный (однопоточный)</td>
+                            <td>Требует синхронизации</td>
+                            <td>Через специальные механизмы IPC</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import time
+import asyncio
+import threading
+import multiprocessing
+
+# Функция для тестирования (будет адаптирована для каждого подхода)
+def io_bound_task(sleep_time):
+    # Имитация I/O-операции
+    time.sleep(sleep_time)
+    return f"Задача завершена через {sleep_time} сек"
+
+async def async_io_bound_task(sleep_time):
+    # Асинхронная версия той же задачи
+    await asyncio.sleep(sleep_time)
+    return f"Async задача завершена через {sleep_time} сек"
+
+def threading_test():
+    start_time = time.time()
+    
+    # Создаем потоки
+    threads = []
+    for i in range(1, 6):
+        thread = threading.Thread(target=io_bound_task, args=(i,))
+        threads.append(thread)
+        thread.start()
+    
+    # Ожидаем завершения всех потоков
+    for thread in threads:
+        thread.join()
+    
+    end_time = time.time()
+    print(f"Threading подход: {end_time - start_time:.2f} секунд")
+
+def multiprocessing_test():
+    start_time = time.time()
+    
+    # Создаем процессы
+    processes = []
+    for i in range(1, 6):
+        process = multiprocessing.Process(target=io_bound_task, args=(i,))
+        processes.append(process)
+        process.start()
+    
+    # Ожидаем завершения всех процессов
+    for process in processes:
+        process.join()
+    
+    end_time = time.time()
+    print(f"Multiprocessing подход: {end_time - start_time:.2f} секунд")
+
+async def asyncio_test():
+    start_time = time.time()
+    
+    # Создаем и запускаем асинхронные задачи
+    tasks = [async_io_bound_task(i) for i in range(1, 6)]
+    await asyncio.gather(*tasks)
+    
+    end_time = time.time()
+    print(f"Asyncio подход: {end_time - start_time:.2f} секунд")
+
+def main():
+    # Тестирование threading
+    print("Запуск threading теста...")
+    threading_test()
+    
+    # Тестирование multiprocessing
+    print("Запуск multiprocessing теста...")
+    multiprocessing_test()
+    
+    # Тестирование asyncio
+    print("Запуск asyncio теста...")
+    asyncio.run(asyncio_test())
+
+# if __name__ == "__main__":
+#     main()
+
+# Ожидаемый вывод:
+# Запуск threading теста...
+# Threading подход: ~5.01 секунд
+# Запуск multiprocessing теста...
+# Multiprocessing подход: ~5.05 секунд
+# Запуск asyncio теста...
+# Asyncio подход: ~5.00 секунд</code></pre>
+                </div>
+                
+                <h3>Советы и рекомендации</h3>
+                <ul>
+                    <li>Используйте <code>asyncio</code> для задач с интенсивным I/O, таких как сетевые операции или файловый ввод-вывод</li>
+                    <li>Не блокируйте цикл событий тяжелыми вычислениями - это нивелирует преимущества асинхронности</li>
+                    <li>Для CPU-интенсивных задач лучше использовать <code>multiprocessing</code> или сочетать <code>asyncio</code> с <code>concurrent.futures.ProcessPoolExecutor</code></li>
+                    <li>Всегда используйте <code>await</code> при вызове корутин - в противном случае корутины не будут выполняться</li>
+                    <li>Применяйте асинхронные библиотеки вместо блокирующих (например, <code>aiohttp</code> вместо <code>requests</code>, <code>aiofiles</code> вместо обычной работы с файлами)</li>
+                </ul>
+                
+                <h3>Отладка асинхронного кода</h3>
+                <p>Отладка асинхронного кода может быть сложной задачей. Вот несколько полезных инструментов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import asyncio
+import logging
+import traceback
+
+# Настройка логирования
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger("asyncio")
+
+async def buggy_task():
+    try:
+        # Имитируем ошибку
+        await asyncio.sleep(1)
+        raise ValueError("Специально вызванная ошибка")
+    except Exception:
+        logger.error("Произошла ошибка:")
+        logger.error(traceback.format_exc())
+
+async def main():
+    # Включаем отладочный режим asyncio
+    # asyncio.get_event_loop().set_debug(True)  # В Python < 3.7
+    
+    # Запускаем задачу
+    task = asyncio.create_task(buggy_task())
+    
+    # Отслеживаем статус задачи
+    while not task.done():
+        logger.debug(f"Задача {task} всё ещё выполняется")
+        await asyncio.sleep(0.5)
+    
+    try:
+        # Получаем результат (если была ошибка, она будет повторно вызвана здесь)
+        result = task.result()
+    except Exception as e:
+        logger.error(f"Задача завершилась с ошибкой: {e}")
+    else:
+        logger.info(f"Задача успешно завершена с результатом: {result}")
+
+# asyncio.run(main(), debug=True)  # debug=True включает отладочный режим в Python 3.7+</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Лучшие практики асинхронного программирования</h4>
+                    <ol>
+                        <li><strong>Не смешивайте разные стили:</strong> Старайтесь не смешивать синхронный и асинхронный код без необходимости</li>
+                        <li><strong>Избегайте блокирующих операций:</strong> Блокирующие операции останавливают весь цикл событий</li>
+                        <li><strong>Используйте asyncio.gather():</strong> Для конкурентного выполнения нескольких корутин</li>
+                        <li><strong>Применяйте таймауты:</strong> Всегда используйте таймауты для операций, которые могут занять неопределенное время</li>
+                        <li><strong>Обрабатывайте исключения:</strong> Необработанные исключения в корутинах могут привести к скрытым ошибкам</li>
+                        <li><strong>Документируйте корутины:</strong> Ясно указывайте, какие функции являются корутинами и как их использовать</li>
+                        <li><strong>Используйте отладку:</strong> Включайте debug=True для диагностики проблем с циклом событий</li>
+                    </ol>
+                </div>
+                
+                <h3>Заключение</h3>
+                <p>Асинхронное программирование с использованием <code>asyncio</code> — это мощный инструмент для написания высокопроизводительных приложений, особенно для задач с интенсивным вводом-выводом. Хотя асинхронный код может быть более сложным для понимания и отладки, чем синхронный, правильное его применение может значительно повысить производительность программы и эффективность использования ресурсов.</p>
+                
+                <p>Помните, что асинхронное программирование — это не замена для многопоточности или многопроцессорности, а дополнительный инструмент в арсенале разработчика. Каждый подход имеет свои сильные стороны и область применения.</p>
+            </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

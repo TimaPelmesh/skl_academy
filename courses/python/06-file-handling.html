@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Работа с файлами в Python - изучите текстовые файлы, JSON, CSV и бинарные файлы">
+    <meta name="keywords" content="python, файлы, текстовые файлы, json, csv, бинарные файлы">
+    <title>Работа с файлами</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn active">6. Работа с файлами</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#text-files" class="subtopic active">6.1 Текстовые файлы</a>
+                        <a href="#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <!-- Остальные модули -->
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Введение в модуль -->
+            <section class="module-intro">
+                <h2>Модуль 6: Работа с файлами</h2>
+                <p>В этом модуле вы изучите различные способы работы с файлами в Python.</p>
+            </section>
+            
+            <!-- 6.1 Текстовые файлы -->
+            <section id="text-files" class="topic-section">
+                <h2>6.1 Текстовые файлы</h2>
+                <p>Работа с текстовыми файлами — одна из самых распространенных операций в программировании. Python предоставляет удобные инструменты для чтения, записи и обработки текстовых файлов.</p>
+                
+                <h3>Открытие и закрытие файлов</h3>
+                <p>Для работы с файлами используется функция <code>open()</code>, которая возвращает объект файла. После завершения работы с файлом его необходимо закрыть с помощью метода <code>close()</code>.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Открытие файла для чтения
+file = open('example.txt', 'r')
+content = file.read()
+file.close()
+
+# Более безопасный способ с использованием контекстного менеджера
+with open('example.txt', 'r') as file:
+    content = file.read()
+# Файл автоматически закрывается при выходе из блока with</code></pre>
+                </div>
+                
+                <h3>Режимы открытия файлов</h3>
+                <p>При открытии файла указывается режим, определяющий, какие операции можно выполнять с файлом:</p>
+                <ul>
+                    <li><code>'r'</code> — чтение (режим по умолчанию)</li>
+                    <li><code>'w'</code> — запись (создает новый файл или перезаписывает существующий)</li>
+                    <li><code>'a'</code> — добавление (дописывает данные в конец файла)</li>
+                    <li><code>'x'</code> — эксклюзивное создание (создает файл, возвращает ошибку, если он уже существует)</li>
+                    <li><code>'t'</code> — текстовый режим (по умолчанию)</li>
+                    <li><code>'b'</code> — бинарный режим</li>
+                    <li><code>'+'</code> — чтение и запись</li>
+                </ul>
+                
+                <h3>Чтение текстовых файлов</h3>
+                <p>Python предлагает несколько способов чтения файлов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Чтение всего файла в строку
+with open('example.txt', 'r') as file:
+    content = file.read()
+    print(content)
+
+# Чтение файла построчно в список
+with open('example.txt', 'r') as file:
+    lines = file.readlines()
+    for line in lines:
+        print(line.strip())  # strip() удаляет символ новой строки
+
+# Построчное чтение с использованием итерации
+with open('example.txt', 'r') as file:
+    for line in file:
+        print(line.strip())</code></pre>
+                </div>
+                
+                <h3>Запись в текстовые файлы</h3>
+                <p>Для записи данных в файл используются методы <code>write()</code> и <code>writelines()</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Запись строки в файл
+with open('new_file.txt', 'w') as file:
+    file.write('Привет, мир!\n')
+    file.write('Это вторая строка.')
+
+# Запись нескольких строк
+lines = ['Строка 1\n', 'Строка 2\n', 'Строка 3\n']
+with open('multiple_lines.txt', 'w') as file:
+    file.writelines(lines)</code></pre>
+                </div>
+                
+                <h3>Кодировка</h3>
+                <p>При работе с файлами, содержащими не-ASCII символы (например, кириллицу), важно указывать правильную кодировку:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Указание кодировки UTF-8
+with open('russian_text.txt', 'r', encoding='utf-8') as file:
+    content = file.read()
+    print(content)
+
+with open('output_russian.txt', 'w', encoding='utf-8') as file:
+    file.write('Привет, мир! Это текст на русском языке.')</code></pre>
+                </div>
+                
+                <h3>Позиционирование в файле</h3>
+                <p>Методы <code>seek()</code> и <code>tell()</code> позволяют управлять текущей позицией в файле:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">with open('example.txt', 'r') as file:
+    # Перемещение указателя на 5 байт от начала файла
+    file.seek(5)
+    
+    # Чтение 10 символов
+    content = file.read(10)
+    print(content)
+    
+    # Получение текущей позиции
+    position = file.tell()
+    print(f'Текущая позиция: {position}')</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы</h4>
+                    <ul>
+                        <li>Всегда используйте конструкцию <code>with</code> для работы с файлами — она гарантирует закрытие файла даже при возникновении ошибок.</li>
+                        <li>Помните о различиях между операционными системами в отношении символов окончания строки (Windows: \r\n, Unix/Linux: \n). Python может автоматически обрабатывать эти различия при использовании текстового режима.</li>
+                        <li>При чтении больших файлов используйте итерацию по строкам или метод <code>read(size)</code>, чтобы избежать загрузки всего файла в память.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 6.2 JSON и CSV -->
+            <section id="json-csv" class="topic-section">
+                <h2>6.2 JSON и CSV</h2>
+                <p>Для хранения структурированных данных часто используются форматы JSON и CSV. Python предоставляет встроенные модули для работы с этими форматами.</p>
+                
+                <h3>Работа с JSON</h3>
+                <p>JSON (JavaScript Object Notation) — популярный формат обмена данными, который легко читается как человеком, так и машиной. Модуль <code>json</code> в Python позволяет кодировать и декодировать данные в этом формате.</p>
+                
+                <h4>Сериализация (Python → JSON)</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import json
+
+# Создаем словарь Python
+data = {
+    "имя": "Иван",
+    "возраст": 30,
+    "город": "Москва",
+    "языки": ["Python", "JavaScript", "C++"],
+    "активен": True,
+    "рейтинг": 4.8
+}
+
+# Преобразование в строку JSON
+json_string = json.dumps(data, ensure_ascii=False, indent=4)
+print(json_string)
+
+# Запись в JSON-файл
+with open('data.json', 'w', encoding='utf-8') as file:
+    json.dump(data, file, ensure_ascii=False, indent=4)</code></pre>
+                </div>
+                
+                <p>Параметр <code>ensure_ascii=False</code> позволяет сохранять не-ASCII символы в их оригинальном виде, а <code>indent=4</code> делает вывод более читаемым с помощью отступов.</p>
+                
+                <h4>Десериализация (JSON → Python)</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import json
+
+# Чтение JSON из строки
+json_string = '{"имя": "Иван", "возраст": 30, "языки": ["Python", "JavaScript"]}'
+data = json.loads(json_string)
+print(data["имя"])  # Иван
+
+# Чтение из JSON-файла
+with open('data.json', 'r', encoding='utf-8') as file:
+    loaded_data = json.load(file)
+    print(loaded_data)</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Соответствие типов данных</h4>
+                    <p>При конвертации данных между Python и JSON используются следующие соответствия:</p>
+                    <ul>
+                        <li>Python <code>dict</code> ⟷ JSON Object</li>
+                        <li>Python <code>list</code>, <code>tuple</code> ⟷ JSON Array</li>
+                        <li>Python <code>str</code> ⟷ JSON String</li>
+                        <li>Python <code>int</code>, <code>float</code> ⟷ JSON Number</li>
+                        <li>Python <code>True</code> ⟷ JSON true</li>
+                        <li>Python <code>False</code> ⟷ JSON false</li>
+                        <li>Python <code>None</code> ⟷ JSON null</li>
+                    </ul>
+                </div>
+                
+                <h3>Работа с CSV</h3>
+                <p>CSV (Comma-Separated Values) — формат для хранения табличных данных в текстовом виде. Для работы с CSV в Python используется модуль <code>csv</code>.</p>
+                
+                <h4>Запись данных в CSV</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import csv
+
+# Данные для записи
+data = [
+    ['Имя', 'Возраст', 'Город'],
+    ['Иван', 25, 'Москва'],
+    ['Мария', 23, 'Санкт-Петербург'],
+    ['Алексей', 30, 'Казань']
+]
+
+# Запись в CSV-файл
+with open('users.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+# Запись словарей в CSV
+users = [
+    {'Имя': 'Иван', 'Возраст': 25, 'Город': 'Москва'},
+    {'Имя': 'Мария', 'Возраст': 23, 'Город': 'Санкт-Петербург'},
+    {'Имя': 'Алексей', 'Возраст': 30, 'Город': 'Казань'}
+]
+
+with open('users_dict.csv', 'w', newline='', encoding='utf-8') as file:
+    fieldnames = ['Имя', 'Возраст', 'Город']
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(users)</code></pre>
+                </div>
+                
+                <h4>Чтение данных из CSV</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">import csv
+
+# Чтение CSV-файла
+with open('users.csv', 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+
+# Чтение CSV-файла в список словарей
+with open('users_dict.csv', 'r', encoding='utf-8') as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(f"{row['Имя']}: {row['Возраст']} лет, город {row['Город']}")</code></pre>
+                </div>
+                
+                <h4>Настройка разделителя и диалекта</h4>
+                <p>CSV файлы могут использовать разные разделители и правила форматирования:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import csv
+
+# Использование точки с запятой в качестве разделителя
+with open('data_semicolon.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file, delimiter=';')
+    writer.writerow(['Имя', 'Возраст', 'Город'])
+    writer.writerow(['Иван', 25, 'Москва'])
+
+# Создание и использование пользовательского диалекта
+csv.register_dialect('custom', delimiter='|', quoting=csv.QUOTE_MINIMAL)
+
+with open('data_custom.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file, dialect='custom')
+    writer.writerow(['Имя', 'Возраст', 'Город'])
+    writer.writerow(['Иван', 25, 'Москва'])</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы по работе с JSON и CSV</h4>
+                    <ul>
+                        <li>Используйте параметр <code>ensure_ascii=False</code> при работе с JSON на русском языке.</li>
+                        <li>Для CSV всегда указывайте параметр <code>newline=''</code> при открытии файла, чтобы избежать проблем с переносами строк на разных платформах.</li>
+                        <li>При работе с большими CSV-файлами используйте построчное чтение, чтобы не загружать весь файл в память.</li>
+                        <li>Модуль <code>pandas</code> предоставляет более удобные инструменты для анализа и обработки данных в формате CSV: <code>pd.read_csv()</code> и <code>df.to_csv()</code>.</li>
+                    </ul>
+                </div>
+                
+                <div class="interactive-resources">
+                    <h4>Полезные инструменты</h4>
+                    <ul>
+                        <li><a href="https://jsonlint.com/" target="_blank">JSONLint</a> — онлайн-валидатор JSON</li>
+                        <li><a href="https://jsonformatter.org/" target="_blank">JSON Formatter</a> — инструмент для форматирования и валидации JSON</li>
+                        <li><a href="https://www.csvvalidator.io/" target="_blank">CSV Validator</a> — инструмент для проверки CSV-файлов</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 6.3 Бинарные файлы -->
+            <section id="binary-files" class="topic-section">
+                <h2>6.3 Бинарные файлы</h2>
+                <p>Бинарные файлы содержат данные в виде последовательности байтов, а не в текстовом формате. К бинарным файлам относятся изображения, аудио, видео, исполняемые файлы и многие другие.</p>
+                
+                <h3>Открытие и чтение бинарных файлов</h3>
+                <p>Для работы с бинарными файлами используется режим <code>'b'</code> в сочетании с режимами чтения или записи:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Чтение бинарного файла
+with open('image.jpg', 'rb') as file:
+    binary_data = file.read()
+    print(f"Размер файла: {len(binary_data)} байт")
+    print(f"Первые 10 байт: {binary_data[:10]}")
+
+# Чтение определенного количества байтов
+with open('image.jpg', 'rb') as file:
+    header = file.read(10)  # Чтение первых 10 байт
+    print(header)</code></pre>
+                </div>
+                
+                <h3>Запись бинарных файлов</h3>
+                <p>Для записи бинарных данных используется режим <code>'wb'</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Запись бинарных данных
+with open('output.bin', 'wb') as file:
+    file.write(b'\x00\x01\x02\x03\x04')  # Запись байтовой строки
+    
+    # Запись массива байтов
+    import array
+    byte_array = array.array('B', [5, 6, 7, 8, 9])
+    file.write(byte_array)
+
+# Копирование бинарного файла
+with open('image.jpg', 'rb') as source:
+    with open('image_copy.jpg', 'wb') as destination:
+        destination.write(source.read())</code></pre>
+                </div>
+                
+                <h3>Работа с модулем <code>struct</code></h3>
+                <p>Модуль <code>struct</code> позволяет упаковывать и распаковывать бинарные данные по определенному формату:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import struct
+
+# Упаковка данных в бинарный формат
+# 'i' - целое число (4 байта), 'f' - число с плавающей точкой (4 байта), 's' - строка
+data = struct.pack('if10s', 123, 45.67, b'Hello')
+print(data)  # b'{\x00\x00\x00\\xd7#B\x00Hello\x00\x00\x00\x00\x00'
+
+# Запись упакованных данных в файл
+with open('packed_data.bin', 'wb') as file:
+    file.write(data)
+
+# Чтение и распаковка данных
+with open('packed_data.bin', 'rb') as file:
+    binary_data = file.read()
+    unpacked = struct.unpack('if10s', binary_data)
+    print(unpacked)  # (123, 45.67, b'Hello\x00\x00\x00\x00\x00')</code></pre>
+                </div>
+                
+                <h3>Работа с модулем <code>pickle</code></h3>
+                <p>Модуль <code>pickle</code> позволяет сериализовать и десериализовать объекты Python:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import pickle
+
+# Создаем объект для сериализации
+data = {
+    'name': 'Иван',
+    'age': 30,
+    'skills': ['Python', 'Data Science'],
+    'contacts': {
+        'email': 'ivan@example.com',
+        'phone': '+7-900-123-45-67'
+    }
+}
+
+# Сериализация объекта в файл
+with open('data.pickle', 'wb') as file:
+    pickle.dump(data, file)
+
+# Десериализация объекта из файла
+with open('data.pickle', 'rb') as file:
+    loaded_data = pickle.load(file)
+    print(loaded_data)
+    print(f"Имя: {loaded_data['name']}, Возраст: {loaded_data['age']}")</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Меры безопасности при работе с pickle</h4>
+                    <p>Важно помнить, что модуль <code>pickle</code> не безопасен при работе с ненадежными данными:</p>
+                    <ul>
+                        <li>Никогда не загружайте pickle-файлы из ненадежных источников</li>
+                        <li>Pickle может исполнять произвольный код во время загрузки</li>
+                        <li>Для обмена данными с внешними системами лучше использовать JSON или другие безопасные форматы</li>
+                    </ul>
+                </div>
+                
+                <h3>Работа с бинарными файлами изображений</h3>
+                <p>Для работы с изображениями часто используется библиотека <code>Pillow</code> (PIL):</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">from PIL import Image
+
+# Открытие изображения
+image = Image.open('example.jpg')
+print(f"Размер изображения: {image.width}x{image.height}")
+print(f"Формат: {image.format}")
+
+# Изменение размера и сохранение изображения
+resized_image = image.resize((800, 600))
+resized_image.save('resized_example.jpg')
+
+# Конвертация между форматами
+image.save('example.png')</code></pre>
+                </div>
+                
+                <h3>Работа с zip-архивами</h3>
+                <p>Модуль <code>zipfile</code> позволяет создавать и распаковывать ZIP-архивы:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import zipfile
+import os
+
+# Создание ZIP-архива
+with zipfile.ZipFile('archive.zip', 'w') as zipf:
+    # Добавление файла в архив
+    zipf.write('data.json')
+    zipf.write('image.jpg')
+    
+    # Добавление всех текстовых файлов из директории
+    for file in os.listdir('.'):
+        if file.endswith('.txt'):
+            zipf.write(file)
+
+# Распаковка архива
+with zipfile.ZipFile('archive.zip', 'r') as zipf:
+    # Вывод списка файлов в архиве
+    print(zipf.namelist())
+    
+    # Распаковка всех файлов
+    zipf.extractall('extracted_files')
+    
+    # Извлечение конкретного файла
+    zipf.extract('data.json', 'single_file')</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы по работе с бинарными файлами</h4>
+                    <ul>
+                        <li>При работе с большими бинарными файлами читайте и обрабатывайте данные порциями, чтобы избежать проблем с памятью.</li>
+                        <li>Используйте контекстные менеджеры (<code>with</code>) для автоматического закрытия файлов.</li>
+                        <li>Для сложных бинарных форматов (аудио, видео, изображения) используйте специализированные библиотеки, такие как Pillow, OpenCV, PyAudio и др.</li>
+                        <li>При работе с сетевыми бинарными данными помните о различиях в порядке байтов (little-endian и big-endian).</li>
+                    </ul>
+                </div>
+                
+                <div class="next-steps">
+                    <h4>Следующие шаги для изучения</h4>
+                    <ul>
+                        <li>Изучите библиотеку <code>BytesIO</code> из модуля <code>io</code> для работы с бинарными данными в памяти.</li>
+                        <li>Познакомьтесь с библиотекой <code>NumPy</code> для эффективной работы с бинарными массивами данных.</li>
+                        <li>Изучите форматы HDF5 и Parquet для работы с большими объемами научных или аналитических данных.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Заключение модуля -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Диагностика сетей и утилиты: ping, traceroute, ipconfig/ifconfig, netstat, nslookup, tcpdump, Wireshark, nmap, iperf, ss, dig">
+    <meta name="keywords" content="ping, traceroute, ipconfig, ifconfig, netstat, nslookup, tcpdump, Wireshark, nmap, iperf, ss, dig">
+    <title>Диагностика и утилиты — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/09-diagnostics-and-tools.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+
+
+                                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">9. Диагностика и утилиты</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#basic" class="subtopic active">9.1 Базовые команды</a>
+                        <a href="#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="#monitoring" class="subtopic">9.4 Мониторинг и телеметрия</a>
+                        <a href="#pro" class="subtopic">9.5 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="basic" class="topic-section">
+                <h2>9.1 Базовые команды</h2>
+                <div class="lesson-content">
+                    <h3>Протокол ICMP: основа диагностики сетей</h3>
+                    <p><strong>ICMP</strong> (Internet Control Message Protocol) — это вспомогательный протокол сетевого уровня (L3), который используется для передачи сообщений об ошибках и диагностики сети. ICMP не передает пользовательские данные, но критически важен для работы сети.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если IP — это "почтовая служба", то ICMP — это "служба оповещения о проблемах": "адрес не найден", "время доставки истекло", "маршрут недоступен".</p>
+                    </div>
+
+                    <h3>Структура ICMP-сообщения</h3>
+                    <div class="visual-guide">
+                        <h4>Формат ICMP-пакета:</h4>
+                        <ul>
+                            <li><strong>Type (8 бит)</strong> — тип сообщения (например, 8 = Echo Request, 0 = Echo Reply)</li>
+                            <li><strong>Code (8 бит)</strong> — уточняет тип сообщения (дополнительная информация об ошибке)</li>
+                            <li><strong>Checksum (16 бит)</strong> — контрольная сумма для проверки целостности</li>
+                            <li><strong>Rest of Header (32 бита)</strong> — зависит от типа сообщения (может содержать ID, Sequence Number и т.д.)</li>
+                            <li><strong>Data</strong> — данные сообщения (часто содержит копию заголовка IP-пакета, вызвавшего ошибку)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Типы ICMP-сообщений</h3>
+                    <div class="visual-guide">
+                        <h4>Основные типы ICMP (для IPv4):</h4>
+                        <ul>
+                            <li><strong>Type 0 — Echo Reply</strong> — ответ на ping-запрос. Используется утилитой ping</li>
+                            <li><strong>Type 3 — Destination Unreachable</strong> — адрес назначения недоступен. Имеет несколько кодов:
+                                <ul>
+                                    <li><strong>Code 0</strong> — сеть недоступна (Network Unreachable)</li>
+                                    <li><strong>Code 1</strong> — хост недоступен (Host Unreachable)</li>
+                                    <li><strong>Code 2</strong> — протокол недоступен (Protocol Unreachable)</li>
+                                    <li><strong>Code 3</strong> — порт недоступен (Port Unreachable)</li>
+                                    <li><strong>Code 4</strong> — требуется фрагментация, но установлен флаг DF (Don't Fragment)</li>
+                                    <li><strong>Code 13</strong> — административно запрещено (Communication Administratively Prohibited)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Type 4 — Source Quench</strong> — устарело, использовалось для уменьшения скорости отправки</li>
+                            <li><strong>Type 5 — Redirect</strong> — перенаправление на другой маршрутизатор</li>
+                            <li><strong>Type 8 — Echo Request</strong> — запрос ping. Используется утилитой ping</li>
+                            <li><strong>Type 11 — Time Exceeded</strong> — время жизни пакета истекло. Имеет коды:
+                                <ul>
+                                    <li><strong>Code 0</strong> — TTL истекло в пути (используется в traceroute)</li>
+                                    <li><strong>Code 1</strong> — время сборки фрагментов истекло</li>
+                                </ul>
+                            </li>
+                            <li><strong>Type 12 — Parameter Problem</strong> — проблема с заголовком IP-пакета</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr><th>Type</th><th>Code</th><th>Название</th><th>Описание</th></tr>
+                            <tr><td>0</td><td>0</td><td>Echo Reply</td><td>Ответ на ping</td></tr>
+                            <tr><td>3</td><td>0</td><td>Network Unreachable</td><td>Сеть недоступна</td></tr>
+                            <tr><td>3</td><td>1</td><td>Host Unreachable</td><td>Хост недоступен</td></tr>
+                            <tr><td>3</td><td>3</td><td>Port Unreachable</td><td>Порт недоступен</td></tr>
+                            <tr><td>3</td><td>4</td><td>Fragmentation Needed</td><td>Нужна фрагментация, но DF=1</td></tr>
+                            <tr><td>8</td><td>0</td><td>Echo Request</td><td>Запрос ping</td></tr>
+                            <tr><td>11</td><td>0</td><td>TTL Exceeded</td><td>TTL истекло (traceroute)</td></tr>
+                            <tr><td>11</td><td>1</td><td>Fragment Reassembly Time Exceeded</td><td>Время сборки фрагментов истекло</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>Как работает Ping: Echo Request/Reply</h3>
+                    <div class="visual-guide">
+                        <h4>Процесс ping:</h4>
+                        <ol>
+                            <li><strong>Отправка Echo Request (Type 8):</strong> Утилита ping отправляет ICMP Echo Request с уникальным идентификатором и порядковым номером</li>
+                            <li><strong>Получение Echo Reply (Type 0):</strong> Целевой хост отвечает ICMP Echo Reply с теми же идентификатором и номером</li>
+                            <li><strong>Измерение RTT:</strong> Ping измеряет время между отправкой запроса и получением ответа (Round Trip Time)</li>
+                            <li><strong>Проверка потерь:</strong> Если ответ не приходит, фиксируется потеря пакета</li>
+                        </ol>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Использование ping с различными ключами
+# Windows
+ping 8.8.8.8              # Простой ping (4 пакета)
+ping 8.8.8.8 -n 10        # Отправить 10 пакетов
+ping 8.8.8.8 -t           # Непрерывный ping (до Ctrl+C)
+ping 8.8.8.8 -l 1000      # Размер пакета 1000 байт
+ping 8.8.8.8 -i 64        # TTL = 64
+
+# Linux/macOS
+ping 8.8.8.8              # Непрерывный ping (до Ctrl+C)
+ping 8.8.8.8 -c 10        # Отправить 10 пакетов
+ping 8.8.8.8 -s 1000      # Размер пакета 1000 байт
+ping 8.8.8.8 -t 64        # TTL = 64
+ping 8.8.8.8 -i 0.2       # Интервал 0.2 секунды</code></pre>
+                    </div>
+
+                    <h3>Как работает Traceroute: Time Exceeded</h3>
+                    <p><strong>Traceroute</strong> (tracert в Windows) использует ICMP Type 11 (Time Exceeded) для отслеживания пути пакетов через маршрутизаторы.</p>
+
+                    <div class="visual-guide">
+                        <h4>Процесс traceroute:</h4>
+                        <ol>
+                            <li><strong>TTL = 1:</strong> Отправляется пакет с TTL = 1. Первый маршрутизатор уменьшает TTL до 0 и отправляет ICMP Time Exceeded</li>
+                            <li><strong>TTL = 2:</strong> Отправляется пакет с TTL = 2. Второй маршрутизатор отправляет ICMP Time Exceeded</li>
+                            <li><strong>Продолжение:</strong> TTL увеличивается до тех пор, пока пакет не достигнет целевого хоста</li>
+                            <li><strong>Целевой хост:</strong> Отвечает ICMP Echo Reply (если используется ICMP) или Port Unreachable (если используется UDP)</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Различия в реализации:</strong></p>
+                        <ul>
+                            <li><strong>Windows (tracert):</strong> Использует ICMP Echo Request</li>
+                            <li><strong>Linux/Unix (traceroute):</strong> По умолчанию использует UDP (можно переключить на ICMP с ключом <code>-I</code>)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Использование traceroute
+# Windows
+tracert 1.1.1.1           # Трассировка маршрута
+tracert -h 15 1.1.1.1     # Максимум 15 хопов
+tracert -w 1000 1.1.1.1   # Таймаут 1000 мс
+
+# Linux/macOS
+traceroute 1.1.1.1        # Трассировка маршрута (UDP)
+traceroute -I 1.1.1.1     # Использовать ICMP
+traceroute -m 15 1.1.1.1  # Максимум 15 хопов
+traceroute -w 1 1.1.1.1   # Таймаут 1 секунда</code></pre>
+                    </div>
+
+                    <h3>Path MTU Discovery (PMTUD)</h3>
+                    <p><strong>PMTUD</strong> использует ICMP Type 3 Code 4 (Fragmentation Needed) для определения максимального размера пакета, который может пройти по пути без фрагментации.</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает PMTUD:</h4>
+                        <ol>
+                            <li><strong>Отправка с DF=1:</strong> Хост отправляет пакет с флагом Don't Fragment (DF)</li>
+                            <li><strong>Маршрутизатор с меньшим MTU:</strong> Если MTU канала меньше размера пакета, маршрутизатор отправляет ICMP Fragmentation Needed с указанием максимального MTU</li>
+                            <li><strong>Корректировка:</strong> Отправитель уменьшает размер пакета и повторяет отправку</li>
+                            <li><strong>Оптимизация:</strong> Постепенно определяется максимальный размер пакета для данного пути</li>
+                        </ol>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Проблема с блокировкой ICMP:</strong> Некоторые администраторы блокируют весь ICMP-трафик для "безопасности". Это нарушает работу PMTUD и может привести к проблемам с недоступностью сайтов или медленной работой.</p>
+                    </div>
+
+                    <h3>Безопасность и ICMP</h3>
+                    <div class="visual-guide">
+                        <h4>Рекомендации по фильтрации ICMP:</h4>
+                        <ul>
+                            <li><strong>Разрешайте:</strong> Echo Request/Reply (Type 0, 8) — для диагностики</li>
+                            <li><strong>Разрешайте:</strong> Destination Unreachable (Type 3) — критично для PMTUD</li>
+                            <li><strong>Разрешайте:</strong> Time Exceeded (Type 11) — для traceroute</li>
+                            <li><strong>Блокируйте:</strong> Redirect (Type 5) — может использоваться для атак</li>
+                            <li><strong>Ограничивайте:</strong> Rate-limiting для Echo Request — защита от ICMP flood</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>ICMP в атаках:</strong> ICMP может использоваться для:</p>
+                        <ul>
+                            <li><strong>ICMP flood</strong> — отправка большого количества Echo Request для перегрузки</li>
+                            <li><strong>Smurf attack</strong> — отправка Echo Request с подменой адреса источника на адрес жертвы</li>
+                            <li><strong>ICMP tunneling</strong> — скрытая передача данных внутри ICMP-пакетов</li>
+                        </ul>
+                        <p>Защита: rate-limiting, фильтрация broadcast ping, мониторинг необычного ICMP-трафика.</p>
+                    </div>
+
+                    <h3>Базовые команды диагностики</h3>
+                    <div class="code-example">
+<pre><code class="bash"># Проверка связи
+ping 8.8.8.8
+tracert 1.1.1.1         # Windows
+traceroute 1.1.1.1      # Linux/macOS
+
+# Конфигурация и таблицы
+ipconfig /all           # Windows
+ifconfig || ip addr     # Linux/macOS
+netstat -ano            # Windows
+ss -tulpen              # Linux/macOS
+
+# DNS
+nslookup example.com    # Windows
+dig example.com ANY     # Linux/macOS
+</code></pre>
+                    </div>
+
+                    <h3>Резюме по ICMP</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>ICMP</strong> — протокол для передачи сообщений об ошибках и диагностики сети</li>
+                            <li><strong>Основные типы:</strong> Echo Request/Reply (ping), Destination Unreachable, Time Exceeded (traceroute)</li>
+                            <li><strong>Ping</strong> — использует Echo Request (Type 8) и Echo Reply (Type 0)</li>
+                            <li><strong>Traceroute</strong> — использует Time Exceeded (Type 11) для отслеживания маршрута</li>
+                            <li><strong>PMTUD</strong> — использует Fragmentation Needed (Type 3 Code 4) для определения MTU</li>
+                            <li><strong>Безопасность:</strong> Не блокируйте весь ICMP, разрешайте критичные типы с rate-limiting</li>
+                        </ul>
+                        <p><strong>Цель:</strong> ICMP обеспечивает критически важную обратную связь о состоянии сети и является основой большинства утилит диагностики.</p>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Методология диагностики</h4>
+                        <ul>
+                            <li><strong>Модель слоёв</strong>: поднимайтесь снизу вверх — физика → L2 → L3 → L4 → L7.</li>
+                            <li><strong>Разделяй и властвуй</strong>: локализуйте границы (клиент/сеть/сервер) и проверяйте каждый участок.</li>
+                            <li><strong>Базовые паттерны</strong>: нет IP → DHCP/статический; есть IP, но нет DNS → проверить резолв; высокий RTT/потери → трассировка/серии ICMP с повышенной частотой/размером пакета.</li>
+                            <li><strong>Traceroute</strong>: в Windows — ICMP, в Linux/macOS — обычно UDP/ICMP; фильтрация по пути и асимметрия маршрутов искажают вывод.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Алгоритмы и принципы</h4>
+                        <ul>
+                            <li><strong>Гипотезы → проверки</strong>: формулируйте простую гипотезу, подтверждайте минимальным набором тестов.</li>
+                            <li><strong>Изменение одного параметра</strong>: меняйте одну переменную за раз для чистого вывода.</li>
+                            <li><strong>Сравнение эталонов</strong>: рабочее vs нерабочее место/путь; контрольные трассировки/pcap.</li>
+                            <li><strong>Время и корреляция</strong>: сопоставляйте симптомы с изменениями/релизами/инцидентами.</li>
+                            <li><strong>Документирование</strong>: фиксируйте шаги/выводы/команды; уменьшает цикл возврата.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Типовые категории проблем</h4>
+                        <ul>
+                            <li><strong>L1/L2</strong>: дуплекс/скорость/ошибки, VLAN/Trunk, STP‑блокировки.</li>
+                            <li><strong>L3</strong>: адресация/шлюз/маршруты, асимметрия, PMTUD/MSS.</li>
+                            <li><strong>L4</strong>: порты/состояния TCP, перезаполнение окон, алгоритмы перегрузок.</li>
+                            <li><strong>L7</strong>: DNS/HTTP/TLS ошибки, таймауты приложений.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="advanced-tools" class="topic-section">
+                <h2>9.2 Расширенные утилиты</h2>
+                <div class="lesson-content">
+                    <p>Используйте <strong>nmap</strong> для сканирования, <strong>iperf</strong> для измерения пропускной способности, <strong>mtr</strong> для комбинированной трассировки/пинга. Анализируйте pcap‑файлы в Wireshark или через <code>tshark/tcpdump</code>.</p>
+                    <div class="visual-guide">
+                        <h4>Практические сценарии</h4>
+                        <ul>
+                            <li><strong>Падение Throughput</strong>: iperf в обе стороны (TCP/UDP), MTU/fragmentation/Window Scaling.</li>
+                            <li><strong>Подозрение на фильтрацию</strong>: nmap (SYN/ACK/UDP/версионный скан), сопоставление с правилами.</li>
+                            <li><strong>Анализ задержек</strong>: mtr по времени/направлениям, проверка QoS/очередей на участках.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wireshark" class="topic-section">
+                <h2>9.3 Анализ трафика</h2>
+                <div class="lesson-content">
+                    <h3>Что такое Wireshark?</h3>
+                    <p><strong>Wireshark</strong> — это анализатор сетевых протоколов, который позволяет "видеть" весь трафик, проходящий через сетевой интерфейс. Это как "рентген" для сети — показывает, что происходит на самом деле.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Если ping — это "позвонить и спросить, дома ли", то Wireshark — это "подслушать все телефонные разговоры" и проанализировать их.</p>
+                    </div>
+
+                    <h3>Захват трафика</h3>
+                    <div class="visual-guide">
+                        <h4>Как захватить трафик:</h4>
+                        <ul>
+                            <li><strong>Выбор интерфейса:</strong> Выберите сетевой интерфейс (Ethernet, Wi-Fi)</li>
+                            <li><strong>Promiscuous режим:</strong> Захват всего трафика в сегменте сети (не только адресованного вам)</li>
+                            <li><strong>Фильтры захвата:</strong> Можно сразу фильтровать при захвате (например, только HTTP)</li>
+                            <li><strong>Сохранение:</strong> Сохраняйте захваченный трафик в файл для последующего анализа</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Перехват трафика через tcpdump (командная строка)
+tcpdump -i eth0 -nn tcp port 80    # Захват HTTP-трафика
+tcpdump -i wlan0 -vv icmp          # Захват ICMP с подробным выводом
+
+# Сохранение в файл
+tcpdump -i eth0 -w capture.pcap     # Сохранить в файл для анализа в Wireshark</code></pre>
+                    </div>
+
+                    <h3>Фильтры в Wireshark</h3>
+                    <div class="visual-guide">
+                        <h4>Display фильтры (отображение):</h4>
+                        <ul>
+                            <li><strong>По протоколу:</strong> <code>tcp</code>, <code>udp</code>, <code>http</code>, <code>dns</code></li>
+                            <li><strong>По адресу:</strong> <code>ip.addr == 1.1.1.1</code></li>
+                            <li><strong>По порту:</strong> <code>tcp.port == 443</code></li>
+                            <li><strong>Комбинации:</strong> <code>dns && !tcp</code> (DNS, но не TCP)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Анализ трафика</h3>
+                    <div class="visual-guide">
+                        <h4>Полезные функции:</h4>
+                        <ul>
+                            <li><strong>Follow TCP Stream:</strong> Просмотр всего диалога между клиентом и сервером, восстановление потока данных</li>
+                            <li><strong>Графики:</strong> Визуализация RTT (Round Trip Time), пропускной способности (Throughput)</li>
+                            <li><strong>Статистика:</strong> Анализ протоколов, разговоров, потоков</li>
+                            <li><strong>Экспорт объектов:</strong> Извлечение файлов из HTTP-трафика</li>
+                        </ul>
+                    </div>
+
+                    <h3>Диагностика проблем</h3>
+                    <div class="visual-guide">
+                        <h4>Что искать в Wireshark:</h4>
+                        <ul>
+                            <li><strong>ICMP/TTL:</strong> Диагностика недоступности хостов, проблем с маршрутизацией</li>
+                            <li><strong>PMTUD:</strong> Проблемы с размером пакетов (Fragmentation needed)</li>
+                            <li><strong>Retransmissions:</strong> Повторные передачи пакетов — признак потерь</li>
+                            <li><strong>Высокие задержки:</strong> Большое время между запросом и ответом</li>
+                            <li><strong>Ошибки протоколов:</strong> Неправильно сформированные пакеты</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Этично и законно:</strong> Используйте Wireshark только в своей сети или с разрешения. Захват трафика в чужих сетях без разрешения незаконен.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>Wireshark</strong> — анализатор сетевых протоколов для захвата и анализа трафика</li>
+                            <li><strong>Захват:</strong> Выбор интерфейса, promiscuous режим, фильтры захвата</li>
+                            <li><strong>Фильтры:</strong> По протоколам, адресам, портам, комбинации условий</li>
+                            <li><strong>Анализ:</strong> Follow TCP Stream, статистика, графики RTT/Throughput</li>
+                            <li><strong>Диагностика:</strong> Поиск проблем с ICMP/TTL, PMTUD, retransmissions</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Глубокий анализ сетевого трафика для диагностики проблем и понимания работы протоколов.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="monitoring" class="topic-section">
+                <h2>9.4 Мониторинг и телеметрия</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>NTP</strong>: синхронизация времени — база для логов/корреляции.</li>
+                        <li><strong>SNMP</strong>: сбор метрик/траппов; версии v2c/v3, безопасность.</li>
+                        <li><strong>Syslog</strong>: централизованные логи, уровни, ретеншн.</li>
+                        <li><strong>NetFlow/sFlow/IPFIX</strong>: телеметрия потоков, топ‑токены и аномалии.</li>
+                    </ul>
+                    <div class="visual-guide">
+                        <h4>Построение наблюдаемости</h4>
+                        <ul>
+                            <li><strong>База</strong>: NTP + Syslog + метрики (SNMP/Exporter) + flow‑данные.</li>
+                            <li><strong>Алертинг</strong>: пороговые/поведенческие; корреляция с логами и трассировками.</li>
+                            <li><strong>Хранение</strong>: ретеншн/архивация, приватность и доступы.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pro" class="topic-section">
+                <h2>9.5 Для профессионалов</h2>
+                <div class="lesson-content">
+                    <ul>
+                        <li><strong>ss</strong>: современная альтернатива netstat.</li>
+                        <li><strong>dig</strong>: гибкая диагностика DNS.</li>
+                        <li><strong>nmap</strong>: инвентаризация сети и аудит безопасности.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 3: Ветвление. Ветки как указатели на коммиты, создание, переключение, сравнение, удаление.">
+    <meta name="keywords" content="git branch, git switch, ветки, сравнение веток, git diff">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Git — Модуль 3: Ветвление">
+    <meta property="og:description" content="Понимаем, как работают ветки в Git, и используем их в повседневной работе.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/git/03-branching.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <title>Курс Git — Модуль 3: Ветвление | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/03-branching.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="git">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Git</button>
+                    <div class="subtopics">
+                        <a href="01-git-basics.html#vcs-intro" class="subtopic">1.1 Что такое VCS</a>
+                        <a href="01-git-basics.html#first-steps" class="subtopic">1.2 Первые шаги</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Коммиты и история</button>
+                    <div class="subtopics">
+                        <a href="02-commits-and-history.html#log-pro" class="subtopic">2.1 git log</a>
+                        <a href="02-commits-and-history.html#amend" class="subtopic">2.2 amend</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">3. Ветвление</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#branch-basics" class="subtopic active">3.1 Что такое ветка, HEAD</a>
+                        <a href="#create-switch" class="subtopic">3.2 Создание и переключение</a>
+                        <a href="#list-delete" class="subtopic">3.3 Список и удаление</a>
+                        <a href="#compare" class="subtopic">3.4 Сравнение веток</a>
+                        <a href="#workflow" class="subtopic">3.5 Практика: feature‑ветка</a>
+                        <a href="#detached" class="subtopic">3.6 Detached HEAD</a>
+                        <a href="#upstream" class="subtopic">3.7 Upstream и tracking</a>
+                        <a href="#remote-tracking" class="subtopic">3.8 Remote‑tracking ветки</a>
+                        <a href="#refs-symrefs" class="subtopic">3.9 Refs и symrefs</a>
+                        <a href="#naming" class="subtopic">3.10 Именование веток</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Слияние и конфликты</button>
+                    <div class="subtopics">
+                        <a href="04-merging-and-conflicts.html#ff-vs-merge" class="subtopic">4.1 FF vs Merge</a>
+                        <a href="04-merging-and-conflicts.html#conflicts" class="subtopic">4.2 Конфликты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Rebase</button>
+                    <div class="subtopics">
+                        <a href="05-rebase.html#interactive" class="subtopic">5.1 Интерактивный rebase</a>
+                        <a href="05-rebase.html#rules" class="subtopic">5.2 Правила</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Удалённые</button>
+                    <div class="subtopics">
+                        <a href="06-remotes.html#clone" class="subtopic">6.1 clone</a>
+                        <a href="06-remotes.html#push" class="subtopic">6.2 push</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. Команда</button>
+                    <div class="subtopics">
+                        <a href="07-teamwork-and-practices.html#pr" class="subtopic">7.1 PR/MR</a>
+                        <a href="07-teamwork-and-practices.html#stash" class="subtopic">7.2 stash/cherry-pick</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Спасение</button>
+                    <div class="subtopics">
+                        <a href="08-recovery-and-troubleshooting.html#restore" class="subtopic">8.1 restore</a>
+                        <a href="08-recovery-and-troubleshooting.html#reflog" class="subtopic">8.2 reflog</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#gui" class="subtopic">9.1 GUI</a>
+                        <a href="09-tools-and-integrations.html#hooks-ci" class="subtopic">9.2 hooks/CI</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 3: Ветвление (Branching) — сердце Git</h2>
+                <p>Ветки — лёгкие указатели на коммиты. Быстро создаются и объединяются, позволяя параллельную разработку и безопасные эксперименты.</p>
+                <div class="visual-guide">
+                    <h4>Зачем нужны ветки</h4>
+                    <ul>
+                        <li>Изоляция разработки фич без риска для <code>main</code></li>
+                        <li>Параллельная работа нескольких людей над разными задачами</li>
+                        <li>Чистая история и упрощение код‑ревью</li>
+                    </ul>
+                </div>
+                <div class="practice-tips">
+                    <h4>Полезные практики</h4>
+                    <ul>
+                        <li>Одна ветка — одна задача; называйте ветки по шаблону: <code>feature/...</code>, <code>fix/...</code></li>
+                        <li>Регулярно синхронизируйтесь с базовой веткой (fetch + rebase/merge)</li>
+                        <li>Удаляйте слитые ветки, чтобы поддерживать чистоту</li>
+                    </ul>
+                </div>
+                <p>Мыслите веткой как именованной «меткой» на графе истории. Перемещая метки и сопоставляя их, вы управляете потоком изменений, не копируя файлы и не создавая директории для каждой версии проекта.</p>
+            </section>
+
+            <section id="branch-basics" class="topic-section">
+                <h2>3.1 Что такое ветка. HEAD, main, feature</h2>
+                <p>Ветка — имя указателя на коммит. <code>HEAD</code> обычно указывает на текущую ветку; в состоянии detached HEAD указывает на конкретный коммит.</p>
+                <p>Представьте историю как дорожную развязку: коммиты — это узлы, ветки — дорожные указатели. Переставляя указатели, вы выбираете «маршрут» развития кода. <code>HEAD</code> — ваш текущий автомобиль, он едет туда, куда укажет ветка.</p>
+            </section>
+
+            <section id="create-switch" class="topic-section">
+                <h2>3.2 Создание и переключение</h2>
+                <div class="code-example">
+<pre><code class="bash">git branch feature/login
+# создать и сразу переключиться
+git switch -c feature/login
+# или старым способом
+git checkout -b feature/login
+
+# переключение
+git switch main
+# или
+git checkout main
+</code></pre>
+                </div>
+                <p><code>git switch</code> делает смысл команд явнее и безопаснее по умолчанию, чем универсальный <code>checkout</code>. Используйте <code>switch</code> для веток и <code>restore</code> для файлов — так проще избегать путаницы.</p>
+            </section>
+
+            <section id="list-delete" class="topic-section">
+                <h2>3.3 Список и удаление веток</h2>
+                <div class="code-example">
+<pre><code class="bash">git branch -v
+# безопасное удаление слитой ветки
+git branch -d feature/login
+# принудительное удаление
+git branch -D feature/old
+</code></pre>
+                </div>
+            </section>
+
+            <section id="compare" class="topic-section">
+                <h2>3.4 Сравнение веток</h2>
+                <div class="code-example">
+<pre><code class="bash">git diff main..feature/login
+# какие коммиты есть в feature/login, но нет в main
+git log --oneline main..feature/login
+</code></pre>
+                </div>
+                <p>Для сравнения полезно различать <code>..</code> и <code>...</code>: первая форма показывает «что есть в правой ветке, но нет в левой», вторая — симметричную разность. Совмещайте сравнения с визуальным графом истории.</p>
+            </section>
+
+            <section id="workflow" class="topic-section">
+                <h2>3.5 Практика: feature‑ветка</h2>
+                <ol>
+                    <li>Создайте ветку для фичи</li>
+                    <li>Сделайте коммиты по частям (add -p)</li>
+                    <li>Сравните с main и подготовьте к слиянию</li>
+                </ol>
+                <p>Даже в простом сценарии важно сохранять «чистоту» ветки: маленькие осмысленные коммиты облегчат ревью, а аккуратное слияние — дальнейшее сопровождение.</p>
+            </section>
+            <section id="detached" class="topic-section">
+                <h2>3.6 Detached HEAD</h2>
+                <p>Состояние, когда <code>HEAD</code> указывает напрямую на коммит, а не на имя ветки. Полезно для экспериментов и просмотра истории. Чтобы не потерять работу — создайте ветку от текущего состояния.</p>
+            </section>
+            <section id="upstream" class="topic-section">
+                <h2>3.7 Upstream и tracking</h2>
+                <p>Ветка может отслеживать <em>upstream</em> (обычно удалённую ветку). Это включает краткие команды (<code>git pull</code>, <code>git push</code>) и влияет на стратегии слияния/ребейза по умолчанию.</p>
+            </section>
+            <section id="remote-tracking" class="topic-section">
+                <h2>3.8 Remote‑tracking ветки</h2>
+                <p>Это локальные ссылки вида <code>origin/main</code>, отражающие состояние удалённых веток. Они обновляются при <code>git fetch</code>, но не меняют вашу рабочую директорию.</p>
+            </section>
+            <section id="refs-symrefs" class="topic-section">
+                <h2>3.9 Refs и символьные ссылки</h2>
+                <p>Ветки/теги — имена ссылок (refs) в <code>.git/refs</code>. <code>HEAD</code> — <em>symref</em>, указывающий на текущую ветку. Понимание структуры refs помогает лучше разбираться во внутренних механизмах Git.</p>
+            </section>
+            <section id="naming" class="topic-section">
+                <h2>3.10 Именование веток и политика</h2>
+                <p>Используйте префиксы (<code>feature/</code>, <code>fix/</code>, <code>docs/</code>) и осмысленные имена. Избегайте двусмысленных названий. Учитывайте требования CI и защиту веток в вашем проекте.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

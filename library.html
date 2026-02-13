@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKL Library — Статьи | SKL Academy</title>
+  
+  <!-- SEO -->
+  <meta name="description" content="Статьи о программировании, технологиях и IT-карьере. Глубокие разборы, интересные факты и практические руководства.">
+  <meta name="keywords" content="статьи о программировании, IT статьи, технические статьи, обучение программированию">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="SKL Library — Статьи | SKL Academy">
+  <meta property="og:description" content="Статьи о программировании, технологиях и IT-карьере.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skl-academy.ru/library.html">
+  <meta property="og:site_name" content="SKL Academy">
+  
+  <link rel="canonical" href="https://skl-academy.ru/library.html">
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .article-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    
+    .article-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+    
+    .category-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    
+    .category-deep-dive { background: #e0e7ff; color: #4f46e5; }
+    .category-stories { background: #e0e7ff; color: #4f46e5; }
+    .category-career { background: #e0e7ff; color: #4f46e5; }
+    .category-tutorial { background: #e0e7ff; color: #4f46e5; }
+    .category-theory { background: #e0e7ff; color: #4f46e5; }
+    .category-tools { background: #e0e7ff; color: #4f46e5; }
+    .category-cases { background: #e0e7ff; color: #4f46e5; }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation: слева «На главную», справа заголовок — не налезают на мобилке -->
+  <nav class="bg-white border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14 gap-3 min-w-0">
+        <a href="index.html" class="flex items-center flex-shrink-0 text-gray-600 hover:text-gray-900 transition-colors">
+          <i class="fas fa-arrow-left mr-2"></i>
+          <span class="font-medium whitespace-nowrap">На главную</span>
+        </a>
+        <span class="font-semibold text-gray-900 truncate text-right">Библиотека</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-gray-900">Статьи</h1>
+      <p class="text-gray-500 mt-1">Разборы, руководства и истории из мира IT</p>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      
+      <!-- Article: URL Journey -->
+      <a href="articles/url-journey.html" class="article-card block">
+        <div class="p-5">
+          <span class="category-badge category-deep-dive">Глубокий разбор</span>
+          <h3 class="text-base font-semibold text-gray-900 mt-3 mb-2 leading-snug">
+            Что происходит, когда вы вводите URL в браузер?
+          </h3>
+          <p class="text-gray-500 text-sm mb-3 line-clamp-2">
+            DNS, TCP, TLS, HTTP, рендеринг — полный путь запроса от Enter до страницы.
+          </p>
+          <div class="flex items-center text-xs text-gray-400">
+            <i class="far fa-clock mr-1"></i> 25 мин
+          </div>
+        </div>
+      </a>
+
+      <!-- Article: Billion Dollar Bugs -->
+      <a href="articles/billion-dollar-bugs.html" class="article-card block">
+        <div class="p-5">
+          <span class="category-badge category-stories">IT-истории</span>
+          <h3 class="text-base font-semibold text-gray-900 mt-3 mb-2 leading-snug">
+            5 багов, которые стоили миллионы долларов
+          </h3>
+          <p class="text-gray-500 text-sm mb-3 line-clamp-2">
+            Knight Capital, Cloudflare, AWS — истории катастрофических ошибок.
+          </p>
+          <div class="flex items-center text-xs text-gray-400">
+            <i class="far fa-clock mr-1"></i> 25 мин
+          </div>
+        </div>
+      </a>
+
+      <!-- Article: Reading Code -->
+      <a href="articles/reading-code.html" class="article-card block">
+        <div class="p-5">
+          <span class="category-badge category-career">Карьера</span>
+          <h3 class="text-base font-semibold text-gray-900 mt-3 mb-2 leading-snug">
+            Как читать чужой код: методология для джуниоров
+          </h3>
+          <p class="text-gray-500 text-sm mb-3 line-clamp-2">
+            Практические техники для понимания незнакомых кодовых баз.
+          </p>
+          <div class="flex items-center text-xs text-gray-400">
+            <i class="far fa-clock mr-1"></i> 20 мин
+          </div>
+        </div>
+      </a>
+
+      <!-- Article: Docker -->
+      <a href="articles/docker-basics.html" class="article-card block">
+        <div class="p-5">
+          <span class="category-badge category-tools">Инструменты</span>
+          <h3 class="text-base font-semibold text-gray-900 mt-3 mb-2 leading-snug">
+            Docker для начинающих: основы контейнеризации
+          </h3>
+          <p class="text-gray-500 text-sm mb-3 line-clamp-2">
+            Простое объяснение Docker, контейнеров и как начать использовать.
+          </p>
+          <div class="flex items-center text-xs text-gray-400">
+            <i class="far fa-clock mr-1"></i> 30 мин
+          </div>
+        </div>
+      </a>
+
+      <!-- Article: AI -->
+      <a href="articles/ai-for-beginners.html" class="article-card block">
+        <div class="p-5">
+          <span class="category-badge category-theory">Теория</span>
+          <h3 class="text-base font-semibold text-gray-900 mt-3 mb-2 leading-snug">
+            Искусственный интеллект для начинающих
+          </h3>
+          <p class="text-gray-500 text-sm mb-3 line-clamp-2">
+            Что такое ИИ, как он работает и где применяется.
+          </p>
+          <div class="flex items-center text-xs text-gray-400">
+            <i class="far fa-clock mr-1"></i> 15 мин
+          </div>
+        </div>
+      </a>
+
+      <!-- Article: First Python -->
+      <a href="articles/first-python-program.html" class="article-card block">
+        <div class="p-5">
+          <span class="category-badge category-tutorial">Практика</span>
+          <h3 class="text-base font-semibold text-gray-900 mt-3 mb-2 leading-snug">
+            Первая программа на Python
+          </h3>
+          <p class="text-gray-500 text-sm mb-3 line-clamp-2">
+            От установки до работы с библиотекой requests.
+          </p>
+          <div class="flex items-center text-xs text-gray-400">
+            <i class="far fa-clock mr-1"></i> 15 мин
+          </div>
+        </div>
+      </a>
+
+      <!-- Article: Tkinter -->
+      <a href="articles/tkinter-notes-app.html" class="article-card block">
+        <div class="p-5">
+          <span class="category-badge category-cases">Кейсы</span>
+          <h3 class="text-base font-semibold text-gray-900 mt-3 mb-2 leading-snug">
+            Приложение заметок на tkinter
+          </h3>
+          <p class="text-gray-500 text-sm mb-3 line-clamp-2">
+            Создаём GUI-приложение с современным дизайном.
+          </p>
+          <div class="flex items-center text-xs text-gray-400">
+            <i class="far fa-clock mr-1"></i> 20 мин
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-200 mt-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex items-center justify-between">
+        <p class="text-gray-400 text-sm">
+          © 2026 SKL Academy
+        </p>
+        <a href="index.html" class="text-gray-500 hover:text-gray-700 text-sm">
+          На главную
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

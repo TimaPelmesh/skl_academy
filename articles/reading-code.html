@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как читать чужой код: методология для джуниоров | SKL Academy</title>
+  
+  <meta name="description" content="Практические техники для понимания незнакомых кодовых баз. Как не утонуть в чужом проекте и быстро разобраться в коде.">
+  <meta name="keywords" content="как читать код, code review, понимание кода, навыки программиста, junior developer">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Как читать чужой код: методология для джуниоров">
+  <meta property="og:description" content="Практические техники для понимания незнакомых кодовых баз.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://skl-academy.ru/articles/reading-code.html">
+  
+  <link rel="canonical" href="https://skl-academy.ru/articles/reading-code.html">
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    .tip-card {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-left: 4px solid #3b82f6;
+    }
+    .method-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #f1f5f9;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #475569;
+    }
+    .quote-box {
+      background: linear-gradient(135deg, #fdf4ff, #fae8ff);
+      border-left: 4px solid #a855f7;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="../index.html" class="flex items-center">
+            <img class="h-8 w-auto" src="../images/icon.ico" alt="SKL Academy">
+            <span class="ml-2 text-lg font-semibold text-gray-900">SKL Academy</span>
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../library.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">
+            <i class="fas fa-book mr-1"></i> Библиотека
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">Карьера</span>
+        <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 20 мин чтения</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        Как читать чужой код: методология для джуниоров
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        Все учат писать код. Никто не учит его читать. А ведь программисты тратят 70% времени на чтение кода и только 30% на написание. Давайте исправим это.
+      </p>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <!-- Introduction -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Почему читать код так сложно?</h2>
+        
+        <p class="text-gray-700 mb-4">
+          Первый день на новой работе. Вам дают доступ к репозиторию с 500 файлами, 100 000 строк кода, написанными 15 разными людьми за 5 лет. "Разберись в коде и исправь этот баг", — говорит тимлид.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Знакомо? Это один из самых стрессовых моментов для джуниора. Код кажется хаосом. Непонятно, с чего начать. Каждый файл тянет за собой десять других. Переменные названы непонятно. Комментариев нет. Документация устарела.
+        </p>
+        
+        <div class="quote-box rounded-lg p-6 mb-6">
+          <p class="text-purple-900 italic mb-2">
+            "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+          </p>
+          <p class="text-purple-700 font-medium mb-0">— Martin Fowler</p>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Проблема в том, что <strong>чтение кода — это отдельный навык</strong>, который нужно развивать. Он отличается от написания кода так же, как чтение книги отличается от её написания.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Почему нас этому не учат?</h3>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-6">
+          <li><strong>В университете</strong> вы пишете код с нуля. Маленькие проекты, один автор.</li>
+          <li><strong>На курсах</strong> вам дают чистые примеры. Идеальный код, который никогда не бывает в реальности.</li>
+          <li><strong>В туториалах</strong> показывают процесс создания, а не понимания.</li>
+        </ul>
+        
+        <p class="text-gray-700 mb-4">
+          А в реальной работе вы 80% времени читаете код, написанный другими. Код, который менялся годами. Код с легаси, костылями и "временными" решениями, которые живут пятый год.
+        </p>
+      </section>
+
+      <!-- Main insight -->
+      <section class="mb-12">
+        <div class="tip-card rounded-lg p-6">
+          <h3 class="font-bold text-blue-900 mb-2">Главный инсайт</h3>
+          <p class="text-blue-800 mb-0">
+            Чтение кода — это не пассивное "просматривание". Это активный процесс построения <strong>ментальной модели</strong>: "Как эта система работает? Почему она устроена именно так? Какие решения принимали авторы?"
+          </p>
+        </div>
+      </section>
+
+      <!-- Method 1 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">1</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Начните с README и документации</h2>
+            <p class="text-gray-500 mt-1">5-10 минут, которые сэкономят часы</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Прежде чем открывать код, найдите всю доступную документацию. Да, она может быть устаревшей. Да, она может быть неполной. Но даже плохая документация даёт контекст.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что искать?</h3>
+        
+        <div class="bg-white border border-gray-200 rounded-lg divide-y divide-gray-200 mb-6">
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fab fa-readme text-xl text-gray-600"></i>
+              <strong class="text-gray-900">README.md</strong>
+            </div>
+            <p class="text-gray-600 text-sm">Общее описание проекта. Что это? Зачем? Как запустить? Обычно в корне репозитория.</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fas fa-sitemap text-xl text-gray-600"></i>
+              <strong class="text-gray-900">ARCHITECTURE.md или docs/</strong>
+            </div>
+            <p class="text-gray-600 text-sm">Структура системы, диаграммы, описание компонентов. Бывает редко, но если есть — золото!</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fas fa-code-branch text-xl text-gray-600"></i>
+              <strong class="text-gray-900">CONTRIBUTING.md</strong>
+            </div>
+            <p class="text-gray-600 text-sm">Как устроен процесс разработки? Какие соглашения? Какие инструменты?</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fas fa-box text-xl text-gray-600"></i>
+              <strong class="text-gray-900">package.json / requirements.txt / Gemfile</strong>
+            </div>
+            <p class="text-gray-600 text-sm">Зависимости расскажут о технологиях, фреймворках, библиотеках.</p>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <i class="fas fa-cog text-xl text-gray-600"></i>
+              <strong class="text-gray-900">Конфиги: .eslintrc, tsconfig.json, docker-compose.yml</strong>
+            </div>
+            <p class="text-gray-600 text-sm">Какие правила и стандарты приняты? Как запускается проект?</p>
+          </div>
+        </div>
+        
+        <div class="tip-card rounded-lg p-4 mb-4">
+          <p class="text-blue-800 mb-0">
+            <strong>Совет:</strong> Даже если документация устарела, она показывает <em>намерения</em> авторов. Какую проблему они решали? Какие термины используют? Это ценный контекст.
+          </p>
+        </div>
+      </section>
+
+      <!-- Method 2 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">2</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Найдите точку входа</h2>
+            <p class="text-gray-500 mt-1">Откуда всё начинается?</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Каждая программа имеет "точку входа" — место, откуда начинается выполнение. Это как главный вход в здание. Найдите его, и вы поймёте, как устроены "коридоры".
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Типичные точки входа</h3>
+        
+        <div class="bg-white border border-gray-200 rounded-lg divide-y divide-gray-200 mb-6">
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <span class="font-medium text-gray-900">Python</span>
+              <p class="text-gray-500 text-sm mt-1">Скрипт или модуль</p>
+            </div>
+            <code class="bg-gray-100 px-3 py-1 rounded text-sm">if __name__ == "__main__":</code>
+          </div>
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <span class="font-medium text-gray-900">Node.js</span>
+              <p class="text-gray-500 text-sm mt-1">Смотрите package.json → "main"</p>
+            </div>
+            <code class="bg-gray-100 px-3 py-1 rounded text-sm">index.js, app.js, server.js</code>
+          </div>
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <span class="font-medium text-gray-900">React</span>
+              <p class="text-gray-500 text-sm mt-1">Компонент верхнего уровня</p>
+            </div>
+            <code class="bg-gray-100 px-3 py-1 rounded text-sm">src/index.jsx → App.jsx</code>
+          </div>
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <span class="font-medium text-gray-900">Express/Fastify</span>
+              <p class="text-gray-500 text-sm mt-1">Где app.listen()?</p>
+            </div>
+            <code class="bg-gray-100 px-3 py-1 rounded text-sm">app.listen(3000)</code>
+          </div>
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <span class="font-medium text-gray-900">Django</span>
+              <p class="text-gray-500 text-sm mt-1">URL → View → Model</p>
+            </div>
+            <code class="bg-gray-100 px-3 py-1 rounded text-sm">urls.py → views.py</code>
+          </div>
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <span class="font-medium text-gray-900">Spring Boot</span>
+              <p class="text-gray-500 text-sm mt-1">Аннотация на классе</p>
+            </div>
+            <code class="bg-gray-100 px-3 py-1 rounded text-sm">@SpringBootApplication</code>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          От точки входа двигайтесь "вглубь" по вызовам функций. Используйте <strong>"Go to Definition"</strong> в IDE, чтобы прыгать между файлами.
+        </p>
+      </section>
+
+      <!-- Method 3 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">3</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Используйте метод "сверху вниз"</h2>
+            <p class="text-gray-500 mt-1">Top-Down Reading — от общего к частному</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Не пытайтесь понять каждую строку сразу. Это как пытаться прочитать книгу, анализируя каждое слово. Сначала поймите общую картину, потом углубляйтесь.
+        </p>
+        
+        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 mb-6">
+          <h4 class="font-bold text-gray-900 mb-4">Уровни понимания</h4>
+          <ol class="space-y-4">
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4">1</span>
+              <div>
+                <strong class="text-gray-900">Структура папок</strong>
+                <p class="text-gray-600 text-sm mt-1">Какие есть модули? src/, lib/, utils/, components/, services/? Это карта территории.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4">2</span>
+              <div>
+                <strong class="text-gray-900">Файлы в папках</strong>
+                <p class="text-gray-600 text-sm mt-1">Что делает каждый модуль? Как они связаны? Какие паттерны используются?</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4">3</span>
+              <div>
+                <strong class="text-gray-900">Классы и функции в файлах</strong>
+                <p class="text-gray-600 text-sm mt-1">Какие основные абстракции? Публичные vs приватные методы?</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4">4</span>
+              <div>
+                <strong class="text-gray-900">Логика внутри функций</strong>
+                <p class="text-gray-600 text-sm mt-1">Как работает конкретный алгоритм? Какие edge cases обрабатываются?</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Типичные структуры проектов</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Frontend (React)</h4>
+            <pre class="text-sm text-gray-600 bg-gray-50 p-3 rounded">
+src/
+├── components/   # UI-компоненты
+├── pages/        # Страницы/роуты
+├── hooks/        # Кастомные хуки
+├── services/     # API-вызовы
+├── store/        # Состояние (Redux/Zustand)
+└── utils/        # Утилиты</pre>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Backend (Node.js)</h4>
+            <pre class="text-sm text-gray-600 bg-gray-50 p-3 rounded">
+src/
+├── routes/       # HTTP endpoints
+├── controllers/  # Бизнес-логика
+├── services/     # Переиспользуемая логика
+├── models/       # Схемы данных
+├── middleware/   # Обработчики запросов
+└── utils/        # Утилиты</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Method 4 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">4</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Запустите код и поиграйте с ним</h2>
+            <p class="text-gray-500 mt-1">Learning by doing — динамическое понимание</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Статическое чтение даёт только половину картины. Код оживает, когда он выполняется. Запустите проект и начните экспериментировать.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Техники динамического исследования</h3>
+        
+        <div class="space-y-4 mb-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-print text-indigo-600 mr-2"></i>Console.log / print</h4>
+            <p class="text-gray-600 text-sm mb-2">Самый простой способ понять, что происходит. Добавьте логи в интересующие места.</p>
+            <div class="bg-gray-900 text-indigo-400 p-3 rounded font-mono text-xs">
+              <pre>console.log('Function called with:', { userId, action });
+console.log('Database result:', result);
+console.log('Time taken:', Date.now() - start, 'ms');</pre>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-bug text-indigo-600 mr-2"></i>Debugger с Breakpoints</h4>
+            <p class="text-gray-600 text-sm mb-2">Остановите выполнение и посмотрите значения переменных в реальном времени.</p>
+            <ul class="text-gray-600 text-sm list-disc pl-5">
+              <li>VS Code: кликните слева от номера строки</li>
+              <li>Chrome DevTools: Ctrl+Shift+I → Sources</li>
+              <li>Используйте step over (F10) и step into (F11)</li>
+            </ul>
+          </div>
+          
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-hammer text-indigo-600 mr-2"></i>Сломайте что-нибудь</h4>
+            <p class="text-gray-600 text-sm mb-2">Серьёзно! Закомментируйте функцию. Измените return. Посмотрите, что перестанет работать.</p>
+            <div class="bg-gray-900 text-gray-100 p-3 rounded font-mono text-xs">
+              <pre>// Что будет, если это закомментировать?
+// await validateUser(user);
+
+// Что будет, если вернуть пустой массив?
+return []; // users</pre>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-vial text-purple-600 mr-2"></i>Запустите тесты</h4>
+            <p class="text-gray-600 text-sm">Тесты — это документация, которая точно работает. Они показывают ожидаемое поведение и edge cases.</p>
+          </div>
+        </div>
+        
+        <div class="tip-card rounded-lg p-4">
+          <p class="text-blue-800 mb-0">
+            <strong>Совет:</strong> Создайте отдельную ветку для экспериментов: <code class="bg-white/50 px-2 py-1 rounded">git checkout -b exploration</code>. Ломайте, меняйте, экспериментируйте без страха.
+          </p>
+        </div>
+      </section>
+
+      <!-- Method 5 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">5</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Используйте инструменты IDE</h2>
+            <p class="text-gray-500 mt-1">Навигация по коду на стероидах</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Современные IDE делают чтение кода намного проще. Изучите горячие клавиши — это инвестиция, которая окупится тысячекратно.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Ключевые функции VS Code</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Go to Definition</h4>
+            <p class="text-gray-600 text-sm mb-2"><kbd class="bg-gray-100 px-2 py-1 rounded text-xs">F12</kbd> или <kbd class="bg-gray-100 px-2 py-1 rounded text-xs">Ctrl/Cmd + Click</kbd></p>
+            <p class="text-gray-600 text-sm">Переход к определению функции, класса, переменной. Самая важная команда!</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Find All References</h4>
+            <p class="text-gray-600 text-sm mb-2"><kbd class="bg-gray-100 px-2 py-1 rounded text-xs">Shift + F12</kbd></p>
+            <p class="text-gray-600 text-sm">Где используется эта функция? Кто её вызывает? Кто зависит от неё?</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Peek Definition</h4>
+            <p class="text-gray-600 text-sm mb-2"><kbd class="bg-gray-100 px-2 py-1 rounded text-xs">Alt + F12</kbd></p>
+            <p class="text-gray-600 text-sm">Посмотреть определение не переходя в другой файл — открывается маленькое окошко.</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Outline / Structure</h4>
+            <p class="text-gray-600 text-sm mb-2"><kbd class="bg-gray-100 px-2 py-1 rounded text-xs">Ctrl/Cmd + Shift + O</kbd></p>
+            <p class="text-gray-600 text-sm">Список всех функций и классов в текущем файле. Быстрый обзор структуры.</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Search Everywhere</h4>
+            <p class="text-gray-600 text-sm mb-2"><kbd class="bg-gray-100 px-2 py-1 rounded text-xs">Ctrl/Cmd + Shift + F</kbd></p>
+            <p class="text-gray-600 text-sm">Поиск по всему проекту. Ищите по названиям функций, сообщениям об ошибках, комментариям.</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2">Go Back / Forward</h4>
+            <p class="text-gray-600 text-sm mb-2"><kbd class="bg-gray-100 px-2 py-1 rounded text-xs">Alt + ← / →</kbd></p>
+            <p class="text-gray-600 text-sm">Вернуться туда, откуда перешли. Как кнопки "назад/вперёд" в браузере.</p>
+          </div>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Полезные расширения</h3>
+        
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="tool-badge"><i class="fas fa-sitemap"></i> GitLens — история изменений</span>
+          <span class="tool-badge"><i class="fas fa-palette"></i> Bracket Pair Colorizer</span>
+          <span class="tool-badge"><i class="fas fa-project-diagram"></i> Import Cost — размер импортов</span>
+          <span class="tool-badge"><i class="fas fa-code"></i> Code Spell Checker</span>
+        </div>
+      </section>
+
+      <!-- Method 6 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">6</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Читайте Git историю</h2>
+            <p class="text-gray-500 mt-1">Код — это история изменений</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Git хранит не только текущее состояние кода, но и всю историю его эволюции. Это машина времени, которая показывает, <em>почему</em> код стал таким.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Полезные команды</h3>
+        
+        <div class="bg-gray-900 text-indigo-400 p-6 rounded-lg font-mono text-sm mb-6 overflow-x-auto">
+          <pre class="text-gray-400"># Кто и когда менял этот файл?</pre>
+          <pre>git log --oneline --follow filename.js</pre>
+          
+          <pre class="text-gray-400 mt-4"># Кто написал каждую строку? (blame = "обвинить")</pre>
+          <pre>git blame filename.js</pre>
+          
+          <pre class="text-gray-400 mt-4"># Что изменилось в конкретном коммите?</pre>
+          <pre>git show abc123</pre>
+          
+          <pre class="text-gray-400 mt-4"># Поиск по сообщениям коммитов</pre>
+          <pre>git log --grep="fix bug" --oneline</pre>
+          
+          <pre class="text-gray-400 mt-4"># Когда была добавлена эта строка?</pre>
+          <pre>git log -S "someFunction" --oneline</pre>
+          
+          <pre class="text-gray-400 mt-4"># История изменений функции</pre>
+          <pre>git log -L :functionName:filename.js</pre>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что искать в истории?</h3>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li><strong>Почему добавлен этот код?</strong> — сообщение коммита часто объясняет</li>
+          <li><strong>Связанные изменения</strong> — что ещё менялось вместе с этим файлом?</li>
+          <li><strong>Кто автор?</strong> — можно спросить напрямую</li>
+          <li><strong>Linked issues</strong> — коммиты часто ссылаются на тикеты (JIRA-123, #456)</li>
+        </ul>
+        
+        <div class="tip-card rounded-lg p-4">
+          <p class="text-blue-800 mb-0">
+            <strong>GitLens в VS Code</strong> показывает историю прямо в редакторе. Наведите на строку — увидите, кто и когда её написал.
+          </p>
+        </div>
+      </section>
+
+      <!-- Method 7 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">7</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Рисуйте диаграммы</h2>
+            <p class="text-gray-500 mt-1">Визуализация помогает понять</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Наш мозг лучше понимает картинки, чем текст. Когда система сложная, нарисуйте её. Не обязательно красиво — главное понятно для вас.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что рисовать?</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-cubes text-indigo-600 mr-2"></i>Диаграмма компонентов</h4>
+            <p class="text-gray-600 text-sm">Какие модули существуют? Как они связаны? Кто от кого зависит?</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-exchange-alt text-indigo-600 mr-2"></i>Sequence diagram</h4>
+            <p class="text-gray-600 text-sm">Как данные проходят через систему? Что вызывает что?</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-database text-blue-600 mr-2"></i>ER-диаграмма</h4>
+            <p class="text-gray-600 text-sm">Какие сущности в базе данных? Как они связаны?</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <h4 class="font-bold text-gray-900 mb-2"><i class="fas fa-project-diagram text-purple-600 mr-2"></i>Flowchart</h4>
+            <p class="text-gray-600 text-sm">Какие решения принимаются? Какие ветвления?</p>
+          </div>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Инструменты</h3>
+        
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="tool-badge"><i class="fas fa-pencil-alt"></i> Excalidraw — рисование от руки</span>
+          <span class="tool-badge"><i class="fas fa-code"></i> Mermaid — диаграммы из кода</span>
+          <span class="tool-badge"><i class="fas fa-sitemap"></i> draw.io — полноценный редактор</span>
+          <span class="tool-badge"><i class="fas fa-pen"></i> Бумага + ручка</span>
+        </div>
+        
+        <div class="bg-gray-900 text-indigo-400 p-4 rounded-lg font-mono text-sm mb-4">
+          <pre class="text-gray-400"># Mermaid пример (можно вставить в README)</pre>
+          <pre>```mermaid
+graph LR
+    A[User] --> B[API Gateway]
+    B --> C[Auth Service]
+    B --> D[Product Service]
+    D --> E[(Database)]
+```</pre>
+        </div>
+      </section>
+
+      <!-- Method 8 -->
+      <section class="mb-12">
+        <div class="flex items-start gap-4 mb-6">
+          <span class="method-number">8</span>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 m-0">Спрашивайте правильно</h2>
+            <p class="text-gray-500 mt-1">Люди — лучшая документация</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Не бойтесь задавать вопросы коллегам. Но делайте это правильно — покажите, что вы уже потратили время на самостоятельное изучение.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Плохие vs хорошие вопросы</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <h4 class="font-bold text-indigo-900 mb-2"><i class="fas fa-times-circle mr-2"></i>Плохо</h4>
+            <p class="text-indigo-800 text-sm italic">"Я не понимаю этот код, можешь объяснить?"</p>
+            <p class="text-indigo-700 text-xs mt-2">Слишком общий вопрос. Непонятно, что именно непонятно.</p>
+          </div>
+          <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <h4 class="font-bold text-indigo-900 mb-2"><i class="fas fa-check-circle mr-2"></i>Хорошо</h4>
+            <p class="text-indigo-800 text-sm italic">"Я разобрался, что функция X вызывает сервис Y. Но я не понимаю, почему мы используем кэш здесь, а не там. Это для производительности?"</p>
+            <p class="text-indigo-700 text-xs mt-2">Показывает проделанную работу и конкретный вопрос.</p>
+          </div>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Формула хорошего вопроса</h3>
+        
+        <ol class="list-decimal pl-6 text-gray-700 mb-4">
+          <li class="mb-2"><strong>Контекст</strong> — что вы делаете и зачем</li>
+          <li class="mb-2"><strong>Что вы уже попробовали</strong> — покажите свою работу</li>
+          <li class="mb-2"><strong>Что именно непонятно</strong> — конкретный вопрос</li>
+          <li class="mb-2"><strong>Ваша гипотеза</strong> — что вы думаете?</li>
+        </ol>
+        
+        <div class="bg-white border border-gray-200 rounded-lg p-4">
+          <h4 class="font-bold text-gray-900 mb-2">Пример хорошего сообщения в Slack:</h4>
+          <div class="text-gray-600 text-sm bg-gray-50 p-3 rounded">
+            <p class="mb-2">Привет! Работаю над TASK-123 (добавление фильтра по дате).</p>
+            <p class="mb-2">Я нашёл, что фильтрация происходит в <code>ProductService.filter()</code>. Вижу, что там используется паттерн Builder для параметров.</p>
+            <p class="mb-2">Вопрос: почему мы не используем существующий <code>DateRangeFilter</code> из utils, а создаём кастомную логику? Это из-за особенностей нашего API или есть другая причина?</p>
+            <p>Моя гипотеза — DateRangeFilter не поддерживает timezone, которая нам нужна.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Checklist -->
+      <section class="bg-gray-900 text-white rounded-2xl p-8 mb-12">
+        <h2 class="text-2xl font-bold mb-6">Чек-лист для изучения нового проекта</h2>
+        <p class="text-gray-400 mb-6">Используйте этот список при подключении к новому проекту или команде:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-bold text-indigo-400 mb-3">День 1-2: Обзор</h4>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Прочитал README и документацию</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Изучил структуру папок</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Нашёл точку входа</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Посмотрел зависимости</span>
+              </label>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-bold text-indigo-400 mb-3">День 3-4: Запуск</h4>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Запустил проект локально</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Запустил тесты</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Попробовал основные функции</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Добавил console.log в интересные места</span>
+              </label>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-bold text-indigo-400 mb-3">Неделя 1: Глубже</h4>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Изучил git историю</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Нарисовал диаграмму компонентов</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Записал возникшие вопросы</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Обсудил архитектуру с командой</span>
+              </label>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-bold text-purple-400 mb-3">Неделя 2+: Практика</h4>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Исправил первый баг</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Сделал первый PR</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Прошёл code review</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded">
+                <span>Обновил документацию</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Заключение</h2>
+        
+        <p class="text-gray-700 mb-4">
+          Чтение кода — это навык, который развивается со временем. Первый проект кажется непроходимыми джунглями. Десятый — знакомым лесом с понятными тропинками. Сотый — вы видите паттерны и понимаете, где что искать, ещё до того, как открыли файл.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Не расстраивайтесь, если сначала тяжело. Это нормально. Каждый опытный разработчик прошёл через это. Используйте методы из этой статьи, практикуйтесь на open-source проектах, и постепенно вы станете тем человеком, к которому приходят с вопросами о коде.
+        </p>
+        
+        <div class="quote-box rounded-lg p-6">
+          <p class="text-purple-900 italic mb-2">
+            "The only way to learn a new programming language is by writing programs in it. The only way to understand existing programs is by reading them."
+          </p>
+          <p class="text-purple-700 font-medium mb-0">— Dennis Ritchie</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Author -->
+    <footer class="border-t border-gray-200 pt-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-500 text-sm">Опубликовано: 30 января 2026</p>
+          <p class="text-gray-500 text-sm">Категория: Карьера</p>
+        </div>
+        <a href="../library.html" class="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-800">
+          <i class="fas fa-arrow-left mr-2"></i> Все статьи
+        </a>
+      </div>
+    </footer>
+  </article>
+</body>
+</html>

@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ООП в Python - изучите классы, объекты, наследование, полиморфизм и инкапсуляцию">
+    <meta name="keywords" content="python, ооп, классы, объекты, наследование, полиморфизм, инкапсуляция">
+    <title>ООП в Python</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+
+        .operators-cheatsheet {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #d2a8ff;
+        }
+
+        .light-theme .operators-cheatsheet {
+            background-color: #f1f1f1;
+            border-left: 4px solid #8a63d2;
+        }
+
+        .operators-cheatsheet h4 {
+            color: #d2a8ff;
+            margin-top: 0;
+        }
+
+        .light-theme .operators-cheatsheet h4 {
+            color: #8a63d2;
+        }
+
+        .operators-cheatsheet table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .operators-cheatsheet th,
+        .operators-cheatsheet td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #444c56;
+        }
+
+        .light-theme .operators-cheatsheet th,
+        .light-theme .operators-cheatsheet td {
+            border: 1px solid #d0d7de;
+        }
+
+        .operators-cheatsheet th {
+            background-color: #373e47;
+        }
+
+        .light-theme .operators-cheatsheet th {
+            background-color: #e6e6e6;
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn active">5. ООП в Python</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#classes-objects" class="subtopic active">5.1 Классы и объекты</a>
+                        <a href="#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <!-- Остальные модули -->
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Введение в модуль -->
+            <section class="module-intro">
+                <h2>Модуль 5: ООП в Python</h2>
+                <p>Объектно-ориентированное программирование (ООП) — это парадигма программирования, которая использует объекты и классы для организации кода. Python — полноценный объектно-ориентированный язык, который предоставляет все необходимые инструменты для разработки в этом стиле.</p>
+                
+                <p>В этом модуле вы изучите:</p>
+                <ul>
+                    <li>Классы и объекты — основные строительные блоки ООП</li>
+                    <li>Наследование — механизм повторного использования кода</li>
+                    <li>Полиморфизм — возможность использовать объекты разных классов через общий интерфейс</li>
+                    <li>Инкапсуляцию — скрытие внутренних деталей реализации</li>
+                </ul>
+                
+                <p>Понимание принципов ООП позволит вам создавать более структурированные, поддерживаемые и масштабируемые программы. Вы научитесь моделировать реальные сущности в виде классов и объектов, что сделает ваш код более понятным и близким к предметной области.</p>
+            </section>
+            
+            <!-- 5.1 Классы и объекты -->
+            <section id="classes-objects" class="topic-section">
+                <h2>5.1 Классы и объекты</h2>
+                <p>Классы и объекты — фундаментальные концепции объектно-ориентированного программирования. Класс — это шаблон или чертеж, который определяет свойства (атрибуты) и поведение (методы) объектов. Объект — это конкретный экземпляр класса.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые понятия:</h4>
+                    <ul>
+                        <li><strong>Класс</strong> — шаблон для создания объектов</li>
+                        <li><strong>Объект</strong> — экземпляр класса</li>
+                        <li><strong>Атрибуты</strong> — переменные, хранящие данные объекта</li>
+                        <li><strong>Методы</strong> — функции, определяющие поведение объекта</li>
+                        <li><strong>Конструктор</strong> — специальный метод для инициализации объекта</li>
+                    </ul>
+                </div>
+                
+                <h3>Создание класса</h3>
+                <p>В Python класс определяется с помощью ключевого слова <code>class</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Автомобиль:
+    """Класс для представления автомобиля."""
+    
+    # Атрибуты класса (общие для всех экземпляров)
+    количество_колес = 4
+    
+    # Конструктор
+    def __init__(self, марка, модель, год, цвет):
+        # Атрибуты экземпляра (уникальные для каждого объекта)
+        self.марка = марка
+        self.модель = модель
+        self.год = год
+        self.цвет = цвет
+        self.пробег = 0  # Начальное значение
+    
+    # Методы
+    def информация(self):
+        """Возвращает информацию об автомобиле."""
+        return f"{self.марка} {self.модель}, {self.год}, {self.цвет}, пробег: {self.пробег} км"
+    
+    def ехать(self, расстояние):
+        """Увеличивает пробег на указанное расстояние."""
+        self.пробег += расстояние
+        return f"Проехали {расстояние} км. Текущий пробег: {self.пробег} км"</code></pre>
+                </div>
+                
+                <h3>Создание объектов (экземпляров класса)</h3>
+                <p>После определения класса можно создавать его экземпляры:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Создаем объекты класса Автомобиль
+моя_машина = Автомобиль("Toyota", "Corolla", 2020, "белый")
+другая_машина = Автомобиль("Honda", "Civic", 2019, "синий")
+
+# Получаем доступ к атрибутам
+print(моя_машина.марка)  # Toyota
+print(другая_машина.цвет)  # синий
+
+# Вызываем методы
+print(моя_машина.информация())  # Toyota Corolla, 2020, белый, пробег: 0 км
+print(моя_машина.ехать(100))  # Проехали 100 км. Текущий пробег: 100 км
+print(моя_машина.ехать(50))  # Проехали 50 км. Текущий пробег: 150 км
+
+# Доступ к атрибутам класса
+print(Автомобиль.количество_колес)  # 4
+print(моя_машина.количество_колес)  # 4 (доступ через экземпляр)</code></pre>
+                </div>
+                
+                <h3>Метод __init__ (конструктор)</h3>
+                <p>Метод <code>__init__</code> — это специальный метод, который автоматически вызывается при создании нового экземпляра класса. Он используется для инициализации атрибутов объекта.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Человек:
+    def __init__(self, имя, возраст):
+        self.имя = имя
+        self.возраст = возраст
+        print(f"Создан новый объект Человек: {имя}, {возраст} лет")
+
+# При создании объекта автоматически вызывается __init__
+человек1 = Человек("Иван", 30)  # Выведет: Создан новый объект Человек: Иван, 30 лет</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>О параметре self</h4>
+                    <p>Параметр <code>self</code> ссылается на текущий экземпляр класса и используется для доступа к его атрибутам и методам. Он всегда должен быть первым параметром в методах класса, но при вызове метода его указывать не нужно — Python автоматически передает объект как первый аргумент.</p>
+                </div>
+                
+                <h3>Атрибуты класса и экземпляра</h3>
+                <p>В Python существует два типа атрибутов:</p>
+                <ul>
+                    <li><strong>Атрибуты класса</strong> — общие для всех экземпляров</li>
+                    <li><strong>Атрибуты экземпляра</strong> — уникальные для каждого объекта</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Студент:
+    # Атрибут класса
+    учебное_заведение = "Университет"
+    
+    def __init__(self, имя, курс):
+        # Атрибуты экземпляра
+        self.имя = имя
+        self.курс = курс
+
+# Создаем студентов
+студент1 = Студент("Анна", 2)
+студент2 = Студент("Петр", 3)
+
+# Доступ к атрибутам экземпляра
+print(студент1.имя)  # Анна
+print(студент2.курс)  # 3
+
+# Доступ к атрибутам класса
+print(студент1.учебное_заведение)  # Университет
+print(студент2.учебное_заведение)  # Университет
+
+# Изменение атрибута класса
+Студент.учебное_заведение = "Академия"
+print(студент1.учебное_заведение)  # Академия
+print(студент2.учебное_заведение)  # Академия
+
+# Изменение атрибута экземпляра не влияет на другие экземпляры
+студент1.курс = 4
+print(студент1.курс)  # 4
+print(студент2.курс)  # 3 (не изменился)</code></pre>
+                </div>
+                
+                <h3>Методы экземпляра, класса и статические методы</h3>
+                <p>В Python существует три типа методов:</p>
+                
+                <h4>1. Методы экземпляра</h4>
+                <p>Это обычные методы, которые работают с конкретным экземпляром класса. Они принимают <code>self</code> в качестве первого параметра.</p>
+                
+                <h4>2. Методы класса</h4>
+                <p>Методы класса работают с классом, а не с его экземплярами. Они определяются с помощью декоратора <code>@classmethod</code> и принимают <code>cls</code> (ссылку на класс) в качестве первого параметра.</p>
+                
+                <h4>3. Статические методы</h4>
+                <p>Статические методы не работают ни с классом, ни с его экземплярами. Они определяются с помощью декоратора <code>@staticmethod</code> и не принимают специальных первых параметров.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Математика:
+    # Атрибут класса
+    описание = "Класс для математических операций"
+    
+    def __init__(self, значение):
+        # Атрибут экземпляра
+        self.значение = значение
+    
+    # Метод экземпляра
+    def удвоить(self):
+        return self.значение * 2
+    
+    # Метод класса
+    @classmethod
+    def изменить_описание(cls, новое_описание):
+        cls.описание = новое_описание
+        return cls.описание
+    
+    # Статический метод
+    @staticmethod
+    def сложить(a, b):
+        return a + b
+
+# Использование методов экземпляра
+мат = Математика(5)
+print(мат.удвоить())  # 10
+
+# Использование методов класса
+Математика.изменить_описание("Новое описание")
+print(Математика.описание)  # Новое описание
+print(мат.описание)  # Новое описание
+
+# Использование статических методов
+print(Математика.сложить(10, 20))  # 30
+print(мат.сложить(10, 20))  # 30 (можно вызвать и через экземпляр)</code></pre>
+                </div>
+                
+                <h3>Магические методы (dunder методы)</h3>
+                <p>Python предоставляет множество специальных методов, которые начинаются и заканчиваются двойным подчеркиванием (double underscore, или "dunder"). Эти методы позволяют определить, как объекты вашего класса будут взаимодействовать со встроенными функциями и операторами Python.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Точка:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    # Строковое представление для пользователя
+    def __str__(self):
+        return f"Точка({self.x}, {self.y})"
+    
+    # Строковое представление для отладки
+    def __repr__(self):
+        return f"Точка(x={self.x}, y={self.y})"
+    
+    # Сложение точек
+    def __add__(self, other):
+        return Точка(self.x + other.x, self.y + other.y)
+    
+    # Сравнение точек
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+    
+    # Длина вектора от начала координат
+    def __abs__(self):
+        return (self.x ** 2 + self.y ** 2) ** 0.5
+
+# Создаем точки
+точка1 = Точка(3, 4)
+точка2 = Точка(1, 2)
+
+# Используем магические методы
+print(точка1)  # Вызывает __str__: Точка(3, 4)
+print(repr(точка1))  # Вызывает __repr__: Точка(x=3, y=4)
+
+# Сложение точек
+точка3 = точка1 + точка2  # Вызывает __add__
+print(точка3)  # Точка(4, 6)
+
+# Сравнение точек
+print(точка1 == точка2)  # Вызывает __eq__: False
+print(точка1 == Точка(3, 4))  # True
+
+# Вычисление длины вектора
+print(abs(точка1))  # Вызывает __abs__: 5.0</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Часто используемые магические методы:</h4>
+                    <ul>
+                        <li><code>__init__(self, ...)</code> — конструктор</li>
+                        <li><code>__str__(self)</code> — строковое представление для пользователя (str())</li>
+                        <li><code>__repr__(self)</code> — строковое представление для отладки (repr())</li>
+                        <li><code>__len__(self)</code> — длина объекта (len())</li>
+                        <li><code>__getitem__(self, key)</code> — доступ по индексу/ключу (obj[key])</li>
+                        <li><code>__setitem__(self, key, value)</code> — установка значения по индексу/ключу (obj[key] = value)</li>
+                        <li><code>__add__(self, other)</code> — сложение (obj1 + obj2)</li>
+                        <li><code>__eq__(self, other)</code> — сравнение на равенство (obj1 == obj2)</li>
+                        <li><code>__lt__(self, other)</code> — сравнение "меньше" (obj1 < obj2)</li>
+                        <li><code>__call__(self, ...)</code> — вызов объекта как функции (obj())</li>
+                    </ul>
+                </div>
+                
+                <h3>Свойства (properties)</h3>
+                <p>Свойства позволяют определить методы, которые будут вызываться при доступе к атрибуту, его изменении или удалении. Это позволяет контролировать доступ к атрибутам и добавлять дополнительную логику.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Температура:
+    def __init__(self, цельсий=0):
+        self._цельсий = цельсий
+    
+    # Геттер - вызывается при доступе к свойству
+    @property
+    def цельсий(self):
+        return self._цельсий
+    
+    # Сеттер - вызывается при изменении свойства
+    @цельсий.setter
+    def цельсий(self, значение):
+        if значение < -273.15:
+            raise ValueError("Температура не может быть ниже абсолютного нуля!")
+        self._цельсий = значение
+    
+    # Другое свойство, вычисляемое на основе цельсия
+    @property
+    def фаренгейт(self):
+        return self._цельсий * 9/5 + 32
+    
+    @фаренгейт.setter
+    def фаренгейт(self, значение):
+        self.цельсий = (значение - 32) * 5/9
+
+# Использование свойств
+температура = Температура(25)
+print(температура.цельсий)  # 25
+print(температура.фаренгейт)  # 77.0
+
+# Изменение через сеттер
+температура.цельсий = 30
+print(температура.цельсий)  # 30
+print(температура.фаренгейт)  # 86.0
+
+температура.фаренгейт = 68
+print(температура.цельсий)  # 20.0
+
+# Проверка валидации
+try:
+    температура.цельсий = -300  # Вызовет ошибку
+except ValueError as e:
+    print(e)  # Температура не может быть ниже абсолютного нуля!</code></pre>
+                </div>
+                
+                <h3>Практический пример: Создание класса Банковский счет</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">class БанковскийСчет:
+    """Класс для представления банковского счета."""
+    
+    # Атрибут класса - процентная ставка для всех счетов
+    процентная_ставка = 0.05
+    
+    def __init__(self, владелец, начальный_баланс=0):
+        self.владелец = владелец
+        self._баланс = начальный_баланс  # Защищенный атрибут
+        self.история_операций = []
+        
+    @property
+    def баланс(self):
+        """Свойство для доступа к балансу счета."""
+        return self._баланс
+    
+    def внести(self, сумма):
+        """Вносит деньги на счет."""
+        if сумма <= 0:
+            raise ValueError("Сумма должна быть положительной")
+        
+        self._баланс += сумма
+        self.история_операций.append(f"Внесено: {сумма}")
+        return f"Внесено {сумма}. Новый баланс: {self._баланс}"
+    
+    def снять(self, сумма):
+        """Снимает деньги со счета."""
+        if сумма <= 0:
+            raise ValueError("Сумма должна быть положительной")
+        
+        if сумма > self._баланс:
+            raise ValueError("Недостаточно средств")
+        
+        self._баланс -= сумма
+        self.история_операций.append(f"Снято: {сумма}")
+        return f"Снято {сумма}. Новый баланс: {self._баланс}"
+    
+    def начислить_проценты(self):
+        """Начисляет проценты на баланс счета."""
+        проценты = self._баланс * self.процентная_ставка
+        self._баланс += проценты
+        self.история_операций.append(f"Начислены проценты: {проценты:.2f}")
+        return f"Начислены проценты: {проценты:.2f}. Новый баланс: {self._баланс:.2f}"
+    
+    def показать_историю(self):
+        """Возвращает историю операций по счету."""
+        return "\n".join(self.история_операций)
+    
+    def __str__(self):
+        return f"Счет владельца {self.владелец}, баланс: {self._баланс}"
+    
+    @classmethod
+    def изменить_ставку(cls, новая_ставка):
+        """Изменяет процентную ставку для всех счетов."""
+        if новая_ставка < 0:
+            raise ValueError("Ставка не может быть отрицательной")
+        cls.процентная_ставка = новая_ставка
+        return f"Новая процентная ставка: {новая_ставка}"
+
+# Использование класса БанковскийСчет
+счет_анны = БанковскийСчет("Анна Иванова", 1000)
+счет_петра = БанковскийСчет("Петр Сидоров")
+
+print(счет_анны)  # Счет владельца Анна Иванова, баланс: 1000
+
+# Операции со счетом
+print(счет_анны.внести(500))  # Внесено 500. Новый баланс: 1500
+print(счет_анны.снять(200))  # Снято 200. Новый баланс: 1300
+print(счет_анны.начислить_проценты())  # Начислены проценты: 65.00. Новый баланс: 1365.00
+
+# Изменение процентной ставки для всех счетов
+БанковскийСчет.изменить_ставку(0.06)
+print(БанковскийСчет.процентная_ставка)  # 0.06
+print(счет_анны.процентная_ставка)  # 0.06
+print(счет_петра.процентная_ставка)  # 0.06
+
+# История операций
+print("\nИстория операций:")
+print(счет_анны.показать_историю())</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по работе с классами и объектами</h4>
+                    <ul>
+                        <li>Следуйте соглашению: имена классов пишутся в CamelCase (каждое слово с большой буквы)</li>
+                        <li>Всегда добавляйте docstring к классам и методам</li>
+                        <li>Используйте атрибуты класса для данных, общих для всех экземпляров</li>
+                        <li>Используйте свойства (properties) для контроля доступа к атрибутам</li>
+                        <li>Создавайте классы с единственной ответственностью (принцип единственной ответственности)</li>
+                        <li>Помните, что в Python все атрибуты публичны по умолчанию</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 5.2 Наследование -->
+            <section id="inheritance" class="topic-section">
+                <h2>5.2 Наследование</h2>
+                <p>Наследование — один из ключевых принципов объектно-ориентированного программирования, который позволяет создавать новые классы на основе существующих. Дочерний класс (подкласс) наследует атрибуты и методы родительского класса (суперкласса), а также может добавлять новые или переопределять существующие.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые понятия:</h4>
+                    <ul>
+                        <li><strong>Родительский класс (суперкласс)</strong> — класс, от которого наследуются другие классы</li>
+                        <li><strong>Дочерний класс (подкласс)</strong> — класс, который наследуется от другого класса</li>
+                        <li><strong>Переопределение методов</strong> — изменение поведения унаследованных методов</li>
+                        <li><strong>Множественное наследование</strong> — наследование от нескольких классов одновременно</li>
+                        <li><strong>Иерархия классов</strong> — древовидная структура наследования</li>
+                    </ul>
+                </div>
+                
+                <h3>Базовое наследование</h3>
+                <p>Для создания класса, который наследуется от другого, укажите родительский класс в скобках после имени класса:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Животное:
+    """Базовый класс для всех животных."""
+    
+    def __init__(self, имя, возраст):
+        self.имя = имя
+        self.возраст = возраст
+    
+    def издать_звук(self):
+        return "Какой-то звук животного"
+    
+    def информация(self):
+        return f"{self.имя}, возраст: {self.возраст} лет"
+
+# Дочерний класс Собака наследуется от класса Животное
+class Собака(Животное):
+    """Класс для представления собаки."""
+    
+    def __init__(self, имя, возраст, порода):
+        # Вызываем конструктор родительского класса
+        super().__init__(имя, возраст)
+        # Добавляем новый атрибут
+        self.порода = порода
+    
+    # Переопределяем метод родительского класса
+    def издать_звук(self):
+        return "Гав!"
+    
+    # Добавляем новый метод
+    def вилять_хвостом(self):
+        return f"{self.имя} виляет хвостом"
+
+# Создаем экземпляры
+животное = Животное("Безымянное животное", 5)
+собака = Собака("Рекс", 3, "Овчарка")
+
+# Используем методы
+print(животное.информация())  # Безымянное животное, возраст: 5 лет
+print(животное.издать_звук())  # Какой-то звук животного
+
+print(собака.информация())  # Рекс, возраст: 3 лет (унаследовано от Животное)
+print(собака.издать_звук())  # Гав! (переопределено)
+print(собака.вилять_хвостом())  # Рекс виляет хвостом (новый метод)
+print(f"Порода: {собака.порода}")  # Порода: Овчарка (новый атрибут)</code></pre>
+                </div>
+                
+                <h3>Функция super()</h3>
+                <p>Функция <code>super()</code> используется для вызова методов родительского класса. Это особенно полезно при переопределении методов, когда вы хотите расширить функциональность родительского метода, а не полностью заменить его.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Сотрудник:
+    def __init__(self, имя, зарплата):
+        self.имя = имя
+        self.зарплата = зарплата
+    
+    def информация(self):
+        return f"Сотрудник: {self.имя}, зарплата: {self.зарплата} руб."
+    
+    def повысить_зарплату(self, сумма):
+        self.зарплата += сумма
+        return f"Зарплата повышена на {сумма} руб. Новая зарплата: {self.зарплата} руб."
+
+class Менеджер(Сотрудник):
+    def __init__(self, имя, зарплата, отдел):
+        # Вызываем конструктор родительского класса
+        super().__init__(имя, зарплата)
+        self.отдел = отдел
+    
+    # Расширяем метод информация, добавляя информацию об отделе
+    def информация(self):
+        # Получаем базовую информацию из родительского класса
+        базовая_информация = super().информация()
+        # Добавляем информацию об отделе
+        return f"{базовая_информация}, отдел: {self.отдел}"
+    
+    # Добавляем новый метод
+    def управлять_отделом(self):
+        return f"{self.имя} управляет отделом {self.отдел}"
+
+# Создаем экземпляры
+сотрудник = Сотрудник("Иван Петров", 50000)
+менеджер = Менеджер("Анна Сидорова", 80000, "Маркетинг")
+
+# Используем методы
+print(сотрудник.информация())  # Сотрудник: Иван Петров, зарплата: 50000 руб.
+print(менеджер.информация())  # Сотрудник: Анна Сидорова, зарплата: 80000 руб., отдел: Маркетинг
+
+# Вызываем унаследованный метод
+print(менеджер.повысить_зарплату(10000))  # Зарплата повышена на 10000 руб. Новая зарплата: 90000 руб.
+
+# Вызываем новый метод
+print(менеджер.управлять_отделом())  # Анна Сидорова управляет отделом Маркетинг</code></pre>
+                </div>
+                
+                <h3>Проверка наследования</h3>
+                <p>Python предоставляет несколько способов проверить отношения наследования между классами и объектами:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Проверяем, является ли объект экземпляром класса
+print(isinstance(собака, Собака))  # True
+print(isinstance(собака, Животное))  # True (т.к. Собака наследуется от Животное)
+print(isinstance(животное, Собака))  # False
+
+# Проверяем, является ли класс подклассом другого класса
+print(issubclass(Собака, Животное))  # True
+print(issubclass(Животное, Собака))  # False
+
+# Получаем список базовых классов
+print(Собака.__bases__)  # (<class '__main__.Животное'>,)</code></pre>
+                </div>
+                
+                <h3>Множественное наследование</h3>
+                <p>Python поддерживает множественное наследование, позволяя классу наследоваться от нескольких родительских классов. При этом дочерний класс получает атрибуты и методы всех родительских классов.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Работник:
+    def __init__(self, имя, зарплата):
+        self.имя = имя
+        self.зарплата = зарплата
+    
+    def работать(self):
+        return f"{self.имя} работает"
+
+class Студент:
+    def __init__(self, имя, университет):
+        self.имя = имя
+        self.университет = университет
+    
+    def учиться(self):
+        return f"{self.имя} учится в {self.университет}"
+
+# Множественное наследование
+class СтудентРаботник(Работник, Студент):
+    def __init__(self, имя, зарплата, университет):
+        # Явно вызываем конструкторы обоих родительских классов
+        Работник.__init__(self, имя, зарплата)
+        Студент.__init__(self, имя, университет)
+    
+    def информация(self):
+        return f"{self.имя} работает за {self.зарплата} руб. и учится в {self.университет}"
+
+# Создаем экземпляр
+студент_работник = СтудентРаботник("Алексей", 30000, "МГУ")
+
+# Используем методы из обоих родительских классов
+print(студент_работник.работать())  # Алексей работает
+print(студент_работник.учиться())  # Алексей учится в МГУ
+print(студент_работник.информация())  # Алексей работает за 30000 руб. и учится в МГУ</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>О порядке разрешения методов (MRO)</h4>
+                    <p>При множественном наследовании может возникнуть ситуация, когда метод с одинаковым именем определен в нескольких родительских классах. Python использует порядок разрешения методов (Method Resolution Order, MRO) для определения, какой метод будет вызван.</p>
+                    <p>MRO определяет порядок, в котором Python ищет методы в иерархии классов. Посмотреть MRO для класса можно с помощью атрибута <code>__mro__</code> или метода <code>mro()</code>:</p>
+                    <pre><code class="language-python">print(СтудентРаботник.__mro__)
+# (<class '__main__.СтудентРаботник'>, <class '__main__.Работник'>, <class '__main__.Студент'>, <class 'object'>)</code></pre>
+                    <p>В этом примере, если метод определен и в <code>Работник</code>, и в <code>Студент</code>, будет использован метод из класса <code>Работник</code>, так как он стоит первым в MRO.</p>
+                </div>
+                
+                <h3>Абстрактные классы</h3>
+                <p>Абстрактный класс — это класс, который не предназначен для создания экземпляров, а служит только в качестве базового класса для других классов. В Python для создания абстрактных классов используется модуль <code>abc</code> (Abstract Base Classes).</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">from abc import ABC, abstractmethod
+
+class ТранспортноеСредство(ABC):
+    def __init__(self, название):
+        self.название = название
+    
+    @abstractmethod
+    def двигаться(self):
+        """Этот метод должен быть реализован во всех подклассах."""
+        pass
+    
+    @abstractmethod
+    def остановиться(self):
+        """Этот метод должен быть реализован во всех подклассах."""
+        pass
+    
+    def информация(self):
+        return f"Транспортное средство: {self.название}"
+
+class Автомобиль(ТранспортноеСредство):
+    def __init__(self, название, марка):
+        super().__init__(название)
+        self.марка = марка
+    
+    # Реализация абстрактного метода
+    def двигаться(self):
+        return f"{self.название} едет по дороге"
+    
+    # Реализация абстрактного метода
+    def остановиться(self):
+        return f"{self.название} остановился"
+
+class Самолет(ТранспортноеСредство):
+    def __init__(self, название, авиакомпания):
+        super().__init__(название)
+        self.авиакомпания = авиакомпания
+    
+    # Реализация абстрактного метода
+    def двигаться(self):
+        return f"{self.название} летит по воздуху"
+    
+    # Реализация абстрактного метода
+    def остановиться(self):
+        return f"{self.название} приземлился"
+    
+    # Дополнительный метод
+    def взлететь(self):
+        return f"{self.название} взлетает"
+
+# Попытка создать экземпляр абстрактного класса вызовет ошибку
+try:
+    транспорт = ТранспортноеСредство("Транспорт")
+except TypeError as e:
+    print(f"Ошибка: {e}")  # Ошибка: Can't instantiate abstract class ТранспортноеСредство with abstract methods двигаться, остановиться
+
+# Создаем экземпляры конкретных классов
+автомобиль = Автомобиль("Моя машина", "Toyota")
+самолет = Самолет("Рейс 123", "Аэрофлот")
+
+# Используем методы
+print(автомобиль.двигаться())  # Моя машина едет по дороге
+print(самолет.двигаться())  # Рейс 123 летит по воздуху
+print(самолет.взлететь())  # Рейс 123 взлетает</code></pre>
+                </div>
+                
+                <h3>Наследование встроенных типов</h3>
+                <p>В Python можно наследоваться от встроенных типов, таких как <code>list</code>, <code>dict</code>, <code>str</code> и т.д., чтобы расширить их функциональность:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class РасширенныйСписок(list):
+    """Расширенный список с дополнительными методами."""
+    
+    def сумма(self):
+        """Возвращает сумму всех элементов списка."""
+        return sum(self)
+    
+    def среднее(self):
+        """Возвращает среднее значение элементов списка."""
+        if not self:
+            return 0
+        return self.сумма() / len(self)
+    
+    def только_положительные(self):
+        """Возвращает новый список только с положительными элементами."""
+        return РасширенныйСписок([x for x in self if x > 0])
+
+# Создаем экземпляр
+мой_список = РасширенныйСписок([1, -2, 3, -4, 5])
+
+# Используем методы из базового класса list
+мой_список.append(6)
+мой_список.extend([7, -8])
+print(мой_список)  # [1, -2, 3, -4, 5, 6, 7, -8]
+print(len(мой_список))  # 8
+
+# Используем новые методы
+print(мой_список.сумма())  # 8
+print(мой_список.среднее())  # 1.0
+print(мой_список.только_положительные())  # [1, 3, 5, 6, 7]</code></pre>
+                </div>
+                
+                <h3>Практический пример: Иерархия классов для интернет-магазина</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">class Товар:
+    """Базовый класс для всех товаров в магазине."""
+    
+    def __init__(self, название, цена, артикул):
+        self.название = название
+        self.цена = цена
+        self.артикул = артикул
+        self.в_наличии = True
+    
+    def информация(self):
+        статус = "В наличии" if self.в_наличии else "Нет в наличии"
+        return f"{self.название} (арт. {self.артикул}), цена: {self.цена} руб., {статус}"
+    
+    def изменить_цену(self, новая_цена):
+        self.цена = новая_цена
+        return f"Цена на {self.название} изменена на {новая_цена} руб."
+    
+    def продать(self):
+        if self.в_наличии:
+            self.в_наличии = False
+            return f"{self.название} продан"
+        return f"{self.название} нет в наличии"
+
+class Электроника(Товар):
+    """Класс для электронных товаров."""
+    
+    def __init__(self, название, цена, артикул, гарантия):
+        super().__init__(название, цена, артикул)
+        self.гарантия = гарантия  # в месяцах
+    
+    def информация(self):
+        базовая_информация = super().информация()
+        return f"{базовая_информация}, гарантия: {self.гарантия} мес."
+    
+    def продлить_гарантию(self, месяцы):
+        self.гарантия += месяцы
+        return f"Гарантия на {self.название} продлена на {месяцы} мес. Новая гарантия: {self.гарантия} мес."
+
+class Смартфон(Электроника):
+    """Класс для смартфонов."""
+    
+    def __init__(self, название, цена, артикул, гарантия, операционная_система, память):
+        super().__init__(название, цена, артикул, гарантия)
+        self.операционная_система = операционная_система
+        self.память = память  # в ГБ
+    
+    def информация(self):
+        базовая_информация = super().информация()
+        return f"{базовая_информация}, ОС: {self.операционная_система}, память: {self.память} ГБ"
+
+class Книга(Товар):
+    """Класс для книг."""
+    
+    def __init__(self, название, цена, артикул, автор, жанр, страницы):
+        super().__init__(название, цена, артикул)
+        self.автор = автор
+        self.жанр = жанр
+        self.страницы = страницы
+    
+    def информация(self):
+        базовая_информация = super().информация()
+        return f"{базовая_информация}, автор: {self.автор}, жанр: {self.жанр}, {self.страницы} стр."
+
+# Создаем экземпляры
+телефон = Смартфон("iPhone 13", 79990, "SM001", 12, "iOS", 128)
+книга = Книга("Война и мир", 950, "BK001", "Л.Н. Толстой", "Роман", 1225)
+
+# Используем методы
+print(телефон.информация())
+# iPhone 13 (арт. SM001), цена: 79990 руб., В наличии, гарантия: 12 мес., ОС: iOS, память: 128 ГБ
+
+print(книга.информация())
+# Война и мир (арт. BK001), цена: 950 руб., В наличии, автор: Л.Н. Толстой, жанр: Роман, 1225 стр.
+
+print(телефон.продлить_гарантию(6))
+# Гарантия на iPhone 13 продлена на 6 мес. Новая гарантия: 18 мес.
+
+print(книга.продать())
+# Война и мир продан
+
+print(книга.информация())
+# Война и мир (арт. BK001), цена: 950 руб., Нет в наличии, автор: Л.Н. Толстой, жанр: Роман, 1225 стр.</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по использованию наследования</h4>
+                    <ul>
+                        <li>Используйте наследование, когда между классами существует отношение "является" (is-a): Собака является Животным</li>
+                        <li>Избегайте глубоких иерархий наследования (более 2-3 уровней)</li>
+                        <li>Предпочитайте композицию наследованию, когда это возможно (отношение "имеет" (has-a))</li>
+                        <li>При множественном наследовании будьте осторожны с проблемой ромбовидного наследования</li>
+                        <li>Используйте <code>super()</code> для вызова методов родительского класса</li>
+                        <li>Создавайте абстрактные базовые классы для определения общих интерфейсов</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 5.3 Полиморфизм -->
+            <section id="polymorphism" class="topic-section">
+                <h2>5.3 Полиморфизм</h2>
+                <p>Полиморфизм — один из основных принципов объектно-ориентированного программирования, который позволяет использовать объекты разных классов через общий интерфейс. Термин "полиморфизм" происходит от греческих слов "поли" (много) и "морф" (форма), что означает "много форм".</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые понятия:</h4>
+                    <ul>
+                        <li><strong>Полиморфизм</strong> — способность объектов разных классов реагировать на одинаковые методы по-разному</li>
+                        <li><strong>Интерфейс</strong> — набор методов, которые должны быть реализованы классом</li>
+                        <li><strong>Утиная типизация</strong> — "если нечто выглядит как утка, плавает как утка и крякает как утка, то это, вероятно, и есть утка"</li>
+                        <li><strong>Перегрузка операторов</strong> — определение поведения операторов для пользовательских классов</li>
+                    </ul>
+                </div>
+                
+                <h3>Полиморфизм подтипов</h3>
+                <p>Полиморфизм подтипов основан на наследовании и позволяет использовать объекты дочерних классов там, где ожидаются объекты родительского класса. Это возможно, потому что дочерние классы наследуют интерфейс родительского класса.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Фигура:
+    """Базовый класс для геометрических фигур."""
+    
+    def __init__(self, название):
+        self.название = название
+    
+    def площадь(self):
+        """Вычисляет площадь фигуры."""
+        raise NotImplementedError("Метод должен быть переопределен в дочернем классе")
+    
+    def периметр(self):
+        """Вычисляет периметр фигуры."""
+        raise NotImplementedError("Метод должен быть переопределен в дочернем классе")
+    
+    def описание(self):
+        """Возвращает описание фигуры."""
+        return f"Это {self.название}"
+
+class Прямоугольник(Фигура):
+    """Класс для прямоугольников."""
+    
+    def __init__(self, ширина, высота):
+        super().__init__("прямоугольник")
+        self.ширина = ширина
+        self.высота = высота
+    
+    def площадь(self):
+        return self.ширина * self.высота
+    
+    def периметр(self):
+        return 2 * (self.ширина + self.высота)
+    
+    def описание(self):
+        базовое_описание = super().описание()
+        return f"{базовое_описание} с шириной {self.ширина} и высотой {self.высота}"
+
+class Круг(Фигура):
+    """Класс для кругов."""
+    
+    def __init__(self, радиус):
+        super().__init__("круг")
+        self.радиус = радиус
+    
+    def площадь(self):
+        import math
+        return math.pi * self.радиус ** 2
+    
+    def периметр(self):
+        import math
+        return 2 * math.pi * self.радиус
+    
+    def описание(self):
+        базовое_описание = super().описание()
+        return f"{базовое_описание} с радиусом {self.радиус}"
+
+# Функция, которая работает с любой фигурой
+def вывести_информацию(фигура):
+    """Выводит информацию о фигуре."""
+    print(фигура.описание())
+    print(f"Площадь: {фигура.площадь():.2f}")
+    print(f"Периметр: {фигура.периметр():.2f}")
+    print()
+
+# Создаем разные фигуры
+прямоугольник = Прямоугольник(5, 3)
+круг = Круг(4)
+
+# Используем полиморфизм - одна функция работает с разными типами
+вывести_информацию(прямоугольник)
+# Это прямоугольник с шириной 5 и высотой 3
+# Площадь: 15.00
+# Периметр: 16.00
+
+вывести_информацию(круг)
+# Это круг с радиусом 4
+# Площадь: 50.27
+# Периметр: 25.13</code></pre>
+                </div>
+                
+                <h3>Утиная типизация</h3>
+                <p>Python использует "утиную типизацию" (duck typing), что означает, что тип объекта определяется его поведением, а не явным наследованием. Если объект имеет методы и свойства, которые ожидаются в определенном контексте, то он может быть использован в этом контексте, независимо от его фактического класса.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Утка:
+    def крякать(self):
+        return "Кря-кря!"
+    
+    def плавать(self):
+        return "Утка плавает"
+
+class РобоУтка:
+    def крякать(self):
+        return "Робо-кря!"
+    
+    def плавать(self):
+        return "РобоУтка плавает"
+
+# Здесь нет общего базового класса, но оба класса имеют одинаковые методы
+
+def утиные_действия(утка):
+    """Функция работает с любым объектом, который имеет методы крякать и плавать."""
+    print(утка.крякать())
+    print(утка.плавать())
+    print()
+
+# Создаем объекты
+утка = Утка()
+робоутка = РобоУтка()
+
+# Используем утиную типизацию
+утиные_действия(утка)
+# Кря-кря!
+# Утка плавает
+
+утиные_действия(робоутка)
+# Робо-кря!
+# РобоУтка плавает</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Преимущества утиной типизации</h4>
+                    <p>Утиная типизация делает код более гибким и менее зависимым от иерархии классов. Вместо того чтобы требовать, чтобы объекты были определенного типа, мы просто ожидаем, что они будут поддерживать определенные операции. Это позволяет использовать в коде объекты, которые не были изначально спроектированы для работы вместе, но имеют совместимые интерфейсы.</p>
+                </div>
+                
+                <h3>Перегрузка операторов</h3>
+                <p>Перегрузка операторов — это форма полиморфизма, которая позволяет определить, как операторы Python (+, -, *, / и т.д.) будут работать с объектами пользовательских классов. Для этого используются специальные методы (магические методы).</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Вектор:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    # Перегрузка оператора сложения (+)
+    def __add__(self, other):
+        return Вектор(self.x + other.x, self.y + other.y)
+    
+    # Перегрузка оператора вычитания (-)
+    def __sub__(self, other):
+        return Вектор(self.x - other.x, self.y - other.y)
+    
+    # Перегрузка оператора умножения на скаляр (*)
+    def __mul__(self, скаляр):
+        return Вектор(self.x * скаляр, self.y * скаляр)
+    
+    # Перегрузка оператора сравнения (==)
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+    
+    # Строковое представление
+    def __str__(self):
+        return f"Вектор({self.x}, {self.y})"
+
+# Создаем векторы
+v1 = Вектор(3, 4)
+v2 = Вектор(1, 2)
+
+# Используем перегруженные операторы
+v3 = v1 + v2  # Вызывает __add__
+print(v3)  # Вектор(4, 6)
+
+v4 = v1 - v2  # Вызывает __sub__
+print(v4)  # Вектор(2, 2)
+
+v5 = v1 * 2  # Вызывает __mul__
+print(v5)  # Вектор(6, 8)
+
+print(v1 == v2)  # False, вызывает __eq__
+print(v1 == Вектор(3, 4))  # True</code></pre>
+                </div>
+                
+                <h3>Полиморфизм и встроенные функции</h3>
+                <p>Многие встроенные функции Python, такие как <code>len()</code>, <code>str()</code>, <code>iter()</code>, работают с разными типами данных благодаря полиморфизму. Каждый тип данных реализует соответствующие магические методы, которые вызываются этими функциями.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class КолодаКарт:
+    def __init__(self):
+        self.карты = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    
+    # Реализация для len()
+    def __len__(self):
+        return len(self.карты)
+    
+    # Реализация для str()
+    def __str__(self):
+        return f"Колода из {len(self)} карт"
+    
+    # Реализация для iter()
+    def __iter__(self):
+        return iter(self.карты)
+
+# Создаем колоду
+колода = КолодаКарт()
+
+# Используем встроенные функции
+print(len(колода))  # 13, вызывает __len__
+print(str(колода))  # "Колода из 13 карт", вызывает __str__
+
+# Итерация по объекту
+for карта in колода:  # вызывает __iter__
+    print(карта, end=' ')
+# 2 3 4 5 6 7 8 9 10 J Q K A</code></pre>
+                </div>
+                
+                <h3>Абстрактные базовые классы (ABC)</h3>
+                <p>Абстрактные базовые классы (ABC) предоставляют способ формально определить интерфейсы в Python. Они гарантируют, что дочерние классы реализуют определенные методы, что делает полиморфизм более надежным.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">from abc import ABC, abstractmethod
+
+class Животное(ABC):
+    @abstractmethod
+    def голос(self):
+        """Каждое животное должно иметь метод голос."""
+        pass
+    
+    @abstractmethod
+    def движение(self):
+        """Каждое животное должно иметь метод движение."""
+        pass
+    
+    def дышать(self):
+        """Этот метод уже реализован и может быть унаследован."""
+        return "Животное дышит"
+
+class Собака(Животное):
+    def голос(self):
+        return "Гав!"
+    
+    def движение(self):
+        return "Собака бежит"
+
+class Птица(Животное):
+    def голос(self):
+        return "Чирик!"
+    
+    def движение(self):
+        return "Птица летит"
+    
+    # Переопределяем метод дышать
+    def дышать(self):
+        базовое_дыхание = super().дышать()
+        return f"{базовое_дыхание} через воздушные мешки"
+
+# Создаем объекты
+собака = Собака()
+птица = Птица()
+
+# Используем полиморфизм
+животные = [собака, птица]
+for животное in животные:
+    print(f"Голос: {животное.голос()}")
+    print(f"Движение: {животное.движение()}")
+    print(f"Дыхание: {животное.дышать()}")
+    print()
+
+# Голос: Гав!
+# Движение: Собака бежит
+# Дыхание: Животное дышит
+#
+# Голос: Чирик!
+# Движение: Птица летит
+# Дыхание: Животное дышит через воздушные мешки</code></pre>
+                </div>
+                
+                <h3>Практический пример: Обработка различных типов данных</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">class ОбработчикДанных:
+    """Класс для демонстрации полиморфизма при обработке различных типов данных."""
+    
+    @staticmethod
+    def обработать(данные):
+        """Обрабатывает данные в зависимости от их типа."""
+        if hasattr(данные, "items"):  # Словарь или похожий на словарь объект
+            return ОбработчикДанных._обработать_словарь(данные)
+        elif hasattr(данные, "__iter__") and not isinstance(данные, str):  # Итерируемый объект, но не строка
+            return ОбработчикДанных._обработать_список(данные)
+        elif isinstance(данные, str):  # Строка
+            return ОбработчикДанных._обработать_строку(данные)
+        elif isinstance(данные, (int, float)):  # Число
+            return ОбработчикДанных._обработать_число(данные)
+        else:
+            return f"Неизвестный тип данных: {type(данные).__name__}"
+    
+    @staticmethod
+    def _обработать_словарь(словарь):
+        """Обрабатывает словарь."""
+        результат = {}
+        for ключ, значение in словарь.items():
+            результат[ключ.upper() if isinstance(ключ, str) else ключ] = значение
+        return результат
+    
+    @staticmethod
+    def _обработать_список(список):
+        """Обрабатывает список или другой итерируемый объект."""
+        return [x * 2 if isinstance(x, (int, float)) else x for x in список]
+    
+    @staticmethod
+    def _обработать_строку(строка):
+        """Обрабатывает строку."""
+        return строка.upper()
+    
+    @staticmethod
+    def _обработать_число(число):
+        """Обрабатывает число."""
+        return число * 2
+
+# Используем полиморфизм для обработки различных типов данных
+данные = [
+    {"имя": "Иван", "возраст": 30},
+    [1, 2, 3, 4],
+    "привет, мир!",
+    42,
+    3.14
+]
+
+for элемент in данные:
+    результат = ОбработчикДанных.обработать(элемент)
+    print(f"Тип: {type(элемент).__name__}, Результат: {результат}")
+
+# Тип: dict, Результат: {'ИМЯ': 'Иван', 'ВОЗРАСТ': 30}
+# Тип: list, Результат: [2, 4, 6, 8]
+# Тип: str, Результат: ПРИВЕТ, МИР!
+# Тип: int, Результат: 84
+# Тип: float, Результат: 6.28</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по использованию полиморфизма</h4>
+                    <ul>
+                        <li>Определяйте общие интерфейсы для классов, которые должны работать взаимозаменяемо</li>
+                        <li>Используйте абстрактные базовые классы для формального определения интерфейсов</li>
+                        <li>Помните о "утиной типизации" — объекты должны поддерживать ожидаемые методы</li>
+                        <li>Перегружайте операторы только тогда, когда это делает код более понятным</li>
+                        <li>Избегайте проверок типов (isinstance) там, где можно использовать полиморфизм</li>
+                        <li>Стремитесь к тому, чтобы функции работали с разными типами данных без изменения их кода</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 5.4 Инкапсуляция -->
+            <section id="encapsulation" class="topic-section">
+                <h2>5.4 Инкапсуляция</h2>
+                <p>Инкапсуляция — один из фундаментальных принципов объектно-ориентированного программирования, который заключается в скрытии внутренних деталей реализации объекта и предоставлении внешнего интерфейса для взаимодействия с ним. Инкапсуляция позволяет защитить данные от случайного изменения и обеспечивает целостность объекта.</p>
+                
+                <div class="visual-guide">
+                    <h4>Ключевые понятия:</h4>
+                    <ul>
+                        <li><strong>Инкапсуляция</strong> — скрытие внутренних деталей и данных объекта от внешнего мира</li>
+                        <li><strong>Контроль доступа</strong> — ограничение доступа к атрибутам и методам объекта</li>
+                        <li><strong>Геттеры и сеттеры</strong> — методы для контролируемого доступа к атрибутам</li>
+                        <li><strong>Свойства (properties)</strong> — механизм Python для реализации геттеров и сеттеров</li>
+                    </ul>
+                </div>
+                
+                <h3>Уровни доступа в Python</h3>
+                <p>В отличие от многих других объектно-ориентированных языков, Python не имеет строгих механизмов для обеспечения инкапсуляции. Вместо этого он следует принципу "мы все взрослые здесь" и использует соглашения об именовании для указания уровня доступа к атрибутам и методам:</p>
+                
+                <ul>
+                    <li><strong>Публичные атрибуты и методы</strong> — обычные имена без подчеркиваний (например, <code>name</code>, <code>age</code>)</li>
+                    <li><strong>Защищенные атрибуты и методы</strong> — имена с одним подчеркиванием в начале (например, <code>_name</code>, <code>_age</code>)</li>
+                    <li><strong>Приватные атрибуты и методы</strong> — имена с двумя подчеркиваниями в начале (например, <code>__name</code>, <code>__age</code>)</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Пользователь:
+    def __init__(self, имя, возраст, пароль):
+        self.имя = имя  # Публичный атрибут
+        self._возраст = возраст  # Защищенный атрибут
+        self.__пароль = пароль  # Приватный атрибут
+    
+    def публичный_метод(self):
+        """Публичный метод, доступный извне класса."""
+        return f"Привет, {self.имя}!"
+    
+    def _защищенный_метод(self):
+        """Защищенный метод, не рекомендуется вызывать извне класса."""
+        return f"Возраст: {self._возраст}"
+    
+    def __приватный_метод(self):
+        """Приватный метод, предназначен только для внутреннего использования."""
+        return f"Пароль: {self.__пароль}"
+    
+    def получить_информацию(self):
+        """Публичный метод, который использует приватный метод."""
+        return f"{self.публичный_метод()} {self._защищенный_метод()}"
+
+# Создаем объект
+пользователь = Пользователь("Анна", 25, "секретный_пароль")
+
+# Доступ к публичным атрибутам и методам
+print(пользователь.имя)  # Анна
+print(пользователь.публичный_метод())  # Привет, Анна!
+
+# Доступ к защищенным атрибутам и методам (возможен, но не рекомендуется)
+print(пользователь._возраст)  # 25
+print(пользователь._защищенный_метод())  # Возраст: 25
+
+# Попытка доступа к приватным атрибутам и методам
+try:
+    print(пользователь.__пароль)  # Вызовет AttributeError
+except AttributeError as e:
+    print(f"Ошибка: {e}")
+
+try:
+    print(пользователь.__приватный_метод())  # Вызовет AttributeError
+except AttributeError as e:
+    print(f"Ошибка: {e}")
+
+# Использование публичного интерфейса
+print(пользователь.получить_информацию())  # Привет, Анна! Возраст: 25</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>О приватных атрибутах в Python</h4>
+                    <p>В Python приватные атрибуты (с двумя подчеркиваниями) на самом деле не являются строго приватными. Они реализуются с помощью механизма, называемого "name mangling" (искажение имен). Имя атрибута <code>__attr</code> в классе <code>MyClass</code> преобразуется в <code>_MyClass__attr</code>. Это означает, что к приватным атрибутам все еще можно получить доступ извне, но для этого нужно знать, как работает механизм искажения имен:</p>
+                    <pre><code class="language-python"># Доступ к приватному атрибуту через искаженное имя
+print(пользователь._Пользователь__пароль)  # секретный_пароль</code></pre>
+                </div>
+                
+                <h3>Геттеры и сеттеры</h3>
+                <p>Геттеры и сеттеры — это методы, которые используются для контролируемого доступа к атрибутам объекта. Они позволяют добавить логику проверки и обработки данных при чтении и записи атрибутов.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Человек:
+    def __init__(self, имя, возраст):
+        self.__имя = имя
+        self.__возраст = возраст
+    
+    # Геттер для имени
+    def get_имя(self):
+        return self.__имя
+    
+    # Сеттер для имени
+    def set_имя(self, имя):
+        if not имя:
+            raise ValueError("Имя не может быть пустым")
+        self.__имя = имя
+    
+    # Геттер для возраста
+    def get_возраст(self):
+        return self.__возраст
+    
+    # Сеттер для возраста
+    def set_возраст(self, возраст):
+        if возраст < 0 or возраст > 120:
+            raise ValueError("Возраст должен быть от 0 до 120")
+        self.__возраст = возраст
+
+# Создаем объект
+человек = Человек("Иван", 30)
+
+# Используем геттеры и сеттеры
+print(человек.get_имя())  # Иван
+print(человек.get_возраст())  # 30
+
+человек.set_имя("Петр")
+человек.set_возраст(35)
+
+print(человек.get_имя())  # Петр
+print(человек.get_возраст())  # 35
+
+# Проверка валидации
+try:
+    человек.set_возраст(150)  # Вызовет ошибку
+except ValueError as e:
+    print(f"Ошибка: {e}")  # Ошибка: Возраст должен быть от 0 до 120</code></pre>
+                </div>
+                
+                <h3>Свойства (properties)</h3>
+                <p>Python предоставляет механизм свойств (properties), который позволяет использовать методы для доступа к атрибутам, но при этом сохранить синтаксис прямого доступа. Это делает код более чистым и удобным для использования.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Человек:
+    def __init__(self, имя, возраст):
+        self.__имя = имя
+        self.__возраст = возраст
+    
+    # Свойство для имени
+    @property
+    def имя(self):
+        """Геттер для имени."""
+        return self.__имя
+    
+    @имя.setter
+    def имя(self, значение):
+        """Сеттер для имени."""
+        if not значение:
+            raise ValueError("Имя не может быть пустым")
+        self.__имя = значение
+    
+    # Свойство для возраста
+    @property
+    def возраст(self):
+        """Геттер для возраста."""
+        return self.__возраст
+    
+    @возраст.setter
+    def возраст(self, значение):
+        """Сеттер для возраста."""
+        if значение < 0 or значение > 120:
+            raise ValueError("Возраст должен быть от 0 до 120")
+        self.__возраст = значение
+    
+    # Свойство только для чтения
+    @property
+    def совершеннолетний(self):
+        """Свойство только для чтения."""
+        return self.__возраст >= 18
+
+# Создаем объект
+человек = Человек("Иван", 30)
+
+# Используем свойства как обычные атрибуты
+print(человек.имя)  # Иван
+print(человек.возраст)  # 30
+print(человек.совершеннолетний)  # True
+
+# Изменяем значения через свойства
+человек.имя = "Петр"
+человек.возраст = 16
+
+print(человек.имя)  # Петр
+print(человек.возраст)  # 16
+print(человек.совершеннолетний)  # False
+
+# Проверка валидации
+try:
+    человек.возраст = 150  # Вызовет ошибку
+except ValueError as e:
+    print(f"Ошибка: {e}")  # Ошибка: Возраст должен быть от 0 до 120
+
+# Попытка изменить свойство только для чтения
+try:
+    человек.совершеннолетний = True  # Вызовет AttributeError
+except AttributeError as e:
+    print(f"Ошибка: {e}")  # Ошибка: can't set attribute</code></pre>
+                </div>
+                
+                <h3>Создание свойств с помощью функции property</h3>
+                <p>Помимо декораторов, свойства можно создавать с помощью встроенной функции <code>property</code>. Это альтернативный способ, который может быть полезен в некоторых случаях.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class Прямоугольник:
+    def __init__(self, ширина, высота):
+        self.__ширина = ширина
+        self.__высота = высота
+    
+    def get_ширина(self):
+        return self.__ширина
+    
+    def set_ширина(self, значение):
+        if значение <= 0:
+            raise ValueError("Ширина должна быть положительной")
+        self.__ширина = значение
+    
+    def get_высота(self):
+        return self.__высота
+    
+    def set_высота(self, значение):
+        if значение <= 0:
+            raise ValueError("Высота должна быть положительной")
+        self.__высота = значение
+    
+    def get_площадь(self):
+        return self.__ширина * self.__высота
+    
+    # Создание свойств с помощью функции property
+    ширина = property(get_ширина, set_ширина)
+    высота = property(get_высота, set_высота)
+    площадь = property(get_площадь)  # Свойство только для чтения
+
+# Создаем объект
+прямоугольник = Прямоугольник(5, 3)
+
+# Используем свойства
+print(прямоугольник.ширина)  # 5
+print(прямоугольник.высота)  # 3
+print(прямоугольник.площадь)  # 15
+
+# Изменяем значения
+прямоугольник.ширина = 10
+прямоугольник.высота = 6
+
+print(прямоугольник.ширина)  # 10
+print(прямоугольник.высота)  # 6
+print(прямоугольник.площадь)  # 60</code></pre>
+                </div>
+                
+                <h3>Дескрипторы</h3>
+                <p>Дескрипторы — это более продвинутый механизм для контроля доступа к атрибутам. Они позволяют определить, как атрибуты будут вести себя при доступе, изменении и удалении. Дескрипторы реализуются с помощью специальных методов <code>__get__</code>, <code>__set__</code> и <code>__delete__</code>.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">class ПоложительноеЧисло:
+    """Дескриптор для положительных чисел."""
+    
+    def __init__(self, имя):
+        self.имя = имя
+        self.приватное_имя = f"__{имя}"
+    
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self
+        return getattr(instance, self.приватное_имя, 0)
+    
+    def __set__(self, instance, value):
+        if value <= 0:
+            raise ValueError(f"{self.имя} должно быть положительным")
+        setattr(instance, self.приватное_имя, value)
+
+class Товар:
+    """Класс, использующий дескрипторы."""
+    
+    цена = ПоложительноеЧисло("цена")
+    количество = ПоложительноеЧисло("количество")
+    
+    def __init__(self, название, цена, количество):
+        self.название = название
+        self.цена = цена
+        self.количество = количество
+    
+    @property
+    def стоимость(self):
+        """Вычисляет общую стоимость товара."""
+        return self.цена * self.количество
+
+# Создаем объект
+товар = Товар("Ноутбук", 50000, 3)
+
+# Используем атрибуты с дескрипторами
+print(товар.название)  # Ноутбук
+print(товар.цена)  # 50000
+print(товар.количество)  # 3
+print(товар.стоимость)  # 150000
+
+# Изменяем значения
+товар.цена = 45000
+товар.количество = 5
+
+print(товар.цена)  # 45000
+print(товар.количество)  # 5
+print(товар.стоимость)  # 225000
+
+# Проверка валидации
+try:
+    товар.цена = -1000  # Вызовет ошибку
+except ValueError as e:
+    print(f"Ошибка: {e}")  # Ошибка: цена должно быть положительным</code></pre>
+                </div>
+                
+                <h3>Практический пример: Банковский счет с инкапсуляцией</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">class БанковскийСчет:
+    """Класс для представления банковского счета с инкапсуляцией."""
+    
+    def __init__(self, владелец, начальный_баланс=0):
+        self.__владелец = владелец
+        self.__баланс = начальный_баланс
+        self.__активен = True
+        self.__история_транзакций = []
+    
+    @property
+    def владелец(self):
+        """Свойство только для чтения."""
+        return self.__владелец
+    
+    @property
+    def баланс(self):
+        """Свойство только для чтения."""
+        return self.__баланс
+    
+    @property
+    def активен(self):
+        """Свойство только для чтения."""
+        return self.__активен
+    
+    def внести(self, сумма):
+        """Вносит деньги на счет."""
+        if not self.__активен:
+            raise ValueError("Счет закрыт")
+        
+        if сумма <= 0:
+            raise ValueError("Сумма должна быть положительной")
+        
+        self.__баланс += сумма
+        self.__записать_транзакцию("внесение", сумма)
+        return f"Внесено {сумма} руб. Новый баланс: {self.__баланс} руб."
+    
+    def снять(self, сумма):
+        """Снимает деньги со счета."""
+        if not self.__активен:
+            raise ValueError("Счет закрыт")
+        
+        if сумма <= 0:
+            raise ValueError("Сумма должна быть положительной")
+        
+        if сумма > self.__баланс:
+            raise ValueError("Недостаточно средств на счете")
+        
+        self.__баланс -= сумма
+        self.__записать_транзакцию("снятие", сумма)
+        return f"Снято {сумма} руб. Новый баланс: {self.__баланс} руб."
+    
+    def закрыть(self):
+        """Закрывает счет."""
+        if not self.__активен:
+            raise ValueError("Счет уже закрыт")
+        
+        self.__активен = False
+        self.__записать_транзакцию("закрытие", 0)
+        return f"Счет закрыт. Остаток: {self.__баланс} руб."
+    
+    def получить_историю(self):
+        """Возвращает историю транзакций."""
+        return self.__история_транзакций.copy()
+    
+    def __записать_транзакцию(self, тип, сумма):
+        """Приватный метод для записи транзакции."""
+        import datetime
+        дата = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        транзакция = {
+            "дата": дата,
+            "тип": тип,
+            "сумма": сумма,
+            "баланс": self.__баланс
+        }
+        self.__история_транзакций.append(транзакция)
+    
+    def __str__(self):
+        статус = "активен" if self.__активен else "закрыт"
+        return f"Счет {self.__владелец}, баланс: {self.__баланс} руб., статус: {статус}"
+
+# Создаем счет
+счет = БанковскийСчет("Иван Иванов", 1000)
+
+# Используем публичный интерфейс
+print(счет)  # Счет Иван Иванов, баланс: 1000 руб., статус: активен
+print(счет.владелец)  # Иван Иванов
+print(счет.баланс)  # 1000
+print(счет.активен)  # True
+
+# Выполняем операции
+print(счет.внести(500))  # Внесено 500 руб. Новый баланс: 1500 руб.
+print(счет.снять(200))  # Снято 200 руб. Новый баланс: 1300 руб.
+
+# Проверка валидации
+try:
+    счет.снять(2000)  # Вызовет ошибку
+except ValueError as e:
+    print(f"Ошибка: {e}")  # Ошибка: Недостаточно средств на счете
+
+# Получаем историю транзакций
+история = счет.получить_историю()
+for транзакция in история:
+    print(f"{транзакция['дата']} - {транзакция['тип']} - {транзакция['сумма']} руб. - Баланс: {транзакция['баланс']} руб.")
+
+# Закрываем счет
+print(счет.закрыть())  # Счет закрыт. Остаток: 1300 руб.
+print(счет.активен)  # False
+
+# Попытка выполнить операцию с закрытым счетом
+try:
+    счет.внести(100)  # Вызовет ошибку
+except ValueError as e:
+    print(f"Ошибка: {e}")  # Ошибка: Счет закрыт</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по использованию инкапсуляции в Python</h4>
+                    <ul>
+                        <li>Используйте соглашения об именовании для указания уровня доступа к атрибутам и методам</li>
+                        <li>Предпочитайте свойства (properties) вместо явных геттеров и сеттеров</li>
+                        <li>Скрывайте внутренние детали реализации, предоставляя четкий публичный интерфейс</li>
+                        <li>Используйте приватные атрибуты для данных, которые не должны изменяться извне</li>
+                        <li>Добавляйте валидацию данных в сеттеры свойств</li>
+                        <li>Помните, что в Python инкапсуляция основана на соглашениях, а не на строгих ограничениях</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Заключение модуля -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Оптимизация веб-приложений: Core Web Vitals, производительность, SEO, доступность, безопасность.">
+    <meta name="keywords" content="web performance, core web vitals, seo, accessibility, оптимизация сайта">
+    <meta name="author" content="SKL Academy">
+    <title>Веб‑разработка — Модуль 9: Оптимизация | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/09-optimization.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="web">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Performance</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button>
+                <button class="color-scheme-btn" data-color="orange"><span class="color-dot" style="background: #f97316;"></span></button>
+                <button class="color-scheme-btn" data-color="blue"><span class="color-dot" style="background: #3b82f6;"></span></button>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggle">🌓</button>
+            <a href="../../index.html" class="exit-btn">🏠</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">Введение в HTML</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">Формы</a>
+                        <a href="01-html-basics.html#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="01-html-basics.html#seo-html" class="subtopic">SEO</a>
+                        <a href="01-html-basics.html#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">Введение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">Специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">Типографика</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">Box Model</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">@media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">Анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">Условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">События</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">Storage</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="04-responsive-design.html#intro" class="subtopic">Введение</a>
+                        <a href="04-responsive-design.html#viewport" class="subtopic">Viewport</a>
+                        <a href="04-responsive-design.html#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="04-responsive-design.html#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="04-responsive-design.html#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="04-responsive-design.html#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="04-responsive-design.html#responsive-images" class="subtopic">Изображения</a>
+                        <a href="04-responsive-design.html#container-queries" class="subtopic">Container Queries</a>
+                        <a href="04-responsive-design.html#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="04-responsive-design.html#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="06-forms-validation.html#form-basics" class="subtopic">Основы форм</a>
+                        <a href="06-forms-validation.html#input-types" class="subtopic">Типы полей</a>
+                        <a href="06-forms-validation.html#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="06-forms-validation.html#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="06-forms-validation.html#js-validation" class="subtopic">JS валидация</a>
+                        <a href="06-forms-validation.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="06-forms-validation.html#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="06-forms-validation.html#security" class="subtopic">Безопасность</a>
+                        <a href="06-forms-validation.html#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="07-dom-advanced.html#dom-tree" class="subtopic">Дерево DOM</a>
+                        <a href="07-dom-advanced.html#selectors" class="subtopic">Селекторы</a>
+                        <a href="07-dom-advanced.html#traversal" class="subtopic">Обход</a>
+                        <a href="07-dom-advanced.html#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="07-dom-advanced.html#events-basics" class="subtopic">События</a>
+                        <a href="07-dom-advanced.html#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="07-dom-advanced.html#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="07-dom-advanced.html#observers" class="subtopic">Observers</a>
+                        <a href="07-dom-advanced.html#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="#core-web-vitals" class="subtopic active">Core Web Vitals</a>
+                        <a href="#lcp" class="subtopic">LCP</a>
+                        <a href="#cls" class="subtopic">CLS</a>
+                        <a href="#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="#fonts" class="subtopic">Шрифты</a>
+                        <a href="#js-perf" class="subtopic">JS производительность</a>
+                        <a href="#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="#seo" class="subtopic">SEO</a>
+                        <a href="#accessibility" class="subtopic">Доступность</a>
+                        <a href="#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="10-projects.html#intro" class="subtopic">Введение</a>
+                        <a href="10-projects.html#project-1" class="subtopic">Проект 1</a>
+                        <a href="10-projects.html#project-2" class="subtopic">Проект 2</a>
+                        <a href="10-projects.html#project-3" class="subtopic">Проект 3</a>
+                        <a href="10-projects.html#project-4" class="subtopic">Проект 4</a>
+                        <a href="10-projects.html#project-5" class="subtopic">Проект 5</a>
+                        <a href="10-projects.html#project-6" class="subtopic">Проект 6</a>
+                        <a href="10-projects.html#deployment" class="subtopic">Деплой</a>
+                        <a href="10-projects.html#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 9: Оптимизация и производительность</h2>
+                <p>Core Web Vitals, SEO, доступность, безопасность — всё что нужно для production-ready сайта.</p>
+            </section>
+
+            <!-- 9.1 Core Web Vitals -->
+            <section id="core-web-vitals" class="topic-section">
+                <h2>Core Web Vitals</h2>
+
+                <h3>Что это?</h3>
+                <p><strong>Core Web Vitals</strong> — ключевые метрики Google для оценки пользовательского опыта.</p>
+
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Метрика</th>
+                                <th>Хорошо</th>
+                                <th>Нужна работа</th>
+                                <th>Плохо</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>LCP</strong> (Largest Contentful Paint)</td>
+                                <td>≤ 2.5s</td>
+                                <td>2.5s - 4s</td>
+                                <td>> 4s</td>
+                            </tr>
+                            <tr>
+                                <td><strong>INP</strong> (Interaction to Next Paint)</td>
+                                <td>≤ 200ms</td>
+                                <td>200ms - 500ms</td>
+                                <td>> 500ms</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CLS</strong> (Cumulative Layout Shift)</td>
+                                <td>≤ 0.1</td>
+                                <td>0.1 - 0.25</td>
+                                <td>> 0.25</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Почему важно?</h3>
+                <ul>
+                    <li><strong>SEO</strong> — Core Web Vitals влияют на ранжирование в Google</li>
+                    <li><strong>Конверсия</strong> — быстрые сайты конвертируют лучше</li>
+                    <li><strong>UX</strong> — пользователи ожидают мгновенного отклика</li>
+                </ul>
+            </section>
+
+            <!-- 9.2 LCP -->
+            <section id="lcp" class="topic-section">
+                <h2>LCP (Largest Contentful Paint)</h2>
+
+                <h3>Что измеряет?</h3>
+                <p>Время отрисовки самого большого видимого элемента (обычно hero-изображение или заголовок).</p>
+
+                <h3>Как оптимизировать</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- 1. Preload критичных ресурсов --&gt;
+&lt;link rel="preload" as="image" href="hero.webp" fetchpriority="high"&gt;
+&lt;link rel="preload" as="font" href="font.woff2" type="font/woff2" crossorigin&gt;
+
+&lt;!-- 2. Приоритизация LCP-изображения --&gt;
+&lt;img src="hero.webp" 
+     fetchpriority="high" 
+     loading="eager"
+     decoding="async"
+     alt="Hero"&gt;
+
+&lt;!-- 3. Критический CSS inline --&gt;
+&lt;style&gt;
+  /* Только стили для above-the-fold */
+  .hero { ... }
+&lt;/style&gt;
+
+&lt;!-- 4. Остальной CSS асинхронно --&gt;
+&lt;link rel="preload" as="style" href="../courses.css" onload="this.rel='stylesheet'"&gt;</code></pre>
+                </div>
+
+                <h3>Оптимизация сервера</h3>
+                
+                <div class="code-example">
+<pre><code class="language-text"># Nginx: включить сжатие и кэширование
+gzip on;
+gzip_types text/html text/css application/javascript image/svg+xml;
+
+# HTTP/2 push
+location / {
+    http2_push /styles/critical.css;
+    http2_push /images/hero.webp;
+}
+
+# CDN и кэширование
+Cache-Control: public, max-age=31536000, immutable</code></pre>
+                </div>
+
+                <div class="visual-guide">
+                    <h4>Чек-лист LCP</h4>
+                    <ul>
+                        <li> TTFB (Time to First Byte) < 600ms</li>
+                        <li> Критический CSS inline или preload</li>
+                        <li> LCP-изображение с fetchpriority="high"</li>
+                        <li> Оптимизированные изображения (WebP, AVIF)</li>
+                        <li> CDN для статики</li>
+                        <li> HTTP/2 или HTTP/3</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 9.3 CLS -->
+            <section id="cls" class="topic-section">
+                <h2>CLS (Cumulative Layout Shift)</h2>
+
+                <h3>Что измеряет?</h3>
+                <p>Визуальную стабильность — насколько элементы "прыгают" во время загрузки.</p>
+
+                <h3>Причины CLS</h3>
+                <ul>
+                    <li>Изображения без размеров</li>
+                    <li>Динамически добавляемый контент</li>
+                    <li>Web fonts (FOUT/FOIT)</li>
+                    <li>Реклама и встраиваемые блоки</li>
+                </ul>
+
+                <h3>Как исправить</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- 1. ВСЕГДА указывайте размеры изображений --&gt;
+&lt;img src="photo.jpg" width="800" height="600" alt="..."&gt;
+
+&lt;!-- Или используйте aspect-ratio в CSS --&gt;
+&lt;style&gt;
+  img { 
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+  }
+&lt;/style&gt;
+
+&lt;!-- 2. Резервируйте место для динамического контента --&gt;
+&lt;div class="ad-slot" style="min-height: 250px;"&gt;
+  &lt;!-- Реклама загрузится сюда --&gt;
+&lt;/div&gt;
+
+&lt;!-- 3. Шрифты без FOUT --&gt;
+&lt;style&gt;
+  @font-face {
+    font-family: 'MyFont';
+    src: url('font.woff2') format('woff2');
+    font-display: swap; /* или optional */
+  }
+&lt;/style&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-css">/* 4. CSS containment для изолированных секций */
+.widget {
+  contain: layout;
+}
+
+/* 5. Скелетон для загрузки */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.4 INP -->
+            <section id="inp" class="topic-section">
+                <h2>INP (Interaction to Next Paint)</h2>
+
+                <h3>Что измеряет?</h3>
+                <p>Отзывчивость — время от взаимодействия пользователя до визуального отклика.</p>
+
+                <h3>Как оптимизировать</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// 1. Разбивайте долгие задачи
+//  Плохо
+function processItems(items) {
+  items.forEach(item => heavyProcessing(item));
+}
+
+//  Хорошо: разбить на чанки
+async function processItems(items) {
+  for (const item of items) {
+    heavyProcessing(item);
+    
+    // Дать браузеру "дышать"
+    await new Promise(r => setTimeout(r, 0));
+    // или: await scheduler.yield(); (новый API)
+  }
+}
+
+// 2. Web Workers для тяжёлых вычислений
+const worker = new Worker('heavy-task.js');
+worker.postMessage(data);
+worker.onmessage = (e) => updateUI(e.data);
+
+// 3. requestIdleCallback для некритичных задач
+requestIdleCallback(() => {
+  // Аналитика, предзагрузка, несрочные обновления
+});</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">// 4. Debounce и Throttle
+const handleScroll = throttle(() => {
+  // Обработка скролла
+}, 100);
+
+const handleInput = debounce((value) => {
+  // Поиск
+}, 300);
+
+// 5. Passive event listeners
+element.addEventListener('scroll', handler, { passive: true });
+element.addEventListener('touchstart', handler, { passive: true });
+
+// 6. CSS вместо JS где возможно
+//  JS для анимации
+element.style.transform = `translateX(${x}px)`;
+
+//  CSS transition
+element.classList.add('moved');</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.5 Изображения -->
+            <section id="images" class="topic-section">
+                <h2>Оптимизация изображений</h2>
+
+                <h3>Современные форматы</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Формат</th>
+                                <th>Сжатие</th>
+                                <th>Поддержка</th>
+                                <th>Использование</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>AVIF</td>
+                                <td>Лучшее</td>
+                                <td>Chrome, Firefox</td>
+                                <td>Фото, сложные изображения</td>
+                            </tr>
+                            <tr>
+                                <td>WebP</td>
+                                <td>Отличное</td>
+                                <td>Все современные</td>
+                                <td>Универсальный</td>
+                            </tr>
+                            <tr>
+                                <td>JPEG</td>
+                                <td>Хорошее</td>
+                                <td>Все</td>
+                                <td>Fallback для фото</td>
+                            </tr>
+                            <tr>
+                                <td>PNG</td>
+                                <td>Среднее</td>
+                                <td>Все</td>
+                                <td>Прозрачность, иконки</td>
+                            </tr>
+                            <tr>
+                                <td>SVG</td>
+                                <td>—</td>
+                                <td>Все</td>
+                                <td>Иконки, логотипы, графика</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Responsive Images</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- picture для art direction и форматов --&gt;
+&lt;picture&gt;
+  &lt;source type="image/avif" 
+          srcset="image-400.avif 400w,
+                  image-800.avif 800w,
+                  image-1200.avif 1200w"
+          sizes="(max-width: 600px) 100vw, 50vw"&gt;
+  &lt;source type="image/webp" 
+          srcset="image-400.webp 400w,
+                  image-800.webp 800w,
+                  image-1200.webp 1200w"
+          sizes="(max-width: 600px) 100vw, 50vw"&gt;
+  &lt;img src="image-800.jpg" 
+       srcset="image-400.jpg 400w,
+               image-800.jpg 800w,
+               image-1200.jpg 1200w"
+       sizes="(max-width: 600px) 100vw, 50vw"
+       alt="Описание"
+       loading="lazy"
+       decoding="async"
+       width="800"
+       height="600"&gt;
+&lt;/picture&gt;</code></pre>
+                </div>
+
+                <h3>Ленивая загрузка</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Нативная ленивая загрузка --&gt;
+&lt;img src="image.jpg" loading="lazy" alt="..."&gt;
+
+&lt;!-- LCP изображение — НЕ lazy! --&gt;
+&lt;img src="hero.jpg" loading="eager" fetchpriority="high" alt="..."&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.6 Шрифты -->
+            <section id="fonts" class="topic-section">
+                <h2>Оптимизация шрифтов</h2>
+
+                <h3>Preload и font-display</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Preload критичных шрифтов --&gt;
+&lt;link rel="preload" as="font" href="font.woff2" type="font/woff2" crossorigin&gt;
+
+&lt;style&gt;
+@font-face {
+  font-family: 'Inter';
+  src: url('inter.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap; /* Показать fallback, потом заменить */
+  /* font-display: optional; — не показывать если не загрузился быстро */
+}
+
+/* Размер fallback-шрифта для уменьшения CLS */
+@font-face {
+  font-family: 'Inter';
+  src: url('inter.woff2') format('woff2');
+  font-display: swap;
+  size-adjust: 100.6%;
+  ascent-override: 95%;
+  descent-override: 22%;
+}
+&lt;/style&gt;</code></pre>
+                </div>
+
+                <h3>Subset шрифтов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Google Fonts с подмножеством */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap&text=АБВабв0123');
+
+/* Или локально с pyftsubset */
+/* pyftsubset font.ttf --text="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789" */</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.7 JavaScript Performance -->
+            <section id="js-perf" class="topic-section">
+                <h2>JavaScript Performance</h2>
+
+                <h3>Code Splitting</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Динамический импорт
+const module = await import('./heavy-module.js');
+
+// React lazy loading
+const HeavyComponent = React.lazy(() => import('./HeavyComponent'));
+
+// Route-based splitting
+const routes = {
+  '/': () => import('./pages/Home'),
+  '/about': () => import('./pages/About'),
+  '/contact': () => import('./pages/Contact')
+};</code></pre>
+                </div>
+
+                <h3>Tree Shaking</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Импортирует всю библиотеку
+import _ from 'lodash';
+_.debounce(fn, 300);
+
+//  Импортирует только нужное
+import debounce from 'lodash/debounce';
+debounce(fn, 300);
+
+//  Или из ES-modules версии
+import { debounce } from 'lodash-es';</code></pre>
+                </div>
+
+                <h3>Defer и Async</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- async: загрузка параллельно, выполнение сразу --&gt;
+&lt;script async src="analytics.js"&gt;&lt;/script&gt;
+
+&lt;!-- defer: загрузка параллельно, выполнение после DOM --&gt;
+&lt;script defer src="app.js"&gt;&lt;/script&gt;
+
+&lt;!-- module: автоматически defer --&gt;
+&lt;script type="module" src="app.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.8 CSS Performance -->
+            <section id="css-perf" class="topic-section">
+                <h2>CSS Performance</h2>
+
+                <h3>Critical CSS</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Критический CSS inline --&gt;
+&lt;style&gt;
+  /* Только above-the-fold стили */
+  :root { --primary: #6c63ff; }
+  body { margin: 0; font-family: system-ui; }
+  .hero { min-height: 100vh; }
+&lt;/style&gt;
+
+&lt;!-- Остальной CSS асинхронно --&gt;
+&lt;link rel="preload" as="style" href="../courses.css" onload="this.rel='stylesheet'"&gt;
+&lt;noscript&gt;&lt;link rel="stylesheet" href="../courses.css"&gt;&lt;/noscript&gt;</code></pre>
+                </div>
+
+                <h3>CSS Containment</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* contain: изолирует перерисовку */
+.card {
+  contain: layout style paint;
+  /* или */
+  contain: content; /* layout + style + paint */
+}
+
+/* content-visibility: пропустить рендеринг вне viewport */
+.section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px; /* Примерная высота */
+}</code></pre>
+                </div>
+
+                <h3>Оптимизация селекторов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/*  Медленные селекторы */
+div > ul > li > a.link { }
+[class*="btn-"] { }
+*:not(.active) { }
+
+/*  Быстрые селекторы */
+.nav-link { }
+.btn-primary { }
+.card { }</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.9 Кэширование -->
+            <section id="caching" class="topic-section">
+                <h2>Кэширование</h2>
+
+                <h3>HTTP кэширование</h3>
+                
+                <div class="code-example">
+<pre><code class="language-text"># Статические ресурсы с хэшем в имени
+Cache-Control: public, max-age=31536000, immutable
+
+# HTML страницы
+Cache-Control: no-cache, must-revalidate
+
+# API ответы
+Cache-Control: private, max-age=300
+
+# ETag для валидации
+ETag: "abc123"
+If-None-Match: "abc123"  # → 304 Not Modified</code></pre>
+                </div>
+
+                <h3>Service Worker</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// sw.js
+const CACHE_NAME = 'app-v1';
+const STATIC_ASSETS = ['/app.js', '/styles.css', '/offline.html'];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(STATIC_ASSETS))
+  );
+});
+
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request)
+      .then(cached => cached || fetch(e.request))
+      .catch(() => caches.match('/offline.html'))
+  );
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.10 SEO -->
+            <section id="seo" class="topic-section">
+                <h2>SEO оптимизация</h2>
+
+                <h3>Мета-теги</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;head&gt;
+  &lt;title&gt;Заголовок страницы — Бренд&lt;/title&gt;
+  &lt;meta name="description" content="Описание до 160 символов"&gt;
+  &lt;meta name="robots" content="index, follow"&gt;
+  &lt;link rel="canonical" href="https://example.com/page"&gt;
+  
+  &lt;!-- Open Graph --&gt;
+  &lt;meta property="og:title" content="Заголовок"&gt;
+  &lt;meta property="og:description" content="Описание"&gt;
+  &lt;meta property="og:image" content="https://example.com/image.jpg"&gt;
+  &lt;meta property="og:url" content="https://example.com/page"&gt;
+  &lt;meta property="og:type" content="website"&gt;
+  
+  &lt;!-- Twitter Card --&gt;
+  &lt;meta name="twitter:card" content="summary_large_image"&gt;
+  &lt;meta name="twitter:title" content="Заголовок"&gt;
+  &lt;meta name="twitter:description" content="Описание"&gt;
+  &lt;meta name="twitter:image" content="https://example.com/image.jpg"&gt;
+&lt;/head&gt;</code></pre>
+                </div>
+
+                <h3>Structured Data</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Заголовок статьи",
+  "author": {"@type": "Person", "name": "Автор"},
+  "datePublished": "2025-01-30",
+  "image": "https://example.com/image.jpg"
+}
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <h3>Sitemap и robots.txt</h3>
+                
+                <div class="code-example">
+<pre><code class="language-xml">&lt;!-- sitemap.xml --&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://example.com/&lt;/loc&gt;
+    &lt;lastmod&gt;2025-01-30&lt;/lastmod&gt;
+    &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+    &lt;priority&gt;1.0&lt;/priority&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-text"># robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://example.com/sitemap.xml</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.11 Доступность -->
+            <section id="accessibility" class="topic-section">
+                <h2>Доступность (a11y)</h2>
+
+                <h3>Основные принципы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- 1. Семантический HTML --&gt;
+&lt;header&gt;...&lt;/header&gt;
+&lt;nav&gt;...&lt;/nav&gt;
+&lt;main&gt;...&lt;/main&gt;
+&lt;article&gt;...&lt;/article&gt;
+&lt;footer&gt;...&lt;/footer&gt;
+
+&lt;!-- 2. Иерархия заголовков --&gt;
+&lt;h1&gt;Главный заголовок&lt;/h1&gt;
+&lt;h2&gt;Подзаголовок&lt;/h2&gt;
+&lt;h3&gt;Подподзаголовок&lt;/h3&gt;
+
+&lt;!-- 3. Альтернативный текст --&gt;
+&lt;img src="chart.png" alt="График роста продаж: +25% за год"&gt;
+&lt;img src="decoration.png" alt="" role="presentation"&gt;
+
+&lt;!-- 4. Формы с label --&gt;
+&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="email" required aria-describedby="email-hint"&gt;
+&lt;span id="email-hint"&gt;Мы не будем спамить&lt;/span&gt;
+
+&lt;!-- 5. Кнопки и ссылки --&gt;
+&lt;button aria-label="Закрыть"&gt;✕&lt;/button&gt;
+&lt;a href="/page"&gt;Читать далее о продукте X&lt;/a&gt; &lt;!-- НЕ "Читать далее" --&gt;</code></pre>
+                </div>
+
+                <h3>ARIA</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Роли --&gt;
+&lt;div role="alert"&gt;Ошибка сохранения!&lt;/div&gt;
+&lt;div role="dialog" aria-modal="true"&gt;...&lt;/div&gt;
+
+&lt;!-- Состояния --&gt;
+&lt;button aria-expanded="false" aria-controls="menu"&gt;Меню&lt;/button&gt;
+&lt;nav id="menu" aria-hidden="true"&gt;...&lt;/nav&gt;
+
+&lt;!-- Live regions --&gt;
+&lt;div aria-live="polite"&gt;Загрузка завершена&lt;/div&gt;
+&lt;div aria-live="assertive"&gt;Ошибка!&lt;/div&gt;</code></pre>
+                </div>
+
+                <h3>Фокус и клавиатура</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Видимый фокус */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.12 Безопасность -->
+            <section id="security" class="topic-section">
+                <h2>Безопасность</h2>
+
+                <h3>HTTP заголовки</h3>
+                
+                <div class="code-example">
+<pre><code class="language-text"># Content Security Policy
+Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-abc123'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;
+
+# Защита от кликджекинга
+X-Frame-Options: DENY
+
+# XSS защита
+X-Content-Type-Options: nosniff
+
+# HTTPS
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# Referrer
+Referrer-Policy: strict-origin-when-cross-origin</code></pre>
+                </div>
+
+                <h3>XSS защита</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Опасно
+element.innerHTML = userInput;
+
+//  Безопасно
+element.textContent = userInput;
+
+//  Санитизация
+import DOMPurify from 'dompurify';
+element.innerHTML = DOMPurify.sanitize(userInput);</code></pre>
+                </div>
+            </section>
+
+            <!-- 9.13 Инструменты -->
+            <section id="tools" class="topic-section">
+                <h2>Инструменты</h2>
+
+                <h3>Анализ производительности</h3>
+                <ul>
+                    <li><strong>Lighthouse</strong> — встроен в DevTools</li>
+                    <li><strong>PageSpeed Insights</strong> — реальные данные</li>
+                    <li><strong>WebPageTest</strong> — детальный анализ</li>
+                    <li><strong>Chrome DevTools Performance</strong> — профилирование</li>
+                </ul>
+
+                <h3>Бандл анализ</h3>
+                <ul>
+                    <li><strong>webpack-bundle-analyzer</strong></li>
+                    <li><strong>source-map-explorer</strong></li>
+                    <li><strong>bundlephobia.com</strong> — размер npm пакетов</li>
+                </ul>
+
+                <h3>Доступность</h3>
+                <ul>
+                    <li><strong>axe DevTools</strong></li>
+                    <li><strong>WAVE</strong></li>
+                    <li><strong>Lighthouse Accessibility</strong></li>
+                </ul>
+
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Проведите полный аудит любого сайта:</p>
+                    <ul>
+                        <li>Lighthouse: Performance, Accessibility, SEO, Best Practices</li>
+                        <li>Core Web Vitals через PageSpeed Insights</li>
+                        <li>Составьте план оптимизации</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose">✕</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+

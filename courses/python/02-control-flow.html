@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Управление потоком в Python - изучите условные операторы, циклы и обработку исключений">
+    <meta name="keywords" content="python, условные операторы, if, else, циклы, for, while, исключения, try, except">
+    <title>Условия и циклы</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+
+        .operators-cheatsheet {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #d2a8ff;
+        }
+
+        .light-theme .operators-cheatsheet {
+            background-color: #f1f1f1;
+            border-left: 4px solid #8a63d2;
+        }
+
+        .operators-cheatsheet h4 {
+            color: #d2a8ff;
+            margin-top: 0;
+        }
+
+        .light-theme .operators-cheatsheet h4 {
+            color: #8a63d2;
+        }
+
+        .operators-cheatsheet table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .operators-cheatsheet th,
+        .operators-cheatsheet td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #444c56;
+        }
+
+        .light-theme .operators-cheatsheet th,
+        .light-theme .operators-cheatsheet td {
+            border: 1px solid #d0d7de;
+        }
+
+        .operators-cheatsheet th {
+            background-color: #373e47;
+        }
+
+        .light-theme .operators-cheatsheet th {
+            background-color: #e6e6e6;
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .celebration-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Стили для внешних ссылок */
+        a[href^="http"], a[href^="https"] {
+            color: #58a6ff;
+            text-decoration: underline;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        a[href^="http"]:hover, a[href^="https"]:hover {
+            color: #79c0ff;
+            text-decoration: underline;
+        }
+        
+        .light-theme a[href^="http"], .light-theme a[href^="https"] {
+            color: #0366d6;
+        }
+        
+        .light-theme a[href^="http"]:hover, .light-theme a[href^="https"]:hover {
+            color: #0969da;
+        }
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn active">2. Управление потоком</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#conditional" class="subtopic active">2.1 Условные операторы</a>
+                        <a href="#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Остальные модули -->
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Введение в модуль -->
+            <section class="module-intro">
+                <h2>Модуль 2: Управление потоком</h2>
+                <p>В этом модуле вы изучите, как управлять потоком выполнения программы с использованием условных операторов, циклов и обработки исключений. Эти инструменты позволяют создавать гибкие и интеллектуальные программы, которые могут принимать решения и реагировать на различные условия.</p>
+            </section>
+            
+            <!-- 2.1 Условные операторы -->
+            <section id="conditional" class="topic-section">
+                <h2>2.1 Условные операторы</h2>
+                
+                <h3>Что такое условные операторы?</h3>
+                <p>Условные операторы позволяют программе выполнять разные блоки кода в зависимости от заданных условий. В Python основным условным оператором является <code>if</code>.</p>
+                
+                <h3>Оператор if-elif-else</h3>
+                <p>Конструкция if-elif-else позволяет проверить несколько условий последовательно:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python">age = 18
+
+if age < 13:
+    print("Ребёнок")
+elif age < 18:
+    print("Подросток")
+else:
+    print("Взрослый")
+    
+# Результат: Взрослый</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Важно:</strong> В Python для создания блоков кода используются отступы (обычно 4 пробела), а не фигурные скобки как во многих других языках.</p>
+                </div>
+                
+                <h3>Операторы сравнения</h3>
+                <p>Для создания условий используются операторы сравнения:</p>
+                
+                <div class="operators-cheatsheet">
+                    <h4>Таблица операторов сравнения</h4>
+                    <table>
+                        <tr>
+                            <th>Оператор</th>
+                            <th>Описание</th>
+                            <th>Пример</th>
+                        </tr>
+                        <tr>
+                            <td>==</td>
+                            <td>Равно</td>
+                            <td>x == y</td>
+                        </tr>
+                        <tr>
+                            <td>!=</td>
+                            <td>Не равно</td>
+                            <td>x != y</td>
+                        </tr>
+                        <tr>
+                            <td>&gt;</td>
+                            <td>Больше чем</td>
+                            <td>x &gt; y</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;</td>
+                            <td>Меньше чем</td>
+                            <td>x &lt; y</td>
+                        </tr>
+                        <tr>
+                            <td>&gt;=</td>
+                            <td>Больше или равно</td>
+                            <td>x &gt;= y</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;=</td>
+                            <td>Меньше или равно</td>
+                            <td>x &lt;= y</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h3>Логические операторы</h3>
+                <p>Для объединения условий используются логические операторы:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Оператор and (И): оба условия должны быть истинными
+age = 25
+income = 50000
+
+if age > 21 and income > 30000:
+    print("Кредит одобрен")
+    
+# Оператор or (ИЛИ): хотя бы одно условие должно быть истинным
+if age > 65 or income < 10000:
+    print("Предоставляется скидка")
+    
+# Оператор not (НЕ): инвертирует результат
+is_weekend = False
+if not is_weekend:
+    print("Рабочий день")</code></pre>
+                </div>
+                
+                <h3>Тернарный оператор</h3>
+                <p>Python поддерживает краткий способ записи условия в одну строку — тернарный оператор:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Синтаксис: значение_если_истина if условие else значение_если_ложь
+age = 20
+status = "совершеннолетний" if age >= 18 else "несовершеннолетний"
+print(status)  # Результат: совершеннолетний</code></pre>
+                </div>
+                
+                <h3>Проверка принадлежности и идентичности</h3>
+                <p>Python предлагает специальные операторы для проверки принадлежности элемента к коллекции и идентичности объектов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Оператор in проверяет наличие элемента в последовательности
+fruits = ["яблоко", "банан", "груша"]
+if "банан" in fruits:
+    print("Банан в списке")
+    
+# Операторы is и is not проверяют, указывают ли переменные на один и тот же объект
+a = [1, 2, 3]
+b = a        # b указывает на тот же список
+c = [1, 2, 3]  # c - новый список с такими же значениями
+
+print(a is b)    # True
+print(a is c)    # False
+print(a == c)    # True (содержимое равно)</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы для практики</h4>
+                    <ul>
+                        <li>Начинайте с простых условий и постепенно усложняйте их.</li>
+                        <li>Обращайте внимание на отступы — они определяют блоки кода в Python.</li>
+                        <li>Помните о приоритете операторов при создании сложных условий.</li>
+                        <li>Используйте скобки для группировки условий для лучшей читаемости.</li>
+                    </ul>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Практическое задание</h4>
+                    <p>Напишите программу, которая запрашивает у пользователя его возраст и выводит соответствующее сообщение:</p>
+                    <ul>
+                        <li>Если возраст меньше 0, выведите "Ошибка: возраст не может быть отрицательным"</li>
+                        <li>Если возраст от 0 до 12, выведите "Ребенок"</li>
+                        <li>Если возраст от 13 до 17, выведите "Подросток"</li>
+                        <li>Если возраст от 18 до 64, выведите "Взрослый"</li>
+                        <li>Если возраст 65 и старше, выведите "Пенсионер"</li>
+                    </ul>
+                    <details>
+                        <summary>Показать решение</summary>
+                        <div class="code-example">
+                            <pre><code class="python">age = int(input("Введите ваш возраст: "))
+
+if age < 0:
+    print("Ошибка: возраст не может быть отрицательным")
+elif age <= 12:
+    print("Ребенок")
+elif age <= 17:
+    print("Подросток")
+elif age <= 64:
+    print("Взрослый")
+else:
+    print("Пенсионер")</code></pre>
+                        </div>
+                    </details>
+                </div>
+            </section>
+            
+            <!-- 2.2 Циклы (for/while) -->
+            <section id="loops" class="topic-section">
+                <h2>2.2 Циклы (for/while)</h2>
+                <p>Циклы позволяют выполнять один и тот же блок кода несколько раз. В Python есть два основных типа циклов: <code>for</code> и <code>while</code>.</p>
+                
+                <h3>Цикл for</h3>
+                <p>Цикл <code>for</code> используется для итерации по последовательностям (спискам, кортежам, строкам и т.д.) или другим итерируемым объектам.</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Базовый синтаксис цикла for
+for элемент in последовательность:
+    # код, который выполняется для каждого элемента
+    
+# Пример: перебор элементов списка
+fruits = ["яблоко", "банан", "груша"]
+for fruit in fruits:
+    print(f"Я люблю {fruit}")
+
+# Результат:
+# Я люблю яблоко
+# Я люблю банан
+# Я люблю груша</code></pre>
+                </div>
+                
+                <h4>Функция range()</h4>
+                <p>Функция <code>range()</code> часто используется с циклом for для создания последовательности чисел:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># range(stop) - числа от 0 до stop-1
+for i in range(5):
+    print(i)
+# Результат: 0 1 2 3 4
+
+# range(start, stop) - числа от start до stop-1
+for i in range(2, 6):
+    print(i)
+# Результат: 2 3 4 5
+
+# range(start, stop, step) - числа от start до stop-1 с шагом step
+for i in range(1, 10, 2):
+    print(i)
+# Результат: 1 3 5 7 9</code></pre>
+                </div>
+                
+                <h3>Цикл while</h3>
+                <p>Цикл <code>while</code> выполняет блок кода, пока заданное условие остаётся истинным:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Базовый синтаксис цикла while
+while условие:
+    # код, который выполняется пока условие истинно
+
+# Пример: счётчик с while
+count = 0
+while count < 5:
+    print(count)
+    count += 1  # увеличиваем счётчик
+# Результат: 0 1 2 3 4</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Предупреждение:</strong> Будьте осторожны с циклами <code>while</code>! Если условие никогда не станет ложным, получится бесконечный цикл. Всегда проверяйте, что условие в какой-то момент изменится.</p>
+                </div>
+                
+                <h3>Управляющие операторы: break и continue</h3>
+                <p>Python предоставляет специальные операторы для контроля выполнения циклов:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># break - немедленно прекращает выполнение цикла
+for i in range(10):
+    if i == 5:
+        break  # выход из цикла при i = 5
+    print(i)
+# Результат: 0 1 2 3 4
+
+# continue - пропускает текущую итерацию и переходит к следующей
+for i in range(10):
+    if i % 2 == 0:
+        continue  # пропускаем четные числа
+    print(i)
+# Результат: 1 3 5 7 9</code></pre>
+                </div>
+                
+                <h3>Цикл for-else и while-else</h3>
+                <p>В Python циклы могут иметь блок <code>else</code>, который выполняется после завершения цикла, если цикл не был прерван с помощью <code>break</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Пример использования else с циклом for
+for i in range(5):
+    print(i)
+else:
+    print("Цикл завершен нормально")
+# Результат: 0 1 2 3 4 Цикл завершен нормально
+
+# Пример с прерыванием цикла
+for i in range(5):
+    if i == 3:
+        break  # прерываем цикл
+    print(i)
+else:
+    print("Это сообщение не будет выведено")
+# Результат: 0 1 2</code></pre>
+                </div>
+                
+                <h3>Вложенные циклы</h3>
+                <p>Циклы можно вкладывать друг в друга для обработки многомерных данных:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Пример вложенных циклов: вывод таблицы умножения
+for i in range(1, 4):  # внешний цикл: строки
+    for j in range(1, 4):  # внутренний цикл: столбцы
+        print(f"{i} × {j} = {i*j}", end="\t")
+    print()  # переход на новую строку после каждой строки таблицы
+
+# Результат:
+# 1 × 1 = 1   1 × 2 = 2   1 × 3 = 3   
+# 2 × 1 = 2   2 × 2 = 4   2 × 3 = 6   
+# 3 × 1 = 3   3 × 2 = 6   3 × 3 = 9  </code></pre>
+                </div>
+                
+                <h3>Генераторы списков</h3>
+                <p>Генераторы списков (list comprehensions) — это краткий и элегантный способ создания списков на основе существующих последовательностей:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Синтаксис: [выражение for элемент in последовательность if условие]
+
+# Создание списка квадратов чисел
+numbers = [1, 2, 3, 4, 5]
+squares = [x**2 for x in numbers]
+print(squares)  # [1, 4, 9, 16, 25]
+
+# С условием: только четные числа
+even_squares = [x**2 for x in numbers if x % 2 == 0]
+print(even_squares)  # [4, 16]
+
+# Вложенные циклы в генераторе
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flat_list = [x for row in matrix for x in row]
+print(flat_list)  # [1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Когда использовать for, а когда while?</h4>
+                    <ul>
+                        <li><strong>Используйте for:</strong> когда заранее известно количество итераций или нужно перебрать все элементы последовательности.</li>
+                        <li><strong>Используйте while:</strong> когда количество итераций заранее неизвестно и выполнение зависит от условия.</li>
+                    </ul>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы для эффективной работы с циклами</h4>
+                    <ul>
+                        <li>Избегайте изменения последовательности, по которой итерируется цикл for.</li>
+                        <li>Используйте функцию <code>enumerate()</code> для получения и индекса, и значения элемента: <code>for index, value in enumerate(sequence):</code></li>
+                        <li>Для параллельной итерации по нескольким последовательностям применяйте <code>zip()</code>: <code>for x, y in zip(list1, list2):</code></li>
+                        <li>Всегда проверяйте условие выхода из цикла while, чтобы избежать бесконечных циклов.</li>
+                    </ul>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Практические задания</h4>
+                    <p><strong>Задание 1:</strong> Напишите программу, которая выводит таблицу умножения для числа, введенного пользователем (от 1 до 10).</p>
+                    <details>
+                        <summary>Показать решение</summary>
+                        <div class="code-example">
+                            <pre><code class="python">number = int(input("Введите число от 1 до 10: "))
+
+print(f"Таблица умножения для числа {number}:")
+for i in range(1, 11):
+    result = number * i
+    print(f"{number} × {i} = {result}")</code></pre>
+                        </div>
+                    </details>
+                    
+                    <p><strong>Задание 2:</strong> Напишите программу, которая находит все числа от 1 до 100, которые делятся на 7, используя генератор списков.</p>
+                    <details>
+                        <summary>Показать решение</summary>
+                        <div class="code-example">
+                            <pre><code class="python">divisible_by_7 = [num for num in range(1, 101) if num % 7 == 0]
+print("Числа от 1 до 100, делящиеся на 7:")
+print(divisible_by_7)</code></pre>
+                        </div>
+                    </details>
+                </div>
+            </section>
+            
+            <!-- 2.3 Исключения -->
+            <section id="exceptions" class="topic-section">
+                <h2>2.3 Исключения</h2>
+                <p>Исключения — это объекты, которые представляют ошибки и особые ситуации, возникающие во время выполнения программы. В Python механизм обработки исключений позволяет корректно реагировать на ошибки, не прерывая работу программы.</p>
+                
+                <h3>Блок try-except</h3>
+                <p>Основной конструкцией для обработки исключений является блок <code>try-except</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Базовый синтаксис try-except
+try:
+    # Код, который может вызвать исключение
+    result = 10 / 0  # Деление на ноль вызывает ZeroDivisionError
+except ZeroDivisionError:
+    # Код, который выполняется при возникновении указанного исключения
+    print("Ошибка: деление на ноль!")
+    
+# Результат: Ошибка: деление на ноль!</code></pre>
+                </div>
+                
+                <h3>Блок try-except-else-finally</h3>
+                <p>Полная структура блока обработки исключений включает дополнительные секции <code>else</code> и <code>finally</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python">try:
+    # Код, который может вызвать исключение
+    num = int(input("Введите число: "))
+    result = 100 / num
+except ValueError:
+    # Выполняется при ошибке преобразования в int
+    print("Введено не число!")
+except ZeroDivisionError:
+    # Выполняется при делении на ноль
+    print("Деление на ноль!")
+else:
+    # Выполняется, если в блоке try не возникло исключений
+    print(f"Результат: {result}")
+finally:
+    # Выполняется всегда, независимо от того, было ли исключение
+    print("Операция завершена")</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Важно:</strong> Блок <code>finally</code> выполняется всегда, вне зависимости от того, возникло исключение или нет. Это делает его идеальным местом для освобождения ресурсов (закрытие файлов, соединений с базой данных и т.д.).</p>
+                </div>
+                
+                <h3>Обработка нескольких исключений</h3>
+                <p>Несколько типов исключений можно обрабатывать разными способами:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Несколько блоков except для разных исключений
+try:
+    value = int(input("Введите число: "))
+    result = 10 / value
+except ValueError:
+    print("Некорректный ввод: не число")
+except ZeroDivisionError:
+    print("Ошибка: деление на ноль")
+    
+# Несколько исключений в одном блоке except
+try:
+    value = int(input("Введите число: "))
+    result = 10 / value
+except (ValueError, ZeroDivisionError):
+    print("Произошла ошибка: неверный ввод или деление на ноль")</code></pre>
+                </div>
+                
+                <h3>Перехват всех исключений</h3>
+                <p>Python позволяет перехватывать все исключения, но этот подход следует использовать с осторожностью:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Перехват любого исключения - избегайте такой практики в реальном коде!
+try:
+    # Какой-то код
+    result = 10 / 0
+except Exception as e:
+    # Получаем доступ к объекту исключения
+    print(f"Произошла ошибка: {e}")
+    
+# Результат: Произошла ошибка: division by zero</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Предупреждение:</strong> Перехват всех исключений с помощью <code>except Exception</code> или просто <code>except:</code> может скрыть неожиданные ошибки и затруднить отладку. Лучше перехватывать только конкретные исключения, которые вы ожидаете и умеете обрабатывать.</p>
+                </div>
+                
+                <h3>Вызов исключений</h3>
+                <p>Вы можете генерировать исключения самостоятельно с помощью оператора <code>raise</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Генерация стандартного исключения
+def validate_age(age):
+    if age < 0:
+        raise ValueError("Возраст не может быть отрицательным")
+    if age > 120:
+        raise ValueError("Недопустимый возраст")
+    return age
+    
+# Пример использования
+try:
+    user_age = validate_age(-5)
+except ValueError as error:
+    print(f"Ошибка: {error}")
+    
+# Результат: Ошибка: Возраст не может быть отрицательным</code></pre>
+                </div>
+                
+                <h3>Создание собственных исключений</h3>
+                <p>Вы можете создавать собственные классы исключений, наследуя их от базового класса <code>Exception</code>:</p>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Определение пользовательского исключения
+class InsufficientFundsError(Exception):
+    """Вызывается при попытке снять больше денег, чем есть на счёте"""
+    pass
+    
+# Использование пользовательского исключения
+class BankAccount:
+    def __init__(self, balance=0):
+        self.balance = balance
+        
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientFundsError(f"Недостаточно средств. Баланс: {self.balance}, требуется: {amount}")
+        self.balance -= amount
+        return amount
+        
+# Пример использования
+account = BankAccount(100)
+try:
+    account.withdraw(150)
+except InsufficientFundsError as e:
+    print(f"Ошибка: {e}")</code></pre>
+                </div>
+                
+                <h3>Иерархия исключений</h3>
+                <p>В Python все исключения организованы в иерархию. Вот некоторые из наиболее распространенных встроенных исключений:</p>
+                
+                <ul>
+                    <li><code>Exception</code>: базовый класс для всех исключений</li>
+                    <li><code>ArithmeticError</code>: базовый класс для ошибок арифметики</li>
+                    <li><code>ZeroDivisionError</code>: деление на ноль</li>
+                    <li><code>OverflowError</code>: результат вычисления слишком велик</li>
+                    <li><code>ValueError</code>: некорректное значение</li>
+                    <li><code>TypeError</code>: операция с неподдерживаемым типом</li>
+                    <li><code>IndexError</code>: индекс вне диапазона</li>
+                    <li><code>KeyError</code>: обращение к несуществующему ключу словаря</li>
+                    <li><code>FileNotFoundError</code>: файл не найден</li>
+                    <li><code>PermissionError</code>: недостаточно прав для выполнения операции</li>
+                </ul>
+                
+                <h3>Лучшие практики обработки исключений</h3>
+                
+                <div class="practice-tips">
+                    <h4>Практические советы</h4>
+                    <ul>
+                        <li><strong>Будьте конкретны:</strong> перехватывайте только те исключения, которые вы ожидаете и можете обработать.</li>
+                        <li><strong>Минимизируйте блоки try:</strong> помещайте в try только тот код, который может вызвать исключение.</li>
+                        <li><strong>Логируйте исключения:</strong> записывайте информацию об ошибках для последующего анализа.</li>
+                        <li><strong>Не игнорируйте исключения:</strong> пустой блок <code>except:</code> может скрыть серьезные проблемы.</li>
+                        <li><strong>Используйте finally:</strong> для гарантированного освобождения ресурсов.</li>
+                    </ul>
+                </div>
+                
+                <h3>LBYL vs EAFP</h3>
+                <p>В Python существуют два подхода к предотвращению ошибок:</p>
+                <ul>
+                    <li><strong>LBYL (Look Before You Leap)</strong> — "Смотри, прежде чем прыгать". Проверка условий перед выполнением операции.</li>
+                    <li><strong>EAFP (Easier to Ask Forgiveness than Permission)</strong> — "Проще просить прощения, чем разрешения". Выполнение операции в блоке try-except.</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="python"># Подход LBYL (проверка перед действием)
+def get_dict_value_lbyl(dictionary, key):
+    if key in dictionary:
+        return dictionary[key]
+    else:
+        return None
+        
+# Подход EAFP (обработка исключения)
+def get_dict_value_eafp(dictionary, key):
+    try:
+        return dictionary[key]
+    except KeyError:
+        return None</code></pre>
+                </div>
+                
+                <p>В Python чаще предпочитают стиль EAFP, поскольку он часто делает код более читаемым и избегает гонок условий (race conditions).</p>
+                
+                <div class="exercise">
+                    <h4>Практическое задание</h4>
+                    <p>Напишите функцию <code>safe_divide(a, b)</code>, которая безопасно делит <code>a</code> на <code>b</code>, обрабатывая возможные исключения:</p>
+                    <ul>
+                        <li>Если <code>b</code> равно 0, функция должна вернуть строку "Деление на ноль невозможно"</li>
+                        <li>Если какой-либо из аргументов не является числом, функция должна вернуть "Ошибка: аргументы должны быть числами"</li>
+                        <li>В случае успешного деления функция возвращает результат операции</li>
+                    </ul>
+                    <details>
+                        <summary>Показать решение</summary>
+                        <div class="code-example">
+                            <pre><code class="python">def safe_divide(a, b):
+    try:
+        # Проверяем, что аргументы - числа
+        result = float(a) / float(b)
+        return result
+    except ZeroDivisionError:
+        return "Деление на ноль невозможно"
+    except (ValueError, TypeError):
+        return "Ошибка: аргументы должны быть числами"
+        
+# Тестирование функции
+print(safe_divide(10, 2))      # 5.0
+print(safe_divide(10, 0))      # Деление на ноль невозможно
+print(safe_divide("10", "2"))  # 5.0
+print(safe_divide("abc", 2))   # Ошибка: аргументы должны быть числами</code></pre>
+                        </div>
+                    </details>
+                </div>
+            </section>
+            
+            <!-- Заключение модуля -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html>

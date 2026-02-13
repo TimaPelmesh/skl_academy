@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Углублённый курс по адаптивной вёрстке. Медиа-запросы, mobile-first, контейнерные запросы, fluid typography, responsive images.">
+    <meta name="keywords" content="адаптивная верстка, responsive design, media queries, mobile first, контейнерные запросы, fluid typography">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Веб‑разработка — Модуль 4: Адаптивная вёрстка">
+    <meta property="og:description" content="Полное руководство по адаптивной вёрстке: от основ до продвинутых техник.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/web/04-responsive-design.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <title>Веб‑разработка — Модуль 4: Адаптивная вёрстка | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/04-responsive-design.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Адаптивная вёрстка — полное руководство",
+      "description": "Углублённый курс по responsive design: медиа-запросы, mobile-first, контейнерные запросы, fluid typography.",
+      "provider": {"@type": "Organization", "name": "SKL Academy"},
+      "courseMode": "online",
+      "educationalLevel": "intermediate",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true
+    }
+    </script>
+</head>
+<body data-course="web">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+        <h1 class="header-title">Responsive</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема"><span class="color-dot" style="background: #6c63ff;"></span></button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема"><span class="color-dot" style="background: #f97316;"></span></button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема"><span class="color-dot" style="background: #3b82f6;"></span></button>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">Введение в HTML</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">Формы</a>
+                        <a href="01-html-basics.html#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="01-html-basics.html#seo-html" class="subtopic">SEO</a>
+                        <a href="01-html-basics.html#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">Введение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">Специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">Типографика</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">Box Model</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">@media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">Анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">Условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">События</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">Storage</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="#intro" class="subtopic active">Введение</a>
+                        <a href="#viewport" class="subtopic">Viewport</a>
+                        <a href="#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="#responsive-images" class="subtopic">Изображения</a>
+                        <a href="#container-queries" class="subtopic">Container Queries</a>
+                        <a href="#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="06-forms-validation.html#form-basics" class="subtopic">Основы форм</a>
+                        <a href="06-forms-validation.html#input-types" class="subtopic">Типы полей</a>
+                        <a href="06-forms-validation.html#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="06-forms-validation.html#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="06-forms-validation.html#js-validation" class="subtopic">JS валидация</a>
+                        <a href="06-forms-validation.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="06-forms-validation.html#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="06-forms-validation.html#security" class="subtopic">Безопасность</a>
+                        <a href="06-forms-validation.html#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="07-dom-advanced.html#dom-tree" class="subtopic">Дерево DOM</a>
+                        <a href="07-dom-advanced.html#selectors" class="subtopic">Селекторы</a>
+                        <a href="07-dom-advanced.html#traversal" class="subtopic">Обход</a>
+                        <a href="07-dom-advanced.html#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="07-dom-advanced.html#events-basics" class="subtopic">События</a>
+                        <a href="07-dom-advanced.html#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="07-dom-advanced.html#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="07-dom-advanced.html#observers" class="subtopic">Observers</a>
+                        <a href="07-dom-advanced.html#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html#core-web-vitals" class="subtopic">Core Web Vitals</a>
+                        <a href="09-optimization.html#lcp" class="subtopic">LCP</a>
+                        <a href="09-optimization.html#cls" class="subtopic">CLS</a>
+                        <a href="09-optimization.html#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="09-optimization.html#fonts" class="subtopic">Шрифты</a>
+                        <a href="09-optimization.html#js-perf" class="subtopic">JS производительность</a>
+                        <a href="09-optimization.html#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="09-optimization.html#seo" class="subtopic">SEO</a>
+                        <a href="09-optimization.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="09-optimization.html#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="10-projects.html#intro" class="subtopic">Введение</a>
+                        <a href="10-projects.html#project-1" class="subtopic">Проект 1</a>
+                        <a href="10-projects.html#project-2" class="subtopic">Проект 2</a>
+                        <a href="10-projects.html#project-3" class="subtopic">Проект 3</a>
+                        <a href="10-projects.html#project-4" class="subtopic">Проект 4</a>
+                        <a href="10-projects.html#project-5" class="subtopic">Проект 5</a>
+                        <a href="10-projects.html#project-6" class="subtopic">Проект 6</a>
+                        <a href="10-projects.html#deployment" class="subtopic">Деплой</a>
+                        <a href="10-projects.html#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 4: Адаптивная вёрстка</h2>
+                <p>Полное погружение в мир responsive design — от базовых медиа-запросов до современных контейнерных запросов и fluid typography.</p>
+            </section>
+
+            <!-- 4.1 Введение -->
+            <section id="intro" class="topic-section">
+                <h2>Введение в адаптивную вёрстку</h2>
+                
+                <h3>Что такое адаптивный дизайн?</h3>
+                <p><strong>Responsive Web Design (RWD)</strong> — подход к веб-разработке, при котором сайт автоматически подстраивается под размер экрана устройства пользователя.</p>
+                
+                <div class="visual-guide">
+                    <h4>Три столпа адаптивности</h4>
+                    <ul>
+                        <li><strong>Гибкая сетка (Flexible Grid)</strong> — размеры в процентах или относительных единицах</li>
+                        <li><strong>Гибкие изображения (Flexible Images)</strong> — масштабирование медиа-контента</li>
+                        <li><strong>Медиа-запросы (Media Queries)</strong> — условные стили для разных экранов</li>
+                    </ul>
+                </div>
+
+                <h3>Почему это важно?</h3>
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Статистика</th>
+                                <th>Данные 2025</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Мобильный трафик</td>
+                                <td>~60% всего веб-трафика</td>
+                            </tr>
+                            <tr>
+                                <td>Google Mobile-First</td>
+                                <td>Индексация с мобильной версии</td>
+                            </tr>
+                            <tr>
+                                <td>Bounce rate без адаптива</td>
+                                <td>+50% отказов</td>
+                            </tr>
+                            <tr>
+                                <td>Конверсия</td>
+                                <td>+30% на адаптивных сайтах</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Эволюция адаптивности</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>2000-е</strong>
+                        <p>Фиксированные макеты 960px, отдельная мобильная версия (m.site.com)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2010</strong>
+                        <p>Ethan Marcotte вводит термин "Responsive Web Design"</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2015</strong>
+                        <p>Google объявляет mobile-friendly как фактор ранжирования</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2019</strong>
+                        <p>Mobile-First Indexing становится стандартом</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2023+</strong>
+                        <p>Container Queries, :has(), subgrid — новая эра CSS</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4.2 Viewport -->
+            <section id="viewport" class="topic-section">
+                <h2>Viewport и единицы измерения</h2>
+
+                <h3>Meta viewport</h3>
+                <p>Критически важный тег для корректного отображения на мобильных устройствах:</p>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Базовая настройка (обязательно!) --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+&lt;!-- Расширенные параметры --&gt;
+&lt;meta name="viewport" content="
+  width=device-width,
+  initial-scale=1.0,
+  minimum-scale=1.0,
+  maximum-scale=5.0,
+  user-scalable=yes
+"&gt;</code></pre>
+                </div>
+
+                <div class="warn">
+                    <h4> Никогда не делайте так</h4>
+                    <p><code>user-scalable=no</code> или <code>maximum-scale=1.0</code> — это нарушает доступность! Пользователи с плохим зрением должны иметь возможность увеличить страницу.</p>
+                </div>
+
+                <h3>Единицы измерения viewport</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Единица</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>vw</code></td>
+                                <td>1% ширины viewport</td>
+                                <td><code>width: 50vw</code> = 50% ширины экрана</td>
+                            </tr>
+                            <tr>
+                                <td><code>vh</code></td>
+                                <td>1% высоты viewport</td>
+                                <td><code>height: 100vh</code> = полная высота</td>
+                            </tr>
+                            <tr>
+                                <td><code>vmin</code></td>
+                                <td>1% от меньшего измерения</td>
+                                <td>Квадратные элементы</td>
+                            </tr>
+                            <tr>
+                                <td><code>vmax</code></td>
+                                <td>1% от большего измерения</td>
+                                <td>Растянутые элементы</td>
+                            </tr>
+                            <tr>
+                                <td><code>dvh</code></td>
+                                <td>Динамическая высота (учитывает UI)</td>
+                                <td>Мобильные браузеры</td>
+                            </tr>
+                            <tr>
+                                <td><code>svh</code></td>
+                                <td>Минимальная высота viewport</td>
+                                <td>Когда UI развёрнут</td>
+                            </tr>
+                            <tr>
+                                <td><code>lvh</code></td>
+                                <td>Максимальная высота viewport</td>
+                                <td>Когда UI скрыт</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Проблема 100vh на мобильных</h3>
+                <p>На мобильных браузерах <code>100vh</code> включает адресную строку, что вызывает проблемы:</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Проблема: контент обрезается под адресной строкой */
+.hero {
+  height: 100vh; /* НЕ рекомендуется */
+}
+
+/* Решение 1: Современные единицы (2023+) */
+.hero {
+  height: 100dvh; /* Динамическая высота */
+}
+
+/* Решение 2: Fallback для старых браузеров */
+.hero {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Решение 3: CSS custom property через JS */
+.hero {
+  height: calc(var(--vh, 1vh) * 100);
+}</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">// JS для вычисления реальной высоты viewport
+function setVH() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+window.addEventListener('resize', setVH);</code></pre>
+                </div>
+
+                <h3>Относительные единицы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* em — относительно font-size родителя */
+.parent { font-size: 16px; }
+.child { font-size: 1.5em; } /* = 24px */
+.child { padding: 1em; }     /* = 24px (от своего font-size!) */
+
+/* rem — относительно font-size :root (html) */
+:root { font-size: 16px; }
+.element { 
+  font-size: 1.25rem;  /* = 20px */
+  padding: 1.5rem;     /* = 24px */
+  margin: 2rem;        /* = 32px */
+}
+
+/* ch — ширина символа "0" */
+.input { width: 20ch; } /* ~20 символов */
+
+/* ex — высота строчной "x" */
+.sup { vertical-align: 1ex; }</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4> Рекомендация</h4>
+                    <p>Используйте <code>rem</code> для размеров и отступов, <code>em</code> для внутренних пропорций компонентов. Это упрощает масштабирование всего интерфейса.</p>
+                </div>
+            </section>
+
+            <!-- 4.3 Media Queries -->
+            <section id="media-queries" class="topic-section">
+                <h2>Медиа-запросы (Media Queries)</h2>
+
+                <h3>Базовый синтаксис</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Синтаксис */
+@media media-type and (condition) {
+  /* стили */
+}
+
+/* Типы медиа */
+@media screen { }  /* Экраны */
+@media print { }   /* Печать */
+@media all { }     /* Все устройства (по умолчанию) */
+
+/* Условия по ширине */
+@media (min-width: 768px) { }   /* От 768px и шире */
+@media (max-width: 767px) { }   /* До 767px */
+@media (width: 1024px) { }      /* Точно 1024px (редко) */
+
+/* Диапазоны (современный синтаксис) */
+@media (width >= 768px) { }
+@media (768px <= width <= 1024px) { }
+@media (width < 768px) { }</code></pre>
+                </div>
+
+                <h3>Логические операторы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* AND — все условия должны выполняться */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Планшеты */
+}
+
+/* OR (запятая) — хотя бы одно условие */
+@media (max-width: 600px), (orientation: portrait) {
+  /* Мобильные ИЛИ портретная ориентация */
+}
+
+/* NOT — инверсия */
+@media not print {
+  /* Всё кроме печати */
+}
+
+/* Современный синтаксис с or/and/not */
+@media (width >= 768px) and (width <= 1024px) { }
+@media (width < 768px) or (orientation: portrait) { }
+@media not (color) { /* Чёрно-белые экраны */ }</code></pre>
+                </div>
+
+                <h3>Медиа-характеристики (Media Features)</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Характеристика</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>orientation</code></td>
+                                <td>Ориентация экрана</td>
+                                <td><code>portrait</code> / <code>landscape</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>aspect-ratio</code></td>
+                                <td>Соотношение сторон</td>
+                                <td><code>(aspect-ratio: 16/9)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>resolution</code></td>
+                                <td>Плотность пикселей</td>
+                                <td><code>(min-resolution: 2dppx)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>prefers-color-scheme</code></td>
+                                <td>Тёмная/светлая тема</td>
+                                <td><code>dark</code> / <code>light</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>prefers-reduced-motion</code></td>
+                                <td>Отключить анимации</td>
+                                <td><code>reduce</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>prefers-contrast</code></td>
+                                <td>Повышенный контраст</td>
+                                <td><code>more</code> / <code>less</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>hover</code></td>
+                                <td>Поддержка hover</td>
+                                <td><code>hover</code> / <code>none</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>pointer</code></td>
+                                <td>Точность указателя</td>
+                                <td><code>fine</code> / <code>coarse</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Практические примеры</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Тёмная тема системы */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a2e;
+    --text: #e0e0e0;
+  }
+}
+
+/* Отключение анимаций для пользователей с вестибулярными нарушениями */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Touch-устройства (нет точного hover) */
+@media (hover: none) and (pointer: coarse) {
+  .tooltip { display: none; }
+  .button { min-height: 44px; } /* Минимум для тапа */
+}
+
+/* Retina-дисплеи */
+@media (min-resolution: 2dppx) {
+  .logo {
+    background-image: url('logo@2x.png');
+  }
+}
+
+/* Печать */
+@media print {
+  .no-print { display: none; }
+  a[href]::after { content: ' (' attr(href) ')'; }
+  body { font-size: 12pt; color: black; }
+}</code></pre>
+                </div>
+
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Создайте страницу, которая автоматически переключается между светлой и тёмной темой в зависимости от системных настроек пользователя.</p>
+                </div>
+            </section>
+
+            <!-- 4.4 Mobile-First -->
+            <section id="mobile-first" class="topic-section">
+                <h2>Mobile-First подход</h2>
+
+                <h3>Философия Mobile-First</h3>
+                <p><strong>Mobile-First</strong> — методология, при которой сначала создаётся мобильная версия, а затем добавляются стили для больших экранов.</p>
+
+                <div class="visual-guide">
+                    <h4>Почему Mobile-First?</h4>
+                    <ul>
+                        <li><strong>Приоритизация контента</strong> — на маленьком экране видно только важное</li>
+                        <li><strong>Производительность</strong> — мобильные устройства загружают меньше CSS</li>
+                        <li><strong>Прогрессивное улучшение</strong> — базовые стили работают везде</li>
+                        <li><strong>SEO</strong> — Google индексирует мобильную версию первой</li>
+                    </ul>
+                </div>
+
+                <h3>Desktop-First vs Mobile-First</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/*  Desktop-First (устаревший подход) */
+.container {
+  width: 1200px;
+  display: flex;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/*  Mobile-First (рекомендуемый подход) */
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1200px;
+    flex-direction: row;
+    gap: 2rem;
+  }
+}</code></pre>
+                </div>
+
+                <h3>Структура Mobile-First CSS</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* 1. Базовые стили (мобильные) */
+.card {
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--card-bg);
+}
+
+.card__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card__image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+/* 2. Планшеты (от 768px) */
+@media (min-width: 768px) {
+  .card {
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .card__image {
+    width: 40%;
+    aspect-ratio: 4/3;
+  }
+}
+
+/* 3. Десктоп (от 1024px) */
+@media (min-width: 1024px) {
+  .card {
+    padding: 2rem;
+  }
+  
+  .card__title {
+    font-size: 1.5rem;
+  }
+}
+
+/* 4. Большие экраны (от 1440px) */
+@media (min-width: 1440px) {
+  .card {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}</code></pre>
+                </div>
+
+                <h3>Организация медиа-запросов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Вариант 1: Медиа-запросы в конце каждого компонента */
+.header { /* мобильные стили */ }
+.header__nav { /* мобильные стили */ }
+
+@media (min-width: 768px) {
+  .header { /* планшетные стили */ }
+  .header__nav { /* планшетные стили */ }
+}
+
+/* Вариант 2: Все медиа-запросы в конце файла */
+/* (Лучше для читаемости больших файлов) */
+
+/* Вариант 3: CSS Custom Properties для адаптивности */
+:root {
+  --spacing: 1rem;
+  --font-size-heading: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --spacing: 1.5rem;
+    --font-size-heading: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --spacing: 2rem;
+    --font-size-heading: 2.5rem;
+  }
+}
+
+.section {
+  padding: var(--spacing);
+}
+
+h1 {
+  font-size: var(--font-size-heading);
+}</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4> Совет</h4>
+                    <p>Используйте CSS Custom Properties для создания "адаптивных токенов" — переменных, которые меняются в зависимости от размера экрана. Это делает код чище и проще в поддержке.</p>
+                </div>
+            </section>
+
+            <!-- 4.5 Breakpoints -->
+            <section id="breakpoints" class="topic-section">
+                <h2>Брейкпоинты и стратегии</h2>
+
+                <h3>Популярные брейкпоинты</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Устройство</th>
+                                <th>Брейкпоинт</th>
+                                <th>Tailwind</th>
+                                <th>Bootstrap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Мобильные (портрет)</td>
+                                <td>320px - 480px</td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>Мобильные (ландшафт)</td>
+                                <td>481px - 639px</td>
+                                <td>sm: 640px</td>
+                                <td>sm: 576px</td>
+                            </tr>
+                            <tr>
+                                <td>Планшеты</td>
+                                <td>640px - 1023px</td>
+                                <td>md: 768px</td>
+                                <td>md: 768px</td>
+                            </tr>
+                            <tr>
+                                <td>Ноутбуки</td>
+                                <td>1024px - 1279px</td>
+                                <td>lg: 1024px</td>
+                                <td>lg: 992px</td>
+                            </tr>
+                            <tr>
+                                <td>Десктопы</td>
+                                <td>1280px - 1535px</td>
+                                <td>xl: 1280px</td>
+                                <td>xl: 1200px</td>
+                            </tr>
+                            <tr>
+                                <td>Большие экраны</td>
+                                <td>1536px+</td>
+                                <td>2xl: 1536px</td>
+                                <td>xxl: 1400px</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Определение своих брейкпоинтов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* CSS Custom Properties для брейкпоинтов */
+:root {
+  /* Используем в JS для медиа-запросов */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+}
+
+/* SCSS/Sass миксины */
+@mixin sm { @media (min-width: 640px) { @content; } }
+@mixin md { @media (min-width: 768px) { @content; } }
+@mixin lg { @media (min-width: 1024px) { @content; } }
+@mixin xl { @media (min-width: 1280px) { @content; } }
+
+/* Использование */
+.element {
+  font-size: 1rem;
+  
+  @include md {
+    font-size: 1.25rem;
+  }
+  
+  @include lg {
+    font-size: 1.5rem;
+  }
+}</code></pre>
+                </div>
+
+                <h3>Content-First брейкпоинты</h3>
+                <p>Лучшая практика — определять брейкпоинты на основе контента, а не устройств:</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">/*  Брейкпоинты на основе устройств */
+@media (min-width: 768px) { /* "для iPad" */ }
+
+/*  Брейкпоинты на основе контента */
+/* Открываем DevTools, уменьшаем ширину, 
+   добавляем брейкпоинт когда дизайн "ломается" */
+
+.article {
+  /* Базовые стили */
+}
+
+/* Когда текст становится слишком широким для чтения */
+@media (min-width: 45em) {
+  .article {
+    max-width: 65ch; /* ~65 символов — идеальная длина строки */
+    margin: 0 auto;
+  }
+}
+
+/* Когда карточки могут встать в ряд */
+@media (min-width: 600px) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Когда помещается третья колонка */
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4> Правило</h4>
+                    <p>Добавляйте брейкпоинт только когда дизайн "требует" этого — когда контент выглядит плохо или неудобен для использования.</p>
+                </div>
+            </section>
+
+            <!-- 4.6 Fluid Typography -->
+            <section id="fluid-typography" class="topic-section">
+                <h2>Fluid Typography (Плавная типографика)</h2>
+
+                <h3>Проблема фиксированных размеров</h3>
+                <p>При использовании медиа-запросов размер шрифта меняется "скачками". Fluid typography обеспечивает плавное изменение.</p>
+
+                <h3>CSS clamp() — современное решение</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Синтаксис: clamp(минимум, предпочтительное, максимум) */
+
+h1 {
+  /* Минимум 2rem, максимум 4rem, 
+     между ними масштабируется от ширины viewport */
+  font-size: clamp(2rem, 5vw + 1rem, 4rem);
+}
+
+p {
+  /* 1rem на мобильных, плавно до 1.25rem на десктопе */
+  font-size: clamp(1rem, 0.5vw + 0.875rem, 1.25rem);
+}
+
+/* Система fluid typography */
+:root {
+  --fluid-min-width: 320;
+  --fluid-max-width: 1440;
+  
+  --fluid-screen: 100vw;
+  --fluid-bp: calc(
+    (var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
+    (var(--fluid-max-width) - var(--fluid-min-width))
+  );
+}
+
+/* Fluid размеры */
+:root {
+  --fs-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+  --fs-base: clamp(1rem, 0.9rem + 0.35vw, 1.125rem);
+  --fs-md: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --fs-lg: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --fs-xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --fs-2xl: clamp(2.5rem, 1.75rem + 3vw, 4.5rem);
+}</code></pre>
+                </div>
+
+                <h3>Калькулятор Fluid Typography</h3>
+                <p>Формула для расчёта: <code>clamp(minSize, calc(minSize + (maxSize - minSize) * ((100vw - minViewport) / (maxViewport - minViewport))), maxSize)</code></p>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Упрощённая формула */
+/* font-size от 16px (320px) до 24px (1440px) */
+font-size: clamp(1rem, calc(1rem + (1.5 - 1) * ((100vw - 320px) / (1440 - 320))), 1.5rem);
+
+/* Ещё проще с vw */
+/* ~16px на 320px, ~24px на 1440px */
+font-size: clamp(1rem, 0.714vw + 0.857rem, 1.5rem);</code></pre>
+                </div>
+
+                <h3>Fluid Spacing</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">:root {
+  /* Fluid отступы */
+  --space-3xs: clamp(0.25rem, 0.2rem + 0.2vw, 0.375rem);
+  --space-2xs: clamp(0.5rem, 0.4rem + 0.4vw, 0.75rem);
+  --space-xs: clamp(0.75rem, 0.6rem + 0.6vw, 1rem);
+  --space-sm: clamp(1rem, 0.8rem + 0.8vw, 1.5rem);
+  --space-md: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --space-lg: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+  --space-xl: clamp(3rem, 2.4rem + 2.4vw, 4.5rem);
+  --space-2xl: clamp(4rem, 3.2rem + 3.2vw, 6rem);
+}
+
+.section {
+  padding: var(--space-lg) var(--space-md);
+}
+
+.card {
+  padding: var(--space-sm);
+  gap: var(--space-xs);
+}</code></pre>
+                </div>
+
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Создайте систему fluid typography с 5 размерами шрифта, которые плавно масштабируются от 320px до 1440px.</p>
+                </div>
+            </section>
+
+            <!-- 4.7 Responsive Images -->
+            <section id="responsive-images" class="topic-section">
+                <h2>Адаптивные изображения</h2>
+
+                <h3>Проблема</h3>
+                <p>Одно изображение 2000px весит много и медленно грузится на мобильных. Разные экраны требуют разных размеров и форматов.</p>
+
+                <h3>srcset и sizes</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Базовый srcset с указанием ширины --&gt;
+&lt;img 
+  src="image-800.jpg"
+  srcset="
+    image-400.jpg 400w,
+    image-800.jpg 800w,
+    image-1200.jpg 1200w,
+    image-1600.jpg 1600w
+  "
+  sizes="
+    (max-width: 600px) 100vw,
+    (max-width: 1200px) 50vw,
+    33vw
+  "
+  alt="Описание изображения"
+&gt;
+
+&lt;!-- Объяснение sizes:
+  - До 600px: изображение занимает 100% ширины viewport
+  - До 1200px: изображение занимает 50% ширины
+  - Иначе: 33% ширины
+  Браузер выбирает оптимальный размер из srcset
+--&gt;</code></pre>
+                </div>
+
+                <h3>picture для art direction</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Разные изображения для разных экранов --&gt;
+&lt;picture&gt;
+  &lt;!-- Мобильные: вертикальный кроп --&gt;
+  &lt;source 
+    media="(max-width: 600px)" 
+    srcset="hero-mobile.webp"
+  &gt;
+  
+  &lt;!-- Планшеты: квадратный кроп --&gt;
+  &lt;source 
+    media="(max-width: 1024px)" 
+    srcset="hero-tablet.webp"
+  &gt;
+  
+  &lt;!-- Десктоп: горизонтальный --&gt;
+  &lt;img src="hero-desktop.jpg" alt="Hero"&gt;
+&lt;/picture&gt;
+
+&lt;!-- Современные форматы с fallback --&gt;
+&lt;picture&gt;
+  &lt;source type="image/avif" srcset="image.avif"&gt;
+  &lt;source type="image/webp" srcset="image.webp"&gt;
+  &lt;img src="image.jpg" alt="Описание"&gt;
+&lt;/picture&gt;</code></pre>
+                </div>
+
+                <h3>CSS для адаптивных изображений</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Базовые правила */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Сохранение пропорций */
+.image-container {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Разные пропорции для разных экранов */
+.hero-image {
+  aspect-ratio: 1 / 1; /* Квадрат на мобильных */
+}
+
+@media (min-width: 768px) {
+  .hero-image {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-image {
+    aspect-ratio: 21 / 9; /* Ультраширокий */
+  }
+}
+
+/* Ретина-изображения через CSS */
+.logo {
+  background-image: url('logo.png');
+  background-size: contain;
+}
+
+@media (min-resolution: 2dppx) {
+  .logo {
+    background-image: url('logo@2x.png');
+  }
+}</code></pre>
+                </div>
+
+                <h3>Ленивая загрузка</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Нативная ленивая загрузка --&gt;
+&lt;img 
+  src="image.jpg" 
+  loading="lazy"
+  decoding="async"
+  alt="Описание"
+&gt;
+
+&lt;!-- Важные изображения (hero, above the fold) --&gt;
+&lt;img 
+  src="hero.jpg" 
+  loading="eager"
+  fetchpriority="high"
+  alt="Hero"
+&gt;
+
+&lt;!-- Preload для критичных изображений --&gt;
+&lt;link 
+  rel="preload" 
+  as="image" 
+  href="hero.webp" 
+  type="image/webp"
+&gt;</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4> Оптимизация изображений</h4>
+                    <ul>
+                        <li>Используйте современные форматы: AVIF > WebP > JPEG</li>
+                        <li>Сжимайте изображения (TinyPNG, Squoosh)</li>
+                        <li>Указывайте width и height для предотвращения CLS</li>
+                        <li>Используйте CDN с автоматической оптимизацией</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 4.8 Container Queries -->
+            <section id="container-queries" class="topic-section">
+                <h2>Container Queries (Контейнерные запросы)</h2>
+
+                <h3>Революция в CSS</h3>
+                <p>Container Queries позволяют стилизовать элементы на основе размера их контейнера, а не viewport. Это меняет всё!</p>
+
+                <h3>Базовый синтаксис</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* 1. Определяем контейнер */
+.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* Или сокращённо */
+.card-container {
+  container: card / inline-size;
+}
+
+/* 2. Используем контейнерные запросы */
+@container card (min-width: 400px) {
+  .card {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .card__image {
+    width: 40%;
+  }
+}
+
+@container card (min-width: 600px) {
+  .card__title {
+    font-size: 1.5rem;
+  }
+}</code></pre>
+                </div>
+
+                <h3>Типы контейнеров</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>inline-size</code></td>
+                                <td>Запросы по ширине (наиболее частый)</td>
+                            </tr>
+                            <tr>
+                                <td><code>size</code></td>
+                                <td>Запросы по ширине и высоте</td>
+                            </tr>
+                            <tr>
+                                <td><code>normal</code></td>
+                                <td>Не является контейнером для size queries</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Единицы контейнера</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">.card-container {
+  container-type: inline-size;
+}
+
+.card__title {
+  /* cqw — 1% ширины контейнера */
+  font-size: clamp(1rem, 5cqw, 2rem);
+  
+  /* cqh — 1% высоты контейнера */
+  /* cqi — 1% inline размера */
+  /* cqb — 1% block размера */
+  /* cqmin — меньшее из cqi/cqb */
+  /* cqmax — большее из cqi/cqb */
+}</code></pre>
+                </div>
+
+                <h3>Практический пример: адаптивная карточка</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Контейнер */
+.card-wrapper {
+  container: card / inline-size;
+}
+
+/* Базовые стили карточки (мобильные) */
+.card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+}
+
+.card__image {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* Когда контейнер >= 350px: горизонтальный layout */
+@container card (min-width: 350px) {
+  .card {
+    grid-template-columns: 120px 1fr;
+    align-items: start;
+  }
+  
+  .card__image {
+    aspect-ratio: 1;
+  }
+}
+
+/* Когда контейнер >= 500px: больше места */
+@container card (min-width: 500px) {
+  .card {
+    grid-template-columns: 180px 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .card__title {
+    font-size: 1.375rem;
+  }
+}
+
+/* Когда контейнер >= 700px: еще больше */
+@container card (min-width: 700px) {
+  .card {
+    grid-template-columns: 250px 1fr;
+  }
+  
+  .card__image {
+    aspect-ratio: 4/3;
+  }
+}</code></pre>
+                </div>
+
+                <h3>Container Queries vs Media Queries</h3>
+                
+                <div class="visual-guide">
+                    <h4>Когда использовать</h4>
+                    <ul>
+                        <li><strong>Media Queries</strong> — общий layout страницы, навигация, количество колонок</li>
+                        <li><strong>Container Queries</strong> — компоненты, которые могут быть в разных местах (карточки, виджеты)</li>
+                    </ul>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-css">/* Комбинация Media + Container Queries */
+
+/* Media Query для общего layout */
+@media (min-width: 768px) {
+  .sidebar {
+    width: 300px;
+  }
+  
+  .main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Container Query для компонента */
+.card-wrapper {
+  container: card / inline-size;
+}
+
+@container card (min-width: 400px) {
+  .card {
+    flex-direction: row;
+  }
+}</code></pre>
+                </div>
+
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Создайте компонент карточки товара, который адаптируется с помощью Container Queries: вертикальный на узком контейнере, горизонтальный на широком.</p>
+                </div>
+            </section>
+
+            <!-- 4.9 Responsive Patterns -->
+            <section id="responsive-patterns" class="topic-section">
+                <h2>Паттерны адаптивной вёрстки</h2>
+
+                <h3>1. Mostly Fluid</h3>
+                <p>Контент растягивается до максимальной ширины, затем центрируется.</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}</code></pre>
+                </div>
+
+                <h3>2. Column Drop</h3>
+                <p>Колонки "падают" друг под друга при уменьшении ширины.</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">.columns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 1 1 100%;
+}
+
+@media (min-width: 600px) {
+  .column {
+    flex: 1 1 50%;
+  }
+}
+
+@media (min-width: 900px) {
+  .column {
+    flex: 1 1 33.33%;
+  }
+}</code></pre>
+                </div>
+
+                <h3>3. Layout Shifter</h3>
+                <p>Разные layouts на разных размерах (с CSS Grid).</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">.layout {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Мобильные: всё в одну колонку */
+.layout {
+  grid-template-areas:
+    "header"
+    "main"
+    "sidebar"
+    "footer";
+}
+
+/* Планшеты: sidebar справа */
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr 300px;
+    grid-template-areas:
+      "header header"
+      "main sidebar"
+      "footer footer";
+  }
+}
+
+/* Десктоп: sidebar слева */
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 250px 1fr 300px;
+    grid-template-areas:
+      "header header header"
+      "nav main sidebar"
+      "footer footer footer";
+  }
+}</code></pre>
+                </div>
+
+                <h3>4. Off-Canvas</h3>
+                <p>Контент (обычно навигация) скрывается за пределами экрана.</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.nav.is-open {
+  transform: translateX(0);
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+  }
+}</code></pre>
+                </div>
+
+                <h3>5. Responsive Tables</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Вариант 1: Горизонтальный скролл */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Вариант 2: Карточки на мобильных */
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead {
+    display: none;
+  }
+  
+  tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+  }
+}</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- HTML для responsive table --&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Имя&lt;/th&gt;
+      &lt;th&gt;Email&lt;/th&gt;
+      &lt;th&gt;Роль&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td data-label="Имя"&gt;Иван&lt;/td&gt;
+      &lt;td data-label="Email"&gt;ivan@mail.ru&lt;/td&gt;
+      &lt;td data-label="Роль"&gt;Админ&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 4.10 Testing -->
+            <section id="testing" class="topic-section">
+                <h2>Тестирование адаптивности</h2>
+
+                <h3>Инструменты браузера</h3>
+                <ul>
+                    <li><strong>Chrome DevTools</strong> — Device Mode (Ctrl+Shift+M), throttling</li>
+                    <li><strong>Firefox</strong> — Responsive Design Mode</li>
+                    <li><strong>Safari</strong> — Responsive Design Mode</li>
+                </ul>
+
+                <h3>Онлайн-инструменты</h3>
+                <ul>
+                    <li><strong>Responsively</strong> — просмотр на нескольких устройствах</li>
+                    <li><strong>BrowserStack</strong> — реальные устройства</li>
+                    <li><strong>LambdaTest</strong> — кросс-браузерное тестирование</li>
+                </ul>
+
+                <h3>Автоматизированное тестирование</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Playwright — тестирование на разных viewport
+import { test, expect } from '@playwright/test';
+
+const viewports = [
+  { width: 375, height: 667, name: 'iPhone SE' },
+  { width: 768, height: 1024, name: 'iPad' },
+  { width: 1440, height: 900, name: 'Desktop' },
+];
+
+for (const viewport of viewports) {
+  test(`Homepage on ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ 
+      width: viewport.width, 
+      height: viewport.height 
+    });
+    
+    await page.goto('/');
+    
+    // Скриншот для визуального сравнения
+    await expect(page).toHaveScreenshot(`home-${viewport.name}.png`);
+    
+    // Проверка видимости элементов
+    if (viewport.width < 768) {
+      await expect(page.locator('.mobile-menu-btn')).toBeVisible();
+      await expect(page.locator('.desktop-nav')).toBeHidden();
+    } else {
+      await expect(page.locator('.mobile-menu-btn')).toBeHidden();
+      await expect(page.locator('.desktop-nav')).toBeVisible();
+    }
+  });
+}</code></pre>
+                </div>
+
+                <h3>Чек-лист тестирования</h3>
+                <div class="visual-guide">
+                    <ul>
+                        <li> Текст читаем на всех размерах</li>
+                        <li> Кнопки достаточно большие для тапа (минимум 44x44px)</li>
+                        <li> Изображения не обрезаются и не искажаются</li>
+                        <li> Формы удобны для заполнения</li>
+                        <li> Навигация доступна</li>
+                        <li> Нет горизонтального скролла</li>
+                        <li> Контент не выходит за пределы экрана</li>
+                        <li> Модальные окна работают корректно</li>
+                        <li> Тёмная тема работает</li>
+                        <li> Производительность приемлема</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 4.11 Best Practices -->
+            <section id="best-practices" class="topic-section">
+                <h2>Best Practices</h2>
+
+                <h3>Общие принципы</h3>
+                <ul>
+                    <li><strong>Mobile-First</strong> — всегда начинайте с мобильной версии</li>
+                    <li><strong>Content-First</strong> — брейкпоинты на основе контента, не устройств</li>
+                    <li><strong>Fluid > Fixed</strong> — предпочитайте относительные единицы</li>
+                    <li><strong>Тестируйте на реальных устройствах</strong> — эмуляторы не идеальны</li>
+                </ul>
+
+                <h3>Производительность</h3>
+                <ul>
+                    <li>Используйте <code>srcset</code> и <code>sizes</code> для изображений</li>
+                    <li>Ленивая загрузка для контента ниже fold</li>
+                    <li>Минимизируйте количество медиа-запросов</li>
+                    <li>Используйте CSS Custom Properties для адаптивных токенов</li>
+                </ul>
+
+                <h3>Доступность</h3>
+                <ul>
+                    <li>Не отключайте zoom (<code>user-scalable=yes</code>)</li>
+                    <li>Достаточный размер touch targets (44x44px минимум)</li>
+                    <li>Уважайте <code>prefers-reduced-motion</code></li>
+                    <li>Контраст должен быть достаточным на всех экранах</li>
+                </ul>
+
+                <h3>Чек-лист перед публикацией</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Обязательные meta-теги --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;meta name="theme-color" content="#ffffff"&gt;
+
+&lt;!-- Preload критичных ресурсов --&gt;
+&lt;link rel="preload" href="critical.css" as="style"&gt;
+&lt;link rel="preload" href="hero.webp" as="image"&gt;
+
+&lt;!-- Адаптивные изображения --&gt;
+&lt;img srcset="..." sizes="..." loading="lazy" alt="..."&gt;
+
+&lt;!-- Touch-friendly elements --&gt;
+&lt;button style="min-height: 44px; min-width: 44px;"&gt;...&lt;/button&gt;</code></pre>
+                </div>
+
+                <div class="exercise">
+                    <h4>Итоговый проект</h4>
+                    <p>Создайте полностью адаптивный landing page с использованием:</p>
+                    <ul>
+                        <li>Mobile-First подход</li>
+                        <li>Fluid typography</li>
+                        <li>Container Queries для карточек</li>
+                        <li>Адаптивные изображения</li>
+                        <li>Тёмная тема через <code>prefers-color-scheme</code></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>
+                </button>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span><span>Фиолетовая</span></button>
+                    <button class="mobile-color-scheme-btn" data-color="orange"><span class="color-dot" style="background: #f97316;"></span><span>Оранжевая</span></button>
+                    <button class="mobile-color-scheme-btn" data-color="blue"><span class="color-dot" style="background: #3b82f6;"></span><span>Синяя</span></button>
+                </div>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+

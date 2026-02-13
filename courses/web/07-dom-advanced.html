@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Продвинутая работа с DOM: селекторы, манипуляции, события, делегирование, оптимизация.">
+    <meta name="keywords" content="dom, javascript, события, делегирование, querySelector, манипуляции dom">
+    <meta name="author" content="SKL Academy">
+    <title>Веб‑разработка — Модуль 7: Продвинутый DOM | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/07-dom-advanced.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="web">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">DOM</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button>
+                <button class="color-scheme-btn" data-color="orange"><span class="color-dot" style="background: #f97316;"></span></button>
+                <button class="color-scheme-btn" data-color="blue"><span class="color-dot" style="background: #3b82f6;"></span></button>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggle">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z"/></svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+            <a href="../../index.html" class="exit-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">Введение в HTML</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">Формы</a>
+                        <a href="01-html-basics.html#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="01-html-basics.html#seo-html" class="subtopic">SEO</a>
+                        <a href="01-html-basics.html#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">Введение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">Специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">Типографика</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">Box Model</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">@media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">Анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">Условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">События</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">Storage</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="04-responsive-design.html#intro" class="subtopic">Введение</a>
+                        <a href="04-responsive-design.html#viewport" class="subtopic">Viewport</a>
+                        <a href="04-responsive-design.html#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="04-responsive-design.html#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="04-responsive-design.html#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="04-responsive-design.html#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="04-responsive-design.html#responsive-images" class="subtopic">Изображения</a>
+                        <a href="04-responsive-design.html#container-queries" class="subtopic">Container Queries</a>
+                        <a href="04-responsive-design.html#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="04-responsive-design.html#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="06-forms-validation.html#form-basics" class="subtopic">Основы форм</a>
+                        <a href="06-forms-validation.html#input-types" class="subtopic">Типы полей</a>
+                        <a href="06-forms-validation.html#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="06-forms-validation.html#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="06-forms-validation.html#js-validation" class="subtopic">JS валидация</a>
+                        <a href="06-forms-validation.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="06-forms-validation.html#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="06-forms-validation.html#security" class="subtopic">Безопасность</a>
+                        <a href="06-forms-validation.html#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="#dom-tree" class="subtopic active">Дерево DOM</a>
+                        <a href="#selectors" class="subtopic">Селекторы</a>
+                        <a href="#traversal" class="subtopic">Обход</a>
+                        <a href="#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="#events-basics" class="subtopic">События</a>
+                        <a href="#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="#observers" class="subtopic">Observers</a>
+                        <a href="#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html#core-web-vitals" class="subtopic">Core Web Vitals</a>
+                        <a href="09-optimization.html#lcp" class="subtopic">LCP</a>
+                        <a href="09-optimization.html#cls" class="subtopic">CLS</a>
+                        <a href="09-optimization.html#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="09-optimization.html#fonts" class="subtopic">Шрифты</a>
+                        <a href="09-optimization.html#js-perf" class="subtopic">JS производительность</a>
+                        <a href="09-optimization.html#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="09-optimization.html#seo" class="subtopic">SEO</a>
+                        <a href="09-optimization.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="09-optimization.html#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="10-projects.html#intro" class="subtopic">Введение</a>
+                        <a href="10-projects.html#project-1" class="subtopic">Проект 1</a>
+                        <a href="10-projects.html#project-2" class="subtopic">Проект 2</a>
+                        <a href="10-projects.html#project-3" class="subtopic">Проект 3</a>
+                        <a href="10-projects.html#project-4" class="subtopic">Проект 4</a>
+                        <a href="10-projects.html#project-5" class="subtopic">Проект 5</a>
+                        <a href="10-projects.html#project-6" class="subtopic">Проект 6</a>
+                        <a href="10-projects.html#deployment" class="subtopic">Деплой</a>
+                        <a href="10-projects.html#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 7: Продвинутый DOM</h2>
+                <p>Глубокое погружение в Document Object Model: эффективные селекторы, манипуляции, события и оптимизация.</p>
+            </section>
+
+            <!-- 7.1 Структура DOM -->
+            <section id="dom-tree" class="topic-section">
+                <h2>Структура DOM</h2>
+                
+                <h3>Что такое DOM?</h3>
+                <p><strong>DOM (Document Object Model)</strong> — программный интерфейс для HTML/XML документов. Браузер преобразует HTML в дерево объектов.</p>
+
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- HTML --&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Страница&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Привет&lt;/h1&gt;
+    &lt;p&gt;Текст&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- DOM дерево:
+document
+└── html
+    ├── head
+    │   └── title
+    │       └── "Страница" (текстовый узел)
+    └── body
+        ├── h1
+        │   └── "Привет"
+        └── p
+            └── "Текст"
+--&gt;</code></pre>
+                </div>
+
+                <h3>Типы узлов</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>nodeType</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Element</td>
+                                <td>1</td>
+                                <td>HTML-элементы</td>
+                            </tr>
+                            <tr>
+                                <td>Text</td>
+                                <td>3</td>
+                                <td>Текстовое содержимое</td>
+                            </tr>
+                            <tr>
+                                <td>Comment</td>
+                                <td>8</td>
+                                <td>HTML-комментарии</td>
+                            </tr>
+                            <tr>
+                                <td>Document</td>
+                                <td>9</td>
+                                <td>Корень документа</td>
+                            </tr>
+                            <tr>
+                                <td>DocumentFragment</td>
+                                <td>11</td>
+                                <td>Виртуальный контейнер</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">// Проверка типа узла
+element.nodeType === Node.ELEMENT_NODE;  // 1
+element.nodeType === Node.TEXT_NODE;     // 3
+
+// Имя узла
+element.nodeName;   // "DIV", "P", "#text"
+element.tagName;    // "DIV", "P" (только для элементов)</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.2 Селекторы -->
+            <section id="selectors" class="topic-section">
+                <h2>Селекторы DOM</h2>
+
+                <h3>Современные методы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// querySelector — первый элемент
+const header = document.querySelector('header');
+const btn = document.querySelector('.btn-primary');
+const input = document.querySelector('input[type="email"]');
+
+// querySelectorAll — все элементы (NodeList)
+const items = document.querySelectorAll('.list-item');
+const links = document.querySelectorAll('a[href^="https"]');
+
+// Поиск внутри элемента
+const nav = document.querySelector('nav');
+const navLinks = nav.querySelectorAll('a');
+
+// CSS селекторы работают!
+document.querySelector('.card:first-child');
+document.querySelector('.menu > li:nth-child(2)');
+document.querySelector('input:not([disabled])');
+document.querySelector('.item:has(.active)'); // Chrome 105+</code></pre>
+                </div>
+
+                <h3>Старые методы (всё ещё полезны)</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// По ID (самый быстрый!)
+const app = document.getElementById('app');
+
+// По классу (HTMLCollection — живая!)
+const buttons = document.getElementsByClassName('btn');
+
+// По тегу
+const paragraphs = document.getElementsByTagName('p');
+
+// По имени (для форм)
+const inputs = document.getElementsByName('email');</code></pre>
+                </div>
+
+                <h3>NodeList vs HTMLCollection</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// NodeList (querySelectorAll) — статическая
+const items1 = document.querySelectorAll('.item');
+// Добавление нового .item НЕ обновит items1
+
+// HTMLCollection (getElementsByClassName) — живая
+const items2 = document.getElementsByClassName('item');
+// Добавление нового .item ОБНОВИТ items2
+
+// Преобразование в массив
+const arr1 = Array.from(items1);
+const arr2 = [...items1];
+
+// NodeList имеет forEach
+items1.forEach(item => console.log(item));
+
+// HTMLCollection — нет forEach, нужно преобразовать
+[...items2].forEach(item => console.log(item));</code></pre>
+                </div>
+
+                <h3>closest() и matches()</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// closest — ближайший родитель (включая себя)
+const button = document.querySelector('button');
+const card = button.closest('.card');  // Найти родительскую карточку
+const form = button.closest('form');   // Найти родительскую форму
+
+// matches — проверка соответствия селектору
+if (element.matches('.active')) {
+  // элемент имеет класс active
+}
+
+if (element.matches(':hover')) {
+  // элемент под курсором
+}
+
+// Полезно в делегировании событий
+document.addEventListener('click', (e) => {
+  if (e.target.matches('.delete-btn')) {
+    // Клик по кнопке удаления
+  }
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.3 Навигация по DOM -->
+            <section id="traversal" class="topic-section">
+                <h2>Навигация по DOM</h2>
+
+                <h3>Родители, дети, соседи</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const element = document.querySelector('.item');
+
+// Родители
+element.parentNode;        // Родительский узел (любой)
+element.parentElement;     // Родительский элемент
+
+// Дети
+element.childNodes;        // Все дочерние узлы (включая текст!)
+element.children;          // Только дочерние элементы
+element.firstChild;        // Первый дочерний узел
+element.firstElementChild; // Первый дочерний элемент
+element.lastChild;         // Последний дочерний узел
+element.lastElementChild;  // Последний дочерний элемент
+
+// Соседи
+element.previousSibling;        // Предыдущий узел
+element.previousElementSibling; // Предыдущий элемент
+element.nextSibling;            // Следующий узел
+element.nextElementSibling;     // Следующий элемент</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4> Важно</h4>
+                    <p>Свойства без "Element" возвращают любые узлы, включая текстовые (пробелы, переносы). Используйте версии с "Element" для HTML-элементов.</p>
+                </div>
+
+                <h3>Практические примеры</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Найти все родительские элементы
+function getParents(el) {
+  const parents = [];
+  while (el.parentElement) {
+    parents.push(el.parentElement);
+    el = el.parentElement;
+  }
+  return parents;
+}
+
+// Найти всех предков с определённым классом
+function findAncestor(el, selector) {
+  while (el && !el.matches(selector)) {
+    el = el.parentElement;
+  }
+  return el;
+}
+
+// Получить индекс элемента среди соседей
+function getIndex(el) {
+  return [...el.parentElement.children].indexOf(el);
+}
+
+// Получить всех соседей
+function getSiblings(el) {
+  return [...el.parentElement.children].filter(child => child !== el);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.4 Манипуляции -->
+            <section id="manipulation" class="topic-section">
+                <h2>Манипуляции с DOM</h2>
+
+                <h3>Создание элементов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Создание элемента
+const div = document.createElement('div');
+div.className = 'card';
+div.id = 'new-card';
+div.textContent = 'Новая карточка';
+
+// Создание текстового узла
+const text = document.createTextNode('Привет');
+
+// Создание фрагмента (для batch-вставки)
+const fragment = document.createDocumentFragment();
+for (let i = 0; i < 100; i++) {
+  const li = document.createElement('li');
+  li.textContent = `Item ${i}`;
+  fragment.appendChild(li);
+}
+list.appendChild(fragment); // Одна операция DOM!</code></pre>
+                </div>
+
+                <h3>Вставка элементов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const parent = document.querySelector('.container');
+const newEl = document.createElement('div');
+
+// Старые методы
+parent.appendChild(newEl);           // В конец
+parent.insertBefore(newEl, refEl);   // Перед refEl
+parent.replaceChild(newEl, oldEl);   // Заменить oldEl
+
+// Современные методы (рекомендуются!)
+parent.append(newEl);                // В конец (можно несколько)
+parent.prepend(newEl);               // В начало
+parent.append('текст', newEl);       // Можно текст + элементы
+
+// Относительно элемента
+element.before(newEl);               // Перед элементом
+element.after(newEl);                // После элемента
+element.replaceWith(newEl);          // Заменить элемент
+
+// insertAdjacentHTML (быстрее для HTML-строк)
+element.insertAdjacentHTML('beforebegin', '&lt;div&gt;До&lt;/div&gt;');
+element.insertAdjacentHTML('afterbegin', '&lt;div&gt;В начало&lt;/div&gt;');
+element.insertAdjacentHTML('beforeend', '&lt;div&gt;В конец&lt;/div&gt;');
+element.insertAdjacentHTML('afterend', '&lt;div&gt;После&lt;/div&gt;');
+
+// insertAdjacentElement (для элементов)
+element.insertAdjacentElement('beforeend', newEl);</code></pre>
+                </div>
+
+                <h3>Удаление и клонирование</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Удаление
+element.remove();                    // Современный способ
+parent.removeChild(element);         // Старый способ
+
+// Клонирование
+const clone = element.cloneNode(false);  // Только элемент
+const deepClone = element.cloneNode(true); // С детьми
+
+// Перемещение (appendChild перемещает, а не копирует!)
+newParent.appendChild(existingElement);</code></pre>
+                </div>
+
+                <h3>innerHTML vs textContent</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// textContent — только текст (безопасно!)
+element.textContent = 'Привет &lt;script&gt;alert("XSS")&lt;/script&gt;';
+// Результат: текст "Привет &lt;script&gt;..."
+
+// innerHTML — парсит HTML (ОПАСНО с пользовательским вводом!)
+element.innerHTML = '&lt;strong&gt;Жирный&lt;/strong&gt;';
+// Результат: &lt;strong&gt;Жирный&lt;/strong&gt;
+
+// innerText — учитывает CSS (скрытый текст не вернётся)
+element.innerText;  // Только видимый текст
+
+// outerHTML — включает сам элемент
+console.log(element.outerHTML); // "&lt;div class="item"&gt;...&lt;/div&gt;"</code></pre>
+                </div>
+
+                <div class="warn">
+                    <h4> Безопасность</h4>
+                    <p>Никогда не используйте <code>innerHTML</code> с пользовательским вводом! Это XSS-уязвимость. Используйте <code>textContent</code> или санитизацию.</p>
+                </div>
+            </section>
+
+            <!-- 7.5 Атрибуты и свойства -->
+            <section id="attributes" class="topic-section">
+                <h2>Атрибуты и свойства</h2>
+
+                <h3>Разница между атрибутами и свойствами</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Атрибуты — в HTML
+&lt;input id="name" value="Иван" type="text"&gt;
+
+// Свойства — в DOM объекте
+input.id;       // "name" (синхронизировано)
+input.value;    // Текущее значение (может отличаться!)
+input.type;     // "text"
+
+// После ввода пользователем:
+input.getAttribute('value');  // "Иван" (начальное)
+input.value;                  // "Пётр" (текущее)</code></pre>
+                </div>
+
+                <h3>Работа с атрибутами</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Получение
+element.getAttribute('href');
+element.getAttribute('data-id');
+
+// Установка
+element.setAttribute('href', '/new-page');
+element.setAttribute('disabled', '');
+
+// Удаление
+element.removeAttribute('disabled');
+
+// Проверка наличия
+element.hasAttribute('disabled');  // true/false
+
+// Все атрибуты
+element.attributes;  // NamedNodeMap
+[...element.attributes].forEach(attr => {
+  console.log(attr.name, attr.value);
+});</code></pre>
+                </div>
+
+                <h3>Data-атрибуты</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;div id="user" 
+     data-id="123" 
+     data-user-name="Иван" 
+     data-is-admin="true"&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">const user = document.getElementById('user');
+
+// Чтение через dataset
+user.dataset.id;        // "123"
+user.dataset.userName;  // "Иван" (camelCase!)
+user.dataset.isAdmin;   // "true" (строка!)
+
+// Запись
+user.dataset.role = 'editor';
+// Результат: data-role="editor"
+
+// Удаление
+delete user.dataset.isAdmin;
+
+// Преобразование типов
+const isAdmin = user.dataset.isAdmin === 'true';
+const id = parseInt(user.dataset.id, 10);</code></pre>
+                </div>
+
+                <h3>Классы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// classList (рекомендуется!)
+element.classList.add('active');
+element.classList.remove('hidden');
+element.classList.toggle('expanded');
+element.classList.toggle('dark', isDark);  // Условное toggle
+element.classList.replace('old', 'new');
+element.classList.contains('active');      // true/false
+
+// Несколько классов
+element.classList.add('one', 'two', 'three');
+element.classList.remove('one', 'two');
+
+// className (строка)
+element.className = 'btn btn-primary';
+element.className += ' active';  // Осторожно с пробелами!</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.6 Работа со стилями -->
+            <section id="styles" class="topic-section">
+                <h2>Работа со стилями</h2>
+
+                <h3>Inline стили</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Установка стилей
+element.style.color = 'red';
+element.style.backgroundColor = '#f0f0f0';  // camelCase!
+element.style.fontSize = '16px';
+element.style.setProperty('--custom-color', '#6c63ff');
+
+// Чтение inline стилей
+element.style.color;  // "" если не задан inline!
+
+// Удаление стиля
+element.style.color = '';
+element.style.removeProperty('color');
+
+// Множественное присваивание
+element.style.cssText = 'color: red; font-size: 16px;';
+Object.assign(element.style, {
+  color: 'red',
+  fontSize: '16px',
+  marginTop: '10px'
+});</code></pre>
+                </div>
+
+                <h3>Вычисленные стили</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// getComputedStyle — все применённые стили
+const styles = getComputedStyle(element);
+styles.color;           // "rgb(255, 0, 0)"
+styles.fontSize;        // "16px"
+styles.getPropertyValue('--custom-color');
+
+// Для псевдоэлементов
+const beforeStyles = getComputedStyle(element, '::before');
+beforeStyles.content;   // '"→"'</code></pre>
+                </div>
+
+                <h3>Размеры и позиция</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Размеры элемента
+element.offsetWidth;   // Ширина + padding + border
+element.offsetHeight;  // Высота + padding + border
+element.clientWidth;   // Ширина + padding (без border и scrollbar)
+element.clientHeight;  // Высота + padding
+element.scrollWidth;   // Полная ширина контента
+element.scrollHeight;  // Полная высота контента
+
+// Позиция относительно offsetParent
+element.offsetTop;
+element.offsetLeft;
+element.offsetParent;  // Ближайший positioned родитель
+
+// getBoundingClientRect — позиция относительно viewport
+const rect = element.getBoundingClientRect();
+rect.top;      // От верха viewport
+rect.left;     // От левого края viewport
+rect.bottom;   // От верха до низа элемента
+rect.right;    // От левого края до правого края
+rect.width;    // Ширина
+rect.height;   // Высота
+rect.x;        // То же что left
+rect.y;        // То же что top
+
+// Позиция скролла
+element.scrollTop;   // Сколько прокручено сверху
+element.scrollLeft;  // Сколько прокручено слева
+
+// Прокрутка
+element.scrollTo(0, 100);
+element.scrollTo({ top: 100, behavior: 'smooth' });
+element.scrollIntoView({ behavior: 'smooth', block: 'center' });</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.7 События: основы -->
+            <section id="events-basics" class="topic-section">
+                <h2>События: основы</h2>
+
+                <h3>addEventListener</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Базовое использование
+element.addEventListener('click', function(event) {
+  console.log('Клик!', event);
+});
+
+// Стрелочная функция
+element.addEventListener('click', (e) => {
+  console.log(this);  // Осторожно: this !== element!
+});
+
+// Именованная функция (можно удалить)
+function handleClick(e) {
+  console.log('Клик!');
+}
+element.addEventListener('click', handleClick);
+element.removeEventListener('click', handleClick);
+
+// Опции
+element.addEventListener('click', handler, {
+  once: true,       // Сработает один раз
+  passive: true,    // Не вызовет preventDefault (оптимизация)
+  capture: true,    // Фаза захвата вместо всплытия
+  signal: controller.signal  // Для AbortController
+});
+
+// AbortController для удаления
+const controller = new AbortController();
+element.addEventListener('click', handler, { signal: controller.signal });
+// Позже:
+controller.abort();  // Удалит обработчик</code></pre>
+                </div>
+
+                <h3>Популярные события</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Категория</th>
+                                <th>События</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Мышь</td>
+                                <td><code>click</code>, <code>dblclick</code>, <code>mousedown</code>, <code>mouseup</code>, <code>mousemove</code>, <code>mouseenter</code>, <code>mouseleave</code></td>
+                            </tr>
+                            <tr>
+                                <td>Клавиатура</td>
+                                <td><code>keydown</code>, <code>keyup</code>, <code>keypress</code> (устарел)</td>
+                            </tr>
+                            <tr>
+                                <td>Формы</td>
+                                <td><code>submit</code>, <code>reset</code>, <code>input</code>, <code>change</code>, <code>focus</code>, <code>blur</code></td>
+                            </tr>
+                            <tr>
+                                <td>Документ</td>
+                                <td><code>DOMContentLoaded</code>, <code>load</code>, <code>beforeunload</code>, <code>unload</code></td>
+                            </tr>
+                            <tr>
+                                <td>Скролл</td>
+                                <td><code>scroll</code>, <code>resize</code></td>
+                            </tr>
+                            <tr>
+                                <td>Touch</td>
+                                <td><code>touchstart</code>, <code>touchmove</code>, <code>touchend</code></td>
+                            </tr>
+                            <tr>
+                                <td>Drag & Drop</td>
+                                <td><code>dragstart</code>, <code>drag</code>, <code>dragend</code>, <code>drop</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 7.8 Объект события -->
+            <section id="event-object" class="topic-section">
+                <h2>Объект события</h2>
+
+                <h3>Общие свойства</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">element.addEventListener('click', (e) => {
+  e.type;          // "click"
+  e.target;        // Элемент, на котором произошло событие
+  e.currentTarget; // Элемент, на котором висит обработчик
+  e.timeStamp;     // Время события
+  e.isTrusted;     // true если от пользователя, false если из кода
+  
+  e.preventDefault();   // Отменить действие по умолчанию
+  e.stopPropagation();  // Остановить всплытие
+  e.stopImmediatePropagation(); // + остановить другие обработчики
+});</code></pre>
+                </div>
+
+                <h3>События мыши</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">element.addEventListener('click', (e) => {
+  // Координаты
+  e.clientX, e.clientY;  // Относительно viewport
+  e.pageX, e.pageY;      // Относительно документа
+  e.screenX, e.screenY;  // Относительно экрана
+  e.offsetX, e.offsetY;  // Относительно элемента
+  
+  // Кнопка мыши
+  e.button;  // 0=левая, 1=средняя, 2=правая
+  e.buttons; // Битовая маска нажатых кнопок
+  
+  // Модификаторы
+  e.ctrlKey;   // Ctrl зажат
+  e.shiftKey;  // Shift зажат
+  e.altKey;    // Alt зажат
+  e.metaKey;   // Cmd (Mac) / Win (Windows)
+});</code></pre>
+                </div>
+
+                <h3>События клавиатуры</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">document.addEventListener('keydown', (e) => {
+  e.key;      // "a", "Enter", "Escape", "ArrowUp"
+  e.code;     // "KeyA", "Enter", "Escape", "ArrowUp"
+  e.keyCode;  // Устарел! Не используйте
+  
+  // Модификаторы
+  e.ctrlKey, e.shiftKey, e.altKey, e.metaKey;
+  
+  // Повторное нажатие (зажатая клавиша)
+  e.repeat;  // true если клавиша зажата
+  
+  // Примеры
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+  
+  if (e.ctrlKey && e.key === 's') {
+    e.preventDefault();
+    save();
+  }
+  
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    submit();
+  }
+});</code></pre>
+                </div>
+
+                <h3>Фазы события</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// 1. Capturing (захват) — от window вниз к target
+// 2. Target — на целевом элементе
+// 3. Bubbling (всплытие) — от target вверх к window
+
+element.addEventListener('click', handler, true);  // Capturing
+element.addEventListener('click', handler, false); // Bubbling (default)
+
+// Проверка фазы
+element.addEventListener('click', (e) => {
+  e.eventPhase; // 1=capturing, 2=target, 3=bubbling
+});
+
+// Остановка всплытия
+e.stopPropagation();  // Не пойдёт к родителям</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.9 Делегирование событий -->
+            <section id="event-delegation" class="topic-section">
+                <h2>Делегирование событий</h2>
+
+                <h3>Проблема</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Плохо: обработчик на каждый элемент
+document.querySelectorAll('.item').forEach(item => {
+  item.addEventListener('click', handleClick);
+});
+// Проблемы:
+// - Много обработчиков в памяти
+// - Новые элементы не получат обработчик</code></pre>
+                </div>
+
+                <h3>Решение: делегирование</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Хорошо: один обработчик на родителе
+document.querySelector('.list').addEventListener('click', (e) => {
+  // Найти нужный элемент
+  const item = e.target.closest('.item');
+  if (!item) return;
+  
+  // Проверить что внутри нашего контейнера
+  if (!e.currentTarget.contains(item)) return;
+  
+  handleClick(item);
+});
+
+// Работает с динамическими элементами!</code></pre>
+                </div>
+
+                <h3>Паттерн с data-атрибутами</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;div class="toolbar"&gt;
+  &lt;button data-action="save"&gt;Сохранить&lt;/button&gt;
+  &lt;button data-action="delete"&gt;Удалить&lt;/button&gt;
+  &lt;button data-action="copy"&gt;Копировать&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">const actions = {
+  save() { console.log('Сохранение...'); },
+  delete() { console.log('Удаление...'); },
+  copy() { console.log('Копирование...'); }
+};
+
+document.querySelector('.toolbar').addEventListener('click', (e) => {
+  const action = e.target.dataset.action;
+  if (action && actions[action]) {
+    actions[action]();
+  }
+});</code></pre>
+                </div>
+
+                <h3>Практический пример: Todo список</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const todoList = document.querySelector('.todo-list');
+
+todoList.addEventListener('click', (e) => {
+  const todo = e.target.closest('.todo-item');
+  if (!todo) return;
+  
+  const id = todo.dataset.id;
+  
+  // Кнопка удаления
+  if (e.target.matches('.delete-btn')) {
+    deleteTodo(id);
+    todo.remove();
+    return;
+  }
+  
+  // Кнопка редактирования
+  if (e.target.matches('.edit-btn')) {
+    editTodo(id, todo);
+    return;
+  }
+  
+  // Чекбокс
+  if (e.target.matches('input[type="checkbox"]')) {
+    toggleTodo(id, e.target.checked);
+    todo.classList.toggle('completed', e.target.checked);
+  }
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.10 Кастомные события -->
+            <section id="custom-events" class="topic-section">
+                <h2>Кастомные события</h2>
+
+                <h3>CustomEvent</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Создание события
+const event = new CustomEvent('user:login', {
+  detail: {
+    userId: 123,
+    username: 'ivan'
+  },
+  bubbles: true,    // Всплывает
+  cancelable: true  // Можно отменить
+});
+
+// Отправка
+element.dispatchEvent(event);
+
+// Обработка
+document.addEventListener('user:login', (e) => {
+  console.log('Пользователь вошёл:', e.detail.username);
+});
+
+// Проверка отмены
+const cancelled = !element.dispatchEvent(event);
+if (cancelled) {
+  console.log('Событие было отменено');
+}</code></pre>
+                </div>
+
+                <h3>Примеры использования</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Компонент модального окна
+class Modal {
+  constructor(element) {
+    this.element = element;
+  }
+  
+  open() {
+    this.element.classList.add('open');
+    this.element.dispatchEvent(new CustomEvent('modal:open', {
+      bubbles: true,
+      detail: { modal: this }
+    }));
+  }
+  
+  close() {
+    const event = new CustomEvent('modal:close', {
+      bubbles: true,
+      cancelable: true,
+      detail: { modal: this }
+    });
+    
+    if (this.element.dispatchEvent(event)) {
+      this.element.classList.remove('open');
+    }
+  }
+}
+
+// Использование
+document.addEventListener('modal:close', (e) => {
+  if (hasUnsavedChanges) {
+    e.preventDefault();  // Отменить закрытие
+  }
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.11 Observers API -->
+            <section id="observers" class="topic-section">
+                <h2>Observers API</h2>
+
+                <h3>IntersectionObserver</h3>
+                <p>Отслеживание видимости элементов во viewport.</p>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Ленивая загрузка изображений
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.classList.add('loaded');
+      observer.unobserve(img);
+    }
+  });
+}, {
+  rootMargin: '100px',  // Загрузка чуть раньше
+  threshold: 0.1        // 10% видимости
+});
+
+document.querySelectorAll('img[data-src]').forEach(img => {
+  observer.observe(img);
+});
+
+// Анимация при появлении
+const animationObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    entry.target.classList.toggle('animate', entry.isIntersecting);
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+  animationObserver.observe(el);
+});</code></pre>
+                </div>
+
+                <h3>MutationObserver</h3>
+                <p>Отслеживание изменений DOM.</p>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const observer = new MutationObserver((mutations) => {
+  mutations.forEach(mutation => {
+    if (mutation.type === 'childList') {
+      console.log('Добавлены:', mutation.addedNodes);
+      console.log('Удалены:', mutation.removedNodes);
+    }
+    if (mutation.type === 'attributes') {
+      console.log('Изменён атрибут:', mutation.attributeName);
+    }
+  });
+});
+
+observer.observe(element, {
+  childList: true,      // Отслеживать детей
+  subtree: true,        // И всех потомков
+  attributes: true,     // Атрибуты
+  attributeFilter: ['class', 'data-id'],  // Только эти атрибуты
+  characterData: true   // Текстовое содержимое
+});
+
+// Отключение
+observer.disconnect();</code></pre>
+                </div>
+
+                <h3>ResizeObserver</h3>
+                <p>Отслеживание изменения размеров элементов.</p>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const observer = new ResizeObserver((entries) => {
+  entries.forEach(entry => {
+    const { width, height } = entry.contentRect;
+    console.log(`Новый размер: ${width}x${height}`);
+    
+    // Адаптивная логика
+    entry.target.classList.toggle('compact', width < 400);
+  });
+});
+
+observer.observe(element);</code></pre>
+                </div>
+            </section>
+
+            <!-- 7.12 Оптимизация -->
+            <section id="performance" class="topic-section">
+                <h2>Оптимизация DOM</h2>
+
+                <h3>Минимизация reflow/repaint</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Плохо: много reflow
+for (let i = 0; i < 100; i++) {
+  element.style.left = i + 'px';
+  const width = element.offsetWidth;  // Форсирует reflow!
+}
+
+//  Хорошо: batch чтение и запись
+const width = element.offsetWidth;  // Чтение
+for (let i = 0; i < 100; i++) {
+  element.style.transform = `translateX(${i}px)`;  // Только запись
+}</code></pre>
+                </div>
+
+                <h3>DocumentFragment</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Плохо: много вставок
+for (let i = 0; i < 1000; i++) {
+  const li = document.createElement('li');
+  list.appendChild(li);  // Каждый раз reflow!
+}
+
+//  Хорошо: одна вставка
+const fragment = document.createDocumentFragment();
+for (let i = 0; i < 1000; i++) {
+  const li = document.createElement('li');
+  fragment.appendChild(li);
+}
+list.appendChild(fragment);  // Один reflow!</code></pre>
+                </div>
+
+                <h3>Debounce и Throttle</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Debounce — выполнить после паузы
+function debounce(fn, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// Для поиска
+const search = debounce((query) => {
+  fetchResults(query);
+}, 300);
+
+input.addEventListener('input', (e) => search(e.target.value));
+
+// Throttle — выполнять не чаще чем раз в N мс
+function throttle(fn, limit) {
+  let inThrottle;
+  return (...args) => {
+    if (!inThrottle) {
+      fn(...args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+// Для скролла
+window.addEventListener('scroll', throttle(() => {
+  console.log('Скролл!');
+}, 100));</code></pre>
+                </div>
+
+                <h3>Passive event listeners</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Для scroll/touch/wheel — всегда passive: true
+// Если не нужен preventDefault
+window.addEventListener('scroll', handler, { passive: true });
+element.addEventListener('touchstart', handler, { passive: true });
+
+// Это позволяет браузеру не ждать JS и сразу скроллить</code></pre>
+                </div>
+
+                <div class="exercise">
+                    <h4>Итоговый проект</h4>
+                    <p>Создайте интерактивный список задач с:</p>
+                    <ul>
+                        <li>Делегированием событий</li>
+                        <li>Drag & Drop для сортировки</li>
+                        <li>Анимацией появления (IntersectionObserver)</li>
+                        <li>Оптимизированными обновлениями DOM</li>
+                        <li>Кастомными событиями</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose">✕</button>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span><span>Фиолетовая</span></button>
+                    <button class="mobile-color-scheme-btn" data-color="orange"><span class="color-dot" style="background: #f97316;"></span><span>Оранжевая</span></button>
+                    <button class="mobile-color-scheme-btn" data-color="blue"><span class="color-dot" style="background: #3b82f6;"></span><span>Синяя</span></button>
+                </div>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Переключить</span></button>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+

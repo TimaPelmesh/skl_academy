@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Полное руководство по HTML-формам и валидации. Нативная валидация, JavaScript валидация, доступность форм.">
+    <meta name="keywords" content="html формы, валидация форм, input, form validation, javascript validation, accessibility">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Веб‑разработка — Модуль 6: Формы и валидация">
+    <meta property="og:description" content="Создание доступных и удобных форм с валидацией.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/web/06-forms-validation.html">
+    <title>Веб‑разработка — Модуль 6: Формы и валидация | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/06-forms-validation.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "HTML Формы и валидация",
+      "description": "Полное руководство по созданию доступных форм с нативной и JavaScript валидацией.",
+      "provider": {"@type": "Organization", "name": "SKL Academy"},
+      "courseMode": "online",
+      "educationalLevel": "intermediate",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true
+    }
+    </script>
+</head>
+<body data-course="web">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+        <h1 class="header-title">Формы</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая"><span class="color-dot" style="background: #6c63ff;"></span></button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая"><span class="color-dot" style="background: #f97316;"></span></button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя"><span class="color-dot" style="background: #3b82f6;"></span></button>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">Введение в HTML</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">Формы</a>
+                        <a href="01-html-basics.html#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="01-html-basics.html#seo-html" class="subtopic">SEO</a>
+                        <a href="01-html-basics.html#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">Введение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">Специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">Типографика</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">Box Model</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">@media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">Анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">Условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">События</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">Storage</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="04-responsive-design.html#intro" class="subtopic">Введение</a>
+                        <a href="04-responsive-design.html#viewport" class="subtopic">Viewport</a>
+                        <a href="04-responsive-design.html#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="04-responsive-design.html#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="04-responsive-design.html#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="04-responsive-design.html#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="04-responsive-design.html#responsive-images" class="subtopic">Изображения</a>
+                        <a href="04-responsive-design.html#container-queries" class="subtopic">Container Queries</a>
+                        <a href="04-responsive-design.html#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="04-responsive-design.html#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="#form-basics" class="subtopic active">Основы форм</a>
+                        <a href="#input-types" class="subtopic">Типы полей</a>
+                        <a href="#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="#js-validation" class="subtopic">JS валидация</a>
+                        <a href="#accessibility" class="subtopic">Доступность</a>
+                        <a href="#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="#security" class="subtopic">Безопасность</a>
+                        <a href="#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="07-dom-advanced.html#dom-tree" class="subtopic">Дерево DOM</a>
+                        <a href="07-dom-advanced.html#selectors" class="subtopic">Селекторы</a>
+                        <a href="07-dom-advanced.html#traversal" class="subtopic">Обход</a>
+                        <a href="07-dom-advanced.html#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="07-dom-advanced.html#events-basics" class="subtopic">События</a>
+                        <a href="07-dom-advanced.html#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="07-dom-advanced.html#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="07-dom-advanced.html#observers" class="subtopic">Observers</a>
+                        <a href="07-dom-advanced.html#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html#core-web-vitals" class="subtopic">Core Web Vitals</a>
+                        <a href="09-optimization.html#lcp" class="subtopic">LCP</a>
+                        <a href="09-optimization.html#cls" class="subtopic">CLS</a>
+                        <a href="09-optimization.html#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="09-optimization.html#fonts" class="subtopic">Шрифты</a>
+                        <a href="09-optimization.html#js-perf" class="subtopic">JS производительность</a>
+                        <a href="09-optimization.html#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="09-optimization.html#seo" class="subtopic">SEO</a>
+                        <a href="09-optimization.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="09-optimization.html#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="10-projects.html#intro" class="subtopic">Введение</a>
+                        <a href="10-projects.html#project-1" class="subtopic">Проект 1</a>
+                        <a href="10-projects.html#project-2" class="subtopic">Проект 2</a>
+                        <a href="10-projects.html#project-3" class="subtopic">Проект 3</a>
+                        <a href="10-projects.html#project-4" class="subtopic">Проект 4</a>
+                        <a href="10-projects.html#project-5" class="subtopic">Проект 5</a>
+                        <a href="10-projects.html#project-6" class="subtopic">Проект 6</a>
+                        <a href="10-projects.html#deployment" class="subtopic">Деплой</a>
+                        <a href="10-projects.html#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 6: Формы и валидация</h2>
+                <p>Научимся создавать доступные, удобные и безопасные формы с правильной валидацией.</p>
+            </section>
+
+            <!-- 6.1 Основы форм -->
+            <section id="form-basics" class="topic-section">
+                <h2>Основы HTML-форм</h2>
+
+                <h3>Структура формы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;form action="/submit" method="POST"&gt;
+  &lt;!-- Группировка полей --&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Контактная информация&lt;/legend&gt;
+    
+    &lt;!-- Поле с label --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="name"&gt;Имя&lt;/label&gt;
+      &lt;input type="text" id="name" name="name" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="email"&gt;Email&lt;/label&gt;
+      &lt;input type="email" id="email" name="email" required&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  
+  &lt;button type="submit"&gt;Отправить&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <h3>Атрибуты form</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Атрибут</th>
+                                <th>Описание</th>
+                                <th>Значения</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>action</code></td>
+                                <td>URL для отправки</td>
+                                <td>URL или пустая строка</td>
+                            </tr>
+                            <tr>
+                                <td><code>method</code></td>
+                                <td>HTTP метод</td>
+                                <td><code>GET</code>, <code>POST</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>enctype</code></td>
+                                <td>Кодировка данных</td>
+                                <td><code>application/x-www-form-urlencoded</code>, <code>multipart/form-data</code>, <code>text/plain</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>novalidate</code></td>
+                                <td>Отключить браузерную валидацию</td>
+                                <td>Boolean</td>
+                            </tr>
+                            <tr>
+                                <td><code>autocomplete</code></td>
+                                <td>Автозаполнение</td>
+                                <td><code>on</code>, <code>off</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Форма с загрузкой файлов --&gt;
+&lt;form action="/upload" method="POST" enctype="multipart/form-data"&gt;
+  &lt;input type="file" name="avatar" accept="image/*"&gt;
+  &lt;button type="submit"&gt;Загрузить&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;!-- Форма без валидации (для кастомной) --&gt;
+&lt;form novalidate&gt;
+  &lt;!-- ... --&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.2 Типы input -->
+            <section id="input-types" class="topic-section">
+                <h2>Типы input</h2>
+
+                <h3>Текстовые типы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Базовый текст --&gt;
+&lt;input type="text" placeholder="Введите текст"&gt;
+
+&lt;!-- Email с валидацией --&gt;
+&lt;input type="email" placeholder="user@example.com"&gt;
+
+&lt;!-- Пароль (скрытые символы) --&gt;
+&lt;input type="password" minlength="8"&gt;
+
+&lt;!-- URL --&gt;
+&lt;input type="url" placeholder="https://..."&gt;
+
+&lt;!-- Телефон (нет валидации, но правильная клавиатура на мобильных) --&gt;
+&lt;input type="tel" placeholder="+7 (999) 123-45-67"&gt;
+
+&lt;!-- Поиск (с кнопкой очистки) --&gt;
+&lt;input type="search" placeholder="Поиск..."&gt;</code></pre>
+                </div>
+
+                <h3>Числовые типы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Число --&gt;
+&lt;input type="number" min="0" max="100" step="1"&gt;
+
+&lt;!-- Диапазон (слайдер) --&gt;
+&lt;input type="range" min="0" max="100" value="50"&gt;
+
+&lt;!-- Дата --&gt;
+&lt;input type="date" min="2020-01-01" max="2030-12-31"&gt;
+
+&lt;!-- Время --&gt;
+&lt;input type="time" step="900"&gt; &lt;!-- Шаг 15 минут --&gt;
+
+&lt;!-- Дата и время --&gt;
+&lt;input type="datetime-local"&gt;
+
+&lt;!-- Месяц --&gt;
+&lt;input type="month"&gt;
+
+&lt;!-- Неделя --&gt;
+&lt;input type="week"&gt;</code></pre>
+                </div>
+
+                <h3>Выбор</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Чекбокс --&gt;
+&lt;label&gt;
+  &lt;input type="checkbox" name="agree" required&gt;
+  Согласен с условиями
+&lt;/label&gt;
+
+&lt;!-- Группа чекбоксов --&gt;
+&lt;fieldset&gt;
+  &lt;legend&gt;Интересы&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="coding"&gt; Программирование&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="design"&gt; Дизайн&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="music"&gt; Музыка&lt;/label&gt;
+&lt;/fieldset&gt;
+
+&lt;!-- Радиокнопки (только один выбор) --&gt;
+&lt;fieldset&gt;
+  &lt;legend&gt;Пол&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="radio" name="gender" value="male"&gt; Мужской&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="gender" value="female"&gt; Женский&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+                </div>
+
+                <h3>Специальные типы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Файл --&gt;
+&lt;input type="file" accept=".pdf,.doc,.docx"&gt;
+&lt;input type="file" accept="image/*" multiple&gt;
+
+&lt;!-- Цвет --&gt;
+&lt;input type="color" value="#6c63ff"&gt;
+
+&lt;!-- Скрытое поле --&gt;
+&lt;input type="hidden" name="token" value="abc123"&gt;</code></pre>
+                </div>
+
+                <h3>Атрибуты input</h3>
+                
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Атрибут</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>required</code></td>
+                                <td>Обязательное поле</td>
+                            </tr>
+                            <tr>
+                                <td><code>disabled</code></td>
+                                <td>Отключено (не отправляется)</td>
+                            </tr>
+                            <tr>
+                                <td><code>readonly</code></td>
+                                <td>Только чтение (отправляется)</td>
+                            </tr>
+                            <tr>
+                                <td><code>placeholder</code></td>
+                                <td>Подсказка</td>
+                            </tr>
+                            <tr>
+                                <td><code>value</code></td>
+                                <td>Значение по умолчанию</td>
+                            </tr>
+                            <tr>
+                                <td><code>name</code></td>
+                                <td>Имя для отправки</td>
+                            </tr>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>Идентификатор для label</td>
+                            </tr>
+                            <tr>
+                                <td><code>autocomplete</code></td>
+                                <td>Тип автозаполнения</td>
+                            </tr>
+                            <tr>
+                                <td><code>autofocus</code></td>
+                                <td>Автофокус при загрузке</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Autocomplete</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Помогает браузеру правильно автозаполнять --&gt;
+&lt;input type="text" name="name" autocomplete="name"&gt;
+&lt;input type="email" autocomplete="email"&gt;
+&lt;input type="tel" autocomplete="tel"&gt;
+&lt;input type="text" autocomplete="address-line1"&gt;
+&lt;input type="text" autocomplete="postal-code"&gt;
+&lt;input type="text" autocomplete="cc-number"&gt; &lt;!-- Номер карты --&gt;
+&lt;input type="password" autocomplete="new-password"&gt; &lt;!-- Новый пароль --&gt;
+&lt;input type="password" autocomplete="current-password"&gt; &lt;!-- Текущий пароль --&gt;
+&lt;input type="text" autocomplete="one-time-code"&gt; &lt;!-- OTP код --&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.3 Элементы форм -->
+            <section id="form-elements" class="topic-section">
+                <h2>Элементы форм</h2>
+
+                <h3>textarea</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;label for="message"&gt;Сообщение&lt;/label&gt;
+&lt;textarea 
+  id="message" 
+  name="message" 
+  rows="5" 
+  cols="40"
+  maxlength="500"
+  placeholder="Введите сообщение..."
+&gt;&lt;/textarea&gt;</code></pre>
+                </div>
+
+                <h3>select</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Простой select --&gt;
+&lt;label for="country"&gt;Страна&lt;/label&gt;
+&lt;select id="country" name="country" required&gt;
+  &lt;option value=""&gt;Выберите страну&lt;/option&gt;
+  &lt;option value="ru"&gt;Россия&lt;/option&gt;
+  &lt;option value="us"&gt;США&lt;/option&gt;
+  &lt;option value="de"&gt;Германия&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- С группами --&gt;
+&lt;select name="car"&gt;
+  &lt;optgroup label="Немецкие"&gt;
+    &lt;option value="bmw"&gt;BMW&lt;/option&gt;
+    &lt;option value="mercedes"&gt;Mercedes&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="Японские"&gt;
+    &lt;option value="toyota"&gt;Toyota&lt;/option&gt;
+    &lt;option value="honda"&gt;Honda&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;
+
+&lt;!-- Множественный выбор --&gt;
+&lt;select name="skills" multiple size="5"&gt;
+  &lt;option value="html"&gt;HTML&lt;/option&gt;
+  &lt;option value="css"&gt;CSS&lt;/option&gt;
+  &lt;option value="js"&gt;JavaScript&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                </div>
+
+                <h3>datalist (автодополнение)</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;label for="browser"&gt;Браузер&lt;/label&gt;
+&lt;input list="browsers" id="browser" name="browser"&gt;
+&lt;datalist id="browsers"&gt;
+  &lt;option value="Chrome"&gt;
+  &lt;option value="Firefox"&gt;
+  &lt;option value="Safari"&gt;
+  &lt;option value="Edge"&gt;
+&lt;/datalist&gt;</code></pre>
+                </div>
+
+                <h3>output</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;form oninput="result.value = parseInt(a.value) + parseInt(b.value)"&gt;
+  &lt;input type="range" id="a" value="50"&gt; +
+  &lt;input type="number" id="b" value="50"&gt; =
+  &lt;output name="result" for="a b"&gt;100&lt;/output&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <h3>progress и meter</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Прогресс загрузки --&gt;
+&lt;label for="file-progress"&gt;Загрузка:&lt;/label&gt;
+&lt;progress id="file-progress" value="70" max="100"&gt;70%&lt;/progress&gt;
+
+&lt;!-- Индикатор значения --&gt;
+&lt;label for="disk"&gt;Использовано диска:&lt;/label&gt;
+&lt;meter id="disk" value="0.7" min="0" max="1" low="0.3" high="0.7" optimum="0.5"&gt;70%&lt;/meter&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.4 Нативная валидация -->
+            <section id="native-validation" class="topic-section">
+                <h2>Нативная HTML5 валидация</h2>
+
+                <h3>Атрибуты валидации</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Обязательное поле --&gt;
+&lt;input type="text" required&gt;
+
+&lt;!-- Минимальная/максимальная длина --&gt;
+&lt;input type="text" minlength="3" maxlength="50"&gt;
+
+&lt;!-- Диапазон чисел --&gt;
+&lt;input type="number" min="18" max="100"&gt;
+
+&lt;!-- Шаг --&gt;
+&lt;input type="number" step="0.01"&gt; &lt;!-- Для цен --&gt;
+
+&lt;!-- Паттерн (регулярное выражение) --&gt;
+&lt;input type="text" pattern="[A-Za-z]{3,}" title="Минимум 3 буквы"&gt;
+
+&lt;!-- Телефон с паттерном --&gt;
+&lt;input type="tel" pattern="\+7\s?\(\d{3}\)\s?\d{3}-?\d{2}-?\d{2}" 
+       title="+7 (999) 123-45-67"&gt;</code></pre>
+                </div>
+
+                <h3>Популярные паттерны</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Только буквы --&gt;
+&lt;input pattern="[A-Za-zА-Яа-яЁё\s]+"&gt;
+
+&lt;!-- Только цифры --&gt;
+&lt;input pattern="[0-9]+"&gt;
+
+&lt;!-- Имя пользователя (буквы, цифры, подчёркивание) --&gt;
+&lt;input pattern="[a-zA-Z0-9_]{3,20}"&gt;
+
+&lt;!-- Пароль (мин 8 символов, буквы и цифры) --&gt;
+&lt;input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+       title="Минимум 8 символов, включая цифры, строчные и заглавные буквы"&gt;
+
+&lt;!-- Почтовый индекс РФ --&gt;
+&lt;input pattern="[0-9]{6}"&gt;
+
+&lt;!-- ИНН (10 или 12 цифр) --&gt;
+&lt;input pattern="[0-9]{10}|[0-9]{12}"&gt;</code></pre>
+                </div>
+
+                <div class="note">
+                    <h4> Важно</h4>
+                    <p>Нативная валидация — это первая линия защиты. Всегда валидируйте данные также на сервере!</p>
+                </div>
+            </section>
+
+            <!-- 6.5 CSS для валидации -->
+            <section id="css-validation" class="topic-section">
+                <h2>CSS для валидации</h2>
+
+                <h3>Псевдоклассы валидации</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Валидное поле */
+input:valid {
+  border-color: #22c55e;
+}
+
+/* Невалидное поле */
+input:invalid {
+  border-color: #ef4444;
+}
+
+/* Обязательное поле */
+input:required {
+  border-left: 3px solid var(--primary);
+}
+
+/* Необязательное поле */
+input:optional {
+  border-left: 3px solid #ccc;
+}
+
+/* Поле в фокусе */
+input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Заполнен плейсхолдер */
+input:placeholder-shown {
+  /* Пока placeholder виден */
+}
+
+/* Отключенное поле */
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Только для чтения */
+input:read-only {
+  background: #f5f5f5;
+}</code></pre>
+                </div>
+
+                <h3>Проблема :invalid при загрузке</h3>
+                <p>По умолчанию <code>:invalid</code> срабатывает сразу. Решение — показывать ошибку только после взаимодействия:</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Вариант 1: Через :not(:placeholder-shown) */
+input:not(:placeholder-shown):invalid {
+  border-color: #ef4444;
+}
+
+/* Вариант 2: Через :focus */
+input:focus:invalid {
+  border-color: #ef4444;
+}
+
+/* Вариант 3: Через data-атрибут (добавляется JS после blur) */
+input[data-touched]:invalid {
+  border-color: #ef4444;
+}
+
+/* Вариант 4: Современный :user-invalid (Chrome 119+) */
+input:user-invalid {
+  border-color: #ef4444;
+}</code></pre>
+                </div>
+
+                <h3>Стилизация сообщений об ошибках</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-group input:user-invalid {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.form-group input:user-invalid + .error-message {
+  display: block;
+}
+
+.error-message {
+  display: none;
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Иконки валидации */
+.form-group input:user-valid {
+  background-image: url("data:image/svg+xml,...");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.6 JavaScript валидация -->
+            <section id="js-validation" class="topic-section">
+                <h2>JavaScript валидация</h2>
+
+                <h3>Базовая валидация</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const form = document.querySelector('form');
+const emailInput = document.getElementById('email');
+
+form.addEventListener('submit', (e) => {
+  // Собственная валидация
+  if (!validateEmail(emailInput.value)) {
+    e.preventDefault();
+    showError(emailInput, 'Введите корректный email');
+    return;
+  }
+  
+  // Если всё ок, форма отправится
+});
+
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function showError(input, message) {
+  const errorEl = input.parentElement.querySelector('.error-message');
+  errorEl.textContent = message;
+  input.classList.add('invalid');
+}</code></pre>
+                </div>
+
+                <h3>Валидация в реальном времени</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const inputs = document.querySelectorAll('input[required]');
+
+inputs.forEach(input => {
+  // Валидация при потере фокуса
+  input.addEventListener('blur', () => {
+    validateInput(input);
+    input.dataset.touched = 'true';
+  });
+  
+  // Валидация при вводе (после первого blur)
+  input.addEventListener('input', () => {
+    if (input.dataset.touched) {
+      validateInput(input);
+    }
+  });
+});
+
+function validateInput(input) {
+  const isValid = input.checkValidity();
+  const errorEl = input.parentElement.querySelector('.error-message');
+  
+  if (!isValid) {
+    input.classList.add('invalid');
+    input.classList.remove('valid');
+    errorEl.textContent = getErrorMessage(input);
+  } else {
+    input.classList.remove('invalid');
+    input.classList.add('valid');
+    errorEl.textContent = '';
+  }
+}
+
+function getErrorMessage(input) {
+  if (input.validity.valueMissing) {
+    return 'Это поле обязательно';
+  }
+  if (input.validity.typeMismatch) {
+    return 'Неверный формат';
+  }
+  if (input.validity.tooShort) {
+    return `Минимум ${input.minLength} символов`;
+  }
+  if (input.validity.tooLong) {
+    return `Максимум ${input.maxLength} символов`;
+  }
+  if (input.validity.patternMismatch) {
+    return input.title || 'Неверный формат';
+  }
+  return 'Некорректное значение';
+}</code></pre>
+                </div>
+
+                <h3>Валидация паролей</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirm-password');
+const requirements = document.querySelectorAll('.requirement');
+
+password.addEventListener('input', () => {
+  const value = password.value;
+  
+  // Проверка требований
+  updateRequirement('length', value.length >= 8);
+  updateRequirement('lowercase', /[a-z]/.test(value));
+  updateRequirement('uppercase', /[A-Z]/.test(value));
+  updateRequirement('number', /\d/.test(value));
+  updateRequirement('special', /[!@#$%^&*]/.test(value));
+});
+
+function updateRequirement(name, isValid) {
+  const el = document.querySelector(`[data-requirement="${name}"]`);
+  el.classList.toggle('valid', isValid);
+  el.classList.toggle('invalid', !isValid);
+}
+
+// Проверка совпадения паролей
+confirmPassword.addEventListener('input', () => {
+  if (confirmPassword.value !== password.value) {
+    confirmPassword.setCustomValidity('Пароли не совпадают');
+  } else {
+    confirmPassword.setCustomValidity('');
+  }
+});</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- HTML для требований к паролю --&gt;
+&lt;div class="password-requirements"&gt;
+  &lt;p class="requirement" data-requirement="length"&gt;
+    &lt;span class="icon"&gt;&lt;/span&gt; Минимум 8 символов
+  &lt;/p&gt;
+  &lt;p class="requirement" data-requirement="lowercase"&gt;
+    &lt;span class="icon"&gt;&lt;/span&gt; Строчная буква
+  &lt;/p&gt;
+  &lt;p class="requirement" data-requirement="uppercase"&gt;
+    &lt;span class="icon"&gt;&lt;/span&gt; Заглавная буква
+  &lt;/p&gt;
+  &lt;p class="requirement" data-requirement="number"&gt;
+    &lt;span class="icon"&gt;&lt;/span&gt; Цифра
+  &lt;/p&gt;
+  &lt;p class="requirement" data-requirement="special"&gt;
+    &lt;span class="icon"&gt;&lt;/span&gt; Спецсимвол (!@#$%^&amp;*)
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.7 Constraint Validation API -->
+            <section id="constraint-api" class="topic-section">
+                <h2>Constraint Validation API</h2>
+
+                <h3>Свойства validity</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const input = document.querySelector('input');
+
+// Объект ValidityState
+const validity = input.validity;
+
+validity.valid;          // true если всё ок
+validity.valueMissing;   // required не заполнен
+validity.typeMismatch;   // неверный тип (email, url)
+validity.patternMismatch;// не соответствует pattern
+validity.tooLong;        // превышает maxlength
+validity.tooShort;       // меньше minlength
+validity.rangeOverflow;  // больше max
+validity.rangeUnderflow; // меньше min
+validity.stepMismatch;   // не соответствует step
+validity.badInput;       // невозможно преобразовать
+validity.customError;    // установлена своя ошибка</code></pre>
+                </div>
+
+                <h3>Методы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const input = document.querySelector('input');
+const form = document.querySelector('form');
+
+// Проверить валидность
+input.checkValidity();     // true/false, триггерит 'invalid' event
+input.reportValidity();    // true/false, показывает браузерную подсказку
+
+// Проверить всю форму
+form.checkValidity();
+form.reportValidity();
+
+// Установить свою ошибку
+input.setCustomValidity('Пользователь с таким email уже существует');
+
+// Сбросить свою ошибку
+input.setCustomValidity('');
+
+// Получить сообщение об ошибке
+input.validationMessage;   // Текст ошибки</code></pre>
+                </div>
+
+                <h3>Кастомные сообщения об ошибках</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const form = document.querySelector('form');
+
+form.addEventListener('submit', (e) => {
+  const inputs = form.querySelectorAll('input, select, textarea');
+  let firstInvalid = null;
+  
+  inputs.forEach(input => {
+    // Сбрасываем кастомные ошибки
+    input.setCustomValidity('');
+    
+    if (!input.validity.valid) {
+      if (!firstInvalid) firstInvalid = input;
+      
+      // Устанавливаем кастомное сообщение
+      if (input.validity.valueMissing) {
+        input.setCustomValidity(`Пожалуйста, заполните поле "${input.labels[0]?.textContent || input.name}"`);
+      }
+    }
+  });
+  
+  if (firstInvalid) {
+    e.preventDefault();
+    firstInvalid.reportValidity();
+    firstInvalid.focus();
+  }
+});</code></pre>
+                </div>
+
+                <h3>Событие invalid</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const input = document.querySelector('input');
+
+input.addEventListener('invalid', (e) => {
+  // Отменить браузерное всплывающее окно
+  e.preventDefault();
+  
+  // Своя логика показа ошибки
+  showCustomError(input, input.validationMessage);
+});
+
+function showCustomError(input, message) {
+  const errorEl = input.nextElementSibling;
+  errorEl.textContent = message;
+  errorEl.hidden = false;
+  input.setAttribute('aria-invalid', 'true');
+  input.setAttribute('aria-describedby', errorEl.id);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.8 Доступность форм -->
+            <section id="accessibility" class="topic-section">
+                <h2>Доступность форм (a11y)</h2>
+
+                <h3>Label — обязательно!</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!--  Правильно: явная связь --&gt;
+&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="email" name="email"&gt;
+
+&lt;!--  Правильно: вложенный input --&gt;
+&lt;label&gt;
+  Email
+  &lt;input type="email" name="email"&gt;
+&lt;/label&gt;
+
+&lt;!--  Неправильно: placeholder вместо label --&gt;
+&lt;input type="email" placeholder="Email"&gt;
+
+&lt;!--  Визуально скрытый label --&gt;
+&lt;label for="search" class="visually-hidden"&gt;Поиск&lt;/label&gt;
+&lt;input type="search" id="search" placeholder="Поиск..."&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-css">/* Визуально скрытый, но доступный для скринридеров */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}</code></pre>
+                </div>
+
+                <h3>ARIA атрибуты</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Обязательное поле --&gt;
+&lt;input type="email" required aria-required="true"&gt;
+
+&lt;!-- Невалидное поле --&gt;
+&lt;input type="email" aria-invalid="true" aria-describedby="email-error"&gt;
+&lt;span id="email-error" role="alert"&gt;Введите корректный email&lt;/span&gt;
+
+&lt;!-- Подсказка --&gt;
+&lt;input type="password" aria-describedby="password-hint"&gt;
+&lt;span id="password-hint"&gt;Минимум 8 символов&lt;/span&gt;
+
+&lt;!-- Автозаполнение для скринридеров --&gt;
+&lt;input type="text" aria-autocomplete="list" aria-controls="suggestions"&gt;
+
+&lt;!-- Отключенная секция --&gt;
+&lt;fieldset disabled aria-disabled="true"&gt;
+  &lt;legend&gt;Недоступно&lt;/legend&gt;
+&lt;/fieldset&gt;</code></pre>
+                </div>
+
+                <h3>Live regions для ошибок</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Объявление ошибок скринридеру --&gt;
+&lt;div aria-live="polite" aria-atomic="true" class="error-summary"&gt;
+  &lt;!-- JS добавит сюда список ошибок --&gt;
+&lt;/div&gt;
+
+&lt;!-- role="alert" для немедленного объявления --&gt;
+&lt;span role="alert" class="error"&gt;Пароли не совпадают&lt;/span&gt;</code></pre>
+                </div>
+
+                <h3>Фокус и навигация</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Видимый фокус */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Не убирайте outline! Если нужен кастомный, замените */
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">// Фокус на первую ошибку после submit
+form.addEventListener('submit', (e) => {
+  const firstInvalid = form.querySelector(':invalid');
+  if (firstInvalid) {
+    e.preventDefault();
+    firstInvalid.focus();
+    
+    // Объявить ошибку скринридеру
+    announceError(firstInvalid);
+  }
+});
+
+function announceError(input) {
+  const liveRegion = document.querySelector('[aria-live]');
+  liveRegion.textContent = `Ошибка в поле ${input.labels[0].textContent}: ${input.validationMessage}`;
+}</code></pre>
+                </div>
+
+                <h3>Чек-лист доступности форм</h3>
+                <div class="visual-guide">
+                    <ul>
+                        <li> У каждого поля есть label</li>
+                        <li> Ошибки объявляются скринридерам (aria-live, role="alert")</li>
+                        <li> Видимый фокус на всех элементах</li>
+                        <li> Форма работает с клавиатуры</li>
+                        <li> Достаточный контраст текста</li>
+                        <li> Ошибки описаны текстом, не только цветом</li>
+                        <li> Touch targets минимум 44x44px</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 6.9 UX паттерны -->
+            <section id="ux-patterns" class="topic-section">
+                <h2>UX паттерны форм</h2>
+
+                <h3>Inline валидация</h3>
+                <p>Показывайте ошибки рядом с полем, сразу после взаимодействия:</p>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Валидация на blur (потеря фокуса)
+input.addEventListener('blur', validate);
+
+// НЕ валидируйте при каждом keyup — это раздражает
+// Валидация на input — только после первой ошибки
+let hasError = false;
+input.addEventListener('input', () => {
+  if (hasError) validate();
+});
+
+function validate() {
+  hasError = !input.checkValidity();
+  // показать/скрыть ошибку
+}</code></pre>
+                </div>
+
+                <h3>Floating labels</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;div class="floating-label"&gt;
+  &lt;input type="email" id="email" placeholder=" " required&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-css">.floating-label {
+  position: relative;
+}
+
+.floating-label input {
+  padding: 1.5rem 1rem 0.5rem;
+}
+
+.floating-label label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s;
+  pointer-events: none;
+  color: #666;
+}
+
+/* Когда есть фокус или значение */
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top: 0.5rem;
+  transform: translateY(0);
+  font-size: 0.75rem;
+  color: var(--primary);
+}</code></pre>
+                </div>
+
+                <h3>Show/Hide пароль</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;div class="password-field"&gt;
+  &lt;input type="password" id="password"&gt;
+  &lt;button type="button" class="toggle-password" aria-label="Показать пароль"&gt;
+    &lt;svg class="icon-eye"&gt;...&lt;/svg&gt;
+    &lt;svg class="icon-eye-off" hidden&gt;...&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">document.querySelectorAll('.toggle-password').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const input = btn.previousElementSibling;
+    const isPassword = input.type === 'password';
+    
+    input.type = isPassword ? 'text' : 'password';
+    btn.setAttribute('aria-label', isPassword ? 'Скрыть пароль' : 'Показать пароль');
+    
+    btn.querySelector('.icon-eye').hidden = !isPassword;
+    btn.querySelector('.icon-eye-off').hidden = isPassword;
+  });
+});</code></pre>
+                </div>
+
+                <h3>Автосохранение</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const form = document.querySelector('form');
+const STORAGE_KEY = 'form_draft';
+
+// Загрузка сохранённых данных
+const saved = localStorage.getItem(STORAGE_KEY);
+if (saved) {
+  const data = JSON.parse(saved);
+  Object.entries(data).forEach(([name, value]) => {
+    const input = form.querySelector(`[name="${name}"]`);
+    if (input) input.value = value;
+  });
+}
+
+// Автосохранение при изменении
+form.addEventListener('input', debounce(() => {
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}, 500));
+
+// Очистка после успешной отправки
+form.addEventListener('submit', () => {
+  localStorage.removeItem(STORAGE_KEY);
+});
+
+function debounce(fn, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}</code></pre>
+                </div>
+
+                <h3>Многошаговые формы</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const steps = document.querySelectorAll('.form-step');
+const nextBtns = document.querySelectorAll('[data-next]');
+const prevBtns = document.querySelectorAll('[data-prev]');
+let currentStep = 0;
+
+function showStep(index) {
+  steps.forEach((step, i) => {
+    step.hidden = i !== index;
+    step.setAttribute('aria-hidden', i !== index);
+  });
+  
+  // Обновить индикатор прогресса
+  updateProgress(index);
+}
+
+nextBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Валидация текущего шага
+    const currentFields = steps[currentStep].querySelectorAll('input, select');
+    const isValid = [...currentFields].every(f => f.checkValidity());
+    
+    if (isValid && currentStep < steps.length - 1) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  });
+});
+
+prevBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.10 Безопасность -->
+            <section id="security" class="topic-section">
+                <h2>Безопасность форм</h2>
+
+                <h3>CSRF защита</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Токен от сервера --&gt;
+&lt;form method="POST" action="/submit"&gt;
+  &lt;input type="hidden" name="_csrf" value="abc123xyz"&gt;
+  &lt;!-- остальные поля --&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <h3>Санитизация ввода</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">//  Опасно: XSS уязвимость
+element.innerHTML = userInput;
+
+//  Безопасно
+element.textContent = userInput;
+
+//  Если нужен HTML — санитизация
+function sanitize(html) {
+  const temp = document.createElement('div');
+  temp.textContent = html;
+  return temp.innerHTML;
+}
+
+//  Или используйте DOMPurify
+import DOMPurify from 'dompurify';
+element.innerHTML = DOMPurify.sanitize(userInput);</code></pre>
+                </div>
+
+                <h3>Защита от автозаполнения паролей</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Для полей с чувствительными данными --&gt;
+&lt;input type="text" autocomplete="off"&gt;
+
+&lt;!-- Для нового пароля (не автозаполнять старый) --&gt;
+&lt;input type="password" autocomplete="new-password"&gt;</code></pre>
+                </div>
+
+                <h3>Honeypot против ботов</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!-- Скрытое поле, которое бот заполнит --&gt;
+&lt;div class="honey" aria-hidden="true"&gt;
+  &lt;label for="website"&gt;Website&lt;/label&gt;
+  &lt;input type="text" id="website" name="website" tabindex="-1" autocomplete="off"&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-css">.honey {
+  position: absolute;
+  left: -9999px;
+}</code></pre>
+                </div>
+
+                <div class="code-example">
+<pre><code class="language-javascript">// На сервере проверяем
+if (formData.website) {
+  // Это бот — отклонить
+  return res.status(400).json({ error: 'Bot detected' });
+}</code></pre>
+                </div>
+
+                <h3>Rate limiting</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Простой rate limiter на клиенте
+const submitBtn = document.querySelector('button[type="submit"]');
+let lastSubmit = 0;
+const COOLDOWN = 3000; // 3 секунды
+
+form.addEventListener('submit', (e) => {
+  const now = Date.now();
+  if (now - lastSubmit < COOLDOWN) {
+    e.preventDefault();
+    alert('Подождите перед повторной отправкой');
+    return;
+  }
+  lastSubmit = now;
+  submitBtn.disabled = true;
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 6.11 Реальные формы -->
+            <section id="real-forms" class="topic-section">
+                <h2>Реальные примеры форм</h2>
+
+                <h3>Форма регистрации</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;form id="register-form" novalidate&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="reg-name"&gt;Имя&lt;/label&gt;
+    &lt;input 
+      type="text" 
+      id="reg-name" 
+      name="name" 
+      required 
+      minlength="2"
+      autocomplete="name"
+    &gt;
+    &lt;span class="error-message" id="name-error"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="form-group"&gt;
+    &lt;label for="reg-email"&gt;Email&lt;/label&gt;
+    &lt;input 
+      type="email" 
+      id="reg-email" 
+      name="email" 
+      required
+      autocomplete="email"
+    &gt;
+    &lt;span class="error-message" id="email-error"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="form-group"&gt;
+    &lt;label for="reg-password"&gt;Пароль&lt;/label&gt;
+    &lt;div class="password-field"&gt;
+      &lt;input 
+        type="password" 
+        id="reg-password" 
+        name="password" 
+        required 
+        minlength="8"
+        autocomplete="new-password"
+      &gt;
+      &lt;button type="button" class="toggle-password"&gt;👁&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="password-strength"&gt;&lt;/div&gt;
+    &lt;span class="error-message" id="password-error"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="form-group"&gt;
+    &lt;label for="reg-confirm"&gt;Подтвердите пароль&lt;/label&gt;
+    &lt;input 
+      type="password" 
+      id="reg-confirm" 
+      name="confirm" 
+      required
+      autocomplete="new-password"
+    &gt;
+    &lt;span class="error-message" id="confirm-error"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="form-group"&gt;
+    &lt;label class="checkbox-label"&gt;
+      &lt;input type="checkbox" name="agree" required&gt;
+      Согласен с &lt;a href="/terms"&gt;условиями&lt;/a&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+  
+  &lt;button type="submit" class="btn-primary"&gt;Зарегистрироваться&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <h3>Форма оформления заказа</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;form id="checkout-form"&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Контактные данные&lt;/legend&gt;
+    
+    &lt;div class="form-row"&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="first-name"&gt;Имя&lt;/label&gt;
+        &lt;input type="text" id="first-name" name="firstName" required autocomplete="given-name"&gt;
+      &lt;/div&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="last-name"&gt;Фамилия&lt;/label&gt;
+        &lt;input type="text" id="last-name" name="lastName" required autocomplete="family-name"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="phone"&gt;Телефон&lt;/label&gt;
+      &lt;input type="tel" id="phone" name="phone" required autocomplete="tel"
+             pattern="\+7\d{10}" placeholder="+79991234567"&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  
+  &lt;fieldset&gt;
+    &lt;legend&gt;Адрес доставки&lt;/legend&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="city"&gt;Город&lt;/label&gt;
+      &lt;input type="text" id="city" name="city" required autocomplete="address-level2"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+      &lt;label for="address"&gt;Адрес&lt;/label&gt;
+      &lt;input type="text" id="address" name="address" required autocomplete="street-address"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-row"&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="postal"&gt;Индекс&lt;/label&gt;
+        &lt;input type="text" id="postal" name="postal" pattern="[0-9]{6}" autocomplete="postal-code"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  
+  &lt;button type="submit"&gt;Оформить заказ&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <div class="exercise">
+                    <h4>Итоговый проект</h4>
+                    <p>Создайте полнофункциональную форму регистрации с:</p>
+                    <ul>
+                        <li>Валидацией в реальном времени</li>
+                        <li>Индикатором силы пароля</li>
+                        <li>Проверкой совпадения паролей</li>
+                        <li>Доступностью (label, aria, focus)</li>
+                        <li>Автосохранением черновика</li>
+                        <li>Красивыми стилями и анимациями</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>
+                </button>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span><span>Фиолетовая</span></button>
+                    <button class="mobile-color-scheme-btn" data-color="orange"><span class="color-dot" style="background: #f97316;"></span><span>Оранжевая</span></button>
+                    <button class="mobile-color-scheme-btn" data-color="blue"><span class="color-dot" style="background: #3b82f6;"></span><span>Синяя</span></button>
+                </div>
+            </div>
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+

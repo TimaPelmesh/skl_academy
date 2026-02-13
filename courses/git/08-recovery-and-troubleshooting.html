@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 8: Решение сложных ситуаций и спасение. restore/checkout, reset (--soft/--mixed/--hard), revert, reflog, алгоритм восстановления.">
+    <meta name="keywords" content="git restore, git checkout, git reset, git revert, git reflog, откат git">
+    <meta name="author" content="SKL Academy">
+    <meta property="og:title" content="Git — Модуль 8: Спасение и откаты">
+    <meta property="og:description" content="Научимся безопасно откатывать изменения и восстанавливать потерянные коммиты с помощью reflog.">
+    <title>Курс Git — Модуль 8: Спасение и откаты | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/08-recovery-and-troubleshooting.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="git">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">7. Командная работа</button>
+                    <div class="subtopics">
+                        <a href="07-teamwork-and-practices.html#pr" class="subtopic">7.1 PR/MR</a>
+                        <a href="07-teamwork-and-practices.html#tags" class="subtopic">7.2 Теги</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">8. Спасение и откаты</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#restore" class="subtopic active">8.1 restore/checkout</a>
+                        <a href="#restore-source" class="subtopic">8.2 Вытаскивание из коммита</a>
+                        <a href="#reset-revert" class="subtopic">8.3 reset vs revert</a>
+                        <a href="#reflog" class="subtopic">8.4 reflog</a>
+                        <a href="#algorithm" class="subtopic">8.5 Алгоритм спасения</a>
+                        <a href="#reflog-retention" class="subtopic">8.6 Сроки хранения reflog</a>
+                        <a href="#gc-pack" class="subtopic">8.7 Garbage collection и packfiles</a>
+                        <a href="#fsck" class="subtopic">8.8 Проверка целостности: git fsck</a>
+                        <a href="#revert-merge" class="subtopic">8.9 Revert merge‑коммита</a>
+                        <a href="#reset-deep" class="subtopic">8.10 Глубже про reset</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#gui" class="subtopic">9.1 GUI</a>
+                        <a href="09-tools-and-integrations.html#hooks-ci" class="subtopic">9.2 hooks/CI</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                        <a href="10-summary-best-practices.html#best" class="subtopic">10.2 Лучшие практики</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 8: Решение сложных ситуаций и «спасение»</h2>
+                <p>Разберём, как безопасно откатывать изменения и восстанавливать «потерянные» коммиты. В Git почти всё поправимо.</p>
+                <div class="note"><p><strong>Принцип:</strong> в Git «по-настоящему» удаляется только то, что не было закоммичено или давно не достижимо и было сборщиком мусора удалено.</p></div>
+                <p>Важно не паниковать и двигаться по алгоритму: оценить текущее состояние, посмотреть историю и <code>reflog</code>, зафиксировать «здоровую» точку, а затем аккуратно вернуться к рабочему процессу. Спокойствие и методичность здесь решают всё.</p>
+            </section>
+
+            <section id="restore" class="topic-section">
+                <h2>8.1 Откат незакоммиченных изменений: restore/checkout</h2>
+                <div class="code-example">
+<pre><code class="bash"># Откатить изменения в конкретном файле
+git restore path/to/file
+# Старый синтаксис (устар.):
+# git checkout -- path/to/file
+</code></pre>
+                </div>
+            </section>
+
+            <section id="restore-source" class="topic-section">
+                <h2>8.2 Восстановление файла из прошлого коммита</h2>
+                <div class="code-example">
+<pre><code class="bash"># Взять версию файла из конкретного коммита, не меняя всю ветку
+git restore --source=&lt;commit&gt; -- path/to/file
+</code></pre>
+                </div>
+            </section>
+
+            <section id="reset-revert" class="topic-section">
+                <h2>8.3 Отмена коммитов: reset vs revert</h2>
+                <ul>
+                    <li><strong>reset</strong> — переписывает указатели (историю) текущей ветки</li>
+                    <li><strong>revert</strong> — создаёт новый коммит‑откат (без переписывания истории)</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="bash"># reset: уровни
+# --soft  — откатить указатель, изменения останутся в индексе
+# --mixed — (по умолчанию) откатить указатель, изменения попадут в рабочую директорию
+# --hard  — откатить всё (ОСТОРОЖНО!)
+
+git reset --soft HEAD~1
+git reset --mixed HEAD~1
+git reset --hard HEAD~1
+
+# revert: безопасно для публичных веток
+git revert &lt;commit-hash&gt;
+</code></pre>
+                </div>
+                <p>Выбор между <code>reset</code> и <code>revert</code> зависит от аудитории истории. Для общих веток почти всегда предпочтителен <code>revert</code>, поскольку он прозрачно отражает отмену на «полосе времени» проекта.</p>
+            </section>
+
+            <section id="reflog" class="topic-section">
+                <h2>8.4 Поиск «потерянного»: git reflog</h2>
+                <p><code>reflog</code> хранит локальную историю перемещений <code>HEAD</code>/веток. Помогает найти коммит после неудачного reset/rebase.</p>
+                <div class="code-example">
+<pre><code class="bash">git reflog
+# восстановить ветку на найденный коммит
+git reset --hard &lt;hash-from-reflog&gt;
+# или создать новую ветку с нужной точки
+git branch rescue/&lt;date&gt; &lt;hash&gt;
+</code></pre>
+                </div>
+            </section>
+
+            <section id="algorithm" class="topic-section">
+                <h2>8.5 Алгоритм действий «если всё сломали»</h2>
+                <ol>
+                    <li>Не паниковать. Ничего не удаляйте жёстко.</li>
+                    <li>Посмотрите <code>git status</code> и <code>git log --oneline --graph --decorate --all</code>.</li>
+                    <li>Откройте <code>git reflog</code> и найдите «здоровую» точку.</li>
+                    <li>Создайте спасательную ветку от найденного хеша: <code>git branch rescue/&lt;date&gt; &lt;hash&gt;</code>.</li>
+                    <li>Аккуратно вернитесь к работе: <code>git switch rescue/&lt;date&gt;</code> или <code>git reset --hard &lt;hash&gt;</code> (понимая последствия).</li>
+                </ol>
+            </section>
+            <section id="reflog-retention" class="topic-section">
+                <h2>8.6 Сроки хранения reflog</h2>
+                <p><code>reflog</code> хранится локально и очищается сборщиком мусора. Сроки регулируются параметрами конфигурации (например, время истечения записей), что важно при восстановлении старых состояний.</p>
+            </section>
+            <section id="gc-pack" class="topic-section">
+                <h2>8.7 Garbage collection и packfiles</h2>
+                <p>Git упаковывает объекты в <em>packfiles</em> для экономии места и скорости. <code>git gc</code> удаляет недостижимые объекты и оптимизирует хранилище, соблюдая «период безопасности», чтобы не потерять недавние объекты.</p>
+            </section>
+            <section id="fsck" class="topic-section">
+                <h2>8.8 Проверка целостности: git fsck</h2>
+                <p><code>git fsck</code> анализирует целостность графа объектов и ссылок, помогает найти «висячие» объекты и повреждения.</p>
+            </section>
+            <section id="revert-merge" class="topic-section">
+                <h2>8.9 Revert merge‑коммита</h2>
+                <p>Откат merge‑коммита требует указать <code>-m &lt;parent-number&gt;</code> — какой родитель считать «основной». Это важно, чтобы корректно инвертировать изменения.</p>
+            </section>
+            <section id="reset-deep" class="topic-section">
+                <h2>8.10 Глубже про reset: soft/mixed/hard</h2>
+                <p><code>reset</code> перемещает указатели и управляет состоянием индекса/рабочей директории. <strong>soft</strong> — только <code>HEAD</code>; <strong>mixed</strong> — <code>HEAD</code> и индекс; <strong>hard</strong> — всё, включая рабочее дерево. Понимание трёх деревьев (HEAD/index/worktree) критично.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

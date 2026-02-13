@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 багов, которые стоили миллионы долларов | SKL Academy</title>
+  
+  <meta name="description" content="Истории катастрофических ошибок в IT: Knight Capital, Cloudflare, AWS, Therac-25 и Ariane 5. Чему они нас учат.">
+  <meta name="keywords" content="баги в коде, катастрофы IT, Knight Capital, Cloudflare, AWS сбой, история IT">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="5 багов, которые стоили миллионы долларов">
+  <meta property="og:description" content="Истории катастрофических ошибок в IT и чему они нас учат.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://skl-academy.ru/articles/billion-dollar-bugs.html">
+  
+  <link rel="canonical" href="https://skl-academy.ru/articles/billion-dollar-bugs.html">
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    .story-card {
+      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+      border-left: 4px solid #6366f1;
+    }
+    .damage-badge {
+      background: linear-gradient(135deg, #4f46e5, #4338ca);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .lesson-box {
+      background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+      border-left: 4px solid #4f46e5;
+    }
+    .timeline-item {
+      position: relative;
+      padding-left: 24px;
+      border-left: 2px solid #e5e7eb;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #6366f1;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="../index.html" class="flex items-center">
+            <img class="h-8 w-auto" src="../images/icon.ico" alt="SKL Academy">
+            <span class="ml-2 text-lg font-semibold text-gray-900">SKL Academy</span>
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../library.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">
+            <i class="fas fa-book mr-1"></i> Библиотека
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">IT-истории</span>
+        <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 25 мин чтения</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        5 багов, которые стоили миллионы долларов
+      </h1>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        Код может быть опасен. Одна ошибка способна уничтожить компанию, убить людей или обрушить половину интернета. Вот пять историй, которые должен знать каждый разработчик.
+      </p>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+
+      <!-- Introduction -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Почему баги так дороги?</h2>
+        
+        <p class="text-gray-700 mb-4">
+          Мы привыкли думать о багах как о мелких неприятностях: кнопка не работает, страница не загружается, приложение вылетает. Перезагрузил — и всё ок. Но в мире высоких технологий, финансов и критических систем одна строчка кода может стоить миллиарды.
+        </p>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg mb-6">
+          <h4 class="font-bold text-indigo-900 mb-2">Цена ошибки растёт экспоненциально</h4>
+          <p class="text-indigo-800 mb-0">
+            Баг, найденный на этапе написания кода, стоит $1. На этапе тестирования — $10. В продакшене — $100. После того, как он вызвал инцидент — $1000+. А если он уничтожил компанию...
+          </p>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Эти истории — не страшилки для запугивания джунов. Это реальные события, которые изменили индустрию и заставили пересмотреть подходы к разработке, тестированию и развёртыванию.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Давайте разберём каждый случай детально: что произошло, почему это случилось, и какие уроки мы можем извлечь.
+        </p>
+      </section>
+
+      <!-- Story 1: Knight Capital -->
+      <section class="mb-16">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <h2 class="text-3xl font-bold text-gray-900 flex items-center m-0">
+            <span class="flex items-center justify-center w-12 h-12 bg-indigo-600 text-white rounded-xl text-xl font-bold mr-4">1</span>
+            Knight Capital Group
+          </h2>
+          <span class="damage-badge">$440 000 000 за 45 минут</span>
+        </div>
+        
+        <div class="story-card rounded-lg p-6 mb-6">
+          <p class="text-gray-800 font-medium mb-0">
+            <strong>Дата:</strong> 1 августа 2012 года<br>
+            <strong>Место:</strong> Нью-Йоркская фондовая биржа (NYSE)<br>
+            <strong>Итог:</strong> Банкротство одной из крупнейших торговых фирм США
+          </p>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Предыстория</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Knight Capital была одной из крупнейших торговых фирм на Wall Street. Они обрабатывали около 17% всех торгов акциями на американских биржах. Их торговые алгоритмы совершали миллионы сделок в день.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          1 августа 2012 года NYSE запустила новую программу — Retail Liquidity Program (RLP). Knight Capital готовила обновление своего торгового ПО для поддержки этой программы.
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что пошло не так?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          За несколько дней до запуска инженеры Knight Capital начали разворачивать новый код на 8 серверах. Но процесс развёртывания был ручным, и <strong>на одном из серверов новый код не был установлен</strong>.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Проблема усугублялась тем, что новый код переиспользовал старый флаг <code class="bg-gray-100 px-2 py-1 rounded">SMARS</code>. Этот флаг раньше активировал функцию "Power Peg" — старую логику для тестирования, которая:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li>Покупала акции по рыночной цене (максимальной)</li>
+          <li>Мгновенно продавала их по рыночной цене (минимальной)</li>
+          <li>Не имела никаких ограничений на количество сделок</li>
+        </ul>
+        
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono text-sm mb-6">
+          <pre>// Псевдокод того, что произошло
+if (SMARS_FLAG_ENABLED) {
+    // На 7 серверах: новая логика RLP
+    executeRetailLiquidityProgram();
+} else {
+    // На 1 сервере: СТАРАЯ логика Power Peg
+    // которая покупала дорого и продавала дёшево
+    // в бесконечном цикле!
+    executePowerPeg(); // КАТАСТРОФА
+}</pre>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Хронология катастрофы</h3>
+        
+        <div class="space-y-4 mb-6">
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">9:30 — Открытие торгов</p>
+            <p class="text-gray-600">Восьмой сервер активировал старый код Power Peg</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">9:31 — Первые странные сделки</p>
+            <p class="text-gray-600">Система начала покупать и продавать акции 154 компаний</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">9:32 — Рынок реагирует</p>
+            <p class="text-gray-600">Цены некоторых акций подскочили на 10%+</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">9:35 — Knight замечает проблему</p>
+            <p class="text-gray-600">Но не понимает, в чём дело</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">9:45 — Панические попытки остановить</p>
+            <p class="text-gray-600">Инженеры отключают серверы один за другим, но не тот!</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">10:15 — Наконец остановлено</p>
+            <p class="text-gray-600">45 минут, 4 миллиона сделок, $440 миллионов убытков</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          За 45 минут система совершила около <strong>4 миллионов сделок</strong> по 154 акциям на сумму $7 миллиардов. Компания потеряла <strong>$10 миллионов в секунду</strong>.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Последствия</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Knight Capital потеряла больше, чем заработала за всю свою историю. Компания была вынуждена принять экстренное финансирование, а затем была продана конкуренту Getco за копейки.
+        </p>
+
+        <div class="lesson-box rounded-lg p-6">
+          <h4 class="font-bold text-indigo-900 mb-3">Уроки Knight Capital</h4>
+          <ul class="list-disc pl-6 text-indigo-800 space-y-2">
+            <li><strong>Автоматизируйте развёртывание</strong> — ручной деплой на 8 серверов = человеческая ошибка</li>
+            <li><strong>Не переиспользуйте старые флаги</strong> — удаляйте мёртвый код</li>
+            <li><strong>Имейте kill switch</strong> — возможность мгновенно остановить всё</li>
+            <li><strong>Мониторинг аномалий</strong> — $10М/сек убытков должны были вызвать алерт</li>
+            <li><strong>Feature flags с таймаутом</strong> — старый код не должен жить вечно</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Story 2: Cloudflare -->
+      <section class="mb-16">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <h2 class="text-3xl font-bold text-gray-900 flex items-center m-0">
+            <span class="flex items-center justify-center w-12 h-12 bg-indigo-600 text-white rounded-xl text-xl font-bold mr-4">2</span>
+            Cloudflare Outage 2019
+          </h2>
+          <span class="damage-badge">27 минут, весь мир</span>
+        </div>
+
+        <div class="story-card rounded-lg p-6 mb-6">
+          <p class="text-gray-800 font-medium mb-0">
+            <strong>Дата:</strong> 2 июля 2019 года<br>
+            <strong>Причина:</strong> Одна регулярка (regex)<br>
+            <strong>Итог:</strong> Половина интернета недоступна 27 минут
+          </p>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Предыстория</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Cloudflare — одна из крупнейших CDN-компаний в мире. Через их сеть проходит около 10% всего интернет-трафика. Они защищают миллионы сайтов от DDoS-атак с помощью WAF (Web Application Firewall).
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          WAF использует правила на основе регулярных выражений для обнаружения и блокировки вредоносных запросов. В тот день инженер добавил новое правило...
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что произошло?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Инженер добавил правило для обнаружения XSS-атак:
+        </p>
+        
+        <div class="bg-gray-900 text-indigo-400 p-6 rounded-lg font-mono text-xs mb-6 overflow-x-auto">
+          <pre>(?:(?:\"|'|\]|\}|\\|\d|(?:nan|infinity|true|false|null|undefined|symbol|math)|\`|\-|\+)+[)]*;?((?:\s|-|~|!|{}|\|\||\+)*.*(?:.*=.*)))</pre>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Выглядит как обычный regex, верно? Но в нём скрывалась смертельная ловушка — <strong>catastrophic backtracking</strong>.
+        </p>
+        
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что такое catastrophic backtracking?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Движок регулярных выражений работает методом перебора. Когда паттерн не совпадает, он "откатывается" и пробует другой вариант. Для некоторых regex количество вариантов растёт экспоненциально:
+        </p>
+        
+        <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <p class="text-gray-700 mb-2"><strong>Проблемный паттерн:</strong> <code class="bg-gray-100 px-2 py-1 rounded">.*.*=.*</code></p>
+          <p class="text-gray-600 text-sm mb-4">Этот паттерн говорит: "любые символы, потом ещё любые символы, потом знак равенства, потом ещё любые символы"</p>
+          
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-left text-gray-600">
+                <th class="pb-2">Длина строки</th>
+                <th class="pb-2">Количество вариантов</th>
+                <th class="pb-2">Время</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-900">
+              <tr class="border-t border-gray-200">
+                <td class="py-2">10 символов</td>
+                <td class="py-2">~1 000</td>
+                <td class="py-2">&lt;1 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-2">20 символов</td>
+                <td class="py-2">~1 000 000</td>
+                <td class="py-2">~100 мс</td>
+              </tr>
+              <tr class="border-t border-gray-200">
+                <td class="py-2">30 символов</td>
+                <td class="py-2">~1 000 000 000</td>
+                <td class="py-2">~минуты</td>
+              </tr>
+              <tr class="border-t border-gray-200 bg-indigo-50">
+                <td class="py-2 font-bold">40+ символов</td>
+                <td class="py-2 font-bold">Астрономическое</td>
+                <td class="py-2 font-bold">Бесконечность</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Когда этот regex встретил определённые HTTP-запросы, CPU на всех серверах Cloudflare по всему миру ушёл в 100% и завис.
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Масштаб катастрофы</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Поскольку Cloudflare проксирует трафик для миллионов сайтов, всё это стало недоступно:
+        </p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <i class="fab fa-discord text-3xl text-indigo-600 mb-2"></i>
+            <p class="font-medium text-gray-900">Discord</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <i class="fab fa-shopify text-3xl text-indigo-600 mb-2"></i>
+            <p class="font-medium text-gray-900">Shopify</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <i class="fab fa-medium text-3xl text-gray-900 mb-2"></i>
+            <p class="font-medium text-gray-900">Medium</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <i class="fab fa-reddit text-3xl text-indigo-600 mb-2"></i>
+            <p class="font-medium text-gray-900">Reddit</p>
+          </div>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          И сотни тысяч других сайтов. Интернет буквально "лёг" на 27 минут.
+        </p>
+
+        <div class="lesson-box rounded-lg p-6">
+          <h4 class="font-bold text-indigo-900 mb-3">Уроки Cloudflare</h4>
+          <ul class="list-disc pl-6 text-indigo-800 space-y-2">
+            <li><strong>Тестируйте regex на больших входных данных</strong> — не только "счастливые" случаи</li>
+            <li><strong>Используйте инструменты анализа</strong> — есть regex-анализаторы для поиска backtracking</li>
+            <li><strong>Ограничивайте время выполнения</strong> — timeout для regex</li>
+            <li><strong>Canary releases</strong> — сначала на 1% серверов, потом на все</li>
+            <li><strong>Быстрый rollback</strong> — возможность откатить изменения за секунды</li>
+          </ul>
+        </div>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg mt-6">
+          <p class="text-indigo-900 mb-0">
+            <strong>После инцидента</strong> Cloudflare добавила защиту от catastrophic backtracking во все regex-правила WAF и перешла на движок с гарантированным линейным временем выполнения.
+          </p>
+        </div>
+      </section>
+
+      <!-- Story 3: AWS S3 -->
+      <section class="mb-16">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <h2 class="text-3xl font-bold text-gray-900 flex items-center m-0">
+            <span class="flex items-center justify-center w-12 h-12 bg-indigo-600 text-white rounded-xl text-xl font-bold mr-4">3</span>
+            AWS S3 Outage 2017
+          </h2>
+          <span class="damage-badge">$150+ млн убытков рынка</span>
+        </div>
+
+        <div class="story-card rounded-lg p-6 mb-6">
+          <p class="text-gray-800 font-medium mb-0">
+            <strong>Дата:</strong> 28 февраля 2017 года<br>
+            <strong>Причина:</strong> Опечатка в команде<br>
+            <strong>Итог:</strong> Треть интернета недоступна почти 5 часов
+          </p>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Предыстория</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Amazon S3 (Simple Storage Service) — это хранилище файлов, на котором работает огромная часть интернета. Изображения, видео, бэкапы, статические сайты — всё это часто лежит на S3. Регион US-EAST-1 (Северная Вирджиния) — самый большой и старый регион AWS.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          В тот день команда S3 выполняла рутинную операцию: удаление небольшого количества серверов, чтобы отладить проблему с биллинговой системой.
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что произошло?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Инженер выполнил команду для удаления нескольких серверов. Но из-за опечатки в параметре <strong>была удалена гораздо большая группа серверов</strong>, чем планировалось.
+        </p>
+        
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono text-sm mb-6">
+          <pre class="text-gray-400"># Что планировалось (условно):</pre>
+          <pre class="text-indigo-400">$ remove-servers --count=5 --subsystem=billing</pre>
+          <pre class="text-gray-400 mt-4"># Что было введено (условно):</pre>
+          <pre class="text-indigo-400">$ remove-servers --count=??? --subsystem=index</pre>
+          <pre class="text-gray-400 mt-2"># Удалена критическая подсистема индексации!</pre>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Среди удалённых серверов оказались серверы <strong>подсистемы индексации</strong>. Эта система отвечает за то, чтобы S3 знал, где физически хранится каждый файл. Без неё S3 не мог найти ни один объект.
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Эффект домино</h3>
+        
+        <p class="text-gray-700 mb-4">
+          S3 — это фундамент для множества других сервисов AWS. Когда он упал:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-6">
+          <li><strong>AWS Console</strong> — иконки и статические файлы лежат на S3</li>
+          <li><strong>Lambda</strong> — код функций хранится на S3</li>
+          <li><strong>EC2</strong> — AMI образы на S3</li>
+          <li><strong>И далее по цепочке...</strong></li>
+        </ul>
+        
+        <p class="text-gray-700 mb-4">
+          Ирония: даже <strong>AWS Status Dashboard</strong> не мог показать статус сбоя, потому что сам работал на S3!
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Пострадавшие сервисы</h3>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <p class="font-medium text-gray-900">Slack</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <p class="font-medium text-gray-900">Trello</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <p class="font-medium text-gray-900">Quora</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <p class="font-medium text-gray-900">IFTTT</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <p class="font-medium text-gray-900">Docker Hub</p>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-4 text-center">
+            <p class="font-medium text-gray-900">Business Insider</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Почему восстановление заняло так долго?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Подсистема индексации не перезапускалась много лет. За это время S3 вырос настолько, что полная инициализация индекса заняла несколько часов. Никто не тестировал восстановление в таком масштабе.
+        </p>
+
+        <div class="lesson-box rounded-lg p-6">
+          <h4 class="font-bold text-indigo-900 mb-3">Уроки AWS S3</h4>
+          <ul class="list-disc pl-6 text-indigo-800 space-y-2">
+            <li><strong>Опасные команды должны требовать подтверждения</strong> — "Are you sure?"</li>
+            <li><strong>Ограничивайте blast radius</strong> — нельзя удалить слишком много за раз</li>
+            <li><strong>Регулярно тестируйте восстановление</strong> — disaster recovery drills</li>
+            <li><strong>Не кладите все яйца в одну корзину</strong> — мультирегиональность</li>
+            <li><strong>Status page не должен зависеть от основной инфраструктуры</strong></li>
+          </ul>
+        </div>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg mt-6">
+          <p class="text-indigo-900 mb-0">
+            <strong>После инцидента</strong> AWS добавила защиту от случайного удаления критических систем и ограничила скорость удаления серверов.
+          </p>
+        </div>
+      </section>
+
+      <!-- Story 4: Therac-25 -->
+      <section class="mb-16">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <h2 class="text-3xl font-bold text-gray-900 flex items-center m-0">
+            <span class="flex items-center justify-center w-12 h-12 bg-purple-600 text-white rounded-xl text-xl font-bold mr-4">4</span>
+            Therac-25
+          </h2>
+          <span class="damage-badge">6 смертей, много травм</span>
+        </div>
+
+        <div class="story-card rounded-lg p-6 mb-6">
+          <p class="text-gray-800 font-medium mb-0">
+            <strong>Период:</strong> 1985-1987 годы<br>
+            <strong>Причина:</strong> Race condition в коде<br>
+            <strong>Итог:</strong> 6 смертей, серьёзные лучевые травмы
+          </p>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Предыстория</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Therac-25 — это медицинский аппарат лучевой терапии, созданный компанией AECL для лечения рака. Он мог работать в двух режимах:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-6">
+          <li><strong>Electron mode</strong> — низкоэнергетический пучок электронов (для поверхностных опухолей)</li>
+          <li><strong>X-ray mode</strong> — высокоэнергетический пучок (для глубоких опухолей), который проходит через металлический рассеиватель</li>
+        </ul>
+        
+        <p class="text-gray-700 mb-4">
+          В X-ray режиме энергия пучка в 100 раз выше, и без рассеивателя она смертельна.
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Что пошло не так?</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Предыдущие модели (Therac-6 и Therac-20) имели <strong>аппаратные блокировки</strong>: физические датчики не позволяли включить высокую энергию без рассеивателя. Но в Therac-25 эти блокировки заменили <strong>программными</strong>.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          В коде была <strong>race condition</strong>: если оператор очень быстро менял параметры (за 8 секунд или меньше), система не успевала установить рассеиватель, но уже включала высокоэнергетический режим.
+        </p>
+        
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono text-sm mb-6">
+          <pre class="text-gray-400">// Упрощённая иллюстрация проблемы</pre>
+          <pre>
+Thread 1: setBeamEnergy(HIGH);     // t=0
+Thread 2: checkSpreader();         // t=1 (ещё не установлен!)
+Thread 1: fireBeam();              // t=2 (смертельная доза)
+Thread 2: installSpreader();       // t=3 (слишком поздно!)</pre>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Трагедии</h3>
+        
+        <p class="text-gray-700 mb-4">
+          С 1985 по 1987 год произошло минимум 6 случаев передозировки:
+        </p>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-6">
+          <li>Пациенты получали дозы в <strong>100 раз</strong> выше нормы</li>
+          <li>Они описывали ощущение как "электрический удар" или "огонь"</li>
+          <li>Трое погибли в течение недель от лучевой болезни</li>
+          <li>Ещё трое умерли позже от осложнений</li>
+          <li>Многие получили тяжёлые ожоги и инвалидность</li>
+        </ul>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Почему проблему не нашли раньше?</h3>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li><strong>Невоспроизводимость</strong> — баг проявлялся только при определённой скорости ввода</li>
+          <li><strong>Доверие к ПО</strong> — производитель утверждал, что "это невозможно"</li>
+          <li><strong>Плохие сообщения об ошибках</strong> — аппарат показывал "MALFUNCTION 54" без объяснения</li>
+          <li><strong>Переиспользование кода</strong> — код от Therac-6/20 использовался без учёта отсутствия аппаратной защиты</li>
+        </ul>
+
+        <div class="lesson-box rounded-lg p-6">
+          <h4 class="font-bold text-indigo-900 mb-3">Уроки Therac-25</h4>
+          <ul class="list-disc pl-6 text-indigo-800 space-y-2">
+            <li><strong>Race conditions убивают</strong> — буквально</li>
+            <li><strong>Нельзя заменять аппаратную защиту программной</strong> для критических систем</li>
+            <li><strong>Тестируйте edge cases</strong> — "быстрый оператор" никто не проверял</li>
+            <li><strong>Понятные сообщения об ошибках</strong> — "MALFUNCTION 54" бесполезно</li>
+            <li><strong>Defense in depth</strong> — несколько уровней защиты</li>
+          </ul>
+        </div>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg mt-6">
+          <p class="text-indigo-900 mb-0">
+            <strong>Therac-25 — это каноническая история в курсах по software engineering.</strong> Она показывает, что код может убивать, и почему тестирование критических систем требует особого подхода.
+          </p>
+        </div>
+      </section>
+
+      <!-- Story 5: Ariane 5 -->
+      <section class="mb-16">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <h2 class="text-3xl font-bold text-gray-900 flex items-center m-0">
+            <span class="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-xl text-xl font-bold mr-4">5</span>
+            Ariane 5 Flight 501
+          </h2>
+          <span class="damage-badge">$370 млн за 37 секунд</span>
+        </div>
+
+        <div class="story-card rounded-lg p-6 mb-6">
+          <p class="text-gray-800 font-medium mb-0">
+            <strong>Дата:</strong> 4 июня 1996 года<br>
+            <strong>Причина:</strong> Integer overflow<br>
+            <strong>Итог:</strong> Взрыв ракеты с 4 спутниками на борту
+          </p>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Предыстория</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Ariane 5 — флагманская европейская ракета-носитель, разработанная Европейским космическим агентством (ESA). На разработку ушло 10 лет и около $7 миллиардов. Первый запуск должен был продемонстрировать возможности новой ракеты.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          На борту находились 4 научных спутника Cluster стоимостью $370 миллионов для изучения магнитосферы Земли.
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">37 секунд полёта</h3>
+        
+        <div class="space-y-4 mb-6">
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">T+0 — Старт</p>
+            <p class="text-gray-600">Ракета успешно стартует</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">T+36.7 с — Сбой навигации</p>
+            <p class="text-gray-600">Инерциальная система выдаёт ошибочные данные</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">T+37 с — Резкий поворот</p>
+            <p class="text-gray-600">Автопилот пытается "исправить" несуществующее отклонение</p>
+          </div>
+          <div class="timeline-item pb-4">
+            <p class="text-gray-900 font-bold">T+39 с — Самоуничтожение</p>
+            <p class="text-gray-600">Система безопасности взрывает ракету</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Техническая причина</h3>
+        
+        <p class="text-gray-700 mb-4">
+          Код инерциальной навигационной системы (SRI — Inertial Reference System) был взят из успешно работавшей Ariane 4. Но Ariane 5 была <strong>мощнее и быстрее</strong>.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          В коде была переменная для хранения горизонтальной скорости. Она имела тип <strong>16-битное знаковое целое число</strong> (максимум 32 767).
+        </p>
+        
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono text-sm mb-6">
+          <pre class="text-gray-400">// Код на Ada (упрощённо)</pre>
+          <pre>
+horizontal_bias : INTEGER_16;  -- Максимум 32,767
+
+-- Ariane 4: скорость никогда не превышала 32,767
+-- Ariane 5: скорость достигла ~40,000
+
+horizontal_bias := Float_To_Integer(velocity);
+-- BOOM! Integer overflow → исключение</pre>
+        </div>
+        
+        <p class="text-gray-700 mb-4">
+          Когда значение превысило 32 767, произошло <strong>арифметическое переполнение</strong>. Код выбросил исключение (exception). Но обработчик исключений... <strong>просто остановил работу системы</strong>.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Есть и резервная навигационная система! Но она работала на <strong>том же коде</strong>. Обе системы отказали одновременно.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Автопилот получил диагностические данные вместо координат, интерпретировал их как "огромное отклонение от курса" и повернул ракету на 90°. Аэродинамические нагрузки начали разрушать конструкцию, и система самоуничтожения сработала.
+        </p>
+
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Почему код не проверили?</h3>
+        
+        <ul class="list-disc pl-6 text-gray-700 mb-4">
+          <li>Код успешно работал 10 лет на Ariane 4</li>
+          <li>Функция, где был баг, вообще не нужна во время полёта (только при подготовке)</li>
+          <li>Её не отключили, потому что "а вдруг пригодится"</li>
+          <li>Тестирование проводилось с симуляцией Ariane 4, а не Ariane 5</li>
+        </ul>
+
+        <div class="lesson-box rounded-lg p-6">
+          <h4 class="font-bold text-indigo-900 mb-3">Уроки Ariane 5</h4>
+          <ul class="list-disc pl-6 text-indigo-800 space-y-2">
+            <li><strong>Не копируйте код слепо</strong> — новые условия могут сломать старые предположения</li>
+            <li><strong>Проверяйте диапазоны всех чисел</strong> — что если значение вырастет вдвое?</li>
+            <li><strong>Резервная система не должна иметь общего кода с основной</strong></li>
+            <li><strong>Удаляйте мёртвый код</strong> — функция калибровки не нужна в полёте</li>
+            <li><strong>Тестируйте в условиях реальной эксплуатации</strong></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section class="bg-gray-900 text-white rounded-2xl p-8 mb-12">
+        <h2 class="text-2xl font-bold mb-6">Общие уроки из всех историй</h2>
+        
+        <p class="text-gray-300 mb-6">
+          Удивительно, как часто повторяются одни и те же ошибки. Вот что объединяет эти катастрофы:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-white/10 rounded-lg p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-vial text-2xl text-indigo-400"></i>
+              <h4 class="font-bold text-indigo-400 text-lg">Тестирование</h4>
+            </div>
+            <p class="text-gray-300 text-sm">Тестировать нужно не только "happy path", но и edge cases: большие значения, быстрый ввод, параллельные операции.</p>
+          </div>
+          <div class="bg-white/10 rounded-lg p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-rocket text-2xl text-indigo-400"></i>
+              <h4 class="font-bold text-indigo-400 text-lg">Развёртывание</h4>
+            </div>
+            <p class="text-gray-300 text-sm">Автоматизация, canary releases, мониторинг. Ручной деплой = человеческие ошибки.</p>
+          </div>
+          <div class="bg-white/10 rounded-lg p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-power-off text-2xl text-blue-400"></i>
+              <h4 class="font-bold text-blue-400 text-lg">Kill Switch</h4>
+            </div>
+            <p class="text-gray-300 text-sm">Всегда имейте возможность быстро всё остановить. Секунды имеют значение.</p>
+          </div>
+          <div class="bg-white/10 rounded-lg p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-users text-2xl text-purple-400"></i>
+              <h4 class="font-bold text-purple-400 text-lg">Code Review</h4>
+            </div>
+            <p class="text-gray-300 text-sm">Свежий взгляд находит ошибки, которые автор не видит. 4 глаза лучше, чем 2.</p>
+          </div>
+          <div class="bg-white/10 rounded-lg p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-trash text-2xl text-indigo-400"></i>
+              <h4 class="font-bold text-indigo-400 text-lg">Мёртвый код</h4>
+            </div>
+            <p class="text-gray-300 text-sm">Удаляйте неиспользуемый код. Он не "просто лежит" — он ждёт момента, чтобы сломаться.</p>
+          </div>
+          <div class="bg-white/10 rounded-lg p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-shield-alt text-2xl text-indigo-400"></i>
+              <h4 class="font-bold text-indigo-400 text-lg">Defense in Depth</h4>
+            </div>
+            <p class="text-gray-300 text-sm">Несколько уровней защиты. Если один сломается, другие должны удержать.</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Final thoughts -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Заключение</h2>
+        
+        <p class="text-gray-700 mb-4">
+          Эти истории — не повод бояться программировать. Они — напоминание о том, какую ответственность мы несём. Код, который мы пишем, влияет на реальный мир: деньги, здоровье, жизни.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Каждая из этих катастроф привела к улучшениям в индустрии. Knight Capital изменила подходы к автоматизации торговли. Cloudflare улучшила защиту regex. AWS добавила safeguards. Therac-25 стала обязательным кейсом в курсах software engineering.
+        </p>
+        
+        <p class="text-gray-700 mb-4">
+          Учитесь на чужих ошибках — это гораздо дешевле, чем совершать свои.
+        </p>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
+          <p class="text-indigo-900 mb-0 italic">
+            "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?"<br>
+            <span class="text-indigo-700 font-medium">— Brian Kernighan</span>
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Author -->
+    <footer class="border-t border-gray-200 pt-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-500 text-sm">Опубликовано: 30 января 2026</p>
+          <p class="text-gray-500 text-sm">Категория: IT-истории</p>
+        </div>
+        <a href="../library.html" class="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-800">
+          <i class="fas fa-arrow-left mr-2"></i> Все статьи
+        </a>
+      </div>
+    </footer>
+  </article>
+</body>
+</html>

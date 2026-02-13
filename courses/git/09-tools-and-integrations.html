@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 9: Инструменты и интеграции. GUI-клиенты, SSH ключи, Git hooks (pre-commit), CI/CD (GitHub Actions), switch/restore.">
+    <meta name="keywords" content="git gui, ssh ключи, git hooks, pre-commit, ci/cd, github actions, git switch, git restore">
+    <meta name="author" content="SKL Academy">
+    <meta property="og:title" content="Git — Модуль 9: Инструменты и интеграции">
+    <meta property="og:description" content="Повышаем эффективность: GUI, SSH, хуки Git, CI/CD, современные команды switch/restore.">
+    <title>Курс Git — Модуль 9: Инструменты и интеграции | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/09-tools-and-integrations.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="git">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">8. Спасение</button>
+                    <div class="subtopics">
+                        <a href="08-recovery-and-troubleshooting.html#reset-revert" class="subtopic">8.1 reset/revert</a>
+                        <a href="08-recovery-and-troubleshooting.html#reflog" class="subtopic">8.2 reflog</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">9. Инструменты и интеграции</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#gui" class="subtopic active">9.1 GUI-клиенты</a>
+                        <a href="#ssh" class="subtopic">9.2 SSH-ключи</a>
+                        <a href="#hooks" class="subtopic">9.3 Git hooks (pre-commit)</a>
+                        <a href="#ci" class="subtopic">9.4 CI/CD (GitHub Actions)</a>
+                        <a href="#modern" class="subtopic">9.5 switch/restore</a>
+                        <a href="#worktree" class="subtopic">9.6 worktree</a>
+                        <a href="#submodule" class="subtopic">9.7 submodule</a>
+                        <a href="#subtree" class="subtopic">9.8 subtree</a>
+                        <a href="#lfs" class="subtopic">9.9 Git LFS</a>
+                        <a href="#sparse" class="subtopic">9.10 sparse-checkout</a>
+                        <a href="#bisect" class="subtopic">9.11 git bisect</a>
+                        <a href="#blame" class="subtopic">9.12 git blame</a>
+                        <a href="#attributes" class="subtopic">9.13 .gitattributes</a>
+                        <a href="#filters" class="subtopic">9.14 clean/smudge фильтры</a>
+                        <a href="#config-scopes" class="subtopic">9.15 Скоупы конфигурации</a>
+                        <a href="#sign-commits" class="subtopic">9.16 Подписанные коммиты (GPG/SSH)</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                        <a href="10-summary-best-practices.html#best" class="subtopic">10.2 Лучшие практики</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 9: Инструменты и интеграции</h2>
+                <p>Познакомимся с экосистемой вокруг Git: графические клиенты, SSH‑ключи, хуки и CI/CD. Плюс современные команды вместо старого checkout.</p>
+                <p>Инструменты и интеграции усиливают базовые возможности Git: они автоматизируют рутину, повышают качество и сокращают время обратной связи. Важно понимать, где проходит граница ответственности: что делает Git, а что — внешняя система.</p>
+            </section>
+
+            <section id="gui" class="topic-section">
+                <h2>9.1 GUI‑клиенты</h2>
+                <ul>
+                    <li>Sourcetree, GitKraken, Fork — визуальные клиенты для Git</li>
+                    <li>Встроенные инструменты IDE (VS Code, JetBrains)</li>
+                </ul>
+            </section>
+
+            <section id="ssh" class="topic-section">
+                <h2>9.2 SSH‑ключи: генерация и добавление</h2>
+                <div class="code-example">
+<pre><code class="bash"># Сгенерировать ключ (современный ed25519)
+ssh-keygen -t ed25519 -C "you@example.com"
+# Добавить агенту (Windows с Git Bash / macOS / Linux)
+ssh-add ~/.ssh/id_ed25519
+# Показать публичный ключ и добавить на GitHub/GitLab
+cat ~/.ssh/id_ed25519.pub
+</code></pre>
+                </div>
+            </section>
+
+            <section id="hooks" class="topic-section">
+                <h2>9.3 Git hooks: пример pre-commit</h2>
+                <p>Хуки — скрипты в <code>.git/hooks</code>, которые запускаются на события Git.</p>
+                <div class="code-example">
+<pre><code class="bash"># .git/hooks/pre-commit (Unix-подобные ОС)
+#!/usr/bin/env bash
+set -e
+
+# Пример: запуск тестов
+if [ -f "package.json" ]; then
+  npm test
+fi
+
+# Пример: форматирование
+if command -v prettier &>/dev/null; then
+  npx prettier --check .
+fi
+</code></pre>
+                </div>
+                <div class="note"><p>Не забудьте сделать исполняемым: <code>chmod +x .git/hooks/pre-commit</code>. В командах используйте локальные dev‑зависимости.</p></div>
+                <p>Хуки — мощный, но локальный механизм. Для воспроизводимости в команде лучше использовать управляемые инструменты (например, <code>pre-commit</code> фреймворк) и проверки на CI.</p>
+            </section>
+
+            <section id="ci" class="topic-section">
+                <h2>9.4 CI/CD (на примере GitHub Actions)</h2>
+                <div class="code-example">
+<pre><code class="yaml"># .github/workflows/ci.yml
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm test --if-present
+</code></pre>
+                </div>
+                <p>CI — это «сторож у ворот» вашей кодовой базы. Он должен быть быстрым, надёжным и прозрачным: понятные логи, стабильные окружения, детерминированные зависимости.</p>
+            </section>
+
+            <section id="modern" class="topic-section">
+                <h2>9.5 Современные команды: switch/restore</h2>
+                <ul>
+                    <li><code>git switch -c feature/x</code> вместо <code>git checkout -b feature/x</code></li>
+                    <li><code>git restore path</code> вместо <code>git checkout -- path</code></li>
+                </ul>
+            </section>
+            <section id="worktree" class="topic-section">
+                <h2>9.6 Несколько рабочих деревьев: git worktree</h2>
+                <p><code>worktree</code> позволяет иметь несколько каталогов, привязанных к одному репозиторию, для параллельной работы с разными ветками без повторного клонирования. Удобно для «длинных» задач и релизной поддержки.</p>
+            </section>
+            <section id="submodule" class="topic-section">
+                <h2>9.7 Подмодули: git submodule</h2>
+                <p>Подмодуль — это ссылка на внешний репозиторий (фиксированный коммит) внутри проекта. Плюсы: независимые истории; минусы: сложнее онбординг, синхронизация версий и CI.</p>
+            </section>
+            <section id="subtree" class="topic-section">
+                <h2>9.8 Встраивание историй: git subtree</h2>
+                <p><code>subtree</code> копирует историю зависимого проекта внутрь монорепо, упрощая работу без отдельного репозитория на продакшене. Проще, чем submodule, но история разрастается.</p>
+            </section>
+            <section id="lfs" class="topic-section">
+                <h2>9.9 Большие файлы: Git LFS</h2>
+                <p>Git LFS хранит бинарники как «указатели», сами файлы лежат во внешнем хранилище. Снижает размер репозитория, но требует серверной поддержки и квот. Подходит для медиа/датасетов.</p>
+            </section>
+            <section id="sparse" class="topic-section">
+                <h2>9.10 Частичная выборка: sparse-checkout</h2>
+                <p>Механизм выборочной materialization файлов/каталогов. В «cone mode» проще конфигурировать каталоги верхнего уровня. Полезно в монорепозиториях.</p>
+            </section>
+            <section id="bisect" class="topic-section">
+                <h2>9.11 Поиск регрессий: git bisect</h2>
+                <p>Двоичный поиск по истории определяет коммит, в котором возникла проблема. Теоретически снижает число проверок с O(N) до O(log N) по количеству коммитов.</p>
+            </section>
+            <section id="blame" class="topic-section">
+                <h2>9.12 Аннотация строк: git blame</h2>
+                <p>Показывает, какой коммит последний изменил каждую строку. Учитывайте переименования/перемещения (опции обнаружения копий), чтобы не делать ложных выводов.</p>
+            </section>
+            <section id="attributes" class="topic-section">
+                <h2>9.13 .gitattributes и драйверы диффов</h2>
+                <p>Атрибуты управляют нормализацией перевода строк, бинарностью, стратегиями диффа/слияния и фильтрами. Примеры: <code>text eol=lf</code>, кастомные <em>diff</em>/<em>merge</em>‑драйверы.</p>
+            </section>
+            <section id="filters" class="topic-section">
+                <h2>9.14 Фильтры clean/smudge</h2>
+                <p>Позволяют преобразовывать содержимое при записи/чтении (например, шифрование или форматирование). Нуждаются в аккуратной настройке и согласовании в CI.</p>
+            </section>
+            <section id="config-scopes" class="topic-section">
+                <h2>9.15 Скоупы конфигурации Git</h2>
+                <p>Конфигурация бывает системной, глобальной и локальной; доступны включения <code>includeIf</code> и «условные» настройки для разных директорий/проектов.</p>
+            </section>
+            <section id="sign-commits" class="topic-section">
+                <h2>9.16 Подписанные коммиты (GPG/SSH): теория и настройка</h2>
+                <p>Подпись коммита криптографически связывает автора и содержимое коммита. Провайдеры (GitHub/GitLab) валидируют подпись и показывают статус «Verified», что повышает доверие к истории и защищает от подделок.</p>
+                <h3>GPG (OpenPGP)</h3>
+                <p>Классический подход: создаётся пара ключей GPG, публичный ключ публикуется в профиле провайдера, приватный хранится у автора. Git использует GPG для подписания (<code>gpg.program</code>, <code>user.signingkey</code>).</p>
+                <div class="code-example">
+<pre><code class="bash"># Создать ключ GPG
+gpg --full-generate-key
+# Показать публичный ключ (armor)
+gpg --armor --export you@example.com
+# Указать ключ Git-у
+git config --global user.signingkey &lt;KEYID&gt;
+# Включить подпись по умолчанию
+git config --global commit.gpgsign true
+# Подписать тег
+git tag -s v1.0.0 -m "Release 1.0.0"
+</code></pre>
+                </div>
+                <h3>SSH-подписи</h3>
+                <p>Современная альтернатива: используется уже существующая пара SSH‑ключей (например, ed25519). Провайдеры поддерживают валидацию SSH‑подписи, настройка проще на машинах без GPG.</p>
+                <div class="code-example">
+<pre><code class="bash"># Включить подпись SSH (требует современного Git)
+git config --global gpg.format ssh
+# Указать SSH-ключ
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+# Подписать коммит
+git commit -S -m "feat: подписанный коммит"
+</code></pre>
+                </div>
+                <h3>Рекомендации</h3>
+                <ul>
+                    <li>Храните приватные ключи в безопасных менеджерах (OS keychain/agent), не коммитьте их.</li>
+                    <li>Для команд — определите политику: где подпись обязательна (например, релизы, защищённые ветки).</li>
+                    <li>Следите за сроками и ротацией ключей; отозванные ключи удаляйте из профилей.</li>
+                </ul>
+                <p>См. также организационные аспекты в разделе <a href="10-summary-best-practices.html#security">10.6 «Безопасность секретов»</a> и трейлеры <code>Signed-off-by:</code> в <a href="02-commits-and-history.html#messages-trailers">2.8</a>.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

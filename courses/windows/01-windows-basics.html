@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс Windows и PowerShell для начинающих. Изучите основы Windows: интерфейс, файловую систему, командную строку, PowerShell. Полный курс администрирования Windows с нуля.">
+    <meta name="keywords" content="бесплатный курс windows, windows для начинающих, основы windows, обучение windows, powershell скриптинг, windows с нуля, windows tutorial, windows курсы, powershell курсы">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Бесплатный курс Windows и PowerShell для начинающих — Основы администрирования">
+    <meta property="og:description" content="Изучите основы Windows с нуля. Бесплатный курс администрирования для начинающих с практическими примерами.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/windows/01-windows-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Бесплатный курс Windows и PowerShell для начинающих">
+    <meta name="twitter:description" content="Изучите основы Windows с нуля. Бесплатный курс администрирования для начинающих.">
+    <title>Бесплатный курс Windows и PowerShell для начинающих — Основы администрирования | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/windows/01-windows-basics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Windows course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Windows и PowerShell",
+          "item": "https://skl-academy.ru/courses/windows/01-windows-basics.html"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс Windows и PowerShell для начинающих",
+      "description": "Изучите основы Windows с нуля. Бесплатный курс администрирования для начинающих с практическими примерами.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "url": "https://skl-academy.ru"
+      },
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "instructor": {
+          "@type": "Organization",
+          "name": "SKL Academy"
+        }
+      }
+    }
+    </script>
+    
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Бесплатный курс Windows и PowerShell для начинающих — Основы администрирования",
+      "description": "Изучите основы Windows с нуля. Бесплатный курс администрирования для начинающих с практическими примерами.",
+      "author": {
+        "@type": "Organization",
+        "name": "SKL Academy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://skl-academy.ru/images/icon.ico"
+        }
+      },
+      "datePublished": "2025-01-13",
+      "dateModified": "2025-01-13",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://skl-academy.ru/courses/windows/01-windows-basics.html"
+      }
+    }
+    </script>
+</head>
+<body data-course="windows">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Windows</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <a href="02-powershell-basics.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn active">1. Основы Windows</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#introduction" class="subtopic active">1.1 Введение в Windows</a>
+                        <a href="#versions" class="subtopic">1.2 Версии Windows</a>
+                        <a href="#interface" class="subtopic">1.3 Интерфейс Windows</a>
+                        <a href="#file-explorer" class="subtopic">1.4 Проводник Windows</a>
+                        <a href="#settings" class="subtopic">1.5 Настройки системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. PowerShell</button>
+                    <div class="subtopics">
+                        <a href="02-powershell-basics.html#what-is-powershell" class="subtopic">2.1 Что такое PowerShell</a>
+                        <a href="02-powershell-basics.html#installation" class="subtopic">2.2 Установка и настройка</a>
+                        <a href="02-powershell-basics.html#first-commands" class="subtopic">2.3 Первые команды</a>
+                        <a href="02-powershell-basics.html#help-system" class="subtopic">2.4 Система помощи</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="03-file-system.html#structure" class="subtopic">3.1 Структура файловой системы</a>
+                        <a href="03-file-system.html#paths" class="subtopic">3.2 Пути и навигация</a>
+                        <a href="03-file-system.html#permissions" class="subtopic">3.3 Права доступа</a>
+                        <a href="03-file-system.html#attributes" class="subtopic">3.4 Атрибуты файлов</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Реестр Windows</button>
+                    <div class="subtopics">
+                        <a href="04-registry.html#what-is-registry" class="subtopic">4.1 Что такое реестр</a>
+                        <a href="04-registry.html#structure" class="subtopic">4.2 Структура реестра</a>
+                        <a href="04-registry.html#editing" class="subtopic">4.3 Редактирование реестра</a>
+                        <a href="04-registry.html#backup" class="subtopic">4.4 Резервное копирование</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Службы Windows</button>
+                    <div class="subtopics">
+                        <a href="05-services.html#what-are-services" class="subtopic">5.1 Что такое службы</a>
+                        <a href="05-services.html#management" class="subtopic">5.2 Управление службами</a>
+                        <a href="05-services.html#troubleshooting" class="subtopic">5.3 Диагностика служб</a>
+                        <a href="05-services.html#custom-services" class="subtopic">5.4 Создание служб</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Сетевые настройки</button>
+                    <div class="subtopics">
+                        <a href="06-networking.html#network-config" class="subtopic">6.1 Настройка сети</a>
+                        <a href="06-networking.html#firewall" class="subtopic">6.2 Брандмауэр Windows</a>
+                        <a href="06-networking.html#remote-access" class="subtopic">6.3 Удаленный доступ</a>
+                        <a href="06-networking.html#troubleshooting" class="subtopic">6.4 Диагностика сети</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Безопасность</button>
+                    <div class="subtopics">
+                        <a href="07-security.html#user-accounts" class="subtopic">7.1 Учетные записи</a>
+                        <a href="07-security.html#group-policy" class="subtopic">7.2 Групповые политики</a>
+                        <a href="07-security.html#antivirus" class="subtopic">7.3 Антивирусная защита</a>
+                        <a href="07-security.html#encryption" class="subtopic">7.4 Шифрование данных</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Автоматизация</button>
+                    <div class="subtopics">
+                        <a href="08-automation.html#batch-files" class="subtopic">8.1 Пакетные файлы</a>
+                        <a href="08-automation.html#powershell-scripts" class="subtopic">8.2 PowerShell скрипты</a>
+                        <a href="08-automation.html#task-scheduler" class="subtopic">8.3 Планировщик задач</a>
+                        <a href="08-automation.html#advanced-automation" class="subtopic">8.4 Продвинутая автоматизация</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика</button>
+                    <div class="subtopics">
+                        <a href="09-troubleshooting.html#event-viewer" class="subtopic">9.1 Просмотр событий</a>
+                        <a href="09-troubleshooting.html#performance" class="subtopic">9.2 Мониторинг производительности</a>
+                        <a href="09-troubleshooting.html#system-recovery" class="subtopic">9.3 Восстановление системы</a>
+                        <a href="09-troubleshooting.html#advanced-tools" class="subtopic">9.4 Продвинутые инструменты</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#hyper-v" class="subtopic">10.1 Hyper-V</a>
+                        <a href="10-advanced-topics.html#wsl" class="subtopic">10.2 WSL (Windows Subsystem for Linux)</a>
+                        <a href="10-advanced-topics.html#containers" class="subtopic">10.3 Контейнеры Windows</a>
+                        <a href="10-advanced-topics.html#cloud-integration" class="subtopic">10.4 Интеграция с облаком</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 1.1: Введение в Windows -->
+            <section id="introduction" class="topic-section">
+                <h2>1.1 Введение в Windows</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 15 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <p>Microsoft Windows — это семейство операционных систем, разработанных корпорацией Microsoft. Windows является одной из самых популярных операционных систем в мире, особенно в корпоративной среде и среди домашних пользователей.</p>
+                    
+                    <h3>Краткая история Windows</h3>
+                    <ul>
+                        <li><strong>1985</strong> — Windows 1.0, первая графическая оболочка для MS-DOS</li>
+                        <li><strong>1995</strong> — Windows 95, революционная система с графическим интерфейсом</li>
+                        <li><strong>2001</strong> — Windows XP, одна из самых стабильных версий</li>
+                        <li><strong>2009</strong> — Windows 7, улучшенная производительность и интерфейс</li>
+                        <li><strong>2015</strong> — Windows 10, универсальная платформа</li>
+                        <li><strong>2021</strong> — Windows 11, современный дизайн и новые возможности</li>
+                    </ul>
+
+                    <h3>Архитектура Windows</h3>
+                    <div class="info">
+                        <strong>Ядро системы:</strong> Windows использует гибридное ядро (Hybrid Kernel), которое сочетает в себе преимущества монолитного и микроядерного подходов. Это обеспечивает высокую производительность и стабильность системы.
+                    </div>
+
+                    <h3>Основные компоненты</h3>
+                    <ul>
+                        <li><strong>Ядро (Kernel)</strong> — управляет ресурсами системы и процессами</li>
+                        <li><strong>Подсистема ввода-вывода</strong> — обрабатывает файловые операции и работу с устройствами</li>
+                        <li><strong>Менеджер процессов</strong> — управляет запущенными программами</li>
+                        <li><strong>Диспетчер памяти</strong> — контролирует использование оперативной памяти</li>
+                        <li><strong>Реестр Windows</strong> — централизованная база данных настроек</li>
+                    </ul>
+
+                    <div class="note">
+                        <strong>Важно понимать:</strong> Windows построена на принципах многоуровневой архитектуры, где каждый компонент выполняет свою функцию, но при этом тесно интегрирован с остальными частями системы.
+                    </div>
+
+                    <h3>Сферы применения</h3>
+                    <div class="tip">
+                        <h4>Корпоративная среда</h4>
+                        <ul>
+                            <li>Серверы Windows Server</li>
+                            <li>Active Directory для управления пользователями</li>
+                            <li>Exchange Server для почты</li>
+                            <li>SQL Server для баз данных</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip">
+                        <h4>Домашнее использование</h4>
+                        <ul>
+                            <li>Персональные компьютеры и ноутбуки</li>
+                            <li>Игровые платформы</li>
+                            <li>Мультимедийные центры</li>
+                            <li>Образовательные программы</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.2: Версии Windows -->
+            <section id="versions" class="topic-section">
+                <h2>1.2 Версии Windows</h2>
+                <div class="lesson-content">
+                    <p>За годы развития Microsoft выпустила множество версий Windows. Каждая версия привносила новые возможности и улучшения.</p>
+                    
+                    <h3>Современные версии Windows</h3>
+                    
+                    <div class="visual-guide">
+                        <h4>Windows 10 (2015-2021)</h4>
+                        <ul>
+                            <li>Универсальная платформа для всех устройств</li>
+                            <li>Встроенная поддержка виртуализации</li>
+                            <li>Microsoft Edge браузер</li>
+                            <li>Cortana - голосовой помощник</li>
+                            <li>Windows Hello - биометрическая аутентификация</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="visual-guide">
+                        <h4>Windows 11 (2021-настоящее время)</h4>
+                        <ul>
+                            <li>Обновленный дизайн интерфейса</li>
+                            <li>Улучшенная производительность</li>
+                            <li>Встроенная поддержка Android приложений</li>
+                            <li>Microsoft Teams интеграция</li>
+                            <li>Улучшенная безопасность</li>
+                        </ul>
+                    </div>
+
+                    <h3>Серверные версии</h3>
+                    <div class="info">
+                        <strong>Windows Server 2019/2022:</strong> Предназначены для корпоративного использования, включают Active Directory, Hyper-V, PowerShell, и множество других серверных технологий.
+                    </div>
+
+                    <h3>Выбор версии Windows</h3>
+                    <div class="warn">
+                        <strong>Рекомендации:</strong> Для домашнего использования рекомендуется Windows 11, для корпоративной среды - Windows Server 2022. При выборе учитывайте требования к оборудованию и совместимость с необходимым программным обеспечением.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.3: Интерфейс Windows -->
+            <section id="interface" class="topic-section">
+                <h2>1.3 Интерфейс Windows</h2>
+                <div class="lesson-content">
+                    <p>Интерфейс Windows эволюционировал на протяжении многих лет, но основные элементы остаются узнаваемыми и интуитивными.</p>
+                    
+                    <h3>Основные элементы интерфейса</h3>
+                    
+                    <h4>Рабочий стол (Desktop)</h4>
+                    <ul>
+                        <li><strong>Обои рабочего стола</strong> — фоновое изображение</li>
+                        <li><strong>Значки</strong> — ярлыки к программам и файлам</li>
+                        <li><strong>Панель задач</strong> — внизу экрана с кнопками запущенных программ</li>
+                        <li><strong>Кнопка "Пуск"</strong> — главное меню системы</li>
+                    </ul>
+
+                    <h4>Панель задач (Taskbar)</h4>
+                    <div class="code-example">
+                        <pre><code class="bash"># Основные элементы панели задач:
+                        # - Кнопка "Пуск" (левая сторона)
+                        # - Панель быстрого запуска
+                        # - Кнопки открытых окон
+                        # - Область уведомлений (системный трей)
+                        # - Кнопка "Показать рабочий стол"
+                    </div>
+
+                    <h4>Меню "Пуск"</h4>
+                    <div class="info">
+                        <strong>Функции меню "Пуск":</strong> Доступ к программам, настройкам системы, поиску файлов и приложений, управлению питанием и выходу из системы.
+                    </div>
+
+                    <h3>Управление окнами</h3>
+                    <ul>
+                        <li><strong>Свернуть</strong> — скрыть окно в панель задач</li>
+                        <li><strong>Развернуть/Восстановить</strong> — полноэкранный режим</li>
+                        <li><strong>Закрыть</strong> — завершить работу программы</li>
+                        <li><strong>Перетаскивание</strong> — перемещение окон мышью</li>
+                        <li><strong>Изменение размера</strong> — растягивание за края окна</li>
+                    </ul>
+
+                    <h3>Горячие клавиши Windows</h3>
+                    <div class="code-example">
+                        <pre><code class="text"># Основные горячие клавиши:
+Win + D          # Показать рабочий стол
+Win + E          # Открыть проводник
+Win + R          # Открыть "Выполнить"
+Win + L          # Заблокировать компьютер
+Alt + Tab        # Переключение между окнами
+Ctrl + Alt + Del # Диспетчер задач
+Win + X          # Меню быстрого доступа</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.4: Проводник Windows -->
+            <section id="file-explorer" class="topic-section">
+                <h2>1.4 Проводник Windows</h2>
+                <div class="lesson-content">
+                    <p>Проводник Windows (File Explorer) — это основное приложение для работы с файлами и папками в Windows.</p>
+                    
+                    <h3>Запуск проводника</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Способы запуска проводника:
+                        # 1. Win + E
+                        # 2. Щелчок по значку папки в панели задач
+                        # 3. Правый клик на кнопке "Пуск" → "Проводник"
+                        # 4. Поиск "Проводник" в меню "Пуск"
+                    </div>
+
+                    <h3>Интерфейс проводника</h3>
+                    <ul>
+                        <li><strong>Панель навигации</strong> — быстрый доступ к папкам</li>
+                        <li><strong>Адресная строка</strong> — показывает текущий путь</li>
+                        <li><strong>Панель поиска</strong> — поиск файлов в текущей папке</li>
+                        <li><strong>Область содержимого</strong> — отображение файлов и папок</li>
+                        <li><strong>Панель предварительного просмотра</strong> — предварительный просмотр файлов</li>
+                    </ul>
+
+                    <h3>Навигация по файловой системе</h3>
+                    <div class="code-example">
+                        <pre><code class="text"># Основные папки Windows:
+C:\Users\[Имя_пользователя]\     # Домашняя папка пользователя
+C:\Program Files\                # Установленные программы (64-bit)
+C:\Program Files (x86)\          # Установленные программы (32-bit)
+C:\Windows\                      # Системные файлы Windows
+C:\ProgramData\                  # Данные программ (скрытая)
+C:\Users\Public\                 # Общие файлы пользователей</code></pre>
+                    </div>
+
+                    <h3>Операции с файлами и папками</h3>
+                    <div class="tip">
+                        <strong>Основные операции:</strong>
+                        <ul>
+                            <li><strong>Создание</strong> — правый клик → "Создать" → "Папка" или "Текстовый документ"</li>
+                            <li><strong>Переименование</strong> — F2 или правый клик → "Переименовать"</li>
+                            <li><strong>Копирование</strong> — Ctrl+C, затем Ctrl+V</li>
+                            <li><strong>Перемещение</strong> — Ctrl+X, затем Ctrl+V</li>
+                            <li><strong>Удаление</strong> — Delete (в корзину) или Shift+Delete (навсегда)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Настройка отображения</h3>
+                    <div class="info">
+                        <strong>Виды отображения:</strong> Проводник поддерживает различные виды отображения файлов: крупные значки, список, таблица, плитка. Выбор вида зависит от типа файлов и предпочтений пользователя.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 1.5: Настройки системы -->
+            <section id="settings" class="topic-section">
+                <h2>1.5 Настройки системы</h2>
+                <div class="lesson-content">
+                    <p>Windows предоставляет множество инструментов для настройки системы под ваши потребности.</p>
+                    
+                    <h3>Приложение "Параметры"</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Способы открытия "Параметры":
+                        # 1. Win + I
+                        # 2. Меню "Пуск" → "Параметры"
+                        # 3. Правый клик на кнопке "Пуск" → "Параметры"
+                    </div>
+
+                    <h3>Основные разделы настроек</h3>
+                    
+                    <div class="code-example">
+                        <h4>Система</h4>
+                        <ul>
+                            <li>Экран и разрешение</li>
+                            <li>Звук и аудиоустройства</li>
+                            <li>Уведомления и действия</li>
+                            <li>Питание и спящий режим</li>
+                            <li>Хранилище</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>Устройства</h4>
+                        <ul>
+                            <li>Bluetooth и другие устройства</li>
+                            <li>Принтеры и сканеры</li>
+                            <li>Мышь и сенсорная панель</li>
+                            <li>Клавиатура</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <h4>Сеть и Интернет</h4>
+                        <ul>
+                            <li>Wi-Fi настройки</li>
+                            <li>Ethernet подключение</li>
+                            <li>VPN</li>
+                            <li>Мобильный хот-спот</li>
+                        </ul>
+                    </div>
+
+                    <h3>Панель управления (Control Panel)</h3>
+                    <div class="warn">
+                        <strong>Важно:</strong> Панель управления содержит классические настройки Windows. В Windows 10/11 многие функции перенесены в приложение "Параметры", но панель управления все еще доступна для продвинутых настроек.
+                    </div>
+
+                    <div class="code-example">
+                        <pre><code class="bash"># Способы открытия панели управления:
+                        # 1. Win + R → control
+                        # 2. Поиск "Панель управления" в меню "Пуск"
+                        # 3. Правый клик на кнопке "Пуск" → "Панель управления"
+                    </div>
+
+                    <h3>Системная информация</h3>
+                    <div class="info">
+                        <strong>Просмотр информации о системе:</strong> Win + R → msinfo32 — откроется окно с подробной информацией о системе, включая аппаратное обеспечение, драйверы и настройки.
+                    </div>
+
+                    <h3>Диспетчер устройств</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Способы открытия диспетчера устройств:
+                        # 1. Win + X → "Диспетчер устройств"
+                        # 2. Win + R → devmgmt.msc
+                        # 3. Правый клик на "Этот компьютер" → "Свойства" → "Диспетчер устройств"
+                    </div>
+
+                    <div class="note">
+                        <strong>Диспетчер устройств:</strong> Позволяет просматривать и управлять всеми подключенными устройствами, обновлять драйверы, отключать и включать устройства, а также диагностировать проблемы с оборудованием.
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../courses.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+    
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

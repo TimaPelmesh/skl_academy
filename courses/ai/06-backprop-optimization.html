@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Модуль 6: Как учатся нейросети — Loss, Backpropagation, градиентный спуск, проблемы обучения">
+    <title>6. Backpropagation и оптимизация | Введение в AI | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/ai/06-backprop-optimization.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="ai">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Введение в AI</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons"><button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button></div>
+            <button class="theme-toggle-btn" id="themeToggle" aria-label="Тема"><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" aria-label="Настройки"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <a href="../../index.html" class="exit-btn" title="На главную"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
+        </div>
+    </header>
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic"><button class="topic-btn">1–5</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="05-neural-intro.html" class="subtopic">5. Нейросети</a></div></div>
+                <div class="topic"><button class="topic-btn active">6. Backprop и оптимизация</button><div class="subtopics" style="max-height: 1000px;"><a href="#loss" class="subtopic active">6.1 Функция потерь</a><a href="#backprop" class="subtopic">6.2 Backpropagation</a><a href="#gradient-descent" class="subtopic">6.3 Градиентный спуск</a><a href="#problems" class="subtopic">6.4 Проблемы обучения</a></div></div>
+                <div class="topic"><button class="topic-btn">7–10</button><div class="subtopics"><a href="07-rnn-lstm.html" class="subtopic">7. RNN/LSTM</a><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+            </div>
+        </div>
+        <main id="content" class="content sidebar-active">
+            <section id="module-intro" class="topic-section"><h2>Модуль 6: Как учатся нейросети. Backpropagation и оптимизация</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Вскрыть «чёрный ящик» обучения — самое важное для понимания.</p></div></section>
+            <section id="loss" class="topic-section"><h2>Функция потерь (Loss) для нейросетей</h2><div class="lesson-content"><p><strong>Регрессия:</strong> MSE (средний квадрат ошибки) — штрафует большие отклонения сильнее. <strong>Классификация:</strong> Cross-Entropy — мера того, насколько предсказанное распределение вероятностей далеко от истинной метки (one-hot). Минимизируя cross-entropy, модель учится выдавать высокую вероятность правильного класса.</p></div></section>
+            <section id="backprop" class="topic-section"><h2>Метод обратного распространения ошибки (Backpropagation)</h2><div class="lesson-content"><p>Идея: <strong>цепное правило</strong> (производная сложной функции) из матанализа. Ошибка на выходе «просачивается» назад по слоям: для каждого веса считаем, какой вклад он внёс в итоговую ошибку. Градиент loss по каждому весу получается перемножением градиентов по пути от выхода к этому весу. Так один проход вперёд и один назад дают градиенты по всем весам — без backprop обучение глубоких сетей было бы нереалистично.</p></div></section>
+            <section id="gradient-descent" class="topic-section"><h2>Градиентный спуск и его вариации</h2><div class="lesson-content"><p><strong>Batch</strong> — шаг по всему датасету; <strong>SGD</strong> — по одному объекту (шумно, но часто быстрее выходит из плоских минимумов); <strong>Mini-batch</strong> — компромисс (типичный выбор). Размер батча влияет на скорость и стабильность. <strong>Momentum</strong> — накопление «инерции» градиента, сглаживание и ускорение сходимости. На практике чаще используют Adam, AdamW — адаптивный шаг по каждому параметру.</p></div></section>
+            <section id="problems" class="topic-section"><h2>Проблемы обучения</h2><div class="lesson-content"><p><strong>Затухающий градиент (vanishing):</strong> в глубоких сетях с сигмоидом/tanh градиент на первых слоях становится очень маленьким, веса почти не обновляются. ReLU частично решает. <strong>Взрывающийся градиент (explosion):</strong> градиент растёт по мере распространения назад — веса «взрываются». Решения: clipping градиента, нормализация. <strong>Регуляризация:</strong> Dropout — случайное выключение нейронов на шаге обучения, чтобы сеть не полагалась на отдельные нейроны и меньше переобучалась.</p></div></section>
+        </main>
+    </div>
+    <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>
+    <script src="../courses.js"></script>
+</body>
+</html>

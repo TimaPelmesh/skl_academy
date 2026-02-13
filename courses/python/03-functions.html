@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Функции в Python - изучите создание функций, параметры, аргументы, lambda-функции и рекурсию">
+    <meta name="keywords" content="python, функции, параметры, аргументы, lambda, рекурсия">
+    <title>Функции</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic {
+            color: #000;
+        }
+        
+        .light-theme .topic-btn {
+            color: #000;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+
+        .operators-cheatsheet {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #d2a8ff;
+        }
+
+        .light-theme .operators-cheatsheet {
+            background-color: #f1f1f1;
+            border-left: 4px solid #8a63d2;
+        }
+
+        .operators-cheatsheet h4 {
+            color: #d2a8ff;
+            margin-top: 0;
+        }
+
+        .light-theme .operators-cheatsheet h4 {
+            color: #8a63d2;
+        }
+
+        .operators-cheatsheet table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .operators-cheatsheet th,
+        .operators-cheatsheet td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #444c56;
+        }
+
+        .light-theme .operators-cheatsheet th,
+        .light-theme .operators-cheatsheet td {
+            border: 1px solid #d0d7de;
+        }
+
+        .operators-cheatsheet th {
+            background-color: #373e47;
+        }
+
+        .light-theme .operators-cheatsheet th {
+            background-color: #e6e6e6;
+        }
+        
+        /* Стили для заключения и ссылки на следующий модуль */
+        .conclusion {
+            background-color: #2d333b;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 30px auto;
+            border-left: 4px solid #6f42c1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .light-theme .conclusion {
+            background-color: #f1f1f1;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .conclusion h3 {
+            color: #d2a8ff;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .light-theme .conclusion h3 {
+            color: #6f42c1;
+        }
+        
+        .conclusion p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .next-module {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .next-module a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3);
+            min-width: 250px;
+        }
+        
+        .next-module a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4);
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+        
+        .light-theme .next-module a {
+            background: linear-gradient(90deg, #2188ff, #804eda);
+            color: white;
+        }
+        
+        .light-theme .next-module a:hover {
+            background: linear-gradient(90deg, #1a76d2, #7340c6);
+        }
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn active">3. Функции</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#creating" class="subtopic active">3.1 Создание функций</a>
+                        <a href="#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Остальные модули -->
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Введение в модуль -->
+            <section class="module-intro">
+                <h2>Модуль 3: Функции</h2>
+                <p>Функции — фундаментальный строительный блок в Python и основа модульного программирования. Они позволяют разбить код на логические части, повысить его читаемость и переиспользуемость.</p>
+                
+                <p>В этом модуле вы изучите:</p>
+                <ul>
+                    <li>Как создавать и вызывать функции</li>
+                    <li>Работу с параметрами и аргументами разных типов</li>
+                    <li>Использование компактных lambda-функций</li>
+                    <li>Применение рекурсии для решения сложных задач</li>
+                </ul>
+                
+                <p>Освоив функции, вы сможете писать более структурированный, поддерживаемый и элегантный код. Это необходимый навык для любого Python-разработчика, который станет основой для изучения более продвинутых концепций в будущих модулях.</p>
+            </section>
+            
+            <!-- 3.1 Создание функций -->
+            <section id="creating" class="topic-section">
+                <h2>3.1 Создание функций</h2>
+                <p>Функции — это блоки кода, выполняющие определённую задачу. Они позволяют структурировать программу, делают код более читаемым и помогают избежать повторений. В Python функции определяются с помощью ключевого слова <code>def</code>.</p>
+                
+                <h3>Синтаксис функций</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">def имя_функции(параметр1, параметр2, ...):
+    """Документация (docstring)"""
+    # тело функции
+    # код, выполняющий нужные действия
+    return результат  # необязательно</code></pre>
+                </div>
+                
+                <h3>Основные компоненты функции</h3>
+                <ul>
+                    <li><strong>Ключевое слово def</strong> — указывает на начало определения функции</li>
+                    <li><strong>Имя функции</strong> — должно следовать соглашениям Python (snake_case)</li>
+                    <li><strong>Параметры</strong> — переменные, которые получает функция (необязательны)</li>
+                    <li><strong>Двоеточие :</strong> — обязательный символ, завершающий заголовок функции</li>
+                    <li><strong>Docstring</strong> — строка документации (рекомендуется, но не обязательна)</li>
+                    <li><strong>Тело функции</strong> — код с отступом, выполняющий действия функции</li>
+                    <li><strong>Оператор return</strong> — возвращает значение из функции (если требуется)</li>
+                </ul>
+                
+                <h3>Простой пример функции</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">def приветствие():
+    print("Привет, мир!")
+
+# Вызов функции
+приветствие()  # Выведет: Привет, мир!</code></pre>
+                </div>
+                
+                <h3>Функция с параметром</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">def персональное_приветствие(имя):
+    print(f"Привет, {имя}!")
+
+# Вызов функции с аргументом
+персональное_приветствие("Анна")  # Выведет: Привет, Анна!</code></pre>
+                </div>
+                
+                <h3>Функция, возвращающая значение</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">def сумма(a, b):
+    """Функция складывает два числа и возвращает результат."""
+    return a + b
+
+# Сохранение результата функции в переменной
+результат = сумма(5, 3)
+print(результат)  # Выведет: 8
+
+# Прямое использование возвращаемого значения
+print(сумма(10, 20))  # Выведет: 30</code></pre>
+                </div>
+                
+                <h3>Оператор return</h3>
+                <p>Оператор <code>return</code> имеет две важные функции:</p>
+                <ol>
+                    <li>Возвращает значение из функции</li>
+                    <li>Немедленно завершает выполнение функции</li>
+                </ol>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def проверить_возраст(возраст):
+    if возраст < 18:
+        return "Доступ запрещён"
+    
+    # Этот код выполнится только если возраст >= 18
+    return "Доступ разрешён"</code></pre>
+                </div>
+                
+                <p>Функция может возвращать несколько значений в виде кортежа:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def разделить_и_остаток(a, b):
+    """Возвращает результат деления и остаток."""
+    частное = a // b
+    остаток = a % b
+    return частное, остаток
+
+результат = разделить_и_остаток(20, 7)
+print(результат)  # Выведет: (2, 6)
+
+# Распаковка кортежа
+частное, остаток = разделить_и_остаток(20, 7)
+print(f"Частное: {частное}, Остаток: {остаток}")  # Выведет: Частное: 2, Остаток: 6</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по написанию функций</h4>
+                    <ul>
+                        <li>Называйте функции понятными именами, отражающими их назначение</li>
+                        <li>Функция должна выполнять только одну конкретную задачу</li>
+                        <li>Старайтесь делать функции короткими (до 20-25 строк)</li>
+                        <li>Всегда добавляйте документацию (docstring) к важным функциям</li>
+                        <li>Функции без оператора <code>return</code> возвращают <code>None</code></li>
+                    </ul>
+                </div>
+                
+                <h3>Области видимости (Scopes)</h3>
+                <p>Каждая функция создаёт собственную область видимости для переменных:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Глобальная переменная
+x = 10
+
+def функция():
+    # Локальная переменная
+    y = 5
+    print(f"Внутри функции: x = {x}, y = {y}")
+
+функция()  # Выведет: Внутри функции: x = 10, y = 5
+print(f"Вне функции: x = {x}")
+# print(y)  # Ошибка! y не определена вне функции</code></pre>
+                </div>
+                
+                <h3>Изменение глобальных переменных</h3>
+                <p>Используйте ключевое слово <code>global</code> для изменения глобальных переменных:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">счётчик = 0
+
+def увеличить_счётчик():
+    global счётчик
+    счётчик += 1
+    return счётчик
+
+print(увеличить_счётчик())  # Выведет: 1
+print(увеличить_счётчик())  # Выведет: 2
+print(счётчик)              # Выведет: 2</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Когда использовать функции?</h4>
+                    <ul>
+                        <li>Код повторяется несколько раз в программе</li>
+                        <li>Логически обособленные блоки кода</li>
+                        <li>Когда нужно абстрагировать сложную логику</li>
+                        <li>Для улучшения читаемости программы</li>
+                        <li>Для тестирования отдельных частей программы</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 3.2 Параметры и аргументы -->
+            <section id="parameters" class="topic-section">
+                <h2>3.2 Параметры и аргументы</h2>
+                <p>Функции становятся по-настоящему мощными, когда они могут получать и обрабатывать данные. Для этого используются параметры и аргументы.</p>
+                
+                <div class="visual-guide">
+                    <h4>Важно понимать разницу:</h4>
+                    <ul>
+                        <li><strong>Параметры</strong> — переменные, указанные при определении функции</li>
+                        <li><strong>Аргументы</strong> — значения, которые передаются функции при её вызове</li>
+                    </ul>
+                </div>
+                
+                <h3>Виды параметров</h3>
+                
+                <h4>1. Обязательные параметры</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">def степень(основание, показатель):
+    return основание ** показатель
+
+# Оба аргумента обязательны
+результат = степень(2, 3)  # 2³ = 8</code></pre>
+                </div>
+                
+                <h4>2. Параметры по умолчанию</h4>
+                <p>Параметры могут иметь значения по умолчанию, которые используются, если аргумент не передан:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def степень(основание, показатель=2):
+    """Возводит основание в указанную степень. По умолчанию - квадрат."""
+    return основание ** показатель
+
+# Используем значение по умолчанию для показателя (2)
+квадрат = степень(4)        # 4² = 16
+# Указываем оба аргумента
+куб = степень(4, 3)         # 4³ = 64</code></pre>
+                </div>
+                
+                <p>Важные правила для параметров по умолчанию:</p>
+                <ul>
+                    <li>Все параметры по умолчанию должны идти после обязательных</li>
+                    <li>Значения по умолчанию вычисляются только один раз при определении функции</li>
+                </ul>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># НЕПРАВИЛЬНО:
+# def функция(параметр1=10, параметр2):  # SyntaxError
+#    pass
+
+# ПРАВИЛЬНО:
+def функция(параметр1, параметр2=10):
+    pass</code></pre>
+                </div>
+                
+                <p>Будьте осторожны с изменяемыми значениями по умолчанию:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Проблема: список создается один раз при определении функции
+def добавить_элемент(элемент, список=[]):
+    список.append(элемент)
+    return список
+
+print(добавить_элемент(1))  # [1]
+print(добавить_элемент(2))  # [1, 2] - список сохраняется между вызовами!
+
+# Правильный способ:
+def добавить_элемент_правильно(элемент, список=None):
+    if список is None:
+        список = []
+    список.append(элемент)
+    return список
+
+print(добавить_элемент_правильно(1))  # [1]
+print(добавить_элемент_правильно(2))  # [2] - каждый раз новый список</code></pre>
+                </div>
+                
+                <h4>3. Позиционные и именованные аргументы</h4>
+                <p>Python позволяет передавать аргументы двумя способами:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def приветствие(имя, сообщение):
+    return f"{сообщение}, {имя}!"
+
+# Позиционные аргументы (порядок важен)
+print(приветствие("Иван", "Добрый день"))  # "Добрый день, Иван!"
+
+# Именованные аргументы (порядок не важен)
+print(приветствие(сообщение="Привет", имя="Мария"))  # "Привет, Мария!"
+
+# Комбинирование (позиционные должны идти первыми)
+print(приветствие("Алексей", сообщение="Здравствуйте"))  # "Здравствуйте, Алексей!"</code></pre>
+                </div>
+                
+                <h4>4. Произвольное количество аргументов (*args)</h4>
+                <p>Для работы с переменным числом позиционных аргументов используется специальный параметр со звёздочкой:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def сумма_всех(*числа):
+    """Суммирует произвольное количество чисел."""
+    результат = 0
+    for число in числа:
+        результат += число
+    return результат
+
+print(сумма_всех(1, 2))          # 3
+print(сумма_всех(1, 2, 3, 4, 5)) # 15
+
+# *args собирает все позиционные аргументы в кортеж
+def информация_о_пользователе(имя, *увлечения):
+    print(f"Имя: {имя}")
+    if увлечения:
+        print(f"Увлечения: {', '.join(увлечения)}")
+    else:
+        print("Увлечения не указаны")
+
+информация_о_пользователе("Елена", "чтение", "танцы", "программирование")
+# Выведет:
+# Имя: Елена
+# Увлечения: чтение, танцы, программирование</code></pre>
+                </div>
+                
+                <h4>5. Произвольные именованные аргументы (**kwargs)</h4>
+                <p>Для работы с произвольным числом именованных аргументов используется параметр с двумя звёздочками:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def профиль_пользователя(**данные):
+    """Создаёт словарь с данными пользователя."""
+    print("Информация о пользователе:")
+    for ключ, значение in данные.items():
+        print(f"  {ключ}: {значение}")
+
+профиль_пользователя(имя="Дмитрий", возраст=28, город="Москва")
+# Выведет:
+# Информация о пользователе:
+#   имя: Дмитрий
+#   возраст: 28
+#   город: Москва</code></pre>
+                </div>
+                
+                <h4>6. Комбинирование разных типов параметров</h4>
+                <p>Python позволяет комбинировать все типы параметров, но в определённом порядке:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def универсальная_функция(
+    обязательный,           # Обязательный параметр
+    со_значением_по_умолчанию=10,  # Параметр со значением по умолчанию
+    *args,                  # Переменное число позиционных аргументов
+    **kwargs                # Переменное число именованных аргументов
+):
+    print(f"Обязательный: {обязательный}")
+    print(f"По умолчанию: {со_значением_по_умолчанию}")
+    print(f"*args: {args}")
+    print(f"**kwargs: {kwargs}")
+
+универсальная_функция(
+    "Обязательное значение", 
+    20, 
+    1, 2, 3, 
+    имя="Анна", город="Санкт-Петербург"
+)
+# Выведет:
+# Обязательный: Обязательное значение
+# По умолчанию: 20
+# *args: (1, 2, 3)
+# **kwargs: {'имя': 'Анна', 'город': 'Санкт-Петербург'}</code></pre>
+                </div>
+                
+                <h4>7. Позиционные и именованные аргументы в Python 3.8+</h4>
+                <p>В современных версиях Python можно более точно указывать, как должны передаваться аргументы:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Только позиционные аргументы (до /)
+# Только именованные аргументы (после *)
+def функция(только_позиционный, /, позиционный_или_именованный, *, только_именованный):
+    print(f"Позиционный: {только_позиционный}")
+    print(f"Любой: {позиционный_или_именованный}")
+    print(f"Именованный: {только_именованный}")
+
+# Правильный вызов:
+функция(10, 20, только_именованный=30)
+функция(10, позиционный_или_именованный=20, только_именованный=30)
+
+# Ошибки:
+# функция(только_позиционный=10, 20, только_именованный=30)  # Нельзя первый аргумент по имени
+# функция(10, 20, 30)  # Нельзя последний аргумент по позиции</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Полезные советы</h4>
+                    <ul>
+                        <li>Используйте параметры по умолчанию для необязательных аргументов</li>
+                        <li>Избегайте изменяемых типов (список, словарь) в качестве значений по умолчанию</li>
+                        <li>Предпочитайте именованные аргументы для функций с множеством параметров</li>
+                        <li>Не злоупотребляйте *args и **kwargs — они снижают читаемость кода</li>
+                        <li>При работе с позиционными/именованными аргументами, добавьте подробную документацию</li>
+                    </ul>
+                </div>
+                
+                <h3>Распаковка аргументов</h3>
+                <p>Python позволяет "распаковывать" последовательности и словари в аргументы функции:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def сумма(a, b, c):
+    return a + b + c
+
+# Распаковка списка/кортежа в позиционные аргументы
+значения = [1, 2, 3]
+print(сумма(*значения))  # 6
+
+# Распаковка словаря в именованные аргументы
+значения_словарь = {'a': 10, 'b': 20, 'c': 30}
+print(сумма(**значения_словарь))  # 60</code></pre>
+                </div>
+            </section>
+            
+            <!-- 3.3 Lambda-функции -->
+            <section id="lambda" class="topic-section">
+                <h2>3.3 Lambda-функции</h2>
+                <p>Lambda-функции (анонимные функции) — это небольшие, одноразовые функции, которые можно создавать "на лету" без определения через <code>def</code>. Они особенно полезны, когда нужна простая функция для короткой операции.</p>
+                
+                <h3>Синтаксис lambda-функций</h3>
+                <div class="code-example">
+                    <pre><code class="language-python">lambda аргументы: выражение</code></pre>
+                </div>
+                
+                <p>Ключевые особенности lambda-функций:</p>
+                <ul>
+                    <li>Содержат только одно выражение (не могут содержать блоки кода)</li>
+                    <li>Результат выражения автоматически возвращается</li>
+                    <li>Могут принимать любое количество аргументов</li>
+                    <li>Создаются в месте использования</li>
+                </ul>
+                
+                <h3>Простые примеры</h3>
+                <div class="code-example">
+                    <pre><code class="language-python"># Lambda-функция, возводящая число в квадрат
+квадрат = lambda x: x ** 2
+print(квадрат(5))  # 25
+
+# Функция с несколькими аргументами
+сумма = lambda a, b: a + b
+print(сумма(3, 5))  # 8
+
+# Аргументы по умолчанию
+приветствие = lambda имя, сообщение="Привет": f"{сообщение}, {имя}!"
+print(приветствие("Мария"))  # "Привет, Мария!"
+print(приветствие("Антон", "Здравствуйте"))  # "Здравствуйте, Антон!"</code></pre>
+                </div>
+                
+                <h3>Практическое применение lambda-функций</h3>
+                <p>Lambda-функции чаще всего используются в комбинации с такими функциями, как <code>sorted()</code>, <code>filter()</code>, <code>map()</code> и в функциональном программировании.</p>
+                
+                <h4>1. Сортировка с помощью lambda</h4>
+                <div class="code-example">
+                    <pre><code class="language-python"># Список кортежей (имя, возраст)
+пользователи = [
+    ("Иван", 30),
+    ("Мария", 25),
+    ("Алексей", 35),
+    ("Екатерина", 28)
+]
+
+# Сортировка по возрасту
+по_возрасту = sorted(пользователи, key=lambda user: user[1])
+print(по_возрасту)
+# [('Мария', 25), ('Екатерина', 28), ('Иван', 30), ('Алексей', 35)]
+
+# Сортировка по длине имени
+по_длине_имени = sorted(пользователи, key=lambda user: len(user[0]))
+print(по_длине_имени)
+# [('Иван', 30), ('Мария', 25), ('Алексей', 35), ('Екатерина', 28)]</code></pre>
+                </div>
+                
+                <h4>2. Фильтрация с помощью filter()</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">числа = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Фильтрация четных чисел
+четные = list(filter(lambda x: x % 2 == 0, числа))
+print(четные)  # [2, 4, 6, 8, 10]
+
+# Эквивалент с использованием генератора списка
+четные_генератор = [x for x in числа if x % 2 == 0]
+print(четные_генератор)  # [2, 4, 6, 8, 10]
+
+# Фильтрация словарей
+товары = [
+    {"название": "Ноутбук", "цена": 70000},
+    {"название": "Смартфон", "цена": 30000},
+    {"название": "Наушники", "цена": 5000},
+    {"название": "Планшет", "цена": 45000}
+]
+
+дорогие_товары = list(filter(lambda товар: товар["цена"] > 40000, товары))
+print(дорогие_товары)
+# [{'название': 'Ноутбук', 'цена': 70000}, {'название': 'Планшет', 'цена': 45000}]</code></pre>
+                </div>
+                
+                <h4>3. Преобразование с помощью map()</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">числа = [1, 2, 3, 4, 5]
+
+# Возведение всех чисел в квадрат
+квадраты = list(map(lambda x: x ** 2, числа))
+print(квадраты)  # [1, 4, 9, 16, 25]
+
+# Эквивалент с использованием генератора списка
+квадраты_генератор = [x ** 2 for x in числа]
+print(квадраты_генератор)  # [1, 4, 9, 16, 25]
+
+# Преобразование списка словарей
+товары = [
+    {"название": "Ноутбук", "цена": 70000},
+    {"название": "Смартфон", "цена": 30000},
+    {"название": "Наушники", "цена": 5000}
+]
+
+# Добавление скидки 10%
+со_скидкой = list(map(
+    lambda товар: {
+        "название": товар["название"],
+        "цена": товар["цена"],
+        "цена_со_скидкой": товар["цена"] * 0.9
+    },
+    товары
+))
+
+print(со_скидкой)
+# [{'название': 'Ноутбук', 'цена': 70000, 'цена_со_скидкой': 63000.0}, ...]</code></pre>
+                </div>
+                
+                <h4>4. Комбинирование функций высшего порядка</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">числа = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Найти сумму квадратов четных чисел
+результат = sum(map(lambda x: x ** 2, filter(lambda x: x % 2 == 0, числа)))
+print(результат)  # 220 (= 4 + 16 + 36 + 64 + 100)
+
+# То же самое с генератором
+результат_генератор = sum(x ** 2 for x in числа if x % 2 == 0)
+print(результат_генератор)  # 220</code></pre>
+                </div>
+                
+                <h4>5. Использование в функциональном программировании</h4>
+                <div class="code-example">
+                    <pre><code class="language-python">from functools import reduce
+
+числа = [1, 2, 3, 4, 5]
+
+# Произведение всех чисел с помощью reduce
+произведение = reduce(lambda x, y: x * y, числа)
+print(произведение)  # 120 (= 1 * 2 * 3 * 4 * 5)
+
+# Более сложный пример: нахождение максимального элемента
+максимум = reduce(lambda x, y: x if x > y else y, числа)
+print(максимум)  # 5</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Когда использовать lambda-функции</h4>
+                    <ul>
+                        <li>Для простых операций, когда объявление полноценной функции избыточно</li>
+                        <li>При передаче функции как аргумента другой функции (например, в <code>sorted</code>, <code>map</code>, <code>filter</code>)</li>
+                        <li>Для быстрой обработки данных "на лету"</li>
+                    </ul>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Ограничения lambda-функций</h4>
+                    <ul>
+                        <li>Могут содержать только одно выражение (нельзя использовать несколько строк кода)</li>
+                        <li>Не поддерживают операторы присваивания, условий, циклов внутри себя</li>
+                        <li>Отсутствие имени затрудняет отладку</li>
+                        <li>Сложные lambda могут снижать читаемость кода</li>
+                    </ul>
+                </div>
+                
+                <h3>Сравнение lambda и обычных функций</h3>
+                <div class="code-example">
+                    <pre><code class="language-python"># Обычная функция
+def квадрат_обычная(x):
+    return x ** 2
+
+# Lambda-функция
+квадрат_лямбда = lambda x: x ** 2
+
+# Обе функции работают одинаково
+print(квадрат_обычная(5))  # 25
+print(квадрат_лямбда(5))   # 25</code></pre>
+                </div>
+                
+                <p>Для простых случаев lambda-функции могут быть короче и компактнее, но для сложной логики предпочтительнее обычные функции:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Более сложная логика — лучше использовать обычную функцию
+def анализ_числа(x):
+    """Анализирует число и возвращает информацию о нем."""
+    результат = []
+    if x % 2 == 0:
+        результат.append("четное")
+    else:
+        результат.append("нечетное")
+        
+    if x > 0:
+        результат.append("положительное")
+    elif x < 0:
+        результат.append("отрицательное")
+    else:
+        результат.append("ноль")
+        
+    return ", ".join(результат)
+
+# Это было бы очень сложно и неудобно реализовать как lambda-функцию
+print(анализ_числа(5))    # нечетное, положительное
+print(анализ_числа(-2))   # четное, отрицательное
+print(анализ_числа(0))    # четное, ноль</code></pre>
+                </div>
+            </section>
+            
+            <!-- 3.4 Рекурсия -->
+            <section id="recursion" class="topic-section">
+                <h2>3.4 Рекурсия</h2>
+                <p>Рекурсия — это метод решения задач, при котором функция вызывает сама себя. Это мощная техника, которая позволяет элегантно решать многие сложные проблемы, особенно те, которые можно разбить на подзадачи того же типа.</p>
+                
+                <h3>Основные компоненты рекурсивной функции</h3>
+                <ol>
+                    <li><strong>Базовый случай</strong> — условие, при котором рекурсия останавливается</li>
+                    <li><strong>Рекурсивный случай</strong> — функция вызывает сама себя с измененными аргументами</li>
+                </ol>
+                
+                <div class="visual-guide">
+                    <h4>Важно!</h4>
+                    <p>Каждая рекурсивная функция должна иметь как минимум один базовый случай, иначе она будет выполняться бесконечно (или до переполнения стека).</p>
+                </div>
+                
+                <h3>Простой пример: факториал</h3>
+                <p>Факториал числа n (обозначается n!) — это произведение всех положительных целых чисел от 1 до n.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def факториал(n):
+    """Вычисляет факториал числа n рекурсивно."""
+    # Базовый случай
+    if n == 0 or n == 1:
+        return 1
+    
+    # Рекурсивный случай
+    return n * факториал(n - 1)
+
+print(факториал(5))  # 120 (= 5 * 4 * 3 * 2 * 1)</code></pre>
+                </div>
+                
+                <p>Разберем выполнение функции <code>факториал(5)</code>:</p>
+                <ol>
+                    <li><code>факториал(5)</code> → <code>5 * факториал(4)</code></li>
+                    <li><code>факториал(4)</code> → <code>4 * факториал(3)</code></li>
+                    <li><code>факториал(3)</code> → <code>3 * факториал(2)</code></li>
+                    <li><code>факториал(2)</code> → <code>2 * факториал(1)</code></li>
+                    <li><code>факториал(1)</code> → <code>1</code> (базовый случай)</li>
+                    <li>Теперь вычисления идут в обратном порядке: <code>2 * 1 = 2</code>, <code>3 * 2 = 6</code>, <code>4 * 6 = 24</code>, <code>5 * 24 = 120</code></li>
+                </ol>
+                
+                <h3>Числа Фибоначчи</h3>
+                <p>Последовательность Фибоначчи — это ряд чисел, где каждое следующее число равно сумме двух предыдущих: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def фибоначчи(n):
+    """Возвращает n-ое число Фибоначчи."""
+    # Базовые случаи
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    
+    # Рекурсивный случай
+    return фибоначчи(n - 1) + фибоначчи(n - 2)
+
+# Вывод первых 10 чисел Фибоначчи
+for i in range(10):
+    print(f"фибоначчи({i}) = {фибоначчи(i)}")
+
+# фибоначчи(0) = 0
+# фибоначчи(1) = 1
+# фибоначчи(2) = 1
+# фибоначчи(3) = 2
+# фибоначчи(4) = 3
+# фибоначчи(5) = 5
+# фибоначчи(6) = 8
+# фибоначчи(7) = 13
+# фибоначчи(8) = 21
+# фибоначчи(9) = 34</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Проблемы с наивной реализацией Фибоначчи</h4>
+                    <p>Наивная рекурсивная реализация чисел Фибоначчи крайне неэффективна, так как выполняет много повторных вычислений. Например, при вычислении <code>фибоначчи(5)</code> функция <code>фибоначчи(2)</code> вызывается трижды!</p>
+                </div>
+                
+                <h3>Оптимизация рекурсии: мемоизация</h3>
+                <p>Мемоизация — это техника оптимизации, при которой мы сохраняем результаты уже выполненных вычислений, чтобы не повторять их.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">def фибоначчи_мемо(n, память={}):
+    """Оптимизированная версия функции Фибоначчи с мемоизацией."""
+    # Проверяем, не вычисляли ли мы уже это значение
+    if n in память:
+        return память[n]
+    
+    # Базовые случаи
+    if n == 0:
+        результат = 0
+    elif n == 1:
+        результат = 1
+    # Рекурсивный случай
+    else:
+        результат = фибоначчи_мемо(n - 1, память) + фибоначчи_мемо(n - 2, память)
+    
+    # Сохраняем результат в памяти
+    память[n] = результат
+    return результат
+
+# Теперь вычисление больших чисел Фибоначчи стало гораздо быстрее
+print(фибоначчи_мемо(50))  # 12586269025</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Примечание о значении по умолчанию</h4>
+                    <p>В данном случае мы намеренно используем изменяемый объект (словарь) как значение по умолчанию, так как нам нужно сохранять результаты между вызовами функции. Это один из редких случаев, когда такой подход оправдан.</p>
+                </div>
+                
+                <h3>Рекурсивный обход структур данных</h3>
+                <p>Рекурсия особенно полезна при работе с вложенными структурами данных, такими как деревья или вложенные списки.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Обход вложенного списка
+def сумма_вложенных(список):
+    """Вычисляет сумму всех чисел во вложенном списке любой глубины."""
+    общая_сумма = 0
+    
+    for элемент in список:
+        if isinstance(элемент, list):
+            # Если элемент - список, рекурсивно вызываем функцию
+            общая_сумма += сумма_вложенных(элемент)
+        else:
+            # Если элемент - число, добавляем его к сумме
+            общая_сумма += элемент
+            
+    return общая_сумма
+
+# Пример вложенного списка
+вложенный_список = [1, 2, [3, 4, [5, 6]], 7, [8, [9]]]
+print(сумма_вложенных(вложенный_список))  # 45 (= 1+2+3+4+5+6+7+8+9)</code></pre>
+                </div>
+                
+                <h3>Обход файловой системы</h3>
+                <p>Рекурсия часто используется для обхода иерархических структур, таких как файловая система.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import os
+
+def найти_файлы(директория, расширение):
+    """Рекурсивно находит все файлы с указанным расширением в директории и поддиректориях."""
+    найденные_файлы = []
+    
+    # Получаем список всех файлов и папок в текущей директории
+    for имя in os.listdir(директория):
+        полный_путь = os.path.join(директория, имя)
+        
+        # Если это директория, рекурсивно ищем в ней
+        if os.path.isdir(полный_путь):
+            найденные_файлы.extend(найти_файлы(полный_путь, расширение))
+        # Если это файл с нужным расширением, добавляем его
+        elif имя.endswith(расширение):
+            найденные_файлы.append(полный_путь)
+            
+    return найденные_файлы
+
+# Пример использования
+# python_файлы = найти_файлы("/путь/к/директории", ".py")
+# print(f"Найдено {len(python_файлы)} Python файлов")</code></pre>
+                </div>
+                
+                <h3>Рекурсия vs Итерация</h3>
+                <p>Многие рекурсивные функции можно переписать с использованием циклов (итеративно). Сравним рекурсивную и итеративную версии функции факториала:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Рекурсивная версия
+def факториал_рекурсивный(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * факториал_рекурсивный(n - 1)
+
+# Итеративная версия
+def факториал_итеративный(n):
+    результат = 1
+    for i in range(2, n + 1):
+        результат *= i
+    return результат
+
+print(факториал_рекурсивный(5))  # 120
+print(факториал_итеративный(5))  # 120</code></pre>
+                </div>
+                
+                <div class="visual-guide">
+                    <h4>Преимущества и недостатки рекурсии</h4>
+                    <h5>Преимущества:</h5>
+                    <ul>
+                        <li>Код часто получается более элегантным и читаемым</li>
+                        <li>Естественно подходит для задач, которые уже имеют рекурсивную структуру</li>
+                        <li>Упрощает работу со сложными структурами данных (деревья, графы)</li>
+                    </ul>
+                    <h5>Недостатки:</h5>
+                    <ul>
+                        <li>Повышенное потребление памяти из-за создания стековых кадров</li>
+                        <li>Риск переполнения стека (Python ограничивает глубину рекурсии)</li>
+                        <li>Часто менее эффективна, чем итеративные решения</li>
+                        <li>Может быть сложнее отлаживать</li>
+                    </ul>
+                </div>
+                
+                <h3>Ограничение глубины рекурсии в Python</h3>
+                <p>Python имеет встроенное ограничение на глубину рекурсии для предотвращения переполнения стека. По умолчанию это значение равно 1000, но его можно изменить:</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python">import sys
+
+# Узнать текущий лимит рекурсии
+print(sys.getrecursionlimit())  # Обычно 1000
+
+# Установить новый лимит (используйте с осторожностью!)
+sys.setrecursionlimit(2000)
+print(sys.getrecursionlimit())  # 2000</code></pre>
+                </div>
+                
+                <div class="practice-tips">
+                    <h4>Советы по использованию рекурсии</h4>
+                    <ul>
+                        <li>Всегда определяйте базовый случай, чтобы избежать бесконечной рекурсии</li>
+                        <li>Используйте мемоизацию для оптимизации повторяющихся вычислений</li>
+                        <li>Рассмотрите итеративное решение для задач с глубокой рекурсией</li>
+                        <li>Избегайте изменения глобальных переменных внутри рекурсивных функций</li>
+                        <li>Для очень сложных рекурсивных алгоритмов рассмотрите "хвостовую рекурсию"</li>
+                    </ul>
+                </div>
+                
+                <h3>Хвостовая рекурсия</h3>
+                <p>Хвостовая рекурсия — это особый вид рекурсии, при котором рекурсивный вызов является последней операцией в функции. Некоторые языки программирования оптимизируют хвостовую рекурсию, но Python, к сожалению, этого не делает.</p>
+                
+                <div class="code-example">
+                    <pre><code class="language-python"># Обычная рекурсия (не хвостовая)
+def факториал(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * факториал(n - 1)  # Нужно выполнить умножение после возврата из рекурсии
+
+# Хвостовая рекурсия
+def факториал_хвостовой(n, аккумулятор=1):
+    if n == 0 or n == 1:
+        return аккумулятор
+    return факториал_хвостовой(n - 1, n * аккумулятор)  # Последняя операция - рекурсивный вызов
+
+print(факториал(5))  # 120
+print(факториал_хвостовой(5))  # 120</code></pre>
+                </div>
+                
+                <p>В Python хвостовая рекурсия не оптимизируется автоматически, но такой стиль программирования все равно может быть полезен для ясности кода.</p>
+            </section>
+            
+            <!-- Заключение модуля -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html>

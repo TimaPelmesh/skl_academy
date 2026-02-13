@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс по компьютерным сетям для начинающих. Изучите основы сетевых технологий: типы сетей, топологии, компоненты. Полный курс по компьютерным сетям с нуля.">
+    <meta name="keywords" content="бесплатный курс компьютерные сети, компьютерные сети для начинающих, основы компьютерных сетей, обучение сетям, сетевые технологии, компьютерные сети с нуля, networking course">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Бесплатный курс по компьютерным сетям — Основы сетевых технологий">
+    <meta property="og:description" content="Изучите компьютерные сети с нуля. Бесплатный курс по сетевым технологиям для начинающих с практическими примерами.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/networks/01-networks-fundamental.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Бесплатный курс по компьютерным сетям">
+    <meta name="twitter:description" content="Изучите компьютерные сети с нуля. Бесплатный курс по сетевым технологиям для начинающих.">
+    <title>Бесплатный курс по компьютерным сетям — Основы сетевых технологий | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/01-networks-fundamental.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Networks course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Сетевые технологии",
+          "item": "https://skl-academy.ru/courses/networks/01-networks-fundamental.html"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс по компьютерным сетям",
+      "description": "Полный курс по компьютерным сетям с нуля. Изучите основы сетевых технологий: типы сетей, топологии, компоненты и принципы работы сетей.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "sameAs": "https://skl-academy.ru/"
+      },
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "coursePrerequisites": "Базовые знания компьютера",
+      "teaches": ["компьютерные сети", "сетевые технологии", "сетевая архитектура", "протоколы"],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "компьютерные сети"
+        },
+        {
+          "@type": "Thing", 
+          "name": "сетевые технологии"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Бесплатный курс по компьютерным сетям — Основы сетевых технологий",
+      "description": "Изучите компьютерные сети с нуля. Бесплатный курс по сетевым технологиям для начинающих с практическими примерами.",
+      "author": {
+        "@type": "Organization",
+        "name": "SKL Academy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "url": "https://skl-academy.ru/"
+      },
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://skl-academy.ru/courses/networks/01-networks-fundamental.html"
+      },
+      "keywords": "бесплатный курс компьютерные сети, компьютерные сети для начинающих, основы компьютерных сетей, обучение сетям"
+    }
+    </script>
+    
+    
+</head>
+<body data-course="networks">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn active">1. Основы сетевых технологий</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#introduction" class="subtopic active">1.1 Введение в сети</a>
+                        <a href="#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <!-- Модуль 10 -->
+                <div class="topic">
+                    <button class="topic-btn">10. Дополнительные темы</button>
+                    <div class="subtopics">
+                        <a href="10-advanced-topics.html#iot" class="subtopic">10.1 IoT и MQTT</a>
+                        <a href="10-advanced-topics.html#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="10-advanced-topics.html#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="10-advanced-topics.html#k8s" class="subtopic">10.4 Для профессионалов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Секция 1.1: Введение в сети -->
+            <section id="introduction" class="topic-section">
+                <h2>1.1 Введение в сети</h2>
+                <div class="lesson-content">
+                    <h3>Что такое компьютерные сети?</h3>
+                    <p>Компьютерная сеть — это система связи, которая позволяет компьютерам и другим устройствам обмениваться данными. Сети варьируются от маленьких локальных сетей до глобальной сети Интернет, соединяющей миллиарды устройств по всему миру.</p>
+                    
+                    <div class="note">
+                        <p><strong>Важно:</strong> Сети стали неотъемлемой частью нашей жизни, обеспечивая доступ к информации, общение и совместную работу независимо от географического положения.</p>
+                    </div>
+                    
+                    <h3>Зачем нужны сети? Примеры из жизни</h3>
+                    <ul>
+                        <li>Доступ к веб‑ресурсам и облачным сервисам: поиск, видео, документы.</li>
+                        <li>Работа в офисе: общие принтеры, файловые серверы, видеоконференции.</li>
+                        <li>Домашние сценарии: «умный дом», потоковое видео, онлайн‑игры.</li>
+                        <li>Мобильность: Wi‑Fi и сотовые сети для связи «везде и всегда».</li>
+                        <li>Производство/IoT: датчики, телеметрия, удалённый мониторинг.</li>
+                    </ul>
+
+                    <div class="features-section">
+                        <h4>Из чего состоит сеть (в общих чертах)</h4>
+                        <ul>
+                            <li><strong>Узлы (конечные устройства)</strong>: ПК, смартфоны, серверы, камеры.</li>
+                            <li><strong>Каналы связи</strong>: кабель (витая пара, оптика) и беспроводная среда (Wi‑Fi).</li>
+                            <li><strong>Сетевое оборудование</strong>: коммутаторы, маршрутизаторы, точки доступа.</li>
+                            <li><strong>Протоколы</strong>: правила обмена данными (Ethernet, IP, TCP/UDP, HTTP и др.).</li>
+                        </ul>
+                    </div>
+
+                    <h3>История развития сетей</h3>
+                    <p>История компьютерных сетей началась в 1960-х годах с проекта ARPANET, разработанного Министерством обороны США. Этот проект заложил основу для современного Интернета.</p>
+                    
+                    <ul>
+                        <li><strong>1969</strong> — Создание ARPANET, первой сети с коммутацией пакетов</li>
+                        <li><strong>1973</strong> — Разработка протоколов TCP/IP</li>
+                        <li><strong>1983</strong> — ARPANET полностью переходит на TCP/IP</li>
+                        <li><strong>1989</strong> — Тим Бернерс-Ли предлагает концепцию World Wide Web</li>
+                        <li><strong>1991</strong> — Запуск первого веб-сайта</li>
+                        <li><strong>2000-е</strong> — Развитие широкополосного доступа и беспроводных технологий</li>
+                        <li><strong>2010-е</strong> — Эра облачных вычислений и Интернета вещей</li>
+                    </ul>
+
+                    <div class="note">
+                        <p><strong>Для профессионалов:</strong> Ethernet (Ксерокс PARC, 1973→1980 IEEE 802.3), RFC 791/792 (IP/ICMP, 1981), RFC 793 (TCP, 1981) стали фундаментом Интернета; в 2013 появился QUIC, а затем HTTP/3.</p>
+                    </div>
+
+                    <h3>Основные понятия: пропускная способность, задержка, надёжность</h3>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr>
+                                <th>Понятие</th>
+                                <th>Что означает</th>
+                                <th>Как измеряется</th>
+                                <th>Замечания</th>
+                            </tr>
+                            <tr>
+                                <td>Пропускная способность (Bandwidth)</td>
+                                <td>Максимальная скорость передачи по каналу</td>
+                                <td>бит/с (Мбит/с, Гбит/с)</td>
+                                <td>Верхний теоретический предел канала</td>
+                            </tr>
+                            <tr>
+                                <td>Пропускная способность приложения (Throughput)</td>
+                                <td>Фактическая скорость доставки полезных данных</td>
+                                <td>бит/с</td>
+                                <td>Меньше Bandwidth из‑за накладных расходов и потерь</td>
+                            </tr>
+                            <tr>
+                                <td>Задержка (Latency)</td>
+                                <td>Время прохождения пакета от источника к получателю</td>
+                                <td>мс</td>
+                                <td>Влияет на отзывчивость: важна для звонков/игр</td>
+                            </tr>
+                            <tr>
+                                <td>Джиттер (Jitter)</td>
+                                <td>Колебания задержки между пакетами</td>
+                                <td>мс</td>
+                                <td>Критично для потокового аудио/видео</td>
+                            </tr>
+                            <tr>
+                                <td>Надёжность</td>
+                                <td>Стабильность работы сети и сохранность данных</td>
+                                <td>% доступности, потери пакетов</td>
+                                <td>Зависит от топологии, оборудования, помех</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>Типы сетей кратко</h3>
+                    <ul>
+                        <li><strong>PAN</strong> — персональная сеть на несколько метров (Bluetooth, NFC).</li>
+                        <li><strong>LAN</strong> — локальная сеть в пределах офиса/дома (Ethernet, Wi‑Fi).</li>
+                        <li><strong>WAN</strong> — связи между городами/странами (провайдерские магистрали).</li>
+                        <li><strong>Интернет</strong> — глобальная сеть сетей на базе TCP/IP.</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Секция 1.2: Типы сетей -->
+            <section id="network-types" class="topic-section">
+                <h2>1.2 Типы сетей</h2>
+                <div class="lesson-content">
+                    <h3>Классификация сетей по масштабу</h3>
+                    <p>Сети можно классифицировать по их географическому охвату и размеру:</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Основные типы сетей:</h4>
+                        <ul>
+                            <li><strong>PAN (Personal Area Network)</strong> — персональная сеть, охватывающая устройства одного человека на небольшом расстоянии (до 10 метров). Примеры: Bluetooth-соединение между смартфоном и наушниками.</li>
+                            <li><strong>LAN (Local Area Network)</strong> — локальная сеть, объединяющая устройства в пределах ограниченной территории, например, офиса, здания или кампуса.</li>
+                            <li><strong>MAN (Metropolitan Area Network)</strong> — городская сеть, охватывающая территорию города или крупного района.</li>
+                            <li><strong>WAN (Wide Area Network)</strong> — глобальная сеть, охватывающая большие географические территории, включая страны и континенты. Интернет — самый известный пример WAN.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Классификация по способу организации</h3>
+                    <p>По способу организации и управления сети делятся на:</p>
+                    
+                    <ul>
+                        <li><strong>Одноранговые сети (Peer-to-peer)</strong> — все компьютеры равноправны, каждый может выступать как клиент и как сервер.</li>
+                        <li><strong>Клиент-серверные сети</strong> — выделенные серверы предоставляют услуги клиентским компьютерам.</li>
+                    </ul>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># Команды для получения информации о сетевых интерфейсах и конфигурации
+
+# В Windows:
+netsh wlan show interfaces    # Информация о беспроводных интерфейсах
+netsh wlan show networks      # Отображение доступных беспроводных сетей
+net view                      # Просмотр компьютеров в локальной сети
+
+# В Linux:
+iwconfig                      # Информация о беспроводных интерфейсах
+nmcli device wifi list        # Список доступных Wi-Fi сетей
+nmcli connection show         # Просмотр активных сетевых подключений</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Секция 1.3: Топологии сетей -->
+            <section id="network-topologies" class="topic-section">
+                <h2>1.3 Топологии сетей</h2>
+                <div class="lesson-content">
+                    <h3>Что такое топология сети?</h3>
+                    <p>Топология сети — это физическое или логическое расположение узлов и соединений в компьютерной сети. Выбор топологии влияет на производительность, надежность и масштабируемость сети.</p>
+                    
+                    <h3>Основные виды топологий</h3>
+                    
+                    <div class="topology-container">
+                        <h4 class="topology-title">Базовые топологии сетей</h4>
+                        <div class="note">
+                            <p><strong>Замечание:</strong> Физическая топология описывает реальное соединение узлов и кабелей (звезда, шина, кольцо), а логическая — как в сети фактически идут потоки кадров и пакетов. В современных Ethernet‑сетях физически, как правило, используется звезда/дерево, а логическая структура определяется работой коммутаторов и протоколов (например, STP).</p>
+                        </div>
+                        <div class="topology-grid">
+                            <div class="topology-card bus">
+                                <div class="topology-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+                                </div>
+                                <h5 class="topology-name">Шина (Bus)</h5>
+                                <p class="topology-desc">Все устройства подключены к одному кабелю. Простая и недорогая, но при повреждении кабеля вся сеть выходит из строя.</p>
+                                <div class="topology-properties">
+                                    <div class="property"><span class="property-label">Надежность</span><span class="property-value low">Низкая</span></div>
+                                    <div class="property"><span class="property-label">Стоимость</span><span class="property-value high">Низкая</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="topology-card star">
+                                <div class="topology-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                </div>
+                                <h5 class="topology-name">Звезда (Star)</h5>
+                                <p class="topology-desc">Все устройства подключены к центральному узлу. Отказ одного узла не влияет на работу остальной сети, но выход из строя центрального узла приводит к отказу всей сети.</p>
+                                <div class="topology-properties">
+                                    <div class="property"><span class="property-label">Надежность</span><span class="property-value medium">Средняя</span></div>
+                                    <div class="property"><span class="property-label">Стоимость</span><span class="property-value medium">Средняя</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="topology-card ring">
+                                <div class="topology-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+                                </div>
+                                <h5 class="topology-name">Кольцо (Ring)</h5>
+                                <p class="topology-desc">Каждое устройство соединено с двумя соседними, образуя замкнутый круг. Данные передаются по кругу от узла к узлу.</p>
+                                <div class="topology-properties">
+                                    <div class="property"><span class="property-label">Надежность</span><span class="property-value medium">Средняя</span></div>
+                                    <div class="property"><span class="property-label">Стоимость</span><span class="property-value medium">Средняя</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="topology-card mesh">
+                                <div class="topology-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7.77L5.61 18h12.78zM12 4L2 20h20L12 4zm0 6.47L15.11 14H8.89L12 10.47z"/></svg>
+                                </div>
+                                <h5 class="topology-name">Ячеистая (Mesh)</h5>
+                                <p class="topology-desc">Каждое устройство соединено со многими или всеми другими устройствами. Обеспечивает высокую надежность, но сложна в реализации.</p>
+                                <div class="topology-properties">
+                                    <div class="property"><span class="property-label">Надежность</span><span class="property-value high">Высокая</span></div>
+                                    <div class="property"><span class="property-label">Стоимость</span><span class="property-value low">Высокая</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="topology-card tree">
+                                <div class="topology-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22L3 13H9V1h6v12h6z"/></svg>
+                                </div>
+                                <h5 class="topology-name">Дерево (Tree)</h5>
+                                <p class="topology-desc">Иерархическая структура с корневым узлом и ветвями. Часто используется в корпоративных сетях.</p>
+                                <div class="topology-properties">
+                                    <div class="property"><span class="property-label">Надежность</span><span class="property-value medium">Средняя</span></div>
+                                    <div class="property"><span class="property-label">Стоимость</span><span class="property-value medium">Средняя</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <p><strong>Практическая актуальность:</strong> шина/кольцо исторически важны, но редко встречаются сегодня; типичная физическая реализация — звезда/дерево с коммутаторами, логика формируется протоколами L2/L3.</p>
+                    </div>
+                    
+                    <h3>Сравнение топологий</h3>
+                    <div class="spec-table-wrapper">
+                        <table class="spec-table">
+                            <tr>
+                                <th>Топология</th>
+                                <th>Преимущества</th>
+                                <th>Недостатки</th>
+                                <th>Применение</th>
+                            </tr>
+                            <tr>
+                                <td>Шина</td>
+                                <td>Простота, экономия кабеля</td>
+                                <td>Низкая отказоустойчивость, проблемы с масштабированием</td>
+                                <td>Небольшие сети, устаревшие системы</td>
+                            </tr>
+                            <tr>
+                                <td>Звезда</td>
+                                <td>Высокая надежность, простота добавления новых узлов</td>
+                                <td>Зависимость от центрального узла, больше кабеля</td>
+                                <td>Локальные сети офисов, домашние сети</td>
+                            </tr>
+                            <tr>
+                                <td>Кольцо</td>
+                                <td>Стабильная пропускная способность, равный доступ</td>
+                                <td>Отказ одного узла может нарушить работу всей сети</td>
+                                <td>Промышленные сети, FDDI</td>
+                            </tr>
+                            <tr>
+                                <td>Ячеистая</td>
+                                <td>Высокая отказоустойчивость, отсутствие единой точки отказа</td>
+                                <td>Сложность, высокая стоимость</td>
+                                <td>Критически важные сети, беспроводные mesh-сети</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Секция 1.4: Компоненты сетей -->
+            <section id="network-components" class="topic-section">
+                <h2>1.4 Компоненты сетей</h2>
+                <div class="lesson-content">
+                    <h3>Основные компоненты компьютерных сетей</h3>
+                    <p>Компьютерная сеть состоит из различных устройств и компонентов, каждый из которых выполняет определенную функцию в процессе передачи данных.</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Ключевые компоненты сети:</h4>
+                        <ul>
+                            <li><strong>Конечные устройства</strong> — компьютеры, смартфоны, принтеры, серверы и другие устройства, которые являются источниками или получателями данных в сети.</li>
+                            <li><strong>Сетевые устройства</strong> — оборудование, обеспечивающее передачу данных между конечными устройствами (маршрутизаторы, коммутаторы, точки доступа).</li>
+                            <li><strong>Среда передачи данных</strong> — физические каналы, по которым передаются данные (кабели, беспроводные среды).</li>
+                            <li><strong>Сетевые протоколы</strong> — набор правил и соглашений для обмена данными между устройствами в сети.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Сетевые устройства</h3>
+                    
+                    <h4>Маршрутизатор (Router)</h4>
+                    <p>Маршрутизатор — это устройство, которое соединяет две или более сети и направляет пакеты данных между ними. Маршрутизаторы работают на сетевом уровне модели OSI (уровень 3) и используют IP-адреса для определения оптимального пути передачи данных.</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># Команды для работы с маршрутизацией
+
+# В Windows:
+route print                   # Просмотр таблицы маршрутизации
+tracert google.com            # Трассировка маршрута до указанного хоста
+pathping 8.8.8.8              # Расширенная трассировка с анализом потерь пакетов
+
+# В Linux:
+ip route show                 # Просмотр таблицы маршрутизации
+traceroute google.com         # Трассировка маршрута до указанного хоста
+mtr 8.8.8.8                   # Комбинированный инструмент трассировки и пинга</code></pre>
+                    </div>
+                    
+                    <h4>Коммутатор (Switch)</h4>
+                    <p>Коммутатор — устройство, которое соединяет несколько устройств в одной сети. Коммутаторы работают на канальном уровне модели OSI (уровень 2) и используют MAC-адреса для передачи данных между устройствами в локальной сети.</p>
+                    
+                    <h4>Концентратор (Hub)</h4>
+                    <p>Концентратор — простое устройство, которое соединяет несколько устройств в сети и передает данные от одного порта ко всем остальным. В отличие от коммутатора, концентратор не анализирует получаемые данные и просто ретранслирует их на все подключенные устройства.</p>
+                    
+                    <div class="note">
+                        <p><strong>Важно:</strong> Концентраторы считаются устаревшими и в современных сетях практически полностью заменены коммутаторами, которые обеспечивают более эффективную передачу данных.</p>
+                    </div>
+                    
+                    <h4>Мост (Bridge)</h4>
+                    <p>Мост — устройство, соединяющее две сети одного типа. Мосты работают на канальном уровне и фильтруют трафик, пропуская только те пакеты, которые должны перейти из одной сети в другую.</p>
+                    
+                    <h4>Точка доступа (Access Point)</h4>
+                    <p>Точка доступа — устройство, которое обеспечивает беспроводное подключение к проводной сети. Точки доступа часто используются для создания Wi-Fi сетей.</p>
+                    
+                    <h3>Среда передачи данных</h3>
+                    
+                    <div class="media-types-container">
+                        <h4 class="media-types-title">Типы сред передачи данных</h4>
+                        
+                        <div class="media-types-grid">
+                            <div class="media-type-card twisted-pair">
+                                <div class="media-type-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13 9h-2V7h2v2zm0 2h-2v2h2v-2zm0 4h-2v2h2v-2zm-4-6H7v2h2V9zm0 2H7v2h2v-2zm0 4H7v2h2v-2zm10-8h-4v10h4V7zm2 12H3V5h18v14zm0-16H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                                </div>
+                                <h5 class="media-type-name">Витая пара</h5>
+                                <p class="media-type-desc">Наиболее распространенный тип кабеля для локальных сетей. Состоит из пар скрученных проводников, что снижает электромагнитные помехи.</p>
+                                <div class="media-type-stats">
+                                    <div class="stat"><span class="stat-label">Скорость</span><span class="stat-value">до 10 Гбит/с</span></div>
+                                    <div class="stat"><span class="stat-label">Расстояние</span><span class="stat-value">до 100 м</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="media-type-card coaxial">
+                                <div class="media-type-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><circle cx="12" cy="12" r="5"/></svg>
+                                </div>
+                                <h5 class="media-type-name">Коаксиальный кабель</h5>
+                                <p class="media-type-desc">Кабель с центральным проводником, окруженным изоляцией и экраном. Используется в кабельном телевидении и некоторых сетях.</p>
+                                <div class="media-type-stats">
+                                    <div class="stat"><span class="stat-label">Скорость</span><span class="stat-value">типично до 1–2 Гбит/с</span></div>
+                                    <div class="stat"><span class="stat-label">Расстояние</span><span class="stat-value">до сотен метров</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="media-type-card fiber">
+                                <div class="media-type-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                </div>
+                                <h5 class="media-type-name">Оптоволокно</h5>
+                                <p class="media-type-desc">Кабель из стеклянных или пластиковых волокон, передающий данные с помощью световых импульсов. Обеспечивает высокую скорость и защиту от помех.</p>
+                                <div class="media-type-stats">
+                                    <div class="stat"><span class="stat-label">Скорость</span><span class="stat-value">до десятков Тбит/с (DWDM)</span></div>
+                                    <div class="stat"><span class="stat-label">Расстояние</span><span class="stat-value">десятки–сотни км (с ретрансляцией)</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="media-type-card wireless">
+                                <div class="media-type-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                                </div>
+                                <h5 class="media-type-name">Беспроводная среда</h5>
+                                <p class="media-type-desc">Передача данных с помощью радиоволн (Wi-Fi, Bluetooth) или инфракрасного излучения. Обеспечивает мобильность, но более подвержена помехам.</p>
+                                <div class="media-type-stats">
+                                    <div class="stat"><span class="stat-label">Скорость</span><span class="stat-value">теоретически до десятков Гбит/с</span></div>
+                                    <div class="stat"><span class="stat-label">Расстояние</span><span class="stat-value">десятки–сотни метров</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>

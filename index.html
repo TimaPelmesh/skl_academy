@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKL Academy</title>
+  
+  <!-- Yandex.Metrika counter -->
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+    ym(102262736, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+  
+  <!-- Favicon / Иконки сайта -->
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  
+  <!-- SEO Мета-теги -->
+  <meta name="description" content="SKL Academy - бесплатная образовательная платформа для изучения IT-технологий. Курсы по Python, компьютерным сетям, Git, Web-разработке, техническому английскому. Обучение программированию с нуля.">
+  <meta name="keywords" content="бесплатные курсы программирования, python курсы, компьютерные сети курсы, технический английский, английский для IT, словарный запас B2, IT образование, обучение программированию, курсы для начинающих, python для начинающих, компьютерные сети для начинающих">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph мета-теги для социальных сетей -->
+  <meta property="og:title" content="SKL Academy - Современное обучение IT">
+  <meta property="og:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skl-academy.ru/">
+  <meta property="og:image" content="https://skl-academy.ru/images/icon.ico">
+  
+
+  <!-- Для веб мастера -->
+   <meta name="yandex-verification" content="bd95be99f2cb3ea8">
+   
+  <!-- Twitter Card мета-теги -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SKL Academy - Современное обучение IT">
+  <meta name="twitter:description" content="Образовательная платформа с бесплатными курсами по программированию, веб-разработке и IT-технологиям.">
+  <meta name="twitter:image" content="https://skl-academy.ru/images/icon.ico">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skl-academy.ru/">
+  
+  <!-- Structured Data: Organization and Educational Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "SKL Academy",
+        "url": "https://skl-academy.ru/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://skl-academy.ru/images/favicon-32x32.png"
+        },
+        "description": "Бесплатная образовательная платформа для изучения IT-технологий и программирования",
+        "foundingDate": "2025",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "RU"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "url": "https://skl-academy.ru/"
+        },
+        "sameAs": [
+          "https://skl-academy.ru/"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Курсы программирования",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Course",
+                "name": "Бесплатный курс Python для начинающих",
+                "url": "https://skl-academy.ru/courses/python/01-python-basics.html"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Course",
+                "name": "Бесплатный курс по компьютерным сетям",
+                "url": "https://skl-academy.ru/courses/networks/01-networks-fundamental.html"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Course",
+                "name": "Курс по Git",
+                "url": "https://skl-academy.ru/courses/git/01-git-basics.html"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Course",
+                "name": "Технический английский — Увеличение словарного запаса до B2",
+                "url": "https://skl-academy.ru/courses/english/01-foundations.html"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "name": "SKL Academy",
+        "url": "https://skl-academy.ru/",
+        "description": "Бесплатная образовательная платформа для изучения IT-технологий",
+        "publisher": {
+          "@type": "Organization",
+          "name": "SKL Academy"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://skl-academy.ru/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Tailwind (runtime CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Critical site styles first to reduce FOUC -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts as regular stylesheet (display=swap prevents FOIT) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin">
+  
+  <!-- Font Awesome as regular stylesheet (avoid delayed media swap) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body class="font-sans">
+  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- Navigation -->
+  <nav class="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-20 items-center">
+        <!-- Логотип (слева на десктопе, скрыт на мобильных) -->
+        <div class="flex items-center hidden md:flex">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="index.html" class="flex items-center">
+              <img class="h-9 w-auto" src="images/icon.ico" alt="SKL Academy">
+              <span class="ml-3 text-xl font-semibold text-gray-900 header-title">SKL Academy</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Центральная навигация (только на десктопе) -->
+        <div class="hidden md:flex md:items-center md:space-x-8 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
+          <a href="#trainers" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Интерактивные инструменты</a>
+          <a href="#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Библиотека</a>
+          <a href="#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
+          <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
+        </div>
+
+        <!-- Правая часть: поиск на десктопе, мобильная навигация -->
+        <div class="flex items-center space-x-4">
+          <!-- Поисковик (только на десктопе) -->
+          <div class="hidden md:block relative search-container">
+            <div class="search-input-wrapper">
+              <input type="text" 
+                     id="search-input" 
+                     placeholder="Поиск курсов и статей..." 
+                     class="search-input">
+              <button type="button" id="search-button" class="search-button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <!-- Результаты поиска -->
+            <div id="search-results" class="search-results hidden">
+              <div class="search-results-header">
+                <span class="search-results-title">Результаты поиска</span>
+                <button type="button" id="clear-search" class="clear-search-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="search-results-content">
+                <!-- Результаты будут вставляться сюда -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Мобильная навигация: логотип слева, поиск и бургер справа (Библиотека только в меню) -->
+          <div class="mobile-header-row flex items-center justify-between w-full md:hidden gap-2 min-w-0">
+            <!-- Логотип слева -->
+            <a href="index.html" class="flex items-center flex-shrink-0 min-w-0">
+              <img class="h-8 w-auto flex-shrink-0" src="images/icon.ico" alt="SKL Academy">
+              <span class="ml-2 text-lg font-semibold text-gray-900 header-title whitespace-nowrap">SKL Academy</span>
+            </a>
+
+            <!-- Справа: поиск, бургер -->
+            <div class="flex items-center flex-shrink-0 gap-2">
+              <!-- Мобильный поисковик -->
+              <div class="relative mobile-search-container">
+                <button type="button" id="mobile-search-toggle" class="mobile-search-toggle-btn">
+                  <i class="fas fa-search"></i>
+                </button>
+                <!-- Мобильные результаты поиска -->
+                <div id="mobile-search-results" class="mobile-search-results hidden">
+                  <div class="mobile-search-input-wrapper">
+                    <input type="text" 
+                           id="mobile-search-input" 
+                           placeholder="Поиск курсов и статей..." 
+                           class="mobile-search-input">
+                    <button type="button" id="mobile-clear-search" class="mobile-clear-search-btn">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <div class="mobile-search-results-content">
+                    <!-- Результаты будут вставляться сюда -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Бургер меню -->
+              <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <span class="sr-only">Open main menu</span>
+                <div class="burger-icon">
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="pt-2 pb-3 space-y-1 px-4">
+        <a href="#trainers" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Интерактивные инструменты</a>
+        <a href="#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Библиотека</a>
+        <a href="#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
+        <a href="about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="gradient-bg text-white pt-4 relative overflow-hidden">
+    <div id="hero-webgl" aria-hidden="true"></div>
+    
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:py-8 sm:px-6 lg:px-8">
+      <div class="hero-layout">
+        <div class="hero-title-block">
+          <h1 class="hero-title text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            Освой ключевые IT‑навыки с нуля
+          </h1>
+        </div>
+        <div class="hero-stats-block">
+          <div class="stats-container">
+            <div class="stat-block" style="--stat-delay: 0.1s;">
+              <div class="stat-number stat-counter" data-count="7" data-duration="1200">0</div>
+              <div class="stat-label">Курсов</div>
+            </div>
+            <div class="stat-block" style="--stat-delay: 0.25s;">
+              <div class="stat-number stat-text">24/7</div>
+              <div class="stat-label">Доступ</div>
+            </div>
+            <div class="stat-block" style="--stat-delay: 0.4s;">
+              <div class="stat-number stat-counter" data-count="100" data-suffix="%" data-duration="1200">0</div>
+              <div class="stat-label">Бесплатно</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Courses Section -->
+  <div id="courses" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Наши курсы</h2>
+      <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
+        Найдешь что-то полезное для себя?
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Course 1 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-network-wired text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Компьютерные сети</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Изучите компьютерные сети: от основ до продвинутых технологий.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-networks">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/networks/01-networks-fundamental.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 2 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fab fa-python text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Python</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Освойте Python - от основ до продвинутых техник программирования.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-python">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/python/01-python-basics.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 3 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fab fa-git-alt text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Git</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Изучите Git - самую популярную систему контроля версий.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-git">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/git/01-git-basics.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 4 -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fab fa-html5 text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Веб-разработка</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Создавайте современные веб-сайты с помощью HTML и CSS.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-web">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/web/01-html-basics.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 5 - Linux и Bash -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fab fa-linux text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Linux и Bash</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Освойте Linux и Bash - основу современной IT-инфраструктуры.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-linux">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/linux/01-linux-basics.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 6 - Windows и PowerShell -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fab fa-windows text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Windows и PowerShell</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Изучите Windows PowerShell и автоматизацию в экосистеме Microsoft.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-windows">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/windows/01-windows-basics.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 7: Technical English -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-language text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Технический английский</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Увеличьте словарный запас до уровня B2. Навык перевода технических текстов.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-english">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/english/01-foundations.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 8: Введение в AI (последний) -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-brain text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Введение в AI</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Нейросети, LLM, движки и алгоритмы, модели прогнозов: CatBoost, LightGBM и не только.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-ai">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="courses/ai/00-about-course.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-12">
+      <h3 class="text-2xl font-semibold text-gray-900 text-center">Планируются</h3>
+      <p class="mt-3 max-w-2xl text-lg text-gray-600 mx-auto text-center">
+        Ваша поддержка поможет нам развиваться и создавать больше полезных материалов. Вы можете <a href="https://tbank.ru/cf/5WE9u97bUbM" class="inline-flex items-center font-semibold text-indigo-600 hover:text-indigo-500 transition">сделать пожертвование</a> или <a href="https://forms.gle/8WB8dfUohUvT4AoS9" class="inline-flex items-center font-semibold text-indigo-600 hover:text-indigo-500 transition">вступить в нашу команду</a>.
+      </p>
+      <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Planned: ЕГЭ по информатике -->
+        <div class="course-card">
+          <div class="p-6">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fas fa-graduation-cap text-indigo-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">ЕГЭ по информатике</h3>
+              </div>
+            </div>
+            <div class="mt-4">
+              <p class="text-gray-600">Системная подготовка к ЕГЭ: теория, практика и тренировочные варианты.</p>
+            </div>
+            <div class="mt-6 flex space-x-4 course-card-actions">
+              <button type="button" class="course-button-secondary" data-modal-target="modal-ege">
+                Подробнее
+                <i class="fas fa-info-circle ml-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Planned: ОГЭ по информатике -->
+        <div class="course-card">
+          <div class="p-6">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fas fa-certificate text-indigo-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">ОГЭ по информатике</h3>
+              </div>
+            </div>
+            <div class="mt-4">
+              <p class="text-gray-600">Подготовка к экзамену: тренируем навыки программирования и анализа данных.</p>
+            </div>
+            <div class="mt-6 flex space-x-4 course-card-actions">
+              <button type="button" class="course-button-secondary" data-modal-target="modal-oge">
+                Подробнее
+                <i class="fas fa-info-circle ml-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trainers Section -->
+  <div id="trainers" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Интерактивные инструменты</h2>
+      <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
+        Тренажеры, интерактивные песочницы и практические инструменты для обучения
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto">
+      <!-- Trainer 1: Typing -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+              <i class="fas fa-keyboard text-indigo-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-medium text-gray-900">Тренажер печати</h3>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Улучшите скорость и точность печати с помощью интерактивного тренажера.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-typing">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="sandbox/typing/index.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trainer 2: Linux Commands -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fab fa-linux text-indigo-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">Тренажер Linux команд</h3>
+              </div>
+            </div>
+            <span class="status-badge status-in-development">В разработке</span>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Отработайте команды Linux в интерактивном режиме и закрепите знания на практике.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-linux-trainer">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Sandbox: PC Architecture -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fas fa-desktop text-indigo-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">Архитектура ПК</h3>
+              </div>
+            </div>
+            <span class="status-badge status-in-development">В разработке</span>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Изучите внутреннее устройство компьютера в интерактивной 3D-модели. Крутите, рассматривайте и изучайте компоненты ПК.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-pc-architecture">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="sandbox/pc-architecture/index.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Sandbox: Web Playground -->
+      <div class="course-card">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="course-icon-container flex-shrink-0 bg-gray-100 p-3 rounded-xl">
+                <i class="fas fa-code text-orange-500 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-gray-900">Веб-песочница</h3>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-gray-600">Интерактивная среда для изучения веб-разработки. Пишите HTML, CSS и JavaScript и мгновенно видите результат.</p>
+          </div>
+          <div class="mt-6 flex space-x-4 course-card-actions">
+            <button type="button" class="course-button-secondary" data-modal-target="modal-web-playground">
+              Подробнее
+              <i class="fas fa-info-circle ml-2"></i>
+            </button>
+            <a href="sandbox/web-playground/index.html" class="course-button">
+              Перейти
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Articles Section -->
+  <div id="articles" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">SKL Library</h2>
+      <p class="mt-3 max-w-2xl text-xl text-gray-600 mx-auto">
+        Глубокие разборы, интересные факты и истории из мира IT
+      </p>
+    </div>
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+        <!-- Article 1: URL Journey -->
+        <div class="course-card h-full article-card hover:shadow-lg">
+          <div class="p-5 flex flex-col h-full relative overflow-hidden">
+            <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div class="flex items-start relative z-10">
+              <div class="course-icon-container flex-shrink-0 bg-indigo-100 p-3 rounded-xl">
+                <i class="fas fa-globe text-indigo-600 text-lg"></i>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-lg font-medium text-gray-900">Что происходит при вводе URL?</h3>
+                <div class="mt-1">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700">Глубокий разбор</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700 ml-2">
+                    <i class="far fa-clock mr-1"></i> 25 мин
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 flex-grow">
+              <p class="text-gray-600 text-sm">DNS, TCP, TLS, HTTP, рендеринг — полный путь запроса от Enter до страницы.</p>
+              <div class="mt-3 flex items-center justify-end">
+                <a href="articles/url-journey.html" class="article-read-button">
+                  Читать
+                  <i class="fas fa-arrow-right ml-1.5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Article 2: Billion Dollar Bugs -->
+        <div class="course-card h-full article-card hover:shadow-lg">
+          <div class="p-5 flex flex-col h-full relative overflow-hidden">
+            <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
+              <i class="fas fa-bug"></i>
+            </div>
+            <div class="flex items-start relative z-10">
+              <div class="course-icon-container flex-shrink-0 bg-indigo-100 p-3 rounded-xl">
+                <i class="fas fa-bug text-indigo-600 text-lg"></i>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-lg font-medium text-gray-900">5 багов за миллионы долларов</h3>
+                <div class="mt-1">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700">IT-истории</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700 ml-2">
+                    <i class="far fa-clock mr-1"></i> 20 мин
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 flex-grow">
+              <p class="text-gray-600 text-sm">Knight Capital, Cloudflare, AWS — истории катастрофических ошибок.</p>
+              <div class="mt-3 flex items-center justify-end">
+                <a href="articles/billion-dollar-bugs.html" class="article-read-button">
+                  Читать
+                  <i class="fas fa-arrow-right ml-1.5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Article 3: Reading Code -->
+        <div class="course-card h-full article-card hover:shadow-lg">
+          <div class="p-5 flex flex-col h-full relative overflow-hidden">
+            <div class="article-icon-bg absolute top-0 right-0 opacity-10 text-8xl">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="flex items-start relative z-10">
+              <div class="course-icon-container flex-shrink-0 bg-indigo-100 p-3 rounded-xl">
+                <i class="fas fa-code text-indigo-600 text-lg"></i>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-lg font-medium text-gray-900">Как читать чужой код</h3>
+                <div class="mt-1">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700">Карьера</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700 ml-2">
+                    <i class="far fa-clock mr-1"></i> 15 мин
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 flex-grow">
+              <p class="text-gray-600 text-sm">Методология для понимания незнакомых кодовых баз. Навык, которому не учат.</p>
+              <div class="mt-3 flex items-center justify-end">
+                <a href="articles/reading-code.html" class="article-read-button">
+                  Читать
+                  <i class="fas fa-arrow-right ml-1.5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Link to Library -->
+      <div class="text-center mt-8">
+        <a href="library.html" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors">
+          <i class="fas fa-book-open mr-2"></i>
+          Все статьи в библиотеке
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Модальные окна для курсов -->
+  <!-- Модальное окно для курса "Компьютерные сети" -->
+  <div class="modal" id="modal-networks">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-network-wired text-blue-600 mr-3"></i>Компьютерные сети</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Структурированный гайд по сетям: от моделей связи до практики эксплуатации и безопасности.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Модели OSI/TCP-IP и адресация</li>
+                <li>• Коммутация, VLAN, динамическая маршрутизация</li>
+                <li>• Безопасность, диагностика и best practices</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Студентам и джунам в администрировании</li>
+                <li>• Сетевым инженерам уровня junior+</li>
+                <li>• Тем, кто готовится к CCNA</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/networks/01-networks-fundamental.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Python" -->
+  <div class="modal" id="modal-python">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-python text-blue-600 mr-3"></i>Python</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Изучаем Python с нуля, закрепляем практикой и переходим к продвинутым приёмам.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Типы данных, функции, ООП</li>
+                <li>• Работа с файлами, модулями и виртуальными окружениями</li>
+                <li>• Асинхронность, тестирование и лучшие практики</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Новичкам в разработке</li>
+                <li>• Будущим backend и data-специалистам</li>
+                <li>• Инженерам автоматизации и DevOps</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/python/01-python-basics.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Технический английский" -->
+  <div class="modal" id="modal-english">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-language text-blue-600 mr-3"></i>Технический английский</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Увеличьте словарный запас до уровня B2. Фокус на навыке перевода технических текстов без произношения и аудио.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что включим</h4>
+              <ul class="modal-list">
+                <li>• Словарный запас от A0 до B2: тематические словари для IT-специалистов</li>
+                <li>• Перевод и разбор технической документации, статей и рабочих текстов</li>
+                <li>• Карточки с контекстными примерами, практика перевода</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Формат</h4>
+              <ul class="modal-list">
+                <li>• Только чтение и перевод — без аудио и произношения</li>
+                <li>• Пошаговая подача: словари, контекстные примеры, практика</li>
+                <li>• Метод интервальных повторений для запоминания</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/english/01-foundations.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Git" -->
+  <div class="modal" id="modal-git">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-git-alt text-blue-600 mr-3"></i>Git</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Git без воды: от базовых команд до грамотной командной работы в репозиториях.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Основные команды и работа с локальным репо</li>
+                <li>• Ветвление, слияние, разрешение конфликтов</li>
+                <li>• GitHub, PR-процессы, code review</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Разработчикам любого стека</li>
+                <li>• DevOps и инженерным командам</li>
+                <li>• Студентам и курсовым проектам</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/git/01-git-basics.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Веб-разработка" -->
+  <div class="modal" id="modal-web">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-html5 text-blue-600 mr-3"></i>Веб-разработка</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Практикуем адаптивную вёрстку: чистый HTML, современный CSS и базовый JS.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Семантический HTML5 и доступность</li>
+                <li>• Flexbox, Grid, работа с анимациями</li>
+                <li>• Адаптив, дизайн-системы, базовый JS</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Начинающим фронтенд-разработчикам</li>
+                <li>• Дизайнерам и продактам</li>
+                <li>• Тем, кто собирает лендинги и MVP</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/web/01-html-basics.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Модальное окно для курса "Linux и Bash" -->
+  <div class="modal" id="modal-linux">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-linux text-blue-600 mr-3"></i>Linux и Bash</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Сильная база по Linux и Bash: конфигурация системы, автоматизация и ежедневные сценарии.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Файловая система, права, процессы</li>
+                <li>• Bash CLI, текстовые утилиты, piping</li>
+                <li>• Скрипты, автоматизация, практики DevOps</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Системным администраторам и инженерам</li>
+                <li>• DevOps-специалистам и разработчикам</li>
+                <li>• Тем, кто переходит на Linux как основную ОС</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/linux/01-linux-basics.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Windows и PowerShell" -->
+  <div class="modal" id="modal-windows">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-windows text-blue-600 mr-3"></i>Windows и PowerShell</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">PowerShell как основной инструмент администрирования и автоматизации Windows-инфраструктуры.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Командлеты, модули, профили</li>
+                <li>• Управление службами, реестром и AD</li>
+                <li>• Скрипты для автоматизации рутины</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Системным администраторам и инженерам</li>
+                <li>• DevOps и .NET-командам</li>
+                <li>• IT-специалистам, которые хотят ускорить работу</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/windows/01-windows-basics.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "Введение в AI" -->
+  <div class="modal" id="modal-ai">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-brain text-blue-600 mr-3"></i>Введение в AI</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Структурированный обзор: как устроены нейросети и LLM, движки и алгоритмы, модели прогнозов (CatBoost, LightGBM и др.) и инструменты. Помогает составить карту темы и понять, куда копать дальше.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• ИИ и нейросети: слои, обучение, типы задач</li>
+                <li>• LLM: архитектуры, инференс, оптимизация</li>
+                <li>• Модели прогнозов: градиентный бустинг, CatBoost, LightGBM, XGBoost</li>
+                <li>• Фреймворки и практика: PyTorch, Hugging Face, пайплайны</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Тем, кто хочет влиться в AI/ML и нужна карта темы</li>
+                <li>• Разработчикам и аналитикам без глубокого бэкграунда в ML</li>
+                <li>• Для ориентации перед курсами и проектами (не заменяет практику)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/ai/00-about-course.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "ЕГЭ по информатике" -->
+  <div class="modal" id="modal-ege">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-graduation-cap text-blue-600 mr-3"></i>ЕГЭ по информатике</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Системная подготовка к ЕГЭ по информатике с упором на практику и типовые задания.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Алгоритмы, программирование, Python</li>
+                <li>• Логика, системы счисления, базы данных</li>
+                <li>• Задачи части C и стратегии решения</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Ученикам 10–11 классов</li>
+                <li>• Абитуриентам технических вузов</li>
+                <li>• Преподавателям и тьюторам</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="404.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для курса "ОГЭ по информатике" -->
+  <div class="modal" id="modal-oge">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-certificate text-blue-600 mr-3"></i>ОГЭ по информатике</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Подготовим к ОГЭ по информатике: без спешки, с разбором типовых задач и тренажёрами.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что разберём</h4>
+              <ul class="modal-list">
+                <li>• Базовый Python и алгоритмика</li>
+                <li>• Таблицы, логика, работа с данными</li>
+                <li>• Практика по экзаменационному формату</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Ученикам 8–9 классов</li>
+                <li>• Тем, кто переходит к изучению программирования</li>
+                <li>• Родителям и педагогам как готовый план</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="courses/oge/01-oge-part1.html" class="course-button">
+          Перейти к курсу
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для тренажера "Linux команд" -->
+  <div class="modal" id="modal-linux-trainer">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-linux text-blue-600 mr-3"></i>Тренажер Linux команд</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Интерактивный тренажер для отработки команд Linux и Bash. Практикуйтесь в безопасной среде без риска повредить систему.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что включено</h4>
+              <ul class="modal-list">
+                <li>• Интерактивные упражнения по командам</li>
+                <li>• Практика работы с файловой системой</li>
+                <li>• Упражнения по правам доступа и процессам</li>
+                <li>• Работа с текстовыми утилитами и piping</li>
+                <li>• Разные уровни сложности</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Изучающим Linux и Bash</li>
+                <li>• Системным администраторам</li>
+                <li>• DevOps-специалистам</li>
+                <li>• Тем, кто хочет закрепить знания на практике</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="text-sm text-gray-500 text-center w-full">Тренажер находится в разработке. Скоро будет доступен!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для интерактивной песочницы "Архитектура ПК" -->
+  <div class="modal" id="modal-pc-architecture">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-desktop text-blue-600 mr-3"></i>Архитектура ПК</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Изучите внутреннее устройство компьютера в интерактивной 3D-модели. Вращайте, масштабируйте и изучайте каждый компонент в деталях.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что включено</h4>
+              <ul class="modal-list">
+                <li>• 3D-модель компьютера с детализацией компонентов</li>
+                <li>• Интерактивное вращение и масштабирование</li>
+                <li>• Подробная информация о каждом компоненте</li>
+                <li>• Визуализация связей между компонентами</li>
+                <li>• Образовательные подсказки и описания</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Начинающим изучать устройство компьютера</li>
+                <li>• Студентам IT-направлений</li>
+                <li>• Тем, кто хочет визуально понять архитектуру ПК</li>
+                <li>• Преподавателям для демонстрации</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="sandbox/pc-architecture/index.html" class="course-button">
+          Перейти к инструменту
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для тренажера печати -->
+  <div class="modal" id="modal-typing">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-keyboard text-indigo-600 mr-3"></i>Тренажер печати</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Улучшите скорость и точность печати с помощью интерактивного тренажера. Освойте слепую печать и повысьте продуктивность работы.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что включено</h4>
+              <ul class="modal-list">
+                <li>• Тренировка слепой печати</li>
+                <li>• Статистика и прогресс в реальном времени</li>
+                <li>• Разные уровни сложности</li>
+                <li>• Различные тексты для практики</li>
+                <li>• Отслеживание скорости и точности</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Начинающим программистам</li>
+                <li>• Студентам и школьникам</li>
+                <li>• Всем, кто хочет печатать быстрее</li>
+                <li>• Тем, кто хочет освоить слепую печать</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="sandbox/typing/index.html" class="course-button">
+          Перейти к тренажеру
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно для веб-песочницы -->
+  <div class="modal" id="modal-web-playground">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-code text-orange-500 mr-3"></i>Веб-песочница</h3>
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <p class="modal-lead">Интерактивная среда для изучения веб-разработки. Пишите HTML, CSS и JavaScript и мгновенно видите результат в реальном времени.</p>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-section">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="modal-subtitle">Что включено</h4>
+              <ul class="modal-list">
+                <li>• Live-превью в реальном времени</li>
+                <li>• Готовые шаблоны для изучения</li>
+                <li>• Консоль JavaScript для отладки</li>
+                <li>• Подсветка синтаксиса кода</li>
+                <li>• Сохранение проектов локально</li>
+                <li>• Экспорт кода в файлы</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="modal-subtitle">Кому подойдёт</h4>
+              <ul class="modal-list">
+                <li>• Начинающим веб-разработчикам</li>
+                <li>• Изучающим HTML, CSS и JavaScript</li>
+                <li>• Тем, кто хочет экспериментировать с кодом</li>
+                <li>• Преподавателям для демонстрации</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="sandbox/web-playground/index.html" class="course-button">
+          Перейти к песочнице
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript для работы модальных окон -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Находим все кнопки для открытия модальных окон
+      const modalButtons = document.querySelectorAll('[data-modal-target]');
+      
+      // Для каждой кнопки добавляем обработчик клика
+      modalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Получаем ID модального окна из атрибута data-modal-target
+          const modalId = button.getAttribute('data-modal-target');
+          const modal = document.getElementById(modalId);
+          
+          // Открываем модальное окно
+          if (modal) {
+            openModal(modal);
+          }
+        });
+      });
+      
+      // Находим все кнопки закрытия модальных окон
+      const closeButtons = document.querySelectorAll('.modal-close');
+      
+      // Для каждой кнопки закрытия добавляем обработчик клика
+      closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Находим ближайшее модальное окно (родителя кнопки закрытия)
+          const modal = button.closest('.modal');
+          
+          // Закрываем модальное окно
+          if (modal) {
+            closeModal(modal);
+          }
+        });
+      });
+      
+      // Находим все фоновые элементы модальных окон
+      const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+      
+      // Для каждого фона добавляем обработчик клика для закрытия модального окна
+      modalBackdrops.forEach(backdrop => {
+        backdrop.addEventListener('click', () => {
+          // Находим ближайшее модальное окно (родителя фона)
+          const modal = backdrop.closest('.modal');
+          
+          // Закрываем модальное окно
+          if (modal) {
+            closeModal(modal);
+          }
+        });
+      });
+      
+      // Добавляем обработчик клавиши Escape для закрытия активного модального окна
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          const activeModal = document.querySelector('.modal.active');
+          if (activeModal) {
+            closeModal(activeModal);
+          }
+        }
+      });
+      
+      // Функция для открытия модального окна
+      function openModal(modal) {
+        // Добавляем класс active для отображения и анимации
+        modal.classList.add('active');
+        // Блокируем прокрутку основной страницы
+        document.body.style.overflow = 'hidden';
+      }
+      
+      // Функция для закрытия модального окна
+      function closeModal(modal) {
+        // Убираем класс active
+        modal.classList.remove('active');
+        // Возвращаем возможность прокрутки страницы
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer id="contacts" class="footer-simple">
+    <div class="footer-simple__inner">
+      <div class="footer-simple__about">
+        <h4>О проекте</h4>
+        <p>SKL Academy — платформа с бесплатными IT-курсами и практиками для старта и роста.</p>
+      </div>
+      <div class="footer-simple__contacts">
+        <h4>Контакты</h4>
+        <div class="footer-simple__links">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mr.tim.pumpkin@gmail.com" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-envelope"></i>
+            Gmail
+          </a>
+          <a href="#" onclick="openTelegram(); return false;">
+            <i class="fab fa-telegram"></i>
+            Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-simple__bottom">
+      <p>SKL Academy · 2025</p>
+    </div>
+  </footer>
+
+  <script src="search-data.js" defer></script>
+  <script src="search.js" defer></script>
+  <script src="script.js" defer></script>
+  <script>
+    // Функция для плавного скролла к контактам
+    function scrollToContacts(event) {
+      event.preventDefault();
+      const contactsSection = document.getElementById('contacts');
+      if (contactsSection) {
+        contactsSection.scrollIntoView({ 
+          behavior: 'smooth'
+        });
+      }
+    }
+    
+    // Функции для открытия Telegram
+    function openTelegram() {
+      window.open('https://t.me/tima_pelmeshka', '_blank');
+    }
+    
+    // Hero: лёгкая canvas-анимация (десктоп и мобильный)
+    function initHero() {
+      if (typeof window.initHeroWebGL === 'function') {
+        window.initHeroWebGL();
+      } else {
+        setTimeout(initHero, 50);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(initHero, 50);
+    } else {
+      window.addEventListener('load', function() { setTimeout(initHero, 50); });
+    }
+
+    // Hero: анимация счётчиков только на десктопе; на мобилке — сразу финальные значения
+    function animateCounters() {
+      var counters = document.querySelectorAll('.stat-counter[data-count]');
+      if (!counters.length) return;
+      var hero = document.querySelector('.gradient-bg');
+      if (!hero) return;
+      var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+      if (!isDesktop) {
+        counters.forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var suffix = el.getAttribute('data-suffix') || '';
+          el.textContent = target + suffix;
+        });
+        return;
+      }
+      var done = false;
+      function run() {
+        if (done) return;
+        counters.forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var duration = parseInt(el.getAttribute('data-duration'), 10) || 1200;
+          var suffix = el.getAttribute('data-suffix') || '';
+          var start = 0;
+          var startTime = null;
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var elapsed = timestamp - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            progress = 1 - Math.pow(1 - progress, 2.2);
+            var current = Math.round(start + (target - start) * progress);
+            el.textContent = current + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+        done = true;
+      }
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { run(); }
+        });
+      }, { threshold: 0.2 });
+      obs.observe(hero);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', animateCounters);
+    } else {
+      animateCounters();
+    }
+  </script>
+</body>
+</html>

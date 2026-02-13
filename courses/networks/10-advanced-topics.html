@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Дополнительные темы: IoT, MQTT, облачные сети (VPC), SDN, BGP/Anycast, Kubernetes Networking">
+    <meta name="keywords" content="IoT, MQTT, VPC, SDN, BGP, Anycast, Kubernetes, CNI">
+    <title>Дополнительные темы — бесплатный курс SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/networks/10-advanced-topics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="networks">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Компьютерные сети</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы сетевых технологий</button>
+                    <div class="subtopics">
+                        <a href="01-networks-fundamental.html#introduction" class="subtopic">1.1 Введение в сети</a>
+                        <a href="01-networks-fundamental.html#network-types" class="subtopic">1.2 Типы сетей</a>
+                        <a href="01-networks-fundamental.html#network-topologies" class="subtopic">1.3 Топологии сетей</a>
+                        <a href="01-networks-fundamental.html#network-components" class="subtopic">1.4 Компоненты сетей</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Модели OSI и TCP/IP</button>
+                    <div class="subtopics">
+                        <a href="02-osi-tcp-ip-models.html#osi-model" class="subtopic">2.1 Модель OSI</a>
+                        <a href="02-osi-tcp-ip-models.html#tcp-ip-model" class="subtopic">2.2 Модель TCP/IP</a>
+                        <a href="02-osi-tcp-ip-models.html#models-comparison" class="subtopic">2.3 Сравнение моделей</a>
+                        <a href="02-osi-tcp-ip-models.html#data-encapsulation" class="subtopic">2.4 Инкапсуляция данных</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Коммутация и Ethernet</button>
+                    <div class="subtopics">
+                        <a href="03-ethernet-switching.html#ethernet" class="subtopic">3.1 Ethernet и MAC/ARP</a>
+                        <a href="03-ethernet-switching.html#vlans" class="subtopic">3.2 VLAN и 802.1Q</a>
+                        <a href="03-ethernet-switching.html#stp" class="subtopic">3.3 STP/RSTP</a>
+                        <a href="03-ethernet-switching.html#lacp-security" class="subtopic">3.4 LACP и безопасность портов</a>
+                        <a href="03-ethernet-switching.html#wifi" class="subtopic">3.5 Беспроводные сети 802.11</a>
+                        <a href="03-ethernet-switching.html#ethernet-oam" class="subtopic">3.6 Ethernet OAM</a>
+                        <a href="03-ethernet-switching.html#wifi-frames-controllers" class="subtopic">3.7 Кадры Wi‑Fi и контроллеры</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">4. IP‑адресация</button>
+                    <div class="subtopics">
+                        <a href="04-ip-addressing-and-routing.html#ipv4" class="subtopic">4.1 IPv4 и подсети</a>
+                        <a href="04-ip-addressing-and-routing.html#nat" class="subtopic">4.2 NAT</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6" class="subtopic">4.3 IPv6</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-advanced" class="subtopic">4.4 IPv6 углубление</a>
+                        <a href="04-ip-addressing-and-routing.html#ipv6-services" class="subtopic">4.5 IPv6 сервисы</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Маршрутизация (L3)</button>
+                    <div class="subtopics">
+                        <a href="05-routing.html#static-routing" class="subtopic">5.1 Статическая маршрутизация</a>
+                        <a href="05-routing.html#fhrp" class="subtopic">5.2 HSRP/VRRP/GLBP</a>
+                        <a href="05-routing.html#ospf" class="subtopic">5.3 OSPF основы</a>
+                        <a href="05-routing.html#bgp" class="subtopic">5.4 BGP основы</a>
+                        <a href="05-routing.html#acl" class="subtopic">5.5 ACL и политики</a>
+                        <a href="05-routing.html#qos" class="subtopic">5.6 QoS основы</a>
+                        <a href="05-routing.html#multicast" class="subtopic">5.7 Multicast</a>
+                        <a href="05-routing.html#igp" class="subtopic">5.8 IS‑IS/EIGRP/RIP</a>
+                        <a href="05-routing.html#te" class="subtopic">5.9 Traffic Engineering (RSVP‑TE/SR)</a>
+                        <a href="05-routing.html#qos-deep" class="subtopic">5.10 QoS углубление</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Транспортный уровень</button>
+                    <div class="subtopics">
+                        <a href="06-transport-layer.html#tcp" class="subtopic">6.1 TCP</a>
+                        <a href="06-transport-layer.html#udp" class="subtopic">6.2 UDP</a>
+                        <a href="06-transport-layer.html#ports" class="subtopic">6.3 Порты</a>
+                        <a href="06-transport-layer.html#advanced" class="subtopic">6.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Прикладные протоколы</button>
+                    <div class="subtopics">
+                        <a href="07-application-protocols.html#dns" class="subtopic">7.1 DNS</a>
+                        <a href="07-application-protocols.html#http" class="subtopic">7.2 HTTP/HTTPS</a>
+                        <a href="07-application-protocols.html#dhcp" class="subtopic">7.3 DHCP</a>
+                        <a href="07-application-protocols.html#mail" class="subtopic">7.4 Почтовые протоколы</a>
+                        <a href="07-application-protocols.html#voip" class="subtopic">7.5 VoIP и SIP</a>
+                        <a href="07-application-protocols.html#remote-access" class="subtopic">7.6 Протоколы удаленного доступа</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Сетевая безопасность</button>
+                    <div class="subtopics">
+                        <a href="08-network-security.html#threats" class="subtopic">8.1 Типы атак</a>
+                        <a href="08-network-security.html#crypto" class="subtopic">8.2 Шифрование и VPN/IPsec</a>
+                        <a href="08-network-security.html#firewall" class="subtopic">8.3 Межсетевые экраны</a>
+                        <a href="08-network-security.html#pki" class="subtopic">8.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Диагностика и утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-diagnostics-and-tools.html#basic" class="subtopic">9.1 Базовые команды</a>
+                        <a href="09-diagnostics-and-tools.html#advanced-tools" class="subtopic">9.2 Расширенные утилиты</a>
+                        <a href="09-diagnostics-and-tools.html#wireshark" class="subtopic">9.3 Анализ трафика</a>
+                        <a href="09-diagnostics-and-tools.html#pro" class="subtopic">9.4 Для профессионалов</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">10. Дополнительные темы</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#iot" class="subtopic active">10.1 IoT и MQTT</a>
+                        <a href="#cloud" class="subtopic">10.2 Облачные сети (VPC)</a>
+                        <a href="#sdn" class="subtopic">10.3 SDN</a>
+                        <a href="#sdwan" class="subtopic">10.4 SD‑WAN</a>
+                        <a href="#automation" class="subtopic">10.5 Автоматизация сетей</a>
+                        <a href="#k8s" class="subtopic">10.6 Для профессионалов</a>
+                        <a href="#mpls-evpn-vxlan" class="subtopic">10.7 MPLS и EVPN/VXLAN</a>
+                        <a href="#lte-5g" class="subtopic">10.8 LTE/5G основы</a>
+                        <a href="#optics-l1" class="subtopic">10.9 Оптика и L1</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section id="iot" class="topic-section">
+                <h2>10.1 IoT и MQTT</h2>
+                <div class="lesson-content">
+                    <h3>Что такое IoT?</h3>
+                    <p><strong>IoT</strong> (Internet of Things) — концепция подключения обычных устройств к интернету: датчики, умные лампочки, термостаты, камеры и т.д. Эти устройства часто имеют ограниченные ресурсы (малая память, слабый процессор, батарейное питание).</p>
+
+                    <div class="note">
+                        <p><strong>Особенности IoT:</strong> Устройства должны работать долго от батареи, передавать мало данных, работать в нестабильных сетях. Поэтому нужны легкие протоколы.</p>
+                    </div>
+
+                    <h3>MQTT: протокол для IoT</h3>
+                    <p><strong>MQTT</strong> (Message Queuing Telemetry Transport) — легкий протокол для обмена сообщениями между IoT-устройствами. Использует модель "публикация-подписка" (pub/sub).</p>
+
+                    <div class="visual-guide">
+                        <h4>Как работает MQTT:</h4>
+                        <ul>
+                            <li><strong>Брокер:</strong> Центральный сервер, который получает и распределяет сообщения</li>
+                            <li><strong>Публикация:</strong> Устройство отправляет сообщение в "топик" (topic) — это как "канал" или "тема"</li>
+                            <li><strong>Подписка:</strong> Другие устройства подписываются на топики и получают сообщения</li>
+                            <li><strong>Пример:</strong> Датчик температуры публикует данные в топик "sensors/temperature", а приложение подписывается на этот топик и получает обновления</li>
+                        </ul>
+                    </div>
+
+                    <h3>QoS уровни MQTT</h3>
+                    <div class="visual-guide">
+                        <h4>Уровни качества обслуживания:</h4>
+                        <ul>
+                            <li><strong>QoS 0 (At most once):</strong> Отправил и забыл. Нет подтверждения доставки. Самый быстрый, но могут быть потери.</li>
+                            <li><strong>QoS 1 (At least once):</strong> Гарантирует доставку, но могут быть дубликаты. Подтверждение получения.</li>
+                            <li><strong>QoS 2 (Exactly once):</strong> Гарантирует доставку ровно один раз. Самый надежный, но медленнее.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Выбор QoS:</strong> Для критичных данных (например, команды управления) используйте QoS 1 или 2. Для периодических измерений (температура) достаточно QoS 0.</p>
+                    </div>
+
+                    <h3>Безопасность MQTT</h3>
+                    <div class="visual-guide">
+                        <h4>Методы защиты:</h4>
+                        <ul>
+                            <li><strong>TLS:</strong> Шифрование соединения между устройством и брокером</li>
+                            <li><strong>Аутентификация:</strong> Логин и пароль для доступа к брокеру</li>
+                            <li><strong>ACL:</strong> Контроль доступа — какие устройства могут публиковать/подписываться на какие топики</li>
+                            <li><strong>Изоляция топиков:</strong> Разделение топиков для разных клиентов</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>IoT</strong> — подключение обычных устройств к интернету</li>
+                            <li><strong>MQTT</strong> — легкий протокол для IoT на основе публикации-подписки</li>
+                            <li><strong>Брокер</strong> — центральный сервер для маршрутизации сообщений</li>
+                            <li><strong>Топики</strong> — каналы для публикации и подписки</li>
+                            <li><strong>QoS</strong> — уровни качества (0, 1, 2) для баланса надежности и скорости</li>
+                            <li><strong>Безопасность:</strong> TLS, аутентификация, ACL для защиты</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Обеспечить эффективный обмен данными между IoT-устройствами с минимальными затратами ресурсов.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cloud" class="topic-section">
+                <h2>10.2 Облачные сети (VPC)</h2>
+                <div class="lesson-content">
+                    <h3>Что такое VPC?</h3>
+                    <p><strong>VPC</strong> (Virtual Private Cloud) — это изолированная виртуальная сеть в облачном провайдере (AWS, Azure, GCP). По сути, это ваша собственная частная сеть в облаке, где вы можете создавать подсети, настраивать маршрутизацию и правила безопасности.</p>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> VPC — это как аренда офисного здания в бизнес-центре. У вас своя изолированная часть, но вы используете общую инфраструктуру (электричество, интернет).</p>
+                    </div>
+
+                    <h3>Компоненты VPC</h3>
+                    <div class="visual-guide">
+                        <h4>Основные элементы:</h4>
+                        <ul>
+                            <li><strong>Подсети (Subnets):</strong> Логическое разделение сети, как в обычных сетях</li>
+                            <li><strong>Маршруты (Route Tables):</strong> Определяют, куда направляется трафик</li>
+                            <li><strong>Internet Gateway:</strong> Шлюз для выхода в интернет (для публичных подсетей)</li>
+                            <li><strong>NAT Gateway:</strong> Для выхода приватных подсетей в интернет</li>
+                            <li><strong>Security Groups:</strong> Firewall на уровне экземпляра (виртуальной машины)</li>
+                            <li><strong>NACL (Network ACL):</strong> Firewall на уровне подсети</li>
+                        </ul>
+                    </div>
+
+                    <h3>Public и Private подсети</h3>
+                    <div class="visual-guide">
+                        <h4>Public подсети:</h4>
+                        <ul>
+                            <li>Имеют прямой доступ в интернет через Internet Gateway</li>
+                            <li>Используются для веб-серверов, балансировщиков нагрузки</li>
+                            <li>Экземпляры получают публичные IP-адреса</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Private подсети:</h4>
+                        <ul>
+                            <li>Нет прямого доступа в интернет</li>
+                            <li>Используются для баз данных, внутренних сервисов</li>
+                            <li>Выход в интернет через NAT Gateway (только исходящий трафик)</li>
+                            <li>Более безопасны, так как недоступны из интернета</li>
+                        </ul>
+                    </div>
+
+                    <h3>Security Groups и NACL</h3>
+                    <div class="visual-guide">
+                        <h4>Security Groups (SG):</h4>
+                        <ul>
+                            <li>Firewall на уровне экземпляра (виртуальной машины)</li>
+                            <li>Stateful — помнит состояние соединений</li>
+                            <li>Разрешающие правила (deny by default)</li>
+                            <li>Можно применить к нескольким экземплярам</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>NACL (Network ACL):</h4>
+                        <ul>
+                            <li>Firewall на уровне подсети</li>
+                            <li>Stateless — проверяет каждый пакет независимо</li>
+                            <li>Может блокировать и разрешать</li>
+                            <li>Применяется ко всей подсети</li>
+                        </ul>
+                    </div>
+
+                    <h3>Связность между VPC</h3>
+                    <div class="visual-guide">
+                        <h4>VPC Peering:</h4>
+                        <ul>
+                            <li>Прямое соединение между двумя VPC</li>
+                            <li>Позволяет обмениваться трафиком</li>
+                            <li>Простое, но не масштабируется (каждая пара VPC требует отдельного peering)</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Transit Gateway:</h4>
+                        <ul>
+                            <li>Центральный хаб для соединения множества VPC</li>
+                            <li>Упрощает топологию (звезда вместо полносвязной)</li>
+                            <li>Централизованное управление маршрутизацией</li>
+                        </ul>
+                    </div>
+
+                    <h3>Лучшие практики</h3>
+                    <div class="visual-guide">
+                        <h4>Рекомендации:</h4>
+                        <ul>
+                            <li><strong>Разделение сред:</strong> Отдельные VPC для production, staging, development</li>
+                            <li><strong>Deny by default:</strong> Security Groups и NACL блокируют все по умолчанию</li>
+                            <li><strong>Минимизация:</strong> Открывайте только необходимые порты</li>
+                            <li><strong>Централизованные сервисы:</strong> Общие DNS, логи, мониторинг</li>
+                            <li><strong>Документирование:</strong> Ведите документацию по архитектуре и правилам</li>
+                        </ul>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>VPC</strong> — изолированная виртуальная сеть в облаке</li>
+                            <li><strong>Public подсети</strong> — прямой доступ в интернет через Internet Gateway</li>
+                            <li><strong>Private подсети</strong> — выход через NAT Gateway, недоступны из интернета</li>
+                            <li><strong>Security Groups</strong> — firewall на уровне экземпляра (stateful)</li>
+                            <li><strong>NACL</strong> — firewall на уровне подсети (stateless)</li>
+                            <li><strong>VPC Peering/Transit</strong> — соединение между VPC</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Создать безопасную, масштабируемую сетевую инфраструктуру в облаке с правильной изоляцией и контролем доступа.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sdn" class="topic-section">
+                <h2>10.3 SDN</h2>
+                <div class="lesson-content">
+                    <h3>Проблема традиционных сетей</h3>
+                    <p>В традиционных сетях каждое устройство (коммутатор, маршрутизатор) принимает решения самостоятельно. Это усложняет управление и изменение конфигурации в больших сетях.</p>
+
+                    <div class="note">
+                        <p><strong>Решение:</strong> <strong>SDN</strong> (Software-Defined Networking) — разделяет "мозги" (управление) и "мышцы" (пересылку данных) сети.</p>
+                    </div>
+
+                    <h3>Что такое SDN?</h3>
+                    <p><strong>SDN</strong> — это архитектура, которая отделяет плоскость управления (control plane) от плоскости передачи данных (data plane). Управление централизовано в контроллере, а устройства просто пересылают пакеты по инструкциям контроллера.</p>
+
+                    <div class="visual-guide">
+                        <h4>Архитектура SDN:</h4>
+                        <ul>
+                            <li><strong>Control Plane (плоскость управления):</strong> Централизованный контроллер принимает решения о маршрутизации</li>
+                            <li><strong>Data Plane (плоскость передачи):</strong> Коммутаторы/маршрутизаторы просто пересылают пакеты по правилам от контроллера</li>
+                            <li><strong>Южный интерфейс:</strong> Связь между контроллером и устройствами (OpenFlow, P4Runtime, gNMI)</li>
+                            <li><strong>Северный интерфейс:</strong> API для управления сетью приложениями</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Аналогия:</strong> Традиционная сеть — это "демократия" (каждое устройство решает само). SDN — это "диктатура" (контроллер командует, устройства выполняют).</p>
+                    </div>
+
+                    <h3>Преимущества SDN</h3>
+                    <div class="visual-guide">
+                        <h4>Зачем использовать SDN:</h4>
+                        <ul>
+                            <li><strong>Централизованное управление:</strong> Вся конфигурация в одном месте</li>
+                            <li><strong>Программируемость:</strong> Управление через API, автоматизация</li>
+                            <li><strong>Гибкость:</strong> Быстрые изменения конфигурации</li>
+                            <li><strong>Визуализация:</strong> Видимость всей сети из одного места</li>
+                            <li><strong>Масштабирование:</strong> Легче управлять большими сетями</li>
+                        </ul>
+                    </div>
+
+                    <h3>Intent-Based Networking</h3>
+                    <p><strong>Intent-Based Networking</strong> — это подход, где вы описываете "желаемое состояние" сети (что должно быть), а система сама определяет, как это реализовать.</p>
+
+                    <div class="visual-guide">
+                        <h4>Пример:</h4>
+                        <ul>
+                            <li><strong>Intent:</strong> "Отдел продаж должен иметь доступ к серверу, но не к базе данных"</li>
+                            <li><strong>Система:</strong> Автоматически создает правила firewall, настраивает маршруты</li>
+                            <li><strong>Преимущество:</strong> Не нужно думать о деталях реализации</li>
+                        </ul>
+                    </div>
+
+                    <h3>Spine-Leaf архитектура</h3>
+                    <p>Современные дата-центры используют архитектуру <strong>Spine-Leaf</strong> (позвоночник-лист):</p>
+
+                    <div class="visual-guide">
+                        <h4>Структура:</h4>
+                        <ul>
+                            <li><strong>Leaf (лист):</strong> Коммутаторы доступа, к которым подключаются серверы</li>
+                            <li><strong>Spine (позвоночник):</strong> Коммутаторы ядра, соединяющие все Leaf</li>
+                            <li><strong>ECMP:</strong> Несколько путей между Leaf и Spine для балансировки нагрузки</li>
+                            <li><strong>Преимущества:</strong> Предсказуемая задержка, масштабируемость, простота</li>
+                        </ul>
+                    </div>
+
+                    <h3>Сервисные цепочки</h3>
+                    <p><strong>Service Chaining</strong> — автоматическое направление трафика через цепочку сервисов (firewall, IDS, балансировщик) по политике.</p>
+
+                    <div class="note">
+                        <p><strong>Пример:</strong> Весь трафик из интернета автоматически проходит через firewall, затем IDS, затем балансировщик перед попаданием на серверы.</p>
+                    </div>
+
+                    <h3>Резюме</h3>
+                    <div class="conclusion">
+                        <p><strong>Ключевые моменты:</strong></p>
+                        <ul>
+                            <li><strong>SDN</strong> — разделение управления и передачи данных, централизованное управление</li>
+                            <li><strong>Control Plane</strong> — централизованный контроллер принимает решения</li>
+                            <li><strong>Data Plane</strong> — устройства пересылают пакеты по инструкциям</li>
+                            <li><strong>Intent-Based</strong> — описание желаемого состояния, система реализует</li>
+                            <li><strong>Spine-Leaf</strong> — современная архитектура дата-центров</li>
+                            <li><strong>Преимущества:</strong> Централизация, программируемость, гибкость, автоматизация</li>
+                        </ul>
+                        <p><strong>Цель:</strong> Упростить управление сетями, сделать их более гибкими и программируемыми через централизованный контроль.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="sdwan" class="topic-section">
+                <h2>10.4 SD‑WAN</h2>
+                <div class="lesson-content">
+                    <p>SD‑WAN использует наложную сеть поверх множества транспортов (MPLS/Интернет/LTE) и централизованную политику для выбора пути на основе метрик качества (потери/задержка/джиттер) и приложений.</p>
+                    <div class="visual-guide">
+                        <h4>Ключевые элементы SD‑WAN</h4>
+                        <ul>
+                            <li><strong>Контроллер/Оркестратор</strong>: управление политиками и конфигурацией узлов.</li>
+                            <li><strong>Edge‑устройства</strong>: шифрование, измерение SLA, динамический выбор пути (DIA/ремаршрутизация).</li>
+                            <li><strong>Overlay</strong>: IPsec/DTLS туннели, сегментация VRF/политики.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Политики и QoS</h4>
+                        <ul>
+                            <li><strong>Application‑Aware Routing</strong>: выбор пути по сигнатурам/DSCP/портам.</li>
+                            <li><strong>Forward Error Correction/Packet Duplication</strong>: улучшение качества на ненадёжных каналах.</li>
+                            <li><strong>Path Conditioning</strong>: shaping/policing/ремаркировка.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="automation" class="topic-section">
+                <h2>10.5 Автоматизация сетей</h2>
+                <div class="lesson-content">
+                    <p>Автоматизация снижает ошибки и ускоряет изменения через декларативные модели и API. Типичный стек: инвентарь, генерация конфигураций по шаблонам, транзакционное применение, валидация.</p>
+                    <div class="visual-guide">
+                        <h4>Инструменты и интерфейсы</h4>
+                        <ul>
+                            <li><strong>YANG/NETCONF/RESTCONF/gNMI</strong>: модельно‑ориентированные интерфейсы устройств.</li>
+                            <li><strong>Ansible/Terraform</strong>: идемпотентное управление и инфраструктура как код.</li>
+                            <li><strong>CI/CD</strong>: тесты конфигураций, pre‑change проверки, авто‑rollback.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>Проверка состояния сети</h4>
+                        <ul>
+                            <li><strong>Intent‑валидаторы</strong>: соответствие желаемому состоянию (reachability, policy).</li>
+                            <li><strong>Телеметрия</strong>: потоковые метрики, событийные шины, автогенерация алертов.</li>
+                            <li><strong>Digital Twin</strong>: моделирование изменений до применения.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="k8s" class="topic-section">
+                <h2>10.6 Для профессионалов</h2>
+                <div class="lesson-content">
+                    <p>Сеть Kubernetes базируется на модели «каждый Pod имеет собственный IP, все Pod‑ы связны». CNI‑плагин реализует передачу и политику. kube‑proxy обеспечивает сервисы L4, Ingress‑контроллер — L7. В продакшене часто применяются overlay/underlay, eBPF и маршрутизация (например, BGP) для масштабируемости.</p>
+                    <div class="visual-guide">
+                        <h4>Ключевые компоненты K8s Networking</h4>
+                        <ul>
+                            <li><strong>CNI</strong>: Calico/Flannel/Cilium/Weave — различия в dataplane и политике.</li>
+                            <li><strong>Services</strong>: ClusterIP/NodePort/LoadBalancer; session affinity и health checks.</li>
+                            <li><strong>NetworkPolicy</strong>: L3/L4 сегментация между Pod‑ами по меткам.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mpls-evpn-vxlan" class="topic-section">
+                <h2>10.7 MPLS и EVPN/VXLAN</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>MPLS кратко</h4>
+                        <ul>
+                            <li><strong>Метки</strong>: быстрый LSR‑пересыл на основе label stack; LDP/RSVP/IS‑IS/OSPF распространяют метки/пути.</li>
+                            <li><strong>L2/L3 VPN</strong>: VPLS/VPWS и L3VPN (RFC 4364) изолируют клиентов поверх провайдерской сети.</li>
+                            <li><strong>TE</strong>: RSVP‑TE или Segment Routing для гарантированных путей и SLA.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>VXLAN и EVPN</h4>
+                        <ul>
+                            <li><strong>VXLAN</strong>: overlay L2 поверх L3 с VNI (24 бита), VTEP инкапсулирует/деинкапсулирует кадры.</li>
+                            <li><strong>Flood‑and‑Learn vs EVPN</strong>: EVPN (BGP) как control‑plane для MAC/IP, ARP‑suppress, мультихоминг (ESI/DF).</li>
+                            <li><strong>EVPN Route Types</strong>: RT‑2 (MAC/IP), RT‑5 (IP Prefix), RT‑7 (ES routes) — основа фабрик DC.</li>
+                        </ul>
+                    </div>
+                    <div class="note"><p><strong>Практика:</strong> underlay L3 Clos (IS‑IS/OSPF + ECMP), overlay EVPN/VXLAN с MLAG/ESI обеспечивает масштаб и отказоустойчивость в ЦОД.</p></div>
+                </div>
+            </section>
+
+            <section id="lte-5g" class="topic-section">
+                <h2>10.8 LTE/5G основы</h2>
+                <div class="lesson-content">
+                    <p>Сотовые сети обеспечивают мобильный доступ с разделением плоскостей управления и пользователя.</p>
+                    <div class="visual-guide">
+                        <h4>Архитектура</h4>
+                        <ul>
+                            <li><strong>LTE (EPC)</strong>: eNodeB, MME (control), SGW/PGW (user‑plane).</li>
+                            <li><strong>5G (5GC)</strong>: gNodeB, AMF/SMF (control), UPF (user‑plane); сервис‑ориентированная архитектура.</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>QoS и режимы</h4>
+                        <ul>
+                            <li><strong>NSA/SA</strong>: неполно‑ и полно‑самостоятельный 5G.</li>
+                            <li><strong>Bearer/QCI/5QI</strong>: классы QoS для разных сервисов, приоритет и задержка.</li>
+                            <li><strong>Network Slicing</strong>: логическая изоляция сетей под сервисы.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="optics-l1" class="topic-section">
+                <h2>10.9 Оптика и L1</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>Среды и интерфейсы</h4>
+                        <ul>
+                            <li><strong>SMF/MMF</strong>: одномод/многомод; диапазоны волн (1310/1550 нм), влияние дисперсий.</li>
+                            <li><strong>Трансиверы</strong>: SFP(+)/SFP28/QSFP(DD), скорости/дальности, BiDi/DSM.</li>
+                            <li><strong>Бюджет оптики</strong>: мощность, затухание, коннекторы/сплайсы; простая проверка «сойдётся/не сойдётся».</li>
+                        </ul>
+                    </div>
+                    <div class="visual-guide">
+                        <h4>OAM/ETH на L1/L2</h4>
+                        <ul>
+                            <li><strong>Ethernet PHY</strong>: 1000BASE‑T/10GBASE‑SR/LR/ER и их ограничения по среде.</li>
+                            <li><strong>DWDM</strong>: уплотнение длин волн; транспондеры/мультиплексоры и OSNR (очень кратко).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html>
+
+

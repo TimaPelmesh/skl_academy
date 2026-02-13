@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker для начинающих: основы контейнеризации | SKL Academy</title>
+  
+  <!-- Yandex.Metrika counter -->
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+    ym(102262736, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+  
+  <!-- Favicon / Иконки сайта -->
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+  
+  <!-- SEO Мета-теги -->
+  <meta name="description" content="Простое объяснение Docker и контейнеризации для начинающих. Что такое Docker, зачем он нужен, как установить и использовать. Основы работы с контейнерами, образами и Dockerfile.">
+  <meta name="keywords" content="docker, контейнеризация, docker для начинающих, что такое docker, docker basics, контейнеры, образы docker, dockerfile, docker compose, devops">
+  <meta name="author" content="SKL Academy">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+  <!-- Open Graph мета-теги для социальных сетей -->
+  <meta property="og:title" content="Docker для начинающих: основы контейнеризации | SKL Academy">
+  <meta property="og:description" content="Простое объяснение Docker и контейнеризации для начинающих. Что такое Docker, зачем он нужен, как установить и использовать.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://skl-academy.ru/articles/docker-basics.html">
+  <meta property="og:image" content="https://skl-academy.ru/images/docker-basics-og.jpg">
+  <meta property="og:site_name" content="SKL Academy">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="article:published_time" content="2026-01-04T00:00:00+03:00">
+  <meta property="article:modified_time" content="2026-01-04T00:00:00+03:00">
+  <meta property="article:author" content="SKL Academy">
+  <meta property="article:section" content="DevOps">
+  <meta property="article:tag" content="Docker, контейнеризация, DevOps, контейнеры, образы">
+  
+  <!-- Twitter Card мета-теги -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docker для начинающих: основы контейнеризации">
+  <meta name="twitter:description" content="Простое объяснение Docker и контейнеризации для начинающих. Что такое Docker, зачем он нужен и как использовать.">
+  <meta name="twitter:image" content="https://skl-academy.ru/images/docker-basics-og.jpg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skl-academy.ru/articles/docker-basics.html">
+  
+  <!-- Structured Data: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Docker для начинающих: основы контейнеризации",
+    "description": "Простое объяснение Docker и контейнеризации для начинающих. Что такое Docker, зачем он нужен, как установить и использовать.",
+    "image": "https://skl-academy.ru/images/docker-basics-og.jpg",
+    "author": {
+      "@type": "Organization",
+      "name": "SKL Academy",
+      "url": "https://skl-academy.ru/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SKL Academy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://skl-academy.ru/images/favicon-32x32.png"
+      }
+    },
+    "datePublished": "2026-01-04T00:00:00+03:00",
+    "dateModified": "2026-01-04T00:00:00+03:00",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://skl-academy.ru/articles/docker-basics.html"
+    },
+    "articleSection": "DevOps",
+    "keywords": "docker, контейнеризация, docker для начинающих, контейнеры, образы, dockerfile, devops",
+    "inLanguage": "ru",
+    "timeRequired": "PT20M"
+  }
+  </script>
+  
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Главная",
+        "item": "https://skl-academy.ru/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Статьи",
+        "item": "https://skl-academy.ru/#articles"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Docker для начинающих",
+        "item": "https://skl-academy.ru/articles/docker-basics.html"
+      }
+    ]
+  }
+  </script>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap&subset=cyrillic,latin" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans">
+  <noscript><div><img src="https://mc.yandex.ru/watch/102262736" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- Navigation -->
+  <nav class="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-24 items-center">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="../index.html" class="flex items-center">
+              <img class="h-9 w-auto" src="../images/icon.ico" alt="SKL Academy">
+              <span class="ml-3 text-xl font-semibold text-gray-900 header-title">SKL Academy</span>
+            </a>
+          </div>
+        </div>
+        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+          <a href="../index.html#articles" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Статьи</a>
+          <a href="../index.html#contacts" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">Контакты</a>
+          <a href="../about.html" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 text-base font-medium">О проекте</a>
+        </div>
+        <div class="-mr-2 flex items-center md:hidden">
+          <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Open main menu</span>
+            <div class="burger-icon">
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden">
+      <div class="pt-2 pb-3 space-y-1 px-4">
+        <a href="../index.html#articles" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Статьи</a>
+        <a href="../index.html#contacts" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">Контакты</a>
+        <a href="../about.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100">О проекте</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <div class="gradient-bg text-white py-8 md:py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-2xl md:text-3xl font-bold mb-3 text-white">Docker для начинающих: основы контейнеризации</h1>
+        <p class="text-base md:text-lg text-blue-100 mb-4">Что такое Docker, зачем он нужен и как начать использовать контейнеры</p>
+        
+        <!-- Article Meta -->
+        <div class="flex flex-wrap justify-center items-center gap-4 text-xs md:text-sm text-blue-100">
+          <div class="flex items-center">
+            <i class="fas fa-clock mr-2"></i>
+            <span>Время чтения: 20 минут</span>
+          </div>
+          <div class="flex items-center">
+            <i class="fas fa-tags mr-2"></i>
+            <span>Docker, Контейнеризация, DevOps</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Article Content -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="article-layout">
+      <!-- Table of Contents -->
+      <div class="table-of-contents">
+        <h3><i class="fas fa-list-ul mr-2"></i>Содержание</h3>
+        <ul>
+          <li><a href="#intro">Что такое Docker?</a></li>
+          <li><a href="#why-docker">Зачем нужен Docker?</a></li>
+          <li><a href="#concepts">Основные понятия</a></li>
+          <li><a href="#installation">Установка Docker</a></li>
+          <li><a href="#first-steps">Первые шаги</a></li>
+          <li><a href="#dockerfile">Создание Dockerfile</a></li>
+          <li><a href="#docker-compose">Docker Compose</a></li>
+          <li><a href="#best-practices">Лучшие практики</a></li>
+          <li><a href="#conclusion">Заключение</a></li>
+        </ul>
+      </div>
+
+      <article class="article-content" itemscope itemtype="https://schema.org/Article">
+        <meta itemprop="headline" content="Docker для начинающих: основы контейнеризации">
+        <meta itemprop="description" content="Простое объяснение Docker и контейнеризации для начинающих. Что такое Docker, зачем он нужен, как установить и использовать.">
+        <meta itemprop="datePublished" content="2026-01-04">
+        <meta itemprop="dateModified" content="2026-01-04">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization">
+          <meta itemprop="name" content="SKL Academy">
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+          <meta itemprop="name" content="SKL Academy">
+        </div>
+
+      <section id="intro">
+        <h2>Что такое Docker?</h2>
+        <p>Docker — это платформа для разработки, доставки и запуска приложений в изолированных контейнерах. Контейнер — это легковесная, переносимая единица программного обеспечения, которая содержит всё необходимое для запуска приложения: код, библиотеки, системные инструменты и настройки.</p>
+        
+        <div class="highlight-box">
+          <strong>Простыми словами:</strong>
+          <p>Представьте, что вы переезжаете. Вместо того чтобы перевозить каждый предмет отдельно и потом собирать мебель заново, вы упаковываете всё в контейнер. Контейнер можно перевезти куда угодно, и всё внутри останется на своих местах. Docker делает то же самое с приложениями: упаковывает их со всеми зависимостями в "контейнер", который можно запустить на любой системе.</p>
+        </div>
+
+        <h3>Docker vs Виртуальные машины</h3>
+        <p>Многие путают Docker с виртуальными машинами, но это разные технологии:</p>
+        
+        <div class="highlight-box">
+          <strong>Виртуальная машина (VM):</strong>
+          <ul class="with-icons check-list">
+            <li>Полностью эмулирует операционную систему</li>
+            <li>Требует много ресурсов (память, процессор, место на диске)</li>
+            <li>Медленный запуск (минуты)</li>
+            <li>Изоляция на уровне железа</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Docker контейнер:</strong>
+          <ul class="with-icons check-list">
+            <li>Использует ядро хостовой ОС</li>
+            <li>Легковесный (мегабайты вместо гигабайт)</li>
+            <li>Быстрый запуск (секунды)</li>
+            <li>Изоляция на уровне процессов</li>
+          </ul>
+        </div>
+
+        <p>Контейнеры эффективнее виртуальных машин, потому что они делят ядро операционной системы с хостом, а не создают отдельную ОС для каждого приложения.</p>
+      </section>
+
+      <section id="why-docker">
+        <h2>Зачем нужен Docker?</h2>
+        <p>Docker решает несколько критических проблем в разработке и развёртывании приложений:</p>
+
+        <h3>1. Проблема "У меня работает, а у тебя нет"</h3>
+        <p>Классическая ситуация: приложение отлично работает на вашем компьютере, но не запускается на сервере или у коллеги. Причины могут быть разные:</p>
+        <ul class="with-icons check-list">
+          <li>Разные версии библиотек</li>
+          <li>Отсутствующие зависимости</li>
+          <li>Различия в операционных системах</li>
+          <li>Разные настройки окружения</li>
+        </ul>
+        <p>Docker решает эту проблему, упаковывая приложение со всеми зависимостями в контейнер, который работает одинаково везде.</p>
+
+        <h3>2. Упрощение развёртывания</h3>
+        <p>Без Docker развёртывание приложения может включать:</p>
+        <ul class="with-icons check-list">
+          <li>Установку операционной системы</li>
+          <li>Настройку веб-сервера</li>
+          <li>Установку баз данных</li>
+          <li>Настройку переменных окружения</li>
+          <li>Установку зависимостей приложения</li>
+        </ul>
+        <p>С Docker достаточно запустить один контейнер — всё уже настроено и готово к работе.</p>
+
+        <h3>3. Масштабируемость</h3>
+        <p>Docker позволяет легко масштабировать приложения: если нужно обработать больше запросов, просто запустите больше контейнеров. Это основа современных микросервисных архитектур.</p>
+
+        <h3>4. Изоляция</h3>
+        <p>Каждое приложение работает в своём изолированном контейнере. Если одно приложение упадёт или будет скомпрометировано, это не повлияет на другие.</p>
+
+        <div class="success-box">
+          <strong>Реальный пример:</strong> Представьте, что у вас есть веб-приложение на Python 3.9, база данных PostgreSQL и Redis для кэширования. Вместо того чтобы устанавливать всё это на сервер вручную, вы создаёте три контейнера и запускаете их одной командой. Это занимает минуты вместо часов.
+        </div>
+      </section>
+
+      <section id="concepts">
+        <h2>Основные понятия Docker</h2>
+        <p>Чтобы работать с Docker, нужно понять несколько ключевых концепций:</p>
+
+        <h3>1. Образ (Image)</h3>
+        <p>Образ — это шаблон для создания контейнеров. Это неизменяемый файл, который содержит всё необходимое для запуска приложения: код, библиотеки, зависимости, конфигурацию. Образы можно сравнить с "классом" в программировании, а контейнер — это "экземпляр" этого класса.</p>
+        <p>Образы хранятся в реестрах (registry), самый популярный — Docker Hub. Вы можете использовать готовые образы или создавать свои.</p>
+
+        <h3>2. Контейнер (Container)</h3>
+        <p>Контейнер — это запущенный экземпляр образа. Это изолированная среда, где работает ваше приложение. Можно запустить несколько контейнеров из одного образа — они будут независимы друг от друга.</p>
+
+        <h3>3. Dockerfile</h3>
+        <p>Dockerfile — это текстовый файл с инструкциями для создания образа. В нём описывается, какая базовая ОС использовать, какие пакеты установить, какой код скопировать и как запустить приложение.</p>
+
+        <h3>4. Docker Compose</h3>
+        <p>Docker Compose — это инструмент для определения и запуска многоконтейнерных приложений. В одном файле описываются все сервисы, их зависимости и настройки, и всё это запускается одной командой.</p>
+
+        <h3>5. Реестр (Registry)</h3>
+        <p>Реестр — это хранилище образов Docker. Docker Hub — публичный реестр, где можно найти тысячи готовых образов. Также можно использовать приватные реестры для собственных образов.</p>
+
+        <div class="highlight-box">
+          <strong>Аналогия:</strong>
+          <ul>
+            <li><strong>Образ</strong> = рецепт торта (инструкция)</li>
+            <li><strong>Контейнер</strong> = испечённый торт (результат)</li>
+            <li><strong>Dockerfile</strong> = запись рецепта на бумаге</li>
+            <li><strong>Docker Hub</strong> = кулинарная книга с рецептами</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="installation">
+        <h2>Установка Docker</h2>
+        <p>Установка Docker зависит от вашей операционной системы:</p>
+
+        <h3>Windows</h3>
+        <ol>
+          <li>Скачайте <strong>Docker Desktop</strong> с официального сайта docker.com</li>
+          <li>Запустите установщик и следуйте инструкциям</li>
+          <li>После установки перезагрузите компьютер</li>
+          <li>Запустите Docker Desktop — он должен появиться в системном трее</li>
+        </ol>
+
+        <h3>macOS</h3>
+        <ol>
+          <li>Скачайте <strong>Docker Desktop для Mac</strong> с официального сайта</li>
+          <li>Откройте скачанный .dmg файл и перетащите Docker в папку Applications</li>
+          <li>Запустите Docker из Applications</li>
+          <li>Примите лицензионное соглашение и введите пароль администратора</li>
+        </ol>
+
+        <h3>Linux (Ubuntu/Debian)</h3>
+        <div class="code-block">
+          <div class="code-block-header">Установка Docker на Linux</div>
+          <div class="code-block-content">
+# Обновляем список пакетов
+sudo apt update
+
+# Устанавливаем необходимые пакеты
+sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
+
+# Добавляем официальный GPG ключ Docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# Добавляем репозиторий Docker
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Устанавливаем Docker
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+# Проверяем установку
+docker --version
+          </div>
+        </div>
+
+        <h3>Проверка установки</h3>
+        <p>После установки откройте терминал и выполните:</p>
+        <div class="code-block">
+          <div class="code-block-header">Проверка Docker</div>
+          <div class="code-block-content">
+docker --version
+docker run hello-world
+          </div>
+        </div>
+        <p>Если вы увидели приветственное сообщение от Docker, установка прошла успешно!</p>
+      </section>
+
+      <section id="first-steps">
+        <h2>Первые шаги с Docker</h2>
+        <p>Давайте начнём с базовых команд Docker:</p>
+
+        <h3>Основные команды</h3>
+        
+        <div class="code-block">
+          <div class="code-block-header">Просмотр доступных образов</div>
+          <div class="code-block-content">
+docker images
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Загрузка образа из Docker Hub</div>
+          <div class="code-block-content">
+docker pull nginx
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Запуск контейнера</div>
+          <div class="code-block-content">
+docker run nginx
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Запуск контейнера в фоновом режиме</div>
+          <div class="code-block-content">
+docker run -d nginx
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Просмотр запущенных контейнеров</div>
+          <div class="code-block-content">
+docker ps
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Просмотр всех контейнеров (включая остановленные)</div>
+          <div class="code-block-content">
+docker ps -a
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Остановка контейнера</div>
+          <div class="code-block-content">
+docker stop &lt;container_id&gt;
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Удаление контейнера</div>
+          <div class="code-block-content">
+docker rm &lt;container_id&gt;
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Удаление образа</div>
+          <div class="code-block-content">
+docker rmi &lt;image_id&gt;
+          </div>
+        </div>
+
+        <h3>Практический пример: запуск веб-сервера</h3>
+        <p>Давайте запустим веб-сервер Nginx в контейнере:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">Запуск Nginx с пробросом портов</div>
+          <div class="code-block-content">
+docker run -d -p 8080:80 --name my-nginx nginx
+          </div>
+        </div>
+
+        <p>Разберём команду:</p>
+        <ul class="with-icons check-list">
+          <li><strong>-d</strong> — запуск в фоновом режиме (detached)</li>
+          <li><strong>-p 8080:80</strong> — проброс портов (порт хоста:порт контейнера)</li>
+          <li><strong>--name my-nginx</strong> — имя контейнера</li>
+          <li><strong>nginx</strong> — образ для использования</li>
+        </ul>
+
+        <p>Теперь откройте браузер и перейдите по адресу <code>http://localhost:8080</code> — вы увидите страницу приветствия Nginx!</p>
+
+        <div class="warning-box">
+          <strong>Важно:</strong> Если порт 8080 уже занят, используйте другой порт, например, <code>-p 8081:80</code>.
+        </div>
+      </section>
+
+      <section id="dockerfile">
+        <h2>Создание Dockerfile</h2>
+        <p>Dockerfile — это инструкция для создания собственного образа. Давайте создадим простой Dockerfile для Python-приложения:</p>
+
+        <div class="code-block">
+          <div class="code-block-header">Пример Dockerfile для Python-приложения</div>
+          <div class="code-block-content">
+# Используем официальный образ Python
+FROM python:3.9-slim
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем файл с зависимостями
+COPY requirements.txt .
+
+# Устанавливаем зависимости
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем код приложения
+COPY . .
+
+# Открываем порт
+EXPOSE 8000
+
+# Команда для запуска приложения
+CMD ["python", "app.py"]
+          </div>
+        </div>
+
+        <h3>Разбор Dockerfile</h3>
+        <ul class="with-icons check-list">
+          <li><strong>FROM</strong> — базовый образ (от чего наследуемся)</li>
+          <li><strong>WORKDIR</strong> — рабочая директория внутри контейнера</li>
+          <li><strong>COPY</strong> — копирование файлов с хоста в контейнер</li>
+          <li><strong>RUN</strong> — выполнение команды во время сборки образа</li>
+          <li><strong>EXPOSE</strong> — объявление порта, который будет использоваться</li>
+          <li><strong>CMD</strong> — команда, которая выполнится при запуске контейнера</li>
+        </ul>
+
+        <h3>Сборка образа</h3>
+        <p>Чтобы создать образ из Dockerfile, используйте команду:</p>
+        
+        <div class="code-block">
+          <div class="code-block-header">Сборка образа</div>
+          <div class="code-block-content">
+docker build -t my-python-app .
+          </div>
+        </div>
+
+        <p>Где:</p>
+        <ul class="with-icons check-list">
+          <li><strong>-t my-python-app</strong> — имя и тег образа</li>
+          <li><strong>.</strong> — путь к директории с Dockerfile (текущая директория)</li>
+        </ul>
+
+        <h3>Запуск контейнера из собственного образа</h3>
+        <div class="code-block">
+          <div class="code-block-header">Запуск контейнера</div>
+          <div class="code-block-content">
+docker run -p 8000:8000 my-python-app
+          </div>
+        </div>
+      </section>
+
+      <section id="docker-compose">
+        <h2>Docker Compose</h2>
+        <p>Docker Compose упрощает работу с многоконтейнерными приложениями. Вместо запуска нескольких контейнеров отдельными командами, вы описываете всё в одном файле <code>docker-compose.yml</code>.</p>
+
+        <h3>Пример docker-compose.yml</h3>
+        <p>Создадим простое приложение с веб-сервером и базой данных:</p>
+
+        <div class="code-block">
+          <div class="code-block-header">docker-compose.yml</div>
+          <div class="code-block-content">
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/mydb
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mydb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+          </div>
+        </div>
+
+        <h3>Основные команды Docker Compose</h3>
+        
+        <div class="code-block">
+          <div class="code-block-header">Запуск всех сервисов</div>
+          <div class="code-block-content">
+docker-compose up
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Запуск в фоновом режиме</div>
+          <div class="code-block-content">
+docker-compose up -d
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Остановка всех сервисов</div>
+          <div class="code-block-content">
+docker-compose down
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Просмотр логов</div>
+          <div class="code-block-content">
+docker-compose logs
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">Пересборка образов</div>
+          <div class="code-block-content">
+docker-compose build
+          </div>
+        </div>
+
+        <div class="success-box">
+          <strong>Преимущества Docker Compose:</strong> Одна команда запускает всё приложение со всеми зависимостями. Это особенно полезно для разработки, когда нужно быстро поднять локальное окружение.
+        </div>
+      </section>
+
+      <section id="best-practices">
+        <h2>Лучшие практики Docker</h2>
+        <p>Следуя этим рекомендациям, вы создадите эффективные и безопасные контейнеры:</p>
+
+        <h3>1. Используйте .dockerignore</h3>
+        <p>Создайте файл <code>.dockerignore</code>, чтобы исключить ненужные файлы из образа (аналогично .gitignore):</p>
+        <div class="code-block">
+          <div class="code-block-header">.dockerignore</div>
+          <div class="code-block-content">
+node_modules
+.git
+.env
+*.log
+.DS_Store
+          </div>
+        </div>
+
+        <h3>2. Используйте многоэтапную сборку</h3>
+        <p>Для уменьшения размера образа используйте многоэтапную сборку (multi-stage build):</p>
+        <div class="code-block">
+          <div class="code-block-header">Многоэтапная сборка</div>
+          <div class="code-block-content">
+# Этап сборки
+FROM node:16 AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Этап запуска
+FROM node:16-slim
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY package*.json ./
+RUN npm install --production
+CMD ["node", "dist/index.js"]
+          </div>
+        </div>
+
+        <h3>3. Не запускайте контейнеры от root</h3>
+        <p>Создавайте отдельного пользователя для запуска приложения:</p>
+        <div class="code-block">
+          <div class="code-block-header">Создание пользователя</div>
+          <div class="code-block-content">
+RUN useradd -m -u 1000 appuser
+USER appuser
+          </div>
+        </div>
+
+        <h3>4. Используйте конкретные версии образов</h3>
+        <p>Вместо <code>FROM python:latest</code> используйте <code>FROM python:3.9-slim</code>. Это обеспечит предсказуемость и стабильность.</p>
+
+        <h3>5. Кэшируйте зависимости</h3>
+        <p>Копируйте файлы зависимостей перед копированием кода, чтобы использовать кэш Docker:</p>
+        <div class="code-block">
+          <div class="code-block-header">Правильный порядок команд</div>
+          <div class="code-block-content">
+# Сначала зависимости
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Потом код
+COPY . .
+          </div>
+        </div>
+
+        <h3>6. Используйте переменные окружения</h3>
+        <p>Не хардкодьте конфигурацию в образ. Используйте переменные окружения или файлы конфигурации, монтируемые как volumes.</p>
+      </section>
+
+      <section id="conclusion">
+        <h2>Заключение</h2>
+        <p>Docker — это мощный инструмент, который изменил способ разработки и развёртывания приложений. Он решает проблемы совместимости, упрощает развёртывание и делает приложения более переносимыми и масштабируемыми.</p>
+
+        <p>Что мы изучили:</p>
+        <ul class="with-icons check-list">
+          <li>Что такое Docker и зачем он нужен</li>
+          <li>Основные понятия: образы, контейнеры, Dockerfile</li>
+          <li>Как установить Docker</li>
+          <li>Базовые команды для работы с контейнерами</li>
+          <li>Как создать собственный Dockerfile</li>
+          <li>Использование Docker Compose для многоконтейнерных приложений</li>
+          <li>Лучшие практики работы с Docker</li>
+        </ul>
+
+        <div class="highlight-box">
+          <strong>Следующие шаги:</strong>
+          <p>Попробуйте создать свой первый Dockerfile для одного из ваших проектов. Начните с простого приложения и постепенно усложняйте. Изучите Docker Hub — там много готовых образов, которые можно использовать как основу. Практика — лучший способ освоить Docker!</p>
+        </div>
+
+        <p>Docker стал стандартом в современной разработке. Знание Docker — это не просто полезный навык, а необходимость для любого разработчика, который хочет работать с современными технологиями и практиками DevOps.</p>
+      </section>
+
+      </article>
+    </div>
+
+    <!-- Article Navigation -->
+    <div class="article-navigation">
+      <div class="nav-buttons">
+        <a href="../index.html#articles" class="nav-button back">
+          <i class="fas fa-arrow-left mr-2"></i>К списку статей
+        </a>
+        <a href="../index.html" class="nav-button home">
+          <i class="fas fa-home mr-2"></i>На главную
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacts" class="footer-simple">
+    <div class="footer-simple__inner">
+      <div class="footer-simple__about">
+        <h4>О проекте</h4>
+        <p>SKL Academy — платформа с бесплатными IT-курсами и практиками для старта и роста.</p>
+      </div>
+      <div class="footer-simple__contacts">
+        <h4>Контакты</h4>
+        <div class="footer-simple__links">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mr.tim.pumpkin@gmail.com" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-envelope"></i>
+            Gmail
+          </a>
+          <a href="#" onclick="openTelegram(); return false;">
+            <i class="fab fa-telegram"></i>
+            Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-simple__bottom">
+      <p>SKL Academy · 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

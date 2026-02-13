@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс по веб‑разработке. Модуль 2: CSS — визуальное оформление, адаптивность, макеты (Flexbox, Grid).">
+    <meta name="keywords" content="веб разработка, css, flexbox, grid, адаптивная верстка, медиазапросы, анимации css, бесплатный курс">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Веб‑разработка — Модуль 2: CSS — Визуальное оформление">
+    <meta property="og:description" content="CSS: селекторы, каскадность, шрифты, box model, позиционирование, Flexbox, Grid, адаптив и анимации.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/web/02-css-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Веб‑разработка — CSS основы">
+    <meta name="twitter:description" content="Модуль 2: CSS — визуальное оформление.">
+    <title>Веб‑разработка — Модуль 2: CSS — Визуальное оформление | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/02-css-basics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+
+    <!-- Structured Data: Breadcrumbs for Web course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://skl-academy.ru/"},
+        {"@type": "ListItem", "position": 2, "name": "Веб‑разработка", "item": "https://skl-academy.ru/courses/web/02-css-basics.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс по веб‑разработке",
+      "description": "Полный курс по веб‑разработке с нуля: HTML, CSS, JavaScript и практика.",
+      "provider": {"@type": "Organization", "name": "SKL Academy", "sameAs": "https://skl-academy.ru/"},
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "coursePrerequisites": "Базовые знания компьютера",
+      "teaches": ["HTML", "CSS", "JavaScript", "адаптивная верстка", "клиентский JavaScript"],
+      "about": [
+        {"@type": "Thing", "name": "HTML"},
+        {"@type": "Thing", "name": "CSS"},
+        {"@type": "Thing", "name": "JavaScript"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Веб‑разработка — Модуль 2: CSS — Визуальное оформление",
+      "description": "CSS: селекторы, каскадность, типографика, модель коробки, позиционирование, Flexbox, Grid, адаптив, анимации.",
+      "author": {"@type": "Organization", "name": "SKL Academy"},
+      "publisher": {"@type": "Organization", "name": "SKL Academy", "url": "https://skl-academy.ru/"},
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://skl-academy.ru/courses/web/02-css-basics.html"},
+      "keywords": "css, flexbox, grid, адаптивная верстка"
+    }
+    </script>
+</head>
+<body data-course="web">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">CSS</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">Введение в HTML</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">Формы</a>
+                        <a href="01-html-basics.html#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="01-html-basics.html#seo-html" class="subtopic">SEO</a>
+                        <a href="01-html-basics.html#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="#css-intro" class="subtopic active">Введение</a>
+                        <a href="#specificity" class="subtopic">Специфичность</a>
+                        <a href="#typography" class="subtopic">Типографика</a>
+                        <a href="#box-model" class="subtopic">Box Model</a>
+                        <a href="#positioning" class="subtopic">Позиционирование</a>
+                        <a href="#flexbox" class="subtopic">Flexbox</a>
+                        <a href="#grid" class="subtopic">Grid</a>
+                        <a href="#responsive" class="subtopic">@media</a>
+                        <a href="#animations" class="subtopic">Анимации</a>
+                        <a href="#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">Условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">События</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">Storage</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="04-responsive-design.html#intro" class="subtopic">Введение</a>
+                        <a href="04-responsive-design.html#viewport" class="subtopic">Viewport</a>
+                        <a href="04-responsive-design.html#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="04-responsive-design.html#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="04-responsive-design.html#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="04-responsive-design.html#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="04-responsive-design.html#responsive-images" class="subtopic">Изображения</a>
+                        <a href="04-responsive-design.html#container-queries" class="subtopic">Container Queries</a>
+                        <a href="04-responsive-design.html#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="04-responsive-design.html#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="06-forms-validation.html#form-basics" class="subtopic">Основы форм</a>
+                        <a href="06-forms-validation.html#input-types" class="subtopic">Типы полей</a>
+                        <a href="06-forms-validation.html#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="06-forms-validation.html#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="06-forms-validation.html#js-validation" class="subtopic">JS валидация</a>
+                        <a href="06-forms-validation.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="06-forms-validation.html#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="06-forms-validation.html#security" class="subtopic">Безопасность</a>
+                        <a href="06-forms-validation.html#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="07-dom-advanced.html#dom-tree" class="subtopic">Дерево DOM</a>
+                        <a href="07-dom-advanced.html#selectors" class="subtopic">Селекторы</a>
+                        <a href="07-dom-advanced.html#traversal" class="subtopic">Обход</a>
+                        <a href="07-dom-advanced.html#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="07-dom-advanced.html#events-basics" class="subtopic">События</a>
+                        <a href="07-dom-advanced.html#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="07-dom-advanced.html#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="07-dom-advanced.html#observers" class="subtopic">Observers</a>
+                        <a href="07-dom-advanced.html#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html#core-web-vitals" class="subtopic">Core Web Vitals</a>
+                        <a href="09-optimization.html#lcp" class="subtopic">LCP</a>
+                        <a href="09-optimization.html#cls" class="subtopic">CLS</a>
+                        <a href="09-optimization.html#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="09-optimization.html#fonts" class="subtopic">Шрифты</a>
+                        <a href="09-optimization.html#js-perf" class="subtopic">JS производительность</a>
+                        <a href="09-optimization.html#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="09-optimization.html#seo" class="subtopic">SEO</a>
+                        <a href="09-optimization.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="09-optimization.html#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="10-projects.html#intro" class="subtopic">Введение</a>
+                        <a href="10-projects.html#project-1" class="subtopic">Проект 1</a>
+                        <a href="10-projects.html#project-2" class="subtopic">Проект 2</a>
+                        <a href="10-projects.html#project-3" class="subtopic">Проект 3</a>
+                        <a href="10-projects.html#project-4" class="subtopic">Проект 4</a>
+                        <a href="10-projects.html#project-5" class="subtopic">Проект 5</a>
+                        <a href="10-projects.html#project-6" class="subtopic">Проект 6</a>
+                        <a href="10-projects.html#deployment" class="subtopic">Деплой</a>
+                        <a href="10-projects.html#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 2: CSS</h2>
+                <p>Разберём синтаксис и способы подключения CSS, каскадность и специфичность, типографику, модель коробки, позиционирование, Flexbox, Grid, адаптивность и анимации.</p>
+            </section>
+
+            <!-- 2.1 -->
+            <section id="css-intro" class="topic-section">
+                <h2>Введение в CSS. Синтаксис и подключение</h2>
+                <p>CSS (Cascading Style Sheets — каскадные таблицы стилей) — это язык, который управляет внешним видом и оформлением HTML-элементов. Если HTML — это скелет страницы, то CSS — это её "кожа и одежда", которая делает страницу красивой и привлекательной.</p>
+                
+                <h3>Что такое CSS и зачем он нужен</h3>
+                <p>CSS позволяет:</p>
+                <ul>
+                    <li>Изменять цвета, шрифты, размеры элементов</li>
+                    <li>Создавать макеты и расположение элементов на странице</li>
+                    <li>Добавлять анимации и интерактивные эффекты</li>
+                    <li>Делать страницы адаптивными для разных устройств</li>
+                    <li>Создавать единый стиль для всего сайта</li>
+                </ul>
+                <p><strong>Преимущества отделения стилей от структуры:</strong></p>
+                <ul>
+                    <li>Один CSS-файл может стилизовать множество HTML-страниц</li>
+                    <li>Легко изменить дизайн всего сайта, изменив один файл</li>
+                    <li>HTML остаётся чистым и семантическим</li>
+                    <li>Браузер может кэшировать CSS-файлы, ускоряя загрузку</li>
+                </ul>
+                
+                <h3>Синтаксис CSS</h3>
+                <p>CSS состоит из правил (rules). Каждое правило имеет следующую структуру:</p>
+                <div class="code-example">
+<pre><code class="language-css">селектор {
+    свойство: значение;
+    другое-свойство: другое-значение;
+}</code></pre>
+                </div>
+                <p><strong>Компоненты правила:</strong></p>
+                <ul>
+                    <li><strong>Селектор</strong> — указывает, к каким элементам применяется правило</li>
+                    <li><strong>Декларация</strong> — пара "свойство: значение" в фигурных скобках</li>
+                    <li><strong>Свойство</strong> — что мы хотим изменить (цвет, размер, отступ и т.д.)</li>
+                    <li><strong>Значение</strong> — как мы это изменяем (конкретный цвет, размер в пикселях и т.д.)</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Пример правила */
+h1 {
+    color: #4f46e5;        /* свойство: значение; */
+    font-size: 2rem;        /* каждое свойство на новой строке */
+    margin-bottom: 1rem;   /* точка с запятой обязательна */
+}</code></pre>
+                </div>
+                
+                <h3>Способы подключения CSS</h3>
+                <p>Есть три способа добавить CSS к HTML-странице. Каждый имеет свои преимущества и недостатки.</p>
+                
+                <h4>1. Встроенные стили (inline styles)</h4>
+                <p>Стили пишутся прямо в атрибуте <code>style</code> HTML-элемента:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;h1 style="color: #4f46e5; font-size: 2rem;"&gt;Заголовок&lt;/h1&gt;</code></pre>
+                </div>
+                <p><strong>Когда использовать:</strong> только для одноразовых стилей, которые уникальны для конкретного элемента и не будут переиспользоваться.</p>
+                <p><strong>Минусы:</strong> нарушает принцип разделения структуры и стилей, сложно поддерживать, увеличивает размер HTML, нельзя переиспользовать стили.</p>
+                <p><strong>Рекомендация:</strong> избегайте встроенных стилей, используйте только в крайних случаях (динамические стили через JavaScript, email-верстка).</p>
+                
+                <h4>2. Внутренние стили (embedded styles)</h4>
+                <p>Стили пишутся в теге <code>&lt;style&gt;</code> внутри <code>&lt;head&gt;</code>:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;head&gt;
+    &lt;style&gt;
+        h1 { 
+            color: #4f46e5; 
+            font-size: 2rem; 
+        }
+        .card {
+            border-radius: 10px;
+            padding: 1rem;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                </div>
+                <p><strong>Когда использовать:</strong> для стилей, специфичных для одной страницы, для критического CSS (стили, необходимые для первого рендера).</p>
+                <p><strong>Минусы:</strong> стили не переиспользуются между страницами, увеличивают размер HTML-файла.</p>
+                <p><strong>Рекомендация:</strong> используйте для критического CSS или одностраничных приложений.</p>
+                
+                <h4>3. Внешний файл (external stylesheet) — РЕКОМЕНДУЕТСЯ</h4>
+                <p>Стили находятся в отдельном <code>.css</code> файле и подключаются через <code>&lt;link&gt;</code>:</p>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;head&gt;
+    &lt;link rel="stylesheet" href="../courses.css"&gt;
+    &lt;!-- или несколько файлов --&gt;
+    &lt;link rel="stylesheet" href="reset.css"&gt;
+    &lt;link rel="stylesheet" href="main.css"&gt;
+&lt;/head&gt;</code></pre>
+                </div>
+                <p><strong>Преимущества:</strong></p>
+                <ul>
+                    <li>Разделение структуры и стилей</li>
+                    <li>Переиспользование стилей на множестве страниц</li>
+                    <li>Кэширование браузером — файл загружается один раз</li>
+                    <li>Легче поддерживать и изменять</li>
+                    <li>Можно использовать препроцессоры (Sass, Less)</li>
+                </ul>
+                <p><strong>Рекомендация:</strong> это основной и предпочтительный способ подключения CSS.</p>
+                
+                <h3>Селекторы: как выбрать элементы для стилизации</h3>
+                <p>Селекторы — это способ указать браузеру, к каким элементам применить стили. Понимание селекторов — основа работы с CSS.</p>
+                
+                <h4>Базовые селекторы</h4>
+                
+                <p><strong>1. Селектор по тегу (элементу)</strong></p>
+                <div class="code-example">
+<pre><code class="language-css">/* Стилизует все параграфы */
+p { 
+    line-height: 1.7; 
+    margin-bottom: 1rem;
+}
+
+/* Стилизует все заголовки h1 */
+h1 { 
+    font-size: 2rem; 
+    font-weight: 700;
+}</code></pre>
+                </div>
+                <p>Используется для базовых стилей, которые применяются ко всем элементам определённого типа.</p>
+                
+                <p><strong>2. Селектор по классу</strong></p>
+                <div class="code-example">
+<pre><code class="language-css">/* Стилизует все элементы с классом "card" */
+.card { 
+    border-radius: 10px; 
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}</code></pre>
+                </div>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;div class="card"&gt;Карточка 1&lt;/div&gt;
+&lt;div class="card"&gt;Карточка 2&lt;/div&gt;</code></pre>
+                </div>
+                <p>Классы — самый гибкий и переиспользуемый способ стилизации. Один класс можно применять к множеству элементов.</p>
+                
+                <p><strong>3. Селектор по ID</strong></p>
+                <div class="code-example">
+<pre><code class="language-css">/* Стилизует элемент с id="mainTitle" */
+#mainTitle { 
+    font-weight: 700; 
+    color: #1e293b;
+}</code></pre>
+                </div>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;h1 id="mainTitle"&gt;Главный заголовок&lt;/h1&gt;</code></pre>
+                </div>
+                <p><strong>Важно:</strong> ID должен быть уникальным на странице. Используйте ID для уникальных элементов, но предпочитайте классы для стилизации (они более гибкие).</p>
+                
+                <h4>Комбинированные селекторы</h4>
+                
+                <p><strong>Селектор потомков</strong> — выбирает элементы внутри других:</p>
+                <div class="code-example">
+<pre><code class="language-css">/* Все ссылки внутри навигации */
+nav a { 
+    text-decoration: none; 
+    color: #4f46e5;
+}
+
+/* Все параграфы внутри .card */
+.card p {
+    margin-bottom: 0.5rem;
+}</code></pre>
+                </div>
+                
+                <p><strong>Псевдоклассы</strong> — выбирают элементы в определённом состоянии:</p>
+                <div class="code-example">
+<pre><code class="language-css">/* Ссылка при наведении */
+a:hover { 
+    text-decoration: underline; 
+    color: #6366f1;
+}
+
+/* Последний элемент списка */
+li:last-child {
+    margin-bottom: 0;
+}
+
+/* Чётные строки таблицы */
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* Первая буква параграфа */
+p::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+}</code></pre>
+                </div>
+                
+                <p><strong>Группировка селекторов</strong> — применяйте одно правило к нескольким селекторам:</p>
+                <div class="code-example">
+<pre><code class="language-css">/* Одинаковые стили для h1, h2, h3 */
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1rem;
+}</code></pre>
+                </div>
+                
+                <h4>Практические советы по селекторам</h4>
+                <ul>
+                    <li><strong>Используйте классы</strong> для переиспользуемых стилей</li>
+                    <li><strong>Избегайте глубокой вложенности</strong> (более 2-3 уровней) — это увеличивает специфичность и усложняет поддержку</li>
+                    <li><strong>Именуйте классы осмысленно:</strong> <code>.button-primary</code> лучше, чем <code>.btn1</code></li>
+                    <li><strong>Не используйте ID для стилизации</strong> — только для уникальных элементов и JavaScript</li>
+                    <li><strong>Используйте семантические селекторы:</strong> <code>article h2</code> лучше, чем <code>.article-title</code> в некоторых случаях</li>
+                </ul>
+                
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Подключите внешний CSS-файл к вашей HTML-странице и создайте стили для:</p>
+                    <ul>
+                        <li>Заголовков разных уровней (h1-h3) с разными размерами и цветами</li>
+                        <li>Класса <code>.card</code> с рамкой, скруглением и тенью</li>
+                        <li>Ссылок с эффектом при наведении (hover)</li>
+                        <li>Списков с кастомными маркерами</li>
+                    </ul>
+                    <p>Экспериментируйте с разными селекторами и посмотрите, как они работают.</p>
+                </div>
+            </section>
+
+            <!-- 2.2 -->
+            <section id="specificity" class="topic-section">
+                <h2>Каскадность, наследование и специфичность</h2>
+                <p>Понимание каскадности, наследования и специфичности — это основа работы с CSS. Эти концепции определяют, какие стили будут применены к элементу, когда несколько правил конфликтуют друг с другом.</p>
+                
+                <h3>Каскадность (Cascade)</h3>
+                <p>CSS называется "каскадным" потому, что стили применяются в определённом порядке, как водопад. Когда несколько правил могут применяться к одному элементу, браузер использует каскад для определения приоритета.</p>
+                
+                <p><strong>Порядок применения стилей (от низкого к высокому приоритету):</strong></p>
+                <ol>
+                    <li>Стили браузера (user agent stylesheet) — базовые стили, которые браузер применяет по умолчанию</li>
+                    <li>Пользовательские стили — стили, установленные пользователем в браузере</li>
+                    <li>Авторские стили — ваши CSS-файлы</li>
+                    <li>Стили с <code>!important</code> — имеют наивысший приоритет (избегайте их использования)</li>
+                </ol>
+                
+                <p><strong>В рамках одного источника:</strong> если два правила имеют одинаковую специфичность, применяется то, которое идёт <strong>ниже</strong> в коде (позже в файле).</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Первое правило */
+h1 { color: black; }
+
+/* Второе правило — оно применится, так как идёт ниже */
+h1 { color: blue; }
+/* Результат: h1 будет синим */</code></pre>
+                </div>
+                
+                <h3>Наследование (Inheritance)</h3>
+                <p>Некоторые CSS-свойства наследуются дочерними элементами от родительских. Это означает, что если вы задали цвет текста для <code>&lt;body&gt;</code>, все элементы внутри унаследуют этот цвет, если не переопределить его явно.</p>
+                
+                <p><strong>Свойства, которые наследуются:</strong></p>
+                <ul>
+                    <li><code>color</code> — цвет текста</li>
+                    <li><code>font-family</code>, <code>font-size</code>, <code>font-weight</code> — свойства шрифта</li>
+                    <li><code>line-height</code> — межстрочный интервал</li>
+                    <li><code>text-align</code> — выравнивание текста</li>
+                    <li><code>list-style</code> — стиль списков</li>
+                </ul>
+                
+                <p><strong>Свойства, которые НЕ наследуются:</strong></p>
+                <ul>
+                    <li><code>width</code>, <code>height</code> — размеры</li>
+                    <li><code>margin</code>, <code>padding</code> — отступы</li>
+                    <li><code>border</code> — рамки</li>
+                    <li><code>background</code> — фон</li>
+                    <li><code>display</code> — тип отображения</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Задаём базовые стили для body */
+body {
+    color: #1e293b;           /* наследуется всеми элементами */
+    font-family: 'Arial', sans-serif;  /* наследуется */
+    line-height: 1.6;         /* наследуется */
+    margin: 0;                /* НЕ наследуется */
+    padding: 0;               /* НЕ наследуется */
+}
+
+/* Все параграфы унаследуют color, font-family, line-height */
+/* Но margin и padding нужно задавать отдельно */</code></pre>
+                </div>
+                
+                <p><strong>Принудительное наследование:</strong> можно заставить свойство наследоваться, используя значение <code>inherit</code>:</p>
+                <div class="code-example">
+<pre><code class="language-css">.card {
+    border: 1px solid #e5e7eb;
+}
+
+.card a {
+    border: inherit;  /* наследует border от .card */
+}</code></pre>
+                </div>
+                
+                <h3>Специфичность (Specificity) — вес селектора</h3>
+                <p>Специфичность определяет, какое правило применится, когда несколько правил могут стилизовать один элемент. Браузер вычисляет "вес" каждого селектора и применяет правило с наибольшим весом.</p>
+                
+                <h4>Как вычисляется специфичность</h4>
+                <p>Специфичность вычисляется по формуле: <strong>(a, b, c, d)</strong></p>
+                <ul>
+                    <li><strong>a</strong> — inline стили (style="...") = 1000</li>
+                    <li><strong>b</strong> — количество ID в селекторе = 100 за каждый</li>
+                    <li><strong>c</strong> — количество классов, атрибутов, псевдоклассов = 10 за каждый</li>
+                    <li><strong>d</strong> — количество тегов и псевдоэлементов = 1 за каждый</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Примеры специфичности */
+
+/* (0, 0, 0, 1) = 1 */
+p { color: black; }
+
+/* (0, 0, 1, 0) = 10 */
+.card { color: blue; }
+
+/* (0, 1, 0, 0) = 100 */
+#mainTitle { color: green; }
+
+/* (0, 0, 2, 1) = 21 */
+.card .title { color: red; }
+
+/* (1, 0, 0, 0) = 1000 */
+/* style="color: purple;" в HTML */</code></pre>
+                </div>
+                
+                <p><strong>Правило:</strong> чем больше число, тем выше специфичность. При конфликте применяется правило с большей специфичностью.</p>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Конфликт стилей */
+h1 { color: black; }          /* специфичность: 1 */
+.title { color: blue; }        /* специфичность: 10 */
+#mainTitle { color: green; }   /* специфичность: 100 */
+/* Победит зелёный (id имеет большую специфичность) */</code></pre>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Важно понимать:</strong></p>
+                    <ul>
+                        <li>Специфичность не складывается линейно: (0, 0, 11, 0) = 110, что больше, чем (0, 1, 0, 0) = 100</li>
+                        <li><code>!important</code> переопределяет всё, но его использование — плохая практика</li>
+                        <li>Старайтесь поддерживать низкую специфичность — это упрощает поддержку кода</li>
+                        <li>Избегайте селекторов по ID для стилизации — они создают высокую специфичность</li>
+                    </ul>
+                </div>
+                
+                <h3>Единицы измерения в CSS</h3>
+                <p>CSS предоставляет множество единиц измерения. Правильный выбор единиц критически важен для адаптивности и поддержки.</p>
+                
+                <h4>Абсолютные единицы</h4>
+                <ul>
+                    <li><code>px</code> (пиксели) — самая распространённая единица. 1px = 1 пиксель экрана. Используйте для мелких деталей (рамки, тени), но не для размеров шрифтов и отступов в адаптивных макетах.</li>
+                    <li><code>pt</code> (пункты) — используется в печати, 1pt = 1/72 дюйма</li>
+                    <li><code>cm</code>, <code>mm</code>, <code>in</code> — сантиметры, миллиметры, дюймы. Используются редко, в основном для печати</li>
+                </ul>
+                
+                <h4>Относительные единицы (рекомендуются)</h4>
+                
+                <p><strong>1. rem (root em)</strong> — относительно размера шрифта корневого элемента (<code>&lt;html&gt;</code>):</p>
+                <div class="code-example">
+<pre><code class="language-css">html { font-size: 16px; }  /* базовый размер */
+h1 { font-size: 2rem; }   /* = 32px (2 × 16px) */
+p { font-size: 1rem; }     /* = 16px (1 × 16px) */
+.card { padding: 1.5rem; } /* = 24px (1.5 × 16px) */</code></pre>
+                </div>
+                <p><strong>Преимущества:</strong> предсказуемость, легко масштабировать весь сайт, изменяя размер шрифта у <code>html</code>.</p>
+                <p><strong>Когда использовать:</strong> для размеров шрифтов, отступов, размеров элементов. <strong>Рекомендуется как основная единица.</strong></p>
+                
+                <p><strong>2. em</strong> — относительно размера шрифта родительского элемента:</p>
+                <div class="code-example">
+<pre><code class="language-css">.card { font-size: 18px; }
+.card .title { font-size: 1.5em; }  /* = 27px (1.5 × 18px) */
+.card .small { font-size: 0.875em; } /* = 15.75px (0.875 × 18px) */</code></pre>
+                </div>
+                <p><strong>Особенность:</strong> может создавать каскадный эффект, когда вложенные элементы умножают размеры. Используйте осторожно.</p>
+                <p><strong>Когда использовать:</strong> когда нужно, чтобы размер зависел от родителя (например, отступы относительно размера шрифта элемента).</p>
+                
+                <p><strong>3. % (проценты)</strong> — относительно размера родительского элемента:</p>
+                <div class="code-example">
+<pre><code class="language-css">.container { width: 1200px; }
+.box { width: 50%; }  /* = 600px (50% от 1200px) */</code></pre>
+                </div>
+                <p><strong>Когда использовать:</strong> для ширины, высоты, отступов относительно родителя. Отлично подходит для адаптивных макетов.</p>
+                
+                <p><strong>4. vw, vh (viewport units)</strong> — относительно размера окна браузера:</p>
+                <div class="code-example">
+<pre><code class="language-css">.hero { 
+    height: 60vh;  /* 60% высоты окна браузера */
+    width: 100vw;  /* 100% ширины окна */
+}
+.sidebar { width: 25vw; }  /* 25% ширины окна */</code></pre>
+                </div>
+                <p><strong>Когда использовать:</strong> для полноэкранных секций, адаптивных размеров относительно экрана.</p>
+                <p><strong>Осторожно:</strong> на мобильных устройствах <code>100vw</code> может создать горизонтальную прокрутку из-за полосы прокрутки. Используйте <code>100%</code> вместо <code>100vw</code> для ширины.</p>
+                
+                <p><strong>5. vmin, vmax</strong> — минимальный/максимальный размер viewport:</p>
+                <div class="code-example">
+<pre><code class="language-css">.square { 
+    width: 50vmin;   /* 50% от меньшей стороны (ширина или высота) */
+    height: 50vmin;  /* всегда квадрат */
+}</code></pre>
+                </div>
+                
+                <h4>Современные единицы</h4>
+                <ul>
+                    <li><code>ch</code> — ширина символа "0" в текущем шрифте. Полезно для ограничения ширины текста</li>
+                    <li><code>lh</code> — высота строки (line-height) текущего элемента</li>
+                    <li><code>cqw</code>, <code>cqh</code> — единицы контейнерных запросов (container queries)</li>
+                </ul>
+                
+                <h4>Практические рекомендации</h4>
+                <ul>
+                    <li><strong>Для шрифтов:</strong> используйте <code>rem</code> — предсказуемо и масштабируемо</li>
+                    <li><strong>Для отступов:</strong> используйте <code>rem</code> для вертикальных отступов, <code>%</code> или <code>rem</code> для горизонтальных</li>
+                    <li><strong>Для ширины контейнеров:</strong> используйте <code>%</code>, <code>max-width</code> с <code>px</code> или <code>rem</code></li>
+                    <li><strong>Для высоты:</strong> используйте <code>vh</code> для полноэкранных секций, <code>auto</code> или <code>rem</code> для остального</li>
+                    <li><strong>Избегайте:</strong> смешивания единиц без необходимости, использования <code>px</code> для всего в адаптивных макетах</li>
+                </ul>
+                
+                <div class="code-example">
+<pre><code class="language-css">/* Хороший пример использования единиц */
+:root {
+    font-size: 16px;  /* базовый размер */
+}
+
+.container {
+    max-width: 1200px;  /* фиксированная максимальная ширина */
+    width: 100%;        /* адаптивная ширина */
+    padding: 1.5rem;    /* адаптивные отступы */
+}
+
+h1 {
+    font-size: 2.5rem;  /* = 40px */
+    margin-bottom: 1rem; /* = 16px */
+}
+
+.card {
+    width: 100%;        /* адаптивная ширина */
+    padding: 1.25rem;   /* адаптивные внутренние отступы */
+    border: 1px solid;  /* 1px всегда 1px */
+}</code></pre>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Создайте страницу и поэкспериментируйте с единицами:</p>
+                    <ul>
+                        <li>Используйте <code>rem</code> для размеров шрифтов и отступов</li>
+                        <li>Создайте контейнер с <code>max-width: 1200px</code> и <code>width: 100%</code></li>
+                        <li>Используйте <code>vh</code> для создания полноэкранной секции</li>
+                        <li>Сравните результат при изменении размера шрифта в браузере (Ctrl + колесо мыши)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2.3 -->
+            <section id="typography" class="topic-section">
+                <h2>Работа с текстом и шрифтами</h2>
+                <h3>Базовые свойства</h3>
+                <div class="code-example">
+<pre><code class="language-css">body { font-family: 'Montserrat', system-ui, sans-serif; line-height: 1.7; }
+h1 { font-size: 2rem; font-weight: 700; text-align: center; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }</code></pre>
+                </div>
+                <h3>Подключение Google Fonts</h3>
+                <div class="code-example">
+<pre><code class="language-xml">&lt;link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"&gt;</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Задайте базовую типографику для портфолио: шрифты, размеры и межстрочные интервалы для заголовков/текста.</p>
+                </div>
+            </section>
+
+            <!-- 2.4 -->
+            <section id="box-model" class="topic-section">
+                <h2>Модель коробки (Box Model)</h2>
+                <p>Каждый элемент — прямоугольник: content + padding + border + margin.</p>
+                <div class="code-example">
+<pre><code class="language-css">.card {
+  width: 300px; /* ширина content */
+  padding: 16px; /* внутренние отступы */
+  border: 1px solid #e5e7eb; /* рамка */
+  margin: 12px auto; /* внешние отступы */
+  box-sizing: border-box; /* включает padding и border в width */
+}</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сверстайте 3 карточки проекта: выровняйте по сетке, примените отступы, рамки и скругления.</p>
+                </div>
+            </section>
+
+            <!-- 2.5 -->
+            <section id="positioning" class="topic-section">
+                <h2>Позиционирование элементов</h2>
+                <div class="code-example">
+<pre><code class="language-css">.parent { position: relative; }
+.child { position: absolute; top: 8px; right: 8px; }
+.fixed-banner { position: fixed; bottom: 16px; right: 16px; }
+.sticky-header { position: sticky; top: 0; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте липкую шапку и значок (badge) в правом верхнем углу карточки через <code>absolute</code>.</p>
+                </div>
+            </section>
+
+            <!-- 2.6 -->
+            <section id="flexbox" class="topic-section">
+                <h2>Flexbox</h2>
+                <div class="code-example">
+<pre><code class="language-css">.row {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between; /* выравнивание по главной оси */
+  align-items: center;            /* выравнивание по поперечной оси */
+}
+.card { flex: 1 1 300px; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сверстайте горизонтальное меню и сетку карточек на Flexbox с переносом строк.</p>
+                </div>
+            </section>
+
+            <!-- 2.7 -->
+            <section id="grid" class="topic-section">
+                <h2>Grid Layout</h2>
+                <div class="code-example">
+<pre><code class="language-css">.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.item:nth-child(1) { grid-column: span 2; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте фотогалерею 3×N, одну из карточек растяните на 2 колонки.</p>
+                </div>
+            </section>
+
+            <!-- 2.8 -->
+            <section id="responsive" class="topic-section">
+                <h2>Адаптивная верстка и медиазапросы</h2>
+                <p>Mobile‑First: сначала стили для мобильных, затем усложняем для больших экранов.</p>
+                <div class="code-example">
+<pre><code class="language-css">.container { padding: 16px; }
+@media (min-width: 768px) {
+  .container { max-width: 720px; margin: 0 auto; }
+}
+@media (min-width: 1024px) {
+  .container { max-width: 960px; }
+}</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Сделайте главную портфолио адаптивной: навигация, сетки карточек, отступы.</p>
+                </div>
+            </section>
+
+            <!-- 2.9 -->
+            <section id="animations" class="topic-section">
+                <h2>Трансформации, переходы и анимации</h2>
+                <div class="code-example">
+<pre><code class="language-css">.btn { transition: transform .2s ease, box-shadow .2s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,.1); }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+.card:hover { animation: pulse .8s ease-in-out alternate; }</code></pre>
+                </div>
+                <div class="exercise">
+                    <h4>Практика</h4>
+                    <p>Добавьте hover‑эффекты кнопкам и карточкам, анимируйте появление элементов.</p>
+                </div>
+            </section>
+
+            <!-- 2.10 -->
+            <section id="flexbox-advanced" class="topic-section">
+                <h2>Flexbox — углублённо</h2>
+                <p>Разбираемся с алгоритмом распределения пространства, переносом строк и выравниванием многострочных рядов.</p>
+                <div class="code-example">
+<pre><code class="language-css">.row { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 24px); }
+.card { flex: 1 1 clamp(220px, 30%, 360px); min-width: 220px; }
+.row { align-content: start; /* выравнивание нескольких рядов */ }
+.card { align-self: stretch; }</code></pre>
+                </div>
+                <h3>Известные ловушки</h3>
+                <ul>
+                    <li>Сжатие контента: используйте <code>min-width</code> и <code>min-height</code>.</li>
+                    <li>Неожиданное выравнивание — различайте <code>align-items</code> и <code>align-content</code>.</li>
+                </ul>
+            </section>
+
+            <!-- 2.11 -->
+            <section id="grid-advanced" class="topic-section">
+                <h2>Grid — углублённо</h2>
+                <p>Шаблоны областей, автоматическое размещение, функции <code>minmax()</code>, <code>fit-content()</code>, <code>subgrid</code>.</p>
+                <div class="code-example">
+<pre><code class="language-css">.layout {
+  display: grid;
+  grid-template-columns: [full-start] 1fr [content-start] minmax(0, 1200px) [content-end] 1fr [full-end];
+}
+.layout &gt; * { grid-column: content; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.article { display: grid; grid-template-columns: 1fr 320px; grid-template-rows: auto 1fr; grid-template-areas:
+  'title aside' 'content aside'; }
+.article__title { grid-area: title; }
+.article__content { grid-area: content; }
+.article__aside { grid-area: aside; }</code></pre>
+                </div>
+                <div class="note"><p><strong>Subgrid:</strong> позволяет наследовать линии родителя для вложенных сеток (поддержка в современных браузерах).</p></div>
+            </section>
+
+            <!-- 2.12 -->
+            <section id="css-architecture" class="topic-section">
+                <h2>Архитектуры CSS: БЭМ, ITCSS, Utility‑first</h2>
+                <h3>БЭМ</h3>
+                <p>Именование: <code>block__element--modifier</code>. Пример: <code>card</code>, <code>card__title</code>, <code>card--featured</code>.</p>
+                <div class="code-example">
+<pre><code class="language-css">.card { /* блок */ }
+.card__title { /* элемент */ }
+.card--featured { /* модификатор */ }</code></pre>
+                </div>
+                <h3>ITCSS</h3>
+                <p>Слои: Settings → Tools → Generic → Elements → Objects → Components → Utilities. От абстрактного к конкретному, уменьшает специфичность.</p>
+                <h3>Правила поддержки</h3>
+                <ul>
+                    <li>Минимизируйте специфичность: избегайте селекторов по id, вложенности &gt; 2 уровней.</li>
+                    <li>Компонентный подход: каждый блок изолирован, стили живут рядом.</li>
+                    <li>Используйте design tokens через <code>:root</code> и CSS Custom Properties.</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="language-css">:root { --space-1: 8px; --space-2: 12px; --brand: #4f46e5; }
+.button { padding: var(--space-1) var(--space-2); background: var(--brand); }</code></pre>
+                </div>
+            </section>
+
+            <!-- 2.13 -->
+            <section id="responsive-advanced" class="topic-section">
+                <h2>Адаптив: контейнерные запросы, ретина, медиа</h2>
+                <h3>Container Queries</h3>
+                <div class="code-example">
+<pre><code class="language-css">.card-grid { container-type: inline-size; }
+.card { display: grid; grid-template-columns: 1fr; }
+@container (min-width: 480px) {
+  .card { grid-template-columns: 1fr 1fr; }
+}</code></pre>
+                </div>
+                <h3>Ретина и качество</h3>
+                <ul>
+                    <li><code>image-set()</code> для фоновых изображений; <code>srcset</code> для <code>&lt;img&gt;</code>.</li>
+                    <li>Используйте <code>aspect-ratio</code>, указывайте <code>width/height</code> у медиа для предотвращения CLS.</li>
+                </ul>
+                <h3>Производительность CSS</h3>
+                <ul>
+                    <li>Критический CSS: инлайните ключевые стили в <code>&lt;head&gt;</code>, остальное отложенно.</li>
+                    <li>Избегайте тяжёлых теней и анимаций layout/paint; анимируйте <code>transform</code> и <code>opacity</code>.</li>
+                </ul>
+            </section>
+
+            <!-- Итоговый проект -->
+            <section id="module2-project" class="topic-section">
+                <h2>Итоговый проект модуля 2</h2>
+                <p>Полностью стилизуйте главную портфолио‑страницу: сетки (Flex/Grid), адаптивность, типографика, интерактивные hover‑эффекты.</p>
+                <ul>
+                    <li>Навигация (desktop/mobile), секции «Проекты» (карточки), «Контакты» (форма)</li>
+                    <li>Светлая/тёмная темы — по желанию</li>
+                    <li>Анимации появления элементов при наведении/прокрутке</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

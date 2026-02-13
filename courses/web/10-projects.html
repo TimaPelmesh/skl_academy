@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Практические проекты по веб-разработке. Портфолио, Todo App, Weather App, E-commerce, Dashboard.">
+    <meta name="keywords" content="веб проекты, портфолио, практика программирования, frontend проекты">
+    <meta name="author" content="SKL Academy">
+    <title>Веб‑разработка — Модуль 10: Практические проекты | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/web/10-projects.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="web">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Проекты</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button>
+                <button class="color-scheme-btn" data-color="orange"><span class="color-dot" style="background: #f97316;"></span></button>
+                <button class="color-scheme-btn" data-color="blue"><span class="color-dot" style="background: #3b82f6;"></span></button>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggle">🌓</button>
+            <a href="../../index.html" class="exit-btn">🏠</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. HTML</button>
+                    <div class="subtopics">
+                        <a href="01-html-basics.html#html-intro" class="subtopic">Введение в HTML</a>
+                        <a href="01-html-basics.html#text-content" class="subtopic">Текстовый контент</a>
+                        <a href="01-html-basics.html#links-images" class="subtopic">Ссылки и изображения</a>
+                        <a href="01-html-basics.html#semantic-markup" class="subtopic">Семантика</a>
+                        <a href="01-html-basics.html#forms" class="subtopic">Формы</a>
+                        <a href="01-html-basics.html#a11y-aria" class="subtopic">A11y и ARIA</a>
+                        <a href="01-html-basics.html#seo-html" class="subtopic">SEO</a>
+                        <a href="01-html-basics.html#media-retina" class="subtopic">Медиа и Retina</a>
+                        <a href="01-html-basics.html#module1-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. CSS</button>
+                    <div class="subtopics">
+                        <a href="02-css-basics.html#css-intro" class="subtopic">Введение</a>
+                        <a href="02-css-basics.html#specificity" class="subtopic">Специфичность</a>
+                        <a href="02-css-basics.html#typography" class="subtopic">Типографика</a>
+                        <a href="02-css-basics.html#box-model" class="subtopic">Box Model</a>
+                        <a href="02-css-basics.html#positioning" class="subtopic">Позиционирование</a>
+                        <a href="02-css-basics.html#flexbox" class="subtopic">Flexbox</a>
+                        <a href="02-css-basics.html#grid" class="subtopic">Grid</a>
+                        <a href="02-css-basics.html#responsive" class="subtopic">@media</a>
+                        <a href="02-css-basics.html#animations" class="subtopic">Анимации</a>
+                        <a href="02-css-basics.html#module2-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. JavaScript</button>
+                    <div class="subtopics">
+                        <a href="03-javascript-basics.html#js-intro" class="subtopic">Введение в JS</a>
+                        <a href="03-javascript-basics.html#conditions" class="subtopic">Условия</a>
+                        <a href="03-javascript-basics.html#functions" class="subtopic">Функции</a>
+                        <a href="03-javascript-basics.html#loops-arrays" class="subtopic">Циклы и массивы</a>
+                        <a href="03-javascript-basics.html#dom-basics" class="subtopic">DOM основы</a>
+                        <a href="03-javascript-basics.html#dom-events" class="subtopic">События</a>
+                        <a href="03-javascript-basics.html#forms-js" class="subtopic">Формы и JS</a>
+                        <a href="03-javascript-basics.html#storage" class="subtopic">Storage</a>
+                        <a href="03-javascript-basics.html#async-fetch" class="subtopic">Async и Fetch</a>
+                        <a href="03-javascript-basics.html#module3-project" class="subtopic">Проект</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Responsive</button>
+                    <div class="subtopics">
+                        <a href="04-responsive-design.html#intro" class="subtopic">Введение</a>
+                        <a href="04-responsive-design.html#viewport" class="subtopic">Viewport</a>
+                        <a href="04-responsive-design.html#media-queries" class="subtopic">Медиа-запросы</a>
+                        <a href="04-responsive-design.html#mobile-first" class="subtopic">Mobile First</a>
+                        <a href="04-responsive-design.html#breakpoints" class="subtopic">Брейкпоинты</a>
+                        <a href="04-responsive-design.html#fluid-typography" class="subtopic">Типографика</a>
+                        <a href="04-responsive-design.html#responsive-images" class="subtopic">Изображения</a>
+                        <a href="04-responsive-design.html#container-queries" class="subtopic">Container Queries</a>
+                        <a href="04-responsive-design.html#responsive-patterns" class="subtopic">Паттерны</a>
+                        <a href="04-responsive-design.html#best-practices" class="subtopic">Best practices</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Flex & Grid</button>
+                    <div class="subtopics">
+                        <a href="05-flexbox-grid.html#flexbox-intro" class="subtopic">Flexbox: введение</a>
+                        <a href="05-flexbox-grid.html#flex-container" class="subtopic">Flex Container</a>
+                        <a href="05-flexbox-grid.html#flex-items" class="subtopic">Flex Items</a>
+                        <a href="05-flexbox-grid.html#flex-patterns" class="subtopic">Паттерны Flex</a>
+                        <a href="05-flexbox-grid.html#grid-intro" class="subtopic">Grid: введение</a>
+                        <a href="05-flexbox-grid.html#grid-container" class="subtopic">Grid Container</a>
+                        <a href="05-flexbox-grid.html#grid-items" class="subtopic">Grid Items</a>
+                        <a href="05-flexbox-grid.html#grid-areas" class="subtopic">Grid Areas</a>
+                        <a href="05-flexbox-grid.html#flex-vs-grid" class="subtopic">Flex vs Grid</a>
+                        <a href="05-flexbox-grid.html#real-layouts" class="subtopic">Реальные макеты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Формы</button>
+                    <div class="subtopics">
+                        <a href="06-forms-validation.html#form-basics" class="subtopic">Основы форм</a>
+                        <a href="06-forms-validation.html#input-types" class="subtopic">Типы полей</a>
+                        <a href="06-forms-validation.html#native-validation" class="subtopic">Нативная валидация</a>
+                        <a href="06-forms-validation.html#css-validation" class="subtopic">CSS валидация</a>
+                        <a href="06-forms-validation.html#js-validation" class="subtopic">JS валидация</a>
+                        <a href="06-forms-validation.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="06-forms-validation.html#ux-patterns" class="subtopic">UX-паттерны</a>
+                        <a href="06-forms-validation.html#security" class="subtopic">Безопасность</a>
+                        <a href="06-forms-validation.html#real-forms" class="subtopic">Реальные формы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. DOM</button>
+                    <div class="subtopics">
+                        <a href="07-dom-advanced.html#dom-tree" class="subtopic">Дерево DOM</a>
+                        <a href="07-dom-advanced.html#selectors" class="subtopic">Селекторы</a>
+                        <a href="07-dom-advanced.html#traversal" class="subtopic">Обход</a>
+                        <a href="07-dom-advanced.html#manipulation" class="subtopic">Манипуляции</a>
+                        <a href="07-dom-advanced.html#events-basics" class="subtopic">События</a>
+                        <a href="07-dom-advanced.html#event-delegation" class="subtopic">Делегирование</a>
+                        <a href="07-dom-advanced.html#custom-events" class="subtopic">Кастомные события</a>
+                        <a href="07-dom-advanced.html#observers" class="subtopic">Observers</a>
+                        <a href="07-dom-advanced.html#performance" class="subtopic">Производительность</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Async & API</button>
+                    <div class="subtopics">
+                        <a href="08-async-apis.html#sync-async" class="subtopic">Sync и Async</a>
+                        <a href="08-async-apis.html#promises" class="subtopic">Promise</a>
+                        <a href="08-async-apis.html#async-await" class="subtopic">async/await</a>
+                        <a href="08-async-apis.html#fetch-api" class="subtopic">Fetch API</a>
+                        <a href="08-async-apis.html#rest-api" class="subtopic">REST API</a>
+                        <a href="08-async-apis.html#error-handling" class="subtopic">Обработка ошибок</a>
+                        <a href="08-async-apis.html#parallel" class="subtopic">Параллельные запросы</a>
+                        <a href="08-async-apis.html#caching" class="subtopic">Кэширование</a>
+                        <a href="08-async-apis.html#websockets" class="subtopic">WebSockets</a>
+                        <a href="08-async-apis.html#real-projects" class="subtopic">Реальные проекты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Оптимизация</button>
+                    <div class="subtopics">
+                        <a href="09-optimization.html#core-web-vitals" class="subtopic">Core Web Vitals</a>
+                        <a href="09-optimization.html#lcp" class="subtopic">LCP</a>
+                        <a href="09-optimization.html#cls" class="subtopic">CLS</a>
+                        <a href="09-optimization.html#images" class="subtopic">Оптимизация изображений</a>
+                        <a href="09-optimization.html#fonts" class="subtopic">Шрифты</a>
+                        <a href="09-optimization.html#js-perf" class="subtopic">JS производительность</a>
+                        <a href="09-optimization.html#css-perf" class="subtopic">CSS производительность</a>
+                        <a href="09-optimization.html#seo" class="subtopic">SEO</a>
+                        <a href="09-optimization.html#accessibility" class="subtopic">Доступность</a>
+                        <a href="09-optimization.html#tools" class="subtopic">Инструменты</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">10. Проекты</button>
+                    <div class="subtopics">
+                        <a href="#intro" class="subtopic active">Введение</a>
+                        <a href="#project-1" class="subtopic">Проект 1</a>
+                        <a href="#project-2" class="subtopic">Проект 2</a>
+                        <a href="#project-3" class="subtopic">Проект 3</a>
+                        <a href="#project-4" class="subtopic">Проект 4</a>
+                        <a href="#project-5" class="subtopic">Проект 5</a>
+                        <a href="#project-6" class="subtopic">Проект 6</a>
+                        <a href="#deployment" class="subtopic">Деплой</a>
+                        <a href="#next-steps" class="subtopic">Дальше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 10: Практические проекты</h2>
+                <p>Применяем все знания на практике! 6 проектов разной сложности для портфолио.</p>
+            </section>
+
+            <!-- Введение -->
+            <section id="intro" class="topic-section">
+                <h2>Введение</h2>
+
+                <h3>Как работать с проектами</h3>
+                <ol>
+                    <li><strong>Прочитайте требования</strong> — поймите что нужно создать</li>
+                    <li><strong>Спланируйте структуру</strong> — HTML разметка, компоненты</li>
+                    <li><strong>Начните с Mobile-First</strong> — сначала мобильная версия</li>
+                    <li><strong>Итерируйте</strong> — MVP → улучшения → полировка</li>
+                    <li><strong>Тестируйте</strong> — разные браузеры, устройства</li>
+                    <li><strong>Деплойте</strong> — GitHub Pages, Vercel, Netlify</li>
+                </ol>
+
+                <h3>Уровни сложности</h3>
+                <div class="info-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Проект</th>
+                                <th>Сложность</th>
+                                <th>Технологии</th>
+                                <th>Время</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Портфолио</td>
+                                <td>★</td>
+                                <td>HTML, CSS, базовый JS</td>
+                                <td>4-8 часов</td>
+                            </tr>
+                            <tr>
+                                <td>Todo App</td>
+                                <td>★★</td>
+                                <td>DOM, localStorage, события</td>
+                                <td>6-12 часов</td>
+                            </tr>
+                            <tr>
+                                <td>Weather App</td>
+                                <td>★★</td>
+                                <td>Fetch API, async/await</td>
+                                <td>8-16 часов</td>
+                            </tr>
+                            <tr>
+                                <td>E-commerce</td>
+                                <td>★★★</td>
+                                <td>Всё вышеперечисленное</td>
+                                <td>20-40 часов</td>
+                            </tr>
+                            <tr>
+                                <td>Dashboard</td>
+                                <td>★★★</td>
+                                <td>Графики, фильтры, данные</td>
+                                <td>20-40 часов</td>
+                            </tr>
+                            <tr>
+                                <td>Chat App</td>
+                                <td>★★★★</td>
+                                <td>WebSocket, real-time</td>
+                                <td>30-50 часов</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Проект 1: Портфолио -->
+            <section id="project-1" class="topic-section">
+                <h2>Проект 1: Сайт-портфолио</h2>
+
+                <h3>Описание</h3>
+                <p>Создайте личный сайт-портфолио для демонстрации своих проектов и навыков.</p>
+
+                <h3>Требования</h3>
+                <div class="visual-guide">
+                    <h4>Обязательно</h4>
+                    <ul>
+                        <li>Главная страница с hero-секцией</li>
+                        <li>Секция "Обо мне"</li>
+                        <li>Секция "Навыки" (с иконками/прогресс-барами)</li>
+                        <li>Галерея проектов (минимум 3)</li>
+                        <li>Форма обратной связи</li>
+                        <li>Адаптивность (mobile-first)</li>
+                        <li>Плавные анимации при скролле</li>
+                    </ul>
+                    
+                    <h4>Бонус</h4>
+                    <ul>
+                        <li>Тёмная/светлая тема</li>
+                        <li>Многоязычность</li>
+                        <li>Блог с статьями</li>
+                        <li>Интерактивные элементы</li>
+                    </ul>
+                </div>
+
+                <h3>Структура</h3>
+                
+                <div class="code-example">
+<pre><code class="language-text">portfolio/
+├── index.html
+├── css/
+│   ├── styles.css
+│   └── animations.css
+├── js/
+│   └── main.js
+├── images/
+│   ├── projects/
+│   └── icons/
+└── favicon.ico</code></pre>
+                </div>
+
+                <h3>HTML каркас</h3>
+                
+                <div class="code-example">
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Иван Петров — Frontend Developer&lt;/title&gt;
+  &lt;meta name="description" content="Портфолио веб-разработчика"&gt;
+  &lt;link rel="stylesheet" href="css/styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header class="header"&gt;
+    &lt;nav class="nav"&gt;
+      &lt;a href="#" class="logo"&gt;IP&lt;/a&gt;
+      &lt;ul class="nav-links"&gt;
+        &lt;li&gt;&lt;a href="#about"&gt;Обо мне&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#skills"&gt;Навыки&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#projects"&gt;Проекты&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#contact"&gt;Контакты&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;button class="theme-toggle"&gt;🌙&lt;/button&gt;
+      &lt;button class="menu-toggle"&gt;☰&lt;/button&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section id="hero" class="hero"&gt;
+      &lt;h1&gt;Привет, я &lt;span class="highlight"&gt;Иван&lt;/span&gt;&lt;/h1&gt;
+      &lt;p class="subtitle"&gt;Frontend Developer&lt;/p&gt;
+      &lt;a href="#projects" class="btn"&gt;Смотреть проекты&lt;/a&gt;
+    &lt;/section&gt;
+
+    &lt;section id="about" class="about"&gt;
+      &lt;h2&gt;Обо мне&lt;/h2&gt;
+      &lt;!-- ... --&gt;
+    &lt;/section&gt;
+
+    &lt;section id="skills" class="skills"&gt;
+      &lt;h2&gt;Навыки&lt;/h2&gt;
+      &lt;div class="skills-grid"&gt;
+        &lt;div class="skill-card"&gt;
+          &lt;img src="icons/html.svg" alt="HTML"&gt;
+          &lt;h3&gt;HTML5&lt;/h3&gt;
+          &lt;div class="progress" style="--progress: 95%"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- ... --&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id="projects" class="projects"&gt;
+      &lt;h2&gt;Проекты&lt;/h2&gt;
+      &lt;div class="projects-grid"&gt;
+        &lt;article class="project-card"&gt;
+          &lt;img src="projects/project1.jpg" alt="Проект 1"&gt;
+          &lt;div class="project-info"&gt;
+            &lt;h3&gt;Todo App&lt;/h3&gt;
+            &lt;p&gt;Приложение для управления задачами&lt;/p&gt;
+            &lt;div class="project-tags"&gt;
+              &lt;span&gt;HTML&lt;/span&gt;
+              &lt;span&gt;CSS&lt;/span&gt;
+              &lt;span&gt;JavaScript&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="project-links"&gt;
+              &lt;a href="#"&gt;Demo&lt;/a&gt;
+              &lt;a href="#"&gt;GitHub&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;!-- ... --&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id="contact" class="contact"&gt;
+      &lt;h2&gt;Связаться&lt;/h2&gt;
+      &lt;form class="contact-form"&gt;
+        &lt;input type="text" name="name" placeholder="Имя" required&gt;
+        &lt;input type="email" name="email" placeholder="Email" required&gt;
+        &lt;textarea name="message" placeholder="Сообщение" required&gt;&lt;/textarea&gt;
+        &lt;button type="submit"&gt;Отправить&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="footer"&gt;
+    &lt;p&gt;© 2025 Иван Петров&lt;/p&gt;
+    &lt;div class="social-links"&gt;
+      &lt;a href="#"&gt;GitHub&lt;/a&gt;
+      &lt;a href="#"&gt;LinkedIn&lt;/a&gt;
+      &lt;a href="#"&gt;Telegram&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+
+  &lt;script src="js/main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <h3>CSS стили (основа)</h3>
+                
+                <div class="code-example">
+<pre><code class="language-css">:root {
+  --primary: #6c63ff;
+  --bg: #ffffff;
+  --text: #1a1a2e;
+  --card-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --text: #e0e0e0;
+  --card-bg: #2d2d44;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Hero с анимацией */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 8vw, 4rem);
+  animation: fadeInUp 0.8s ease;
+}
+
+.highlight {
+  color: var(--primary);
+}
+
+/* Анимации при скролле */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Сетка проектов */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}</code></pre>
+                </div>
+
+                <h3>JavaScript (интерактивность)</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Анимация при скролле
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+  observer.observe(el);
+});
+
+// Переключение темы
+const themeToggle = document.querySelector('.theme-toggle');
+themeToggle.addEventListener('click', () => {
+  document.body.dataset.theme = 
+    document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('theme', document.body.dataset.theme);
+});
+
+// Мобильное меню
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- Проект 2: Todo App -->
+            <section id="project-2" class="topic-section">
+                <h2> Проект 2: Todo App</h2>
+
+                <h3>Описание</h3>
+                <p>Приложение для управления задачами с фильтрацией, поиском и сохранением в localStorage.</p>
+
+                <h3>Функционал</h3>
+                <ul>
+                    <li>Добавление/удаление/редактирование задач</li>
+                    <li>Отметка выполнения</li>
+                    <li>Фильтрация: Все / Активные / Выполненные</li>
+                    <li>Поиск по названию</li>
+                    <li>Drag & Drop сортировка</li>
+                    <li>Сохранение в localStorage</li>
+                    <li>Очистка выполненных</li>
+                </ul>
+
+                <h3>Структура данных</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Структура задачи
+const task = {
+  id: crypto.randomUUID(),
+  text: 'Выучить JavaScript',
+  completed: false,
+  createdAt: Date.now(),
+  priority: 'medium' // low, medium, high
+};
+
+// Состояние приложения
+const state = {
+  tasks: [],
+  filter: 'all', // all, active, completed
+  searchQuery: ''
+};
+
+// Рендеринг
+function render() {
+  const filtered = state.tasks
+    .filter(task => {
+      if (state.filter === 'active') return !task.completed;
+      if (state.filter === 'completed') return task.completed;
+      return true;
+    })
+    .filter(task => 
+      task.text.toLowerCase().includes(state.searchQuery.toLowerCase())
+    );
+  
+  tasksList.innerHTML = filtered.map(task => `
+    &lt;li class="task ${task.completed ? 'completed' : ''}" data-id="${task.id}"&gt;
+      &lt;input type="checkbox" ${task.completed ? 'checked' : ''}&gt;
+      &lt;span class="task-text"&gt;${escapeHtml(task.text)}&lt;/span&gt;
+      &lt;button class="delete-btn"&gt;🗑&lt;/button&gt;
+    &lt;/li&gt;
+  `).join('');
+}
+
+// Сохранение
+function save() {
+  localStorage.setItem('todos', JSON.stringify(state.tasks));
+}
+
+// Загрузка
+function load() {
+  const saved = localStorage.getItem('todos');
+  if (saved) {
+    state.tasks = JSON.parse(saved);
+    render();
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Проект 3: Weather App -->
+            <section id="project-3" class="topic-section">
+                <h2>🌤️ Проект 3: Weather App</h2>
+
+                <h3>Описание</h3>
+                <p>Приложение погоды с геолокацией, поиском городов и прогнозом на неделю.</p>
+
+                <h3>API</h3>
+                <ul>
+                    <li><strong>OpenWeatherMap</strong> — бесплатный API погоды</li>
+                    <li><strong>Geolocation API</strong> — определение местоположения</li>
+                </ul>
+
+                <h3>Код</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">const API_KEY = 'YOUR_API_KEY';
+const API_URL = 'https://api.openweathermap.org/data/2.5';
+
+// Получить погоду по координатам
+async function getWeather(lat, lon) {
+  const response = await fetch(
+    `${API_URL}/weather?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${API_KEY}`
+  );
+  return response.json();
+}
+
+// Получить прогноз
+async function getForecast(lat, lon) {
+  const response = await fetch(
+    `${API_URL}/forecast?lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${API_KEY}`
+  );
+  return response.json();
+}
+
+// Геолокация
+async function getCurrentLocation() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      pos => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+      err => reject(err)
+    );
+  });
+}
+
+// Поиск города
+async function searchCity(query) {
+  const response = await fetch(
+    `${API_URL}/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`
+  );
+  return response.json();
+}
+
+// Инициализация
+async function init() {
+  try {
+    const { lat, lon } = await getCurrentLocation();
+    const weather = await getWeather(lat, lon);
+    const forecast = await getForecast(lat, lon);
+    renderWeather(weather);
+    renderForecast(forecast);
+  } catch (error) {
+    showError('Не удалось определить местоположение');
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Проект 4: E-commerce -->
+            <section id="project-4" class="topic-section">
+                <h2>Проект 4: E-commerce</h2>
+
+                <h3>Описание</h3>
+                <p>Интернет-магазин с каталогом товаров, корзиной и оформлением заказа.</p>
+
+                <h3>Функционал</h3>
+                <ul>
+                    <li>Каталог товаров с фильтрацией</li>
+                    <li>Поиск и сортировка</li>
+                    <li>Страница товара</li>
+                    <li>Корзина (localStorage)</li>
+                    <li>Оформление заказа</li>
+                    <li>Адаптивный дизайн</li>
+                </ul>
+
+                <h3>Структура</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">// Состояние
+const store = {
+  products: [],
+  cart: [],
+  filters: {
+    category: 'all',
+    priceRange: [0, 10000],
+    sortBy: 'popular'
+  }
+};
+
+// Корзина
+const cart = {
+  items: JSON.parse(localStorage.getItem('cart')) || [],
+  
+  add(product, quantity = 1) {
+    const existing = this.items.find(i => i.id === product.id);
+    if (existing) {
+      existing.quantity += quantity;
+    } else {
+      this.items.push({ ...product, quantity });
+    }
+    this.save();
+    this.updateUI();
+  },
+  
+  remove(productId) {
+    this.items = this.items.filter(i => i.id !== productId);
+    this.save();
+    this.updateUI();
+  },
+  
+  getTotal() {
+    return this.items.reduce((sum, item) => 
+      sum + item.price * item.quantity, 0
+    );
+  },
+  
+  save() {
+    localStorage.setItem('cart', JSON.stringify(this.items));
+  },
+  
+  updateUI() {
+    const badge = document.querySelector('.cart-badge');
+    badge.textContent = this.items.length;
+    badge.hidden = this.items.length === 0;
+  }
+};
+
+// Фильтрация
+function filterProducts(products, filters) {
+  return products
+    .filter(p => filters.category === 'all' || p.category === filters.category)
+    .filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1])
+    .sort((a, b) => {
+      if (filters.sortBy === 'price-asc') return a.price - b.price;
+      if (filters.sortBy === 'price-desc') return b.price - a.price;
+      return b.rating - a.rating;
+    });
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Проект 5: Dashboard -->
+            <section id="project-5" class="topic-section">
+                <h2>Проект 5: Dashboard</h2>
+
+                <h3>Описание</h3>
+                <p>Аналитическая панель с графиками, таблицами и фильтрами.</p>
+
+                <h3>Функционал</h3>
+                <ul>
+                    <li>Графики (Chart.js / ApexCharts)</li>
+                    <li>Таблицы с сортировкой и пагинацией</li>
+                    <li>Фильтры по датам</li>
+                    <li>Карточки с KPI</li>
+                    <li>Экспорт в CSV/PDF</li>
+                    <li>Темная тема</li>
+                </ul>
+
+                <h3>Графики с Chart.js</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">import Chart from 'chart.js/auto';
+
+// Линейный график
+const salesChart = new Chart(document.getElementById('salesChart'), {
+  type: 'line',
+  data: {
+    labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
+    datasets: [{
+      label: 'Продажи',
+      data: [12000, 19000, 15000, 25000, 22000, 30000],
+      borderColor: '#6c63ff',
+      backgroundColor: 'rgba(108, 99, 255, 0.1)',
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      y: { beginAtZero: true }
+    }
+  }
+});
+
+// Обновление данных
+async function updateCharts(dateRange) {
+  const data = await fetchAnalytics(dateRange);
+  salesChart.data.labels = data.labels;
+  salesChart.data.datasets[0].data = data.values;
+  salesChart.update();
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Проект 6: Chat App -->
+            <section id="project-6" class="topic-section">
+                <h2>Проект 6: Chat App</h2>
+
+                <h3>Описание</h3>
+                <p>Real-time чат с WebSocket, комнатами и историей сообщений.</p>
+
+                <h3>Функционал</h3>
+                <ul>
+                    <li>Регистрация/авторизация</li>
+                    <li>Список комнат</li>
+                    <li>Real-time сообщения</li>
+                    <li>Индикатор "печатает..."</li>
+                    <li>Отправка изображений</li>
+                    <li>Уведомления</li>
+                </ul>
+
+                <h3>WebSocket клиент</h3>
+                
+                <div class="code-example">
+<pre><code class="language-javascript">class ChatClient {
+  constructor(url) {
+    this.url = url;
+    this.ws = null;
+    this.handlers = new Map();
+    this.connect();
+  }
+  
+  connect() {
+    this.ws = new WebSocket(this.url);
+    
+    this.ws.onopen = () => {
+      console.log('Connected');
+      this.emit('connected');
+    };
+    
+    this.ws.onmessage = (event) => {
+      const { type, payload } = JSON.parse(event.data);
+      this.emit(type, payload);
+    };
+    
+    this.ws.onclose = () => {
+      console.log('Disconnected, reconnecting...');
+      setTimeout(() => this.connect(), 3000);
+    };
+  }
+  
+  send(type, payload) {
+    if (this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify({ type, payload }));
+    }
+  }
+  
+  on(event, handler) {
+    if (!this.handlers.has(event)) {
+      this.handlers.set(event, []);
+    }
+    this.handlers.get(event).push(handler);
+  }
+  
+  emit(event, data) {
+    const handlers = this.handlers.get(event) || [];
+    handlers.forEach(h => h(data));
+  }
+  
+  // API методы
+  joinRoom(roomId) {
+    this.send('join', { roomId });
+  }
+  
+  sendMessage(roomId, text) {
+    this.send('message', { roomId, text, timestamp: Date.now() });
+  }
+  
+  startTyping(roomId) {
+    this.send('typing', { roomId, typing: true });
+  }
+  
+  stopTyping(roomId) {
+    this.send('typing', { roomId, typing: false });
+  }
+}
+
+// Использование
+const chat = new ChatClient('wss://chat.example.com');
+
+chat.on('message', (msg) => {
+  appendMessage(msg);
+});
+
+chat.on('typing', ({ userId, typing }) => {
+  showTypingIndicator(userId, typing);
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- Деплой -->
+            <section id="deployment" class="topic-section">
+                <h2>Деплой проектов</h2>
+
+                <h3>GitHub Pages</h3>
+                
+                <div class="code-example">
+<pre><code class="language-bash"># 1. Создать репозиторий на GitHub
+# 2. Push проекта
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/username/repo.git
+git push -u origin main
+
+# 3. Settings → Pages → Source: main branch
+# Сайт будет на: https://username.github.io/repo/</code></pre>
+                </div>
+
+                <h3>Vercel</h3>
+                
+                <div class="code-example">
+<pre><code class="language-bash"># CLI
+npm i -g vercel
+vercel
+
+# Или через vercel.com — подключить GitHub репозиторий</code></pre>
+                </div>
+
+                <h3>Netlify</h3>
+                
+                <div class="code-example">
+<pre><code class="language-bash"># Drag & drop папку на netlify.com
+# Или подключить GitHub репозиторий
+
+# netlify.toml для настройки
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200</code></pre>
+                </div>
+            </section>
+
+            <!-- Что дальше -->
+            <section id="next-steps" class="topic-section">
+                <h2>Что дальше?</h2>
+
+                <h3>Продолжение обучения</h3>
+                
+                <div class="visual-guide">
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li><strong>React / Vue / Svelte</strong> — современные фреймворки</li>
+                        <li><strong>TypeScript</strong> — типизация</li>
+                        <li><strong>Next.js / Nuxt</strong> — SSR фреймворки</li>
+                        <li><strong>State Management</strong> — Redux, Zustand, Pinia</li>
+                    </ul>
+                    
+                    <h4>Backend</h4>
+                    <ul>
+                        <li><strong>Node.js + Express</strong></li>
+                        <li><strong>Базы данных</strong> — PostgreSQL, MongoDB</li>
+                        <li><strong>REST API / GraphQL</strong></li>
+                        <li><strong>Authentication</strong> — JWT, OAuth</li>
+                    </ul>
+                    
+                    <h4>DevOps</h4>
+                    <ul>
+                        <li><strong>Docker</strong></li>
+                        <li><strong>CI/CD</strong> — GitHub Actions</li>
+                        <li><strong>Мониторинг</strong> — Sentry, Analytics</li>
+                    </ul>
+                </div>
+
+                <h3>Ресурсы</h3>
+                <ul>
+                    <li><a href="https://developer.mozilla.org">MDN Web Docs</a></li>
+                    <li><a href="https://web.dev">web.dev</a></li>
+                    <li><a href="https://javascript.info">JavaScript.info</a></li>
+                    <li><a href="https://css-tricks.com">CSS-Tricks</a></li>
+                </ul>
+
+                <div class="note">
+                    <h4>🎉 Поздравляем!</h4>
+                    <p>Вы прошли весь курс по веб-разработке! Теперь у вас есть фундамент для создания любых веб-приложений. Практикуйтесь, создавайте проекты, и вперёд к новым вершинам!</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose">✕</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script src="../courses.js"></script>
+</body>
+</html>
+

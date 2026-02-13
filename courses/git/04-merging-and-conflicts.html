@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git — Модуль 4: Слияние и разрешение конфликтов. Fast-Forward, 3-way merge, как решать конфликты.">
+    <meta name="keywords" content="git merge, fast-forward, 3-way merge, конфликты git, разрешение конфликтов">
+    <meta name="author" content="SKL Academy">
+    <meta property="og:title" content="Git — Модуль 4: Слияние и конфликты">
+    <meta property="og:description" content="Практикуем merge: сценарии, конфликты и их разрешение.">
+    <title>Курс Git — Модуль 4: Слияние и конфликты | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/git/04-merging-and-conflicts.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="git">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Git</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Философия и основы Git</button>
+                    <div class="subtopics">
+                        <a href="01-git-basics.html#vcs-intro" class="subtopic">1.1 Что такое VCS</a>
+                        <a href="01-git-basics.html#git-advantages" class="subtopic">1.2 Почему Git</a>
+                        <a href="01-git-basics.html#key-concepts" class="subtopic">1.3 Ключевые понятия</a>
+                        <a href="01-git-basics.html#file-states" class="subtopic">1.4 Состояния файла</a>
+                        <a href="01-git-basics.html#git-architecture" class="subtopic">1.5 Архитектура</a>
+                        <a href="01-git-basics.html#first-steps" class="subtopic">1.6 Первые шаги</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">2. Коммиты и история</button>
+                    <div class="subtopics">
+                        <a href="02-commits-and-history.html#log-pro" class="subtopic">2.1 git log</a>
+                        <a href="02-commits-and-history.html#git-show" class="subtopic">2.2 git show</a>
+                        <a href="02-commits-and-history.html#amend" class="subtopic">2.3 amend</a>
+                        <a href="02-commits-and-history.html#add-patch" class="subtopic">2.4 add -p</a>
+                        <a href="02-commits-and-history.html#gitignore" class="subtopic">2.5 .gitignore</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">3. Ветвление</button>
+                    <div class="subtopics">
+                        <a href="03-branching.html#branch-basics" class="subtopic">3.1 Основы веток</a>
+                        <a href="03-branching.html#create-switch" class="subtopic">3.2 Создание/переключение</a>
+                        <a href="03-branching.html#list-delete" class="subtopic">3.3 Список/удаление</a>
+                        <a href="03-branching.html#compare" class="subtopic">3.4 Сравнение</a>
+                        <a href="03-branching.html#workflow" class="subtopic">3.5 Практика</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn active">4. Слияние и конфликты</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#ff-vs-merge" class="subtopic active">4.1 FF vs 3‑way</a>
+                        <a href="#conflicts" class="subtopic">4.2 Почему конфликты</a>
+                        <a href="#markers" class="subtopic">4.3 Маркеры конфликтов</a>
+                        <a href="#resolve" class="subtopic">4.4 Разрешение</a>
+                        <a href="#tools" class="subtopic">4.5 Инструменты</a>
+                        <a href="#strategies" class="subtopic">4.6 Стратегии и опции merge</a>
+                        <a href="#ort-recursive" class="subtopic">4.7 Алгоритмы ort/recursive</a>
+                        <a href="#rename-whitespace" class="subtopic">4.8 Переименования и whitespace</a>
+                        <a href="#rerere" class="subtopic">4.9 rerere: запоминание решений</a>
+                        <a href="#squash-history" class="subtopic">4.10 Squash merge и история</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">5. Rebase</button>
+                    <div class="subtopics">
+                        <a href="05-rebase.html#rebase-vs-merge" class="subtopic">5.1 Rebase vs Merge</a>
+                        <a href="05-rebase.html#interactive" class="subtopic">5.2 Интерактивный rebase</a>
+                        <a href="05-rebase.html#conflicts" class="subtopic">5.3 Конфликты</a>
+                        <a href="05-rebase.html#rules" class="subtopic">5.4 Правила</a>
+                        <a href="05-rebase.html#cleanup" class="subtopic">5.5 Практика</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">6. Удалённые репозитории</button>
+                    <div class="subtopics">
+                        <a href="06-remotes.html#clone" class="subtopic">6.1 Клонирование</a>
+                        <a href="06-remotes.html#remotes" class="subtopic">6.2 Remotes</a>
+                        <a href="06-remotes.html#fetch-pull" class="subtopic">6.3 fetch/pull</a>
+                        <a href="06-remotes.html#push" class="subtopic">6.4 push/upstream</a>
+                        <a href="06-remotes.html#protocols" class="subtopic">6.5 SSH/HTTPS</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">7. Командная работа</button>
+                    <div class="subtopics">
+                        <a href="07-teamwork-and-practices.html#pr" class="subtopic">7.1 PR/MR</a>
+                        <a href="07-teamwork-and-practices.html#review" class="subtopic">7.2 Code Review</a>
+                        <a href="07-teamwork-and-practices.html#tags" class="subtopic">7.3 Теги</a>
+                        <a href="07-teamwork-and-practices.html#stash" class="subtopic">7.4 Stash</a>
+                        <a href="07-teamwork-and-practices.html#cherry" class="subtopic">7.5 Cherry-pick</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">8. Спасение и откаты</button>
+                    <div class="subtopics">
+                        <a href="08-recovery-and-troubleshooting.html#restore" class="subtopic">8.1 restore/checkout</a>
+                        <a href="08-recovery-and-troubleshooting.html#restore-source" class="subtopic">8.2 Из коммита</a>
+                        <a href="08-recovery-and-troubleshooting.html#reset-revert" class="subtopic">8.3 reset vs revert</a>
+                        <a href="08-recovery-and-troubleshooting.html#reflog" class="subtopic">8.4 reflog</a>
+                        <a href="08-recovery-and-troubleshooting.html#algorithm" class="subtopic">8.5 Алгоритм</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Инструменты и интеграции</button>
+                    <div class="subtopics">
+                        <a href="09-tools-and-integrations.html#gui" class="subtopic">9.1 GUI</a>
+                        <a href="09-tools-and-integrations.html#ssh" class="subtopic">9.2 SSH‑ключи</a>
+                        <a href="09-tools-and-integrations.html#hooks" class="subtopic">9.3 Hooks</a>
+                        <a href="09-tools-and-integrations.html#ci" class="subtopic">9.4 CI/CD</a>
+                        <a href="09-tools-and-integrations.html#modern" class="subtopic">9.5 switch/restore</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Сводная практика</button>
+                    <div class="subtopics">
+                        <a href="10-summary-best-practices.html#end-to-end" class="subtopic">10.1 Сквозной пример</a>
+                        <a href="10-summary-best-practices.html#best" class="subtopic">10.2 Лучшие практики</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro topic-section">
+                <h2>Модуль 4: Слияние и разрешение конфликтов</h2>
+                <p>Научимся объединять ветки и безопасно решать конфликты при слиянии.</p>
+                <p>Слияние — это момент истины для истории: именно здесь разрозненные линии разработки сходятся в единый результат. Важно понимать не только синтаксис команд, но и их последствия для графа коммитов и читаемости истории.</p>
+            </section>
+
+            <section id="ff-vs-merge" class="topic-section">
+                <h2>4.1 Стратегии слияния</h2>
+                <ul>
+                    <li><strong>Fast‑Forward</strong>: просто перемещается указатель ветки</li>
+                    <li><strong>3‑way merge</strong>: создаётся новый merge‑коммит</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="bash"># FF (если возможно)
+git switch main
+git merge feature/login
+
+# Принудительно создать merge-коммит
+git merge --no-ff feature/login
+</code></pre>
+                </div>
+                <p>FF поддерживает линейную историю, но скрывает факт существования отдельной ветки. Merge‑коммит фиксирует точку слияния, что полезно для аудита и поиска регрессий. Выбор стратегии — это компромисс между «чистотой» и информативностью.</p>
+            </section>
+
+            <section id="conflicts" class="topic-section">
+                <h2>4.2 Почему возникают конфликты</h2>
+                <p>Одинаковые строки изменены по‑разному в разных ветках. Git не может выбрать автоматически.</p>
+                <p>Конфликт — не ошибка системы, а сигнал к принятию решения. Используйте контекст истории (diff/log, ссылки на задачи), чтобы понять исходный замысел и примирить альтернативы.</p>
+            </section>
+
+            <section id="markers" class="topic-section">
+                <h2>4.3 Маркеры конфликтов</h2>
+                <div class="code-example">
+<pre><code class="bash">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+текущая версия
+=======
+версия из feature/login
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/login
+</code></pre>
+                </div>
+            </section>
+
+            <section id="resolve" class="topic-section">
+                <h2>4.4 Разрешение конфликтов</h2>
+                <ol>
+                    <li>Откройте конфликтующие файлы и вручную выберите правильный вариант</li>
+                    <li>Добавьте исправленные файлы в staging: <code>git add</code></li>
+                    <li>Завершите слияние: <code>git commit</code></li>
+                </ol>
+                <p>Стремитесь минимизировать область конфликта: разбивайте большие правки на коммиты, синхронизируйтесь с основной веткой чаще, используйте инструменты сравнения, чтобы увидеть «настоящие» различия, а не шум форматирования.</p>
+            </section>
+
+            <section id="tools" class="topic-section">
+                <h2>4.5 Инструменты</h2>
+                <ul>
+                    <li>Встроенный мердж‑инструмент в IDE/VS Code</li>
+                    <li>Внешние: meld, kdiff3 и др.</li>
+                </ul>
+                <p>Инструменты не принимают решения за вас, но помогают увидеть контекст. Старайтесь смотреть на изменения «по смыслу», включая переименования и перемещения кода.</p>
+            </section>
+            <section id="strategies" class="topic-section">
+                <h2>4.6 Стратегии и опции merge</h2>
+                <ul>
+                    <li><code>--ff</code>/<code>--no-ff</code>/<code>--ff-only</code> — управление fast‑forward</li>
+                    <li><code>--squash</code> — объединить изменения без создания merge‑коммита</li>
+                    <li>Стратегии: <code>ort</code> (по умолчанию), <code>recursive</code> (истор.), <code>octopus</code> (много веток)</li>
+                </ul>
+            </section>
+            <section id="ort-recursive" class="topic-section">
+                <h2>4.7 Алгоритмы ort и recursive</h2>
+                <p><strong>ort</strong> — современный быстрый алгоритм с улучшенной детекцией переименований и разрешением конфликтов. <strong>recursive</strong> — предыдущий алгоритм; полезен для понимания истории и некоторых кейсов.</p>
+            </section>
+            <section id="rename-whitespace" class="topic-section">
+                <h2>4.8 Переименования и пробелы</h2>
+                <p>Git выполняет эвристическую детекцию переименований, сравнивая сходство содержимого. На конфликт влияет обработка пробелов: опции <code>--ignore-space-change</code>, <code>--ignore-all-space</code>, атрибуты <code>.gitattributes</code> (например, <code>*.md text eol=lf</code>).</p>
+            </section>
+            <section id="rerere" class="topic-section">
+                <h2>4.9 rerere: Reuse Recorded Resolution</h2>
+                <p><code>rerere</code> запоминает решения конфликтов и повторно применяет их при схожих конфликтах. Включается конфигурацией, хранит отпечатки конфликтных участков в <code>.git/rr-cache</code>.</p>
+            </section>
+            <section id="squash-history" class="topic-section">
+                <h2>4.10 Squash merge и история</h2>
+                <p><code>--squash</code> создаёт один коммит вместо merge‑коммита, скрывая детализацию ветки. Это упрощает историю, но теряет информацию о происхождении отдельных коммитов.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../courses.js"></script>
+</body>
+</html> 

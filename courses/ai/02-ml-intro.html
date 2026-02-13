@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Модуль 2: Введение в машинное обучение — типы задач, supervised/unsupervised/RL, пайплайн ML">
+    <title>2. Введение в ML и типы задач | Введение в AI | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/ai/02-ml-intro.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="ai">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Введение в AI</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons"><button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button></div>
+            <button class="theme-toggle-btn" id="themeToggle" aria-label="Тема"><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" aria-label="Настройки"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <a href="../../index.html" class="exit-btn" title="На главную"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
+        </div>
+    </header>
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic"><button class="topic-btn">1. Фундамент</button><div class="subtopics"><a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра</a><a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Градиент</a></div></div>
+                <div class="topic"><button class="topic-btn active">2. Введение в ML</button><div class="subtopics" style="max-height: 1000px;"><a href="#supervised" class="subtopic active">2.1 С учителем</a><a href="#unsupervised" class="subtopic">2.2 Без учителя</a><a href="#rl" class="subtopic">2.3 RL</a><a href="#pipeline" class="subtopic">2.4 Пайплайн</a></div></div>
+                <div class="topic"><button class="topic-btn">3. Классические алгоритмы</button><div class="subtopics"><a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a></div></div>
+                <div class="topic"><button class="topic-btn">4. Ансамблевые методы</button><div class="subtopics"><a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a></div></div>
+                <div class="topic"><button class="topic-btn">5–10</button><div class="subtopics"><a href="05-neural-intro.html" class="subtopic">5. Нейросети</a><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+            </div>
+        </div>
+        <main id="content" class="content sidebar-active">
+            <section id="module-intro" class="topic-section"><h2>Модуль 2: Введение в машинное обучение и типы задач</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Дать классификацию задач и показать жизненный цикл ML-проекта.</p></div></section>
+            <section id="supervised" class="topic-section"><h2>Обучение с учителем (Supervised Learning)</h2><div class="lesson-content"><p><strong>Регрессия</strong> — предсказать число (температура, цена, спрос). Выход модели — непрерывное значение. Метрики: MSE, MAE, R².</p><p><strong>Классификация</strong> — отнести объект к одному из классов: кошка/собака, спам/не спам, многоклассовая. Выход — класс или вероятность принадлежности классу.</p><p><strong>Функция потерь (Loss Function)</strong> — одна величина, показывающая, насколько предсказания модели отличаются от правильных ответов. Минимизируя loss, мы «подгоняем» модель под данные. Для регрессии часто MSE, для классификации — кросс-энтропия.</p></div></section>
+            <section id="unsupervised" class="topic-section"><h2>Обучение без учителя (Unsupervised Learning)</h2><div class="lesson-content"><p><strong>Кластеризация</strong> — разбить объекты на группы без заранее заданных меток (сегментация клиентов, поиск аномалий). Алгоритмы: K-means, DBSCAN, иерархическая кластеризация.</p><p><strong>Снижение размерности</strong> — когда признаков слишком много, сжать их до меньшего числа переменных, сохранив структуру (PCA, t-SNE, UMAP). Нужно для визуализации и ускорения обучения.</p></div></section>
+            <section id="rl" class="topic-section"><h2>Обучение с подкреплением (RL) — обзор</h2><div class="lesson-content"><p><strong>Идея:</strong> агент действует в среде, получает награды (или штрафы). Цель — максимизировать суммарную награду. Обучение идёт не по готовым парам «вход–ответ», а по опыту взаимодействия. Примеры: игра (ходы → очки), робот (действия → достижение цели). Для общего кругозора: DQN, policy gradient, среды типа Gym.</p></div></section>
+            <section id="pipeline" class="topic-section"><h2>Основной пайплайн (конвейер) ML</h2><div class="lesson-content"><p><strong>Загрузка данных</strong> → <strong>Предобработка (чистка)</strong> — пропуски, выбросы, типы данных → <strong>Извлечение признаков (Feature Engineering)</strong> — создание и отбор признаков → <strong>Обучение модели</strong> — подбор гиперпараметров, кросс-валидация → <strong>Оценка качества</strong> — метрики на тестовой выборке → <strong>Внедрение (Deployment)</strong> — сервис, API, батч-инференс, мониторинг.</p></div></section>
+        </main>
+    </div>
+    <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>
+    <script src="../courses.js"></script>
+</body>
+</html>

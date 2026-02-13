@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бесплатный курс по Python для начинающих. Изучите основы Python: установку, синтаксис, переменные, типы данных. Полный курс программирования на Python с нуля.">
+    <meta name="keywords" content="бесплатный курс python, python для начинающих, основы python, обучение python, программирование python, python с нуля, python tutorial, python курсы">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Бесплатный курс Python для начинающих — Основы программирования">
+    <meta property="og:description" content="Изучите основы Python с нуля. Бесплатный курс программирования для начинающих с практическими примерами.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/python/01-python-basics.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Бесплатный курс Python для начинающих">
+    <meta name="twitter:description" content="Изучите основы Python с нуля. Бесплатный курс программирования для начинающих.">
+    <title>Бесплатный курс Python для начинающих — Основы программирования | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/python/01-python-basics.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Python course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Python",
+          "item": "https://skl-academy.ru/courses/python/01-python-basics.html"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Бесплатный курс Python для начинающих",
+      "description": "Полный курс программирования на Python с нуля. Изучите основы Python: установку, синтаксис, переменные, типы данных и базовые операторы.",
+      "provider": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "sameAs": "https://skl-academy.ru/"
+      },
+      "courseMode": "online",
+      "educationalLevel": "beginner",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "coursePrerequisites": "Базовые знания компьютера",
+      "teaches": ["Python", "программирование", "алгоритмы", "логика программирования"],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Python"
+        },
+        {
+          "@type": "Thing", 
+          "name": "программирование"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Бесплатный курс Python для начинающих — Основы программирования",
+      "description": "Изучите основы Python с нуля. Бесплатный курс программирования для начинающих с практическими примерами.",
+      "author": {
+        "@type": "Organization",
+        "name": "SKL Academy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SKL Academy",
+        "url": "https://skl-academy.ru/"
+      },
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-08-15",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://skl-academy.ru/courses/python/01-python-basics.html"
+      },
+      "keywords": "бесплатный курс python, python для начинающих, основы python, обучение python"
+    }
+    </script>
+    <style>
+        /* Дополнительные стили для улучшения адаптивности */
+        @media (max-width: 768px) {
+            .code-example pre {
+                font-size: 0.85rem;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .content.sidebar-active {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .code-example pre {
+                font-size: 0.8rem;
+            }
+            
+            .topic-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .topic-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .topic-section h4 {
+                font-size: 1.1rem;
+            }
+            
+            ol, ul {
+                padding-left: 20px;
+            }
+        }
+        
+        /* Улучшение читаемости контента */
+        .topic-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .module-intro {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .code-example {
+            border-radius: 8px;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Улучшение отступов для лучшей читаемости */
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        /* Добавляем отступы для списков */
+        ol, ul {
+            padding-left: 30px;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Исправление для мобильной версии - меню должно быть скрыто */
+        @media (max-width: 991px) {
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Исправление цвета текста в задачах и иконки выхода в светлой теме */
+        .light-theme .exercise h4,
+        .light-theme .exercise p,
+        .light-theme .exercise li,
+        .light-theme .exercise summary {
+            color: #000;
+        }
+        
+        .light-theme .exit-btn svg {
+            fill: #000;
+        }
+        
+        /* Исправление цвета ссылок в меню в светлой теме */
+        .light-theme .subtopic:not(.active) {
+            color: #000;
+        }
+
+        /* Сохраняем подсветку активной подтемы как в общих стилях */
+        .light-theme .subtopic.active {
+            color: var(--primary-color);
+            background-color: var(--overlay-light);
+        }
+
+        .light-theme .topic-btn:not(.active) {
+            color: #000;
+        }
+
+        .light-theme .topic-btn.active {
+            color: #111827;
+        }
+        
+        /* Увеличиваем отступ между бургер-меню и заголовком на мобильных устройствах */
+        @media (max-width: 576px) {
+            .header-title {
+                margin-left: 60px;
+            }
+        }
+
+    </style>
+</head>
+<body data-course="python">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn active">1. Основы Python</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#installation" class="subtopic active">1.1 Установка и настройка</a>
+                        <a href="#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                
+                <!-- Остальные модули -->
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics">
+                        <a href="09-typing-testing-and-quality.html#typing" class="subtopic">9.1 Типизация и mypy</a>
+                        <a href="09-typing-testing-and-quality.html#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="09-typing-testing-and-quality.html#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="09-typing-testing-and-quality.html#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="09-typing-testing-and-quality.html#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="09-typing-testing-and-quality.html#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="09-typing-testing-and-quality.html#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность, производительность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="content" class="content sidebar-active">
+            <!-- Тема 1.1: Установка и настройка -->
+            <section id="installation" class="topic-section">
+                <h2>1.1 Установка и настройка Python</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 15 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <h3>Цель урока</h3>
+                    <p>В этом уроке мы установим Python на ваш компьютер и научимся запускать первые программы. Это как подготовка рабочего места перед началом работы — нужно все настроить один раз, и дальше будет легко!</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Что мы будем делать:</h4>
+                        <ol>
+                            <li>Скачаем и установим Python</li>
+                            <li>Проверим, что все работает</li>
+                            <li>Запустим первую программу</li>
+                            <li>Установим удобный редактор кода (опционально, но рекомендуется)</li>
+                        </ol>
+                        <p><strong>Время:</strong> ~15-20 минут</p>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Важно для новичков:</strong> Не спешите! Установка — это самая важная часть. Если что-то пойдет не так, вернитесь назад и повторите шаг еще раз. Лучше потратить немного больше времени сейчас, чем иметь проблемы потом.</p>
+                    </div>
+                    
+                    <h3>Установка Python</h3>
+                    <p>Python нужно установить на ваш компьютер, как любую другую программу. Процесс отличается для разных операционных систем, но мы пройдем через каждую пошагово.</p>
+                    
+                    <h4>Windows (пошаговая инструкция)</h4>
+                    
+                    <div class="visual-guide">
+                        <h4>Шаг 1: Скачивание Python</h4>
+                        <ol>
+                            <li>Откройте браузер и перейдите на <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
+                            <li>Нажмите на большую желтую кнопку "Download Python 3.x.x" (где x.x — последняя версия)</li>
+                            <li>Дождитесь завершения загрузки файла (обычно называется python-3.x.x.exe)</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="visual-guide">
+                        <h4>Шаг 2: Установка Python</h4>
+                        <ol>
+                            <li>Найдите скачанный файл (обычно в папке "Загрузки") и запустите его двойным кликом</li>
+                            <li><strong>КРИТИЧЕСКИ ВАЖНО:</strong> В самом первом окне установщика в самом низу поставьте галочку "Add python.exe to PATH"</li>
+                            <li>Нажмите "Install Now" (рекомендуется для новичков)</li>
+                            <li>Если появится окно контроля учетных записей (UAC), нажмите "Да"</li>
+                            <li>Дождитесь завершения установки (обычно 2-3 минуты)</li>
+                            <li>Когда увидите "Setup was successful", нажмите "Close"</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Частая ошибка новичков:</strong> Многие забывают поставить галочку "Add python.exe to PATH"! Без этого Python не будет работать из командной строки. Если вы забыли это сделать, придется переустановить Python заново.</p>
+                        <p><strong>Что такое PATH?</strong> Простыми словами, это список мест, где компьютер ищет программы. Если Python не в PATH, компьютер его "не видит".</p>
+                    </div>
+                    
+                    <div class="visual-guide">
+                        <h4>Шаг 3: Проверка установки</h4>
+                        <ol>
+                            <li>Нажмите Win + R (или кнопку Пуск)</li>
+                            <li>Введите <code>cmd</code> и нажмите Enter — откроется командная строка (черное окно)</li>
+                            <li>Введите команду ниже и нажмите Enter:</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка версии Python
+python --version
+
+# Что вы должны увидеть:
+# Python 3.11.x (или Python 3.12.x)
+
+# Если видите это - отлично! Python установлен правильно!</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Если вы видите ошибку:</strong> "'python' не является внутренней или внешней командой..."</p>
+                        <p><strong>Решение:</strong></p>
+                        <ol>
+                            <li>Вы забыли поставить галочку "Add Python to PATH" при установке</li>
+                            <li>Удалите Python через "Панель управления" → "Программы и компоненты"</li>
+                            <li>Установите заново, НЕ ЗАБУДЬТЕ про галочку "Add python.exe to PATH"!</li>
+                        </ol>
+                    </div>
+                    
+                    <h4>macOS</h4>
+                    <p>В macOS Python может быть уже установлен, но лучше установить новую версию:</p>
+                    <ol>
+                        <li>Скачайте Python с <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
+                        <li>Откройте скачанный .pkg файл и следуйте инструкциям</li>
+                    </ol>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># Верификация успешной установки в терминале macOS
+python3 --version
+# Ожидаемый результат: Python 3.11.x</code></pre>
+                    </div>
+                    
+                    <h4>Linux</h4>
+                    <p>В большинстве дистрибутивов Linux Python уже установлен. Проверьте версию:</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># Проверка версии Python
+python3 --version</code></pre>
+                    </div>
+                    
+                    <p>Если Python отсутствует или требуется обновление, используйте пакетный менеджер вашего дистрибутива:</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># Ubuntu/Debian
+sudo apt update
+sudo apt install python3 python3-pip
+
+# Fedora
+sudo dnf install python3 python3-pip
+
+# Arch Linux
+sudo pacman -S python python-pip</code></pre>
+                    </div>
+                    
+                    <h3>Первый запуск Python — создадим вашу первую программу!</h3>
+                    <p>Теперь самое интересное — давайте запустим Python и напишем первую команду! У нас есть два способа работать с Python:</p>
+                    
+                    <h4>Способ 1: Интерактивный режим (Python как калькулятор)</h4>
+                    <p>Это как чат с Python — вы пишете команду, он сразу отвечает. Отлично подходит для экспериментов и быстрой проверки идей!</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Как запустить интерактивный режим:</h4>
+                        <ol>
+                            <li>Откройте командную строку (Win + R, введите <code>cmd</code>, нажмите Enter)</li>
+                            <li>Введите <code>python</code> и нажмите Enter</li>
+                            <li>Вы увидите три стрелочки <code>>>></code> — это значит, что Python готов к работе!</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># В командной строке введите:
+python
+
+# Что вы увидите:
+# Python 3.11.x (дата и время)
+# Type "help", "copyright" и т.д.
+# >>>
+
+# Три стрелочки >>> означают: "Я слушаю, вводи команду!"</code></pre>
+                    </div>
+                    
+                    <div class="practice-tips">
+                        <h4>Давайте попробуем! Введите эти команды по очереди:</h4>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Команда 1: Приветствие
+>>> print("Привет, мир!")
+Привет, мир!
+
+# Поздравляю! Вы только что написали свою первую программу на Python!
+
+# Команда 2: Простая математика
+>>> 2 + 3
+5
+
+# Команда 3: Посложнее
+>>> 10 * 5 + 2
+52
+
+# Команда 4: Работа с текстом
+>>> "Привет, " + "Python!"
+'Привет, Python!'
+
+# Команда 5: Выход из интерактивного режима
+>>> exit()
+# Или нажмите Ctrl + Z и Enter (Windows) / Ctrl + D (Mac/Linux)</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Что происходит?</strong></p>
+                        <ul>
+                            <li><code>>>></code> — это приглашение ввода (prompt). Python ждет вашей команды</li>
+                            <li><code>print("Привет, мир!")</code> — команда, которую вы вводите</li>
+                            <li><code>Привет, мир!</code> — результат выполнения команды</li>
+                        </ul>
+                        <p>Интерактивный режим отлично подходит для экспериментов, но для настоящих программ мы будем использовать файлы!</p>
+                    </div>
+                    
+                    <h4>Способ 2: Создание Python-файла (настоящая программа!)</h4>
+                    <p>Интерактивный режим — это хорошо для экспериментов, но настоящие программы мы сохраняем в файлы. Так их можно запускать много раз и делиться с другими!</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Создаем вашу первую программу (пошагово):</h4>
+                    </div>
+                    
+                    <p><strong>Шаг 1: Создаем файл</strong></p>
+                    <ol>
+                        <li>Откройте Блокнот (Notepad) — нажмите Win + R, введите <code>notepad</code>, нажмите Enter</li>
+                        <li>Напишите в блокноте ровно это:</li>
+                    </ol>
+                    
+                    <div class="code-example">
+                        <pre><code class="python">print("Привет, мир!")
+print("Это моя первая программа на Python!")
+print("Я научусь программировать!")</code></pre>
+                    </div>
+                    
+                    <p><strong>Шаг 2: Сохраняем файл правильно</strong></p>
+                    <ol>
+                        <li>Нажмите "Файл" → "Сохранить как..."</li>
+                        <li>В поле "Имя файла" напишите: <code>hello.py</code></li>
+                        <li><strong>Важно!</strong> В выпадающем списке "Тип файла" выберите "Все файлы (*.*)"</li>
+                        <li>Сохраните файл на Рабочий стол (Desktop) — так его будет легко найти</li>
+                    </ol>
+                    
+                    <div class="note">
+                        <p><strong>Типичная ошибка новичков:</strong> Если вы не выберете "Все файлы", Блокнот сохранит файл как <code>hello.py.txt</code>, а не <code>hello.py</code>, и Python его не запустит!</p>
+                        <p><strong>Как проверить:</strong> После сохранения посмотрите на иконку файла на Рабочем столе. Если видите иконку Python (змея) — все правильно! Если видите иконку блокнота — файл сохранен неправильно.</p>
+                    </div>
+                    
+                    <p><strong>Шаг 3: Запускаем программу!</strong></p>
+                    <ol>
+                        <li>Откройте командную строку (Win + R, введите <code>cmd</code>, нажмите Enter)</li>
+                        <li>Перейдите на Рабочий стол, введя эту команду:</li>
+                    </ol>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># В командной строке введите (и нажмите Enter):
+cd Desktop
+
+# cd = "change directory" (сменить папку)
+# Теперь вы находитесь на Рабочем столе</code></pre>
+                    </div>
+                    
+                    <ol start="3">
+                        <li>Запустите вашу программу:</li>
+                    </ol>
+                    
+                    <div class="code-example">
+                        <pre><code class="bash"># Введите эту команду:
+python hello.py
+
+# Что вы должны увидеть:
+# Привет, мир!
+# Это моя первая программа на Python!
+# Я научусь программировать!
+
+# ПОЗДРАВЛЯЮ! Вы создали и запустили настоящую программу!</code></pre>
+                    </div>
+                    
+                    <div class="visual-guide">
+                        <h4>Что вы только что сделали?</h4>
+                        <ul>
+                            <li>Создали файл с кодом на Python (<code>hello.py</code>)</li>
+                            <li>Сохранили его в правильном формате</li>
+                            <li>Запустили программу из командной строки</li>
+                            <li>Увидели результат работы программы</li>
+                        </ul>
+                        <p>Теперь вы официально программист Python!</p>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Что делать, если ничего не работает?</strong></p>
+                        <p><strong>Ошибка: "python: команда не найдена" или "python is not recognized"</strong></p>
+                        <ul>
+                            <li>Python не установлен или не добавлен в PATH</li>
+                            <li>Вернитесь к разделу "Установка Python" и переустановите с галочкой "Add Python to PATH"</li>
+                        </ul>
+                        <p><strong>Ошибка: "No such file or directory" или "Не удается найти путь"</strong></p>
+                        <ul>
+                            <li>Файл <code>hello.py</code> не находится там, где вы думаете</li>
+                            <li>Убедитесь, что вы в командной строке перешли на Рабочий стол (<code>cd Desktop</code>)</li>
+                            <li>Проверьте, что файл действительно на Рабочем столе</li>
+                        </ul>
+                        <p><strong>Ошибка: "SyntaxError" или какая-то другая</strong></p>
+                        <ul>
+                            <li>Возможно, вы допустили опечатку в коде</li>
+                            <li>Проверьте, что скопировали код точно так, как написано в примере</li>
+                            <li>Обратите внимание на кавычки — они должны быть обычными (""), не «»</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Установка IDE</h3>
+                    <p>Для удобной разработки рекомендуется использовать специальную среду:</p>
+                    
+                    <ul>
+                        <li><strong>Visual Studio Code</strong> — современный редактор с поддержкой Python. Идеален для начинающих.</li>
+                        <li><strong>PyCharm</strong> — профессиональная среда для Python-разработки.</li>
+                        <li><strong>Jupyter Notebook</strong> — интерактивная среда для анализа данных и обучения.</li>
+                    </ul>
+                    
+                    <h4>Настройка Visual Studio Code для Python</h4>
+                    <ol>
+                        <li>Установите VS Code с <a href="https://code.visualstudio.com/" target="_blank">официального сайта</a></li>
+                        <li>Откройте VS Code и нажмите Ctrl+Shift+X</li>
+                        <li>Найдите и установите расширение "Python" от Microsoft</li>
+                        <li>Дополнительно установите "Pylance" для улучшенной поддержки языка</li>
+                    </ol>
+                    
+                    <div class="note">
+                        <p><strong>Профессиональный совет:</strong> VS Code предоставляет множество инструментов для повышения продуктивности Python-разработчика, включая интеллектуальное автодополнение кода, встроенный отладчик, интеграцию с системами контроля версий, линтеры и форматтеры кода. Инвестирование времени в изучение этих возможностей существенно ускорит ваш рабочий процесс и повысит качество кода.</p>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Практическое задание для новичков: Ваша визитная карточка</h4>
+                        <p>Давайте создадим программу, которая выводит информацию о вас! Это будет ваша первая практическая работа.</p>
+                        
+                        <div class="practice-tips">
+                            <h4>Что нужно сделать:</h4>
+                            <ol>
+                                <li>Создайте новый файл <code>my_card.py</code> (моя визитка)</li>
+                                <li>Напишите программу, которая выводит:
+                                    <ul>
+                                        <li>Ваше имя</li>
+                                        <li>Ваш возраст</li>
+                                        <li>Ваше хобби или интересы</li>
+                                        <li>Почему вы решили изучать Python</li>
+                                    </ul>
+                                </li>
+                                <li>Запустите программу и проверьте результат</li>
+                            </ol>
+                        </div>
+                        
+                        <p><strong>Пример того, как должна выглядеть ваша программа:</strong></p>
+                        
+                        <div class="code-example">
+                            <pre><code class="python"># Файл: my_card.py
+# Это моя первая практическая программа!
+
+print("=" * 40)  # Рисуем линию из 40 знаков =
+print("    МОЯ ВИЗИТНАЯ КАРТОЧКА")
+print("=" * 40)
+print()  # Пустая строка для красоты
+
+print("Привет! Меня зовут Алексей")
+print("Мне 25 лет")
+print("Я увлекаюсь музыкой и фотографией")
+print("Я изучаю Python, потому что хочу создавать полезные программы!")
+print()
+print("=" * 40)</code></pre>
+                        </div>
+                        
+                        <p><strong>Когда вы запустите эту программу, вы увидите:</strong></p>
+                        
+                        <div class="code-example">
+                            <pre><code class="bash">========================================
+    МОЯ ВИЗИТНАЯ КАРТОЧКА
+========================================
+
+Привет! Меня зовут Алексей
+Мне 25 лет
+Я увлекаюсь музыкой и фотографией
+Я изучаю Python, потому что хочу создавать полезные программы!
+
+========================================</code></pre>
+                        </div>
+                        
+                        <div class="visual-guide">
+                            <h4>Подсказки:</h4>
+                            <ul>
+                                <li><code>print()</code> без аргументов создает пустую строку</li>
+                                <li><code>print("=" * 40)</code> выводит символ <code>=</code> 40 раз подряд</li>
+                                <li>Вы можете менять текст между кавычками на любой свой!</li>
+                                <li>Попробуйте добавить больше строк или изменить оформление</li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Экспериментируйте!</strong> Попробуйте:</p>
+                        <ul>
+                            <li>Изменить символ для линии (вместо <code>=</code> попробуйте <code>-</code> или <code>*</code>)</li>
+                            <li>Добавить больше информации о себе</li>
+                            <li>Использовать другие символы для украшения</li>
+                        </ul>
+                        
+                        <details>
+                            <summary><strong>Показать решение (только если совсем не получается!)</strong></summary>
+                            <div class="code-example">
+                                <pre><code class="python"># Решение задачи - файл my_card.py
+print("=" * 40)
+print("    МОЯ ВИЗИТНАЯ КАРТОЧКА")
+print("=" * 40)
+print()
+
+print("Привет! Меня зовут [ВАШЕ ИМЯ]")
+print("Мне [ВАШ ВОЗРАСТ] лет")
+print("Я увлекаюсь [ВАШИ УВЛЕЧЕНИЯ]")
+print("Я изучаю Python, потому что [ВАША ПРИЧИНА]!")
+print()
+print("=" * 40)
+
+# Замените текст в квадратных скобках на свои данные!</code></pre>
+                            </div>
+                        </details>
+                        
+                        <div class="note">
+                            <p><strong>Поздравляю!</strong> Когда вы выполните это задание, вы освоите:</p>
+                            <ul>
+                                <li>Создание файлов с кодом Python</li>
+                                <li>Использование команды <code>print()</code></li>
+                                <li>Повторение символов с помощью <code>*</code></li>
+                                <li>Запуск своих программ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Тема 1.2: Синтаксис и переменные -->
+            <section id="syntax" class="topic-section">
+                <h2>1.2 Синтаксис и переменные</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 20 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <h3>Основные элементы синтаксиса Python</h3>
+                    
+                    <div class="note">
+                        <p><strong>Синтаксис</strong> — это набор правил, по которым нужно писать код, чтобы компьютер понял что вы от него хотите. <strong>Простыми словами:</strong> это как грамматика в русском языке — есть правила, как составлять предложения, чтобы они были понятны.</p>
+                    </div>
+                    
+                    <p>Python придумали так, чтобы код было легко читать и писать. Здесь используются простые отступы (пробелы в начале строки) — это делает код чистым и понятным даже для новичков!</p>
+                    
+                    <h4>Отступы и блоки кода</h4>
+                    
+                    <div class="note">
+                        <p><strong>Отступ</strong> — это пробелы в начале строки кода. <strong>Простыми словами:</strong> когда вы нажимаете клавишу пробел или Tab в начале строки — это отступ. В Python отступы очень важны — они показывают, какие строки связаны между собой.</p>
+                        <p><strong>Блок кода</strong> — это группа строк кода, которые выполняются вместе. <strong>Простыми словами:</strong> это как абзац в тексте — несколько связанных предложений, которые относятся к одной теме.</p>
+                    </div>
+                    
+                    <p>В Python отступы определяют структуру кода. Они показывают, какие строки кода работают вместе как одна группа.</p>
+                    
+                    <div class="note">
+                        <p><strong>Важно для новичков:</strong> В следующем примере вы увидите слово <code>if</code> — это команда для проверки условий. Мы подробно изучим её позже! Сейчас главное — понять, как работают отступы. Просто посмотрите на пример и запомните: строки с отступом — это группа, которая относится к команде выше.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Правильное использование отступов (так нужно делать!)
+if True:  # Это главная команда (пока не важно что она значит)
+    print("Эта строка с отступом — она в группе")  # 4 пробела в начале
+    print("Эта тоже с отступом — тоже в группе")   # 4 пробела в начале
+print("А эта БЕЗ отступа — она отдельно")          # Без пробелов в начале
+
+# Неправильное использование отступов (так делать НЕЛЬЗЯ!)
+if True:  # Главная команда
+print("Ошибка! Нет отступа, хотя должен быть")  # Python выдаст ошибку IndentationError</code></pre>
+                    </div>
+                    
+                    <div class="visual-guide">
+                        <h4>Как делать отступы правильно:</h4>
+                        <ul>
+                            <li>Используйте <strong>4 пробела</strong> для каждого уровня отступа</li>
+                            <li>Можно нажать клавишу <strong>Tab</strong> — большинство редакторов автоматически заменят её на 4 пробела</li>
+                            <li><strong>Не смешивайте</strong> табуляцию и пробелы — выберите что-то одно!</li>
+                            <li>В VS Code и других редакторах отступы делаются автоматически — просто нажимайте Enter после строки с двоеточием <code>:</code></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>IndentationError</strong> — это ошибка отступа. <strong>Простыми словами:</strong> Python ругается, что вы неправильно поставили пробелы в начале строки. Если видите эту ошибку — проверьте отступы!</p>
+                    </div>
+                    
+                    <h4>Комментарии</h4>
+                    
+                    <div class="note">
+                        <p><strong>Комментарий</strong> — это текст в коде, который Python не выполняет. <strong>Простыми словами:</strong> это заметки для себя и других программистов. Как если бы вы писали рецепт и добавляли пометки "это для праздничного варианта" или "можно заменить на другой ингредиент".</p>
+                    </div>
+                    
+                    <p>Комментарии помогают объяснить, что делает код. Python их просто пропускает — они только для людей, которые читают код.</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Комментарий начинается с символа решётки #
+# Python видит # и игнорирует всё, что после неё до конца строки
+# Это удобно для пояснений в коде!
+
+# Выведем приветствие
+print("Привет, мир!")  # Комментарий можно писать и после кода в той же строке
+
+# Вычислим сумму
+result = 10 + 20  # Складываем 10 и 20, результат сохраняем в переменную result
+
+"""
+Если нужно написать длинный комментарий на несколько строк,
+используйте три кавычки в начале и в конце.
+Это называется многострочный комментарий.
+Он удобен для длинных пояснений.
+"""
+
+print("Комментарии никак не влияют на работу программы!")  # Программа работает как обычно</code></pre>
+                    </div>
+                    
+                    <div class="practice-tips">
+                        <h4>Когда использовать комментарии:</h4>
+                        <ul>
+                            <li><strong>Объяснить сложный код</strong> — если через месяц вы сами не поймете что тут написано, добавьте комментарий!</li>
+                            <li><strong>Пометить важные моменты</strong> — "ВНИМАНИЕ: здесь нельзя менять значение!"</li>
+                            <li><strong>Временно отключить код</strong> — поставьте # перед строкой, и она не будет выполняться</li>
+                            <li><strong>Не переборщите!</strong> — не нужно комментировать очевидные вещи: <code># Выводим привет</code> перед <code>print("привет")</code> избыточен</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Переменные и присваивание — ваши коробочки для хранения данных</h4>
+                    <p>Переменные в Python — это как волшебные коробочки, в которые вы складываете разные данные. И что круто — Python сам понимает, что вы туда положили, без лишних указаний с вашей стороны!</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Аналогия с коробками (очень важно понять!):</h4>
+                        <p>Представьте, что у вас есть коробки с этикетками:</p>
+                        <ul>
+                            <li><strong>Коробка с надписью "age"</strong> → внутри число 25</li>
+                            <li><strong>Коробка с надписью "name"</strong> → внутри текст "Анна"</li>
+                            <li><strong>Коробка с надписью "is_student"</strong> → внутри значение "да" (True)</li>
+                        </ul>
+                        <p>В программировании:</p>
+                        <ul>
+                            <li><strong>Этикетка на коробке</strong> = Имя переменной</li>
+                            <li><strong>Содержимое коробки</strong> = Значение переменной</li>
+                            <li><strong>Замена содержимого</strong> = Изменение значения</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Простыми словами:</strong> Когда вы пишете <code>age = 25</code>, вы говорите Python: "Возьми коробку с надписью 'age' и положи туда число 25". Python автоматически понимает, что 25 — это число, а не текст!</p>
+                        <p><strong>Главное преимущество:</strong> В других языках нужно сначала объявить тип коробки ("это коробка для чисел", "это коробка для текста"). В Python достаточно просто положить что-то в коробку — Python сам поймет!</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Создаем переменную name и кладем туда текст "Алексей"
+# Знак = означает "положи значение справа в переменную слева"
+name = "Алексей"      # Текст всегда в кавычках! Это называется "строка" (string, str)
+
+# Создаем переменную age и кладем туда число 25
+age = 25              # Число БЕЗ кавычек! Это целое число (integer, int)
+
+# Создаем переменную height и кладем туда число с дробной частью
+height = 1.85         # Число с точкой — это число с плавающей точкой (float)
+
+# Создаем переменную is_student и кладем туда True (правда/истина)
+is_student = True     # True или False — это логический тип (boolean, bool)
+
+# Теперь выведем все значения на экран
+# print() показывает, что внутри переменной
+print(name)           # Покажет: Алексей
+print(age)            # Покажет: 25
+print(height)         # Покажет: 1.85
+print(is_student)     # Покажет: True
+
+# Можем изменить значение переменной — просто присвоим новое!
+age = 26              # Теперь в age лежит 26 вместо 25
+print("Обновленный возраст:", age)  # Покажет: Обновленный возраст: 26</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Почему убрали f-строки?</strong> В оригинале был код <code>print(f"Обновленный возраст: {age}")</code>. F-строки — это продвинутая возможность, мы изучим её чуть позже. Сейчас используем простой способ: <code>print("текст", переменная)</code>.</p>
+                    </div>
+                    
+                    <h4>Правила именования переменных</h4>
+                    
+                    <p>У переменных есть имена (этикетки на наших коробочках). Давайте узнаем, какие имена можно использовать, а какие нельзя!</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Простые правила для имен:</h4>
+                        <ul>
+                            <li><strong>Можно:</strong> латинские буквы (a-z, A-Z), цифры (0-9), подчеркивание (_)</li>
+                            <li><strong>Нельзя:</strong> начинать с цифры</li>
+                            <li><strong>Нельзя:</strong> использовать пробелы и дефисы (-)</li>
+                            <li><strong>Нельзя:</strong> использовать специальные слова Python (if, for, print и другие)</li>
+                            <li><strong>Важно:</strong> <code>name</code> и <code>Name</code> — это РАЗНЫЕ переменные! Python различает большие и маленькие буквы</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># ПРАВИЛЬНЫЕ имена переменных (так можно делать)
+user_name = "John"       # Слова разделены подчеркиванием — отлично!
+age1 = 30                # Цифра в конце — можно!
+age_2 = 31               # Цифра после подчеркивания — тоже можно!
+_private = "Секрет"      # Начинается с подчеркивания — разрешено
+firstName = "Иван"       # Большая буква в середине — работает
+my_super_long_variable_name = "Длинное имя — тоже ОК"
+
+# НЕПРАВИЛЬНЫЕ имена переменных (так делать НЕЛЬЗЯ!)
+# 1name = "Ошибка"       # Начинается с цифры — Python выдаст ошибку!
+# my-var = 10            # Дефис запрещен! Используйте подчеркивание: my_var
+# my var = 10            # Пробел запрещен! Используйте: my_var
+# if = "Ошибка"          # if — специальное слово Python, нельзя использовать!
+# for = "Ошибка"         # for — тоже специальное слово!
+
+# ВАЖНО: Это РАЗНЫЕ переменные! Python различает регистр букв
+name = "Маша"            # Маленькая n
+Name = "Петя"            # Большая N — это уже другая переменная!
+print(name)              # Выведет: Маша
+print(Name)              # Выведет: Петя</code></pre>
+                    </div>
+                    
+                    <div class="practice-tips">
+                        <h4>Советы по выбору имен:</h4>
+                        <ul>
+                            <li><strong>Используйте понятные имена:</strong> <code>age</code> лучше чем <code>a</code>, <code>user_name</code> лучше чем <code>un</code></li>
+                            <li><strong>Используйте английский:</strong> <code>age</code> вместо <code>vozrast</code> (но для учебы можно и русскими буквами)</li>
+                            <li><strong>Для обычных переменных:</strong> все маленькими буквами с подчеркиванием: <code>my_variable</code></li>
+                            <li><strong>Будьте последовательны:</strong> если начали писать <code>user_name</code>, то и дальше пишите <code>user_age</code>, а не <code>userAge</code></li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Несколько переменных одновременно (можете пропустить пока!)</h4>
+                    
+                    <div class="note">
+                        <p><strong>Для любопытных:</strong> Этот раздел показывает продвинутые возможности. Если вам пока сложно — пропустите! К этому можно вернуться позже, когда освоите основы.</p>
+                    </div>
+                    
+                    <p>В Python можно создавать сразу несколько переменных в одной строке. Это удобный "трюк", но не обязательный для изучения прямо сейчас.</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Способ 1: Присвоить одно и то же значение нескольким переменным
+x = y = z = 0             # Все три переменные получают значение 0
+print(x, y, z)            # Выведет: 0 0 0
+# Простыми словами: создали 3 коробки (x, y, z) и в каждую положили 0
+
+# Способ 2: Присвоить разные значения нескольким переменным сразу
+a, b, c = 1, 2, 3         # a получает 1, b получает 2, c получает 3
+print(a, b, c)            # Выведет: 1 2 3
+# Простыми словами: создали 3 коробки и в каждую положили своё число
+
+# Способ 3: Обменять значения двух переменных местами
+a = 10                    # a = 10
+b = 20                    # b = 20
+print("До обмена:", a, b) # До обмена: 10 20
+
+a, b = b, a               # Меняем местами! a получает значение b, b получает значение a
+print("После обмена:", a, b)  # После обмена: 20 10
+# Это как поменять содержимое двух коробок местами — в Python это делается легко!</code></pre>
+                    </div>
+                    
+                    <div class="practice-tips">
+                        <h4>Когда это пригодится:</h4>
+                        <ul>
+                            <li><strong>Обмен значений</strong> — очень удобно в играх и алгоритмах</li>
+                            <li><strong>Распаковка данных</strong> — когда функция возвращает несколько значений (изучим позже)</li>
+                            <li><strong>Для начинающих:</strong> можете пока не использовать эти трюки, пишите обычно: <code>x = 0</code>, потом <code>y = 0</code></li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Типы данных</h4>
+                    
+                    <div class="note">
+                        <p><strong>Тип данных</strong> — это вид информации, которую можно хранить в переменной. <strong>Простыми словами:</strong> это как категории вещей — одежда, еда, книги. В программировании есть категории данных: числа, текст, правда/ложь и другие. Каждая категория (тип) имеет свои особенности.</p>
+                    </div>
+                    
+                    <p>Python автоматически определяет тип данных, когда вы создаете переменную. Вам не нужно ничего специально указывать — Python сам поймет!</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Основные типы данных в Python:</h4>
+                        <ul>
+                            <li><strong>int</strong> (integer) — целые числа: 1, 42, -17, 1000</li>
+                            <li><strong>float</strong> (floating point) — числа с дробной частью: 3.14, -0.5, 99.99</li>
+                            <li><strong>str</strong> (string) — текст (строка): "Привет", "Python", "123" (да, текст "123" это не число!)</li>
+                            <li><strong>bool</strong> (boolean) — правда или ложь: True, False</li>
+                            <li><strong>None</strong> (NoneType) — "ничего", пустое значение</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Создаем переменные разных типов
+number = 42             # Целое число (int) — без кавычек, без точки
+pi = 3.14159            # Число с точкой (float) — для дробных чисел
+name = "Python"         # Текст в кавычках (str) — строка
+is_active = True        # Логическое значение (bool) — только True или False
+nothing = None          # Пустое значение (None) — когда ничего нет
+
+# Как узнать тип переменной? Используем функцию type()
+print(type(number))     # Выведет: <class 'int'> — это целое число
+print(type(pi))         # Выведет: <class 'float'> — число с точкой
+print(type(name))       # Выведет: <class 'str'> — строка (текст)
+print(type(is_active))  # Выведет: <class 'bool'> — логический тип
+print(type(nothing))    # Выведет: <class 'NoneType'> — пустое значение
+
+# Посмотрим на значения переменных
+print(number)           # Выведет: 42
+print(pi)               # Выведет: 3.14159
+print(name)             # Выведет: Python
+print(is_active)        # Выведет: True
+print(nothing)          # Выведет: None</code></pre>
+                    </div>
+                    
+                    <div class="practice-tips">
+                        <h4>Как отличить типы:</h4>
+                        <ul>
+                            <li><strong>Целое число (int):</strong> <code>42</code> — без кавычек, без точки</li>
+                            <li><strong>Дробное число (float):</strong> <code>3.14</code> — есть точка!</li>
+                            <li><strong>Текст (str):</strong> <code>"42"</code> — в кавычках! Это текст "42", не число</li>
+                            <li><strong>Логика (bool):</strong> <code>True</code> или <code>False</code> — с большой буквы, без кавычек</li>
+                            <li><strong>Пустота (None):</strong> <code>None</code> — когда значения пока нет</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Преобразование типов</h4>
+                    
+                    <div class="note">
+                        <p><strong>Преобразование типов</strong> — это превращение данных из одного типа в другой. <strong>Простыми словами:</strong> это как перевод с одного языка на другой. Например, превратить текст "25" в число 25, или число 100 в текст "100".</p>
+                    </div>
+                    
+                    <p><strong>Зачем это нужно?</strong> Потому что Python не может делать некоторые операции, если типы данных не подходят. Например:</p>
+                    <ul>
+                        <li>Нельзя сложить текст и число: <code>"25" + 5</code> — ошибка!</li>
+                        <li>Нужно сначала превратить текст в число: <code>int("25") + 5</code> — работает!</li>
+                    </ul>
+                    
+                    <div class="visual-guide">
+                        <h4>Основные функции преобразования:</h4>
+                        <ul>
+                            <li><strong>int()</strong> — превращает в целое число</li>
+                            <li><strong>float()</strong> — превращает в дробное число</li>
+                            <li><strong>str()</strong> — превращает в текст (строку)</li>
+                            <li><strong>bool()</strong> — превращает в True или False</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Проблема: input() всегда даёт ТЕКСТ!
+age_text = "25"             # Это текст "25", не число 25
+# print(age_text + 5)       # ОШИБКА! Нельзя складывать текст и число!
+
+# Решение: превратить текст в число
+age_number = int(age_text)  # int() превращает текст "25" в число 25
+print(age_number + 5)       # Работает! 25 + 5 = 30
+
+# Еще пример с input()
+# age = input("Ваш возраст: ")  # Пользователь вводит 20
+# print(age + 1)               # ОШИБКА! age это текст "20", не число!
+# Правильно:
+# age = int(input("Ваш возраст: "))  # Сразу превращаем в число!
+# print(age + 1)                     # 20 + 1 = 21
+
+# Превращаем дробное число в целое
+price = 19.99               # Дробное число
+price_whole = int(price)    # int() отрезает всё после точки!
+print(price_whole)          # Выведет: 19 (не 20! Не округляет, а просто отрезает .99)
+
+# Превращаем число в текст (чтобы склеить с другим текстом)
+count = 100                 # Число
+count_text = str(count)     # str() превращает число 100 в текст "100"
+message = "У вас " + count_text + " сообщений"  # Склеиваем тексты
+print(message)              # Выведет: У вас 100 сообщений
+
+# Альтернатива: можно использовать запятую в print() (проще!)
+print("У вас", count, "сообщений")  # Тоже выведет: У вас 100 сообщений
+
+# Превращаем в True/False
+number1 = 1                 # Любое число кроме 0
+result1 = bool(number1)     # bool() превращает в True или False
+print(result1)              # Выведет: True (не ноль = True)
+
+number2 = 0                 # Ноль
+result2 = bool(number2)     # Ноль превращается в False!
+print(result2)              # Выведет: False
+
+text1 = "Привет"            # Непустой текст
+print(bool(text1))          # Выведет: True (есть текст = True)
+
+text2 = ""                  # Пустой текст (пустые кавычки)
+print(bool(text2))          # Выведет: False (пусто = False)</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Важно:</strong> Не всё можно превратить во всё!</p>
+                        <ul>
+                            <li><code>int("25")</code> — работает, превратит текст "25" в число 25</li>
+                            <li><code>int("привет")</code> — ошибка! Слово "привет" нельзя превратить в число</li>
+                            <li><code>int("100")</code> — работает</li>
+                            <li><code>int("10.5")</code> — ошибка! У int() не может быть точки. Используйте <code>float("10.5")</code></li>
+                        </ul>
+                        <p><strong>ValueError</strong> — это ошибка преобразования. <strong>Простыми словами:</strong> Python говорит "я не могу это превратить, это невозможно!"</p>
+                    </div>
+                    
+                    <h3>Ввод и вывод данных</h3>
+                    
+                    <h4>Функция print()</h4>
+                    
+                    <div class="note">
+                        <p><strong>Функция print()</strong> — выводит информацию на экран (в консоль). <strong>Простыми словами:</strong> это команда "покажи это пользователю". Всё, что вы напишете внутри скобок <code>print()</code>, появится на экране.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Самое простое использование — выводим текст
+print("Привет, мир!")       # Выведет на экран: Привет, мир!
+
+# Выводим число
+print(42)                   # Выведет: 42
+
+# Выводим несколько вещей сразу (через запятую)
+name = "Анна"               # Создаем переменную с именем
+age = 28                    # Создаем переменную с возрастом
+print("Имя:", name, "Возраст:", age)  # Выведет: Имя: Анна Возраст: 28
+# Python автоматически ставит пробелы между элементами!
+
+# Выводим только переменные
+print(name, age)            # Выведет: Анна 28
+
+# Пустой print() выводит пустую строку (перенос строки)
+print("Строка 1")
+print()                     # Пустая строка
+print("Строка 3")
+# Выведет:
+# Строка 1
+# (пустая строка)
+# Строка 3</code></pre>
+                    </div>
+                    
+                    <div class="visual-guide">
+                        <h4>Продвинутые возможности print() (можно пропустить пока!):</h4>
+                        <p>Это дополнительные возможности. Если сложно — пропустите, вернетесь позже!</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># F-строки — удобный способ вставить переменные в текст
+name = "Мария"
+age = 25
+print(f"Привет, {name}! Вам {age} лет.")  
+# f перед кавычками означает "форматированная строка"
+# {name} заменится на значение переменной name
+# Выведет: Привет, Мария! Вам 25 лет.
+
+# Можно менять разделитель между элементами
+# По умолчанию разделитель — пробел
+# sep= позволяет изменить это
+print("Яблоко", "Банан", "Апельсин")  # Выведет: Яблоко Банан Апельсин (пробелы)
+print("Яблоко", "Банан", "Апельсин", sep=" | ")  # Выведет: Яблоко | Банан | Апельсин
+
+# Можно изменить что будет в конце строки
+# По умолчанию print() в конце переходит на новую строку
+# end= позволяет изменить это
+print("Строка 1")           # После вывода переходит на новую строку
+print("Строка 2")           # Поэтому это выведется ниже
+# Результат:
+# Строка 1
+# Строка 2
+
+print("Строка 1", end=" --> ")  # Вместо перехода на новую строку поставит " --> "
+print("Строка 2")               # И это выведется на той же строке!
+# Результат: Строка 1 --> Строка 2</code></pre>
+                    </div>
+                    
+                    <h4>Функция input()</h4>
+                    
+                    <div class="note">
+                        <p><strong>Функция input()</strong> — запрашивает данные у пользователя. <strong>Простыми словами:</strong> программа задает вопрос, ждет ответа, и сохраняет этот ответ в переменную. Это делает программу интерактивной — она "общается" с пользователем!</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Запрашиваем имя у пользователя
+name = input("Введите ваше имя: ")  
+# Программа показывает вопрос: "Введите ваше имя: "
+# Программа ждет, пока пользователь введет ответ и нажмет Enter
+# Ответ сохраняется в переменную name
+
+# Теперь используем то, что пользователь ввел
+print("Здравствуйте,", name, "!")    # Если ввели "Мария", выведет: Здравствуйте, Мария !
+
+# Еще пример
+favorite_color = input("Какой ваш любимый цвет? ")  # Спрашиваем цвет
+print("Отличный выбор!", favorite_color, "— красивый цвет!")  # Используем ответ</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>ОЧЕНЬ ВАЖНО:</strong> <code>input()</code> ВСЕГДА возвращает ТЕКСТ (строку), даже если пользователь ввел число!</p>
+                        <p><strong>Простыми словами:</strong> Если пользователь введет <code>25</code>, Python сохранит текст <code>"25"</code>, а не число <code>25</code>. Это как разница между словом "двадцать пять" и самим числом 25.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Проблема: input() всегда дает текст!
+age = input("Введите ваш возраст: ")  
+# Пользователь вводит: 20
+# Но age теперь содержит ТЕКСТ "20", а не ЧИСЛО 20!
+
+print(type(age))       # Проверим тип — выведет: <class 'str'> (строка, текст!)
+
+# Попробуем прибавить 1 к возрасту
+# next_year = age + 1  # ОШИБКА! Нельзя сложить текст "20" и число 1
+
+# Правильное решение: сначала превратить текст в число!
+age_number = int(age)          # Превращаем текст "20" в число 20
+next_year = age_number + 1     # Теперь можно складывать: 20 + 1 = 21
+print("В следующем году вам будет", next_year, "лет")  # Выведет: В следующем году вам будет 21 лет
+
+# Часто делают так — сразу превращают в число:
+age = int(input("Ваш возраст: "))  # input() дает текст, int() сразу превращает в число
+print("Через 5 лет вам будет", age + 5, "лет")  # Теперь age это число, можно складывать!</code></pre>
+                    </div>
+                    
+                    <div class="practice-tips">
+                        <h4>Частые ошибки с input():</h4>
+                        <ul>
+                            <li><strong>Забыли преобразовать в число:</strong> <code>age = input("Возраст: ")</code> + потом <code>age + 5</code> — ошибка!</li>
+                            <li><strong>Правильно:</strong> <code>age = int(input("Возраст: "))</code> — сразу превращаем в число</li>
+                            <li><strong>Пользователь ввел не число:</strong> если спросили возраст, а пользователь ввел "двадцать" — <code>int()</code> выдаст ошибку!</li>
+                            <li><strong>Проверяйте ввод:</strong> Пока просто убедитесь, что в примерах вводите именно числа, когда программа просит число</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Практическое задание: Знакомство с пользователем</h4>
+                        <p>Создайте программу, которая общается с пользователем и запоминает его данные!</p>
+                        
+                        <div class="visual-guide">
+                            <h4>Ваша задача:</h4>
+                            <p>Создайте файл <code>hello_user.py</code>, который:</p>
+                            <ol>
+                                <li>Спрашивает у пользователя его имя</li>
+                                <li>Спрашивает его возраст</li>
+                                <li>Спрашивает его любимый цвет</li>
+                                <li>Выводит всю информацию красиво оформленной</li>
+                            </ol>
+                        </div>
+                        
+                        <p><strong>Как должна работать программа:</strong></p>
+                        
+                        <div class="code-example">
+                            <pre><code class="bash"># Когда пользователь запустит программу:
+Как тебя зовут? Мария
+Сколько тебе лет? 20
+Какой твой любимый цвет? синий
+
+========================================
+        ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ
+========================================
+Имя: Мария
+Возраст: 20
+Любимый цвет: синий
+========================================</code></pre>
+                        </div>
+                        
+                        <p><strong>Подсказка — начало кода:</strong></p>
+                        
+                        <div class="code-example">
+                            <pre><code class="python"># Файл: hello_user.py
+
+# Запрашиваем данные у пользователя
+name = input("Как тебя зовут? ")
+age = input("Сколько тебе лет? ")
+color = input("Какой твой любимый цвет? ")
+
+# Выводим красиво оформленную информацию
+print()  # Пустая строка
+print("=" * 40)
+print("        ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ")
+print("=" * 40)
+# Допишите остальное сами!</code></pre>
+                        </div>
+                        
+                        <div class="practice-tips">
+                            <h4>Подсказки:</h4>
+                            <ul>
+                                <li><code>input()</code> — спрашивает пользователя и сохраняет ответ</li>
+                                <li>Текст в кавычках внутри <code>input()</code> — это вопрос, который увидит пользователь</li>
+                                <li>Результат сохраняется в переменную слева от <code>=</code></li>
+                                <li>Используйте <code>print()</code> чтобы вывести значение переменной</li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Бонусное задание (если хотите попробовать):</strong></p>
+                        <ul>
+                            <li>Добавьте еще один вопрос (например, "Где ты живешь?")</li>
+                            <li>Используйте f-строки для более красивого вывода: <code>print(f"Имя: {name}")</code></li>
+                            <li>Попробуйте изменить оформление линий (другие символы вместо =)</li>
+                        </ul>
+                        
+                        <details>
+                            <summary><strong>Показать полное решение</strong></summary>
+                            <div class="code-example">
+                                <pre><code class="python"># Файл: hello_user.py
+
+# Запрашиваем данные у пользователя
+name = input("Как тебя зовут? ")
+age = input("Сколько тебе лет? ")
+color = input("Какой твой любимый цвет? ")
+
+# Выводим красиво оформленную информацию
+print()  # Пустая строка для отступа
+print("=" * 40)
+print("        ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ")
+print("=" * 40)
+print(f"Имя: {name}")
+print(f"Возраст: {age}")
+print(f"Любимый цвет: {color}")
+print("=" * 40)
+
+# Бонус: можно добавить персонализированное сообщение
+print()
+print(f"Приятно познакомиться, {name}!")
+print(f"{color.capitalize()} — отличный цвет!")</code></pre>
+                            </div>
+                        </details>
+                        
+                        <div class="note">
+                            <p><strong>Что вы изучите, выполнив это задание:</strong></p>
+                            <ul>
+                                <li>Как получать данные от пользователя с помощью <code>input()</code></li>
+                                <li>Как сохранять эти данные в переменные</li>
+                                <li>Как выводить сохраненные данные</li>
+                                <li>Как делать программу интерактивной (общающейся с пользователем)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Тема 1.3: Типы данных -->
+            <section id="data-types" class="topic-section">
+                <h2>1.3 Типы данных</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 25 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <h3>Основные типы данных в Python</h3>
+                    <p>В Python есть разные типы данных для хранения информации. Давайте познакомимся с этими ребятами поближе!</p>
+                    
+                    <div class="visual-guide">
+                        <h4>Основные типы данных:</h4>
+                        <ul>
+                            <li><strong>int (целые числа)</strong>: 1, 42, -10, 0 — целые числа любого размера, даже огромные. Python автоматически выделяет нужную память.</li>
+                            <li><strong>float (числа с плавающей точкой)</strong>: 3.14, -0.001, 2.0 — для вычислений с десятичными дробями. Точность ограничена (~15-17 значащих цифр).</li>
+                            <li><strong>str (строки)</strong>: "Привет", 'Python' — неизменяемые последовательности символов. Поддерживают индексацию, срезы и множество методов для обработки текста.</li>
+                            <li><strong>bool (логические значения)</strong>: True, False — используются в условиях и логических операциях. Любое ненулевое число или непустая коллекция при преобразовании дает True.</li>
+                            <li><strong>None</strong>: специальное значение, обозначающее отсутствие данных. Часто используется как значение по умолчанию для аргументов функций.</li>
+                    </ul>
+                    </div>
+                    
+                    <h4>Строковый тип (str)</h4>
+                    
+                    <div class="note">
+                        <p><strong>Строка (string, str)</strong> — это текст в кавычках. <strong>Простыми словами:</strong> любой текст, который вы хотите сохранить или показать пользователю — это строка. "Привет", "Python", "123" (да, даже числа в кавычках становятся текстом!).</p>
+                    </div>
+                    
+                    <p>Строки можно писать тремя способами:</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Способ 1: одинарные кавычки '
+s1 = 'Привет'        # Текст в одинарных кавычках
+print(s1)            # Выведет: Привет
+
+# Способ 2: двойные кавычки "
+s2 = "Мир"           # Текст в двойных кавычках (работает так же, как одинарные)
+print(s2)            # Выведет: Мир
+
+# Оба способа одинаковы, но двойные удобны когда в тексте есть апостроф:
+s4 = "It's Python"   # Апостроф внутри двойных кавычек — работает!
+s5 = 'Он сказал "Привет"'  # Кавычки внутри одинарных — тоже работает!
+
+# Способ 3: тройные кавычки ''' или """ — для длинного текста на несколько строк
+s3 = '''Это текст
+на нескольких
+строках'''           # Можно писать текст с переносами строк!
+print(s3)
+# Выведет:
+# Это текст
+# на нескольких
+# строках</code></pre>
+                    </div>
+                    
+                    <h4>Что можно делать со строками (основные операции)</h4>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Операция 1: Склеивание строк (конкатенация)
+s1 = "Привет"
+s2 = "Мир"
+result = s1 + ' ' + s2   # Знак + склеивает строки
+print(result)            # Выведет: Привет Мир
+
+# Операция 2: Повторение строки
+s1 = "Привет"
+print(s1 * 3)            # Повторить строку 3 раза
+# Выведет: ПриветПриветПривет
+
+print("=" * 20)          # Полезно для линий!
+# Выведет: ====================
+
+# Операция 3: Узнать длину строки (сколько символов)
+s1 = "Привет"
+length = len(s1)         # len() считает количество символов
+print(length)            # Выведет: 6 (6 букв в слове "Привет")
+
+# Операция 4: Получить один символ из строки (по номеру позиции)
+s1 = "Привет"
+print(s1[0])             # Первый символ (нумерация с 0!) — выведет: П
+print(s1[1])             # Второй символ — выведет: р
+print(s1[5])             # Шестой символ — выведет: т
+
+# Можно с конца! -1 это последний символ
+print(s1[-1])            # Последний символ — выведет: т
+print(s1[-2])            # Предпоследний — выведет: е
+
+# Операция 5: Получить часть строки (срез)
+s1 = "Привет"
+print(s1[1:4])           # Символы с позиции 1 по 3 (4 не включается!) — выведет: рив
+print(s1[:3])            # От начала до позиции 2 — выведет: При
+print(s1[3:])            # От позиции 3 до конца — выведет: вет
+
+# Запомните: Python считает с 0, и конечная позиция не включается!
+# "Привет"
+#  012345  <- позиции
+#  П р и в е т</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Индекс</strong> — это номер позиции символа в строке. <strong>Простыми словами:</strong> номер места, где находится буква. Важно: в Python счет начинается с 0, не с 1! Первая буква имеет индекс 0, вторая — 1, и так далее.</p>
+                    </div>
+                    
+                    <h4>Полезные команды (методы) для строк</h4>
+                    
+                    <div class="note">
+                        <p><strong>Метод</strong> — это команда, которую можно применить к значению. <strong>Простыми словами:</strong> это действие, которое можно сделать с текстом. Пишется после точки: <code>текст.команда()</code></p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python">text = "Python - мощный язык программирования"
+
+# Метод 1: upper() — сделать ВСЕ буквы большими (заглавными)
+print(text.upper())      # Выведет: PYTHON - МОЩНЫЙ ЯЗЫК ПРОГРАММИРОВАНИЯ
+
+# Метод 2: lower() — сделать все буквы маленькими (строчными)
+print(text.lower())      # Выведет: python - мощный язык программирования
+
+# Метод 3: replace() — заменить часть текста на другую
+new_text = text.replace("мощный", "элегантный")  # Заменить "мощный" на "элегантный"
+print(new_text)          # Выведет: Python - элегантный язык программирования
+
+# Метод 4: split() — разбить текст на отдельные слова
+words = text.split()     # Разделить по пробелам
+print(words)             # Выведет: ['Python', '-', 'мощный', 'язык', 'программирования']
+# Получится список (list) слов — изучим списки позже!
+
+# Метод 5: strip() — убрать лишние пробелы в начале и конце
+messy = "   много пробелов   "
+clean = messy.strip()    # Убрать пробелы по краям
+print(clean)             # Выведет: много пробелов (без пробелов по краям!)
+
+# Метод 6: find() — найти позицию слова в тексте
+position = text.find("язык")    # На какой позиции начинается слово "язык"?
+print(position)                 # Выведет: 17 (начинается с 17-й позиции)
+
+# Если слова нет, вернет -1
+position2 = text.find("Java")   # Ищем "Java" (такого слова нет)
+print(position2)                # Выведет: -1 (не найдено)
+
+# Метод 7: Проверить, есть ли слово в тексте (не метод, а оператор in)
+print("язык" in text)    # Есть ли слово "язык" в тексте?
+# Выведет: True (да, есть!)
+
+print("Java" in text)    # Есть ли слово "Java" в тексте?
+# Выведет: False (нет, нету!)
+
+# Метод 8: count() — посчитать, сколько раз встречается буква или слово
+print(text.count("м"))   # Сколько букв "м" в тексте?
+# Выведет: 2 (буква "м" встречается 2 раза)</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Важно про строки:</strong> Строки в Python <strong>неизменяемы</strong>. <strong>Простыми словами:</strong> если вы создали строку "Привет", вы не можете изменить в ней одну букву. Нужно создать новую строку. Например, <code>s1[0] = "П"</code> выдаст ошибку! Вместо этого создайте новую строку: <code>s2 = "П" + s1[1:]</code></p>
+                    </div>
+                    
+                    <h4>Логический тип (bool)</h4>
+                    
+                    <div class="note">
+                        <p><strong>Логический тип (boolean, bool)</strong> — это тип данных, который может быть только <code>True</code> (правда) или <code>False</code> (ложь). <strong>Простыми словами:</strong> это как ответ "Да" или "Нет", "Включено" или "Выключено". Используется для проверок и принятия решений в программе.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Создаем логические переменные
+is_active = True         # Переменная хранит значение "правда"
+is_completed = False     # Переменная хранит значение "ложь"
+
+print(is_active)         # Выведет: True
+print(is_completed)      # Выведет: False
+
+# Важно: пишется с БОЛЬШОЙ буквы! True и False, а не true и false</code></pre>
+                    </div>
+                    
+                    <h4>Логические операции (для тех, кто хочет узнать больше)</h4>
+                    
+                    <div class="note">
+                        <p><strong>Для любопытных:</strong> Этот раздел показывает, как комбинировать True и False. Если сложно — пропустите, вернетесь когда будем изучать условия (if/else)!</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <pre><code class="python">is_active = True
+is_completed = False
+
+# Операция 1: and (И) — оба условия должны быть True
+result = is_active and is_completed   # True И False = False
+print(result)                         # Выведет: False
+# Простыми словами: "Активно И Завершено?" → "Да И Нет?" = Нет
+
+# Операция 2: or (ИЛИ) — хотя бы одно условие должно быть True
+result = is_active or is_completed    # True ИЛИ False = True
+print(result)                         # Выведет: True
+# Простыми словами: "Активно ИЛИ Завершено?" → "Да ИЛИ Нет?" = Да (хватит одного "Да")
+
+# Операция 3: not (НЕ) — переворачивает значение
+result = not is_active                # НЕ True = False
+print(result)                         # Выведет: False
+# Простыми словами: "НЕ Активно?" → "НЕ Да?" = Нет</code></pre>
+                    </div>
+                    
+                    <h4>Сравнение чисел — получаем True или False</h4>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Сравниваем числа
+x = 10
+y = 5
+
+# Больше >
+print(x > y)     # 10 больше 5? Да! — Выведет: True
+
+# Меньше <
+print(x < y)     # 10 меньше 5? Нет! — Выведет: False
+
+# Равно == (два знака равно!)
+print(x == y)    # 10 равно 5? Нет! — Выведет: False
+
+# Не равно !=
+print(x != y)    # 10 не равно 5? Да! — Выведет: True
+
+# Больше или равно >=
+print(x >= 10)   # 10 больше или равно 10? Да (равно)! — Выведет: True
+
+# Меньше или равно <=
+print(y <= 10)   # 5 меньше или равно 10? Да! — Выведет: True</code></pre>
+                    </div>
+                    
+                    <div class="note">
+                        <p><strong>Важно:</strong> Для проверки равенства используйте <code>==</code> (два знака равно), а не <code>=</code> (один знак)!</p>
+                        <ul>
+                            <li><code>=</code> — это присваивание (положить значение в переменную): <code>x = 5</code></li>
+                            <li><code>==</code> — это проверка равенства (равны ли значения?): <code>x == 5</code></li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Что считается True, а что False (можно пропустить пока!)</h4>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Любое значение можно превратить в True или False
+# Общее правило: "пусто" или "ноль" = False, всё остальное = True
+
+# Числа:
+print(bool(0))       # 0 (ноль) = False
+print(bool(42))      # Любое число кроме 0 = True
+print(bool(-5))      # Даже отрицательное (не ноль!) = True
+
+# Текст (строки):
+print(bool(""))      # Пустая строка "" = False
+print(bool("abc"))   # Непустая строка = True
+print(bool(" "))     # Даже один пробел = True (строка не пустая!)
+
+# Специальное значение None:
+print(bool(None))    # None (ничего) = False</code></pre>
+                    </div>
+                    
+                    <h4>Числовые типы (int, float)</h4>
+                    <p>Python предоставляет два основных числовых типа: целые числа (int) и числа с плавающей точкой (float).</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Целые числа (int)
+a = 42
+b = 1000000000000000000000  # Python поддерживает целые числа произвольной длины
+c = 0b1010                  # Двоичная запись (10 в десятичной)
+d = 0o777                   # Восьмеричная запись (511 в десятичной)
+e = 0xFF                    # Шестнадцатеричная запись (255 в десятичной)
+print(a, b, c, d, e)
+
+# Числа с плавающей точкой (float)
+pi = 3.14159
+e_const = 2.71828
+avogadro = 6.022e23         # Научная нотация: 6.022 × 10²³
+tiny = 1e-10                # 0.0000000001
+print(pi, e_const, avogadro, tiny)
+
+# Арифметические операции
+sum_result = a + pi         # Смешивание int и float дает float: 45.14159
+division = 10 / 3           # Обычное деление всегда дает float: 3.3333333333333335
+floor_div = 10 // 3         # Целочисленное деление (результат округляется вниз): 3
+modulo = 10 % 3             # Остаток от деления: 1
+power = 2 ** 8              # Возведение в степень: 256
+print(sum_result, division, floor_div, modulo, power)
+
+# Округление и другие операции
+import math
+print(round(pi, 2))         # Округление до 2 знаков после запятой: 3.14
+print(math.floor(pi))       # Округление вниз: 3
+print(math.ceil(pi))        # Округление вверх: 4
+print(math.sqrt(16))        # Квадратный корень: 4.0
+print(abs(-42))             # Абсолютное значение: 42</code></pre>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Практическое задание: Простой калькулятор</h4>
+                        <p>Создадим вашу первую полезную программу — калькулятор, который складывает два числа!</p>
+                        
+                        <div class="visual-guide">
+                            <h4>Задача:</h4>
+                            <p>Создайте программу <code>calculator.py</code>, которая:</p>
+                            <ol>
+                                <li>Спрашивает первое число</li>
+                                <li>Спрашивает второе число</li>
+                                <li>Складывает их</li>
+                                <li>Показывает результат</li>
+                            </ol>
+                        </div>
+                        
+                        <p><strong>Как должна работать программа:</strong></p>
+                        
+                        <div class="code-example">
+                            <pre><code class="bash"># Пример работы программы:
+Введите первое число: 10
+Введите второе число: 25
+
+====================
+    РЕЗУЛЬТАТ
+====================
+10 + 25 = 35
+====================</code></pre>
+                        </div>
+                        
+                        <div class="note">
+                            <p><strong>Важная деталь для новичков!</strong></p>
+                            <p>Функция <code>input()</code> всегда возвращает текст (строку), даже если пользователь ввел число!</p>
+                            <p><strong>Это означает:</strong></p>
+                            <ul>
+                                <li><code>input("Число: ")</code> даст вам текст, например <code>"10"</code></li>
+                                <li>Чтобы сложить числа, нужно преобразовать текст в число: <code>int("10")</code></li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Подсказка — структура программы:</strong></p>
+                        
+                        <div class="code-example">
+                            <pre><code class="python"># Файл: calculator.py
+
+# Шаг 1: Получаем первое число от пользователя
+number1_text = input("Введите первое число: ")
+number1 = int(number1_text)  # Преобразуем текст в число
+
+# Шаг 2: Получаем второе число
+number2_text = input("Введите второе число: ")
+number2 = int(number2_text)  # Преобразуем текст в число
+
+# Шаг 3: Складываем числа
+result = number1 + number2
+
+# Шаг 4: Показываем результат
+print()
+print("=" * 20)
+print("    РЕЗУЛЬТАТ")
+print("=" * 20)
+# Допишите вывод результата здесь!</code></pre>
+                        </div>
+                        
+                        <div class="practice-tips">
+                            <h4>Подсказки:</h4>
+                            <ul>
+                                <li><code>int()</code> превращает текст в целое число</li>
+                                <li>Можно сократить две строки в одну: <code>number1 = int(input("Число: "))</code></li>
+                                <li>Для вывода используйте f-строку: <code>print(f"{number1} + {number2} = {result}")</code></li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Попробуйте улучшить программу:</strong></p>
+                        <ul>
+                            <li>Добавьте вычитание (попросите выбрать операцию)</li>
+                            <li>Добавьте умножение и деление</li>
+                            <li>Добавьте проверку деления на ноль</li>
+                        </ul>
+                        
+                        <details>
+                            <summary><strong>Показать полное решение (базовая версия)</strong></summary>
+                            <div class="code-example">
+                                <pre><code class="python"># Файл: calculator.py
+
+# Получаем числа от пользователя и сразу преобразуем в int
+number1 = int(input("Введите первое число: "))
+number2 = int(input("Введите второе число: "))
+
+# Выполняем сложение
+result = number1 + number2
+
+# Выводим результат
+print()
+print("=" * 20)
+print("    РЕЗУЛЬТАТ")
+print("=" * 20)
+print(f"{number1} + {number2} = {result}")
+print("=" * 20)</code></pre>
+                            </div>
+                        </details>
+                        
+                        <details>
+                            <summary><strong>Показать улучшенное решение (с выбором операции)</strong></summary>
+                            <div class="code-example">
+                                <pre><code class="python"># Файл: calculator.py (улучшенная версия)
+
+# Получаем числа
+number1 = int(input("Введите первое число: "))
+number2 = int(input("Введите второе число: "))
+
+# Спрашиваем, какую операцию выполнить
+print()
+print("Выберите операцию:")
+print("1 - Сложение")
+print("2 - Вычитание")
+print("3 - Умножение")
+print("4 - Деление")
+operation = input("Ваш выбор (1-4): ")
+
+# Выполняем выбранную операцию
+if operation == "1":
+    result = number1 + number2
+    symbol = "+"
+elif operation == "2":
+    result = number1 - number2
+    symbol = "-"
+elif operation == "3":
+    result = number1 * number2
+    symbol = "*"
+elif operation == "4":
+    if number2 != 0:
+        result = number1 / number2
+        symbol = "/"
+    else:
+        result = "Ошибка! Деление на ноль!"
+        symbol = "/"
+else:
+    result = "Неверная операция!"
+    symbol = "?"
+
+# Выводим результат
+print()
+print("=" * 30)
+print("        РЕЗУЛЬТАТ")
+print("=" * 30)
+print(f"{number1} {symbol} {number2} = {result}")
+print("=" * 30)</code></pre>
+                            </div>
+                        </details>
+                        
+                        <div class="note">
+                            <p><strong>Что вы освоите:</strong></p>
+                            <ul>
+                                <li>Преобразование типов данных (<code>int()</code>, <code>str()</code>)</li>
+                                <li>Математические операции с числами</li>
+                                <li>Работу с пользовательским вводом</li>
+                                <li>Форматирование вывода</li>
+                                <li>(Бонус) Условные операторы <code>if-elif-else</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Тема 1.4: Базовые операторы -->
+            <section id="operators" class="topic-section">
+                <h2>1.4 Базовые операторы</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 20 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <h3>Операторы в Python</h3>
+                    <p>Операторы — это волшебные символы, с помощью которых вы творите чудеса с данными. Давайте посмотрим, какие операторы есть в нашем арсенале!</p>
+                    
+                    <div class="operators-cheatsheet">
+                        <h4>Шпаргалка по операторам:</h4>
+                        <table>
+                            <tr>
+                                <th>Категория</th>
+                                <th>Операторы</th>
+                                <th>Пример</th>
+                                <th>Результат</th>
+                            </tr>
+                            <tr>
+                                <td rowspan="7">Арифметические</td>
+                                <td>+ (сложение)</td>
+                                <td>5 + 3</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>- (вычитание)</td>
+                                <td>5 - 3</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>* (умножение)</td>
+                                <td>5 * 3</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>/ (деление)</td>
+                                <td>5 / 2</td>
+                                <td>2.5</td>
+                            </tr>
+                            <tr>
+                                <td>// (целочисленное деление)</td>
+                                <td>5 // 2</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>% (остаток от деления)</td>
+                                <td>5 % 2</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>** (возведение в степень)</td>
+                                <td>2 ** 3</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6">Сравнения</td>
+                                <td>== (равно)</td>
+                                <td>5 == 5</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td>!= (не равно)</td>
+                                <td>5 != 3</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td>> (больше)</td>
+                                <td>5 > 3</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td>< (меньше)</td>
+                                <td>5 < 3</td>
+                                <td>False</td>
+                            </tr>
+                            <tr>
+                                <td>>= (больше или равно)</td>
+                                <td>5 >= 5</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td><= (меньше или равно)</td>
+                                <td>5 <= 3</td>
+                                <td>False</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">Логические</td>
+                                <td>and (логическое И)</td>
+                                <td>True and False</td>
+                                <td>False</td>
+                            </tr>
+                            <tr>
+                                <td>or (логическое ИЛИ)</td>
+                                <td>True or False</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td>not (логическое НЕ)</td>
+                                <td>not True</td>
+                                <td>False</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5">Присваивания</td>
+                                <td>= (простое присваивание)</td>
+                                <td>x = 5</td>
+                                <td>x = 5</td>
+                            </tr>
+                            <tr>
+                                <td>+= (сложение с присваиванием)</td>
+                                <td>x += 3</td>
+                                <td>x = x + 3</td>
+                            </tr>
+                            <tr>
+                                <td>-= (вычитание с присваиванием)</td>
+                                <td>x -= 2</td>
+                                <td>x = x - 2</td>
+                            </tr>
+                            <tr>
+                                <td>*= (умножение с присваиванием)</td>
+                                <td>x *= 2</td>
+                                <td>x = x * 2</td>
+                            </tr>
+                            <tr>
+                                <td>/= (деление с присваиванием)</td>
+                                <td>x /= 2</td>
+                                <td>x = x / 2</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">Членства</td>
+                                <td>in (содержится в)</td>
+                                <td>"a" in "abc"</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td>not in (не содержится в)</td>
+                                <td>"d" not in "abc"</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td>is (тот же объект)</td>
+                                <td>x is None</td>
+                                <td>True (если x = None)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <h4>Приоритет операторов</h4>
+                    <p>В Python операторы имеют разный приоритет. Операции с более высоким приоритетом выполняются раньше.</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Пример приоритета операторов
+result = 2 + 3 * 4    # Умножение имеет более высокий приоритет, чем сложение
+print(result)         # 14, а не 20
+
+# Использование скобок для изменения порядка операций
+result = (2 + 3) * 4  # Сначала выполняется выражение в скобках
+print(result)         # 20
+
+# Приоритет логических операторов
+x = 5
+y = 10
+z = 15
+result = x < y and y < z  # Сначала выполняются сравнения, затем логическое И
+print(result)             # True
+
+# Сложное выражение
+result = x + y * z - x / y  # Порядок: умножение/деление, затем сложение/вычитание
+print(result)               # 5 + (10 * 15) - (5 / 10) = 5 + 150 - 0.5 = 154.5</code></pre>
+                    </div>
+                    
+                    <h4>Битовые операторы</h4>
+                    <p>Python также поддерживает битовые операции для работы с отдельными битами числа:</p>
+                    
+                    <div class="code-example">
+                        <pre><code class="python"># Битовые операторы
+a = 60            # 60 = 0011 1100 в двоичной системе
+b = 13            # 13 = 0000 1101 в двоичной системе
+
+# Битовое И (AND)
+print(a & b)      # 12 = 0000 1100
+
+# Битовое ИЛИ (OR)
+print(a | b)      # 61 = 0011 1101
+
+# Битовое исключающее ИЛИ (XOR)
+print(a ^ b)      # 49 = 0011 0001
+
+# Битовое НЕ (NOT)
+print(~a)         # -61 = 1100 0011 (с учетом дополнительного кода)
+
+# Битовый сдвиг влево
+print(a << 2)     # 240 = 1111 0000 (сдвиг на 2 бита влево)
+
+# Битовый сдвиг вправо
+print(a >> 2)     # 15 = 0000 1111 (сдвиг на 2 бита вправо)</code></pre>
+                    </div>
+                    
+                </div>
+            </section>
+            
+        </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.hljs) {
+                document.querySelectorAll('pre code').forEach(block => {
+                    hljs.highlightBlock(block);
+                });
+            }
+        });
+    </script>
+    
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 

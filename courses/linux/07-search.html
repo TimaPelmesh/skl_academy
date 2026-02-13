@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Поиск в Linux: find, grep, locate. Изучите мощные инструменты поиска файлов и текста в Linux, комбинации команд для эффективного поиска.">
+    <meta name="keywords" content="поиск linux, find grep locate, поиск файлов, поиск текста, linux команды поиска">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Поиск в Linux — find, grep, locate">
+    <meta property="og:description" content="Изучите инструменты поиска в Linux: find для файлов, grep для текста, locate для быстрого поиска.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/linux/07-search.html">
+    <meta property="og:site_name" content="SKL Academy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Поиск в Linux — find, grep, locate">
+    <meta name="twitter:description" content="Изучите инструменты поиска в Linux: find для файлов, grep для текста, locate для быстрого поиска.">
+    <title>Поиск в Linux — find, grep, locate | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/linux/07-search.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    
+    <!-- Structured Data: Breadcrumbs for Linux course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://skl-academy.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Linux и Bash",
+          "item": "https://skl-academy.ru/courses/linux/01-linux-basics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Поиск",
+          "item": "https://skl-academy.ru/courses/linux/07-search.html"
+        }
+      ]
+    }
+    </script>
+    
+    
+</head>
+<body data-course="linux">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Linux</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <a href="06-redirection.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="08-scripting.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <div id="sidebar" class="sidebar">
+            <!-- Структура курса -->
+            <div class="course-structure">
+                <!-- Модуль 1 -->
+                <div class="topic">
+                    <button class="topic-btn">1. Знакомство с Linux</button>
+                    <div class="subtopics">
+                        <a href="01-linux-basics.html#introduction" class="subtopic">1.1 Введение в Linux</a>
+                        <a href="01-linux-basics.html#distributions" class="subtopic">1.2 Дистрибутивы Linux</a>
+                        <a href="01-linux-basics.html#installation" class="subtopic">1.3 Установка на виртуальную машину</a>
+                        <a href="01-linux-basics.html#wsl" class="subtopic">1.4 WSL2 для Windows</a>
+                        <a href="01-linux-basics.html#first-steps" class="subtopic">1.5 Первое знакомство</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 2 -->
+                <div class="topic">
+                    <button class="topic-btn">2. Файловая система</button>
+                    <div class="subtopics">
+                        <a href="02-file-system.html#terminal-shell" class="subtopic">2.1 Терминал и Shell</a>
+                        <a href="02-file-system.html#file-system" class="subtopic">2.2 Файловая система Linux</a>
+                        <a href="02-file-system.html#paths" class="subtopic">2.3 Пути и навигация</a>
+                        <a href="02-file-system.html#commands" class="subtopic">2.4 Команды навигации</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 3 -->
+                <div class="topic">
+                    <button class="topic-btn">3. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="03-file-operations.html#creating" class="subtopic">3.1 Создание файлов и каталогов</a>
+                        <a href="03-file-operations.html#managing" class="subtopic">3.2 Копирование, перемещение, удаление</a>
+                        <a href="03-file-operations.html#viewing" class="subtopic">3.3 Просмотр содержимого</a>
+                        <a href="03-file-operations.html#editors" class="subtopic">3.4 Текстовые редакторы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 4 -->
+                <div class="topic">
+                    <button class="topic-btn">4. Права доступа</button>
+                    <div class="subtopics">
+                        <a href="04-permissions.html#ownership" class="subtopic">4.1 Владелец и группа</a>
+                        <a href="04-permissions.html#permissions" class="subtopic">4.2 Права доступа</a>
+                        <a href="04-permissions.html#numeric" class="subtopic">4.3 Числовое представление</a>
+                        <a href="04-permissions.html#analysis" class="subtopic">4.4 Анализ прав</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 5 -->
+                <div class="topic">
+                    <button class="topic-btn">5. Процессы</button>
+                    <div class="subtopics">
+                        <a href="05-processes.html#what-is-process" class="subtopic">5.1 Что такое процесс</a>
+                        <a href="05-processes.html#viewing-processes" class="subtopic">5.2 Просмотр процессов</a>
+                        <a href="05-processes.html#managing-processes" class="subtopic">5.3 Управление процессами</a>
+                        <a href="05-processes.html#monitoring" class="subtopic">5.4 Мониторинг системы</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 6 -->
+                <div class="topic">
+                    <button class="topic-btn">6. Перенаправление</button>
+                    <div class="subtopics">
+                        <a href="06-redirection.html#streams" class="subtopic">6.1 Стандартные потоки</a>
+                        <a href="06-redirection.html#output" class="subtopic">6.2 Перенаправление вывода</a>
+                        <a href="06-redirection.html#input" class="subtopic">6.3 Перенаправление ввода</a>
+                        <a href="06-redirection.html#pipes" class="subtopic">6.4 Конвейеры</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 7 -->
+                <div class="topic">
+                    <button class="topic-btn active">7. Поиск</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#find" class="subtopic active">7.1 find - поиск файлов</a>
+                        <a href="#grep" class="subtopic">7.2 grep - поиск текста</a>
+                        <a href="#combination" class="subtopic">7.3 Комбинация find и grep</a>
+                        <a href="#locate" class="subtopic">7.4 locate - быстрый поиск</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 8 -->
+                <div class="topic">
+                    <button class="topic-btn">8. Bash-скриптинг</button>
+                    <div class="subtopics">
+                        <a href="08-scripting.html#what-is-script" class="subtopic">8.1 Что такое скрипт</a>
+                        <a href="08-scripting.html#creating-scripts" class="subtopic">8.2 Создание и запуск</a>
+                        <a href="08-scripting.html#variables" class="subtopic">8.3 Переменные</a>
+                        <a href="08-scripting.html#input" class="subtopic">8.4 Ввод данных</a>
+                        <a href="08-scripting.html#command-substitution" class="subtopic">8.5 Подстановка команд</a>
+                        <a href="08-scripting.html#math" class="subtopic">8.6 Математические операции</a>
+                    </div>
+                </div>
+                
+                <!-- Модуль 9 -->
+                <div class="topic">
+                    <button class="topic-btn">9. Сетевые утилиты</button>
+                    <div class="subtopics">
+                        <a href="09-networking.html#diagnostics" class="subtopic">9.1 Сетевая диагностика</a>
+                        <a href="09-networking.html#connections" class="subtopic">9.2 Просмотр соединений</a>
+                        <a href="09-networking.html#download" class="subtopic">9.3 Скачивание файлов</a>
+                        <a href="09-networking.html#ssh" class="subtopic">9.4 SSH подключение</a>
+                        <a href="09-networking.html#keys" class="subtopic">9.5 Аутентификация по ключам</a>
+                        <a href="09-networking.html#file-transfer" class="subtopic">9.6 Передача файлов</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Тема 7.1: find - поиск файлов -->
+            <section id="find" class="topic-section">
+                <h2>7.1 find - поиск файлов</h2>
+                <div class="lesson-meta" style="display: none;">
+                    <span class="difficulty">Сложность: начальная</span>
+                    <span class="duration">Время изучения: 20 мин</span>
+                </div>
+                
+                <div class="lesson-content">
+                    <p>find — самая мощная команда для поиска файлов в Linux. Она может искать по имени, размеру, времени изменения и многим другим критериям.</p>
+                    
+                    <h3>Базовый синтаксис</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find [путь] [критерии] [действие]
+                    </div>
+
+                    <h3>Поиск по имени</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -name "*.txt"              # найти все .txt файлы в текущем каталоге
+                        find /home -name "document*"      # найти файлы, начинающиеся с "document"
+                        find /etc -name "*.conf"          # найти конфигурационные файлы
+                    </div>
+
+                    <h3>Поиск по типу файла</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -type f                    # только файлы
+                        find . -type d                    # только каталоги
+                        find . -type l                    # только символические ссылки
+                    </div>
+
+                    <h3>Поиск по размеру</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -size +100M                # файлы больше 100 МБ
+                        find . -size -1k                  # файлы меньше 1 КБ
+                        find . -size 0                    # пустые файлы
+                    </div>
+
+                    <h3>Поиск по времени</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -mtime -7                  # измененные за последние 7 дней
+                        find . -mtime +30                 # измененные более 30 дней назад
+                        find . -newer file.txt            # новее указанного файла
+                    </div>
+
+                    <h3>Поиск по правам доступа</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -perm 755                  # файлы с правами 755
+                        find . -perm -u+x                 # исполняемые файлы для владельца
+                        find . -perm /o+w                 # файлы, доступные для записи остальным
+                    </div>
+
+                    <h3>Действия с найденными файлами</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -name "*.tmp" -delete      # удалить временные файлы
+                        find . -name "*.log" -exec ls -l {} \;  # показать подробную информацию
+                        find . -name "*.txt" -exec cp {} backup/ \;  # скопировать в backup
+                    </div>
+
+                    <div class="info">
+                        <strong>Символы в find:</strong><br>
+                        • <code>.</code> — текущий каталог<br>
+                        • <code>*</code> — любое количество символов<br>
+                        • <code>?</code> — один символ<br>
+                        • <code>[]</code> — любой символ из скобок
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 7.2: grep - поиск текста -->
+            <section id="grep" class="topic-section">
+                <h2>7.2 grep - поиск текста</h2>
+                <div class="lesson-content">
+                    <p>grep — команда для поиска текста в файлах. Одна из самых полезных команд в Linux.</p>
+                    
+                    <h3>Базовое использование</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        grep "error" file.txt             # найти строки с "error"
+                        grep "ERROR" *.log                # найти "ERROR" во всех .log файлах
+                        grep -r "function" /home/user/    # рекурсивный поиск в каталоге
+                    </div>
+
+                    <h3>Полезные флаги</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        grep -i "error" file.txt          # поиск без учета регистра
+                        grep -n "error" file.txt          # показать номера строк
+                        grep -v "error" file.txt          # исключить строки с "error"
+                        grep -c "error" file.txt          # подсчитать количество совпадений
+                    </div>
+
+                    <h3>Регулярные выражения</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        grep "^error" file.txt            # строки, начинающиеся с "error"
+                        grep "error$" file.txt            # строки, заканчивающиеся на "error"
+                        grep "er.*or" file.txt            # строки с "er", затем любые символы, затем "or"
+                        grep "[0-9]" file.txt             # строки, содержащие цифры
+                    </div>
+
+                    <h3>Поиск в нескольких файлах</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        grep -r "TODO" .                  # найти "TODO" во всех файлах
+                        grep -l "error" *.txt             # показать только имена файлов с совпадениями
+                        grep -L "error" *.txt             # показать файлы без совпадений
+                    </div>
+
+                    <h3>Контекст поиска</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        grep -A 3 "error" file.txt        # показать 3 строки после совпадения
+                        grep -B 2 "error" file.txt        # показать 2 строки до совпадения
+                        grep -C 2 "error" file.txt        # показать 2 строки до и после
+                    </div>
+
+                    <h3>Практические примеры</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        # Найти все IP-адреса в логах
+                        grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" /var/log/auth.log
+                        
+                        # Найти все email адреса
+                        grep -E "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" file.txt
+                        
+                        # Найти пустые строки
+                        grep "^$" file.txt
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 7.3: Комбинация find и grep -->
+            <section id="combination" class="topic-section">
+                <h2>7.3 Комбинация find и grep</h2>
+                <div class="lesson-content">
+                    <p>Комбинация find и grep позволяет создавать мощные команды поиска.</p>
+                    
+                    <h3>Поиск текста в определенных файлах</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -name "*.py" -exec grep -l "import" {} \;  # найти Python файлы с import
+                        find . -name "*.log" -exec grep "ERROR" {} \;     # найти ошибки в логах
+                    </div>
+
+                    <h3>Поиск с фильтрацией по содержимому</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        find . -name "*.txt" -exec grep -q "important" {} \; -print  # найти .txt файлы с "important"
+                        find . -type f -exec grep -l "TODO" {} \;                   # найти файлы с TODO
+                    </div>
+
+                    <h3>Анализ логов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        # Найти все ошибки за сегодня
+                        find /var/log -name "*.log" -mtime 0 -exec grep -H "ERROR" {} \;
+                        
+                        # Найти файлы с определенным IP
+                        find . -name "*.log" -exec grep -l "192.168.1.1" {} \;
+                    </div>
+
+                    <h3>Поиск конфигурационных файлов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        # Найти файлы с настройками базы данных
+                        find /etc -name "*.conf" -exec grep -l "database" {} \;
+                        
+                        # Найти файлы с паролями (осторожно!)
+                        find . -name "*.conf" -exec grep -l "password" {} \;
+                    </div>
+
+                    <h3>Сложные комбинации</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        # Найти большие файлы с определенным содержимым
+                        find . -size +10M -type f -exec grep -l "backup" {} \;
+                        
+                        # Найти файлы, измененные недавно, с ошибками
+                        find . -mtime -1 -name "*.log" -exec grep -H "ERROR" {} \;
+                    </div>
+
+                    <div class="warning">
+                        <strong>Осторожно с поиском паролей!</strong> Не ищите пароли в открытом виде в системных файлах. Это может быть небезопасно.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 7.4: locate - быстрый поиск -->
+            <section id="locate" class="topic-section">
+                <h2>7.4 locate - быстрый поиск</h2>
+                <div class="lesson-content">
+                    <p>locate — быстрая команда поиска файлов, использующая предварительно построенную базу данных.</p>
+                    
+                    <h3>Базовое использование</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        locate filename                    # найти файл по имени
+                        locate "*.txt"                     # найти все .txt файлы
+                        locate -i "document"              # поиск без учета регистра
+                    </div>
+
+                    <h3>Обновление базы данных</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        sudo updatedb                      # обновить базу данных locate
+                        # База данных обновляется автоматически, но можно принудительно
+                    </div>
+
+                    <h3>Ограничение результатов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        locate "*.log" | head -10         # показать первые 10 результатов
+                        locate "*.txt" | wc -l            # подсчитать количество файлов
+                    </div>
+
+                    <h3>Поиск с фильтрацией</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">
+                        locate "*.conf" | grep "nginx"    # найти конфиги nginx
+                        locate "*.py" | grep "test"       # найти Python тесты
+                    </div>
+
+                    <h3>Преимущества и недостатки</h3>
+                    <div class="code-example">
+                        <h4>Преимущества locate</h4>
+                        <ul>
+                            <li>Очень быстрый поиск</li>
+                            <li>Ищет по всей файловой системе</li>
+                            <li>Простой синтаксис</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Недостатки locate</h4>
+                        <ul>
+                            <li>База данных может быть устаревшей</li>
+                            <li>Не ищет по содержимому файлов</li>
+                            <li>Менее гибкий, чем find</li>
+                        </ul>
+                    </div>
+
+                    <h3>Когда использовать locate vs find</h3>
+                    <div class="info">
+                        <strong>Используйте locate для:</strong><br>
+                        • Быстрого поиска файлов по имени<br>
+                        • Поиска по всей файловой системе<br>
+                        • Когда не нужны сложные критерии поиска
+                    </div>
+                    
+                    <div class="info">
+                        <strong>Используйте find для:</strong><br>
+                        • Поиска по размеру, времени, правам<br>
+                        • Поиска в определенном каталоге<br>
+                        • Когда нужны сложные критерии поиска
+                    </div>
+                </div>
+            </section>
+
+            </main>
+    </div>
+
+    <script src="../courses.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Инициализация подсветки синтаксиса
+        hljs.highlightAll();
+        
+        // Обработка кликов по ссылкам в боковом меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const subtopicLinks = document.querySelectorAll('.subtopic');
+            subtopicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Убираем активный класс со всех ссылок
+                    subtopicLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

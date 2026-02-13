@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Python: типизация, исключения и контракты, логирование, argparse (CLI), тестирование pytest, мокирование, обзор стандартной библиотеки (itertools, functools, pathlib, datetime/zoneinfo).">
+    <meta name="keywords" content="python typing mypy pytest logging argparse исключения контракты pathlib itertools functools datetime zoneinfo">
+    <title>Модуль 9 — Типизация, тестирование и качество</title>
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+    <style>
+        @media (max-width: 768px) {
+            .code-example pre { font-size: 0.85rem; }
+            .sidebar { width: 250px; }
+            .content.sidebar-active { margin-left: 0; }
+        }
+        @media (max-width: 576px) {
+            .code-example pre { font-size: 0.8rem; }
+            .topic-section h2 { font-size: 1.5rem; }
+            .topic-section h3 { font-size: 1.3rem; }
+            .topic-section h4 { font-size: 1.1rem; }
+            ol, ul { padding-left: 20px; }
+        }
+        .topic-section { max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+        .module-intro { max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+        .code-example { border-radius: 8px; margin: 15px 0; max-width: 100%; overflow-x: auto; }
+        p, ul, ol { margin-bottom: 1rem; }
+        ol, ul { padding-left: 30px; }
+        h2, h3, h4 { margin-top: 1.5rem; margin-bottom: 1rem; }
+        @media (max-width: 991px) {
+            .sidebar.active { transform: translateX(0); }
+            .sidebar { transform: translateX(-100%); }
+            .content { margin-left: 0; }
+        }
+        .light-theme .subtopic, .light-theme .topic-btn { color: #000; }
+        .conclusion { background-color: #2d333b; border-radius: 8px; padding: 20px 25px; margin: 30px auto; border-left: 4px solid #6f42c1; text-align: center; max-width: 900px; }
+        .light-theme .conclusion { background-color: #f1f1f1; border-left: 4px solid #6f42c1; }
+        .conclusion h3 { color: #d2a8ff; margin-top: 0; font-size: 1.5rem; }
+        .light-theme .conclusion h3 { color: #6f42c1; }
+        .next-module { margin-top: 20px; text-align: center; }
+        .next-module a { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(90deg, #2188ff, #804eda); color: white; text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; font-size: 1.2rem; transition: all 0.3s ease; box-shadow: 0 8px 16px rgba(103, 51, 201, 0.3); min-width: 250px; }
+        .next-module a:hover { transform: translateY(-2px); box-shadow: 0 12px 20px rgba(103, 51, 201, 0.4); background: linear-gradient(90deg, #1a76d2, #7340c6); }
+        .light-theme .next-module a { background: linear-gradient(90deg, #2188ff, #804eda); color: white; }
+        .light-theme .next-module a:hover { background: linear-gradient(90deg, #1a76d2, #7340c6); }
+        .note { background-color: #1f2937; border: 1px solid #2b6cb0; border-left: 4px solid #2188ff; padding: 12px 14px; border-radius: 6px; color: #e6edf3; }
+        .light-theme .note { background-color: #eef3ff; border: 1px solid #b6c6ff; color: #111827; }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body data-course="python">
+    <header>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 class="header-title">Python</h1>
+        <div class="header-buttons">
+            <!-- Кнопки переключения цветовой схемы -->
+            <div class="color-scheme-buttons">
+                <button class="color-scheme-btn" data-color="purple" title="Фиолетовая схема" aria-label="Фиолетовая цветовая схема">
+                    <span class="color-dot" style="background: #6c63ff;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="orange" title="Оранжевая схема" aria-label="Оранжевая цветовая схема">
+                    <span class="color-dot" style="background: #f97316;"></span>
+                </button>
+                <button class="color-scheme-btn" data-color="blue" title="Синяя схема" aria-label="Синяя цветовая схема">
+                    <span class="color-dot" style="background: #3b82f6;"></span>
+                </button>
+            </div>
+            <!-- Кнопка переключения темы -->
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                </svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <!-- Кнопка настроек (мобильная) -->
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" title="Настройки" aria-label="Открыть настройки">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <!-- Кнопка выхода -->
+            <a href="../../index.html" class="exit-btn" title="На главную">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic">
+                    <button class="topic-btn">1. Основы Python</button>
+                    <div class="subtopics">
+                        <a href="01-python-basics.html#installation" class="subtopic">1.1 Установка и настройка</a>
+                        <a href="01-python-basics.html#syntax" class="subtopic">1.2 Синтаксис и переменные</a>
+                        <a href="01-python-basics.html#data-types" class="subtopic">1.3 Типы данных</a>
+                        <a href="01-python-basics.html#operators" class="subtopic">1.4 Базовые операторы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Управление потоком</button>
+                    <div class="subtopics">
+                        <a href="02-control-flow.html#conditional" class="subtopic">2.1 Условные операторы</a>
+                        <a href="02-control-flow.html#loops" class="subtopic">2.2 Циклы (for/while)</a>
+                        <a href="02-control-flow.html#exceptions" class="subtopic">2.3 Исключения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Функции</button>
+                    <div class="subtopics">
+                        <a href="03-functions.html#creating" class="subtopic">3.1 Создание функций</a>
+                        <a href="03-functions.html#parameters" class="subtopic">3.2 Параметры и аргументы</a>
+                        <a href="03-functions.html#lambda" class="subtopic">3.3 Lambda-функции</a>
+                        <a href="03-functions.html#recursion" class="subtopic">3.4 Рекурсия</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Структуры данных</button>
+                    <div class="subtopics">
+                        <a href="04-data-structures.html#lists-tuples" class="subtopic">4.1 Списки и кортежи</a>
+                        <a href="04-data-structures.html#dictionaries" class="subtopic">4.2 Словари</a>
+                        <a href="04-data-structures.html#sets" class="subtopic">4.3 Множества</a>
+                        <a href="04-data-structures.html#generators" class="subtopic">4.4 Генераторы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. ООП в Python</button>
+                    <div class="subtopics">
+                        <a href="05-oop.html#classes-objects" class="subtopic">5.1 Классы и объекты</a>
+                        <a href="05-oop.html#inheritance" class="subtopic">5.2 Наследование</a>
+                        <a href="05-oop.html#polymorphism" class="subtopic">5.3 Полиморфизм</a>
+                        <a href="05-oop.html#encapsulation" class="subtopic">5.4 Инкапсуляция</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Работа с файлами</button>
+                    <div class="subtopics">
+                        <a href="06-file-handling.html#text-files" class="subtopic">6.1 Текстовые файлы</a>
+                        <a href="06-file-handling.html#json-csv" class="subtopic">6.2 JSON и CSV</a>
+                        <a href="06-file-handling.html#binary-files" class="subtopic">6.3 Бинарные файлы</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. Модули и пакеты</button>
+                    <div class="subtopics">
+                        <a href="07-modules-and-packages.html#import" class="subtopic">7.1 Импорт модулей</a>
+                        <a href="07-modules-and-packages.html#virtualenv" class="subtopic">7.2 Виртуальные окружения</a>
+                        <a href="07-modules-and-packages.html#pip" class="subtopic">7.3 PIP и установка пакетов</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Продвинутые темы</button>
+                    <div class="subtopics">
+                        <a href="08-advanced-topics.html#decorators" class="subtopic">8.1 Декораторы</a>
+                        <a href="08-advanced-topics.html#iterators" class="subtopic">8.2 Итераторы</a>
+                        <a href="08-advanced-topics.html#threading" class="subtopic">8.3 Многопоточность</a>
+                        <a href="08-advanced-topics.html#async" class="subtopic">8.4 Асинхронное программирование</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">9. Типизация, тестирование и качество</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#typing" class="subtopic active">9.1 Типизация и mypy</a>
+                        <a href="#exceptions-contracts" class="subtopic">9.2 Исключения и контракты</a>
+                        <a href="#logging" class="subtopic">9.3 Логирование</a>
+                        <a href="#argparse" class="subtopic">9.4 CLI и argparse</a>
+                        <a href="#pytest" class="subtopic">9.5 Тестирование pytest</a>
+                        <a href="#mocking" class="subtopic">9.6 Мокирование</a>
+                        <a href="#stdlib" class="subtopic">9.7 Стандартная библиотека</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Конкурентность и упаковка</button>
+                    <div class="subtopics">
+                        <a href="10-concurrency-performance-packaging.html#asyncio-deep" class="subtopic">10.1 Asyncio и экосистема</a>
+                        <a href="10-concurrency-performance-packaging.html#gil-memory" class="subtopic">10.2 GIL и модель памяти</a>
+                        <a href="10-concurrency-performance-packaging.html#multiprocessing" class="subtopic">10.3 Параллелизм и процессы</a>
+                        <a href="10-concurrency-performance-packaging.html#profiling" class="subtopic">10.4 Профилирование и оптимизация</a>
+                        <a href="10-concurrency-performance-packaging.html#packaging" class="subtopic">10.5 Упаковка и публикация</a>
+                        <a href="10-concurrency-performance-packaging.html#architecture" class="subtopic">10.6 Архитектура</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main id="content" class="content sidebar-active">
+            <section class="module-intro">
+                <h2>Модуль 9: Типизация, тестирование и качество</h2>
+                <p>В этом модуле мы систематизируем инженерные практики: статическая типизация, исключения и контракты, логирование, создание CLI, тестирование и мокирование. Также рассмотрим ключевые модули стандартной библиотеки, которые встречаются в большинстве проектов.</p>
+            </section>
+
+            <section id="typing" class="topic-section">
+                <h2>9.1 Типизация и mypy</h2>
+                <p>Аннотации типов улучшают читаемость и надёжность кода, позволяют инструментам (mypy, pyright) проверять ошибки на этапе разработки.</p>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-python">from typing import Optional, Union, Iterable, Sequence, Mapping, Callable, TypeVar, Generic, Literal
+
+T = TypeVar("T")
+
+# Базовые аннотации
+age: int = 42
+name: str = "Alice"
+ratio: float = 0.75
+
+# Optional/Union
+user_id: Optional[int] = None
+value: Union[int, float] = 3.14
+
+# Коллекции
+nums: list[int] = [1, 2, 3]
+users: dict[str, int] = {"alice": 1}
+
+# Параметры функций и возвращаемые типы
+def add(a: int, b: int) -> int:
+    return a + b
+
+# Callable
+def apply(f: Callable[[int], int], x: int) -> int:
+    return f(x)
+
+# Обобщения
+class Box(Generic[T]):
+    def __init__(self, value: T) -> None:
+        self.value = value
+
+    def get(self) -> T:
+        return self.value
+
+# Literal полезен для ограниченных наборов значений
+Mode = Literal["r", "w", "a"]
+
+def open_mode(mode: Mode) -> None:
+    ...</code></pre></div>
+                    <div class="code-example"><pre><code class="language-python"># Протоколы и структурная типизация
+from typing import Protocol
+
+class SupportsClose(Protocol):
+    def close(self) -> None: ...
+
+class Resource:
+    def close(self) -> None:
+        print("closed")
+
+# TypedDict для словарей с фиксированной схемой
+from typing import TypedDict
+
+class User(TypedDict):
+    id: int
+    name: str
+    is_active: bool
+
+u: User = {"id": 1, "name": "Alice", "is_active": True}</code></pre></div>
+                </div>
+                <h3>Настройка mypy</h3>
+                <p>Проверка типов выполняется вне рантайма. Добавьте конфиг и запустите проверку.</p>
+                <div class="code-example"><pre><code class="language-ini"># mypy.ini
+[mypy]
+python_version = 3.11
+warn_unused_ignores = True
+warn_return_any = True
+warn_redundant_casts = True
+no_implicit_optional = True
+strict = True
+
+[mypy-tests.*]
+ignore_errors = True</code></pre></div>
+                <div class="code-example"><pre><code class="language-bash"># Пример запуска
+mypy src/</code></pre></div>
+                <div class="note"><p>Типизация не влияет на выполнение кода, но помогает IDE, CI и код-ревью. В сочетании с <code>dataclasses</code>/<code>pydantic</code> повышает надёжность.</p></div>
+            </section>
+
+            <section id="exceptions-contracts" class="topic-section">
+                <h2>9.2 Исключения и контракты</h2>
+                <p>Исключения — стандартный механизм сигнализации об ошибках. Контракты формализуют предпосылки и постусловия функций.</p>
+                <div class="code-example"><pre><code class="language-python">class DomainError(Exception):
+    pass
+
+class ValidationError(DomainError):
+    pass
+
+def divide(a: float, b: float) -> float:
+    # Предусловие (contract): b != 0
+    assert b != 0, "b must be non-zero"
+    return a / b
+
+try:
+    result = divide(10, 0)
+except AssertionError as e:
+    # Контракт нарушен
+    print(e)
+
+# Контекстные менеджеры для гарантированного освобождения ресурсов
+from contextlib import contextmanager
+
+@contextmanager
+def open_safely(path: str):
+    f = open(path, "w", encoding="utf-8")
+    try:
+        yield f
+    finally:
+        f.close()
+
+with open_safely("file.txt") as f:
+    f.write("hello")</code></pre></div>
+                <h3>Лучшие практики</h3>
+                <ul>
+                    <li>Поднимайте специфичные исключения (не глотайте их без логирования).</li>
+                    <li>Используйте контракты через <code>assert</code> для инвариантов и предусловий; в проде — валидацию входных данных.</li>
+                    <li>Для сложной валидации используйте <code>pydantic</code> или <code>attrs</code>.</li>
+                    <li>Оберните границы I/O в адаптеры и пробрасывайте доменные ошибки.</li>
+                </ul>
+            </section>
+
+            <section id="logging" class="topic-section">
+                <h2>9.3 Логирование</h2>
+                <p><code>logging</code> — стандартный фреймворк логирования. Настройте формат, уровни и хендлеры.</p>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-python">import logging
+from pathlib import Path
+
+LOG_DIR = Path("logs")
+LOG_DIR.mkdir(exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s %(message)s",
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler(LOG_DIR / "app.log", encoding="utf-8")
+    ]
+)
+logger = logging.getLogger("app")
+
+logger.info("started")
+logger.warning("something odd")</code></pre></div>
+                    <div class="code-example"><pre><code class="language-python"># dictConfig для продвинутой конфигурации
+import logging.config
+
+LOGGING = {
+    "version": 1,
+    "handlers": {
+        "console": {"class": "logging.StreamHandler", "level": "DEBUG"},
+    },
+    "loggers": {
+        "app": {"handlers": ["console"], "level": "INFO"}
+    }
+}
+
+logging.config.dictConfig(LOGGING)
+log = logging.getLogger("app")
+log.info("configured via dictConfig")</code></pre></div>
+                </div>
+                <p class="note">Для структурированных логов рассмотрите <code>structlog</code> или <code>logging.LoggerAdapter</code> с добавлением контекста.</p>
+            </section>
+
+            <section id="argparse" class="topic-section">
+                <h2>9.4 CLI и argparse</h2>
+                <p>Создавайте удобные консольные интерфейсы с <code>argparse</code>. Для сложных CLI обратите внимание на <code>click</code> и <code>typer</code>.</p>
+                <div class="code-example"><pre><code class="language-python"># cli.py
+import argparse
+from pathlib import Path
+
+parser = argparse.ArgumentParser(prog="photo-tool", description="Resize photos")
+parser.add_argument("input", type=Path, help="Папка с изображениями")
+parser.add_argument("--width", type=int, default=800)
+parser.add_argument("--height", type=int, default=600)
+parser.add_argument("--dry-run", action="store_true")
+
+args = parser.parse_args()
+print(args.input, args.width, args.height, args.dry_run)</code></pre></div>
+                <div class="code-example"><pre><code class="language-python"># Подкоманды
+sub = argparse.ArgumentParser(prog="tool")
+cmd = sub.add_subparsers(dest="command", required=True)
+
+build = cmd.add_parser("build")
+build.add_argument("--prod", action="store_true")
+
+serve = cmd.add_parser("serve")
+serve.add_argument("--port", type=int, default=8000)</code></pre></div>
+            </section>
+
+            <section id="pytest" class="topic-section">
+                <h2>9.5 Тестирование pytest</h2>
+                <p><code>pytest</code> — де-факто стандарт в Python. Чистый синтаксис, мощные фикстуры и плагин-экосистема.</p>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-python"># test_math.py
+import pytest
+
+@pytest.mark.parametrize("a,b,expected", [
+    (1, 2, 3),
+    (0, 0, 0),
+    (-1, 1, 0),
+])
+def test_add(a, b, expected):
+    assert a + b == expected
+
+# Фикстуры
+@pytest.fixture
+def tmp_user(tmp_path):
+    p = tmp_path / "user.json"
+    p.write_text("{}", encoding="utf-8")
+    return p</code></pre></div>
+                    <div class="code-example"><pre><code class="language-ini"># pytest.ini
+[pytest]
+addopts = -q -ra
+filterwarnings = ignore::DeprecationWarning
+python_files = tests.py test_*.py *_tests.py
+markers =
+    slow: медленные тесты
+    integration: интеграционные</code></pre></div>
+                </div>
+                <p class="note">Покрывайте тестами бизнес-правила и границы систем. В CI включайте отчёт о покрытии (<code>coverage.py</code>).</p>
+            </section>
+
+            <section id="mocking" class="topic-section">
+                <h2>9.6 Мокирование</h2>
+                <p>Изолируйте тестируемый код от внешних зависимостей: сети, БД, времени.</p>
+                <div class="two-col">
+                    <div class="code-example"><pre><code class="language-python"># unittest.mock
+from unittest.mock import patch, MagicMock
+import requests
+
+@patch("requests.get")
+def test_fetch(mock_get: MagicMock):
+    mock_get.return_value.status_code = 200
+    mock_get.return_value.json.return_value = {"ok": True}
+    resp = requests.get("https://api.example.com")
+    assert resp.json()["ok"] is True</code></pre></div>
+                    <div class="code-example"><pre><code class="language-python"># monkeypatch (pytest)
+def test_env(monkeypatch):
+    monkeypatch.setenv("APP_ENV", "test")
+    import os
+    assert os.getenv("APP_ENV") == "test"</code></pre></div>
+                </div>
+                <p>Для времени используйте <code>freezegun</code>, для HTTP — <code>responses</code> или <code>pytest-httpserver</code>.</p>
+            </section>
+
+            <section id="stdlib" class="topic-section">
+                <h2>9.7 Широко используемая стандартная библиотека</h2>
+                <div class="two-col">
+                    <div>
+                        <h3>itertools</h3>
+                        <div class="code-example"><pre><code class="language-python">from itertools import islice, chain, combinations, groupby
+
+nums = range(100)
+first_ten = list(islice(nums, 10))
+
+pairs = list(combinations([1,2,3], 2))  # [(1,2), (1,3), (2,3)]
+
+# Группировка
+animals = ["ant", "bear", "cat", "cow"]
+key = lambda s: s[0]
+for k, g in groupby(sorted(animals, key=key), key=key):
+    print(k, list(g))</code></pre></div>
+                        <h3>functools</h3>
+                        <div class="code-example"><pre><code class="language-python">from functools import lru_cache, partial, singledispatch
+
+@lru_cache(maxsize=1024)
+def fib(n: int) -> int:
+    return n if n &lt; 2 else fib(n-1) + fib(n-2)
+
+mul_by_10 = partial(lambda x, y: x * y, 10)
+
+@singledispatch
+def dump(obj):
+    return str(obj)
+
+@dump.register
+def _(obj: list):
+    return f"list({len(obj)})"</code></pre></div>
+                    </div>
+                    <div>
+                        <h3>pathlib</h3>
+                        <div class="code-example"><pre><code class="language-python">from pathlib import Path
+
+p = Path("data") / "file.txt"
+if not p.exists():
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text("hello", encoding="utf-8")
+print(p.read_text(encoding="utf-8"))</code></pre></div>
+                        <h3>datetime и zoneinfo</h3>
+                        <div class="code-example"><pre><code class="language-python">from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+
+now_utc = datetime.now(timezone.utc)
+now_msk = now_utc.astimezone(ZoneInfo("Europe/Moscow"))
+print(now_msk.isoformat())</code></pre></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- Мобильное меню настроек -->
+    <div class="mobile-settings-menu" id="mobileSettingsMenu">
+        <div class="mobile-settings-content">
+            <div class="mobile-settings-header">
+                <h3>Настройки</h3>
+                <button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть настройки">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Цветовая схема</h4>
+                <div class="mobile-color-scheme-buttons">
+                    <button class="mobile-color-scheme-btn" data-color="purple">
+                        <span class="color-dot" style="background: #6c63ff;"></span>
+                        <span>Фиолетовая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="orange">
+                        <span class="color-dot" style="background: #f97316;"></span>
+                        <span>Оранжевая</span>
+                    </button>
+                    <button class="mobile-color-scheme-btn" data-color="blue">
+                        <span class="color-dot" style="background: #3b82f6;"></span>
+                        <span>Синяя</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mobile-settings-section">
+                <h4>Тема</h4>
+                <button class="mobile-theme-toggle-btn" id="mobileThemeToggle">
+                    <span class="theme-label">Светлая</span>
+                    <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                    </svg>
+                    <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../courses.js"></script>
+</body>
+</html> 
