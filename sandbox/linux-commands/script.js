@@ -327,6 +327,67 @@ const commands = {
         hint: 'Используйте: grep "Добро" readme.txt'
       }
     ]
+  },
+  cp: {
+    name: 'cp',
+    description: 'Копирование файлов и директорий',
+    syntax: 'cp [опции] источник назначение',
+    examples: ['cp file.txt copy.txt', 'cp -r dir1 dir2'],
+    detailedHelp: 'Команда cp (copy) копирует файлы. Опции: -r (рекурсивно для директорий), -i (интерактивно, с подтверждением), -v (подробный вывод).',
+    exercises: [
+      {
+        description: 'Скопируйте файл "test.txt" в "backup.txt"',
+        command: 'cp test.txt backup.txt',
+        hint: 'Используйте: cp test.txt backup.txt'
+      }
+    ]
+  },
+  mv: {
+    name: 'mv',
+    description: 'Перемещение и переименование файлов',
+    syntax: 'mv [опции] источник назначение',
+    examples: ['mv old.txt new.txt', 'mv file.txt /tmp/'],
+    detailedHelp: 'Команда mv (move) перемещает или переименовывает файлы и директории. Работает мгновенно в пределах одной файловой системы.',
+    exercises: [
+      {
+        description: 'Переименуйте файл "test.txt" в "renamed.txt"',
+        command: 'mv test.txt renamed.txt',
+        hint: 'Используйте: mv test.txt renamed.txt'
+      }
+    ]
+  },
+  echo: {
+    name: 'echo',
+    description: 'Вывод текста на экран',
+    syntax: 'echo [текст]',
+    examples: ['echo "Hello"', 'echo $HOME'],
+    detailedHelp: 'Команда echo выводит текст на стандартный вывод. Часто используется в скриптах для вывода сообщений и значений переменных.',
+    exercises: [
+      {
+        description: 'Выведите текст "Hello, Linux!"',
+        command: 'echo "Hello, Linux!"',
+        hint: 'Используйте: echo "Hello, Linux!"'
+      },
+      {
+        description: 'Выведите текст "Я учу Linux"',
+        command: 'echo "Я учу Linux"',
+        hint: 'Используйте: echo "Я учу Linux"'
+      }
+    ]
+  },
+  chmod: {
+    name: 'chmod',
+    description: 'Изменение прав доступа к файлам',
+    syntax: 'chmod [права] файл',
+    examples: ['chmod 755 script.sh', 'chmod +x script.sh'],
+    detailedHelp: 'Команда chmod (change mode) изменяет права доступа. Числовой формат: 7=rwx, 6=rw-, 5=r-x, 4=r--. Символьный: +x (добавить выполнение), -w (убрать запись).',
+    exercises: [
+      {
+        description: 'Сделайте файл "test.txt" доступным для чтения всем (chmod 644 test.txt)',
+        command: 'chmod 644 test.txt',
+        hint: 'Используйте: chmod 644 test.txt'
+      }
+    ]
   }
 };
 
@@ -505,10 +566,30 @@ class LinuxTrainer {
         input.value = '';
       }
     });
-    
-    // Автодополнение при вводе
-    input.addEventListener('input', (e) => {
-      this.showCommandSuggestions(e.target.value);
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        this.tabComplete(input);
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (this.historyIndex === undefined) this.historyIndex = this.commandHistory.length;
+        if (this.historyIndex > 0) {
+          this.historyIndex--;
+          input.value = this.commandHistory[this.historyIndex] || '';
+        }
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (this.historyIndex !== undefined && this.historyIndex < this.commandHistory.length - 1) {
+          this.historyIndex++;
+          input.value = this.commandHistory[this.historyIndex] || '';
+        } else {
+          this.historyIndex = this.commandHistory.length;
+          input.value = '';
+        }
+      }
     });
     
     hintBtn?.addEventListener('click', () => {
@@ -548,15 +629,38 @@ class LinuxTrainer {
     });
   }
 
-  showCommandSuggestions(input) {
-    // Можно добавить автодополнение команд
+  tabComplete(inputEl) {
+    const val = inputEl.value;
+    const parts = val.split(' ');
+    
+    if (parts.length <= 1) {
+      const prefix = parts[0].toLowerCase();
+      const matches = Object.keys(commands).filter(c => c.startsWith(prefix));
+      if (matches.length === 1) {
+        inputEl.value = matches[0] + ' ';
+      } else if (matches.length > 1) {
+        this.addTerminalLine(matches.join('  '));
+      }
+    } else {
+      const filePrefix = parts[parts.length - 1].toLowerCase();
+      const dir = this.fs.getCurrentDir();
+      if (dir.children) {
+        const matches = Object.keys(dir.children).filter(n => n.toLowerCase().startsWith(filePrefix));
+        if (matches.length === 1) {
+          parts[parts.length - 1] = matches[0];
+          inputEl.value = parts.join(' ');
+        } else if (matches.length > 1) {
+          this.addTerminalLine(matches.join('  '));
+        }
+      }
+    }
   }
 
   executeCommand(cmd) {
     if (!cmd) return;
     
     this.commandHistory.push(cmd);
-    this.addTerminalLine(`$ ${cmd}`);
+    this.addTerminalLine(`${this.getPrompt()} ${cmd}`);
     
     const parts = cmd.split(' ');
     const command = parts[0];
@@ -597,6 +701,18 @@ class LinuxTrainer {
       case 'grep':
         this.handleGrep(args);
         break;
+      case 'cp':
+        this.handleCp(args);
+        break;
+      case 'mv':
+        this.handleMv(args);
+        break;
+      case 'echo':
+        this.handleEcho(args);
+        break;
+      case 'chmod':
+        this.handleChmod(args);
+        break;
       case 'clear':
         this.clearTerminal();
         break;
@@ -615,6 +731,8 @@ class LinuxTrainer {
     const exerciseId = `${this.currentCommand.name}-${this.currentExercise}`;
     this.completedExercises.add(exerciseId);
     this.addTerminalLine('✓ Упражнение выполнено!');
+    this.learnedCommands.add(this.currentCommand.name);
+    this.renderCommandsList();
     this.updateProgress();
     
     setTimeout(() => {
@@ -745,21 +863,81 @@ class LinuxTrainer {
     }
   }
 
+  handleCp(args) {
+    if (args.length < 2) {
+      this.addTerminalLine('cp: отсутствуют операнды');
+      return;
+    }
+    const src = args[0];
+    const dest = args[1];
+    const dir = this.fs.getCurrentDir();
+    if (dir.children && dir.children[src] && dir.children[src].type === 'file') {
+      dir.children[dest] = { ...dir.children[src], name: dest };
+      this.addTerminalLine('');
+      this.updateFileSystem();
+    } else {
+      this.addTerminalLine(`cp: невозможно скопировать "${src}": Нет такого файла`);
+    }
+  }
+
+  handleMv(args) {
+    if (args.length < 2) {
+      this.addTerminalLine('mv: отсутствуют операнды');
+      return;
+    }
+    const src = args[0];
+    const dest = args[1];
+    const dir = this.fs.getCurrentDir();
+    if (dir.children && dir.children[src]) {
+      dir.children[dest] = { ...dir.children[src], name: dest };
+      delete dir.children[src];
+      this.addTerminalLine('');
+      this.updateFileSystem();
+    } else {
+      this.addTerminalLine(`mv: невозможно переместить "${src}": Нет такого файла или каталога`);
+    }
+  }
+
+  handleEcho(args) {
+    const text = args.join(' ').replace(/^["']|["']$/g, '');
+    this.addTerminalLine(text);
+  }
+
+  handleChmod(args) {
+    if (args.length < 2) {
+      this.addTerminalLine('chmod: отсутствуют операнды');
+      return;
+    }
+    const permissions = args[0];
+    const fileName = args[1];
+    const dir = this.fs.getCurrentDir();
+    if (dir.children && dir.children[fileName]) {
+      dir.children[fileName].permissions = permissions;
+      this.addTerminalLine('');
+    } else {
+      this.addTerminalLine(`chmod: невозможно изменить права "${fileName}": Нет такого файла`);
+    }
+  }
+
   handleHelp() {
     const helpText = `
 Доступные команды:
-  cd [путь]     - изменить директорию
-  ls [путь]     - список файлов
-  pwd           - текущий путь
-  mkdir [имя]   - создать директорию
-  touch [имя]   - создать файл
-  rm [имя]      - удалить файл
-  cat [файл]    - показать содержимое
+  cd [путь]       - изменить директорию
+  ls [путь]       - список файлов
+  pwd             - текущий путь
+  mkdir [имя]     - создать директорию
+  touch [имя]     - создать файл
+  rm [имя]        - удалить файл/директорию
+  cp [файл] [имя] - копировать файл
+  mv [файл] [имя] - переместить/переименовать
+  cat [файл]      - показать содержимое
   grep [текст] [файл] - поиск в файле
-  clear         - очистить терминал
-  help          - эта справка
+  echo [текст]    - вывести текст
+  chmod [права] [файл] - изменить права доступа
+  clear           - очистить терминал
+  help            - эта справка
 
-Для подробной справки по команде выберите её из списка слева или нажмите кнопку "Помощь по командам".
+Для подробной справки выберите команду из списка слева.
     `.trim();
     this.addTerminalLine(helpText);
   }
@@ -822,6 +1000,12 @@ class LinuxTrainer {
     modal.style.display = 'block';
   }
 
+  getPrompt() {
+    const path = this.fs.getPath();
+    const display = path === '/home/user' ? '~' : (path.startsWith('/home/user/') ? '~' + path.slice(10) : path);
+    return `user@linux:${display}$`;
+  }
+
   addTerminalLine(text) {
     const terminal = document.getElementById('terminal');
     const line = document.createElement('div');
@@ -833,7 +1017,7 @@ class LinuxTrainer {
 
   clearTerminal() {
     const terminal = document.getElementById('terminal');
-    terminal.innerHTML = '<div class="terminal-line"><span class="terminal-prompt">user@linux:~$</span><span class="terminal-cursor" id="cursor">█</span></div>';
+    terminal.innerHTML = `<div class="terminal-line"><span class="terminal-prompt">${this.getPrompt()}</span><span class="terminal-cursor" id="cursor">█</span></div>`;
   }
 
   updateFileSystem() {
