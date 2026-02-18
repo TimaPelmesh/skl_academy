@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Модуль 5: Введение в нейросети — перцептрон, функции активации, MLP, Forward Pass">
+    <meta name="description" content="Модуль 5: Введение в нейросети — перцептрон, функции активации, MLP, Forward Pass. Код на Python, примеры, визуальные схемы.">
     <title>5. Введение в нейросети | Введение в AI | SKL Academy</title>
     <link rel="canonical" href="https://skl-academy.ru/courses/ai/05-neural-intro.html">
     <link rel="stylesheet" href="../courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
 </head>
 <body data-course="ai">
@@ -15,7 +16,7 @@
         <h1 class="header-title">Введение в AI</h1>
         <div class="header-buttons">
             <div class="color-scheme-buttons"><button class="color-scheme-btn" data-color="purple"><span class="color-dot" style="background: #6c63ff;"></span></button></div>
-            <button class="theme-toggle-btn" id="themeToggle" aria-label="Тема"><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button>
+            <button class="theme-toggle-btn" id="themeToggle" aria-label="Тема"><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button>
             <button class="mobile-settings-btn" id="mobileSettingsTrigger" aria-label="Настройки"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
             <a href="../../index.html" class="exit-btn" title="На главную"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
         </div>
@@ -23,20 +24,476 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1–4</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="04-ensembles.html" class="subtopic">4. Ансамбли</a></div></div>
-                <div class="topic"><button class="topic-btn active">5. Введение в нейросети</button><div class="subtopics" style="max-height: 1000px;"><a href="#perceptron" class="subtopic active">5.1 Перцептрон</a><a href="#activations" class="subtopic">5.2 Функции активации</a><a href="#mlp" class="subtopic">5.3 MLP</a><a href="#forward" class="subtopic">5.4 Forward Pass</a></div></div>
-                <div class="topic"><button class="topic-btn">6–10</button><div class="subtopics"><a href="06-backprop-optimization.html" class="subtopic">6. Backprop</a><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic"><button class="topic-btn active">5. Введение в нейросети</button><div class="subtopics" style="max-height: 1000px;"><a href="#perceptron" class="subtopic active">5.1 Перцептрон</a><a href="#activations" class="subtopic">5.2 Функции активации</a><a href="#mlp" class="subtopic">5.3 Архитектура MLP</a><a href="#forward" class="subtopic">5.4 Forward Pass</a><a href="#code-example" class="subtopic">5.5 Код на Python</a><a href="#practice" class="subtopic">5.6 Практика</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 5: Введение в нейросети. Искусственный нейрон</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Объяснить, как устроен «кирпичик» глубокого обучения.</p></div></section>
-            <section id="perceptron" class="topic-section"><h2>Перцептрон (искусственный нейрон)</h2><div class="lesson-content"><p><strong>Математическая модель:</strong> взвешенная сумма входов (как в линейной регрессии) плюс функция активации (нелинейность). Выход = activation(w₁x₁ + w₂x₂ + … + b). Сравнение с биологическим нейроном: дендриты — входы, синапсы — веса, тело нейрона — сумма и порог, аксон — выход.</p></div></section>
-            <section id="activations" class="topic-section"><h2>Функции активации</h2><div class="lesson-content"><p><strong>Сигмоид</strong> — выход от 0 до 1, удобен для вероятностей; насыщение на краях ведёт к затуханию градиента. <strong>Tanh</strong> — от −1 до 1, центрированный. <strong>ReLU</strong> (выпрямитель) — max(0, x): обнуляет отрицательные значения, не насыщается при x > 0, ускоряет сходимость. Зачем нелинейность: без неё много слоёв эквивалентны одному линейному преобразованию; с нелинейностью сеть описывает сложные зависимости, а не только прямые/плоскости.</p></div></section>
-            <section id="mlp" class="topic-section"><h2>Архитектура полносвязной сети (MLP)</h2><div class="lesson-content"><p><strong>Входной слой</strong> — признаки (каждый нейрон = один признак или один пиксель). <strong>Скрытые слои</strong> — обучаются промежуточным представлениям (абстракциям). <strong>Выходной слой</strong> — один нейрон для регрессии, несколько для многоклассовой классификации (часто с softmax). Полносвязность: каждый нейрон слоя связан со всеми нейронами предыдущего.</p></div></section>
-            <section id="forward" class="topic-section"><h2>Прямое распространение (Forward Pass)</h2><div class="lesson-content"><p>Данные проходят от входа к выходу: на каждом слое применяется линейное преобразование (матрица весов × вектор входа + сдвиг) и функция активации. Выход предыдущего слоя становится входом следующего. В конце получаем предсказание модели. Все промежуточные значения сохраняются — они понадобятся для обратного распространения при обучении.</p></div></section>
+
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 5: Введение в нейросети</h2>
+                <div class="lesson-content">
+                    <p><strong>Задача модуля:</strong> понять, как устроен «кирпичик» глубокого обучения — искусственный нейрон, как из нейронов строятся сети, и почему они способны решать сложные задачи.</p>
+                    <div class="visual-guide">
+                        <h4>Что вы узнаете</h4>
+                        <ul>
+                            <li>Как работает перцептрон (искусственный нейрон)</li>
+                            <li>Зачем нужны функции активации и чем отличаются Sigmoid, ReLU, Tanh</li>
+                            <li>Как из нейронов собирается многослойная сеть (MLP)</li>
+                            <li>Что такое Forward Pass и как данные проходят через сеть</li>
+                            <li>Как реализовать простую нейросеть на Python с нуля</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="perceptron" class="topic-section">
+                <h2>5.1 Перцептрон (искусственный нейрон)</h2>
+                <div class="lesson-content">
+                    <p>Перцептрон — это простейшая модель нейрона. Он берёт набор входных значений, умножает каждое на свой вес, складывает результат и пропускает через функцию активации.</p>
+
+                    <div class="visual-guide">
+                        <h4>Формула перцептрона</h4>
+                        <p><code>output = activation(w₁·x₁ + w₂·x₂ + ... + wₙ·xₙ + b)</code></p>
+                        <ul>
+                            <li><strong>x₁, x₂, ..., xₙ</strong> — входные сигналы (признаки)</li>
+                            <li><strong>w₁, w₂, ..., wₙ</strong> — веса (обучаемые параметры)</li>
+                            <li><strong>b</strong> — смещение (bias), позволяет сдвигать порог срабатывания</li>
+                            <li><strong>activation</strong> — функция активации (нелинейность)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Аналогия с биологическим нейроном</h3>
+                    <p>Биологический нейрон получает сигналы через <strong>дендриты</strong> (входы), обрабатывает их в <strong>теле клетки</strong> (суммирование + порог) и передаёт результат по <strong>аксону</strong> (выход). Синапсы — это «веса», определяющие силу связи между нейронами.</p>
+
+                    <table class="operators-cheatsheet" style="width: 100%; margin: 1.5rem 0;">
+                        <thead>
+                            <tr><th>Биологический нейрон</th><th>Искусственный нейрон</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Дендриты (входы)</td><td>Входные данные x₁, x₂, ...</td></tr>
+                            <tr><td>Сила синапса</td><td>Веса w₁, w₂, ...</td></tr>
+                            <tr><td>Тело нейрона (суммирование)</td><td>Взвешенная сумма + bias</td></tr>
+                            <tr><td>Порог срабатывания</td><td>Функция активации</td></tr>
+                            <tr><td>Аксон (выход)</td><td>Output нейрона</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Один нейрон = линейный классификатор</h3>
+                    <p>Один перцептрон с пороговой функцией активации способен решить только <strong>линейно разделимые</strong> задачи — те, где классы можно разделить прямой (в 2D) или гиперплоскостью. Классический пример невозможной задачи — XOR (исключающее ИЛИ). Именно для решения таких задач нейроны объединяют в <strong>многослойные сети</strong>.</p>
+
+                    <div class="note">
+                        <p><strong>Историческая справка:</strong> Перцептрон был предложен Фрэнком Розенблаттом в 1957 году. В 1969 году Минский и Паперт показали ограничения одного перцептрона (невозможность решить XOR), что привело к «зиме AI». Решение пришло с многослойными сетями и алгоритмом обратного распространения ошибки.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="activations" class="topic-section">
+                <h2>5.2 Функции активации</h2>
+                <div class="lesson-content">
+                    <p>Функция активации вносит <strong>нелинейность</strong> в работу нейрона. Без неё любая многослойная сеть была бы эквивалентна одному линейному преобразованию (композиция линейных функций — всё ещё линейная функция).</p>
+
+                    <h3>Sigmoid (Логистическая функция)</h3>
+                    <p><code>σ(x) = 1 / (1 + e⁻ˣ)</code></p>
+                    <ul>
+                        <li>Выход: от 0 до 1 — удобно интерпретировать как вероятность</li>
+                        <li>Гладкая, дифференцируемая</li>
+                        <li><strong>Проблема:</strong> при больших |x| производная ≈ 0 (насыщение) → <em>затухание градиентов</em></li>
+                        <li>Выход не центрирован (всегда > 0) → медленная сходимость</li>
+                        <li><strong>Применение:</strong> выходной слой для бинарной классификации</li>
+                    </ul>
+
+                    <h3>Tanh (Гиперболический тангенс)</h3>
+                    <p><code>tanh(x) = (eˣ - e⁻ˣ) / (eˣ + e⁻ˣ)</code></p>
+                    <ul>
+                        <li>Выход: от −1 до 1 — <strong>центрированный</strong> (среднее ≈ 0)</li>
+                        <li>Быстрее сходится, чем sigmoid, т.к. выход центрирован</li>
+                        <li><strong>Проблема:</strong> всё ещё насыщается при больших |x|</li>
+                        <li><strong>Применение:</strong> скрытые слои RNN (до эпохи трансформеров)</li>
+                    </ul>
+
+                    <h3>ReLU (Rectified Linear Unit)</h3>
+                    <p><code>ReLU(x) = max(0, x)</code></p>
+                    <ul>
+                        <li>Проще всего: если x > 0 → пропускаем, иначе → 0</li>
+                        <li><strong>Не насыщается</strong> при x > 0 → нет затухания градиента</li>
+                        <li>Очень быстрое вычисление (просто сравнение с нулём)</li>
+                        <li><strong>Проблема:</strong> «мёртвые нейроны» (dying ReLU) — если нейрон всегда выдаёт 0, его градиент = 0 и он не обучается</li>
+                        <li><strong>Применение:</strong> стандарт для скрытых слоёв в большинстве современных сетей</li>
+                    </ul>
+
+                    <h3>Leaky ReLU и другие варианты</h3>
+                    <p><code>LeakyReLU(x) = x если x > 0, иначе α·x</code> (обычно α = 0.01)</p>
+                    <p>Решает проблему «мёртвых нейронов» — при отрицательных входах всё равно пропускает маленький градиент. Существуют и другие варианты: <strong>ELU</strong>, <strong>GELU</strong> (используется в трансформерах), <strong>Swish</strong> (SiLU).</p>
+
+                    <div class="visual-guide">
+                        <h4>Сравнение функций активации</h4>
+                        <table class="operators-cheatsheet" style="width: 100%;">
+                            <thead>
+                                <tr><th>Функция</th><th>Диапазон</th><th>Плюсы</th><th>Минусы</th><th>Где используется</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Sigmoid</td><td>[0, 1]</td><td>Вероятностная интерпретация</td><td>Затухание градиентов</td><td>Выходной слой (бинарная кл.)</td></tr>
+                                <tr><td>Tanh</td><td>[−1, 1]</td><td>Центрированный выход</td><td>Затухание градиентов</td><td>RNN, старые архитектуры</td></tr>
+                                <tr><td>ReLU</td><td>[0, +∞)</td><td>Быстро, без насыщения</td><td>Мёртвые нейроны</td><td>CNN, MLP (стандарт)</td></tr>
+                                <tr><td>GELU</td><td>≈[−0.17, +∞)</td><td>Гладкая, хорошо работает</td><td>Дороже ReLU</td><td>Трансформеры (BERT, GPT)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="practice-tips">
+                        <h4>Практический совет</h4>
+                        <p>Начинайте с <strong>ReLU</strong> для скрытых слоёв. Если видите «мёртвые нейроны» (многие выходы = 0) — попробуйте Leaky ReLU. Для выхода: sigmoid (бинарная классификация), softmax (многоклассовая), без активации (регрессия).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mlp" class="topic-section">
+                <h2>5.3 Архитектура полносвязной сети (MLP)</h2>
+                <div class="lesson-content">
+                    <p><strong>MLP (Multi-Layer Perceptron)</strong> — это сеть из нескольких слоёв нейронов, где каждый нейрон одного слоя связан со всеми нейронами следующего.</p>
+
+                    <h3>Структура MLP</h3>
+                    <div class="visual-guide">
+                        <h4>Три типа слоёв</h4>
+                        <ul>
+                            <li><strong>Входной слой</strong> — количество нейронов = количество признаков (фичей). Не выполняет вычислений, просто передаёт данные</li>
+                            <li><strong>Скрытые слои</strong> — один или несколько. Каждый нейрон: взвешенная сумма + активация. Эти слои учатся находить промежуточные представления (абстракции) данных</li>
+                            <li><strong>Выходной слой</strong> — количество нейронов зависит от задачи:
+                                <ul>
+                                    <li>Регрессия: 1 нейрон, без активации (или линейная)</li>
+                                    <li>Бинарная классификация: 1 нейрон + sigmoid</li>
+                                    <li>Многоклассовая классификация: N нейронов + softmax</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+<pre><code class="language-plaintext">
+  Входной слой     Скрытый слой 1    Скрытый слой 2    Выходной слой
+  (3 признака)      (4 нейрона)       (4 нейрона)       (2 класса)
+
+     [x₁] ─────→ [h₁] ─────→ [h₅] ─────→ [y₁]  (класс A)
+           ╲   ╱       ╲   ╱       ╲   ╱
+     [x₂] ──╳──→ [h₂] ──╳──→ [h₆] ──╳──→ [y₂]  (класс B)
+           ╱   ╲       ╱   ╲       ╱   ╲
+     [x₃] ─────→ [h₃] ─────→ [h₇] ─────→
+                       │             │
+                  [h₄] ─────→ [h₈] ─────→
+
+  Каждый нейрон связан с каждым нейроном следующего слоя (полносвязность)
+</code></pre>
+
+                    <h3>Почему «глубина» работает?</h3>
+                    <p>Каждый скрытый слой учится представлять данные на всё более высоком уровне абстракции:</p>
+                    <ul>
+                        <li><strong>Слой 1:</strong> простые паттерны (линии, пороги, базовые комбинации признаков)</li>
+                        <li><strong>Слой 2:</strong> комбинации паттернов (углы, формы, сложные условия)</li>
+                        <li><strong>Слой N:</strong> высокоуровневые абстракции (объекты, концепции)</li>
+                    </ul>
+                    <p>Именно поэтому глубокие сети (deep learning) эффективнее мелких — они строят иерархию абстракций.</p>
+
+                    <h3>Гиперпараметры MLP</h3>
+                    <ul>
+                        <li><strong>Количество скрытых слоёв</strong> — обычно 1–5 для табличных данных, десятки-сотни для изображений и текста</li>
+                        <li><strong>Количество нейронов в слое</strong> — типичные значения: 32, 64, 128, 256, 512</li>
+                        <li><strong>Функция активации</strong> — ReLU для скрытых, sigmoid/softmax для выходного</li>
+                        <li><strong>Dropout</strong> — случайное «выключение» части нейронов при обучении для предотвращения переобучения</li>
+                    </ul>
+
+                    <div class="note">
+                        <p><strong>Теорема об универсальной аппроксимации:</strong> MLP всего с одним скрытым слоём (достаточно широким) может аппроксимировать любую непрерывную функцию. Но на практике глубокие и узкие сети работают лучше — им нужно меньше параметров для той же точности.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="forward" class="topic-section">
+                <h2>5.4 Прямое распространение (Forward Pass)</h2>
+                <div class="lesson-content">
+                    <p>Forward Pass — это процесс прохождения данных от входа к выходу сети. На каждом слое выполняются два шага:</p>
+
+                    <ol>
+                        <li><strong>Линейное преобразование:</strong> <code>z = W · x + b</code> (матрица весов × вектор входа + вектор смещений)</li>
+                        <li><strong>Функция активации:</strong> <code>a = activation(z)</code></li>
+                    </ol>
+
+                    <p>Выход одного слоя <code>a</code> становится входом <code>x</code> для следующего. В конце получаем предсказание модели.</p>
+
+                    <div class="visual-guide">
+                        <h4>Пошагово: Forward Pass для сети с 2 скрытыми слоями</h4>
+<pre><code class="language-plaintext">
+Вход:     x = [0.5, 0.3, 0.8]
+
+Слой 1:   z₁ = W₁ · x + b₁        (линейная часть)
+          a₁ = ReLU(z₁)            (нелинейная часть)
+
+Слой 2:   z₂ = W₂ · a₁ + b₂
+          a₂ = ReLU(z₂)
+
+Выход:    z₃ = W₃ · a₂ + b₃
+          ŷ  = softmax(z₃)         (вероятности классов)
+</code></pre>
+                    </div>
+
+                    <h3>Зачем сохранять промежуточные значения?</h3>
+                    <p>Все промежуточные значения (z₁, a₁, z₂, a₂, ...) <strong>сохраняются в памяти</strong>. Они понадобятся на этапе <strong>обратного распространения ошибки</strong> (backpropagation) для вычисления градиентов и обновления весов. Это один из компромиссов: больше памяти → быстрее обучение.</p>
+
+                    <div class="practice-tips">
+                        <h4>Ключевая идея</h4>
+                        <p>Forward Pass — это просто <strong>цепочка матричных умножений + нелинейностей</strong>. GPU отлично справляется с матричными умножениями, поэтому нейросети так хорошо ускоряются на видеокартах.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="code-example" class="topic-section">
+                <h2>5.5 Код: нейросеть на Python с нуля</h2>
+                <div class="lesson-content">
+                    <p>Реализуем простую полносвязную сеть только на NumPy, чтобы понять механику. Никаких фреймворков — чистая математика.</p>
+
+                    <h3>Простой нейрон (перцептрон)</h3>
+<pre><code class="language-python">import numpy as np
+
+# Функции активации
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def relu(x):
+    return np.maximum(0, x)
+
+# Простой нейрон
+def neuron(inputs, weights, bias):
+    """Один нейрон: взвешенная сумма + активация"""
+    z = np.dot(inputs, weights) + bias   # линейная часть
+    output = sigmoid(z)                   # нелинейная часть
+    return output
+
+# Пример: нейрон с 3 входами
+inputs = np.array([0.5, 0.3, 0.8])
+weights = np.array([0.4, -0.2, 0.6])
+bias = 0.1
+
+result = neuron(inputs, weights, bias)
+print(f"Вход: {inputs}")
+print(f"Веса: {weights}, bias: {bias}")
+print(f"Выход нейрона: {result:.4f}")
+# Выход нейрона: 0.6457
+</code></pre>
+
+                    <h3>Полносвязная сеть (MLP) с нуля</h3>
+<pre><code class="language-python">import numpy as np
+
+class SimpleNN:
+    """Простая нейросеть: вход → скрытый слой → выход"""
+    
+    def __init__(self, input_size, hidden_size, output_size):
+        # Инициализация весов (случайные малые числа)
+        self.W1 = np.random.randn(input_size, hidden_size) * 0.01
+        self.b1 = np.zeros(hidden_size)
+        self.W2 = np.random.randn(hidden_size, output_size) * 0.01
+        self.b2 = np.zeros(output_size)
+    
+    def relu(self, x):
+        return np.maximum(0, x)
+    
+    def sigmoid(self, x):
+        return 1 / (1 + np.exp(-np.clip(x, -500, 500)))
+    
+    def forward(self, X):
+        """Forward Pass: данные проходят через сеть"""
+        # Скрытый слой
+        self.z1 = X @ self.W1 + self.b1   # линейное преобразование
+        self.a1 = self.relu(self.z1)        # активация ReLU
+        
+        # Выходной слой
+        self.z2 = self.a1 @ self.W2 + self.b2
+        self.a2 = self.sigmoid(self.z2)     # sigmoid для вероятности
+        
+        return self.a2
+    
+    def predict(self, X):
+        """Предсказание: 0 или 1"""
+        probabilities = self.forward(X)
+        return (probabilities >= 0.5).astype(int)
+
+
+# Пример: классификация XOR (задача, неразрешимая одним перцептроном!)
+X = np.array([[0, 0],
+              [0, 1],
+              [1, 0],
+              [1, 1]])
+
+y = np.array([[0], [1], [1], [0]])  # XOR
+
+# Создаём сеть: 2 входа → 4 скрытых → 1 выход
+nn = SimpleNN(input_size=2, hidden_size=4, output_size=1)
+
+# Forward pass (без обучения — веса случайные)
+predictions = nn.forward(X)
+print("Предсказания (случайные веса):")
+for i in range(len(X)):
+    print(f"  {X[i]} → {predictions[i][0]:.4f}")
+</code></pre>
+
+                    <div class="note">
+                        <p><strong>Важно:</strong> Этот код показывает только <em>forward pass</em>. Для обучения нужен ещё <em>backward pass</em> (backpropagation) — вычисление градиентов и обновление весов. Это тема следующего модуля.</p>
+                    </div>
+
+                    <h3>То же самое на PyTorch (2 строки)</h3>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+
+# Та же сеть, но средствами PyTorch
+model = nn.Sequential(
+    nn.Linear(2, 4),     # входной → скрытый (2 → 4)
+    nn.ReLU(),            # активация
+    nn.Linear(4, 1),     # скрытый → выходной (4 → 1)
+    nn.Sigmoid()          # вероятность на выходе
+)
+
+# Forward pass
+X = torch.tensor([[0., 0.], [0., 1.], [1., 0.], [1., 1.]])
+output = model(X)
+print(output)  # 4 вероятности (случайные веса)
+
+# Посмотрим количество параметров
+total_params = sum(p.numel() for p in model.parameters())
+print(f"Всего параметров: {total_params}")
+# 2×4 + 4 + 4×1 + 1 = 17 параметров
+</code></pre>
+
+                    <div class="practice-tips">
+                        <h4>Сравнение: с нуля vs фреймворк</h4>
+                        <p>Писать с нуля полезно для <strong>понимания</strong>. В реальных проектах используйте <strong>PyTorch</strong> или <strong>TensorFlow</strong> — они автоматически вычисляют градиенты (autograd), поддерживают GPU и имеют готовые слои, оптимизаторы, даталоадеры.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice" class="topic-section">
+                <h2>5.6 Практические упражнения</h2>
+                <div class="lesson-content">
+                    <div class="visual-guide">
+                        <h4>Упражнение 1: Поиграйте с нейроном</h4>
+                        <p>Скопируйте код «простого нейрона» выше и попробуйте:</p>
+                        <ul>
+                            <li>Измените веса — как меняется выход?</li>
+                            <li>Замените sigmoid на relu — что происходит?</li>
+                            <li>Поставьте bias = −10 — какой будет выход sigmoid?</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Упражнение 2: Посчитайте параметры</h4>
+                        <p>Сеть: 784 входов (изображение 28×28) → 128 нейронов → 64 нейрона → 10 выходов (цифры 0–9).</p>
+                        <ul>
+                            <li>Сколько весов в каждом слое?</li>
+                            <li>Сколько bias'ов?</li>
+                            <li>Общее число параметров?</li>
+                        </ul>
+                        <p><em>Ответ:</em> 784×128 + 128 + 128×64 + 64 + 64×10 + 10 = <strong>109 386</strong> параметров.</p>
+                    </div>
+
+                    <div class="visual-guide">
+                        <h4>Упражнение 3: TensorFlow Playground</h4>
+                        <p>Откройте <a href="https://playground.tensorflow.org/" target="_blank">playground.tensorflow.org</a> и попробуйте:</p>
+                        <ul>
+                            <li>Решить задачу «спираль» одним скрытым слоём — получится?</li>
+                            <li>Добавьте 2–3 скрытых слоя — как меняется граница решения?</li>
+                            <li>Попробуйте разные функции активации</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <p><strong>Что дальше:</strong> В следующем модуле разберём <strong>Backpropagation</strong> — как сеть учится, вычисляя градиенты и обновляя веса. Это замыкает цикл: Forward Pass (предсказание) → Loss (ошибка) → Backward Pass (градиенты) → Update (обновление весов).</p>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <script src="../courses.js"></script>
 </body>
 </html>

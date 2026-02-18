@@ -23,17 +23,158 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1–7</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="07-rnn-lstm.html" class="subtopic">7. RNN/LSTM</a></div></div>
-                <div class="topic"><button class="topic-btn active">8. Attention и Трансформеры</button><div class="subtopics" style="max-height: 1000px;"><a href="#attention" class="subtopic active">8.1 Attention</a><a href="#transformer" class="subtopic">8.2 Transformer</a><a href="#positional" class="subtopic">8.3 Позиционное кодирование</a><a href="#multihead" class="subtopic">8.4 Multi-Head Attention</a></div></div>
-                <div class="topic"><button class="topic-btn">9–10</button><div class="subtopics"><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                        <a href="05-neural-intro.html#code-example" class="subtopic">5.5 Код на Python</a>
+                        <a href="05-neural-intro.html#practice" class="subtopic">5.6 Практика</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">8. Attention и Трансформеры</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#attention" class="subtopic active">8.1 Механизм Attention</a>
+                        <a href="#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 8: Революция Attention и Трансформеры (движки LLM)</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Объяснить архитектуру, на которой построены все современные ChatGPT и подобные.</p></div></section>
-            <section id="attention" class="topic-section"><h2>Механизм Внимания (Attention)</h2><div class="lesson-content"><p><strong>Интуиция:</strong> при ответе на вопрос вы «обращаете внимание» на ключевые слова в тексте. <strong>Математика:</strong> Query (запрос — «что ищем»), Key (ключ — «по чему ищем»), Value (значение — «что берём»). Скалярное произведение Query и Key даёт оценку близости; после softmax получаем веса внимания. Взвешенная сумма Value по этим весам — выход внимания. Так каждый токен может «смотреть» на любой другой — основа трансформера.</p></div></section>
-            <section id="transformer" class="topic-section"><h2>Архитектура Трансформер (Transformer)</h2><div class="lesson-content"><p>Отказ от RNN: «Attention is all you need». <strong>Энкодер</strong> — понимает вход (каждый токен обогащается контекстом через self-attention). <strong>Декодер</strong> — генерирует выход по одному токену, смотрит на выход энкодера и на уже сгенерированные токены. Огромные матрицы весов — миллиарды параметров в больших моделях. Слои: self-attention, нормализация, feed-forward, снова нормализация; так блоки повторяются.</p></div></section>
-            <section id="positional" class="topic-section"><h2>Позиционное кодирование (Positional Encoding)</h2><div class="lesson-content"><p>Attention сам по себе не различает порядок токенов — только «кто на кого смотрит». Чтобы модель понимала структуру предложения, к эмбеддингам токенов добавляют <strong>позиционное кодирование</strong> — вектор, зависящий от позиции. Классический вариант — синусы и косинусы разной частоты (фиксированные). В современных моделях часто обучаемое позиционное кодирование или относительные позиции.</p></div></section>
-            <section id="multihead" class="topic-section"><h2>Многослойное внимание (Multi-Head Attention)</h2><div class="lesson-content"><p>Не один механизм внимания, а несколько параллельных «голов». Каждая голова имеет свои матрицы Q, K, V и учится искать свои типы связей — грамматические, смысловые, анафорические и т.д. Выходы голов конкатенируются и проходят через линейный слой. Так модель одновременно учитывает разные аспекты контекста.</p></div></section>
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 8: Революция Attention и Трансформеры</h2>
+                <div class="lesson-content">
+                    <p>В 2017 году статья «Attention is all you need» предложила архитектуру <strong>Transformer</strong>: вместо последовательной обработки текста через RNN или LSTM модель обрабатывает все позиции параллельно и связывает их механизмом <strong>внимания (attention)</strong>. Каждый элемент последовательности может «смотреть» на любой другой и агрегировать информацию по контексту. Эта идея лежит в основе всех современных больших языковых моделей — GPT, BERT, LLaMA и аналогов.</p>
+                    <p><strong>Задача модуля:</strong> объяснить механизм внимания (Query, Key, Value), архитектуру трансформера (энкодер и декодер), роль позиционного кодирования и многоголового внимания. После модуля вы будете понимать, на какой архитектуре построены ChatGPT и подобные системы и как они «видят» контекст.</p>
+                    <div class="visual-guide">
+                        <h4>Что разберём</h4>
+                        <ul>
+                            <li><strong>Attention</strong> — Q, K, V, веса внимания, взвешенная сумма.</li>
+                            <li><strong>Transformer</strong> — энкодер, декодер, слои и блоки.</li>
+                            <li><strong>Позиционное кодирование</strong> — зачем нужен порядок токенов.</li>
+                            <li><strong>Multi-Head Attention</strong> — несколько «голов» для разных типов связей.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="attention" class="topic-section">
+                <h2>8.1 Механизм внимания (Attention)</h2>
+                <div class="lesson-content">
+                    <p>Интуиция: при ответе на вопрос по тексту вы не опираетесь на все слова одинаково — вы «обращаете внимание» на ключевые фрагменты. Механизм внимания в нейросетях формализует эту идею: для каждого элемента (например, токена) мы вычисляем <strong>веса</strong> относительно всех остальных элементов и формируем выход как взвешенную комбинацию их представлений. Так модель явно решает, откуда брать информацию.</p>
+                    <p>Математически вводятся три роли. <strong>Query (Q)</strong> — «запрос»: что мы ищем, обычно представление текущего элемента. <strong>Key (K)</strong> — «ключ»: по чему ищем, представления элементов, на которые можно смотреть. <strong>Value (V)</strong> — «значение»: что именно берём с каждого элемента. Для каждой пары (текущий элемент, другой элемент) считают сходство между Query и Key (часто скалярное произведение или его масштабированный вариант). После применения softmax по «другим» элементам получают веса внимания — распределение вероятностей, куда смотреть. Выход — взвешенная сумма Value по этим весам. В результате каждый токен получает контекстуализированное представление, зависящее от всей последовательности.</p>
+                    <p>В трансформере используется <strong>self-attention</strong>: для одного и того же набора токенов формируются Q, K, V (как линейные преобразования их эмбеддингов). Каждый токен «смотрит» на все остальные и на себя; порядок элементов сам по себе в этой операции не заложен — его добавляют отдельно через позиционное кодирование.</p>
+                    <div class="note">
+                        <p><strong>Связь с модулем 1:</strong> сходство Query и Key часто считают через скалярное произведение — та же идея «похожести» векторов, что и в косинусном сходстве и в описании Attention в статьях.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="transformer" class="topic-section">
+                <h2>8.2 Архитектура трансформера (Transformer)</h2>
+                <div class="lesson-content">
+                    <p>Трансформер отказался от рекуррентных слоёв: «Attention is all you need». Входная последовательность обрабатывается параллельно; связи между позициями задаются только механизмом внимания и позиционным кодированием. Архитектура состоит из двух частей: <strong>энкодера</strong> и <strong>декодера</strong> (в моделях только для декодирования, например GPT, используется только стек декодерных блоков).</p>
+                    <p><strong>Энкодер</strong> принимает входную последовательность (например, исходный текст). Каждый блок энкодера содержит слой self-attention (каждый токен обогащается контекстом от всех остальных), затем слой нормализации, затем feed-forward сеть (два линейных слоя с нелинейностью между ними) и снова нормализацию. Блоки повторяются; на выходе энкодера — контекстуализированные представления каждого токена.</p>
+                    <p><strong>Декодер</strong> генерирует выход по одному токену за раз. В каждом блоке декодера: маскированное self-attention (токен видит только себя и предыдущие сгенерированные токены, чтобы не «подглядывать» в будущее), затем cross-attention на выход энкодера (вопрос «на что из входа смотреть при генерации»), затем feed-forward и нормализации. Огромные модели (миллиарды параметров) — это десятки таких блоков и гигантские матрицы весов; обучение требует больших данных и вычислительных ресурсов.</p>
+                    <div class="visual-guide">
+                        <h4>Кратко</h4>
+                        <p>Энкодер: вход → self-attention → нормализация → feed-forward → нормализация; повтор N раз. Декодер: выход (по токенам) → маскированное self-attention → cross-attention на энкодер → feed-forward; повтор N раз. Генерация — по одному токену, каждый следующий зависит от энкодера и уже сгенерированного префикса.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="positional" class="topic-section">
+                <h2>8.3 Позиционное кодирование (Positional Encoding)</h2>
+                <div class="lesson-content">
+                    <p>Self-attention сам по себе не различает порядок токенов: если переставить слова в предложении, матрица весов внимания между ними изменится только из-за изменения содержимого, но не из-за позиции. Модель не «знает», что первое слово идёт раньше второго. Чтобы передать информацию о порядке, к эмбеддингам токенов добавляют <strong>позиционное кодирование</strong> — вектор, зависящий от позиции в последовательности.</p>
+                    <p>В оригинальной статье использовались фиксированные кодировки — синусы и косинусы разной частоты для разных размерностей вектора. Так получают уникальный вектор для каждой позиции, и модель может различать «первый токен», «второй» и т.д. В современных реализациях часто используют <strong>обучаемое</strong> позиционное кодирование (отдельная таблица или слой) или схемы относительных позиций (расстояние между токенами). Идея одна: явно сообщить модели, где находится каждый элемент в последовательности, чтобы она могла использовать порядок при интерпретации контекста.</p>
+                </div>
+            </section>
+            <section id="multihead" class="topic-section">
+                <h2>8.4 Многоголовое внимание (Multi-Head Attention)</h2>
+                <div class="lesson-content">
+                    <p>Один механизм внимания вычисляет одну взвешенную комбинацию по контексту. Но связи в тексте бывают разного типа: грамматические (подлежащее–сказуемое), смысловые (анафора, синонимы), локальные (соседние слова). <strong>Multi-Head Attention</strong> — это несколько параллельных «голов» внимания: у каждой свои матрицы для получения Q, K, V из входов, и каждая считает свои веса и свой взвешенный выход. Таким образом, каждая голова может специализироваться на своих типах зависимостей.</p>
+                    <p>Выходы всех голов конкатенируются и проходят через общий линейный слой — получается итоговое представление, объединяющее информацию от разных типов внимания. Так модель одновременно учитывает разные аспекты контекста: и синтаксис, и семантику, и локальную связность. В больших моделях число голов может быть десятки (например, 12, 16, 32); размерность на голову при этом уменьшают, чтобы суммарный объём вычислений оставался управляемым.</p>
+                    <div class="practice-tips">
+                        <h4>Итог</h4>
+                        <p>Трансформер = self-attention (и multi-head) + позиционное кодирование + feed-forward и нормализация, собранные в блоки энкодера и декодера. На этой архитектуре построены все современные LLM; понимание Q, K, V и роли позиций — ключ к чтению статей и кодов по NLP и генеративным моделям.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>

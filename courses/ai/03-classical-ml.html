@@ -23,19 +23,149 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1. Фундамент</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">Модуль 1</a></div></div>
-                <div class="topic"><button class="topic-btn">2. Введение в ML</button><div class="subtopics"><a href="02-ml-intro.html" class="subtopic">Модуль 2</a></div></div>
-                <div class="topic"><button class="topic-btn active">3. Классические алгоритмы</button><div class="subtopics" style="max-height: 1000px;"><a href="#linear-regression" class="subtopic active">3.1 Линейная регрессия</a><a href="#logistic" class="subtopic">3.2 Логистическая регрессия</a><a href="#knn" class="subtopic">3.3 KNN</a><a href="#decision-trees" class="subtopic">3.4 Решающие деревья</a></div></div>
-                <div class="topic"><button class="topic-btn">4. Ансамблевые методы</button><div class="subtopics"><a href="04-ensembles.html" class="subtopic">Модуль 4</a></div></div>
-                <div class="topic"><button class="topic-btn">5–10</button><div class="subtopics"><a href="05-neural-intro.html" class="subtopic">5. Нейросети</a><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">3. Классические алгоритмы</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#linear-regression" class="subtopic active">3.1 Линейная регрессия</a>
+                        <a href="#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="#knn" class="subtopic">3.3 KNN</a>
+                        <a href="#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                        <a href="05-neural-intro.html#code-example" class="subtopic">5.5 Код на Python</a>
+                        <a href="05-neural-intro.html#practice" class="subtopic">5.6 Практика</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 3: Классические алгоритмы. От простого к сложному</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Понять логику работы «интерпретируемых» моделей, чтобы потом сравнить с «чёрным ящиком» нейросетей.</p></div></section>
-            <section id="linear-regression" class="topic-section"><h2>Линейная регрессия и её механика</h2><div class="lesson-content"><p>Уравнение прямой <strong>y = kx + b</strong> в многомерном мире: y = w₁x₁ + w₂x₂ + … + w₀ (свободный член). Обучение — подбор весов (коэффициентов) методом наименьших квадратов (МНК) или градиентного спуска. <strong>Интерпретация:</strong> если признак xᵢ вырос на 1 (при остальных неизменных), предсказание изменится на wᵢ.</p></div></section>
-            <section id="logistic" class="topic-section"><h2>Логистическая регрессия (основа классификации)</h2><div class="lesson-content"><p>Для классификации нельзя просто провести прямую: нужна вероятность класса. <strong>Сигмоида</strong> (S-образная функция) «сжимает» линейную комбинацию весов и признаков в число от 0 до 1 — вероятность положительного класса. <strong>Граница принятия решения</strong> — обычно 0,5: выше — один класс, ниже — другой.</p></div></section>
-            <section id="knn" class="topic-section"><h2>Метрические методы (KNN)</h2><div class="lesson-content"><p><strong>Ленивое обучение</strong> — модель по сути запоминает данные; ответ для нового объекта даётся по k ближайшим соседям (голосование по классам или среднее по целевой переменной). <strong>Меры расстояния:</strong> евклидово, манхэттенское. Важно масштабировать признаки, иначе признак с большей дисперсией будет доминировать. Влияние шума снижают выбором k и весами соседей.</p></div></section>
-            <section id="decision-trees" class="topic-section"><h2>Решающие деревья (Decision Trees)</h2><div class="lesson-content"><p>Данные разбиваются по условиям (if-else) по признакам. <strong>Энтропия</strong> и неопределённость — мера «размазанности» классов в узле. Дерево выбирает, по какому признаку и порогу делить, чтобы информация стала «чище» (снижение энтропии или прирост информации). <strong>Проблема переобучения:</strong> глубокое дерево запоминает шум; решается ограничением глубины, минимального числа объектов в листе и ансамблями (следующий модуль).</p></div></section>
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 3: Классические алгоритмы. От простого к сложному</h2>
+                <div class="lesson-content">
+                    <p>Прежде чем переходить к нейросетям и бустингу, полезно разобрать «классику»: линейную и логистическую регрессию, KNN и решающие деревья. Эти модели относительно просты, их легко интерпретировать, и они часто служат бейзлайном в проектах. Понимание их работы помогает осознанно выбирать между простой и сложной моделью и разбираться в ансамблях (следующий модуль), где деревья — базовый строительный блок.</p>
+                    <p><strong>Задача модуля:</strong> понять логику работы интерпретируемых моделей и их ограничения, чтобы потом осознанно сравнивать их с «чёрным ящиком» нейросетей и ансамблей.</p>
+                </div>
+            </section>
+            <section id="linear-regression" class="topic-section">
+                <h2>3.1 Линейная регрессия и её механика</h2>
+                <div class="lesson-content">
+                    <p>Линейная регрессия — это предсказание целевой переменной как <strong>линейной комбинации</strong> признаков. В школе это прямая <strong>y = kx + b</strong>; в многомерном случае — <strong>y = w₁x₁ + w₂x₂ + … + wₙxₙ + w₀</strong>, где w₀ — свободный член (bias), а w₁, w₂, … — веса признаков.</p>
+                    <p><strong>Обучение</strong> — подбор весов так, чтобы предсказания как можно лучше совпадали с правильными ответами. Классический способ — метод наименьших квадратов (МНК): минимизировать средний квадрат ошибки (MSE). То же можно делать градиентным спуском, что особенно важно для больших данных и как шаг к нейросетям.</p>
+                    <p><strong>Интерпретация:</strong> если признак xᵢ увеличить на 1 при неизменных остальных, предсказание изменится на wᵢ. Поэтому коэффициенты линейной регрессии часто смотрят в отчётах и при отборе признаков.</p>
+                    <div class="note">
+                        <p><strong>Ограничения:</strong> модель предполагает линейную связь между признаками и целью. Нелинейные зависимости и взаимодействия признаков требуют либо ручного создания новых признаков, либо более сложных моделей (деревья, нейросети).</p>
+                    </div>
+                </div>
+            </section>
+            <section id="logistic" class="topic-section">
+                <h2>3.2 Логистическая регрессия (основа классификации)</h2>
+                <div class="lesson-content">
+                    <p>Для классификации нельзя просто выдать число как в регрессии: нужна <strong>вероятность</strong> принадлежности классу. Логистическая регрессия берёт ту же линейную комбинацию весов и признаков, но пропускает её через <strong>сигмоиду</strong> (логистическую функцию) — S-образную кривую, которая «сжимает» любое число в интервал от 0 до 1. Это число и трактуется как вероятность положительного класса.</p>
+                    <p><strong>Граница принятия решения</strong> — обычно 0,5: если вероятность выше 0,5 — предсказываем один класс, ниже — другой. Порог можно менять, если важнее минимизировать ложные срабатывания или пропуски (в зависимости от задачи).</p>
+                    <p>Несмотря на название «регрессия», это классификатор; он обучается максимизацией правдоподобия или минимизацией кросс-энтропии. Логистическая регрессия остаётся одним из самых распространённых и интерпретируемых методов бинарной классификации.</p>
+                </div>
+            </section>
+            <section id="knn" class="topic-section">
+                <h2>3.3 Метрические методы (KNN)</h2>
+                <div class="lesson-content">
+                    <p><strong>KNN (k ближайших соседей)</strong> — пример «ленивого» обучения: модель по сути запоминает обучающую выборку. Для нового объекта мы ищем k ближайших к нему объектов в пространстве признаков и выдаём ответ по ним: при классификации — голосование по классам (какой класс чаще среди k соседей), при регрессии — среднее значение целевой переменной у соседей.</p>
+                    <p><strong>Меры расстояния</strong> — обычно евклидово расстояние или манхэттенское; выбор метрики влияет на то, что считается «похожим». Важно <strong>масштабировать признаки</strong>: иначе признак с большей дисперсией (например, доход в рублях) будет доминировать над признаками в меньшем масштабе. Число k и веса соседей (например, обратное расстоянию) позволяют снизить влияние шума и сгладить предсказания.</p>
+                    <div class="practice-tips">
+                        <h4>Плюсы и минусы</h4>
+                        <p>KNN прост и не требует явного обучения, но предсказание может быть медленным на больших выборках (нужно искать соседей), и качество сильно зависит от выбора k и метрики.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="decision-trees" class="topic-section">
+                <h2>3.4 Решающие деревья (Decision Trees)</h2>
+                <div class="lesson-content">
+                    <p>Решающее дерево разбивает данные по условиям вида «признак &lt; порог»: в корне один вопрос, по ответу переходим в левую или правую ветку, и так далее, пока не попадём в лист с предсказанием. По сути это цепочка if-else по признакам, которую алгоритм строит сам по данным.</p>
+                    <p><strong>Энтропия и прирост информации</strong> — мера «размазанности» классов в узле. Дерево на каждом шаге выбирает признак и порог разбиения так, чтобы уменьшить энтропию (сделать узлы «чище» по классам) или максимизировать прирост информации. Критерии могут быть и другими (например, Gini).</p>
+                    <p><strong>Проблема переобучения:</strong> глубокое дерево может запомнить шум и выучить каждое наблюдение, тогда на новых данных качество падает. Ограничивают глубину, минимальное число объектов в листе, обрезают дерево после построения или используют ансамбли (Random Forest, бустинг) — в следующем модуле.</p>
+                    <div class="note">
+                        <p><strong>Плюсы:</strong> дерево легко интерпретировать (можно распечатать правила), хорошо работает с нелинейными зависимостями и не требует масштабирования признаков. Деревья — основа бустинга и случайного леса.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>

@@ -23,17 +23,152 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1–8</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a></div></div>
-                <div class="topic"><button class="topic-btn active">9. LLM</button><div class="subtopics" style="max-height: 1000px;"><a href="#tokenization" class="subtopic active">9.1 Токенизация и эмбеддинги</a><a href="#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a><a href="#temperature" class="subtopic">9.3 Температура и сэмплирование</a><a href="#context" class="subtopic">9.4 Окно контекста</a></div></div>
-                <div class="topic"><button class="topic-btn">10. Практикум</button><div class="subtopics"><a href="10-practice-mlops.html" class="subtopic">Модуль 10</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                        <a href="05-neural-intro.html#code-example" class="subtopic">5.5 Код на Python</a>
+                        <a href="05-neural-intro.html#practice" class="subtopic">5.6 Практика</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#tokenization" class="subtopic active">9.1 Токенизация и эмбеддинги</a>
+                        <a href="#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 9: Большие языковые модели (LLM) и их работа</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Связать теорию Трансформера с тем, что пользователи видят в интерфейсах.</p></div></section>
-            <section id="tokenization" class="topic-section"><h2>Токенизация и эмбеддинги</h2><div class="lesson-content"><p><strong>Токенизация:</strong> текст разбивается на токены — подслова (BPE, WordPiece), реже слова или символы. Каждый токен имеет id. <strong>Эмбеддинги</strong> — векторное представление токена (обучаемый слой: id → вектор фиксированной размерности). Близкие по смыслу слова получают близкие векторы (король/королева). Эмбеддинги — вход первого слоя трансформера.</p></div></section>
-            <section id="pretraining" class="topic-section"><h2>Обучение LLM (Pre-training и Fine-tuning)</h2><div class="lesson-content"><p><strong>Предобучение (pre-training):</strong> на огромных корпусах текста модель учится предсказывать следующее слово (токен). Так она «набирается» грамматики, фактов и стилей. <strong>Дообучение (fine-tuning):</strong> на данных под конкретную задачу (инструкции, диалог, формат ответа) модель подстраивается, чтобы лучше следовать запросам пользователя. Часто используется RLHF (подкрепление от человеческих предпочтений).</p></div></section>
-            <section id="temperature" class="topic-section"><h2>Температура (Temperature) и сэмплирование</h2><div class="lesson-content"><p>Модель выдаёт распределение вероятностей над следующим токеном. Почему ответы не одинаковые: на каждом шаге следующий токен <strong>выбирается по этому распределению</strong> (сэмплирование), а не всегда argmax. <strong>Температура</strong> — параметр, который «размазывает» или «заостряет» распределение: высокая температура — более равномерное (креатив, разнообразие), низкая — пик на самых вероятных токенах (детерминизм, точность).</p></div></section>
-            <section id="context" class="topic-section"><h2>Окно контекста (Context Window) и его ограничения</h2><div class="lesson-content"><p>Модель «видит» только последние N токенов (вход + сгенерированный ответ). Почему забывает начало длинного разговора: старые токены выходят за пределы окна и не участвуют в attention. Ограничения длины документов и диалогов связаны с квадратичной сложностью attention по длине и с памятью. Увеличение контекста (8k, 32k, 128k+) — активная область (разреженное внимание, иерархии).</p></div></section>
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 9: Большие языковые модели (LLM) и их работа</h2>
+                <div class="lesson-content">
+                    <p>Большие языковые модели (LLM) — это трансформеры, обученные на огромных объёмах текста и способные генерировать связный текст, отвечать на вопросы и выполнять инструкции. ChatGPT, Claude, LLaMA, Mistral и аналоги — всё это LLM. Чтобы осознанно использовать их в интерфейсах и API и понимать ограничения, полезно разобрать несколько ключевых понятий: как текст превращается во вход модели (токенизация и эмбеддинги), как модели обучаются (pre-training и fine-tuning), почему ответы различаются при одних и тех же запросах (температура и сэмплирование) и почему модель «забывает» начало длинного диалога (окно контекста).</p>
+                    <p><strong>Задача модуля:</strong> связать теорию трансформера с тем, что пользователи и разработчики видят в интерфейсах и настройках: токены, температура, контекст, дообучение. Это даёт базу для осмысленной работы с API и для понимания статей про обучение и применение LLM.</p>
+                    <div class="visual-guide">
+                        <h4>Что разберём</h4>
+                        <ul>
+                            <li><strong>Токенизация и эмбеддинги</strong> — от текста к векторам на входе модели.</li>
+                            <li><strong>Pre-training и Fine-tuning</strong> — как модели «набираются знаний» и подстраиваются под задачи.</li>
+                            <li><strong>Температура и сэмплирование</strong> — откуда берётся разнообразие и детерминизм ответов.</li>
+                            <li><strong>Окно контекста</strong> — почему есть ограничение длины и что происходит при его превышении.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="tokenization" class="topic-section">
+                <h2>9.1 Токенизация и эмбеддинги</h2>
+                <div class="lesson-content">
+                    <p>Нейросеть работает с числами, а не с буквами. Первый шаг — превратить текст в последовательность <strong>токенов</strong> (подслов, реже целых слов или символов). Алгоритмы вроде <strong>BPE</strong> (Byte Pair Encoding) и <strong>WordPiece</strong> разбивают текст на части по частотной статистике: частые сочетания становятся отдельными токенами, редкие разбиваются мельче. Каждый токен имеет числовой <strong>id</strong> в словаре модели. От выбора токенизатора зависит, сколько токенов получится из одной фразы и как модель будет обрабатывать редкие слова и опечатки.</p>
+                    <p><strong>Эмбеддинги</strong> — это векторное представление токена. Обучаемый слой ставит в соответствие каждому id вектор фиксированной размерности (например, 768 или 4096). В процессе обучения близкие по смыслу или по контексту токены получают близкие векторы (например, «король» и «королева» в подходящем пространстве оказываются рядом). Эмбеддинги — вход первого слоя трансформера; к ним добавляют позиционное кодирование, и дальше идёт цепочка блоков внимания и feed-forward. Качество и размер словаря и эмбеддингов влияют на то, как хорошо модель «понимает» язык и редкие конструкции.</p>
+                </div>
+            </section>
+            <section id="pretraining" class="topic-section">
+                <h2>9.2 Обучение LLM: Pre-training и Fine-tuning</h2>
+                <div class="lesson-content">
+                    <p><strong>Предобучение (pre-training)</strong> — первый этап: модель обучается на огромных корпусах текста (книги, веб-страницы, код, диалоги) на задачу предсказания следующего токена. Никаких явных меток «вопрос–ответ» или «инструкция–выполнение» на этом этапе нет; модель просто учится продолжать текст правдоподобным образом. Так она усваивает грамматику, факты, стили и типичные рассуждения. Предобучение требует колоссальных вычислительных ресурсов и данных; результат — «сырая» базовая модель, которая умеет генерировать текст, но не обязательно следует инструкциям пользователя.</p>
+                    <p><strong>Дообучение (fine-tuning)</strong> — второй этап: модель подстраивается под конкретные задачи и форматы. На данных вида «запрос пользователя — желаемый ответ» (инструкции, диалоги, цепочки рассуждений) модель дообучается так, чтобы чаще выдавать ответы в нужном формате и стиле. Часто применяют <strong>RLHF</strong> (Reinforcement Learning from Human Feedback): люди оценивают варианты ответов, по этим оценкам обучается функция предпочтений, и модель оптимизируется так, чтобы максимизировать предпочтения. В итоге модель лучше «слушается» пользователя и реже генерирует вредный или бесполезный контент. Понимание разницы между pre-training и fine-tuning помогает оценивать, что можно ожидать от базовой модели и от «выровненной» под диалог.</p>
+                    <div class="note">
+                        <p><strong>На практике:</strong> при использовании API вы работаете уже с дообученной моделью. При дообучении своей копии (fine-tuning на своих данных) важно не «забыть» общие способности модели — для этого используют малые learning rate и ограниченное число шагов или техники вроде LoRA.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="temperature" class="topic-section">
+                <h2>9.3 Температура и сэмплирование</h2>
+                <div class="lesson-content">
+                    <p>На каждом шаге генерации модель выдаёт распределение вероятностей над следующим токеном: какое слово (токен) с какой вероятностью идёт дальше. Если бы мы всегда выбирали самый вероятный токен (argmax), ответ на один и тот же запрос был бы один и тот же — детерминированным. В реальности ответы варьируются, потому что следующий токен <strong>выбирается по распределению</strong> (сэмплирование): более вероятные токены выбираются чаще, но и менее вероятные иногда появляются. Так появляется разнообразие и «креативность» генерации.</p>
+                    <p><strong>Температура</strong> — параметр, который управляет «остротой» этого распределения. Формально вероятности перед сэмплированием делят на температуру и снова применяют softmax. При <strong>высокой температуре</strong> (например, 0.8–1.0) распределение становится более равномерным: маловероятные токены получают больший шанс, ответы разнообразнее и порой неожиданнее. При <strong>низкой температуре</strong> (близко к 0) распределение концентрируется на пике — модель ведёт себя почти детерминированно, ответы стабильнее и точнее. В интерфейсах чатов и API температура обычно настраивается: для творческих задач её поднимают, для точных формулировок и фактов — опускают.</p>
+                </div>
+            </section>
+            <section id="context" class="topic-section">
+                <h2>9.4 Окно контекста и его ограничения</h2>
+                <div class="lesson-content">
+                    <p>Модель физически не может обработать бесконечно длинный ввод. Она «видит» только последние <strong>N</strong> токенов — это и есть <strong>окно контекста</strong> (context window). В этот лимит входят и промпт пользователя (вопрос, инструкция, вложенный документ), и сгенерированный моделью ответ. Если диалог или документ длиннее N токенов, старые токены при следующих запросах не попадают во вход: они просто отбрасываются (или суммируются в отдельных схемах). Поэтому модель «забывает» начало очень длинного разговора — не потому что «глупая», а потому что эти токены уже не участвуют в вычислениях.</p>
+                    <p>Ограничение длины связано с архитектурой: self-attention в трансформере имеет квадратичную по длине последовательности сложность по памяти и по времени. Удвоение длины контекста ведёт к четырёхкратному росту затрат. Увеличение окна контекста (8k, 32k, 128k и более токенов) — активная область исследований: разреженное внимание, иерархические представления и другие приёмы позволяют работать с длинными документами без полного квадратичного взрыва. При выборе модели и проектировании сценариев (например, загрузка длинных документов в RAG) нужно учитывать лимит контекста и стратегию обрезки или сжатия текста.</p>
+                    <div class="practice-tips">
+                        <h4>Итог</h4>
+                        <p>Токенизация и эмбеддинги задают вход модели; pre-training и fine-tuning — как она получила свои способности; температура и сэмплирование — почему ответы различаются; окно контекста — почему есть лимит длины и что происходит при длинных диалогах и документах. Эти понятия связывают теорию трансформеров с практикой использования LLM в продуктах и исследованиях.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>

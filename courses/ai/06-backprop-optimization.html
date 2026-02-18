@@ -23,17 +23,163 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1–5</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="05-neural-intro.html" class="subtopic">5. Нейросети</a></div></div>
-                <div class="topic"><button class="topic-btn active">6. Backprop и оптимизация</button><div class="subtopics" style="max-height: 1000px;"><a href="#loss" class="subtopic active">6.1 Функция потерь</a><a href="#backprop" class="subtopic">6.2 Backpropagation</a><a href="#gradient-descent" class="subtopic">6.3 Градиентный спуск</a><a href="#problems" class="subtopic">6.4 Проблемы обучения</a></div></div>
-                <div class="topic"><button class="topic-btn">7–10</button><div class="subtopics"><a href="07-rnn-lstm.html" class="subtopic">7. RNN/LSTM</a><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                        <a href="05-neural-intro.html#code-example" class="subtopic">5.5 Код на Python</a>
+                        <a href="05-neural-intro.html#practice" class="subtopic">5.6 Практика</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#loss" class="subtopic active">6.1 Функция потерь</a>
+                        <a href="#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 6: Как учатся нейросети. Backpropagation и оптимизация</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Вскрыть «чёрный ящик» обучения — самое важное для понимания.</p></div></section>
-            <section id="loss" class="topic-section"><h2>Функция потерь (Loss) для нейросетей</h2><div class="lesson-content"><p><strong>Регрессия:</strong> MSE (средний квадрат ошибки) — штрафует большие отклонения сильнее. <strong>Классификация:</strong> Cross-Entropy — мера того, насколько предсказанное распределение вероятностей далеко от истинной метки (one-hot). Минимизируя cross-entropy, модель учится выдавать высокую вероятность правильного класса.</p></div></section>
-            <section id="backprop" class="topic-section"><h2>Метод обратного распространения ошибки (Backpropagation)</h2><div class="lesson-content"><p>Идея: <strong>цепное правило</strong> (производная сложной функции) из матанализа. Ошибка на выходе «просачивается» назад по слоям: для каждого веса считаем, какой вклад он внёс в итоговую ошибку. Градиент loss по каждому весу получается перемножением градиентов по пути от выхода к этому весу. Так один проход вперёд и один назад дают градиенты по всем весам — без backprop обучение глубоких сетей было бы нереалистично.</p></div></section>
-            <section id="gradient-descent" class="topic-section"><h2>Градиентный спуск и его вариации</h2><div class="lesson-content"><p><strong>Batch</strong> — шаг по всему датасету; <strong>SGD</strong> — по одному объекту (шумно, но часто быстрее выходит из плоских минимумов); <strong>Mini-batch</strong> — компромисс (типичный выбор). Размер батча влияет на скорость и стабильность. <strong>Momentum</strong> — накопление «инерции» градиента, сглаживание и ускорение сходимости. На практике чаще используют Adam, AdamW — адаптивный шаг по каждому параметру.</p></div></section>
-            <section id="problems" class="topic-section"><h2>Проблемы обучения</h2><div class="lesson-content"><p><strong>Затухающий градиент (vanishing):</strong> в глубоких сетях с сигмоидом/tanh градиент на первых слоях становится очень маленьким, веса почти не обновляются. ReLU частично решает. <strong>Взрывающийся градиент (explosion):</strong> градиент растёт по мере распространения назад — веса «взрываются». Решения: clipping градиента, нормализация. <strong>Регуляризация:</strong> Dropout — случайное выключение нейронов на шаге обучения, чтобы сеть не полагалась на отдельные нейроны и меньше переобучалась.</p></div></section>
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 6: Как учатся нейросети. Backpropagation и оптимизация</h2>
+                <div class="lesson-content">
+                    <p>Нейросеть — это набор слоёв с весами; обучение означает подбор этих весов так, чтобы выход модели как можно лучше соответствовал целям (меткам или целевой переменной). Чтобы понять, как именно это происходит, нужно разобрать три вещи: как мы измеряем «несоответствие» (функция потерь), как вычисляем направление изменения весов (обратное распространение ошибки) и как делаем шаги в этом направлении (градиентный спуск и его варианты). Без этого нейросеть остаётся «чёрным ящиком»; с этим — вы сможете осознанно выбирать loss, оптимизаторы и бороться с типичными проблемами обучения.</p>
+                    <p><strong>Задача модуля:</strong> вскрыть механику обучения: от функции потерь через backpropagation к градиентному спуску и типичным проблемам (затухающий и взрывающийся градиент, переобучение). Это основа для чтения статей и настройки любых глубоких моделей.</p>
+                    <div class="visual-guide">
+                        <h4>Что разберём</h4>
+                        <ul>
+                            <li><strong>Loss</strong> — MSE для регрессии, Cross-Entropy для классификации.</li>
+                            <li><strong>Backpropagation</strong> — как градиент «течёт» от выхода к весам.</li>
+                            <li><strong>Градиентный спуск</strong> — batch, mini-batch, SGD, momentum, Adam.</li>
+                            <li><strong>Проблемы</strong> — затухание/взрыв градиента, регуляризация, dropout.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="loss" class="topic-section">
+                <h2>6.1 Функция потерь (Loss) для нейросетей</h2>
+                <div class="lesson-content">
+                    <p>Обучение нейросети сводится к минимизации одной скалярной величины — <strong>функции потерь (loss)</strong>, которая показывает, насколько предсказания модели отличаются от правильных ответов. Выбор loss определяет, что именно модель будет оптимизировать и как вести себя на границах классов или при выбросах.</p>
+                    <p>Для <strong>регрессии</strong> чаще всего используют <strong>MSE</strong> (средний квадрат ошибки): усредняем квадраты разностей между предсказанием и целевым значением. Квадрат сильно штрафует большие отклонения, поэтому модель стремится не допускать крупных ошибок. Альтернативы — MAE (средняя абсолютная ошибка), Huber — когда выбросы не должны доминировать в обучении.</p>
+                    <p>Для <strong>классификации</strong> стандарт — <strong>кросс-энтропия</strong> (cross-entropy). Истинная метка задаётся как one-hot вектор (единица на правильном классе, нули elsewhere); модель выдаёт распределение вероятностей по классам. Кросс-энтропия измеряет «расстояние» между предсказанным распределением и истинным: чем выше вероятность, которую модель поставила на правильный класс, тем меньше loss. Минимизируя кросс-энтропию, модель учится выдавать высокую уверенность в правильном классе и низкую — в остальных.</p>
+                    <div class="note">
+                        <p><strong>На практике:</strong> в PyTorch для многоклассовой классификации используют <code>CrossEntropyLoss</code> (внутри уже совмещён с softmax при необходимости); для регрессии — <code>MSELoss</code>. Выбор loss напрямую влияет на качество и сходимость.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="backprop" class="topic-section">
+                <h2>6.2 Метод обратного распространения ошибки (Backpropagation)</h2>
+                <div class="lesson-content">
+                    <p>У нейросети могут быть миллионы весов. Как понять, в какую сторону изменить каждый вес, чтобы уменьшить loss? Ответ даёт <strong>обратное распространение ошибки (backpropagation)</strong>. Математическая основа — <strong>цепное правило</strong> дифференцирования: производная сложной функции по аргументу равна произведению производных по цепочке от выхода к аргументу.</p>
+                    <p>Схема работы такая. Сначала выполняется <strong>прямой проход (forward)</strong>: вход проходит через все слои, на каждом шаге считаются активации; в конце получаем предсказание и значение loss. Затем выполняется <strong>обратный проход (backward)</strong>: от loss к входу. Для каждого слоя мы знаем градиент loss по выходам этого слоя; цепное правило позволяет вычислить градиент по входам слоя и по его весам. Эти градиенты передаются предыдущему слою, и так до первого. В итоге за один прямой и один обратный проход мы получаем градиент loss по <strong>всем</strong> весам сети.</p>
+                    <p>Без backprop пришлось бы численно оценивать производные по каждому весу отдельно, что нереалистично для больших сетей. Благодаря backprop и автоматическому дифференцированию (autograd) в PyTorch и TensorFlow обучение глубоких сетей стало рутиной. Понимание «градиент течёт от выхода к входам и весам» помогает разбираться в архитектурах и отлаживать обучение.</p>
+                    <div class="visual-guide">
+                        <h4>Кратко</h4>
+                        <p>Forward: вход → слои → выход → loss. Backward: градиент loss распространяется по слоям в обратном порядке; для каждого веса получаем ∂loss/∂weight. Обновление весов идёт в направлении антиградиента.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="gradient-descent" class="topic-section">
+                <h2>6.3 Градиентный спуск и его вариации</h2>
+                <div class="lesson-content">
+                    <p>После того как градиенты по всем весам посчитаны, нужно сделать шаг в направлении уменьшения loss. <strong>Градиентный спуск</strong> — итеративное обновление весов: на каждой итерации веса сдвигаются в сторону антиградиента (минус градиент) на величину, заданную <strong>learning rate</strong> (скорость обучения). От того, по скольким объектам мы считаем градиент и как выбираем шаг, зависят скорость сходимости и стабильность.</p>
+                    <p><strong>Batch gradient descent</strong> — градиент считается по всему датасету; шаг точный, но дорогой по времени и памяти. <strong>SGD</strong> (Stochastic Gradient Descent) — градиент по одному объекту; шаг шумный, но часто помогает выходить из плоских минимумов и быстрее проходить эпохи. <strong>Mini-batch</strong> — компромисс: градиент по небольшой подвыборке (например, 32 или 256 объектов). Это наиболее распространённый вариант: баланс между стабильностью и скоростью.</p>
+                    <p>Для ускорения и устойчивости используют модификации. <strong>Momentum</strong> — накопление «инерции» градиента: направление обновления учитывает не только текущий градиент, но и предыдущие шаги, что сглаживает колебания. <strong>Adam</strong> (Adaptive Moment Estimation) и <strong>AdamW</strong> — адаптивные методы: для каждого параметра подбирается свой эффективный шаг на основе оценок первого и второго момента градиента. На практике Adam и AdamW чаще всего выбирают по умолчанию для нейросетей; они хорошо работают при стандартных настройках и реже требуют ручной подстройки learning rate.</p>
+                    <div class="note">
+                        <p><strong>Практика:</strong> типичный пайплайн — mini-batch, оптимизатор Adam или AdamW, learning rate часто от 1e-4 до 1e-2 в зависимости от задачи. При необходимости используют расписание изменения learning rate (scheduler).</p>
+                    </div>
+                </div>
+            </section>
+            <section id="problems" class="topic-section">
+                <h2>6.4 Проблемы обучения и регуляризация</h2>
+                <div class="lesson-content">
+                    <p>Глубокие сети сталкиваются с несколькими типичными проблемами. <strong>Затухающий градиент (vanishing gradient)</strong>: при обратном распространении в сетях с активациями вроде сигмоиды или гиперболического тангенса производные на каждом слое по модулю меньше единицы. При перемножении по цепочке градиент на первых слоях становится очень маленьким, веса почти не обновляются, и нижние слои «не учатся». Решение — использовать активации, не сжимающие градиент так сильно: <strong>ReLU</strong> (и его варианты) дают производную 1 при положительном входе, поэтому градиент не затухает на таких нейронах.</p>
+                    <p><strong>Взрывающийся градиент (exploding gradient)</strong> — обратная ситуация: градиент по мере распространения назад растёт, веса получают огромные обновления и «взрываются». Это особенно характерно для длинных последовательностей в RNN. Решения: <strong>gradient clipping</strong> (ограничение нормы или величины градиента), нормализация слоёв (Layer Norm, Batch Norm), аккуратная инициализация весов.</p>
+                    <p><strong>Переобучение</strong> — модель запоминает обучающую выборку и плохо обобщает на новые данные. Один из основных приёмов регуляризации в нейросетях — <strong>Dropout</strong>. На каждом шаге обучения случайно «выключается» заданная доля нейронов (например, 0.2 или 0.5): их выход обнуляется. Сеть не может полагаться на отдельные нейроны и вынуждена распределять представление по ансамблю, что снижает переобучение. На инференсе dropout отключают, все нейроны работают, но веса масштабируются с учётом вероятности выпадения. Вместе с ограничением размера модели, early stopping и при необходимости L2-регуляризацией dropout помогает обучать более обобщающие модели.</p>
+                    <div class="practice-tips">
+                        <h4>Итог</h4>
+                        <p>Понимание loss, backprop и градиентного спуска — ядро обучения нейросетей. Знание про затухание/взрыв градиента и про dropout позволяет осознанно выбирать архитектуру, активации и регуляризацию при построении и отладке моделей.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>

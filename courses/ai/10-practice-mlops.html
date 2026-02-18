@@ -23,16 +23,155 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1–9</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="09-llm.html" class="subtopic">9. LLM</a></div></div>
-                <div class="topic"><button class="topic-btn active">10. Практикум и MLOps</button><div class="subtopics" style="max-height: 1000px;"><a href="#python-libs" class="subtopic active">10.1 Библиотеки Python</a><a href="#sklearn" class="subtopic">10.2 Scikit-learn</a><a href="#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a><a href="#mlops" class="subtopic">10.4 MLOps</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                        <a href="05-neural-intro.html#code-example" class="subtopic">5.5 Код на Python</a>
+                        <a href="05-neural-intro.html#practice" class="subtopic">5.6 Практика</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">10. Практикум и MLOps</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#python-libs" class="subtopic active">10.1 Библиотеки Python</a>
+                        <a href="#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 10: Практикум. Промышленный подход и инструменты</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Интеграция всего изученного в реальные инструменты.</p></div></section>
-            <section id="python-libs" class="topic-section"><h2>Библиотеки Python для DS</h2><div class="lesson-content"><p><strong>Pandas</strong> — работа с таблицами (DataFrame), загрузка CSV/Excel, фильтрация, группировки, слияние. <strong>NumPy</strong> — массивы, векторизованные операции, линейная алгебра. <strong>Matplotlib / Seaborn</strong> — визуализация: графики, распределения, корреляции; важно для EDA и понимания данных перед моделированием.</p></div></section>
-            <section id="sklearn" class="topic-section"><h2>Scikit-learn для классических моделей</h2><div class="lesson-content"><p><strong>Единый интерфейс</strong> fit / predict (и transform для препроцессинга). Быстрая реализация регрессий, деревьев, случайного леса, KNN, кластеризации, PCA. Pipeline — цепочка преобразований и модели в одном объекте. Кросс-валидация, подбор гиперпараметров (GridSearchCV). Стандарт для табличных данных и прототипирования.</p></div></section>
-            <section id="pytorch-tf" class="topic-section"><h2>Фреймворки для нейросетей (PyTorch / TensorFlow)</h2><div class="lesson-content"><p><strong>Тензоры</strong> — многомерные массивы, в т.ч. на GPU. <strong>Автоматическое дифференцирование (autograd)</strong> — фреймворк сам считает градиенты по backpropagation, нужно только описать forward. Сборка моделей из слоёв (Linear, Conv2d, LSTM, Transformer). PyTorch — динамический граф, удобная отладка; TensorFlow/Keras — статический граф, продакшен-инструменты. Трансформеры собирают из готовых блоков (Hugging Face transformers).</p></div></section>
-            <section id="mlops" class="topic-section"><h2>Обзор MLOps (как это живет в продакшене)</h2><div class="lesson-content"><p><strong>Обучение</strong> на кластерах (распределённо, с GPU). <strong>Версионирование</strong> моделей и датасетов (MLflow, DVC). <strong>Инференс</strong> — сервирование модели: REST API, батч-обработка; движки вроде ONNX, TensorRT, Triton для ускорения. <strong>Мониторинг</strong> в бою: дрейф данных, падение метрик, задержки. CI/CD для пайплайнов обучения и деплоя. MLOps — это DevOps плюс специфика данных и моделей.</p></div></section>
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 10: Практикум. Промышленный подход и инструменты</h2>
+                <div class="lesson-content">
+                    <p>Теория курса — от математики и линейной регрессии до трансформеров и LLM — находит воплощение в конкретных библиотеках и практиках развёртывания. В реальных проектах данные готовят в Python с помощью Pandas и NumPy, классические модели обучают в Scikit-learn, нейросети — в PyTorch или TensorFlow, а вывод моделей в продакшен и их поддержку обеспечивают практики MLOps. Этот модуль даёт обзор ключевых инструментов и этапов жизненного цикла ML-системы.</p>
+                    <p><strong>Задача модуля:</strong> интегрировать всё изученное в контекст реальных инструментов: какие библиотеки использовать для данных и визуализации, как устроен единый интерфейс Scikit-learn и пайплайны, чем отличаются PyTorch и TensorFlow и как модели живут в продакшене (обучение, версионирование, инференс, мониторинг). После модуля вы сможете осознанно выбирать стек и ориентироваться в типичном пайплайне ML-проекта.</p>
+                    <div class="visual-guide">
+                        <h4>Что разберём</h4>
+                        <ul>
+                            <li><strong>Библиотеки Python</strong> — Pandas, NumPy, визуализация для данных.</li>
+                            <li><strong>Scikit-learn</strong> — fit/predict, pipeline, кросс-валидация, подбор гиперпараметров.</li>
+                            <li><strong>PyTorch / TensorFlow</strong> — тензоры, autograd, сборка моделей, Hugging Face.</li>
+                            <li><strong>MLOps</strong> — обучение, версионирование, инференс, мониторинг, CI/CD.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="python-libs" class="topic-section">
+                <h2>10.1 Библиотеки Python для работы с данными</h2>
+                <div class="lesson-content">
+                    <p>Практически любой ML-проект начинается с загрузки и разведки данных. <strong>Pandas</strong> — стандарт для табличных данных: объект DataFrame (строки и столбцы), загрузка из CSV, Excel, баз данных, фильтрация, группировки, слияние таблиц, обработка пропусков и типов. Умение быстро отфильтровать выборку, посчитать агрегаты и соединить таблицы по ключу экономит часы при подготовке признаков и отладке пайплайна.</p>
+                    <p><strong>NumPy</strong> — основа численных вычислений: многомерные массивы, векторизованные операции без явных циклов, линейная алгебра (матрицы, скалярные произведения). На NumPy построены и Scikit-learn, и внутренности PyTorch/TensorFlow; понимание формы массивов и операций по осям необходимо при отладке и при переходе от таблиц к тензорам нейросетей.</p>
+                    <p><strong>Matplotlib</strong> и <strong>Seaborn</strong> — визуализация: графики зависимостей, распределения признаков, тепловые карты корреляций, бокс-платы. Визуальная разведка (EDA) помогает выявлять выбросы, дисбаланс классов и связи между признаками до обучения модели; без неё легко пропустить ошибки в данных или неудачный выбор признаков.</p>
+                </div>
+            </section>
+            <section id="sklearn" class="topic-section">
+                <h2>10.2 Scikit-learn: классические модели и пайплайны</h2>
+                <div class="lesson-content">
+                    <p><strong>Scikit-learn</strong> — главная библиотека для классических алгоритмов ML в Python. Все модели и препроцессоры следуют единому интерфейсу: <strong>fit</strong> — обучить на данных (или подогнать преобразование, например нормализацию), <strong>predict</strong> — предсказать по новым данным, <strong>transform</strong> — применить преобразование (для нормализаторов, кодировщиков, PCA). Это позволяет собирать цепочки «нормализация → кодирование категорий → модель» в один объект <strong>Pipeline</strong>, который обучается и применяется как единое целое и исключает утечку информации между train и test при кросс-валидации.</p>
+                    <p>В Scikit-learn реализованы линейная и логистическая регрессия, KNN, решающие деревья, случайный лес, градиентный бустинг (GradientBoostingClassifier/Regressor), кластеризация (K-means, DBSCAN), снижение размерности (PCA, t-SNE), метрики и разбиения для кросс-валидации. Подбор гиперпараметров через <strong>GridSearchCV</strong> или <strong>RandomizedSearchCV</strong> автоматизирует перебор комбинаций и выбор лучшей модели по выбранной метрике. Для табличных данных и быстрого прототипирования Scikit-learn остаётся стандартом выбора; для глубокого обучения подключают PyTorch или TensorFlow.</p>
+                    <div class="note">
+                        <p><strong>Практика:</strong> типичный сценарий — загрузить данные в Pandas, разбить на признаки и целевую переменную, разделить на train/test, собрать Pipeline с StandardScaler и моделью, обучить через fit, оценить через predict и метрики. При необходимости — обернуть в GridSearchCV по кросс-валидации.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="pytorch-tf" class="topic-section">
+                <h2>10.3 Фреймворки для нейросетей: PyTorch и TensorFlow</h2>
+                <div class="lesson-content">
+                    <p>Для нейросетей нужны эффективные вычисления на GPU и автоматическое вычисление градиентов. <strong>Тензоры</strong> — многомерные массивы (как в NumPy), которые могут храниться и считаться на видеокарте; операции над ними векторизованы и параллельны. <strong>Автоматическое дифференцирование (autograd)</strong> записывает граф вычислений при прямом проходе и при вызове backward() вычисляет градиенты по всем параметрам по цепному правилу. Пользователь описывает только forward; backpropagation фреймворк делает сам.</p>
+                    <p>Модели собирают из готовых слоёв: Linear, Conv2d, LSTM, MultiheadAttention и т.д. <strong>PyTorch</strong> использует динамический граф: граф строится на лету при каждом проходе, что удобно для отладки и для моделей с переменной длиной последовательности. <strong>TensorFlow</strong> (и высокоуровневый Keras) исторически опирался на статический граф и сильнее заточен под продакшен-деплой и распределённое обучение; в последних версиях также поддерживается eager mode, близкий к PyTorch. Для трансформеров и NLP часто используют библиотеку <strong>Hugging Face Transformers</strong>: готовые конфигурации и веса моделей (BERT, GPT, LLaMA и др.), единый API для загрузки, дообучения и инференса.</p>
+                    <p>Выбор между PyTorch и TensorFlow часто сводится к экосистеме проекта и предпочтениям команды; оба позволяют реализовать любую архитектуру из курса и масштабировать обучение на кластерах с GPU.</p>
+                </div>
+            </section>
+            <section id="mlops" class="topic-section">
+                <h2>10.4 MLOps: от эксперимента к продакшену</h2>
+                <div class="lesson-content">
+                    <p>MLOps — практики разработки и эксплуатации ML-систем: как переходить от обученной модели к стабильному сервису, как версионировать данные и модели, как следить за качеством в бою. Это «DevOps для ML» плюс специфика данных и воспроизводимости экспериментов.</p>
+                    <p><strong>Обучение</strong> больших моделей часто ведут на кластерах с GPU (один узел или распределённо); код и конфигурации хранят в репозитории, эксперименты логируют (метрики, гиперпараметры, артефакты). <strong>Версионирование</strong> моделей и датасетов позволяет воспроизводить результаты и откатываться к предыдущей версии при регрессии. Инструменты вроде <strong>MLflow</strong> (логирование запусков, артефакты, регистр моделей) и <strong>DVC</strong> (версионирование больших файлов и датасетов) решают эти задачи.</p>
+                    <p><strong>Инференс</strong> — сервирование модели: обёртка в REST API или батч-обработка по расписанию. Для ускорения используют конвертацию в форматы вроде <strong>ONNX</strong> и движки <strong>TensorRT</strong>, <strong>Triton</strong> и др. <strong>Мониторинг</strong> в продакшене включает отслеживание дрейфа данных (распределение входов изменилось), падения метрик качества (например, точности на отложенной выборке или A/B тесте), задержек и сбоев сервиса. CI/CD для ML расширяет классический пайплайн: помимо сборки и тестов кода добавляются переобучение модели при изменении данных или кода, валидация качества и деплой новой версии модели. Всё вместе даёт цикл: данные → обучение → версионирование → деплой → мониторинг → обратная связь и итерация.</p>
+                    <div class="practice-tips">
+                        <h4>Итог курса</h4>
+                        <p>Курс прошёл путь от математического фундамента и типов задач ML до классических алгоритмов, ансамблей, нейросетей, backprop, RNN/LSTM, трансформеров и LLM и завершился обзором инструментов и MLOps. Дальше — углубление в выбранное направление (табличные данные, компьютерное зрение, NLP, LLM) и практика на реальных проектах и соревнованиях.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>

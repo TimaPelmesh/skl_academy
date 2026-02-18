@@ -168,60 +168,149 @@
 
             <section id="clone" class="topic-section">
                 <h2>6.1 Клонирование репозитория</h2>
+                <p>Клонирование — это создание полной копии удалённого репозитория на вашем компьютере, включая всю историю коммитов.</p>
                 <div class="code-example">
-<pre><code class="bash">git clone https://github.com/user/repo.git
-# или по SSH
+<pre><code class="bash"># Клонирование по HTTPS
+git clone https://github.com/user/repo.git
+
+# По SSH (нужен настроенный SSH-ключ)
 git clone git@github.com:user/repo.git
-</code></pre>
+
+# Клонировать в конкретную папку
+git clone https://github.com/user/repo.git my-project
+
+# Shallow clone — только последние N коммитов (быстрее)
+git clone --depth 1 https://github.com/user/repo.git
+
+# Клонировать только одну ветку
+git clone --branch develop --single-branch https://github.com/user/repo.git</code></pre>
                 </div>
+                <p>После клонирования Git автоматически создаёт remote с именем <code>origin</code> и настраивает tracking для ветки <code>main</code>.</p>
             </section>
 
             <section id="remotes" class="topic-section">
-                <h2>6.2 Просмотр и добавление удалённых</h2>
+                <h2>6.2 Управление удалёнными (remotes)</h2>
                 <div class="code-example">
-<pre><code class="bash">git remote -v
-# добавить remote
+<pre><code class="bash"># Посмотреть список remotes
+git remote -v
+# origin  git@github.com:user/repo.git (fetch)
+# origin  git@github.com:user/repo.git (push)
+
+# Добавить remote
 git remote add origin git@github.com:user/repo.git
-# изменить URL
-git remote set-url origin git@github.com:user/repo.git
-</code></pre>
+
+# Добавить второй remote (например, для форка)
+git remote add upstream https://github.com/original/repo.git
+
+# Изменить URL
+git remote set-url origin git@github.com:user/new-repo.git
+
+# Переименовать remote
+git remote rename origin main-remote
+
+# Удалить remote
+git remote remove old-remote
+
+# Подробная информация о remote
+git remote show origin</code></pre>
                 </div>
-                <p>Имя remote — это просто ярлык (обычно <code>origin</code>). Вы можете иметь несколько remotes для зеркалирования, форков или реплик, а также настраивать для каждого свой refspec.</p>
+                <p>Типичный сценарий с форком: <code>origin</code> — ваш форк, <code>upstream</code> — оригинальный репозиторий. Вы пушите в origin, а из upstream получаете обновления.</p>
             </section>
 
             <section id="fetch-pull" class="topic-section">
                 <h2>6.3 Получение изменений: fetch и pull</h2>
-                <ul>
-                    <li><code>git fetch</code> — скачивает объекты и ссылки без изменения рабочих файлов</li>
-                    <li><code>git pull</code> = <code>fetch</code> + <code>merge</code> (или <code>rebase</code> при настройке)</li>
-                </ul>
+                <p><code>fetch</code> и <code>pull</code> — два способа получить изменения с сервера. Разница принципиальная.</p>
+
                 <div class="code-example">
-<pre><code class="bash">git fetch origin
-# обновить текущую ветку с ребейзом
-git pull --rebase
-</code></pre>
+<pre><code class="bash"># fetch — скачать объекты, НЕ менять рабочие файлы
+git fetch origin
+# Обновились remote-tracking ветки: origin/main, origin/develop...
+# Ваш локальный код НЕ изменился
+
+# Посмотреть, что нового
+git log --oneline main..origin/main
+
+# Вручную слить
+git merge origin/main
+
+# pull = fetch + merge (в одну команду)
+git pull origin main
+
+# pull с rebase (линейная история)
+git pull --rebase origin main
+
+# Настроить rebase по умолчанию для этого репозитория
+git config pull.rebase true</code></pre>
                 </div>
-                <p>Выбирайте стратегию <code>pull</code> осознанно. В проектах с линейной историей предпочтителен <code>--rebase</code>; если важны явные точки слияния — оставляйте merge. Главное — договориться в команде и закрепить настройками.</p>
+
+                <div class="note">
+                    <p><strong>Рекомендация:</strong> для начинающих безопаснее делать <code>git fetch</code> + <code>git log</code>, чтобы посмотреть изменения, а потом вручную <code>git merge</code>. Это даёт больше контроля.</p>
+                </div>
             </section>
 
             <section id="push" class="topic-section">
-                <h2>6.4 Отправка изменений: push и upstream</h2>
+                <h2>6.4 Отправка изменений: push</h2>
                 <div class="code-example">
-<pre><code class="bash"># первый пуш и привязка upstream
+<pre><code class="bash"># Первый push — с привязкой upstream (-u)
 git push -u origin feature/login
-# обычный пуш после привязки
+# Теперь git push/pull без аргументов знают, куда пушить
+
+# Обычный push
 git push
-</code></pre>
+
+# Push конкретной ветки
+git push origin main
+
+# Push всех веток
+git push --all origin
+
+# Push тегов
+git push origin --tags
+
+# Force push (ОПАСНО — переписывает историю на сервере!)
+git push --force origin feature/my-branch
+
+# Безопасный force push (откажет, если кто-то успел запушить)
+git push --force-with-lease origin feature/my-branch
+
+# Удалить удалённую ветку
+git push origin --delete feature/old-branch</code></pre>
                 </div>
-                <p>Привязка upstream упрощает ежедневную работу: короткие команды без параметров используют «запомненные» направления. Следите за политиками проекта: где разрешён force‑push, а где — нет.</p>
+
+                <div class="tip">
+                    <p><strong>Правило:</strong> никогда не делайте <code>--force</code> в <code>main</code>/<code>develop</code>. Используйте <code>--force-with-lease</code> только для своих feature-веток после rebase.</p>
+                </div>
             </section>
 
             <section id="protocols" class="topic-section">
                 <h2>6.5 Протоколы: SSH vs HTTPS</h2>
+                <h3>HTTPS</h3>
                 <ul>
-                    <li><strong>HTTPS</strong>: проще стартовать, может требовать PAT/логин‑пароль</li>
-                    <li><strong>SSH</strong>: ключи, удобен для постоянной работы</li>
+                    <li>Проще стартовать — работает через стандартные порты</li>
+                    <li>Требует логин/пароль или Personal Access Token (PAT)</li>
+                    <li>Можно настроить credential helper для кэширования</li>
                 </ul>
+                <h3>SSH</h3>
+                <ul>
+                    <li>Удобнее для постоянной работы — не нужно вводить пароль</li>
+                    <li>Требует генерации SSH-ключа и добавления его в GitHub/GitLab</li>
+                    <li>Безопаснее — ключ привязан к вашему компьютеру</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="bash"># Генерация SSH-ключа
+ssh-keygen -t ed25519 -C "your@email.com"
+
+# Добавить ключ в ssh-agent
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+# Проверить подключение к GitHub
+ssh -T git@github.com
+# Hi username! You've successfully authenticated.
+
+# Переключить существующий remote с HTTPS на SSH
+git remote set-url origin git@github.com:user/repo.git</code></pre>
+                </div>
             </section>
             <section id="tracking" class="topic-section">
                 <h2>6.6 Tracking‑ветки</h2>

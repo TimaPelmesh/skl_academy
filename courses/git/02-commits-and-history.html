@@ -238,31 +238,146 @@ build/
             </section>
             <section id="commit-anatomy" class="topic-section">
                 <h2>2.6 Анатомия коммита</h2>
-                <p>Коммит содержит: ссылку на дерево (snapshot), одного или нескольких родителей, автора и коммиттера (имя, email, время), сообщение. Идентификатор коммита — хеш содержимого объекта.</p>
+                <p>Коммит — это объект в базе Git, содержащий:</p>
+                <ul>
+                    <li><strong>tree</strong> — ссылка на дерево (полный снимок всех файлов)</li>
+                    <li><strong>parent</strong> — ссылка на родительский коммит (или два при merge)</li>
+                    <li><strong>author</strong> — кто написал изменения (имя, email, время)</li>
+                    <li><strong>committer</strong> — кто записал коммит (может отличаться от автора)</li>
+                    <li><strong>message</strong> — сообщение к коммиту</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="bash"># Посмотреть внутреннюю структуру коммита
+git cat-file -p HEAD
+# tree 4a2e3f...
+# parent abc1234...
+# author Иван &lt;ivan@example.com&gt; 1708000000 +0300
+# committer Иван &lt;ivan@example.com&gt; 1708000000 +0300
+#
+# feat: добавить авторизацию</code></pre>
+                </div>
             </section>
+
             <section id="author-committer" class="topic-section">
                 <h2>2.7 Автор и коммиттер</h2>
-                <p><em>Author</em> — кто написал изменения; <em>Committer</em> — кто записал их в репозиторий (могут различаться при rebase/merge). Метки времени различаются и важны для аудита.</p>
+                <p><strong>Author</strong> — кто написал изменения. <strong>Committer</strong> — кто записал их в репозиторий. Они могут различаться:</p>
+                <ul>
+                    <li>После <code>rebase</code> — автор сохраняется, коммиттер меняется на того, кто делал rebase</li>
+                    <li>После <code>cherry-pick</code> — аналогично</li>
+                    <li>При <code>git am</code> (применение патча) — автор из патча, коммиттер — вы</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="bash"># Посмотреть автора и коммиттера
+git log --format="%H%nAuthor: %an <%ae> %ai%nCommitter: %cn <%ce> %ci%n" -1</code></pre>
+                </div>
             </section>
+
             <section id="messages-trailers" class="topic-section">
                 <h2>2.8 Сообщения коммитов и трейлеры</h2>
-                <p>Помимо заголовка и описания, сообщения могут включать «трейлеры»: <code>Co-authored-by:</code>, <code>Signed-off-by:</code>, <code>Refs:</code>. Они машинно‑читаемы и поддерживаются инструментами.</p>
+                <p>Хорошее сообщение коммита состоит из трёх частей:</p>
+                <div class="code-example">
+<pre><code class="bash"># 1. Заголовок (до 72 символов, повелительное наклонение)
+feat: добавить авторизацию по JWT
+
+# 2. Тело (через пустую строку, подробности)
+Реализована авторизация с использованием JWT-токенов.
+Добавлены middleware для проверки токена и обновления
+refresh-токена.
+
+# 3. Трейлеры (метаданные для инструментов)
+Refs: #142
+Co-authored-by: Пётр &lt;petr@example.com&gt;
+Signed-off-by: Иван &lt;ivan@example.com&gt;</code></pre>
+                </div>
             </section>
+
             <section id="ranges-selectors" class="topic-section">
-                <h2>2.9 Диапазоны и селекторы в истории</h2>
-                <p>Выражения диапазонов позволяют адресовать подмножества истории: <code>A..B</code> (что в B, но нет в A), <code>A...B</code> (симметричная разность), каретки и тильды для родителей (<code>HEAD^</code>, <code>HEAD~2</code>), селекторы по датам и авторам.</p>
+                <h2>2.9 Диапазоны и селекторы</h2>
+                <div class="code-example">
+<pre><code class="bash"># HEAD~N — N коммитов назад по первому родителю
+git log HEAD~3   # 3 коммита назад
+
+# HEAD^ — первый родитель (HEAD^2 — второй, для merge-коммитов)
+git show HEAD^
+
+# A..B — коммиты, которые есть в B, но нет в A
+git log main..feature   # что нового в feature
+
+# A...B — коммиты, уникальные для каждой ветки
+git log main...feature
+
+# По дате
+git log --since="2025-01-01" --until="2025-02-01"
+
+# По автору
+git log --author="Иван"
+
+# По слову в сообщении
+git log --grep="авторизация"</code></pre>
+                </div>
             </section>
+
             <section id="advanced-diff" class="topic-section">
-                <h2>2.10 Продвинутые опции diff/log</h2>
-                <p>Опции: <code>--word-diff</code> (покомпонентные изменения), <code>--find-renames</code>/<code>--find-copies</code> (эвристики переименований/копий), игнорирование пробелов (<code>-w</code>), цвет и форматирование.</p>
+                <h2>2.10 Продвинутые diff и log</h2>
+                <div class="code-example">
+<pre><code class="bash"># Пословное сравнение (для текстов, markdown)
+git diff --word-diff
+
+# Игнорировать пробелы
+git diff -w
+
+# Показать переименования файлов
+git diff --find-renames
+
+# Статистика изменений
+git diff --stat
+
+# Кто последний менял каждую строку
+git blame path/to/file
+
+# blame с игнорированием пробелов
+git blame -w path/to/file</code></pre>
+                </div>
             </section>
+
             <section id="pickaxe-pathspec" class="topic-section">
-                <h2>2.11 Поиск изменений: pickaxe и pathspec</h2>
-                <p><strong>Pickaxe</strong> (<code>-S</code>) ищет коммиты, добавляющие/удаляющие строку/подстроку. <strong>Pathspec</strong> задаёт шаблоны путей, позволяет гибко ограничивать область анализа.</p>
+                <h2>2.11 Поиск: pickaxe и git bisect</h2>
+                <div class="code-example">
+<pre><code class="bash"># Pickaxe: найти коммиты, которые добавили/удалили строку
+git log -S "password" --oneline   # где появилось слово "password"
+git log -G "def validate_" --oneline  # регулярное выражение
+
+# Pathspec: ограничить область поиска
+git log -- src/auth/     # только изменения в каталоге auth
+
+# git bisect: бинарный поиск коммита с багом
+git bisect start
+git bisect bad              # текущий коммит — баг
+git bisect good abc1234     # этот коммит был без бага
+# Git переключается на средний коммит — тестируйте
+git bisect good  # или git bisect bad
+# Повторяйте, пока Git не найдёт виновный коммит
+git bisect reset            # вернуться к исходному состоянию</code></pre>
+                </div>
             </section>
+
             <section id="pretty-formats" class="topic-section">
-                <h2>2.12 Форматы вывода и кастомизация</h2>
-                <p><code>git log --pretty=&lt;format&gt;</code> предоставляет гибкую настройку полей (хеш, дата, автор, тема). Комбинация с <code>--decorate</code>, <code>--graph</code> делает ленту истории информативной.</p>
+                <h2>2.12 Кастомные форматы вывода</h2>
+                <div class="code-example">
+<pre><code class="bash"># Кастомный формат
+git log --pretty=format:"%h %an %ar %s" -10
+# abc1234 Иван 2 hours ago feat: добавить авторизацию
+
+# Алиасы для частых команд (добавить в .gitconfig)
+git config --global alias.lg "log --oneline --graph --decorate --all"
+git config --global alias.st "status -sb"
+git config --global alias.last "log -1 --format='%H %s'"
+
+# Теперь можно использовать:
+git lg
+git st
+git last</code></pre>
+                </div>
             </section>
         </main>
     </div>

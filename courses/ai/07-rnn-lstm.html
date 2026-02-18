@@ -23,17 +23,151 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1–6</button><div class="subtopics"><a href="01-math-logic.html" class="subtopic">1. Фундамент</a><a href="06-backprop-optimization.html" class="subtopic">6. Backprop</a></div></div>
-                <div class="topic"><button class="topic-btn active">7. RNN и LSTM</button><div class="subtopics" style="max-height: 1000px;"><a href="#sequences" class="subtopic active">7.1 Последовательные данные</a><a href="#rnn" class="subtopic">7.2 RNN</a><a href="#long-memory" class="subtopic">7.3 Долгосрочная память</a><a href="#lstm" class="subtopic">7.4 LSTM</a></div></div>
-                <div class="topic"><button class="topic-btn">8–10</button><div class="subtopics"><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">2. Введение в ML и типы задач</button>
+                    <div class="subtopics">
+                        <a href="02-ml-intro.html#supervised" class="subtopic">2.1 Обучение с учителем</a>
+                        <a href="02-ml-intro.html#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="02-ml-intro.html#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="02-ml-intro.html#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                        <a href="05-neural-intro.html#code-example" class="subtopic">5.5 Код на Python</a>
+                        <a href="05-neural-intro.html#practice" class="subtopic">5.6 Практика</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">7. RNN и LSTM</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#sequences" class="subtopic active">7.1 Последовательные данные</a>
+                        <a href="#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 7: Работа с последовательностями. RNN и LSTM</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Подготовить почву для понимания текста и контекста.</p></div></section>
-            <section id="sequences" class="topic-section"><h2>Природа последовательных данных</h2><div class="lesson-content"><p>Текст, временные ряды, звук — данные с порядком: важен не только набор элементов, но и их последовательность. Полносвязная сеть не видит порядка: «мешок слов» теряет контекст. Для «последовательности» нужна архитектура, которая явно передаёт информацию вдоль оси времени.</p></div></section>
-            <section id="rnn" class="topic-section"><h2>Рекуррентные нейросети (RNN)</h2><div class="lesson-content"><p>Идея <strong>памяти</strong>: скрытое состояние h передаётся с шага на шаг. На каждом шаге t сеть получает вход x_t и предыдущее h_{t−1}, выдаёт новый h_t и (при необходимости) выход y_t. Развёртка сети во времени — одна и та же ячейка повторяется для каждого шага, веса общие. Так модель может использовать информацию из прошлого.</p></div></section>
-            <section id="long-memory" class="topic-section"><h2>Проблема долгосрочной памяти</h2><div class="lesson-content"><p>Простая RNN при длинных последовательностях «забывает» начало: градиент при обратном распространении по времени затухает (или взрывается), и веса почти не получают сигнала от далёких шагов. Для длинных предложений и документов этого недостаточно.</p></div></section>
-            <section id="lstm" class="topic-section"><h2>LSTM (Long Short-Term Memory)</h2><div class="lesson-content"><p><strong>Вентили:</strong> забывания (forget) — что выбросить из ячейки; входа (input) — что записать; выхода (output) — что выдать наружу. Специальная <strong>ячейка (cell state)</strong> проводит информацию через время с минимальными изменениями; вентили решают, когда добавлять/удалять. Так LSTM сохраняет долгосрочную зависимость и решает проблему затухания градиента в RNN. Основа многих старых моделей для текста и рядов; сейчас часто заменяется трансформерами.</p></div></section>
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 7: Работа с последовательностями. RNN и LSTM</h2>
+                <div class="lesson-content">
+                    <p>До сих пор мы рассматривали модели, для которых порядок объектов не важен: каждый пример — набор признаков, и соседние строки в таблице не связаны. Но текст, речь, временные ряды и последовательности событий устроены иначе: важен не только набор элементов, но и их <strong>порядок</strong>. Слово «не» перед «хорошо» меняет смысл; завтрашняя цена акции зависит от вчерашней. Для таких данных нужны архитектуры, которые явно учитывают последовательность и способны хранить контекст.</p>
+                    <p><strong>Задача модуля:</strong> подготовить почву для понимания текста и контекста: ввести идею последовательных данных, рекуррентных сетей (RNN), проблемы долгосрочной памяти и её решение — LSTM. Эти концепции исторически предшествовали трансформерам и до сих пор встречаются в задачах на временные ряды и в старых моделях для NLP.</p>
+                    <div class="visual-guide">
+                        <h4>Что разберём</h4>
+                        <ul>
+                            <li><strong>Последовательные данные</strong> — почему порядок важен и чего не хватает «мешку слов».</li>
+                            <li><strong>RNN</strong> — скрытое состояние, развёртка во времени, общие веса.</li>
+                            <li><strong>Проблема долгосрочной памяти</strong> — затухание градиента по времени.</li>
+                            <li><strong>LSTM</strong> — вентили и ячейка, как сохраняется контекст на длинных последовательностях.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="sequences" class="topic-section">
+                <h2>7.1 Природа последовательных данных</h2>
+                <div class="lesson-content">
+                    <p>Текст — это последовательность слов или символов; временной ряд — последовательность измерений во времени; аудио — последовательность сэмплов. В таких данных смысл или закономерность часто определяются не только набором элементов, но и тем, <strong>в каком порядке</strong> они идут. «Кот съел мышь» и «Мышь съела кота» — разный смысл при тех же словах. В рядах котировок тренд и волатильность зависят от предыстории.</p>
+                    <p>Обычная полносвязная сеть или «мешок слов» (bag of words) порядок не учитывают: объект представляется как вектор признаков, и перестановка слов или моментов времени не меняет представление. В результате теряется контекст и зависимость от прошлого. Для последовательностей нужна архитектура, которая явно передаёт информацию вдоль оси времени (или позиции в тексте) и позволяет модели «помнить» то, что было раньше.</p>
+                    <p>Рекуррентные сети и их развитие — LSTM — как раз и были призваны дать модели такую память: на каждом шаге выход зависит не только от текущего входа, но и от скрытого состояния, несущего информацию о предыдущих шагах.</p>
+                </div>
+            </section>
+            <section id="rnn" class="topic-section">
+                <h2>7.2 Рекуррентные нейросети (RNN)</h2>
+                <div class="lesson-content">
+                    <p>Идея RNN — ввести <strong>скрытое состояние (hidden state)</strong> <em>h</em>, которое передаётся с шага на шаг и играет роль памяти. На каждом временном шаге <em>t</em> сеть получает входной вектор <em>x<sub>t</sub></em> и предыдущее скрытое состояние <em>h<sub>t−1</sub></em>, по ним вычисляет новое состояние <em>h<sub>t</sub></em> и при необходимости выход <em>y<sub>t</sub></em>. Одна и та же функция (одни и те же веса) применяется на каждом шаге: сеть как бы «развёрнута» во времени, но веса общие для всех моментов. Так модель может использовать информацию из прошлого — в пределах того, что удаётся пронести через цепочку обновлений.</p>
+                    <p>Математически типичное обновление: <em>h<sub>t</sub> = σ(W<sub>xh</sub> x<sub>t</sub> + W<sub>hh</sub> h<sub>t−1</sub> + b)</em>, где σ — нелинейная активация (например, tanh), а веса W<sub>xh</sub>, W<sub>hh</sub> и смещение b общие для всех <em>t</em>. Выход может быть, например, линейным преобразованием от <em>h<sub>t</sub></em>. Обучение выполняется обратным распространением во времени (BPTT): градиент loss распространяется от последнего шага к первому через цепочку скрытых состояний.</p>
+                    <p>RNN позволяют обрабатывать последовательности переменной длины и являются естественным выбором для задач, где контекст важен: предсказание следующего символа, классификация предложения, простые модели временных рядов. Ограничение — на длинных последовательностях «память» о начале цепочки теряется из-за затухания градиента.</p>
+                </div>
+            </section>
+            <section id="long-memory" class="topic-section">
+                <h2>7.3 Проблема долгосрочной памяти</h2>
+                <div class="lesson-content">
+                    <p>В простой RNN при обратном распространении по времени градиент проходит через длинную цепочку умножений на матрицы и производные активаций. Если производные по модулю меньше единицы (как у сигмоиды и tanh), градиент с каждым шагом назад <strong>затухает</strong>: на ранних временных шагах он становится столь мал, что веса почти не обновляются, и модель «не помнит» далёкое прошлое. В крайних случаях градиент, наоборот, <strong>взрывается</strong> (экспоненциальный рост), и обучение становится неустойчивым.</p>
+                    <p>Практически это означает: для длинных предложений или длинных временных рядов простая RNN плохо улавливает зависимости между далёкими элементами. Чтобы модель могла опираться на контекст из многих шагов назад, нужен механизм, который проводит информацию через время с минимальным затуханием. Именно это и реализует LSTM за счёт отдельной «ячейки» и вентилей.</p>
+                </div>
+            </section>
+            <section id="lstm" class="topic-section">
+                <h2>7.4 LSTM (Long Short-Term Memory)</h2>
+                <div class="lesson-content">
+                    <p>LSTM — архитектура рекуррентной ячейки, разработанная специально для сохранения долгосрочных зависимостей. Помимо скрытого состояния <em>h</em>, в LSTM вводится отдельный вектор — <strong>состояние ячейки (cell state)</strong> <em>C</em>. Его можно представлять как «долгую память»: информация по нему проходит через время с минимальными изменениями, а три <strong>вентиля (gates)</strong> решают, что забыть, что записать и что выдать наружу.</p>
+                    <p><strong>Вентиль забывания (forget gate)</strong> определяет, какую долю текущего состояния ячейки сохранить: смотрит на вход и предыдущее скрытое состояние и выдаёт числа от 0 до 1 для каждого элемента <em>C</em>. <strong>Вентиль входа (input gate)</strong> решает, какую новую информацию добавить в ячейку. <strong>Вентиль выхода (output gate)</strong> решает, какую часть состояния ячейки выдать в качестве скрытого состояния <em>h</em>, от которого зависят выходы модели. Все вентили обучаются из данных, так что модель сама учится, когда «забывать», «запоминать» и «отдавать».</p>
+                    <p>Благодаря линейному прохождению информации по ячейке (с минимальным затуханием) и обучению вентилей LSTM способен сохранять контекст на длинных последовательностях и в значительной степени решает проблему затухающего градиента в RNN. LSTM долгое время был основой моделей для машинного перевода, суммаризации и прогноза временных рядов. Сейчас во многих задачах на текст его вытеснили трансформеры с механизмом внимания, но для рядов и в ресурсоограниченных сценариях LSTM по-прежнему широко используется.</p>
+                    <div class="note">
+                        <p><strong>Связь с курсом:</strong> понимание RNN и LSTM помогает читать старые статьи по NLP и разбираться в архитектурах «encoder–decoder». Трансформеры (модуль 8) отказываются от последовательного прохода по времени и заменяют его вниманием по всем позициям сразу.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>

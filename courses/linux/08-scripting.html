@@ -73,6 +73,12 @@
                     <span class="color-dot" style="background: #3b82f6;"></span>
                 </button>
             </div>
+            <a href="07-search.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="09-networking.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
             <!-- Кнопка переключения темы -->
             <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
                 <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -89,12 +95,6 @@
                     <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </button>
-            <a href="07-search.html" class="prev-btn" title="Предыдущий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </a>
-            <a href="09-networking.html" class="next-btn" title="Следующий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-            </a>
             <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -196,6 +196,14 @@
                         <a href="#input" class="subtopic">8.4 Ввод данных</a>
                         <a href="#command-substitution" class="subtopic">8.5 Подстановка команд</a>
                         <a href="#math" class="subtopic">8.6 Математические операции</a>
+                        <a href="#conditions" class="subtopic">8.7 Условия (if/else)</a>
+                        <a href="#loops" class="subtopic">8.8 Циклы (for/while/until)</a>
+                        <a href="#case-select" class="subtopic">8.9 case и select</a>
+                        <a href="#functions" class="subtopic">8.10 Функции</a>
+                        <a href="#arrays" class="subtopic">8.11 Массивы</a>
+                        <a href="#strings" class="subtopic">8.12 Работа со строками</a>
+                        <a href="#error-handling" class="subtopic">8.13 Обработка ошибок</a>
+                        <a href="#real-scripts" class="subtopic">8.14 Реальные скрипты</a>
                     </div>
                 </div>
                 
@@ -228,17 +236,17 @@
                     <p>Скрипт — это текстовый файл, содержащий последовательность команд, которые выполняются интерпретатором (shell).</p>
                     
                     <h3>Преимущества скриптов</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Автоматизация</h4>
                         <p>Выполнение повторяющихся задач без ручного ввода команд</p>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Экономия времени</h4>
                         <p>Сложные операции выполняются одной командой</p>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Надежность</h4>
                         <p>Исключение человеческих ошибок при выполнении задач</p>
                     </div>
@@ -253,7 +261,7 @@ echo "Hello World"</code></pre>
                     </div>
 
                     <h3>Типы скриптов</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Системные скрипты</h4>
                         <ul>
                             <li>Автозапуск сервисов</li>
@@ -262,7 +270,7 @@ echo "Hello World"</code></pre>
                         </ul>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Пользовательские скрипты</h4>
                         <ul>
                             <li>Автоматизация рутинных задач</li>
@@ -289,10 +297,9 @@ echo "Hello World"</code></pre>
                     
                     <h3>Создание скрипта</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        nano hello.sh              # создать скрипт в nano
-                        # Или
-                        vim hello.sh               # создать скрипт в vim
+                        <pre><code class="bash">nano hello.sh              # создать скрипт в nano
+# Или
+vim hello.sh               # создать скрипт в vim</code></pre>
                     </div>
 
                     <h3>Содержимое скрипта</h3>
@@ -306,33 +313,30 @@ echo "Текущий пользователь: $USER"</code></pre>
 
                     <h3>Сделать скрипт исполняемым</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-chmod +x hello.sh          # добавить права на выполнение
+                        <pre><code class="bash">chmod +x hello.sh          # добавить права на выполнение
 ls -l hello.sh             # проверить права
-                        # -rwxr-xr-x 1 user group 123 Dec 15 10:30 hello.sh
+# -rwxr-xr-x 1 user group 123 Dec 15 10:30 hello.sh</code></pre>
                     </div>
 
                     <h3>Запуск скрипта</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ./hello.sh                 # запустить скрипт
-                        # Или
-                        bash hello.sh              # запустить через bash
+                        <pre><code class="bash">./hello.sh                 # запустить скрипт
+# Или
+bash hello.sh              # запустить через bash</code></pre>
                     </div>
 
                     <h3>Проверка синтаксиса</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        bash -n script.sh          # проверить синтаксис без выполнения
-                        bash -x script.sh          # выполнить с выводом команд
+                        <pre><code class="bash">bash -n script.sh          # проверить синтаксис без выполнения
+bash -x script.sh          # выполнить с выводом команд</code></pre>
                     </div>
 
                     <h3>Отладка скрипта</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Добавить в скрипт для отладки:
-                        set -x                     # включить отладку
+set -x                     # включить отладку
 echo "Отладочная информация"
-                        set +x                     # выключить отладку
+set +x                     # выключить отладку</code></pre>
                     </div>
 
                     <div class="warning">
@@ -349,54 +353,50 @@ echo "Отладочная информация"
                     
                     <h3>Создание переменных</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        name="Иван"                # создать переменную
-                        age=25                    # числовая переменная
+                        <pre><code class="bash">name="Иван"                # создать переменную
+age=25                    # числовая переменная
 echo "Привет, $name!"     # использовать переменную
-echo "Вам $age лет"       # использовать переменную
+echo "Вам $age лет"       # использовать переменную</code></pre>
                     </div>
 
                     <h3>Системные переменные</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-echo $HOME                 # домашний каталог
+                        <pre><code class="bash">echo $HOME                 # домашний каталог
 echo $USER                 # имя пользователя
 echo $PWD                  # текущий каталог
 echo $PATH                 # пути поиска команд
-echo $0                    # имя скрипта
+echo $0                    # имя скрипта</code></pre>
                     </div>
 
                     <h3>Переменные окружения</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        export MY_VAR="значение"   # создать переменную окружения
+                        <pre><code class="bash">export MY_VAR="значение"   # создать переменную окружения
 echo $MY_VAR               # использовать переменную
-                        env | grep MY_VAR          # показать переменную окружения
+env | grep MY_VAR          # показать переменную окружения</code></pre>
                     </div>
 
                     <h3>Специальные переменные</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-echo $#                    # количество аргументов
+                        <pre><code class="bash">echo $#                    # количество аргументов
 echo $1                    # первый аргумент
 echo $2                    # второй аргумент
 echo $@                    # все аргументы
-echo $?                    # код возврата последней команды
+echo $?                    # код возврата последней команды</code></pre>
                     </div>
 
                     <h3>Работа с переменными</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Проверка существования переменной
-                        if [ -z "$MY_VAR" ]; then
+if [ -z "$MY_VAR" ]; then
     echo "Переменная не задана"
-                        fi
-                        
-                        # Значение по умолчанию
+fi
+
+# Значение по умолчанию
 echo ${MY_VAR:-"по умолчанию"}
-                        
-                        # Длина строки
-                        text="Hello"
-echo ${#text}              # выведет 5
+
+# Длина строки
+text="Hello"
+echo ${#text}              # выведет 5</code></pre>
                     </div>
 
                     <div class="info">
@@ -416,46 +416,42 @@ echo ${#text}              # выведет 5
                         <pre><code class="bash">#!/bin/bash
 echo "Введите ваше имя:"
 read name
-echo "Привет, $name!"
+echo "Привет, $name!"</code></pre>
                     </div>
 
                     <h3>Ввод с приглашением</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-read -p "Введите ваш возраст: " age
-echo "Вам $age лет"
+                        <pre><code class="bash">read -p "Введите ваш возраст: " age
+echo "Вам $age лет"</code></pre>
                     </div>
 
                     <h3>Скрытый ввод (для паролей)</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-read -s -p "Введите пароль: " password
-echo "Пароль введен"
+                        <pre><code class="bash">read -s -p "Введите пароль: " password
+echo "Пароль введен"</code></pre>
                     </div>
 
                     <h3>Ввод нескольких значений</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-read -p "Введите имя и возраст: " name age
-echo "Имя: $name, Возраст: $age"
+                        <pre><code class="bash">read -p "Введите имя и возраст: " name age
+echo "Имя: $name, Возраст: $age"</code></pre>
                     </div>
 
                     <h3>Ввод с таймаутом</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        if read -t 5 -p "Введите что-то за 5 секунд: " input; then
+                        <pre><code class="bash">if read -t 5 -p "Введите что-то за 5 секунд: " input; then
     echo "Вы ввели: $input"
-                        else
+else
     echo "Время истекло"
-                        fi
+fi</code></pre>
                     </div>
 
                     <h3>Чтение из файла</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Читать файл построчно
-                        while read line; do
+while read line; do
     echo "Строка: $line"
-                        done < file.txt
+done < file.txt</code></pre>
                     </div>
 
                     <h3>Практический пример</h3>
@@ -466,10 +462,10 @@ read -p "Имя пользователя: " username
 read -s -p "Пароль: " password
 echo
 read -p "Полное имя: " fullname
-                        
+
 echo "Создаем пользователя $username..."
-                        # Здесь была бы команда создания пользователя
-echo "Пользователь $username создан"
+# Здесь была бы команда создания пользователя
+echo "Пользователь $username создан"</code></pre>
                     </div>
                 </div>
             </section>
@@ -483,65 +479,65 @@ echo "Пользователь $username создан"
                     <h3>Синтаксис подстановки</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Старый синтаксис (обратные кавычки)
-                        current_date=`date`
+current_date=`date`
 echo "Сегодня: $current_date"
-                        
-                        # Новый синтаксис (рекомендуется)
-                        current_date=$(date)
-echo "Сегодня: $current_date"
+
+# Новый синтаксис (рекомендуется)
+current_date=$(date)
+echo "Сегодня: $current_date"</code></pre>
                     </div>
 
                     <h3>Использование в переменных</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Получить имя хоста
-                        hostname=$(hostname)
+hostname=$(hostname)
 echo "Имя компьютера: $hostname"
-                        
-                        # Получить количество файлов
-                        file_count=$(ls -1 | wc -l)
+
+# Получить количество файлов
+file_count=$(ls -1 | wc -l)
 echo "Файлов в каталоге: $file_count"
-                        
-                        # Получить размер каталога
-                        dir_size=$(du -sh . | cut -f1)
-echo "Размер каталога: $dir_size"
+
+# Получить размер каталога
+dir_size=$(du -sh . | cut -f1)
+echo "Размер каталога: $dir_size"</code></pre>
                     </div>
 
                     <h3>Использование в командах</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Создать резервную копию с датой
 cp important.txt backup_$(date +%Y%m%d).txt
-                        
-                        # Показать файлы, измененные сегодня
+
+# Показать файлы, измененные сегодня
 ls -la $(find . -mtime 0)
-                        
-                        # Подсчитать строки в файлах
-echo "Всего строк: $(cat *.txt | wc -l)"
+
+# Подсчитать строки в файлах
+echo "Всего строк: $(cat *.txt | wc -l)"</code></pre>
                     </div>
 
                     <h3>Вложенные подстановки</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Получить имя каталога из полного пути
-                        current_dir=$(basename $(pwd))
+current_dir=$(basename $(pwd))
 echo "Текущий каталог: $current_dir"
-                        
-                        # Получить количество процессов
-                        process_count=$(ps aux | wc -l)
-echo "Процессов запущено: $process_count"
+
+# Получить количество процессов
+process_count=$(ps aux | wc -l)
+echo "Процессов запущено: $process_count"</code></pre>
                     </div>
 
                     <h3>Практические примеры</h3>
                     <div class="code-example">
                         <pre><code class="bash">#!/bin/bash
-                        # Скрипт для создания резервной копии
-                        
+# Скрипт для создания резервной копии
+
 backup_dir="backup_$(date +%Y%m%d_%H%M%S)"
 mkdir "$backup_dir"
-                        
+
 echo "Создаем резервную копию в $backup_dir"
 cp -r /home/user/documents "$backup_dir/"
-                        
+
 echo "Резервная копия создана"
-echo "Размер: $(du -sh "$backup_dir" | cut -f1)"
+echo "Размер: $(du -sh "$backup_dir" | cut -f1)"</code></pre>
                     </div>
 
                     <div class="info">
@@ -558,30 +554,28 @@ echo "Размер: $(du -sh "$backup_dir" | cut -f1)"
                     
                     <h3>Арифметическое расширение $(( ))</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        a=10
-                        b=5
-                        result=$((a + b))
+                        <pre><code class="bash">a=10
+b=5
+result=$((a + b))
 echo "Сумма: $result"
-                        
-                        # Различные операции
+
+# Различные операции
 echo "Сложение: $((a + b))"      # 15
 echo "Вычитание: $((a - b))"     # 5
 echo "Умножение: $((a * b))"     # 50
 echo "Деление: $((a / b))"       # 2
-echo "Остаток: $((a % b))"       # 0
+echo "Остаток: $((a % b))"       # 0</code></pre>
                     </div>
 
                     <h3>Команда expr</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        a=10
-                        b=5
-                        result=$(expr $a + $b)
+                        <pre><code class="bash">a=10
+b=5
+result=$(expr $a + $b)
 echo "Результат: $result"
-                        
-                        # Обратите внимание на пробелы вокруг операторов
-echo "Умножение: $(expr $a \* $b)"  # экранирование *
+
+# Обратите внимание на пробелы вокруг операторов
+echo "Умножение: $(expr $a \* $b)"  # экранирование *</code></pre>
                     </div>
 
                     <h3>Команда bc (калькулятор)</h3>
@@ -590,62 +584,60 @@ echo "Умножение: $(expr $a \* $b)"  # экранирование *
 echo "2 + 3" | bc                # 5
 echo "10 / 3" | bc               # 3
 echo "scale=2; 10 / 3" | bc      # 3.33 (2 знака после запятой)
-                        
-                        # Сложные вычисления
+
+# Сложные вычисления
 echo "sqrt(16)" | bc             # 4
-echo "2^3" | bc                  # 8
+echo "2^3" | bc                  # 8</code></pre>
                     </div>
 
                     <h3>Инкремент и декремент</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        counter=0
+                        <pre><code class="bash">counter=0
 echo "Начальное значение: $counter"
-                        
-                        counter=$((counter + 1))
+
+counter=$((counter + 1))
 echo "После увеличения: $counter"
-                        
-                        counter=$((counter - 1))
+
+counter=$((counter - 1))
 echo "После уменьшения: $counter"
-                        
-                        # Сокращенная запись
-                        counter=$((counter++))           # постфиксный инкремент
-                        counter=$((++counter))           # префиксный инкремент
+
+# Сокращенная запись
+counter=$((counter++))           # постфиксный инкремент
+counter=$((++counter))           # префиксный инкремент</code></pre>
                     </div>
 
                     <h3>Сравнения</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        a=10
-                        b=5
-                        
-                        if [ $a -gt $b ]; then
+                        <pre><code class="bash">a=10
+b=5
+
+if [ $a -gt $b ]; then
     echo "$a больше $b"
-                        fi
-        
-                        if [ $a -eq 10 ]; then
+fi
+
+if [ $a -eq 10 ]; then
     echo "$a равно 10"
-                        fi
+fi</code></pre>
                     </div>
 
                     <h3>Практический пример</h3>
                     <div class="code-example">
                         <pre><code class="bash">#!/bin/bash
-                        # Калькулятор
-                        
+# Калькулятор
+
 read -p "Введите первое число: " num1
 read -p "Введите второе число: " num2
 read -p "Введите операцию (+, -, *, /): " op
-                        
-                        case $op in
-                            +) result=$((num1 + num2)) ;;
-                            -) result=$((num1 - num2)) ;;
-                            \*) result=$((num1 * num2)) ;;
-                            /) result=$((num1 / num2)) ;;
-                            *) echo "Неизвестная операция"; exit 1 ;;
-                        esac
-                        
-echo "Результат: $result"
+
+case $op in
+    +) result=$((num1 + num2)) ;;
+    -) result=$((num1 - num2)) ;;
+    \*) result=$((num1 * num2)) ;;
+    /) result=$((num1 / num2)) ;;
+    *) echo "Неизвестная операция"; exit 1 ;;
+esac
+
+echo "Результат: $result"</code></pre>
                     </div>
 
                     <div class="info">
@@ -656,6 +648,1019 @@ echo "Результат: $result"
                         • <code>-lt</code> — меньше<br>
                         • <code>-ge</code> — больше или равно<br>
                         • <code>-le</code> — меньше или равно
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.7: Условия (if/else) -->
+            <section id="conditions" class="topic-section">
+                <h2>8.7 Условные конструкции: if / elif / else</h2>
+                <div class="lesson-content">
+                    <p>Условные конструкции позволяют скрипту принимать решения и выполнять разные действия в зависимости от условий. Это фундамент любого нетривиального скрипта.</p>
+
+                    <h3>Базовый синтаксис if</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# Простое условие
+if [ "$USER" = "root" ]; then
+    echo "Вы вошли как root"
+fi
+
+# if / else
+age=20
+if [ "$age" -ge 18 ]; then
+    echo "Вы совершеннолетний"
+else
+    echo "Вы несовершеннолетний"
+fi
+
+# if / elif / else
+score=75
+if [ "$score" -ge 90 ]; then
+    echo "Отлично"
+elif [ "$score" -ge 70 ]; then
+    echo "Хорошо"
+elif [ "$score" -ge 50 ]; then
+    echo "Удовлетворительно"
+else
+    echo "Неудовлетворительно"
+fi</code></pre>
+                    </div>
+
+                    <h3>Скобки [ ] vs [[ ]]</h3>
+                    <p>В Bash существует два синтаксиса для условий. Двойные скобки <code>[[ ]]</code> — расширение Bash, безопаснее и мощнее.</p>
+                    <div class="code-example">
+                        <pre><code class="bash"># [ ] — POSIX-совместимый синтаксис (работает в sh)
+# Обязательно ставить пробелы после [ и перед ]
+if [ "$name" = "Иван" ]; then
+    echo "Привет, Иван!"
+fi
+
+# [[ ]] — расширение Bash (рекомендуется)
+# Поддерживает && ||, регулярные выражения, глобы
+if [[ "$name" == "Иван" && "$age" -gt 18 ]]; then
+    echo "Иван, добро пожаловать!"
+fi
+
+# Регулярные выражения (только в [[ ]])
+email="user@example.com"
+if [[ "$email" =~ ^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+$ ]]; then
+    echo "Email валиден"
+fi
+
+# Глобы (только в [[ ]])
+file="report.pdf"
+if [[ "$file" == *.pdf ]]; then
+    echo "Это PDF-файл"
+fi</code></pre>
+                    </div>
+
+                    <h3>Проверка файлов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+file="/etc/passwd"
+
+# Существует ли файл
+if [ -f "$file" ]; then
+    echo "Файл $file существует"
+fi
+
+# Существует ли директория
+if [ -d "/home/user" ]; then
+    echo "Директория существует"
+fi
+
+# Файл доступен для чтения / записи / выполнения
+if [ -r "$file" ]; then echo "Можно читать"; fi
+if [ -w "$file" ]; then echo "Можно писать"; fi
+if [ -x "$file" ]; then echo "Можно выполнять"; fi
+
+# Файл не пуст
+if [ -s "$file" ]; then
+    echo "Файл не пуст"
+fi
+
+# Файл существует (любого типа: файл, директория, ссылка...)
+if [ -e "$file" ]; then
+    echo "Объект существует"
+fi
+
+# Символическая ссылка
+if [ -L "/usr/bin/python" ]; then
+    echo "Это симлинк"
+fi</code></pre>
+                    </div>
+
+                    <h3>Проверка строк</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Строка пустая
+if [ -z "$var" ]; then
+    echo "Переменная пустая или не задана"
+fi
+
+# Строка НЕ пустая
+if [ -n "$var" ]; then
+    echo "Переменная содержит: $var"
+fi
+
+# Сравнение строк
+if [ "$str1" = "$str2" ]; then
+    echo "Строки равны"
+fi
+
+if [ "$str1" != "$str2" ]; then
+    echo "Строки различаются"
+fi</code></pre>
+                    </div>
+
+                    <h3>Логические операторы</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># И (AND) — оба условия должны быть истинны
+if [ "$age" -ge 18 ] && [ "$citizen" = "yes" ]; then
+    echo "Имеете право голоса"
+fi
+
+# Или (OR) — хотя бы одно условие истинно
+if [ "$role" = "admin" ] || [ "$role" = "moderator" ]; then
+    echo "Есть права на удаление"
+fi
+
+# НЕ (NOT) — инвертирует условие
+if ! [ -f "/tmp/lock" ]; then
+    echo "Lock-файл отсутствует, продолжаем"
+fi</code></pre>
+                    </div>
+
+                    <h3>Однострочные условия</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Используя && и ||
+[ -f "config.yml" ] && echo "Конфиг найден" || echo "Конфига нет"
+
+# Проверка кода возврата команды
+grep -q "error" logfile.txt && echo "Найдены ошибки!"
+
+# Тест перед действием
+[ -d "backup" ] || mkdir backup</code></pre>
+                    </div>
+
+                    <div class="info">
+                        <strong>Частые ошибки:</strong><br>
+                        &bull; Забыть пробелы: <code>[$var="x"]</code> — ОШИБКА, нужно <code>[ "$var" = "x" ]</code><br>
+                        &bull; Забыть кавычки: <code>[ $var = x ]</code> сломается если <code>$var</code> пустая<br>
+                        &bull; Использовать <code>==</code> в <code>[ ]</code> — не POSIX, лучше <code>=</code><br>
+                        &bull; Использовать <code>-eq</code> для строк — это только для чисел
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.8: Циклы -->
+            <section id="loops" class="topic-section">
+                <h2>8.8 Циклы: for, while, until</h2>
+                <div class="lesson-content">
+                    <p>Циклы позволяют выполнять одни и те же действия многократно. В bash есть три основных типа циклов.</p>
+
+                    <h3>Цикл for</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# Перебор списка значений
+for fruit in яблоко груша банан; do
+    echo "Фрукт: $fruit"
+done
+
+# Перебор файлов
+for file in *.txt; do
+    echo "Обрабатываю: $file"
+    wc -l "$file"
+done
+
+# Перебор числового диапазона
+for i in {1..10}; do
+    echo "Итерация: $i"
+done
+
+# Диапазон с шагом
+for i in {0..100..5}; do
+    echo "$i"
+done
+
+# C-style for (как в C/Java)
+for ((i = 0; i < 10; i++)); do
+    echo "i = $i"
+done
+
+# Перебор аргументов скрипта
+for arg in "$@"; do
+    echo "Аргумент: $arg"
+done
+
+# Перебор строк из команды
+for user in $(cut -d: -f1 /etc/passwd); do
+    echo "Пользователь: $user"
+done</code></pre>
+                    </div>
+
+                    <h3>Цикл while</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# Базовый while
+counter=1
+while [ "$counter" -le 5 ]; do
+    echo "Счётчик: $counter"
+    counter=$((counter + 1))
+done
+
+# Бесконечный цикл (с выходом по break)
+while true; do
+    read -p "Введите 'quit' для выхода: " input
+    if [ "$input" = "quit" ]; then
+        break
+    fi
+    echo "Вы ввели: $input"
+done
+
+# Чтение файла построчно (правильный способ)
+while IFS= read -r line; do
+    echo "Строка: $line"
+done < "data.txt"
+
+# Чтение вывода команды
+ps aux | while read -r line; do
+    echo "$line"
+done
+
+# while с несколькими условиями
+attempts=0
+max_attempts=3
+while [ "$attempts" -lt "$max_attempts" ]; do
+    echo "Попытка $((attempts + 1)) из $max_attempts"
+    attempts=$((attempts + 1))
+    sleep 1
+done</code></pre>
+                    </div>
+
+                    <h3>Цикл until (пока НЕ выполнится)</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# until — выполняется пока условие ЛОЖНО
+counter=1
+until [ "$counter" -gt 5 ]; do
+    echo "Счётчик: $counter"
+    counter=$((counter + 1))
+done
+
+# Ожидание появления файла
+until [ -f "/tmp/ready.flag" ]; do
+    echo "Ожидаю файл-флаг..."
+    sleep 2
+done
+echo "Файл найден! Продолжаем."
+
+# Ожидание доступности сервиса
+until ping -c 1 google.com &>/dev/null; do
+    echo "Нет сети, ждём..."
+    sleep 5
+done
+echo "Сеть доступна!"</code></pre>
+                    </div>
+
+                    <h3>break и continue</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# break — выйти из цикла
+for i in {1..100}; do
+    if [ "$i" -eq 5 ]; then
+        echo "Достигнуто 5, выходим"
+        break
+    fi
+    echo "$i"
+done
+
+# continue — пропустить итерацию
+for i in {1..10}; do
+    if [ $((i % 2)) -eq 0 ]; then
+        continue    # пропускаем чётные
+    fi
+    echo "Нечётное: $i"
+done
+
+# break N — выход из вложенного цикла (N уровней)
+for i in {1..3}; do
+    for j in {1..3}; do
+        if [ "$j" -eq 2 ]; then
+            break 2   # выйти из обоих циклов
+        fi
+        echo "$i - $j"
+    done
+done</code></pre>
+                    </div>
+
+                    <h3>Практический пример: мониторинг процесса</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+# Скрипт мониторинга процесса
+
+process_name="nginx"
+check_interval=10
+
+echo "Мониторинг процесса: $process_name"
+
+while true; do
+    if pgrep -x "$process_name" > /dev/null; then
+        echo "[$(date '+%H:%M:%S')] $process_name работает"
+    else
+        echo "[$(date '+%H:%M:%S')] $process_name НЕ НАЙДЕН! Перезапускаю..."
+        systemctl restart "$process_name"
+    fi
+    sleep "$check_interval"
+done</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.9: case и select -->
+            <section id="case-select" class="topic-section">
+                <h2>8.9 Конструкции case и select</h2>
+                <div class="lesson-content">
+                    <p><code>case</code> — это мощная альтернатива цепочке if/elif для сравнения одной переменной с несколькими шаблонами. <code>select</code> создаёт интерактивное меню.</p>
+
+                    <h3>Конструкция case</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+read -p "Введите день недели: " day
+
+case "$day" in
+    понедельник|вторник|среда|четверг|пятница)
+        echo "Рабочий день"
+        ;;
+    суббота|воскресенье)
+        echo "Выходной!"
+        ;;
+    *)
+        echo "Неизвестный день: $day"
+        ;;
+esac</code></pre>
+                    </div>
+
+                    <h3>case с шаблонами (глобы)</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+filename="$1"
+
+case "$filename" in
+    *.tar.gz|*.tgz)
+        echo "Распаковка tar.gz..."
+        tar xzf "$filename"
+        ;;
+    *.tar.bz2)
+        echo "Распаковка tar.bz2..."
+        tar xjf "$filename"
+        ;;
+    *.zip)
+        echo "Распаковка zip..."
+        unzip "$filename"
+        ;;
+    *.7z)
+        echo "Распаковка 7z..."
+        7z x "$filename"
+        ;;
+    *)
+        echo "Неизвестный формат: $filename"
+        exit 1
+        ;;
+esac</code></pre>
+                    </div>
+
+                    <h3>case для обработки аргументов скрипта</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+# Скрипт управления сервисом
+
+case "$1" in
+    start)
+        echo "Запуск сервиса..."
+        ;;
+    stop)
+        echo "Остановка сервиса..."
+        ;;
+    restart)
+        echo "Перезапуск сервиса..."
+        ;;
+    status)
+        echo "Проверка статуса..."
+        ;;
+    *)
+        echo "Использование: $0 {start|stop|restart|status}"
+        exit 1
+        ;;
+esac</code></pre>
+                    </div>
+
+                    <h3>Конструкция select (меню)</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+echo "Выберите операционную систему:"
+select os in "Ubuntu" "Fedora" "Arch" "Выход"; do
+    case "$os" in
+        Ubuntu)
+            echo "Менеджер пакетов: apt"
+            ;;
+        Fedora)
+            echo "Менеджер пакетов: dnf"
+            ;;
+        Arch)
+            echo "Менеджер пакетов: pacman"
+            ;;
+        Выход)
+            echo "До свидания!"
+            break
+            ;;
+        *)
+            echo "Неверный выбор, попробуйте снова"
+            ;;
+    esac
+done</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.10: Функции -->
+            <section id="functions" class="topic-section">
+                <h2>8.10 Функции</h2>
+                <div class="lesson-content">
+                    <p>Функции позволяют группировать команды, давать им имя и переиспользовать. Это делает скрипты читаемыми и поддерживаемыми.</p>
+
+                    <h3>Объявление и вызов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# Способ 1: с ключевым словом function
+function greet() {
+    echo "Привет, $1!"
+}
+
+# Способ 2: без function (POSIX-совместимый)
+say_bye() {
+    echo "Пока, $1!"
+}
+
+# Вызов функций
+greet "Иван"       # Привет, Иван!
+say_bye "Мария"    # Пока, Мария!</code></pre>
+                    </div>
+
+                    <h3>Аргументы функций</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+create_user() {
+    local username="$1"    # local — переменная видна только внутри функции
+    local fullname="$2"
+    local role="${3:-user}" # значение по умолчанию
+
+    echo "Создаю пользователя:"
+    echo "  Логин: $username"
+    echo "  Имя: $fullname"
+    echo "  Роль: $role"
+    echo "  Всего аргументов: $#"
+}
+
+create_user "ivanov" "Иван Иванов" "admin"
+create_user "petrov" "Пётр Петров"   # роль = "user" (по умолчанию)</code></pre>
+                    </div>
+
+                    <h3>Возвращаемые значения</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# Способ 1: return (код возврата 0-255)
+is_root() {
+    if [ "$(id -u)" -eq 0 ]; then
+        return 0   # успех (true)
+    else
+        return 1   # неудача (false)
+    fi
+}
+
+if is_root; then
+    echo "Вы root"
+else
+    echo "Вы НЕ root"
+fi
+
+# Способ 2: echo (для возврата строк/чисел)
+get_disk_usage() {
+    local usage
+    usage=$(df -h / | awk 'NR==2 {print $5}')
+    echo "$usage"
+}
+
+disk=$(get_disk_usage)
+echo "Использование диска: $disk"
+
+# Способ 3: глобальная переменная (менее предпочтительно)
+calculate() {
+    RESULT=$(( $1 + $2 ))
+}
+calculate 10 20
+echo "Результат: $RESULT"</code></pre>
+                    </div>
+
+                    <h3>Область видимости: local</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+name="Глобальная"
+
+test_scope() {
+    local name="Локальная"
+    echo "Внутри функции: $name"   # Локальная
+}
+
+test_scope
+echo "Снаружи функции: $name"     # Глобальная
+
+# ВАЖНО: без local переменная будет глобальной!
+bad_function() {
+    result="изменено"   # это ГЛОБАЛЬНАЯ переменная
+}
+
+result="оригинал"
+bad_function
+echo "$result"   # "изменено" — переменная была затёрта!</code></pre>
+                    </div>
+
+                    <h3>Практический пример: библиотека функций</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+# Файл: lib.sh — библиотека полезных функций
+
+log_info() {
+    echo "[INFO $(date '+%Y-%m-%d %H:%M:%S')] $*"
+}
+
+log_error() {
+    echo "[ERROR $(date '+%Y-%m-%d %H:%M:%S')] $*" >&2
+}
+
+file_exists() {
+    [ -f "$1" ]
+}
+
+require_root() {
+    if [ "$(id -u)" -ne 0 ]; then
+        log_error "Этот скрипт требует прав root"
+        exit 1
+    fi
+}
+
+# В другом скрипте подключаем библиотеку:
+# source lib.sh
+# log_info "Скрипт запущен"
+# require_root</code></pre>
+                    </div>
+
+                    <div class="info">
+                        <strong>Правила хорошего тона:</strong><br>
+                        &bull; Всегда используйте <code>local</code> для переменных внутри функций<br>
+                        &bull; Давайте функциям говорящие имена: <code>validate_email</code>, а не <code>check</code><br>
+                        &bull; Документируйте функции комментариями<br>
+                        &bull; Выносите повторяющийся код в функции
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.11: Массивы -->
+            <section id="arrays" class="topic-section">
+                <h2>8.11 Массивы</h2>
+                <div class="lesson-content">
+                    <p>Bash поддерживает индексированные и ассоциативные массивы. Они позволяют хранить коллекции значений в одной переменной.</p>
+
+                    <h3>Индексированные массивы</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# Создание массива
+fruits=("яблоко" "груша" "банан" "апельсин")
+
+# Доступ к элементам (индексы с 0)
+echo "${fruits[0]}"    # яблоко
+echo "${fruits[2]}"    # банан
+
+# Все элементы
+echo "${fruits[@]}"    # яблоко груша банан апельсин
+
+# Количество элементов
+echo "${#fruits[@]}"   # 4
+
+# Длина конкретного элемента
+echo "${#fruits[0]}"   # 6 (длина слова "яблоко")
+
+# Добавить элемент
+fruits+=("манго")
+
+# Удалить элемент
+unset 'fruits[1]'      # удаляет "груша"
+
+# Срез массива (элементы 1-2)
+echo "${fruits[@]:1:2}"</code></pre>
+                    </div>
+
+                    <h3>Перебор массива</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+servers=("web-01" "web-02" "db-01" "cache-01")
+
+# Перебор значений
+for server in "${servers[@]}"; do
+    echo "Проверяю сервер: $server"
+    ping -c 1 "$server" &>/dev/null && echo "  OK" || echo "  НЕДОСТУПЕН"
+done
+
+# Перебор с индексами
+for i in "${!servers[@]}"; do
+    echo "Сервер #$i: ${servers[$i]}"
+done</code></pre>
+                    </div>
+
+                    <h3>Ассоциативные массивы (Bash 4+)</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# Объявление (обязательно declare -A)
+declare -A config
+
+config[host]="localhost"
+config[port]="8080"
+config[db]="myapp"
+config[debug]="true"
+
+# Доступ
+echo "Хост: ${config[host]}"
+echo "Порт: ${config[port]}"
+
+# Все ключи
+echo "Ключи: ${!config[@]}"
+
+# Все значения
+echo "Значения: ${config[@]}"
+
+# Перебор
+for key in "${!config[@]}"; do
+    echo "$key = ${config[$key]}"
+done
+
+# Проверка существования ключа
+if [[ -v config[debug] ]]; then
+    echo "Ключ debug существует"
+fi</code></pre>
+                    </div>
+
+                    <h3>Практический пример: парсинг CSV</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+# Чтение CSV-файла в массивы
+
+declare -a names
+declare -a ages
+
+i=0
+while IFS=',' read -r name age; do
+    names[$i]="$name"
+    ages[$i]="$age"
+    ((i++))
+done < "users.csv"
+
+echo "Загружено ${#names[@]} записей"
+for i in "${!names[@]}"; do
+    echo "${names[$i]} — ${ages[$i]} лет"
+done</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.12: Работа со строками -->
+            <section id="strings" class="topic-section">
+                <h2>8.12 Работа со строками</h2>
+                <div class="lesson-content">
+                    <p>Bash предоставляет множество встроенных операций для манипуляции строками без вызова внешних утилит.</p>
+
+                    <h3>Подстроки и замены</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+str="Hello World Bash Scripting"
+
+# Длина строки
+echo "${#str}"              # 25
+
+# Подстрока (с позиции 6, 5 символов)
+echo "${str:6:5}"           # World
+
+# С конца
+echo "${str: -9}"           # Scripting
+
+# Удаление с начала (кратчайшее совпадение)
+file="archive.tar.gz"
+echo "${file#*.}"           # tar.gz
+
+# Удаление с начала (длиннейшее совпадение)
+echo "${file##*.}"          # gz
+
+# Удаление с конца (кратчайшее)
+echo "${file%.*}"           # archive.tar
+
+# Удаление с конца (длиннейшее)
+echo "${file%%.*}"          # archive
+
+# Замена первого вхождения
+echo "${str/World/Мир}"     # Hello Мир Bash Scripting
+
+# Замена всех вхождений
+text="a-b-c-d"
+echo "${text//-/_}"         # a_b_c_d
+
+# Приведение к верхнему/нижнему регистру (Bash 4+)
+name="hello world"
+echo "${name^^}"            # HELLO WORLD
+echo "${name^}"             # Hello world (только первая буква)
+
+upper="HELLO"
+echo "${upper,,}"           # hello
+echo "${upper,}"            # hELLO</code></pre>
+                    </div>
+
+                    <h3>Значения по умолчанию</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># Если переменная не задана — использовать значение по умолчанию
+echo "${NAME:-Гость}"          # "Гость" если NAME пустая
+
+# Если не задана — присвоить и использовать
+echo "${NAME:=Гость}"          # присваивает NAME="Гость"
+
+# Если не задана — вывести ошибку и завершить
+echo "${NAME:?Переменная NAME обязательна}"
+
+# Если задана — использовать альтернативное значение
+echo "${NAME:+Пользователь задан}"</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.13: Обработка ошибок -->
+            <section id="error-handling" class="topic-section">
+                <h2>8.13 Обработка ошибок: set, trap, коды возврата</h2>
+                <div class="lesson-content">
+                    <p>Надёжный скрипт должен корректно обрабатывать ошибки. Bash предоставляет для этого несколько механизмов.</p>
+
+                    <h3>set — строгий режим</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+set -euo pipefail
+
+# set -e   : завершить скрипт при первой ошибке (ненулевой exit code)
+# set -u   : считать неинициализированные переменные ошибкой
+# set -o pipefail : ошибка в любой части пайпа = ошибка всего пайпа
+
+# Рекомендуется ставить в начале КАЖДОГО скрипта!
+
+# Пример: без set -e скрипт продолжит выполнение после ошибки
+cd /nonexistent/path      # ← скрипт ОСТАНОВИТСЯ здесь
+echo "Эта строка не выполнится"</code></pre>
+                    </div>
+
+                    <h3>trap — обработка сигналов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+set -euo pipefail
+
+# Создаём временный файл
+tmpfile=$(mktemp)
+echo "Временный файл: $tmpfile"
+
+# trap — выполнить команду при выходе (даже при ошибке)
+trap 'rm -f "$tmpfile"; echo "Очистка завершена"' EXIT
+
+# trap для конкретного сигнала
+trap 'echo "Получен SIGINT (Ctrl+C), завершаюсь..."; exit 1' INT
+trap 'echo "Получен SIGTERM"; exit 1' TERM
+
+# Основная логика скрипта
+echo "Работаю..."
+echo "Данные" > "$tmpfile"
+sleep 10   # Попробуйте нажать Ctrl+C
+
+# При выходе (нормальном или аварийном) tmpfile будет удалён</code></pre>
+                    </div>
+
+                    <h3>Коды возврата и обработка ошибок</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+
+# $? — код возврата последней команды (0 = успех)
+ls /etc/passwd
+echo "Код возврата: $?"   # 0
+
+ls /nonexistent 2>/dev/null
+echo "Код возврата: $?"   # 2 (не найдено)
+
+# Обработка ошибок с ||
+cp important.txt backup/ || {
+    echo "Ошибка копирования!"
+    exit 1
+}
+
+# Функция для обработки ошибок
+die() {
+    echo "ОШИБКА: $*" >&2
+    exit 1
+}
+
+[ -f "config.yml" ] || die "Файл config.yml не найден"
+[ -d "output" ] || die "Директория output не существует"</code></pre>
+                    </div>
+
+                    <h3>Перенаправление ошибок</h3>
+                    <div class="code-example">
+                        <pre><code class="bash"># stderr (поток 2) в файл
+command 2> errors.log
+
+# stderr и stdout в один файл
+command &> output.log
+# или
+command > output.log 2>&1
+
+# Подавить все ошибки
+command 2>/dev/null
+
+# Логирование с разделением потоков
+./script.sh > stdout.log 2> stderr.log</code></pre>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Всегда начинайте скрипты с <code>set -euo pipefail</code>!</strong> Это предотвращает большинство скрытых ошибок. Без этого скрипт молча продолжит выполнение после ошибки, что может привести к потере данных.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Тема 8.14: Реальные скрипты -->
+            <section id="real-scripts" class="topic-section">
+                <h2>8.14 Практика: реальные скрипты</h2>
+                <div class="lesson-content">
+                    <p>Закрепим все изученные концепции на примерах реальных скриптов, которые полезны в повседневной работе.</p>
+
+                    <h3>Скрипт 1: Автоматический бэкап</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+set -euo pipefail
+
+# Конфигурация
+SOURCE_DIR="/home/user/documents"
+BACKUP_DIR="/backup"
+MAX_BACKUPS=7
+DATE=$(date +%Y%m%d_%H%M%S)
+BACKUP_NAME="backup_${DATE}.tar.gz"
+
+log() { echo "[$(date '+%H:%M:%S')] $*"; }
+
+log "Начинаю резервное копирование..."
+
+# Проверки
+[ -d "$SOURCE_DIR" ] || { log "ОШИБКА: $SOURCE_DIR не найден"; exit 1; }
+mkdir -p "$BACKUP_DIR"
+
+# Создание архива
+tar czf "${BACKUP_DIR}/${BACKUP_NAME}" -C "$(dirname "$SOURCE_DIR")" "$(basename "$SOURCE_DIR")"
+log "Архив создан: $BACKUP_NAME ($(du -h "${BACKUP_DIR}/${BACKUP_NAME}" | cut -f1))"
+
+# Ротация: удаляем старые бэкапы
+backup_count=$(ls -1 "${BACKUP_DIR}"/backup_*.tar.gz 2>/dev/null | wc -l)
+if [ "$backup_count" -gt "$MAX_BACKUPS" ]; then
+    to_delete=$((backup_count - MAX_BACKUPS))
+    ls -1t "${BACKUP_DIR}"/backup_*.tar.gz | tail -n "$to_delete" | xargs rm -f
+    log "Удалено $to_delete старых бэкапов"
+fi
+
+log "Готово! Всего бэкапов: $(ls -1 "${BACKUP_DIR}"/backup_*.tar.gz | wc -l)"</code></pre>
+                    </div>
+
+                    <h3>Скрипт 2: Проверка здоровья серверов</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+set -euo pipefail
+
+servers=("web-01.example.com" "web-02.example.com" "db-01.example.com")
+declare -A results
+
+check_server() {
+    local server="$1"
+    if ping -c 1 -W 2 "$server" &>/dev/null; then
+        echo "UP"
+    else
+        echo "DOWN"
+    fi
+}
+
+echo "=== Проверка серверов: $(date) ==="
+echo
+
+for server in "${servers[@]}"; do
+    status=$(check_server "$server")
+    results["$server"]="$status"
+
+    if [ "$status" = "UP" ]; then
+        echo "  [OK]   $server"
+    else
+        echo "  [FAIL] $server"
+    fi
+done
+
+# Подсчёт
+up=0; down=0
+for status in "${results[@]}"; do
+    [ "$status" = "UP" ] && ((up++)) || ((down++))
+done
+
+echo
+echo "Итого: $up работают, $down недоступны из ${#servers[@]}"</code></pre>
+                    </div>
+
+                    <h3>Скрипт 3: Парсинг аргументов командной строки</h3>
+                    <div class="code-example">
+                        <pre><code class="bash">#!/bin/bash
+set -euo pipefail
+
+# Значения по умолчанию
+VERBOSE=false
+OUTPUT_DIR="./output"
+INPUT_FILE=""
+
+usage() {
+    cat &lt;&lt;EOF
+Использование: $(basename "$0") [ОПЦИИ] ФАЙЛ
+
+Опции:
+  -o, --output DIR    Выходная директория (по умолчанию: ./output)
+  -v, --verbose       Подробный вывод
+  -h, --help          Показать справку
+
+Пример:
+  $(basename "$0") -v -o /tmp/results data.csv
+EOF
+    exit 0
+}
+
+# Парсинг аргументов
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -o|--output)
+            OUTPUT_DIR="$2"
+            shift 2
+            ;;
+        -v|--verbose)
+            VERBOSE=true
+            shift
+            ;;
+        -h|--help)
+            usage
+            ;;
+        -*)
+            echo "Неизвестная опция: $1" >&2
+            usage
+            ;;
+        *)
+            INPUT_FILE="$1"
+            shift
+            ;;
+    esac
+done
+
+# Проверки
+[ -n "$INPUT_FILE" ] || { echo "Ошибка: не указан входной файл" >&2; usage; }
+[ -f "$INPUT_FILE" ] || { echo "Ошибка: файл $INPUT_FILE не найден" >&2; exit 1; }
+
+# Основная логика
+$VERBOSE && echo "Входной файл: $INPUT_FILE"
+$VERBOSE && echo "Выходная директория: $OUTPUT_DIR"
+
+mkdir -p "$OUTPUT_DIR"
+echo "Обработка $INPUT_FILE..."</code></pre>
+                    </div>
+
+                    <div class="info">
+                        <strong>Задания для самостоятельной работы:</strong><br>
+                        1. Напишите скрипт, который принимает директорию и выводит топ-10 файлов по размеру<br>
+                        2. Создайте скрипт мониторинга использования диска с уведомлением при &gt; 80%<br>
+                        3. Напишите скрипт, который переименовывает все .JPG файлы в .jpg (нижний регистр)<br>
+                        4. Создайте скрипт автоматической ротации логов с архивированием старых
                     </div>
                 </div>
             </section>

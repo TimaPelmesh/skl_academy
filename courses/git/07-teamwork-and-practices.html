@@ -172,78 +172,429 @@
         <main id="content" class="content sidebar-active">
             <section class="module-intro topic-section">
                 <h2>Модуль 7: Командная работа и продвинутые практики</h2>
-                <p>Разберём, как эффективно работать в команде: PR/MR, ревью кода, теги, временное сохранение изменений и перенос коммитов.</p>
-                <p>Командная работа — это набор договорённостей о том, как создавать, проверять и интегрировать изменения. Git предоставляет механизмы, но культура и политика важнее: они определяют, когда и как применять инструменты.</p>
+                <p>Git — это не только инструмент для одного разработчика. Его главная сила проявляется в командной работе. В этом модуле мы разберём полный цикл: от создания Pull Request до релиза, включая code review, модели ветвления, stash, cherry-pick и теги.</p>
+                <p>Командная работа — это набор договорённостей. Git предоставляет механизмы, но культура и политики команды определяют, как именно их применять.</p>
             </section>
 
             <section id="pr" class="topic-section">
                 <h2>7.1 Pull Request / Merge Request</h2>
-                <p>Создавайте PR из feature‑ветки в main. Описывайте цель, мотивацию, изменения и способ тестирования.</p>
-                <p>Хороший PR — самодостаточный документ: контекст задачи, список изменений, скриншоты/логи при необходимости, чек‑лист для ревьюера. Чем меньше сюрпризов у ревьюера, тем быстрее слияние.</p>
+
+                <p>Pull Request (на GitHub) или Merge Request (на GitLab) — это <strong>запрос на слияние</strong> вашей ветки в основную. Это не просто «кнопка merge» — это полноценный процесс обсуждения и проверки кода.</p>
+
+                <h3>Жизненный цикл PR</h3>
+                <ol>
+                    <li><strong>Создание ветки</strong> — <code>git switch -c feature/user-profile</code></li>
+                    <li><strong>Разработка</strong> — коммиты, тесты, документация</li>
+                    <li><strong>Push ветки</strong> — <code>git push -u origin feature/user-profile</code></li>
+                    <li><strong>Создание PR</strong> — через веб-интерфейс GitHub/GitLab</li>
+                    <li><strong>Code Review</strong> — коллеги проверяют и комментируют</li>
+                    <li><strong>Исправления</strong> — новые коммиты по замечаниям</li>
+                    <li><strong>Approve</strong> — ревьюеры одобряют</li>
+                    <li><strong>Merge</strong> — слияние в main</li>
+                    <li><strong>Удаление ветки</strong> — ветка больше не нужна</li>
+                </ol>
+
+                <h3>Как написать хороший PR</h3>
+                <div class="visual-guide">
+                    <h4>Шаблон описания PR</h4>
+<pre>
+## Что сделано
+Краткое описание изменений (1-3 предложения)
+
+## Зачем
+Ссылка на задачу/тикет, мотивация изменений
+
+## Как протестировать
+1. Шаг 1
+2. Шаг 2
+3. Ожидаемый результат
+
+## Скриншоты (если UI)
+...
+
+## Чеклист
+- [ ] Тесты написаны и проходят
+- [ ] Документация обновлена
+- [ ] Нет console.log / print для отладки
+</pre>
+                </div>
+
+                <h3>Создание PR через CLI</h3>
+                <div class="code-example">
+<pre><code class="bash"># GitHub CLI (gh)
+gh pr create --title "feat: профиль пользователя" \
+  --body "Добавляет страницу профиля с аватаром и настройками" \
+  --base main
+
+# Посмотреть свои PR
+gh pr list --author @me
+
+# Посмотреть статус проверок
+gh pr checks
+
+# Слить PR
+gh pr merge --squash</code></pre>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Совет:</strong> Маленькие PR ревьюятся быстрее. Старайтесь, чтобы один PR содержал одно логическое изменение. PR на 50 строк получит ревью за час, PR на 500 строк — за неделю (если вообще).</p>
+                </div>
             </section>
 
             <section id="review" class="topic-section">
-                <h2>7.2 Code Review</h2>
+                <h2>7.2 Code Review: как давать и принимать ревью</h2>
+
+                <p>Code review — это не «проверка на ошибки». Это процесс обмена знаниями, улучшения качества кода и выравнивания стандартов в команде.</p>
+
+                <h3>Как проводить ревью (для ревьюера)</h3>
+                <div class="visual-guide">
+                    <h4>Чеклист ревьюера</h4>
+                    <ul>
+                        <li><strong>Корректность:</strong> код делает то, что заявлено? Есть ли edge-cases?</li>
+                        <li><strong>Читаемость:</strong> понятен ли код без объяснений? Хорошие имена переменных?</li>
+                        <li><strong>Архитектура:</strong> вписывается ли изменение в существующую структуру проекта?</li>
+                        <li><strong>Тесты:</strong> покрыты ли основные сценарии? Тесты проходят?</li>
+                        <li><strong>Безопасность:</strong> нет ли SQL-инъекций, утечек секретов, XSS?</li>
+                        <li><strong>Производительность:</strong> нет ли N+1 запросов, утечек памяти?</li>
+                    </ul>
+                </div>
+
+                <h3>Как писать комментарии</h3>
                 <ul>
-                    <li>Пишите короткие, самодостаточные коммиты</li>
-                    <li>Отвечайте на замечания аргументированно, правки — отдельными коммитами</li>
-                    <li>Используйте чек‑листы и авто‑проверки (CI)</li>
+                    <li><strong>Будьте конкретны:</strong> не «плохо», а «эта функция делает слишком много — предлагаю разбить на validateInput() и processData()»</li>
+                    <li><strong>Объясняйте почему:</strong> не «переименуй», а «имя <code>data</code> не говорит о содержимом, предлагаю <code>userProfiles</code>»</li>
+                    <li><strong>Разделяйте критичное и некритичное:</strong> используйте префиксы <code>nit:</code> (мелочь), <code>blocking:</code> (нужно исправить)</li>
+                    <li><strong>Предлагайте решения:</strong> покажите код, а не только проблему</li>
                 </ul>
-                <p>Цель ревью — не «принять» код, а улучшить его и обменяться знаниями. Фокусируйтесь на рисках, читаемости и архитектурных договорённостях, а не на личных предпочтениях стиля.</p>
+
+                <h3>Как принимать ревью (для автора)</h3>
+                <ul>
+                    <li>Не воспринимайте замечания как критику лично — ревьюят код, не вас</li>
+                    <li>Отвечайте на каждый комментарий: «Исправил», «Не согласен, потому что...», «Давай обсудим»</li>
+                    <li>Правки делайте <strong>отдельными коммитами</strong> (чтобы ревьюер видел, что изменилось)</li>
+                    <li>После финального approve — squash/merge</li>
+                </ul>
+
+                <div class="code-example">
+<pre><code class="bash"># Посмотреть изменения в PR локально
+gh pr checkout 42
+
+# Или вручную:
+git fetch origin pull/42/head:pr-42
+git switch pr-42</code></pre>
+                </div>
             </section>
 
             <section id="tags" class="topic-section">
-                <h2>7.3 Теги (релизы)</h2>
+                <h2>7.3 Теги и релизы</h2>
+
+                <p>Теги — это именованные указатели на конкретные коммиты. Чаще всего используются для маркировки релизных версий.</p>
+
+                <h3>Два типа тегов</h3>
                 <div class="code-example">
-<pre><code class="bash"># Аннотированный тег
-git tag -a v1.0.0 -m "Release 1.0.0"
+<pre><code class="bash"># Лёгкий тег (lightweight) — просто указатель
+git tag v1.0.0
+
+# Аннотированный тег (рекомендуется) — хранит автора, дату, сообщение
+git tag -a v1.0.0 -m "Release 1.0.0: начальный публичный релиз"
+
+# Посмотреть информацию о теге
+git show v1.0.0</code></pre>
+                </div>
+
+                <h3>Работа с тегами</h3>
+                <div class="code-example">
+<pre><code class="bash"># Список тегов
+git tag -l
+git tag -l "v1.*"     # только версии 1.x
+
+# Создать тег на старом коммите
+git tag -a v0.9.0 abc1234 -m "Ретроспективный тег"
+
+# Отправить тег на сервер
+git push origin v1.0.0
+
 # Отправить все теги
 git push origin --tags
-</code></pre>
+
+# Удалить тег локально и на сервере
+git tag -d v1.0.0
+git push origin --delete v1.0.0</code></pre>
+                </div>
+
+                <div class="note">
+                    <p><strong>Рекомендация:</strong> всегда используйте аннотированные теги для релизов. Они хранят метаданные и могут быть подписаны GPG-ключом для верификации.</p>
                 </div>
             </section>
 
             <section id="stash" class="topic-section">
                 <h2>7.4 Временное сохранение: git stash</h2>
+
+                <p>Stash — это «карман» для незавершённых изменений. Типичная ситуация: вы работаете над фичей, и тут приходит срочный баг-репорт. Нужно переключиться на другую ветку, но текущие изменения ещё не готовы для коммита.</p>
+
+                <h3>Основные команды</h3>
                 <div class="code-example">
-<pre><code class="bash">git stash push -m "WIP: форма логина"
-# посмотреть список
+<pre><code class="bash"># Сохранить текущие изменения в stash
+git stash push -m "WIP: форма логина"
+
+# Или короткая форма
+git stash
+
+# Сохранить включая untracked файлы
+git stash push -u -m "WIP: с новыми файлами"
+
+# Посмотреть список stash'ей
 git stash list
-# применить и удалить из стэша
+# stash@{0}: On feature/auth: WIP: форма логина
+# stash@{1}: On main: WIP: рефакторинг
+
+# Применить последний stash и удалить его
 git stash pop
-# применить без удаления
+
+# Применить конкретный stash без удаления
 git stash apply stash@{1}
-</code></pre>
+
+# Посмотреть, что в stash'е (diff)
+git stash show -p stash@{0}
+
+# Удалить конкретный stash
+git stash drop stash@{0}
+
+# Удалить все stash'и
+git stash clear</code></pre>
+                </div>
+
+                <h3>Практический сценарий</h3>
+                <div class="code-example">
+<pre><code class="bash"># Вы работаете над фичей...
+# Приходит срочный баг:
+
+# 1. Сохраняем незавершённую работу
+git stash push -m "WIP: форма регистрации"
+
+# 2. Переключаемся на main и создаём ветку для хотфикса
+git switch main
+git switch -c hotfix/critical-bug
+
+# 3. Чиним баг, коммитим, мёржим
+git commit -am "fix: критический баг в оплате"
+git switch main
+git merge hotfix/critical-bug
+
+# 4. Возвращаемся к фиче и достаём stash
+git switch feature/registration
+git stash pop
+
+# Продолжаем работу как ни в чём не бывало!</code></pre>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Совет:</strong> Всегда давайте stash'у осмысленное сообщение через <code>-m</code>. Через неделю <code>stash@{3}: WIP</code> ни о чём не скажет, а <code>stash@{3}: WIP: форма логина с валидацией</code> — понятно сразу.</p>
                 </div>
             </section>
 
             <section id="cherry" class="topic-section">
-                <h2>7.5 Перенос коммита: git cherry-pick</h2>
+                <h2>7.5 Cherry-pick: перенос отдельных коммитов</h2>
+
+                <p><code>cherry-pick</code> берёт один конкретный коммит из другой ветки и применяет его к текущей. Это не merge целой ветки — это «вишенка с торта».</p>
+
+                <h3>Когда использовать</h3>
+                <ul>
+                    <li>Хотфикс нужен и в main, и в release-ветке</li>
+                    <li>Из большой ветки нужен только один конкретный коммит</li>
+                    <li>Нужно вернуть коммит, который был потерян при неудачном rebase</li>
+                </ul>
+
                 <div class="code-example">
-<pre><code class="bash"># перенести конкретный коммит в текущую ветку
-git cherry-pick &lt;commit-hash&gt;
-</code></pre>
+<pre><code class="bash"># Перенести один коммит
+git cherry-pick abc1234
+
+# Перенести несколько коммитов подряд
+git cherry-pick abc1234 def5678 ghi9012
+
+# Перенести диапазон коммитов (от A до B включительно)
+git cherry-pick A^..B
+
+# Cherry-pick без автоматического коммита (только staged)
+git cherry-pick --no-commit abc1234
+
+# Если возник конфликт:
+git cherry-pick --continue    # после разрешения
+git cherry-pick --abort       # отменить</code></pre>
+                </div>
+
+                <div class="note">
+                    <p><strong>Осторожно:</strong> cherry-pick создаёт <em>новый</em> коммит с новым хешем (но тем же содержимым). Git не знает, что это «тот же» коммит. Если потом мержить ветки — возможны дублирования и конфликты.</p>
                 </div>
             </section>
+
             <section id="workflows" class="topic-section">
-                <h2>7.6 Модели ветвления: GitFlow, GitHub Flow, Trunk‑based</h2>
-                <p><strong>GitFlow</strong> — выпуска‑ориентированная модель с ветками <code>develop</code>/<code>release</code>/<code>hotfix</code>. <strong>GitHub Flow</strong> — простая модель «ветка‑PR‑merge» на основе <code>main</code>. <strong>Trunk‑based</strong> — короткоживущие ветки, частые слияния с «транком» и автоматизацией.</p>
+                <h2>7.6 Модели ветвления</h2>
+
+                <p>Модель ветвления — это договорённость команды о том, какие ветки существуют, как они называются и когда сливаются.</p>
+
+                <h3>GitHub Flow (простая модель)</h3>
+                <div class="visual-guide">
+                    <h4>Принцип: ветка → PR → merge</h4>
+                    <ul>
+                        <li><code>main</code> — всегда рабочая, деплоится автоматически</li>
+                        <li>Для каждой задачи создаётся ветка от main</li>
+                        <li>Готово → PR → code review → merge в main</li>
+                        <li>Нет отдельных веток develop, release, hotfix</li>
+                    </ul>
+                    <p><strong>Подходит для:</strong> небольших команд, SaaS-продуктов, непрерывного деплоя.</p>
+                </div>
+
+                <h3>GitFlow (классическая модель)</h3>
+                <div class="visual-guide">
+                    <h4>Долгоживущие ветки</h4>
+                    <ul>
+                        <li><code>main</code> — только релизы, каждый коммит = тег версии</li>
+                        <li><code>develop</code> — текущая разработка, сюда мёржатся фичи</li>
+                        <li><code>feature/*</code> — ответвления от develop для каждой фичи</li>
+                        <li><code>release/*</code> — подготовка релиза (фиксы, версии, документация)</li>
+                        <li><code>hotfix/*</code> — срочные исправления от main</li>
+                    </ul>
+                    <p><strong>Подходит для:</strong> больших команд, продуктов с версионными релизами, мобильных приложений.</p>
+                </div>
+
+                <h3>Trunk-based Development</h3>
+                <div class="visual-guide">
+                    <h4>Минимум ветвления</h4>
+                    <ul>
+                        <li>Все работают в <code>main</code> (trunk)</li>
+                        <li>Ветки максимально короткоживущие (1-2 дня)</li>
+                        <li>Непрерывная интеграция — мёржим несколько раз в день</li>
+                        <li>Feature flags вместо долгих веток</li>
+                    </ul>
+                    <p><strong>Подходит для:</strong> команд с сильной CI/CD культурой, Google/Meta-масштаб.</p>
+                </div>
             </section>
+
             <section id="protected" class="topic-section">
                 <h2>7.7 Защищённые ветки и политики</h2>
-                <p>Политики репозитория: запрет force‑push, обязательные ревью, статические проверки (CI), требования к статусам, ограничение прав на merge. Это повышает качество и воспроизводимость релизов.</p>
+
+                <p>Защита веток предотвращает случайные (и намеренные) нарушения процесса. Настраивается в GitHub/GitLab/Bitbucket.</p>
+
+                <h3>Типичные политики</h3>
+                <ul>
+                    <li><strong>Запрет push напрямую:</strong> все изменения только через PR</li>
+                    <li><strong>Обязательный review:</strong> минимум 1-2 approve перед merge</li>
+                    <li><strong>Обязательные CI-проверки:</strong> тесты, линтинг, сборка должны пройти</li>
+                    <li><strong>Запрет force-push:</strong> нельзя переписывать историю защищённой ветки</li>
+                    <li><strong>Подпись коммитов:</strong> обязательная GPG/SSH подпись</li>
+                    <li><strong>Linear history:</strong> только rebase-merge или squash, без merge-коммитов</li>
+                </ul>
+
+                <div class="tip">
+                    <p><strong>Минимальный набор для начала:</strong> защитите <code>main</code> от прямого push + обязательный 1 approve + CI-проверки. Этого достаточно для большинства команд.</p>
+                </div>
             </section>
+
             <section id="signing" class="topic-section">
-                <h2>7.8 Подпись коммитов (GPG/SSH) и проверка</h2>
-                <p>Кратко: подпись коммитов подтверждает авторство и целостность. Подробная теория и настройка вынесены в раздел <a href="09-tools-and-integrations.html#sign-commits">9.16 «Подписанные коммиты (GPG/SSH)»</a>, а организационные практики — в <a href="10-summary-best-practices.html#security">10.6 «Безопасность секретов»</a>.</p>
+                <h2>7.8 Подпись коммитов (GPG/SSH)</h2>
+
+                <p>Подпись коммитов подтверждает, что коммит действительно создан тем, за кого себя выдаёт автор. На GitHub подписанные коммиты получают значок «Verified».</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Настройка подписи через SSH (проще, чем GPG)
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true
+
+# Теперь все коммиты будут подписаны автоматически
+git commit -m "feat: подписанный коммит"
+
+# Проверить подпись
+git log --show-signature</code></pre>
+                </div>
             </section>
+
             <section id="dco" class="topic-section">
-                <h2>7.9 DCO и требования к PR</h2>
-                <p><strong>Developer Certificate of Origin</strong> — юридическое подтверждение авторства через строку <code>Signed-off-by:</code> в сообщении коммита. Часто применяется вместе с обязательными шаблонами PR и чек‑листами.</p>
+                <h2>7.9 DCO и шаблоны PR</h2>
+
+                <p><strong>Developer Certificate of Origin</strong> — юридическое подтверждение авторства. Используется в open-source проектах (Linux kernel, CNCF-проекты).</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Добавить DCO sign-off к коммиту
+git commit -s -m "feat: новая функция"
+# Результат: сообщение + "Signed-off-by: Имя &lt;email&gt;"
+
+# Добавить sign-off к последнему коммиту
+git commit --amend -s --no-edit</code></pre>
+                </div>
             </section>
+
             <section id="semver" class="topic-section">
                 <h2>7.10 Семантическое версионирование и релизы</h2>
-                <p>Версии в формате <code>MAJOR.MINOR.PATCH</code>, аннотированные теги, генерация релиз‑нот. Связка с Conventional Commits упрощает автоматизацию CHANGELOG и релизов.</p>
+
+                <p>Semantic Versioning (SemVer) — стандарт нумерации версий: <code>MAJOR.MINOR.PATCH</code>.</p>
+
+                <div class="visual-guide">
+                    <h4>Правила SemVer</h4>
+                    <ul>
+                        <li><strong>MAJOR</strong> (1.x.x → 2.0.0): ломающие изменения API, несовместимость</li>
+                        <li><strong>MINOR</strong> (1.1.x → 1.2.0): новая функциональность, обратная совместимость</li>
+                        <li><strong>PATCH</strong> (1.1.1 → 1.1.2): баг-фиксы, без новой функциональности</li>
+                    </ul>
+                </div>
+
+                <div class="code-example">
+<pre><code class="bash"># Полный цикл релиза:
+
+# 1. Создать release-ветку
+git switch -c release/1.2.0
+
+# 2. Обновить версию в файлах (package.json, setup.py и т.д.)
+# 3. Обновить CHANGELOG.md
+
+# 4. Коммит и тег
+git commit -am "release: v1.2.0"
+git tag -a v1.2.0 -m "Release 1.2.0: добавлен профиль пользователя"
+
+# 5. Слить в main и push
+git switch main
+git merge --no-ff release/1.2.0
+git push origin main --tags
+
+# 6. Создать GitHub Release (автоматически по тегу или вручную)
+gh release create v1.2.0 --title "v1.2.0" --notes "Добавлен профиль пользователя"</code></pre>
+                </div>
+            </section>
+
+            <section class="topic-section">
+                <h2>Практическое задание</h2>
+
+                <div class="exercise">
+                    <h4>Задание 1: Полный цикл PR</h4>
+                    <ol>
+                        <li>Создайте репозиторий на GitHub (или локально с <code>git init --bare</code>)</li>
+                        <li>Клонируйте, создайте ветку <code>feature/about-page</code></li>
+                        <li>Сделайте 3 коммита, запушьте ветку</li>
+                        <li>Создайте PR (через <code>gh pr create</code> или веб-интерфейс)</li>
+                        <li>Добавьте описание по шаблону из раздела 7.1</li>
+                    </ol>
+                </div>
+
+                <div class="exercise">
+                    <h4>Задание 2: Stash workflow</h4>
+                    <ol>
+                        <li>Начните редактировать файл в feature-ветке (не коммитьте)</li>
+                        <li>Сохраните в stash: <code>git stash push -m "описание"</code></li>
+                        <li>Переключитесь на main, сделайте хотфикс, вернитесь</li>
+                        <li>Восстановите stash: <code>git stash pop</code></li>
+                    </ol>
+                </div>
+
+                <div class="exercise">
+                    <h4>Задание 3: Cherry-pick хотфикса</h4>
+                    <ol>
+                        <li>В ветке <code>feature</code> сделайте коммит с исправлением бага</li>
+                        <li>Переключитесь на main</li>
+                        <li>Перенесите только этот коммит: <code>git cherry-pick &lt;hash&gt;</code></li>
+                        <li>Проверьте, что исправление есть в обеих ветках</li>
+                    </ol>
+                </div>
             </section>
         </main>
     </div>

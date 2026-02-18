@@ -105,90 +105,261 @@
             </section>
 
             <section id="restore" class="topic-section">
-                <h2>8.1 Откат незакоммиченных изменений: restore/checkout</h2>
+                <h2>8.1 Откат незакоммиченных изменений: restore</h2>
+                <p>Самый частый случай — вы отредактировали файл и хотите вернуть его к состоянию последнего коммита.</p>
                 <div class="code-example">
 <pre><code class="bash"># Откатить изменения в конкретном файле
 git restore path/to/file
-# Старый синтаксис (устар.):
-# git checkout -- path/to/file
-</code></pre>
+
+# Откатить все изменения в рабочей директории
+git restore .
+
+# Убрать файл из staging (unstage), но сохранить изменения
+git restore --staged path/to/file
+
+# Убрать из staging И откатить изменения
+git restore --staged --worktree path/to/file
+
+# Старый синтаксис (работает, но менее понятен):
+# git checkout -- path/to/file</code></pre>
                 </div>
+                <div class="note"><p><strong>Важно:</strong> <code>git restore</code> без <code>--staged</code> безвозвратно удаляет незакоммиченные изменения. Если вы не уверены — сначала сделайте <code>git stash</code>.</p></div>
             </section>
 
             <section id="restore-source" class="topic-section">
                 <h2>8.2 Восстановление файла из прошлого коммита</h2>
+                <p>Иногда нужно вернуть файл к состоянию из конкретного коммита, не откатывая всю ветку.</p>
                 <div class="code-example">
-<pre><code class="bash"># Взять версию файла из конкретного коммита, не меняя всю ветку
-git restore --source=&lt;commit&gt; -- path/to/file
-</code></pre>
+<pre><code class="bash"># Взять версию файла из конкретного коммита
+git restore --source=abc1234 -- path/to/file
+
+# Из предыдущего коммита
+git restore --source=HEAD~1 -- path/to/file
+
+# Из другой ветки
+git restore --source=main -- path/to/file
+
+# Файл появится в рабочей директории (и в staging)
+# Проверить: git diff --cached</code></pre>
                 </div>
+                <p>Это удобно, когда файл был сломан несколькими коммитами назад и нужна «здоровая» версия.</p>
             </section>
 
             <section id="reset-revert" class="topic-section">
                 <h2>8.3 Отмена коммитов: reset vs revert</h2>
-                <ul>
-                    <li><strong>reset</strong> — переписывает указатели (историю) текущей ветки</li>
-                    <li><strong>revert</strong> — создаёт новый коммит‑откат (без переписывания истории)</li>
-                </ul>
-                <div class="code-example">
-<pre><code class="bash"># reset: уровни
-# --soft  — откатить указатель, изменения останутся в индексе
-# --mixed — (по умолчанию) откатить указатель, изменения попадут в рабочую директорию
-# --hard  — откатить всё (ОСТОРОЖНО!)
+                <p>Это два принципиально разных подхода к отмене. Выбор зависит от того, опубликована ли история.</p>
 
-git reset --soft HEAD~1
-git reset --mixed HEAD~1
-git reset --hard HEAD~1
-
-# revert: безопасно для публичных веток
-git revert &lt;commit-hash&gt;
-</code></pre>
+                <h3>git reset — переписать историю</h3>
+                <div class="visual-guide">
+                    <h4>Три режима reset</h4>
+                    <ul>
+                        <li><strong>--soft</strong> — откатить только указатель HEAD. Изменения остаются в staging. Как будто вы «расконмитили».</li>
+                        <li><strong>--mixed</strong> (по умолчанию) — откатить HEAD и unstage. Изменения в рабочей директории.</li>
+                        <li><strong>--hard</strong> — откатить всё: HEAD, staging, рабочую директорию. <strong>Опасно!</strong></li>
+                    </ul>
                 </div>
-                <p>Выбор между <code>reset</code> и <code>revert</code> зависит от аудитории истории. Для общих веток почти всегда предпочтителен <code>revert</code>, поскольку он прозрачно отражает отмену на «полосе времени» проекта.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># --soft: «расконмитить» последний коммит (изменения в staging)
+git reset --soft HEAD~1
+# Полезно: хотите переделать коммит — изменения уже в staging
+
+# --mixed: убрать из staging + из истории (изменения в рабочей директории)
+git reset HEAD~1
+# Полезно: хотите перегруппировать изменения по коммитам
+
+# --hard: полный откат (ОСТОРОЖНО — незакоммиченное теряется!)
+git reset --hard HEAD~1
+# Полезно: последний коммит полностью мусор
+
+# Откатить на конкретный коммит
+git reset --hard abc1234</code></pre>
+                </div>
+
+                <h3>git revert — безопасный откат</h3>
+                <p>Revert создаёт <strong>новый коммит</strong>, который инвертирует изменения указанного коммита. История не переписывается — все видят и исходный коммит, и его отмену.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Откатить конкретный коммит
+git revert abc1234
+
+# Откатить несколько коммитов подряд
+git revert abc1234..def5678
+
+# Откатить без автоматического коммита (сначала посмотреть)
+git revert --no-commit abc1234
+# Проверить изменения, потом: git commit
+
+# Откат merge-коммита (нужно указать родителя)
+git revert -m 1 &lt;merge-commit-hash&gt;</code></pre>
+                </div>
+
+                <div class="visual-guide">
+                    <h4>Когда что использовать</h4>
+                    <ul>
+                        <li><strong>reset</strong> — для локальных, неопубликованных коммитов. Можно переписать историю.</li>
+                        <li><strong>revert</strong> — для публичных веток (main, develop). Безопасно, не ломает историю коллег.</li>
+                    </ul>
+                </div>
             </section>
 
             <section id="reflog" class="topic-section">
                 <h2>8.4 Поиск «потерянного»: git reflog</h2>
-                <p><code>reflog</code> хранит локальную историю перемещений <code>HEAD</code>/веток. Помогает найти коммит после неудачного reset/rebase.</p>
+                <p>Reflog — ваша страховочная сеть. Он записывает каждое перемещение HEAD, даже после reset --hard. Если вы «потеряли» коммит — скорее всего, его можно найти здесь.</p>
+
                 <div class="code-example">
-<pre><code class="bash">git reflog
-# восстановить ветку на найденный коммит
-git reset --hard &lt;hash-from-reflog&gt;
-# или создать новую ветку с нужной точки
-git branch rescue/&lt;date&gt; &lt;hash&gt;
-</code></pre>
+<pre><code class="bash"># Посмотреть reflog
+git reflog
+# abc1234 HEAD@{0}: reset: moving to HEAD~3
+# def5678 HEAD@{1}: commit: feat: добавить авторизацию
+# ghi9012 HEAD@{2}: commit: fix: поправить валидацию
+# ← Вот они, «потерянные» коммиты!
+
+# Вернуться к «потерянному» состоянию
+git reset --hard HEAD@{1}
+
+# Или создать ветку (безопаснее)
+git branch rescue/auth def5678
+git switch rescue/auth
+
+# Reflog для конкретной ветки
+git reflog show main</code></pre>
                 </div>
             </section>
 
             <section id="algorithm" class="topic-section">
-                <h2>8.5 Алгоритм действий «если всё сломали»</h2>
+                <h2>8.5 Алгоритм «если всё сломали»</h2>
+                <p>Пошаговая инструкция для паники:</p>
                 <ol>
-                    <li>Не паниковать. Ничего не удаляйте жёстко.</li>
-                    <li>Посмотрите <code>git status</code> и <code>git log --oneline --graph --decorate --all</code>.</li>
-                    <li>Откройте <code>git reflog</code> и найдите «здоровую» точку.</li>
-                    <li>Создайте спасательную ветку от найденного хеша: <code>git branch rescue/&lt;date&gt; &lt;hash&gt;</code>.</li>
-                    <li>Аккуратно вернитесь к работе: <code>git switch rescue/&lt;date&gt;</code> или <code>git reset --hard &lt;hash&gt;</code> (понимая последствия).</li>
+                    <li><strong>Не паникуйте.</strong> В Git почти всё поправимо.</li>
+                    <li><strong>Не удаляйте ничего.</strong> Не делайте <code>rm -rf .git</code>.</li>
+                    <li><strong>Оцените ситуацию:</strong></li>
                 </ol>
+                <div class="code-example">
+<pre><code class="bash"># Что сейчас происходит?
+git status
+
+# Как выглядит история?
+git log --oneline --graph --decorate --all
+
+# Reflog — что делали последнее время?
+git reflog</code></pre>
+                </div>
+                <ol start="4">
+                    <li><strong>Найдите «здоровую» точку</strong> в reflog</li>
+                    <li><strong>Создайте спасательную ветку:</strong></li>
+                </ol>
+                <div class="code-example">
+<pre><code class="bash"># Спасательная ветка от найденного хеша
+git branch rescue/2025-02-17 abc1234
+git switch rescue/2025-02-17
+
+# Проверить, что всё ок
+git log --oneline -5
+# Если всё хорошо — продолжить работу</code></pre>
+                </div>
+
+                <div class="tip"><p><strong>Совет:</strong> Если вы в середине merge/rebase и что-то пошло не так — всегда есть <code>git merge --abort</code> или <code>git rebase --abort</code> для безопасного отката.</p></div>
             </section>
+
             <section id="reflog-retention" class="topic-section">
                 <h2>8.6 Сроки хранения reflog</h2>
-                <p><code>reflog</code> хранится локально и очищается сборщиком мусора. Сроки регулируются параметрами конфигурации (например, время истечения записей), что важно при восстановлении старых состояний.</p>
+                <p>Reflog — локальный журнал. Записи хранятся ограниченное время:</p>
+                <div class="code-example">
+<pre><code class="bash"># Проверить текущие настройки
+git config gc.reflogExpire           # по умолчанию 90 дней
+git config gc.reflogExpireUnreachable # по умолчанию 30 дней
+
+# Изменить срок хранения
+git config --global gc.reflogExpire "180 days"</code></pre>
+                </div>
+                <p>После истечения срока записи удаляются при <code>git gc</code>. Для важных спасательных операций действуйте оперативно.</p>
             </section>
+
             <section id="gc-pack" class="topic-section">
                 <h2>8.7 Garbage collection и packfiles</h2>
-                <p>Git упаковывает объекты в <em>packfiles</em> для экономии места и скорости. <code>git gc</code> удаляет недостижимые объекты и оптимизирует хранилище, соблюдая «период безопасности», чтобы не потерять недавние объекты.</p>
+                <p>Git автоматически оптимизирует хранилище, упаковывая объекты в <em>packfiles</em>.</p>
+                <div class="code-example">
+<pre><code class="bash"># Запустить сборку мусора вручную
+git gc
+
+# Агрессивная оптимизация (медленно, но максимально сжимает)
+git gc --aggressive
+
+# Проверить размер репозитория
+git count-objects -vH</code></pre>
+                </div>
             </section>
+
             <section id="fsck" class="topic-section">
                 <h2>8.8 Проверка целостности: git fsck</h2>
-                <p><code>git fsck</code> анализирует целостность графа объектов и ссылок, помогает найти «висячие» объекты и повреждения.</p>
+                <div class="code-example">
+<pre><code class="bash"># Проверить целостность графа объектов
+git fsck
+
+# Найти «висячие» объекты (не привязаны ни к чему)
+git fsck --unreachable
+
+# Найти потерянные коммиты
+git fsck --lost-found
+# Результаты сохраняются в .git/lost-found/</code></pre>
+                </div>
             </section>
+
             <section id="revert-merge" class="topic-section">
-                <h2>8.9 Revert merge‑коммита</h2>
-                <p>Откат merge‑коммита требует указать <code>-m &lt;parent-number&gt;</code> — какой родитель считать «основной». Это важно, чтобы корректно инвертировать изменения.</p>
+                <h2>8.9 Revert merge-коммита</h2>
+                <p>Merge-коммит имеет двух родителей. При revert нужно указать, какой родитель считать «основным»:</p>
+                <div class="code-example">
+<pre><code class="bash"># -m 1 = первый родитель (обычно main)
+git revert -m 1 &lt;merge-commit-hash&gt;
+
+# -m 2 = второй родитель (вливаемая ветка)
+# Используется редко</code></pre>
+                </div>
+                <div class="note"><p><strong>Осторожно:</strong> после revert merge-коммита повторный merge этой ветки не подтянет уже «отменённые» изменения. Нужен revert revert'а или cherry-pick.</p></div>
             </section>
+
             <section id="reset-deep" class="topic-section">
-                <h2>8.10 Глубже про reset: soft/mixed/hard</h2>
-                <p><code>reset</code> перемещает указатели и управляет состоянием индекса/рабочей директории. <strong>soft</strong> — только <code>HEAD</code>; <strong>mixed</strong> — <code>HEAD</code> и индекс; <strong>hard</strong> — всё, включая рабочее дерево. Понимание трёх деревьев (HEAD/index/worktree) критично.</p>
+                <h2>8.10 Глубже про reset: три дерева Git</h2>
+                <p>Чтобы понять reset, нужно понимать «три дерева» Git:</p>
+                <div class="visual-guide">
+                    <h4>Три дерева и три режима reset</h4>
+                    <ul>
+                        <li><strong>HEAD</strong> (текущий коммит) — <code>--soft</code> перемещает только его</li>
+                        <li><strong>Index</strong> (staging area) — <code>--mixed</code> сбрасывает и HEAD, и index</li>
+                        <li><strong>Working Directory</strong> (файлы) — <code>--hard</code> сбрасывает всё</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+<pre><code class="bash"># Пример: вы сделали 3 коммита и хотите объединить в один
+
+# --soft: коммиты «раскоммичены», но всё в staging
+git reset --soft HEAD~3
+git commit -m "feat: объединённый коммит"
+
+# --mixed: коммиты раскоммичены, изменения в рабочей директории
+git reset HEAD~3
+git add .
+git commit -m "feat: объединённый коммит"
+
+# --hard: всё стёрто, как будто 3 коммитов не было
+git reset --hard HEAD~3</code></pre>
+                </div>
+            </section>
+
+            <section class="topic-section">
+                <h2>Практическое задание</h2>
+                <div class="exercise">
+                    <h4>Задание: сценарий спасения</h4>
+                    <ol>
+                        <li>Создайте репозиторий с 5 коммитами</li>
+                        <li>Выполните <code>git reset --hard HEAD~3</code> — «потеряйте» 3 коммита</li>
+                        <li>Убедитесь: <code>git log --oneline</code> показывает только 2 коммита</li>
+                        <li>Найдите потерянные коммиты через <code>git reflog</code></li>
+                        <li>Восстановите: <code>git reset --hard HEAD@{1}</code> или создайте ветку от хеша</li>
+                        <li>Проверьте: все 5 коммитов на месте</li>
+                    </ol>
+                </div>
             </section>
         </main>
     </div>

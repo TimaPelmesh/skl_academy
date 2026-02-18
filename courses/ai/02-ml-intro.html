@@ -23,19 +23,187 @@
     <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="course-structure">
-                <div class="topic"><button class="topic-btn">1. Фундамент</button><div class="subtopics"><a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра</a><a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Градиент</a></div></div>
-                <div class="topic"><button class="topic-btn active">2. Введение в ML</button><div class="subtopics" style="max-height: 1000px;"><a href="#supervised" class="subtopic active">2.1 С учителем</a><a href="#unsupervised" class="subtopic">2.2 Без учителя</a><a href="#rl" class="subtopic">2.3 RL</a><a href="#pipeline" class="subtopic">2.4 Пайплайн</a></div></div>
-                <div class="topic"><button class="topic-btn">3. Классические алгоритмы</button><div class="subtopics"><a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a></div></div>
-                <div class="topic"><button class="topic-btn">4. Ансамблевые методы</button><div class="subtopics"><a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a></div></div>
-                <div class="topic"><button class="topic-btn">5–10</button><div class="subtopics"><a href="05-neural-intro.html" class="subtopic">5. Нейросети</a><a href="08-attention-transformers.html" class="subtopic">8. Трансформеры</a><a href="09-llm.html" class="subtopic">9. LLM</a><a href="10-practice-mlops.html" class="subtopic">10. MLOps</a></div></div>
+                <div class="topic">
+                    <button class="topic-btn">1. Фундамент: математика и логика</button>
+                    <div class="subtopics">
+                        <a href="01-math-logic.html#linear-algebra" class="subtopic">1.1 Линейная алгебра для данных</a>
+                        <a href="01-math-logic.html#derivatives-gradient" class="subtopic">1.2 Производные и градиент</a>
+                        <a href="01-math-logic.html#probability" class="subtopic">1.3 Теория вероятностей</a>
+                        <a href="01-math-logic.html#statistics" class="subtopic">1.4 Основы статистики</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn active">2. Введение в ML и типы задач</button>
+                    <div class="subtopics" style="max-height: 1000px;">
+                        <a href="#supervised" class="subtopic active">2.1 Обучение с учителем</a>
+                        <a href="#unsupervised" class="subtopic">2.2 Обучение без учителя</a>
+                        <a href="#rl" class="subtopic">2.3 Обучение с подкреплением</a>
+                        <a href="#pipeline" class="subtopic">2.4 Пайплайн ML</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">3. Классические алгоритмы</button>
+                    <div class="subtopics">
+                        <a href="03-classical-ml.html#linear-regression" class="subtopic">3.1 Линейная регрессия</a>
+                        <a href="03-classical-ml.html#logistic" class="subtopic">3.2 Логистическая регрессия</a>
+                        <a href="03-classical-ml.html#knn" class="subtopic">3.3 KNN</a>
+                        <a href="03-classical-ml.html#decision-trees" class="subtopic">3.4 Решающие деревья</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">4. Ансамблевые методы</button>
+                    <div class="subtopics">
+                        <a href="04-ensembles.html#random-forest" class="subtopic">4.1 Random Forest</a>
+                        <a href="04-ensembles.html#gradient-boosting" class="subtopic">4.2 Градиентный бустинг</a>
+                        <a href="04-ensembles.html#catboost" class="subtopic">4.3 CatBoost</a>
+                        <a href="04-ensembles.html#lightgbm" class="subtopic">4.4 LightGBM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">5. Введение в нейросети</button>
+                    <div class="subtopics">
+                        <a href="05-neural-intro.html#perceptron" class="subtopic">5.1 Перцептрон</a>
+                        <a href="05-neural-intro.html#activations" class="subtopic">5.2 Функции активации</a>
+                        <a href="05-neural-intro.html#mlp" class="subtopic">5.3 MLP</a>
+                        <a href="05-neural-intro.html#forward" class="subtopic">5.4 Forward Pass</a>
+                        <a href="05-neural-intro.html#code-example" class="subtopic">5.5 Код на Python</a>
+                        <a href="05-neural-intro.html#practice" class="subtopic">5.6 Практика</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">6. Backpropagation и оптимизация</button>
+                    <div class="subtopics">
+                        <a href="06-backprop-optimization.html#loss" class="subtopic">6.1 Функция потерь</a>
+                        <a href="06-backprop-optimization.html#backprop" class="subtopic">6.2 Backpropagation</a>
+                        <a href="06-backprop-optimization.html#gradient-descent" class="subtopic">6.3 Градиентный спуск</a>
+                        <a href="06-backprop-optimization.html#problems" class="subtopic">6.4 Проблемы обучения</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">7. RNN и LSTM</button>
+                    <div class="subtopics">
+                        <a href="07-rnn-lstm.html#sequences" class="subtopic">7.1 Последовательные данные</a>
+                        <a href="07-rnn-lstm.html#rnn" class="subtopic">7.2 RNN</a>
+                        <a href="07-rnn-lstm.html#long-memory" class="subtopic">7.3 Долгосрочная память</a>
+                        <a href="07-rnn-lstm.html#lstm" class="subtopic">7.4 LSTM</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">8. Attention и Трансформеры</button>
+                    <div class="subtopics">
+                        <a href="08-attention-transformers.html#attention" class="subtopic">8.1 Механизм Attention</a>
+                        <a href="08-attention-transformers.html#transformer" class="subtopic">8.2 Архитектура Transformer</a>
+                        <a href="08-attention-transformers.html#positional" class="subtopic">8.3 Позиционное кодирование</a>
+                        <a href="08-attention-transformers.html#multihead" class="subtopic">8.4 Multi-Head Attention</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">9. Большие языковые модели (LLM)</button>
+                    <div class="subtopics">
+                        <a href="09-llm.html#tokenization" class="subtopic">9.1 Токенизация и эмбеддинги</a>
+                        <a href="09-llm.html#pretraining" class="subtopic">9.2 Pre-training и Fine-tuning</a>
+                        <a href="09-llm.html#temperature" class="subtopic">9.3 Температура и сэмплирование</a>
+                        <a href="09-llm.html#context" class="subtopic">9.4 Окно контекста</a>
+                    </div>
+                </div>
+                <div class="topic">
+                    <button class="topic-btn">10. Практикум и MLOps</button>
+                    <div class="subtopics">
+                        <a href="10-practice-mlops.html#python-libs" class="subtopic">10.1 Библиотеки Python</a>
+                        <a href="10-practice-mlops.html#sklearn" class="subtopic">10.2 Scikit-learn</a>
+                        <a href="10-practice-mlops.html#pytorch-tf" class="subtopic">10.3 PyTorch / TensorFlow</a>
+                        <a href="10-practice-mlops.html#mlops" class="subtopic">10.4 MLOps</a>
+                    </div>
+                </div>
             </div>
         </div>
         <main id="content" class="content sidebar-active">
-            <section id="module-intro" class="topic-section"><h2>Модуль 2: Введение в машинное обучение и типы задач</h2><div class="lesson-content"><p><strong>Задача модуля:</strong> Дать классификацию задач и показать жизненный цикл ML-проекта.</p></div></section>
-            <section id="supervised" class="topic-section"><h2>Обучение с учителем (Supervised Learning)</h2><div class="lesson-content"><p><strong>Регрессия</strong> — предсказать число (температура, цена, спрос). Выход модели — непрерывное значение. Метрики: MSE, MAE, R².</p><p><strong>Классификация</strong> — отнести объект к одному из классов: кошка/собака, спам/не спам, многоклассовая. Выход — класс или вероятность принадлежности классу.</p><p><strong>Функция потерь (Loss Function)</strong> — одна величина, показывающая, насколько предсказания модели отличаются от правильных ответов. Минимизируя loss, мы «подгоняем» модель под данные. Для регрессии часто MSE, для классификации — кросс-энтропия.</p></div></section>
-            <section id="unsupervised" class="topic-section"><h2>Обучение без учителя (Unsupervised Learning)</h2><div class="lesson-content"><p><strong>Кластеризация</strong> — разбить объекты на группы без заранее заданных меток (сегментация клиентов, поиск аномалий). Алгоритмы: K-means, DBSCAN, иерархическая кластеризация.</p><p><strong>Снижение размерности</strong> — когда признаков слишком много, сжать их до меньшего числа переменных, сохранив структуру (PCA, t-SNE, UMAP). Нужно для визуализации и ускорения обучения.</p></div></section>
-            <section id="rl" class="topic-section"><h2>Обучение с подкреплением (RL) — обзор</h2><div class="lesson-content"><p><strong>Идея:</strong> агент действует в среде, получает награды (или штрафы). Цель — максимизировать суммарную награду. Обучение идёт не по готовым парам «вход–ответ», а по опыту взаимодействия. Примеры: игра (ходы → очки), робот (действия → достижение цели). Для общего кругозора: DQN, policy gradient, среды типа Gym.</p></div></section>
-            <section id="pipeline" class="topic-section"><h2>Основной пайплайн (конвейер) ML</h2><div class="lesson-content"><p><strong>Загрузка данных</strong> → <strong>Предобработка (чистка)</strong> — пропуски, выбросы, типы данных → <strong>Извлечение признаков (Feature Engineering)</strong> — создание и отбор признаков → <strong>Обучение модели</strong> — подбор гиперпараметров, кросс-валидация → <strong>Оценка качества</strong> — метрики на тестовой выборке → <strong>Внедрение (Deployment)</strong> — сервис, API, батч-инференс, мониторинг.</p></div></section>
+            <section id="module-intro" class="topic-section">
+                <h2>Модуль 2: Введение в машинное обучение и типы задач</h2>
+                <div class="lesson-content">
+                    <p>Машинное обучение (ML) — это подход, при котором компьютер не программируют явно под каждую задачу, а «обучают» на данных: модель настраивает свои параметры так, чтобы лучше предсказывать целевой результат или находить структуру в данных. Чтобы ориентироваться в курсе и в реальных проектах, важно понимать <strong>типы задач</strong> и <strong>типичный жизненный цикл</strong> ML-проекта.</p>
+                    <p><strong>Задача модуля:</strong> дать чёткую классификацию задач (с учителем, без учителя, с подкреплением) и показать полный пайплайн от данных до внедрения модели. После этого вы сможете правильно называть задачу, выбирать метрики и понимать, на каком этапе находитесь в проекте.</p>
+                    <div class="visual-guide">
+                        <h4>Что разберём</h4>
+                        <ul>
+                            <li><strong>Обучение с учителем</strong> — регрессия и классификация, функция потерь, типичные метрики.</li>
+                            <li><strong>Обучение без учителя</strong> — кластеризация и снижение размерности, когда меток нет.</li>
+                            <li><strong>Обучение с подкреплением</strong> — агент, среда, награды; краткий обзор для кругозора.</li>
+                            <li><strong>Пайплайн ML</strong> — от загрузки данных до деплоя и мониторинга.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="supervised" class="topic-section">
+                <h2>2.1 Обучение с учителем (Supervised Learning)</h2>
+                <div class="lesson-content">
+                    <p>В обучении с учителем у каждого объекта в выборке есть <strong>метка</strong> (правильный ответ): цена квартиры, класс письма (спам/не спам), категория товара. Модель учится по парам «признаки → ответ» и в итоге должна предсказывать ответ для новых объектов. Это самый распространённый тип задач в практике.</p>
+
+                    <h3>Регрессия</h3>
+                    <p><strong>Регрессия</strong> — задача предсказания <strong>числа</strong>: температура завтра, цена дома, спрос на товар, время до события. Выход модели — непрерывное значение (часто любое действительное число или значение в заданном диапазоне).</p>
+                    <p>Типичные метрики качества: <strong>MSE</strong> (средний квадрат ошибки), <strong>MAE</strong> (средняя абсолютная ошибка), <strong>R²</strong> (доля объяснённой дисперсии). Чем меньше MSE/MAE и чем ближе R² к 1, тем лучше модель предсказывает целевую переменную.</p>
+
+                    <h3>Классификация</h3>
+                    <p><strong>Классификация</strong> — задача отнесения объекта к одному из <strong>классов</strong>: кошка или собака на фото, спам или не спам, тип заболевания, категория новости. Выход модели — либо метка класса, либо <strong>вероятности</strong> принадлежности каждому классу (что удобнее для интерпретации и настройки порога).</p>
+                    <p>Бинарная классификация — два класса (да/нет, спам/не спам). Многоклассовая — несколько классов (например, цифры 0–9 или категории товаров). Метрики: точность (accuracy), полнота и точность по классам (precision, recall), F1-score, ROC-AUC — в зависимости от дисбаланса классов и целей бизнеса.</p>
+
+                    <h3>Функция потерь (Loss Function)</h3>
+                    <p><strong>Функция потерь</strong> — одна величина, которая показывает, насколько предсказания модели отличаются от правильных ответов. Алгоритм обучения минимизирует эту функцию: подбирает веса так, чтобы loss становился меньше. Таким образом мы «подгоняем» модель под данные.</p>
+                    <p>Для регрессии часто используют <strong>MSE</strong> (средний квадрат ошибки); для классификации — <strong>кросс-энтропию</strong> (логистическую потерю для бинарной, категориальную для многоклассовой). Выбор loss влияет на то, что именно модель оптимизирует и как ведёт себя на границах классов.</p>
+                    <div class="note">
+                        <p><strong>На практике:</strong> большинство задач в индустрии — supervised: прогноз оттока, оценка кредитного скоринга, распознавание образов, рекомендации (часто формулируются как регрессия или классификация). Умение чётко определить «регрессия это или классификация» и подобрать метрику — базовый навык.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="unsupervised" class="topic-section">
+                <h2>2.2 Обучение без учителя (Unsupervised Learning)</h2>
+                <div class="lesson-content">
+                    <p>В обучении без учителя <strong>меток нет</strong>: есть только признаки объектов. Цель — найти структуру в данных: сгруппировать похожие объекты, сжать размерность, выявить аномалии или скрытые факторы. Такие задачи возникают, когда разметка дорога или невозможна, или когда интересна именно структура данных.</p>
+
+                    <h3>Кластеризация</h3>
+                    <p><strong>Кластеризация</strong> — разбить объекты на группы (кластеры) так, чтобы внутри группы объекты были похожи, а между группами — различались. Меток «какой объект к какому классу относится» нет; алгоритм сам решает, сколько групп делать и куда отнести каждый объект.</p>
+                    <p>Примеры: сегментация клиентов по поведению, группировка документов по темам, поиск аномалий (маленькие кластеры или объекты далеко от центров). Популярные алгоритмы: <strong>K-means</strong>, <strong>DBSCAN</strong>, иерархическая кластеризация. Выбор алгоритма и числа кластеров зависит от данных и целей.</p>
+
+                    <h3>Снижение размерности</h3>
+                    <p>Когда признаков очень много, данные трудно визуализировать и модели могут переобучаться или долго обучаться. <strong>Снижение размерности</strong> — это сжатие набора признаков до меньшего числа переменных (компонент), сохраняя по возможности структуру и вариативность данных.</p>
+                    <p><strong>PCA</strong> (метод главных компонент) — линейное сжатие; <strong>t-SNE</strong>, <strong>UMAP</strong> — нелинейные методы, часто используемые для визуализации в 2D. Снижение размерности применяют для ускорения обучения, визуализации, шумоподавления и как преобработку перед кластеризацией.</p>
+                    <div class="practice-tips">
+                        <h4>Когда использовать</h4>
+                        <p>Unsupervised полезен при разведке данных (посмотреть кластеры, распределение в 2D), при отсутствии разметки и когда нужно найти аномалии или сегменты без заранее заданных категорий.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="rl" class="topic-section">
+                <h2>2.3 Обучение с подкреплением (Reinforcement Learning, RL) — обзор</h2>
+                <div class="lesson-content">
+                    <p>В обучении с подкреплением нет готовых пар «вход–ответ». Вместо этого <strong>агент</strong> (модель) действует в <strong>среде</strong>: совершает действия, переходит в новые состояния и получает <strong>награды</strong> (или штрафы). Цель — максимизировать суммарную награду в долгосрочной перспективе. Обучение идёт за счёт проб и ошибок и обновления стратегии на основе полученного опыта.</p>
+                    <p>Примеры: игра (ходы → очки, победа/поражение), управление роботом (действия → достижение цели, экономия энергии), рекомендации (показать контент → клик или отказ). В RL важны баланс исследования и использования (exploration vs exploitation), задержка награды и устойчивость обучения.</p>
+                    <p>Для общего кругозора полезно знать названия: <strong>DQN</strong>, <strong>policy gradient</strong>, <strong>A3C</strong>, среды вроде <strong>OpenAI Gym</strong>. В этом курсе RL затрагивается только обзорно; глубокое изучение потребует отдельного курса.</p>
+                    <div class="note">
+                        <p><strong>Связь с остальным курсом:</strong> идеи RL используются в тонкой настройке языковых моделей (RLHF — reinforcement learning from human feedback) и в игровых AI. Понимание «агент, среда, награда» поможет при чтении про такие методы.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="pipeline" class="topic-section">
+                <h2>2.4 Основной пайплайн (конвейер) ML</h2>
+                <div class="lesson-content">
+                    <p>Любой ML-проект от идеи до работающего сервиса проходит через ряд этапов. Понимание пайплайна помогает планировать работу, не забывать про качество данных и воспроизводимость и правильно ставить эксперименты.</p>
+
+                    <h3>Этапы пайплайна</h3>
+                    <ul>
+                        <li><strong>Загрузка и разведка данных</strong> — откуда берутся данные, какой объём, какие признаки, есть ли пропуски и выбросы. EDA (exploratory data analysis) и визуализации.</li>
+                        <li><strong>Предобработка (чистка)</strong> — обработка пропусков (удаление, заполнение медианой/средним, отдельная модель), выбросы, приведение типов данных, единицы измерения. Без качественной предобработки даже сильная модель будет работать плохо.</li>
+                        <li><strong>Извлечение и отбор признаков (Feature Engineering)</strong> — создание новых признаков (агрегаты, бины, кодировки), отбор информативных признаков, нормализация/стандартизация. Часто именно feature engineering даёт основной прирост качества.</li>
+                        <li><strong>Обучение модели</strong> — выбор алгоритма, разбиение на train/validation/test, подбор гиперпараметров, кросс-валидация. Важно не «подглядывать» в тест до финальной оценки.</li>
+                        <li><strong>Оценка качества</strong> — метрики на отложенной тестовой выборке, анализ ошибок, сравнение с бейзлайном. Решение о внедрении или доработке.</li>
+                        <li><strong>Внедрение (Deployment)</strong> — упаковка модели в сервис (API, батч-инференс), версионирование данных и кода, мониторинг качества и дрейфа данных. MLOps — дисциплина, которая как раз про стабильное внедрение и поддержку моделей.</li>
+                    </ul>
+                    <div class="visual-guide">
+                        <h4>Кратко по цепочке</h4>
+                        <p>Данные → чистка → признаки → обучение → оценка → внедрение → мониторинг. Итерации возможны на любом этапе: например, после оценки может оказаться, что нужно вернуться к признакам или к сбору данных.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg></button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle"><span class="theme-label">Светлая</span><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z"/></svg><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg></button></div></div></div>

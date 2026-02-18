@@ -73,6 +73,12 @@
                     <span class="color-dot" style="background: #3b82f6;"></span>
                 </button>
             </div>
+            <a href="05-processes.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="07-search.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
             <!-- Кнопка переключения темы -->
             <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
                 <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -89,12 +95,6 @@
                     <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </button>
-            <a href="05-processes.html" class="prev-btn" title="Предыдущий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </a>
-            <a href="07-search.html" class="next-btn" title="Следующий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-            </a>
             <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -230,25 +230,22 @@
                     <h3>stdin (0) — стандартный ввод</h3>
                     <p>Поток для чтения данных. По умолчанию это клавиатура.</p>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        cat                    # читает из stdin (клавиатура)
-                        # Нажмите Ctrl+D для завершения ввода
+                        <pre><code class="bash">cat                    # читает из stdin (клавиатура)
+# Нажмите Ctrl+D для завершения ввода</code></pre>
                     </div>
 
                     <h3>stdout (1) — стандартный вывод</h3>
                     <p>Поток для вывода обычных данных. По умолчанию это экран терминала.</p>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        echo "Hello World"     # выводит в stdout
-                        ls                    # выводит список файлов в stdout
+                        <pre><code class="bash">echo "Hello World"     # выводит в stdout
+ls                    # выводит список файлов в stdout</code></pre>
                     </div>
 
                     <h3>stderr (2) — стандартный поток ошибок</h3>
                     <p>Поток для вывода сообщений об ошибках. По умолчанию это тоже экран терминала.</p>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls nonexistent_file   # ошибка выводится в stderr
-                        # ls: cannot access 'nonexistent_file': No such file or directory
+                        <pre><code class="bash">ls nonexistent_file   # ошибка выводится в stderr
+# ls: cannot access 'nonexistent_file': No such file or directory</code></pre>
                     </div>
 
                     <h3>Разделение потоков</h3>
@@ -257,11 +254,10 @@
                     </div>
 
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Команда выводит и обычные данные, и ошибки
-                        ls existing_file nonexistent_file
-                        # existing_file          ← stdout
-                        # ls: cannot access...   ← stderr
+                        <pre><code class="bash"># Команда выводит и обычные данные, и ошибки
+ls existing_file nonexistent_file
+# existing_file          ← stdout
+# ls: cannot access...   ← stderr</code></pre>
                     </div>
                 </div>
             </section>
@@ -274,35 +270,31 @@
                     
                     <h3>Перенаправление stdout</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        echo "Hello" > file.txt    # записать в файл (перезаписать)
-                        echo "World" >> file.txt   # добавить в файл
-                        ls > files.txt             # сохранить список файлов
+                        <pre><code class="bash">echo "Hello" > file.txt    # записать в файл (перезаписать)
+echo "World" >> file.txt   # добавить в файл
+ls > files.txt             # сохранить список файлов</code></pre>
                     </div>
 
                     <h3>Перенаправление stderr</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls nonexistent 2> error.log    # перенаправить ошибки в файл
-                        ls existing 2> error.log       # ошибок нет, файл останется пустым
+                        <pre><code class="bash">ls nonexistent 2> error.log    # перенаправить ошибки в файл
+ls existing 2> error.log       # ошибок нет, файл останется пустым</code></pre>
                     </div>
 
                     <h3>Перенаправление обоих потоков</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls existing nonexistent > output.log 2>&1
-                        # Перенаправить и stdout, и stderr в один файл
-                        
-                        ls existing nonexistent &> output.log
-                        # Сокращенная запись (bash)
+                        <pre><code class="bash">ls existing nonexistent > output.log 2>&1
+# Перенаправить и stdout, и stderr в один файл
+
+ls existing nonexistent &> output.log
+# Сокращенная запись (bash)</code></pre>
                     </div>
 
                     <h3>Отбрасывание вывода</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls > /dev/null              # отбросить stdout
-                        ls 2> /dev/null            # отбросить stderr
-                        ls > /dev/null 2>&1        # отбросить все
+                        <pre><code class="bash">ls > /dev/null              # отбросить stdout
+ls 2> /dev/null            # отбросить stderr
+ls > /dev/null 2>&1        # отбросить все</code></pre>
                     </div>
 
                     <div class="info">
@@ -319,41 +311,37 @@
                     
                     <h3>Перенаправление stdin</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        cat < file.txt              # читать из файла
-                        sort < unsorted.txt         # сортировать файл
-                        wc -l < file.txt            # подсчитать строки в файле
+                        <pre><code class="bash">cat < file.txt              # читать из файла
+sort < unsorted.txt         # сортировать файл
+wc -l < file.txt            # подсчитать строки в файле</code></pre>
                     </div>
 
                     <h3>Heredoc — многострочный ввод</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        cat << EOF
-                        Строка 1
-                        Строка 2
-                        Строка 3
-                        EOF
-                        # Создает временный файл с содержимым между EOF
+                        <pre><code class="bash">cat << EOF
+Строка 1
+Строка 2
+Строка 3
+EOF
+# Создает временный файл с содержимым между EOF</code></pre>
                     </div>
 
                     <h3>Here-string — ввод из переменной</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        text="Hello World"
-                        wc -w <<< "$text"           # подсчитать слова в переменной
+                        <pre><code class="bash">text="Hello World"
+wc -w <<< "$text"           # подсчитать слова в переменной</code></pre>
                     </div>
 
                     <h3>Практические примеры</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Отправить письмо из файла
-                        mail user@example.com < message.txt
-                        
-                        # Создать архив из списка файлов
-                        tar -czf archive.tar.gz -T filelist.txt
-                        
-                        # Выполнить команды из файла
-                        bash < script.sh
+                        <pre><code class="bash"># Отправить письмо из файла
+mail user@example.com < message.txt
+
+# Создать архив из списка файлов
+tar -czf archive.tar.gz -T filelist.txt
+
+# Выполнить команды из файла
+bash < script.sh</code></pre>
                     </div>
                 </div>
             </section>
@@ -366,69 +354,62 @@
                     
                     <h3>Базовое использование</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls -la | grep "txt"         # найти файлы .txt
-                        ps aux | grep firefox       # найти процессы firefox
-                        cat file.txt | sort         # отсортировать файл
+                        <pre><code class="bash">ls -la | grep "txt"         # найти файлы .txt
+ps aux | grep firefox       # найти процессы firefox
+cat file.txt | sort         # отсортировать файл</code></pre>
                     </div>
 
                     <h3>Цепочки команд</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls -la | grep "txt" | wc -l     # подсчитать .txt файлы
-                        ps aux | grep firefox | awk '{print $2}'  # получить PID firefox
-                        cat log.txt | grep ERROR | sort | uniq    # уникальные ошибки
+                        <pre><code class="bash">ls -la | grep "txt" | wc -l     # подсчитать .txt файлы
+ps aux | grep firefox | awk '{print $2}'  # получить PID firefox
+cat log.txt | grep ERROR | sort | uniq    # уникальные ошибки</code></pre>
                     </div>
 
                     <h3>Полезные команды для конвейеров</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>grep — поиск текста</h4>
                         <div class="code-example">
-                        <pre><code class="bash">
-                            ps aux | grep python        # найти процессы python
-                            ls -la | grep -v "txt"      # исключить .txt файлы
-                            cat file.txt | grep -i error # поиск без учета регистра
+                        <pre><code class="bash">ps aux | grep python        # найти процессы python
+ls -la | grep -v "txt"      # исключить .txt файлы
+cat file.txt | grep -i error # поиск без учета регистра</code></pre>
                         </div>
                     </div>
 
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>sort — сортировка</h4>
                         <div class="code-example">
-                        <pre><code class="bash">
-                            ls -la | sort -k5 -nr       # сортировать по размеру (убывание)
-                            cat names.txt | sort        # отсортировать имена
+                        <pre><code class="bash">ls -la | sort -k5 -nr       # сортировать по размеру (убывание)
+cat names.txt | sort        # отсортировать имена</code></pre>
                         </div>
                     </div>
 
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>uniq — удаление дубликатов</h4>
                         <div class="code-example">
-                        <pre><code class="bash">
-                            cat file.txt | sort | uniq  # уникальные строки
-                            cat file.txt | sort | uniq -c  # с подсчетом
+                        <pre><code class="bash">cat file.txt | sort | uniq  # уникальные строки
+cat file.txt | sort | uniq -c  # с подсчетом</code></pre>
                         </div>
                     </div>
 
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>head и tail — начало и конец</h4>
                         <div class="code-example">
-                        <pre><code class="bash">
-                            ls -la | head -10           # первые 10 файлов
-                            ps aux | tail -5            # последние 5 процессов
+                        <pre><code class="bash">ls -la | head -10           # первые 10 файлов
+ps aux | tail -5            # последние 5 процессов</code></pre>
                         </div>
                     </div>
 
                     <h3>Сложные примеры</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Найти 5 самых больших файлов
-                        find /home -type f -exec ls -la {} \; | sort -k5 -nr | head -5
-                        
-                        # Мониторинг логов в реальном времени
-                        tail -f /var/log/syslog | grep ERROR
-                        
-                        # Статистика использования команд
-                        history | awk '{print $2}' | sort | uniq -c | sort -nr | head -10
+                        <pre><code class="bash"># Найти 5 самых больших файлов
+find /home -type f -exec ls -la {} \; | sort -k5 -nr | head -5
+
+# Мониторинг логов в реальном времени
+tail -f /var/log/syslog | grep ERROR
+
+# Статистика использования команд
+history | awk '{print $2}' | sort | uniq -c | sort -nr | head -10</code></pre>
                     </div>
 
                     <div class="warning">

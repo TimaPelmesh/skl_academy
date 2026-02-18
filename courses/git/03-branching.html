@@ -165,64 +165,152 @@
             </section>
 
             <section id="branch-basics" class="topic-section">
-                <h2>3.1 Что такое ветка. HEAD, main, feature</h2>
-                <p>Ветка — имя указателя на коммит. <code>HEAD</code> обычно указывает на текущую ветку; в состоянии detached HEAD указывает на конкретный коммит.</p>
-                <p>Представьте историю как дорожную развязку: коммиты — это узлы, ветки — дорожные указатели. Переставляя указатели, вы выбираете «маршрут» развития кода. <code>HEAD</code> — ваш текущий автомобиль, он едет туда, куда укажет ветка.</p>
+                <h2>3.1 Что такое ветка</h2>
+                <p>Ветка в Git — это просто <strong>указатель (имя) на коммит</strong>. Это невероятно дёшевая операция — создание ветки не копирует файлы, а лишь создаёт новый указатель.</p>
+
+                <div class="visual-guide">
+                    <h4>Как устроены ветки</h4>
+<pre>
+main:     A --- B --- C        ← main указывает на коммит C
+                 \
+feature:          D --- E      ← feature указывает на коммит E
+
+HEAD → feature                 ← HEAD показывает текущую ветку
+</pre>
+                    <ul>
+                        <li><strong>main</strong> — основная ветка (по умолчанию)</li>
+                        <li><strong>feature</strong> — ветка для новой фичи</li>
+                        <li><strong>HEAD</strong> — специальный указатель: «где я сейчас нахожусь»</li>
+                    </ul>
+                </div>
+
+                <p>Когда вы делаете коммит, текущая ветка автоматически перемещается на новый коммит. HEAD следует за веткой.</p>
             </section>
 
             <section id="create-switch" class="topic-section">
-                <h2>3.2 Создание и переключение</h2>
+                <h2>3.2 Создание и переключение веток</h2>
                 <div class="code-example">
-<pre><code class="bash">git branch feature/login
-# создать и сразу переключиться
+<pre><code class="bash"># Создать ветку (но НЕ переключаться на неё)
+git branch feature/login
+
+# Создать и сразу переключиться (рекомендуется)
 git switch -c feature/login
-# или старым способом
+
+# Старый способ (работает, но менее понятен)
 git checkout -b feature/login
 
-# переключение
+# Переключиться на существующую ветку
 git switch main
-# или
-git checkout main
-</code></pre>
+
+# Создать ветку от конкретного коммита
+git switch -c hotfix/bug-123 abc1234
+
+# Создать ветку от удалённой ветки
+git switch -c feature/api origin/feature/api</code></pre>
                 </div>
-                <p><code>git switch</code> делает смысл команд явнее и безопаснее по умолчанию, чем универсальный <code>checkout</code>. Используйте <code>switch</code> для веток и <code>restore</code> для файлов — так проще избегать путаницы.</p>
+                <div class="note"><p><strong>Рекомендация:</strong> используйте <code>git switch</code> для веток и <code>git restore</code> для файлов. Старый <code>git checkout</code> делал и то, и другое, что приводило к путанице.</p></div>
             </section>
 
             <section id="list-delete" class="topic-section">
-                <h2>3.3 Список и удаление веток</h2>
+                <h2>3.3 Список, переименование и удаление веток</h2>
                 <div class="code-example">
-<pre><code class="bash">git branch -v
-# безопасное удаление слитой ветки
+<pre><code class="bash"># Список локальных веток (текущая помечена *)
+git branch
+# * main
+#   feature/login
+#   hotfix/bug-123
+
+# С информацией о последнем коммите
+git branch -v
+
+# Все ветки (включая remote-tracking)
+git branch -a
+
+# Только слитые ветки (можно безопасно удалить)
+git branch --merged main
+
+# Не слитые ветки
+git branch --no-merged main
+
+# Переименовать ветку
+git branch -m old-name new-name
+
+# Безопасное удаление (только если ветка слита)
 git branch -d feature/login
-# принудительное удаление
+
+# Принудительное удаление (даже если не слита — будьте осторожны!)
 git branch -D feature/old
-</code></pre>
+
+# Удалить удалённую ветку
+git push origin --delete feature/old</code></pre>
                 </div>
             </section>
 
             <section id="compare" class="topic-section">
                 <h2>3.4 Сравнение веток</h2>
                 <div class="code-example">
-<pre><code class="bash">git diff main..feature/login
-# какие коммиты есть в feature/login, но нет в main
+<pre><code class="bash"># Diff между ветками (все изменения)
+git diff main..feature/login
+
+# Только имена изменённых файлов
+git diff --name-only main..feature/login
+
+# Коммиты, которые есть в feature, но нет в main
 git log --oneline main..feature/login
-</code></pre>
+
+# Коммиты, которые есть в одной ветке, но нет в другой (обе стороны)
+git log --oneline --left-right main...feature/login
+
+# Визуальный граф всех веток
+git log --oneline --graph --all --decorate</code></pre>
                 </div>
-                <p>Для сравнения полезно различать <code>..</code> и <code>...</code>: первая форма показывает «что есть в правой ветке, но нет в левой», вторая — симметричную разность. Совмещайте сравнения с визуальным графом истории.</p>
+                <p>Разница между <code>..</code> и <code>...</code>: две точки — «что есть в правой, но нет в левой»; три точки — «симметричная разность» (что уникально в каждой).</p>
             </section>
 
             <section id="workflow" class="topic-section">
-                <h2>3.5 Практика: feature‑ветка</h2>
-                <ol>
-                    <li>Создайте ветку для фичи</li>
-                    <li>Сделайте коммиты по частям (add -p)</li>
-                    <li>Сравните с main и подготовьте к слиянию</li>
-                </ol>
-                <p>Даже в простом сценарии важно сохранять «чистоту» ветки: маленькие осмысленные коммиты облегчат ревью, а аккуратное слияние — дальнейшее сопровождение.</p>
+                <h2>3.5 Практика: полный цикл feature-ветки</h2>
+                <div class="code-example">
+<pre><code class="bash"># 1. Обновить main
+git switch main
+git pull origin main
+
+# 2. Создать feature-ветку
+git switch -c feature/user-profile
+
+# 3. Работаем: редактируем файлы, коммитим по частям
+git add -p                      # интерактивно выбираем изменения
+git commit -m "feat: модель профиля"
+git add src/api/profile.py
+git commit -m "feat: API эндпоинт профиля"
+
+# 4. Проверяем, что отличается от main
+git log --oneline main..HEAD    # наши коммиты
+git diff --stat main            # статистика изменений
+
+# 5. Пушим
+git push -u origin feature/user-profile
+
+# 6. После merge — удаляем ветку
+git switch main
+git pull
+git branch -d feature/user-profile</code></pre>
+                </div>
             </section>
+
             <section id="detached" class="topic-section">
                 <h2>3.6 Detached HEAD</h2>
-                <p>Состояние, когда <code>HEAD</code> указывает напрямую на коммит, а не на имя ветки. Полезно для экспериментов и просмотра истории. Чтобы не потерять работу — создайте ветку от текущего состояния.</p>
+                <p>Когда HEAD указывает напрямую на коммит (а не на ветку), это «отсоединённый HEAD». Коммиты в этом состоянии будут потеряны, если не создать ветку.</p>
+                <div class="code-example">
+<pre><code class="bash"># Переключиться на конкретный коммит → detached HEAD
+git checkout abc1234
+# You are in 'detached HEAD' state...
+
+# Сделали эксперимент — хотите сохранить? Создайте ветку:
+git switch -c experiment/my-test
+
+# Или вернуться к обычному состоянию:
+git switch main</code></pre>
+                </div>
             </section>
             <section id="upstream" class="topic-section">
                 <h2>3.7 Upstream и tracking</h2>

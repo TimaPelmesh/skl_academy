@@ -73,6 +73,12 @@
                     <span class="color-dot" style="background: #3b82f6;"></span>
                 </button>
             </div>
+            <a href="06-redirection.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="08-scripting.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
             <!-- Кнопка переключения темы -->
             <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
                 <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -89,12 +95,6 @@
                     <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </button>
-            <a href="06-redirection.html" class="prev-btn" title="Предыдущий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </a>
-            <a href="08-scripting.html" class="next-btn" title="Следующий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-            </a>
             <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -229,56 +229,49 @@
                     
                     <h3>Базовый синтаксис</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find [путь] [критерии] [действие]
+                        <pre><code class="bash">find [путь] [критерии] [действие]</code></pre>
                     </div>
 
                     <h3>Поиск по имени</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -name "*.txt"              # найти все .txt файлы в текущем каталоге
-                        find /home -name "document*"      # найти файлы, начинающиеся с "document"
-                        find /etc -name "*.conf"          # найти конфигурационные файлы
+                        <pre><code class="bash">find . -name "*.txt"              # найти все .txt файлы в текущем каталоге
+find /home -name "document*"      # найти файлы, начинающиеся с "document"
+find /etc -name "*.conf"          # найти конфигурационные файлы</code></pre>
                     </div>
 
                     <h3>Поиск по типу файла</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -type f                    # только файлы
-                        find . -type d                    # только каталоги
-                        find . -type l                    # только символические ссылки
+                        <pre><code class="bash">find . -type f                    # только файлы
+find . -type d                    # только каталоги
+find . -type l                    # только символические ссылки</code></pre>
                     </div>
 
                     <h3>Поиск по размеру</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -size +100M                # файлы больше 100 МБ
-                        find . -size -1k                  # файлы меньше 1 КБ
-                        find . -size 0                    # пустые файлы
+                        <pre><code class="bash">find . -size +100M                # файлы больше 100 МБ
+find . -size -1k                  # файлы меньше 1 КБ
+find . -size 0                    # пустые файлы</code></pre>
                     </div>
 
                     <h3>Поиск по времени</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -mtime -7                  # измененные за последние 7 дней
-                        find . -mtime +30                 # измененные более 30 дней назад
-                        find . -newer file.txt            # новее указанного файла
+                        <pre><code class="bash">find . -mtime -7                  # измененные за последние 7 дней
+find . -mtime +30                 # измененные более 30 дней назад
+find . -newer file.txt            # новее указанного файла</code></pre>
                     </div>
 
                     <h3>Поиск по правам доступа</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -perm 755                  # файлы с правами 755
-                        find . -perm -u+x                 # исполняемые файлы для владельца
-                        find . -perm /o+w                 # файлы, доступные для записи остальным
+                        <pre><code class="bash">find . -perm 755                  # файлы с правами 755
+find . -perm -u+x                 # исполняемые файлы для владельца
+find . -perm /o+w                 # файлы, доступные для записи остальным</code></pre>
                     </div>
 
                     <h3>Действия с найденными файлами</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -name "*.tmp" -delete      # удалить временные файлы
-                        find . -name "*.log" -exec ls -l {} \;  # показать подробную информацию
-                        find . -name "*.txt" -exec cp {} backup/ \;  # скопировать в backup
+                        <pre><code class="bash">find . -name "*.tmp" -delete      # удалить временные файлы
+find . -name "*.log" -exec ls -l {} \;  # показать подробную информацию
+find . -name "*.txt" -exec cp {} backup/ \;  # скопировать в backup</code></pre>
                     </div>
 
                     <div class="info">
@@ -299,57 +292,51 @@
                     
                     <h3>Базовое использование</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        grep "error" file.txt             # найти строки с "error"
-                        grep "ERROR" *.log                # найти "ERROR" во всех .log файлах
-                        grep -r "function" /home/user/    # рекурсивный поиск в каталоге
+                        <pre><code class="bash">grep "error" file.txt             # найти строки с "error"
+grep "ERROR" *.log                # найти "ERROR" во всех .log файлах
+grep -r "function" /home/user/    # рекурсивный поиск в каталоге</code></pre>
                     </div>
 
                     <h3>Полезные флаги</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        grep -i "error" file.txt          # поиск без учета регистра
-                        grep -n "error" file.txt          # показать номера строк
-                        grep -v "error" file.txt          # исключить строки с "error"
-                        grep -c "error" file.txt          # подсчитать количество совпадений
+                        <pre><code class="bash">grep -i "error" file.txt          # поиск без учета регистра
+grep -n "error" file.txt          # показать номера строк
+grep -v "error" file.txt          # исключить строки с "error"
+grep -c "error" file.txt          # подсчитать количество совпадений</code></pre>
                     </div>
 
                     <h3>Регулярные выражения</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        grep "^error" file.txt            # строки, начинающиеся с "error"
-                        grep "error$" file.txt            # строки, заканчивающиеся на "error"
-                        grep "er.*or" file.txt            # строки с "er", затем любые символы, затем "or"
-                        grep "[0-9]" file.txt             # строки, содержащие цифры
+                        <pre><code class="bash">grep "^error" file.txt            # строки, начинающиеся с "error"
+grep "error$" file.txt            # строки, заканчивающиеся на "error"
+grep "er.*or" file.txt            # строки с "er", затем любые символы, затем "or"
+grep "[0-9]" file.txt             # строки, содержащие цифры</code></pre>
                     </div>
 
                     <h3>Поиск в нескольких файлах</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        grep -r "TODO" .                  # найти "TODO" во всех файлах
-                        grep -l "error" *.txt             # показать только имена файлов с совпадениями
-                        grep -L "error" *.txt             # показать файлы без совпадений
+                        <pre><code class="bash">grep -r "TODO" .                  # найти "TODO" во всех файлах
+grep -l "error" *.txt             # показать только имена файлов с совпадениями
+grep -L "error" *.txt             # показать файлы без совпадений</code></pre>
                     </div>
 
                     <h3>Контекст поиска</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        grep -A 3 "error" file.txt        # показать 3 строки после совпадения
-                        grep -B 2 "error" file.txt        # показать 2 строки до совпадения
-                        grep -C 2 "error" file.txt        # показать 2 строки до и после
+                        <pre><code class="bash">grep -A 3 "error" file.txt        # показать 3 строки после совпадения
+grep -B 2 "error" file.txt        # показать 2 строки до совпадения
+grep -C 2 "error" file.txt        # показать 2 строки до и после</code></pre>
                     </div>
 
                     <h3>Практические примеры</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Найти все IP-адреса в логах
-                        grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" /var/log/auth.log
-                        
-                        # Найти все email адреса
-                        grep -E "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" file.txt
-                        
-                        # Найти пустые строки
-                        grep "^$" file.txt
+                        <pre><code class="bash"># Найти все IP-адреса в логах
+grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" /var/log/auth.log
+
+# Найти все email адреса
+grep -E "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" file.txt
+
+# Найти пустые строки
+grep "^$" file.txt</code></pre>
                     </div>
                 </div>
             </section>
@@ -362,46 +349,41 @@
                     
                     <h3>Поиск текста в определенных файлах</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -name "*.py" -exec grep -l "import" {} \;  # найти Python файлы с import
-                        find . -name "*.log" -exec grep "ERROR" {} \;     # найти ошибки в логах
+                        <pre><code class="bash">find . -name "*.py" -exec grep -l "import" {} \;  # найти Python файлы с import
+find . -name "*.log" -exec grep "ERROR" {} \;     # найти ошибки в логах</code></pre>
                     </div>
 
                     <h3>Поиск с фильтрацией по содержимому</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        find . -name "*.txt" -exec grep -q "important" {} \; -print  # найти .txt файлы с "important"
-                        find . -type f -exec grep -l "TODO" {} \;                   # найти файлы с TODO
+                        <pre><code class="bash">find . -name "*.txt" -exec grep -q "important" {} \; -print  # найти .txt файлы с "important"
+find . -type f -exec grep -l "TODO" {} \;                   # найти файлы с TODO</code></pre>
                     </div>
 
                     <h3>Анализ логов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Найти все ошибки за сегодня
-                        find /var/log -name "*.log" -mtime 0 -exec grep -H "ERROR" {} \;
-                        
-                        # Найти файлы с определенным IP
-                        find . -name "*.log" -exec grep -l "192.168.1.1" {} \;
+                        <pre><code class="bash"># Найти все ошибки за сегодня
+find /var/log -name "*.log" -mtime 0 -exec grep -H "ERROR" {} \;
+
+# Найти файлы с определенным IP
+find . -name "*.log" -exec grep -l "192.168.1.1" {} \;</code></pre>
                     </div>
 
                     <h3>Поиск конфигурационных файлов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Найти файлы с настройками базы данных
-                        find /etc -name "*.conf" -exec grep -l "database" {} \;
-                        
-                        # Найти файлы с паролями (осторожно!)
-                        find . -name "*.conf" -exec grep -l "password" {} \;
+                        <pre><code class="bash"># Найти файлы с настройками базы данных
+find /etc -name "*.conf" -exec grep -l "database" {} \;
+
+# Найти файлы с паролями (осторожно!)
+find . -name "*.conf" -exec grep -l "password" {} \;</code></pre>
                     </div>
 
                     <h3>Сложные комбинации</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Найти большие файлы с определенным содержимым
-                        find . -size +10M -type f -exec grep -l "backup" {} \;
-                        
-                        # Найти файлы, измененные недавно, с ошибками
-                        find . -mtime -1 -name "*.log" -exec grep -H "ERROR" {} \;
+                        <pre><code class="bash"># Найти большие файлы с определенным содержимым
+find . -size +10M -type f -exec grep -l "backup" {} \;
+
+# Найти файлы, измененные недавно, с ошибками
+find . -mtime -1 -name "*.log" -exec grep -H "ERROR" {} \;</code></pre>
                     </div>
 
                     <div class="warning">
@@ -418,35 +400,31 @@
                     
                     <h3>Базовое использование</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        locate filename                    # найти файл по имени
-                        locate "*.txt"                     # найти все .txt файлы
-                        locate -i "document"              # поиск без учета регистра
+                        <pre><code class="bash">locate filename                    # найти файл по имени
+locate "*.txt"                     # найти все .txt файлы
+locate -i "document"              # поиск без учета регистра</code></pre>
                     </div>
 
                     <h3>Обновление базы данных</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        sudo updatedb                      # обновить базу данных locate
-                        # База данных обновляется автоматически, но можно принудительно
+                        <pre><code class="bash">sudo updatedb                      # обновить базу данных locate
+# База данных обновляется автоматически, но можно принудительно</code></pre>
                     </div>
 
                     <h3>Ограничение результатов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        locate "*.log" | head -10         # показать первые 10 результатов
-                        locate "*.txt" | wc -l            # подсчитать количество файлов
+                        <pre><code class="bash">locate "*.log" | head -10         # показать первые 10 результатов
+locate "*.txt" | wc -l            # подсчитать количество файлов</code></pre>
                     </div>
 
                     <h3>Поиск с фильтрацией</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        locate "*.conf" | grep "nginx"    # найти конфиги nginx
-                        locate "*.py" | grep "test"       # найти Python тесты
+                        <pre><code class="bash">locate "*.conf" | grep "nginx"    # найти конфиги nginx
+locate "*.py" | grep "test"       # найти Python тесты</code></pre>
                     </div>
 
                     <h3>Преимущества и недостатки</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Преимущества locate</h4>
                         <ul>
                             <li>Очень быстрый поиск</li>
@@ -455,7 +433,7 @@
                         </ul>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Недостатки locate</h4>
                         <ul>
                             <li>База данных может быть устаревшей</li>

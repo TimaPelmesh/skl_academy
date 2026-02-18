@@ -274,6 +274,21 @@ header .header-buttons {
     transition: all 0.3s ease;
 }
 
+/* Светлая тема: иконки в шапке всегда контрастные (как в других курсах) */
+body:not(.dark-theme) header .theme-toggle-btn,
+body:not(.dark-theme) header .exit-btn,
+body:not(.dark-theme) header .mobile-settings-btn {
+    color: #333344;
+}
+body:not(.dark-theme) header .theme-toggle-btn svg,
+body:not(.dark-theme) header .exit-btn svg,
+body:not(.dark-theme) header .mobile-settings-btn svg {
+    color: inherit;
+}
+body:not(.dark-theme) header .header-title {
+    color: #333344;
+}
+
 .theme-icon-sun {
     opacity: 1;
     transform: rotate(0deg);
@@ -1078,6 +1093,14 @@ h4 {
 .light-theme .code-example pre,
 .light-theme .code-example code {
     color: #1e1e1e !important;
+}
+
+/* Текстовые блоки (h4, ul, p) внутри code-example — читаемый тёмный текст на светлом фоне */
+.light-theme .code-example h4,
+.light-theme .code-example ul,
+.light-theme .code-example li,
+.light-theme .code-example p {
+    color: #111827 !important;
 }
 
 .light-theme .code-example code .hljs-comment,

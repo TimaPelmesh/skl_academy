@@ -73,6 +73,12 @@
                     <span class="color-dot" style="background: #3b82f6;"></span>
                 </button>
             </div>
+            <a href="02-file-system.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="04-permissions.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
             <!-- Кнопка переключения темы -->
             <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
                 <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -89,12 +95,6 @@
                     <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </button>
-            <a href="02-file-system.html" class="prev-btn" title="Предыдущий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </a>
-            <a href="04-permissions.html" class="next-btn" title="Следующий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-            </a>
             <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -236,22 +236,20 @@ mkdir dir1 dir2 dir3         # создать несколько каталог�
 
                     <h3>touch — создание файлов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        touch file.txt              # создать пустой файл
-                        touch file1.txt file2.txt   # создать несколько файлов
-                        touch -a file.txt           # обновить время доступа
-                        touch -m file.txt           # обновить время модификации</code></pre>
+                        <pre><code class="bash">touch file.txt              # создать пустой файл
+touch file1.txt file2.txt   # создать несколько файлов
+touch -a file.txt           # обновить время доступа
+touch -m file.txt           # обновить время модификации</code></pre>
                     </div>
 
                     <h3>Создание структуры каталогов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        mkdir -p project/{src,doc,test}
-                        # Создаст:
-                        # project/
-                        # ├── src/
-                        # ├── doc/
-                        # └── test/</code></pre>
+                        <pre><code class="bash">mkdir -p project/{src,doc,test}
+# Создаст:
+# project/
+# ├── src/
+# ├── doc/
+# └── test/</code></pre>
                     </div>
 
                     <div class="info">
@@ -268,29 +266,26 @@ mkdir dir1 dir2 dir3         # создать несколько каталог�
                     
                     <h3>cp — копирование</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        cp file.txt backup.txt      # копировать файл
-                        cp -r dir1 dir2             # копировать каталог рекурсивно
-                        cp -v file.txt backup/      # копировать с выводом процесса
-                        cp -u file.txt backup/      # копировать только если файл новее</code></pre>
+                        <pre><code class="bash">cp file.txt backup.txt      # копировать файл
+cp -r dir1 dir2             # копировать каталог рекурсивно
+cp -v file.txt backup/      # копировать с выводом процесса
+cp -u file.txt backup/      # копировать только если файл новее</code></pre>
                     </div>
 
                     <h3>mv — перемещение и переименование</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        mv file.txt documents/      # переместить файл
-                        mv oldname.txt newname.txt  # переименовать файл
-                        mv dir1 dir2                # переместить каталог
-                        mv *.txt documents/         # переместить все .txt файлы</code></pre>
+                        <pre><code class="bash">mv file.txt documents/      # переместить файл
+mv oldname.txt newname.txt  # переименовать файл
+mv dir1 dir2                # переместить каталог
+mv *.txt documents/         # переместить все .txt файлы</code></pre>
                     </div>
 
                     <h3>rm — удаление</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        rm file.txt                 # удалить файл
-                        rm -r directory/            # удалить каталог рекурсивно
-                        rm -f file.txt              # принудительное удаление
-                        rm -rf directory/           # принудительное удаление каталога</code></pre>
+                        <pre><code class="bash">rm file.txt                 # удалить файл
+rm -r directory/            # удалить каталог рекурсивно
+rm -f file.txt              # принудительное удаление
+rm -rf directory/           # принудительное удаление каталога</code></pre>
                     </div>
 
                     <div class="warning">
@@ -299,9 +294,8 @@ mkdir dir1 dir2 dir3         # создать несколько каталог�
 
                     <h3>rmdir — удаление пустых каталогов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        rmdir empty_dir             # удалить пустой каталог
-                        rmdir dir1 dir2 dir3        # удалить несколько пустых каталогов</code></pre>
+                        <pre><code class="bash">rmdir empty_dir             # удалить пустой каталог
+rmdir dir1 dir2 dir3        # удалить несколько пустых каталогов</code></pre>
                     </div>
                 </div>
             </section>
@@ -321,8 +315,7 @@ cat -n file.txt             # показать с номерами строк</c
 
                     <h3>less и more — постраничный просмотр</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-less file.txt               # постраничный просмотр (рекомендуется)
+                        <pre><code class="bash">less file.txt               # постраничный просмотр (рекомендуется)
 more file.txt               # постраничный просмотр (старый)</code></pre>
                     </div>
 
@@ -332,8 +325,7 @@ more file.txt               # постраничный просмотр (ста�
 
                     <h3>head и tail — начало и конец файла</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-head file.txt               # первые 10 строк
+                        <pre><code class="bash">head file.txt               # первые 10 строк
 head -n 20 file.txt         # первые 20 строк
 tail file.txt               # последние 10 строк
 tail -n 5 file.txt          # последние 5 строк
@@ -342,8 +334,7 @@ tail -f logfile.txt         # следить за изменениями в ре
 
                     <h3>wc — подсчет строк, слов, символов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-wc file.txt                 # строки, слова, символы
+                        <pre><code class="bash">wc file.txt                 # строки, слова, символы
 wc -l file.txt              # только строки
 wc -w file.txt              # только слова
 wc -c file.txt              # только символы</code></pre>
@@ -364,7 +355,7 @@ nano file.txt               # открыть файл в nano
 nano                        # создать новый файл</code></pre>
                     </div>
 
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Основные команды nano</h4>
                         <ul>
                             <li><strong>Ctrl+O</strong> — сохранить файл</li>
@@ -377,12 +368,11 @@ nano                        # создать новый файл</code></pre>
 
                     <h3>vim — мощный редактор</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-vim file.txt                # открыть файл в vim
+                        <pre><code class="bash">vim file.txt                # открыть файл в vim
 vim                         # создать новый файл</code></pre>
                     </div>
 
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Основы vim</h4>
                         <p><strong>Режимы vim:</strong></p>
                         <ul>
@@ -392,7 +382,7 @@ vim                         # создать новый файл</code></pre>
                         </ul>
                     </div>
 
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Основные команды vim</h4>
                         <ul>
                             <li><strong>i</strong> — войти в режим вставки</li>

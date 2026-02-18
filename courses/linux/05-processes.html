@@ -73,6 +73,12 @@
                     <span class="color-dot" style="background: #3b82f6;"></span>
                 </button>
             </div>
+            <a href="04-permissions.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="06-redirection.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
             <!-- Кнопка переключения темы -->
             <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
                 <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -89,12 +95,6 @@
                     <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </button>
-            <a href="04-permissions.html" class="prev-btn" title="Предыдущий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </a>
-            <a href="06-redirection.html" class="next-btn" title="Следующий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-            </a>
             <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -228,17 +228,17 @@
                     <p>Процесс — это выполняющаяся программа в памяти компьютера. Каждая запущенная программа создает один или несколько процессов.</p>
                     
                     <h3>Основные характеристики процесса</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>PID (Process ID)</h4>
                         <p>Уникальный числовой идентификатор процесса в системе</p>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>PPID (Parent Process ID)</h4>
                         <p>Идентификатор родительского процесса, который создал данный процесс</p>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Состояние процесса</h4>
                         <ul>
                             <li><strong>R (Running)</strong> — выполняется</li>
@@ -254,9 +254,9 @@
                     
                     <div class="code-example">
                         <pre><code class="bash"># Просмотр дерева процессов
-                        pstree
-                        # или
-                        ps auxf
+pstree
+# или
+ps auxf</code></pre>
                     </div>
 
                     <div class="info">
@@ -273,49 +273,45 @@
                     
                     <h3>ps — список процессов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ps                    # процессы текущего пользователя
-                        ps aux                # все процессы с подробной информацией
-                        ps -ef                # все процессы в формате BSD
-                        ps aux | grep firefox # найти процессы firefox
+                        <pre><code class="bash">ps                    # процессы текущего пользователя
+ps aux                # все процессы с подробной информацией
+ps -ef                # все процессы в формате BSD
+ps aux | grep firefox # найти процессы firefox</code></pre>
                     </div>
 
                     <h3>Расшифровка вывода ps aux</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-                        root         1  0.0  0.1  78008  9004 ?        Ss   Dec15   0:01 /sbin/init
-                        user      1234  2.5  1.2 123456 45678 pts/0    R+   10:30   0:05 firefox
-                        # ↑      ↑    ↑    ↑     ↑     ↑      ↑        ↑     ↑       ↑     ↑
-                        # |      |    |    |     |     |      |        |     |       |     └─ команда
-                        # |      |    |    |     |     |      |        |     |       └─────── время CPU
-                        # |      |    |    |     |     |      |        |     └─────────────── время запуска
-                        # |      |    |    |     |     |      |        └───────────────────── состояние
-                        # |      |    |    |     |     |      └─────────────────────────────── терминал
-                        # |      |    |    |     |     └─────────────────────────────────────── физическая память
-                        # |      |    |    |     └─────────────────────────────────────────────── виртуальная память
-                        # |      |    |    └───────────────────────────────────────────────────── % памяти
-                        # |      |    └─────────────────────────────────────────────────────────── % CPU
-                        # |      └───────────────────────────────────────────────────────────────── PID
-                        # └───────────────────────────────────────────────────────────────────────── пользователь
+                        <pre><code class="bash">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.1  78008  9004 ?        Ss   Dec15   0:01 /sbin/init
+user      1234  2.5  1.2 123456 45678 pts/0    R+   10:30   0:05 firefox
+# ↑      ↑    ↑    ↑     ↑     ↑      ↑        ↑     ↑       ↑     ↑
+# |      |    |    |     |     |      |        |     |       |     └─ команда
+# |      |    |    |     |     |      |        |     |       └─────── время CPU
+# |      |    |    |     |     |      |        |     └─────────────── время запуска
+# |      |    |    |     |     |      |        └───────────────────── состояние
+# |      |    |    |     |     |      └─────────────────────────────── терминал
+# |      |    |    |     |     └─────────────────────────────────────── физическая память
+# |      |    |    |     └─────────────────────────────────────────────── виртуальная память
+# |      |    |    └───────────────────────────────────────────────────── % памяти
+# |      |    └─────────────────────────────────────────────────────────── % CPU
+# |      └───────────────────────────────────────────────────────────────── PID
+# └───────────────────────────────────────────────────────────────────────── пользователь</code></pre>
                     </div>
 
                     <h3>top — интерактивный монитор процессов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        top                   # запустить top
-                        # Управление:
-                        # q - выход
-                        # k - завершить процесс
-                        # r - изменить приоритет
-                        # h - помощь
+                        <pre><code class="bash">top                   # запустить top
+# Управление:
+# q - выход
+# k - завершить процесс
+# r - изменить приоритет
+# h - помощь</code></pre>
                     </div>
 
                     <h3>htop — улучшенный top</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        htop                  # запустить htop (если установлен)
-                        # Более удобный интерфейс с цветовой подсветкой
+                        <pre><code class="bash">htop                  # запустить htop (если установлен)
+# Более удобный интерфейс с цветовой подсветкой</code></pre>
                     </div>
 
                     <div class="info">
@@ -332,32 +328,29 @@
                     
                     <h3>Запуск процессов в фоне</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        command &             # запустить команду в фоне
-                        nohup command &       # запустить команду в фоне, игнорируя SIGHUP
-                        command > output.log 2>&1 &  # запустить с перенаправлением вывода
+                        <pre><code class="bash">command &             # запустить команду в фоне
+nohup command &       # запустить команду в фоне, игнорируя SIGHUP
+command > output.log 2>&1 &  # запустить с перенаправлением вывода</code></pre>
                     </div>
 
                     <h3>Управление фоновыми задачами</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        jobs                  # показать фоновые задачи
-                        fg %1                 # вернуть задачу 1 на передний план
-                        bg %1                 # продолжить задачу 1 в фоне
-                        fg                    # вернуть последнюю задачу на передний план
+                        <pre><code class="bash">jobs                  # показать фоновые задачи
+fg %1                 # вернуть задачу 1 на передний план
+bg %1                 # продолжить задачу 1 в фоне
+fg                    # вернуть последнюю задачу на передний план</code></pre>
                     </div>
 
                     <h3>Завершение процессов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        kill PID              # отправить SIGTERM (мягкое завершение)
-                        kill -9 PID           # отправить SIGKILL (принудительное завершение)
-                        killall firefox       # завершить все процессы firefox
-                        pkill -f "python"     # завершить процессы по имени команды
+                        <pre><code class="bash">kill PID              # отправить SIGTERM (мягкое завершение)
+kill -9 PID           # отправить SIGKILL (принудительное завершение)
+killall firefox       # завершить все процессы firefox
+pkill -f "python"     # завершить процессы по имени команды</code></pre>
                     </div>
 
                     <h3>Сигналы процессов</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Основные сигналы</h4>
                         <ul>
                             <li><strong>SIGTERM (15)</strong> — запрос на завершение</li>
@@ -382,46 +375,41 @@
                     
                     <h3>free — информация о памяти</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        free                  # показать использование памяти
-                        free -h               # в удобном формате
-                        free -m               # в мегабайтах
-                        free -s 5             # обновлять каждые 5 секунд
+                        <pre><code class="bash">free                  # показать использование памяти
+free -h               # в удобном формате
+free -m               # в мегабайтах
+free -s 5             # обновлять каждые 5 секунд</code></pre>
                     </div>
 
                     <h3>df — использование дискового пространства</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        df                   # использование дисков
-                        df -h                # в удобном формате
-                        df -T                # с типами файловых систем
-                        du -sh /home         # размер каталога /home
+                        <pre><code class="bash">df                   # использование дисков
+df -h                # в удобном формате
+df -T                # с типами файловых систем
+du -sh /home         # размер каталога /home</code></pre>
                     </div>
 
                     <h3>uptime — время работы системы</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        uptime               # время работы и нагрузка
-                        # Вывод: 10:30:45 up 2 days, 3:15, 2 users, load average: 0.52, 0.58, 0.59
-                        #        ↑           ↑        ↑        ↑              ↑
-                        #        время      время    количество  средняя нагрузка
-                        #        запуска    работы   пользователей (1, 5, 15 мин)
+                        <pre><code class="bash">uptime               # время работы и нагрузка
+# Вывод: 10:30:45 up 2 days, 3:15, 2 users, load average: 0.52, 0.58, 0.59
+#        ↑           ↑        ↑        ↑              ↑
+#        время      время    количество  средняя нагрузка
+#        запуска    работы   пользователей (1, 5, 15 мин)</code></pre>
                     </div>
 
                     <h3>iostat — статистика ввода/вывода</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        iostat               # статистика I/O (если установлен)
-                        iostat -x 2          # каждые 2 секунды
+                        <pre><code class="bash">iostat               # статистика I/O (если установлен)
+iostat -x 2          # каждые 2 секунды</code></pre>
                     </div>
 
                     <h3>Полезные команды мониторинга</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        vmstat 1             # статистика виртуальной памяти
-                        sar -u 1 10          # статистика CPU (если установлен)
-                        lscpu                # информация о процессоре
-                        lsblk                # информация о блочных устройствах
+                        <pre><code class="bash">vmstat 1             # статистика виртуальной памяти
+sar -u 1 10          # статистика CPU (если установлен)
+lscpu                # информация о процессоре
+lsblk                # информация о блочных устройствах</code></pre>
                     </div>
 
                     <div class="info">

@@ -73,6 +73,9 @@
                     <span class="color-dot" style="background: #3b82f6;"></span>
                 </button>
             </div>
+            <a href="08-scripting.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
             <!-- Кнопка переключения темы -->
             <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
                 <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -89,9 +92,6 @@
                     <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </button>
-            <a href="08-scripting.html" class="prev-btn" title="Предыдущий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </a>
             <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -226,43 +226,38 @@
                     
                     <h3>ping — проверка доступности</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ping google.com                  # проверить доступность сайта
-                        ping -c 4 8.8.8.8               # отправить 4 пакета
-                        ping -i 2 google.com             # интервал между пакетами 2 сек
-                        ping -t 64 google.com            # TTL пакетов 64
+                        <pre><code class="bash">ping google.com                  # проверить доступность сайта
+ping -c 4 8.8.8.8               # отправить 4 пакета
+ping -i 2 google.com             # интервал между пакетами 2 сек
+ping -t 64 google.com            # TTL пакетов 64</code></pre>
                     </div>
 
                     <h3>traceroute — трассировка маршрута</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        traceroute google.com            # показать маршрут до сервера
-                        traceroute -n google.com         # не разрешать имена хостов
-                        traceroute -m 10 google.com      # максимум 10 прыжков
+                        <pre><code class="bash">traceroute google.com            # показать маршрут до сервера
+traceroute -n google.com         # не разрешать имена хостов
+traceroute -m 10 google.com      # максимум 10 прыжков</code></pre>
                     </div>
 
                     <h3>mtr — комбинация ping и traceroute</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        mtr google.com                   # запустить mtr
-                        mtr -r -c 10 google.com          # 10 циклов и завершить
-                        mtr -n google.com                 # не разрешать имена
+                        <pre><code class="bash">mtr google.com                   # запустить mtr
+mtr -r -c 10 google.com          # 10 циклов и завершить
+mtr -n google.com                 # не разрешать имена</code></pre>
                     </div>
 
                     <h3>nslookup — разрешение DNS</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        nslookup google.com              # найти IP адрес
-                        nslookup 8.8.8.8                 # обратный поиск (IP -> имя)
-                        nslookup -type=MX google.com     # найти MX записи
+                        <pre><code class="bash">nslookup google.com              # найти IP адрес
+nslookup 8.8.8.8                 # обратный поиск (IP -> имя)
+nslookup -type=MX google.com     # найти MX записи</code></pre>
                     </div>
 
                     <h3>dig — расширенный DNS запрос</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        dig google.com                   # подробная информация о DNS
-                        dig @8.8.8.8 google.com          # использовать конкретный DNS сервер
-                        dig -x 8.8.8.8                   # обратный DNS запрос
+                        <pre><code class="bash">dig google.com                   # подробная информация о DNS
+dig @8.8.8.8 google.com          # использовать конкретный DNS сервер
+dig -x 8.8.8.8                   # обратный DNS запрос</code></pre>
                     </div>
 
                     <div class="info">
@@ -282,44 +277,39 @@
                     
                     <h3>ss — современная замена netstat</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ss -tuln                         # все TCP и UDP соединения
-                        ss -tulnp                        # с процессами
-                        ss -tuln | grep :80              # найти соединения на порту 80
-                        ss -tuln | grep LISTEN           # только слушающие порты
+                        <pre><code class="bash">ss -tuln                         # все TCP и UDP соединения
+ss -tulnp                        # с процессами
+ss -tuln | grep :80              # найти соединения на порту 80
+ss -tuln | grep LISTEN           # только слушающие порты</code></pre>
                     </div>
 
                     <h3>netstat — классическая команда</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        netstat -tuln                    # все TCP и UDP соединения
-                        netstat -tulnp                   # с процессами
-                        netstat -r                       # таблица маршрутизации
-                        netstat -i                       # статистика интерфейсов
+                        <pre><code class="bash">netstat -tuln                    # все TCP и UDP соединения
+netstat -tulnp                   # с процессами
+netstat -r                       # таблица маршрутизации
+netstat -i                       # статистика интерфейсов</code></pre>
                     </div>
 
                     <h3>lsof — список открытых файлов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        lsof -i                          # все сетевые соединения
-                        lsof -i :80                      # соединения на порту 80
-                        lsof -i tcp                      # только TCP соединения
-                        lsof -i udp                      # только UDP соединения
+                        <pre><code class="bash">lsof -i                          # все сетевые соединения
+lsof -i :80                      # соединения на порту 80
+lsof -i tcp                      # только TCP соединения
+lsof -i udp                      # только UDP соединения</code></pre>
                     </div>
 
                     <h3>iftop — мониторинг трафика</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        sudo iftop                       # мониторинг трафика в реальном времени
-                        sudo iftop -i eth0               # конкретный интерфейс
-                        sudo iftop -n                    # не разрешать имена хостов
+                        <pre><code class="bash">sudo iftop                       # мониторинг трафика в реальном времени
+sudo iftop -i eth0               # конкретный интерфейс
+sudo iftop -n                    # не разрешать имена хостов</code></pre>
                     </div>
 
                     <h3>nethogs — трафик по процессам</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        sudo nethogs                    # трафик по процессам
-                        sudo nethogs eth0                # конкретный интерфейс
+                        <pre><code class="bash">sudo nethogs                    # трафик по процессам
+sudo nethogs eth0                # конкретный интерфейс</code></pre>
                     </div>
 
                     <div class="info">
@@ -340,47 +330,42 @@
                     
                     <h3>wget — простой загрузчик</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        wget https://example.com/file.zip    # скачать файл
-                        wget -O filename.zip https://example.com/file.zip  # сохранить с другим именем
-                        wget -c https://example.com/file.zip # продолжить загрузку
-                        wget -r https://example.com/         # рекурсивно скачать сайт
+                        <pre><code class="bash">wget https://example.com/file.zip    # скачать файл
+wget -O filename.zip https://example.com/file.zip  # сохранить с другим именем
+wget -c https://example.com/file.zip # продолжить загрузку
+wget -r https://example.com/         # рекурсивно скачать сайт</code></pre>
                     </div>
 
                     <h3>curl — универсальный инструмент</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        curl https://example.com/file.zip    # скачать файл
-                        curl -O https://example.com/file.zip # сохранить с оригинальным именем
-                        curl -L https://example.com/redirect # следовать редиректам
-                        curl -C - https://example.com/file.zip # продолжить загрузку
+                        <pre><code class="bash">curl https://example.com/file.zip    # скачать файл
+curl -O https://example.com/file.zip # сохранить с оригинальным именем
+curl -L https://example.com/redirect # следовать редиректам
+curl -C - https://example.com/file.zip # продолжить загрузку</code></pre>
                     </div>
 
                     <h3>HTTP запросы с curl</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        curl -X GET https://api.example.com/data     # GET запрос
-                        curl -X POST -d "data=value" https://api.example.com  # POST запрос
-                        curl -H "Authorization: Bearer token" https://api.example.com  # с заголовками
-                        curl -v https://example.com                  # подробный вывод
+                        <pre><code class="bash">curl -X GET https://api.example.com/data     # GET запрос
+curl -X POST -d "data=value" https://api.example.com  # POST запрос
+curl -H "Authorization: Bearer token" https://api.example.com  # с заголовками
+curl -v https://example.com                  # подробный вывод</code></pre>
                     </div>
 
                     <h3>Пакетная загрузка</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Создать список URL для загрузки
-                        echo "https://example.com/file1.zip" > urls.txt
-                        echo "https://example.com/file2.zip" >> urls.txt
-                        
-                        # Загрузить все файлы
-                        wget -i urls.txt
+                        <pre><code class="bash"># Создать список URL для загрузки
+echo "https://example.com/file1.zip" > urls.txt
+echo "https://example.com/file2.zip" >> urls.txt
+
+# Загрузить все файлы
+wget -i urls.txt</code></pre>
                     </div>
 
                     <h3>Ограничение скорости</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        wget --limit-rate=1m https://example.com/file.zip  # ограничить скорость
-                        curl --limit-rate 1m https://example.com/file.zip  # ограничить скорость
+                        <pre><code class="bash">wget --limit-rate=1m https://example.com/file.zip  # ограничить скорость
+curl --limit-rate 1m https://example.com/file.zip  # ограничить скорость</code></pre>
                     </div>
 
                     <div class="info">
@@ -399,55 +384,49 @@
                     
                     <h3>Базовое подключение</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ssh user@hostname              # подключиться к серверу
-                        ssh user@192.168.1.100        # подключиться по IP
-                        ssh -p 2222 user@hostname     # подключиться на нестандартном порту
+                        <pre><code class="bash">ssh user@hostname              # подключиться к серверу
+ssh user@192.168.1.100        # подключиться по IP
+ssh -p 2222 user@hostname     # подключиться на нестандартном порту</code></pre>
                     </div>
 
                     <h3>Первый вход</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # При первом подключении система спросит:
-                        # The authenticity of host 'hostname' can't be established.
-                        # Are you sure you want to continue connecting (yes/no)?
-                        # Введите 'yes' для продолжения
+                        <pre><code class="bash"># При первом подключении система спросит:
+# The authenticity of host 'hostname' can't be established.
+# Are you sure you want to continue connecting (yes/no)?
+# Введите 'yes' для продолжения</code></pre>
                     </div>
 
                     <h3>Выполнение команд на удаленном сервере</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ssh user@hostname "ls -la"     # выполнить команду и выйти
-                        ssh user@hostname "uptime && who"  # выполнить несколько команд
+                        <pre><code class="bash">ssh user@hostname "ls -la"     # выполнить команду и выйти
+ssh user@hostname "uptime && who"  # выполнить несколько команд</code></pre>
                     </div>
 
                     <h3>Туннелирование портов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ssh -L 8080:localhost:80 user@hostname  # локальный туннель
-                        ssh -R 8080:localhost:80 user@hostname  # удаленный туннель
-                    </h3>
+                        <pre><code class="bash">ssh -L 8080:localhost:80 user@hostname  # локальный туннель
+ssh -R 8080:localhost:80 user@hostname  # удаленный туннель</code></pre>
+                    </div>
 
                     <h3>Передача файлов через SSH</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        scp file.txt user@hostname:/home/user/  # скопировать файл на сервер
-                        scp user@hostname:/home/user/file.txt . # скопировать файл с сервера
-                        scp -r directory/ user@hostname:/home/user/  # скопировать каталог
+                        <pre><code class="bash">scp file.txt user@hostname:/home/user/  # скопировать файл на сервер
+scp user@hostname:/home/user/file.txt . # скопировать файл с сервера
+scp -r directory/ user@hostname:/home/user/  # скопировать каталог</code></pre>
                     </div>
 
                     <h3>Настройка SSH клиента</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Создать файл ~/.ssh/config
-                        Host myserver
-                            HostName 192.168.1.100
-                            User myuser
-                            Port 22
-                            IdentityFile ~/.ssh/id_rsa
-                        
-                        # Теперь можно подключаться просто:
-                        ssh myserver
+                        <pre><code class="bash"># Создать файл ~/.ssh/config
+Host myserver
+    HostName 192.168.1.100
+    User myuser
+    Port 22
+    IdentityFile ~/.ssh/id_rsa
+
+# Теперь можно подключаться просто:
+ssh myserver</code></pre>
                     </div>
 
                     <div class="warning">
@@ -464,50 +443,44 @@
                     
                     <h3>Генерация SSH ключа</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ssh-keygen -t rsa -b 4096        # создать RSA ключ
-                        ssh-keygen -t ed25519            # создать Ed25519 ключ (рекомендуется)
-                        ssh-keygen -t rsa -b 4096 -C "your_email@example.com"  # с комментарием
+                        <pre><code class="bash">ssh-keygen -t rsa -b 4096        # создать RSA ключ
+ssh-keygen -t ed25519            # создать Ed25519 ключ (рекомендуется)
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"  # с комментарием</code></pre>
                     </div>
 
                     <h3>Процесс генерации</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Система спросит:
-                        # Enter file in which to save the key (/home/user/.ssh/id_rsa): [Enter]
-                        # Enter passphrase (empty for no passphrase): [введите пароль или Enter]
-                        # Enter same passphrase again: [повторите пароль]
+                        <pre><code class="bash"># Система спросит:
+# Enter file in which to save the key (/home/user/.ssh/id_rsa): [Enter]
+# Enter passphrase (empty for no passphrase): [введите пароль или Enter]
+# Enter same passphrase again: [повторите пароль]</code></pre>
                     </div>
 
                     <h3>Копирование ключа на сервер</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ssh-copy-id user@hostname        # автоматически скопировать ключ
-                        # Или вручную:
-                        cat ~/.ssh/id_rsa.pub | ssh user@hostname "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+                        <pre><code class="bash">ssh-copy-id user@hostname        # автоматически скопировать ключ
+# Или вручную:
+cat ~/.ssh/id_rsa.pub | ssh user@hostname "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"</code></pre>
                     </div>
 
                     <h3>Проверка подключения</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ssh user@hostname                # подключиться без пароля
-                        ssh -i ~/.ssh/id_rsa user@hostname  # использовать конкретный ключ
+                        <pre><code class="bash">ssh user@hostname                # подключиться без пароля
+ssh -i ~/.ssh/id_rsa user@hostname  # использовать конкретный ключ</code></pre>
                     </div>
 
                     <h3>Управление ключами</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ssh-add ~/.ssh/id_rsa            # добавить ключ в ssh-agent
-                        ssh-add -l                       # показать загруженные ключи
-                        ssh-add -D                       # удалить все ключи из ssh-agent
+                        <pre><code class="bash">ssh-add ~/.ssh/id_rsa            # добавить ключ в ssh-agent
+ssh-add -l                       # показать загруженные ключи
+ssh-add -D                       # удалить все ключи из ssh-agent</code></pre>
                     </div>
 
                     <h3>Настройка ssh-agent</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Добавить в ~/.bashrc или ~/.profile:
-                        eval "$(ssh-agent -s)"
-                        ssh-add ~/.ssh/id_rsa
+                        <pre><code class="bash"># Добавить в ~/.bashrc или ~/.profile:
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa</code></pre>
                     </div>
 
                     <div class="info">
@@ -527,74 +500,68 @@
                     
                     <h3>scp — копирование через SSH</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        # Копирование файла на сервер
-                        scp file.txt user@hostname:/home/user/
-                        scp -r directory/ user@hostname:/home/user/
-                        
-                        # Копирование файла с сервера
-                        scp user@hostname:/home/user/file.txt .
-                        scp -r user@hostname:/home/user/directory/ .
-                        
-                        # Копирование между серверами
-                        scp user1@host1:/path/file user2@host2:/path/
+                        <pre><code class="bash"># Копирование файла на сервер
+scp file.txt user@hostname:/home/user/
+scp -r directory/ user@hostname:/home/user/
+
+# Копирование файла с сервера
+scp user@hostname:/home/user/file.txt .
+scp -r user@hostname:/home/user/directory/ .
+
+# Копирование между серверами
+scp user1@host1:/path/file user2@host2:/path/</code></pre>
                     </div>
 
                     <h3>rsync — синхронизация файлов</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        rsync -avz file.txt user@hostname:/home/user/  # синхронизировать файл
-                        rsync -avz --delete local/ user@hostname:/home/user/  # синхронизировать каталог
-                        rsync -avz --progress user@hostname:/home/user/ .  # с прогрессом
+                        <pre><code class="bash">rsync -avz file.txt user@hostname:/home/user/  # синхронизировать файл
+rsync -avz --delete local/ user@hostname:/home/user/  # синхронизировать каталог
+rsync -avz --progress user@hostname:/home/user/ .  # с прогрессом</code></pre>
                     </div>
 
                     <h3>sftp — интерактивная передача</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        sftp user@hostname              # подключиться к SFTP серверу
-                        # Команды SFTP:
-                        # put file.txt                 # загрузить файл
-                        # get file.txt                 # скачать файл
-                        # ls                           # список файлов
-                        # cd directory                 # смена каталога
-                        # quit                         # выход
+                        <pre><code class="bash">sftp user@hostname              # подключиться к SFTP серверу
+# Команды SFTP:
+# put file.txt                 # загрузить файл
+# get file.txt                 # скачать файл
+# ls                           # список файлов
+# cd directory                 # смена каталога
+# quit                         # выход</code></pre>
                     </div>
 
                     <h3>wget/curl для загрузки</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        wget https://example.com/file.zip
-                        curl -O https://example.com/file.zip
-                        curl -L -o file.zip https://example.com/file.zip
+                        <pre><code class="bash">wget https://example.com/file.zip
+curl -O https://example.com/file.zip
+curl -L -o file.zip https://example.com/file.zip</code></pre>
                     </div>
 
                     <h3>Создание архива перед передачей</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        tar -czf archive.tar.gz directory/  # создать архив
-                        scp archive.tar.gz user@hostname:/home/user/
-                        ssh user@hostname "cd /home/user && tar -xzf archive.tar.gz"
+                        <pre><code class="bash">tar -czf archive.tar.gz directory/  # создать архив
+scp archive.tar.gz user@hostname:/home/user/
+ssh user@hostname "cd /home/user && tar -xzf archive.tar.gz"</code></pre>
                     </div>
 
                     <h3>Практический пример резервного копирования</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        #!/bin/bash
-                        # Скрипт резервного копирования на удаленный сервер
-                        
-                        BACKUP_DIR="/home/user/backup"
-                        REMOTE_USER="backup"
-                        REMOTE_HOST="backup-server.com"
-                        REMOTE_DIR="/backups"
-                        
-                        # Создать архив
-                        tar -czf "$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz" /home/user/documents/
-                        
-                        # Передать на сервер
-                        scp "$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR/"
-                        
-                        # Удалить локальный архив
-                        rm "$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz"
+                        <pre><code class="bash">#!/bin/bash
+# Скрипт резервного копирования на удаленный сервер
+
+BACKUP_DIR="/home/user/backup"
+REMOTE_USER="backup"
+REMOTE_HOST="backup-server.com"
+REMOTE_DIR="/backups"
+
+# Создать архив
+tar -czf "$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz" /home/user/documents/
+
+# Передать на сервер
+scp "$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR/"
+
+# Удалить локальный архив
+rm "$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz"</code></pre>
                     </div>
 
                     <div class="info">

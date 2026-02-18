@@ -73,6 +73,12 @@
                     <span class="color-dot" style="background: #3b82f6;"></span>
                 </button>
             </div>
+            <a href="03-file-operations.html" class="prev-btn" title="Предыдущий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </a>
+            <a href="05-processes.html" class="next-btn" title="Следующий урок">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </a>
             <!-- Кнопка переключения темы -->
             <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
                 <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -89,12 +95,6 @@
                     <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </button>
-            <a href="03-file-operations.html" class="prev-btn" title="Предыдущий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </a>
-            <a href="05-processes.html" class="next-btn" title="Следующий урок">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-            </a>
             <!-- Кнопка выхода -->
             <a href="../../index.html" class="exit-btn" title="На главную">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
@@ -231,11 +231,10 @@
                     <p>Владелец — это пользователь, который создал файл или каталог. Только владелец и root могут изменять права доступа к файлу.</p>
                     
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls -l file.txt
-                        # -rw-r--r-- 1 user group 1234 Dec 15 10:30 file.txt
-                        #           ↑     ↑
-                        #        владелец группа</code></pre>
+                        <pre><code class="bash">ls -l file.txt
+# -rw-r--r-- 1 user group 1234 Dec 15 10:30 file.txt
+#           ↑     ↑
+#        владелец группа</code></pre>
                     </div>
 
                     <h3>Группа файла</h3>
@@ -250,8 +249,7 @@ chown -R user:group dir/    # рекурсивно для каталога</code
 
                     <h3>chgrp — изменение группы</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-chgrp newgroup file.txt     # изменить группу
+                        <pre><code class="bash">chgrp newgroup file.txt     # изменить группу
 chgrp -R newgroup dir/      # рекурсивно для каталога</code></pre>
                     </div>
 
@@ -268,7 +266,7 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
                     <p>Права доступа определяют, что может делать с файлом владелец, группа и остальные пользователи.</p>
                     
                     <h3>Три типа прав</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>r (read) — чтение</h4>
                         <ul>
                             <li><strong>Для файлов:</strong> можно читать содержимое</li>
@@ -276,7 +274,7 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
                         </ul>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>w (write) — запись</h4>
                         <ul>
                             <li><strong>Для файлов:</strong> можно изменять содержимое</li>
@@ -284,7 +282,7 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
                         </ul>
                     </div>
                     
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>x (execute) — выполнение</h4>
                         <ul>
                             <li><strong>Для файлов:</strong> можно запускать как программу</li>
@@ -294,22 +292,20 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
 
                     <h3>Три категории пользователей</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls -l file.txt
-                        # -rw-r--r-- 1 user group 1234 Dec 15 10:30 file.txt
-                        #  ↑   ↑   ↑
-                        #  |   |   └─ права для остальных (other)
-                        #  |   └───── права для группы (group)
-                        #  └───────── права для владельца (owner)
+                        <pre><code class="bash">ls -l file.txt
+# -rw-r--r-- 1 user group 1234 Dec 15 10:30 file.txt
+#  ↑   ↑   ↑
+#  |   |   └─ права для остальных (other)
+#  |   └───── права для группы (group)
+#  └───────── права для владельца (owner)</code></pre>
                     </div>
 
                     <h3>chmod — изменение прав</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        chmod u+x file.txt          # добавить выполнение для владельца
-                        chmod g-w file.txt          # убрать запись для группы
-                        chmod o+r file.txt          # добавить чтение для остальных
-                        chmod u+x,g-w,o+r file.txt  # комбинация прав
+                        <pre><code class="bash">chmod u+x file.txt          # добавить выполнение для владельца
+chmod g-w file.txt          # убрать запись для группы
+chmod o+r file.txt          # добавить чтение для остальных
+chmod u+x,g-w,o+r file.txt  # комбинация прав</code></pre>
                     </div>
                 </div>
             </section>
@@ -321,7 +317,7 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
                     <p>Права доступа можно задавать числовым способом, что часто удобнее.</p>
                     
                     <h3>Числовые значения</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Базовые значения</h4>
                         <ul>
                             <li><strong>4</strong> — чтение (r)</li>
@@ -333,23 +329,22 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
                     <h3>Комбинирование прав</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Права складываются:
-                        # 4 (r) + 2 (w) + 1 (x) = 7 (rwx)
-                        # 4 (r) + 0 (w) + 1 (x) = 5 (r-x)
-                        # 4 (r) + 2 (w) + 0 (x) = 6 (rw-)
-                        # 0 (r) + 0 (w) + 0 (x) = 0 (---)
+# 4 (r) + 2 (w) + 1 (x) = 7 (rwx)
+# 4 (r) + 0 (w) + 1 (x) = 5 (r-x)
+# 4 (r) + 2 (w) + 0 (x) = 6 (rw-)
+# 0 (r) + 0 (w) + 0 (x) = 0 (---)</code></pre>
                     </div>
 
                     <h3>Примеры числовых прав</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        chmod 755 file.txt          # rwxr-xr-x
-                        chmod 644 file.txt          # rw-r--r--
-                        chmod 600 file.txt          # rw-------
-                        chmod 777 file.txt          # rwxrwxrwx
+                        <pre><code class="bash">chmod 755 file.txt          # rwxr-xr-x
+chmod 644 file.txt          # rw-r--r--
+chmod 600 file.txt          # rw-------
+chmod 777 file.txt          # rwxrwxrwx</code></pre>
                     </div>
 
                     <h3>Расшифровка 755</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>chmod 755</h4>
                         <ul>
                             <li><strong>7</strong> (4+2+1) — владелец: rwx</li>
@@ -376,15 +371,14 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
                     
                     <h3>Чтение вывода ls -l</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        ls -l
-                        # -rwxr-xr-x 1 user group 1234 Dec 15 10:30 script.sh
-                        # drwxr-xr-x 2 user group 4096 Dec 15 10:30 directory/
-                        # lrwxrwxrwx 1 user group    8 Dec 15 10:30 link -> target
+                        <pre><code class="bash">ls -l
+# -rwxr-xr-x 1 user group 1234 Dec 15 10:30 script.sh
+# drwxr-xr-x 2 user group 4096 Dec 15 10:30 directory/
+# lrwxrwxrwx 1 user group    8 Dec 15 10:30 link -> target</code></pre>
                     </div>
 
                     <h3>Типы файлов</h3>
-                    <div class="code-example">
+                    <div class="visual-guide">
                         <h4>Первый символ</h4>
                         <ul>
                             <li><strong>-</strong> — обычный файл</li>
@@ -398,24 +392,23 @@ chgrp -R newgroup dir/      # рекурсивно для каталога</code
                     <h3>Практические примеры</h3>
                     <div class="code-example">
                         <pre><code class="bash"># Файл с правами 644 (rw-r--r--)
-                        -rw-r--r-- 1 user group 1024 Dec 15 10:30 document.txt
-                        
-                        # Исполняемый файл с правами 755 (rwxr-xr-x)
-                        -rwxr-xr-x 1 user group 2048 Dec 15 10:30 program
-                        
-                        # Каталог с правами 755 (rwxr-xr-x)
-                        drwxr-xr-x 2 user group 4096 Dec 15 10:30 folder/
-                        
-                        # Приватный файл с правами 600 (rw-------)
-                        -rw------- 1 user group  512 Dec 15 10:30 secret.txt
+-rw-r--r-- 1 user group 1024 Dec 15 10:30 document.txt
+
+# Исполняемый файл с правами 755 (rwxr-xr-x)
+-rwxr-xr-x 1 user group 2048 Dec 15 10:30 program
+
+# Каталог с правами 755 (rwxr-xr-x)
+drwxr-xr-x 2 user group 4096 Dec 15 10:30 folder/
+
+# Приватный файл с правами 600 (rw-------)
+-rw------- 1 user group  512 Dec 15 10:30 secret.txt</code></pre>
                     </div>
 
                     <h3>Проверка прав доступа</h3>
                     <div class="code-example">
-                        <pre><code class="bash">
-                        test -r file.txt && echo "Можно читать" || echo "Нельзя читать"
-                        test -w file.txt && echo "Можно писать" || echo "Нельзя писать"
-                        test -x file.txt && echo "Можно выполнять" || echo "Нельзя выполнять"
+                        <pre><code class="bash">test -r file.txt && echo "Можно читать" || echo "Нельзя читать"
+test -w file.txt && echo "Можно писать" || echo "Нельзя писать"
+test -x file.txt && echo "Можно выполнять" || echo "Нельзя выполнять"</code></pre>
                     </div>
                 </div>
             </section>

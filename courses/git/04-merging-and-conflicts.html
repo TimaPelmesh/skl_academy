@@ -175,87 +175,569 @@
         <main id="content" class="content sidebar-active">
             <section class="module-intro topic-section">
                 <h2>Модуль 4: Слияние и разрешение конфликтов</h2>
-                <p>Научимся объединять ветки и безопасно решать конфликты при слиянии.</p>
-                <p>Слияние — это момент истины для истории: именно здесь разрозненные линии разработки сходятся в единый результат. Важно понимать не только синтаксис команд, но и их последствия для графа коммитов и читаемости истории.</p>
+                <p>Слияние (merge) — один из ключевых моментов работы с Git. Это точка, где разрозненные линии разработки сходятся в единый результат. В этом модуле мы подробно разберём, как Git выполняет слияние, почему возникают конфликты, и — самое главное — как их уверенно и безопасно разрешать.</p>
+                <p>Если вы когда-нибудь боялись нажать <code>git merge</code>, потому что «а вдруг всё сломается» — этот модуль для вас. После него конфликты перестанут пугать.</p>
             </section>
 
             <section id="ff-vs-merge" class="topic-section">
-                <h2>4.1 Стратегии слияния</h2>
-                <ul>
-                    <li><strong>Fast‑Forward</strong>: просто перемещается указатель ветки</li>
-                    <li><strong>3‑way merge</strong>: создаётся новый merge‑коммит</li>
-                </ul>
+                <h2>4.1 Fast‑Forward vs 3‑way merge</h2>
+
+                <p>Когда вы выполняете <code>git merge</code>, Git выбирает одну из двух стратегий в зависимости от состояния истории.</p>
+
+                <h3>Fast‑Forward (перемотка вперёд)</h3>
+                <p>Если целевая ветка (например, <code>main</code>) не получила новых коммитов с момента ответвления, Git просто «перемотает» указатель вперёд. Новый коммит слияния не создаётся.</p>
+
+                <div class="visual-guide">
+                    <h4>Когда происходит Fast‑Forward</h4>
+                    <p>Представьте: вы создали ветку <code>feature</code> от <code>main</code>, сделали 3 коммита, а в <code>main</code> за это время никто ничего не добавлял. Git просто переставит указатель <code>main</code> на последний коммит <code>feature</code>.</p>
+<pre>
+До merge:
+main:     A --- B
+                 \
+feature:          C --- D --- E
+
+После git merge feature (FF):
+main:     A --- B --- C --- D --- E
+</pre>
+                </div>
+
                 <div class="code-example">
-<pre><code class="bash"># FF (если возможно)
+<pre><code class="bash"># Переключаемся на main
 git switch main
+
+# Сливаем feature (Git выполнит FF автоматически)
 git merge feature/login
 
-# Принудительно создать merge-коммит
-git merge --no-ff feature/login
-</code></pre>
+# Результат: Fast-forward
+# main теперь указывает на тот же коммит, что и feature/login</code></pre>
                 </div>
-                <p>FF поддерживает линейную историю, но скрывает факт существования отдельной ветки. Merge‑коммит фиксирует точку слияния, что полезно для аудита и поиска регрессий. Выбор стратегии — это компромисс между «чистотой» и информативностью.</p>
+
+                <h3>3‑way merge (трёхсторонее слияние)</h3>
+                <p>Если обе ветки получили новые коммиты после точки расхождения, Git выполняет трёхстороннее слияние: сравнивает общего предка, текущую ветку и вливаемую ветку, а затем создаёт специальный <strong>merge‑коммит</strong> с двумя родителями.</p>
+
+                <div class="visual-guide">
+                    <h4>Когда происходит 3‑way merge</h4>
+<pre>
+До merge:
+main:     A --- B --- F --- G
+                 \
+feature:          C --- D --- E
+
+После git merge feature (3-way):
+main:     A --- B --- F --- G --- M  (merge-коммит)
+                 \               /
+feature:          C --- D --- E
+</pre>
+                    <p>Merge-коммит <code>M</code> имеет двух родителей: <code>G</code> и <code>E</code>. Он фиксирует факт слияния в истории.</p>
+                </div>
+
+                <div class="code-example">
+<pre><code class="bash"># Принудительно создать merge-коммит, даже если возможен FF
+git merge --no-ff feature/login
+
+# Разрешить только FF (если невозможно — отмена)
+git merge --ff-only feature/login</code></pre>
+                </div>
+
+                <h3>Когда что использовать?</h3>
+                <div class="visual-guide">
+                    <h4>Сравнение стратегий</h4>
+                    <ul>
+                        <li><strong>FF</strong> — чистая линейная история, но скрывает факт существования ветки. Подходит для маленьких правок и личных веток.</li>
+                        <li><strong>--no-ff</strong> — всегда создаёт merge-коммит. Видно, какие коммиты пришли из ветки. Стандарт для командной работы.</li>
+                        <li><strong>--ff-only</strong> — безопасный режим: если FF невозможен, merge отменяется. Полезно в CI/CD скриптах.</li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <p><strong>Совет для команды:</strong> Договоритесь о стратегии заранее. Многие команды используют <code>--no-ff</code> по умолчанию, чтобы в истории всегда было видно, откуда пришли изменения. Это упрощает поиск регрессий: <code>git log --merges</code> покажет все точки слияния.</p>
+                </div>
             </section>
 
             <section id="conflicts" class="topic-section">
                 <h2>4.2 Почему возникают конфликты</h2>
-                <p>Одинаковые строки изменены по‑разному в разных ветках. Git не может выбрать автоматически.</p>
-                <p>Конфликт — не ошибка системы, а сигнал к принятию решения. Используйте контекст истории (diff/log, ссылки на задачи), чтобы понять исходный замысел и примирить альтернативы.</p>
+
+                <p>Конфликт — это <strong>не ошибка</strong>. Это сигнал Git: «Я вижу, что одни и те же строки изменены в обеих ветках, и не могу решить за вас, какой вариант правильный».</p>
+
+                <h3>Когда Git справляется сам</h3>
+                <p>Если изменения в двух ветках затрагивают <strong>разные файлы</strong> или <strong>разные участки</strong> одного файла, Git объединит их автоматически. Вы даже не заметите, что произошло слияние.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Ветка A изменила строку 10 в файле app.py
+# Ветка B изменила строку 50 в файле app.py
+# Git объединит оба изменения без конфликта</code></pre>
+                </div>
+
+                <h3>Когда возникает конфликт</h3>
+                <p>Конфликт возникает, когда обе ветки изменили <strong>одни и те же строки</strong> в одном файле по-разному. Git не знает, какую версию выбрать — вашу или коллеги — и просит разобраться вручную.</p>
+
+                <div class="visual-guide">
+                    <h4>Типичные причины конфликтов</h4>
+                    <ul>
+                        <li><strong>Одна строка, два варианта:</strong> вы написали <code>color: blue</code>, коллега — <code>color: red</code></li>
+                        <li><strong>Удаление vs изменение:</strong> вы удалили функцию, коллега её отредактировал</li>
+                        <li><strong>Переименование файла:</strong> вы переименовали файл, коллега отредактировал его под старым именем</li>
+                        <li><strong>Рефакторинг:</strong> вы перенесли код в другое место, коллега изменил его на старом месте</li>
+                    </ul>
+                </div>
+
+                <h3>Пошаговый пример: создаём конфликт</h3>
+                <p>Давайте намеренно создадим конфликт, чтобы понять механику.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Шаг 1: Создаём репозиторий и начальный файл
+mkdir conflict-demo && cd conflict-demo
+git init
+echo "Добро пожаловать в наш проект" > README.md
+echo "Версия: 1.0" >> README.md
+git add README.md
+git commit -m "Начальный коммит"
+
+# Шаг 2: Создаём ветку и меняем вторую строку
+git switch -c feature/update-version
+# Меняем «Версия: 1.0» на «Версия: 2.0»
+sed -i 's/Версия: 1.0/Версия: 2.0/' README.md
+git add README.md
+git commit -m "Обновляем версию до 2.0"
+
+# Шаг 3: Возвращаемся в main и тоже меняем вторую строку
+git switch main
+# Меняем «Версия: 1.0» на «Версия: 1.5-beta»
+sed -i 's/Версия: 1.0/Версия: 1.5-beta/' README.md
+git add README.md
+git commit -m "Ставим бета-версию 1.5"
+
+# Шаг 4: Пробуем слить — получаем конфликт!
+git merge feature/update-version
+# CONFLICT (content): Merge conflict in README.md
+# Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+                </div>
+
+                <div class="note">
+                    <p><strong>Не паникуйте!</strong> Конфликт — это нормальная ситуация. Git не потерял ваши данные. Обе версии сохранены в файле, и вы можете в любой момент отменить слияние командой <code>git merge --abort</code>.</p>
+                </div>
             </section>
 
             <section id="markers" class="topic-section">
-                <h2>4.3 Маркеры конфликтов</h2>
+                <h2>4.3 Маркеры конфликтов: что вы видите в файле</h2>
+
+                <p>Когда Git обнаруживает конфликт, он записывает в файл обе версии, разделённые специальными маркерами. Давайте разберём их подробно.</p>
+
                 <div class="code-example">
-<pre><code class="bash">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-текущая версия
+<pre><code class="bash">Добро пожаловать в наш проект
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Версия: 1.5-beta
 =======
-версия из feature/login
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/login
-</code></pre>
+Версия: 2.0
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/update-version</code></pre>
+                </div>
+
+                <div class="visual-guide">
+                    <h4>Расшифровка маркеров</h4>
+                    <ul>
+                        <li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> — начало вашей версии (текущая ветка, куда вы сливаете)</li>
+                        <li>Текст между <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> и <code>=======</code> — <strong>ваши изменения</strong></li>
+                        <li><code>=======</code> — разделитель между двумя версиями</li>
+                        <li>Текст между <code>=======</code> и <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> — <strong>изменения из вливаемой ветки</strong></li>
+                        <li><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/update-version</code> — конец, имя вливаемой ветки</li>
+                    </ul>
+                </div>
+
+                <h3>Конфликт в нескольких местах</h3>
+                <p>В одном файле может быть несколько конфликтных участков. Каждый будет обёрнут своими маркерами. Нужно разрешить <strong>все</strong> конфликты в файле.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Как найти все конфликтные маркеры в проекте:
+grep -rn "&lt;&lt;&lt;&lt;&lt;&lt;&lt;" .
+
+# Посмотреть список конфликтных файлов:
+git diff --name-only --diff-filter=U</code></pre>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Подсказка:</strong> если вы видите маркеры <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> в коде после коммита — значит, вы забыли разрешить конфликт и закоммитили файл с маркерами. Это частая ошибка новичков! Проверяйте файлы перед коммитом.</p>
                 </div>
             </section>
 
             <section id="resolve" class="topic-section">
-                <h2>4.4 Разрешение конфликтов</h2>
+                <h2>4.4 Разрешение конфликтов: пошаговый walkthrough</h2>
+
+                <p>Разрешение конфликта — это процесс из четырёх шагов. Разберём каждый подробно.</p>
+
+                <h3>Шаг 1: Понять, что произошло</h3>
+                <p>Прежде чем редактировать файл, выясните контекст: кто и зачем сделал каждое изменение.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Посмотреть статус — какие файлы в конфликте
+git status
+# On branch main
+# You have unmerged paths.
+#   (fix conflicts and run "git commit")
+#
+# Unmerged paths:
+#   both modified:   README.md
+
+# Посмотреть, что изменилось в каждой ветке
+git log --oneline --left-right main...feature/update-version
+# > abc1234 Обновляем версию до 2.0
+# < def5678 Ставим бета-версию 1.5
+
+# Посмотреть diff с трёхсторонним контекстом
+git diff</code></pre>
+                </div>
+
+                <h3>Шаг 2: Отредактировать файл</h3>
+                <p>Откройте конфликтный файл в редакторе. Вам нужно:</p>
                 <ol>
-                    <li>Откройте конфликтующие файлы и вручную выберите правильный вариант</li>
-                    <li>Добавьте исправленные файлы в staging: <code>git add</code></li>
-                    <li>Завершите слияние: <code>git commit</code></li>
+                    <li>Удалить все маркеры (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>)</li>
+                    <li>Оставить правильную версию (или написать новую, объединяющую обе)</li>
                 </ol>
-                <p>Стремитесь минимизировать область конфликта: разбивайте большие правки на коммиты, синхронизируйтесь с основной веткой чаще, используйте инструменты сравнения, чтобы увидеть «настоящие» различия, а не шум форматирования.</p>
+
+                <div class="visual-guide">
+                    <h4>Три варианта решения</h4>
+                    <ul>
+                        <li><strong>Вариант A — оставить свою версию:</strong></li>
+                    </ul>
+<pre>Добро пожаловать в наш проект
+Версия: 1.5-beta</pre>
+                    <ul>
+                        <li><strong>Вариант B — принять версию коллеги:</strong></li>
+                    </ul>
+<pre>Добро пожаловать в наш проект
+Версия: 2.0</pre>
+                    <ul>
+                        <li><strong>Вариант C — объединить обе версии (часто лучший выбор):</strong></li>
+                    </ul>
+<pre>Добро пожаловать в наш проект
+Версия: 2.0-beta</pre>
+                </div>
+
+                <h3>Шаг 3: Добавить в staging</h3>
+                <div class="code-example">
+<pre><code class="bash"># После редактирования — помечаем файл как разрешённый
+git add README.md
+
+# Проверяем статус — файл больше не в "Unmerged"
+git status
+# All conflicts fixed but you are still merging.</code></pre>
+                </div>
+
+                <h3>Шаг 4: Завершить слияние</h3>
+                <div class="code-example">
+<pre><code class="bash"># Завершаем merge (Git предложит стандартное сообщение)
+git commit
+# Merge branch 'feature/update-version'
+
+# Или с кастомным сообщением:
+git commit -m "Merge feature/update-version: обновлена версия до 2.0-beta"</code></pre>
+                </div>
+
+                <h3>Если что-то пошло не так — отмена</h3>
+                <div class="code-example">
+<pre><code class="bash"># Отменить merge в любой момент (до git commit)
+git merge --abort
+# Всё вернётся к состоянию до merge</code></pre>
+                </div>
+
+                <div class="note">
+                    <p><strong>Совет:</strong> Минимизируйте конфликты — синхронизируйтесь с основной веткой чаще. Чем дольше ветка живёт отдельно, тем больше конфликтов. Регулярный <code>git merge main</code> или <code>git rebase main</code> в feature-ветке — хорошая практика.</p>
+                </div>
             </section>
 
             <section id="tools" class="topic-section">
-                <h2>4.5 Инструменты</h2>
+                <h2>4.5 Инструменты для разрешения конфликтов</h2>
+
+                <p>Разрешать конфликты в текстовом редакторе — рабочий, но не самый удобный способ. Существуют специальные инструменты, которые показывают три версии рядом: общего предка, вашу и вливаемую.</p>
+
+                <h3>VS Code (встроенный merge-редактор)</h3>
+                <p>VS Code автоматически подсвечивает конфликтные участки и предлагает кнопки:</p>
                 <ul>
-                    <li>Встроенный мердж‑инструмент в IDE/VS Code</li>
-                    <li>Внешние: meld, kdiff3 и др.</li>
+                    <li><strong>Accept Current Change</strong> — оставить вашу версию</li>
+                    <li><strong>Accept Incoming Change</strong> — принять вливаемую</li>
+                    <li><strong>Accept Both Changes</strong> — вставить обе версии</li>
+                    <li><strong>Compare Changes</strong> — открыть 3-way diff</li>
                 </ul>
-                <p>Инструменты не принимают решения за вас, но помогают увидеть контекст. Старайтесь смотреть на изменения «по смыслу», включая переименования и перемещения кода.</p>
+                <p>Начиная с версии 1.69, VS Code предлагает полноценный 3-way merge editor: три панели (ваша версия, общий предок, вливаемая) и итоговый результат внизу.</p>
+
+                <h3>Внешние merge-утилиты</h3>
+                <div class="code-example">
+<pre><code class="bash"># Настроить внешний инструмент
+git config --global merge.tool meld      # или kdiff3, p4merge, vimdiff
+
+# Запустить инструмент для разрешения конфликта
+git mergetool
+
+# После разрешения Git спросит: была ли merge успешна?
+# Ответьте y, файл будет помечен как разрешённый</code></pre>
+                </div>
+
+                <div class="visual-guide">
+                    <h4>Популярные merge-утилиты</h4>
+                    <ul>
+                        <li><strong>meld</strong> — графический, кросс-платформенный, бесплатный. Отлично показывает 3-way diff</li>
+                        <li><strong>kdiff3</strong> — трёхсторонее сравнение с авторазрешением простых конфликтов</li>
+                        <li><strong>P4Merge</strong> (Perforce) — мощный бесплатный инструмент с хорошей визуализацией</li>
+                        <li><strong>vimdiff</strong> — для тех, кто живёт в терминале</li>
+                        <li><strong>IntelliJ / WebStorm</strong> — один из лучших встроенных merge-редакторов на рынке</li>
+                    </ul>
+                </div>
+
+                <h3>Быстрое разрешение: принять одну сторону целиком</h3>
+                <div class="code-example">
+<pre><code class="bash"># Принять нашу версию файла целиком (ours)
+git checkout --ours path/to/file.txt
+git add path/to/file.txt
+
+# Принять версию вливаемой ветки целиком (theirs)
+git checkout --theirs path/to/file.txt
+git add path/to/file.txt</code></pre>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Осторожно с --ours / --theirs!</strong> Эти команды принимают файл <em>целиком</em>, а не отдельные конфликтные участки. Если в файле были и ваши изменения, и чужие в разных местах, вы потеряете одни из них.</p>
+                </div>
             </section>
+
             <section id="strategies" class="topic-section">
                 <h2>4.6 Стратегии и опции merge</h2>
-                <ul>
-                    <li><code>--ff</code>/<code>--no-ff</code>/<code>--ff-only</code> — управление fast‑forward</li>
-                    <li><code>--squash</code> — объединить изменения без создания merge‑коммита</li>
-                    <li>Стратегии: <code>ort</code> (по умолчанию), <code>recursive</code> (истор.), <code>octopus</code> (много веток)</li>
-                </ul>
+
+                <p>Команда <code>git merge</code> принимает множество флагов, которые управляют поведением слияния.</p>
+
+                <h3>Флаги Fast-Forward</h3>
+                <div class="code-example">
+<pre><code class="bash"># По умолчанию: FF если возможно, иначе 3-way
+git merge feature
+
+# Всегда создавать merge-коммит (рекомендуется для командной работы)
+git merge --no-ff feature
+
+# Только FF — если невозможно, отменить merge
+git merge --ff-only feature</code></pre>
+                </div>
+
+                <h3>Squash merge</h3>
+                <p>Все изменения из ветки собираются в один коммит, <strong>без создания merge-коммита</strong>. История ветки теряется — остаётся один сжатый коммит.</p>
+                <div class="code-example">
+<pre><code class="bash"># Собрать все изменения из feature в один коммит
+git merge --squash feature
+
+# Изменения в staging, но не закоммичены — нужно коммитить вручную
+git commit -m "feat: добавлена авторизация (squash из feature/auth)"</code></pre>
+                </div>
+
+                <h3>Стратегии слияния</h3>
+                <div class="visual-guide">
+                    <h4>Основные стратегии merge</h4>
+                    <ul>
+                        <li><strong>ort</strong> (по умолчанию с Git 2.34+) — быстрый, улучшенная детекция переименований</li>
+                        <li><strong>recursive</strong> — предыдущий алгоритм по умолчанию, всё ещё работает</li>
+                        <li><strong>octopus</strong> — для одновременного слияния нескольких веток (используется автоматически при <code>git merge A B C</code>)</li>
+                        <li><strong>ours</strong> — принимает текущую ветку целиком, игнорируя вливаемую (создаёт merge-коммит, но без изменений)</li>
+                    </ul>
+                </div>
+
+                <div class="code-example">
+<pre><code class="bash"># Явно указать стратегию
+git merge -s ort feature
+git merge -s recursive feature
+
+# Опции стратегии (через -X)
+git merge -X theirs feature     # при конфликтах автоматически принимать theirs
+git merge -X ours feature       # при конфликтах автоматически принимать ours
+git merge -X patience feature   # использовать «терпеливый» алгоритм diff</code></pre>
+                </div>
             </section>
+
             <section id="ort-recursive" class="topic-section">
                 <h2>4.7 Алгоритмы ort и recursive</h2>
-                <p><strong>ort</strong> — современный быстрый алгоритм с улучшенной детекцией переименований и разрешением конфликтов. <strong>recursive</strong> — предыдущий алгоритм; полезен для понимания истории и некоторых кейсов.</p>
+
+                <p><strong>ort</strong> (Ostensibly Recursive's Twin) — это современная замена <code>recursive</code>, ставшая стратегией по умолчанию в Git 2.34+. Он быстрее и лучше обрабатывает переименования файлов.</p>
+
+                <h3>Что улучшено в ort</h3>
+                <ul>
+                    <li><strong>Скорость:</strong> ort значительно быстрее при большом количестве файлов</li>
+                    <li><strong>Переименования:</strong> лучше обнаруживает переименованные файлы и корректнее объединяет изменения</li>
+                    <li><strong>Внутренняя архитектура:</strong> не модифицирует рабочую директорию до тех пор, пока слияние не вычислено — меньше шансов на «грязное» состояние при ошибке</li>
+                </ul>
+
+                <div class="code-example">
+<pre><code class="bash"># Проверить версию Git (ort доступен с 2.34+)
+git --version
+
+# Явно использовать ort
+git merge -s ort feature/auth
+
+# Или recursive (для старых версий Git)
+git merge -s recursive feature/auth</code></pre>
+                </div>
+
+                <div class="note">
+                    <p><strong>На практике:</strong> если ваш Git версии 2.34+, ort используется автоматически. Разница заметна в крупных репозиториях с тысячами файлов. Для маленьких проектов результат идентичен.</p>
+                </div>
             </section>
+
             <section id="rename-whitespace" class="topic-section">
-                <h2>4.8 Переименования и пробелы</h2>
-                <p>Git выполняет эвристическую детекцию переименований, сравнивая сходство содержимого. На конфликт влияет обработка пробелов: опции <code>--ignore-space-change</code>, <code>--ignore-all-space</code>, атрибуты <code>.gitattributes</code> (например, <code>*.md text eol=lf</code>).</p>
+                <h2>4.8 Переименования, пробелы и .gitattributes</h2>
+
+                <p>Часто конфликты возникают из-за «шума» — изменений пробелов, окончаний строк или переименований файлов. Git предоставляет инструменты для борьбы с этим.</p>
+
+                <h3>Детекция переименований</h3>
+                <p>Git не отслеживает переименования явно. Вместо этого он эвристически сравнивает удалённый файл с добавленным: если содержимое похоже на N% — считается переименованием.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Установить порог похожести (по умолчанию 50%)
+git merge -X rename-threshold=30 feature   # более агрессивная детекция
+
+# Отключить детекцию переименований
+git merge -X no-renames feature</code></pre>
+                </div>
+
+                <h3>Игнорирование пробелов при merge</h3>
+                <div class="code-example">
+<pre><code class="bash"># Игнорировать изменения в количестве пробелов
+git merge -X ignore-space-change feature
+
+# Игнорировать все пробелы
+git merge -X ignore-all-space feature</code></pre>
+                </div>
+
+                <h3>.gitattributes: контроль окончаний строк</h3>
+                <div class="code-example">
+<pre><code class="bash"># Файл .gitattributes в корне проекта:
+*.md   text eol=lf          # Markdown — всегда LF
+*.sh   text eol=lf          # Bash скрипты — LF
+*.bat  text eol=crlf        # Windows батники — CRLF
+*.png  binary               # Изображения — бинарные, не мёржить</code></pre>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Совет:</strong> Создайте <code>.gitattributes</code> в начале проекта. Это предотвратит массу ложных конфликтов из-за разных окончаний строк у Windows и Linux разработчиков.</p>
+                </div>
             </section>
+
             <section id="rerere" class="topic-section">
-                <h2>4.9 rerere: Reuse Recorded Resolution</h2>
-                <p><code>rerere</code> запоминает решения конфликтов и повторно применяет их при схожих конфликтах. Включается конфигурацией, хранит отпечатки конфликтных участков в <code>.git/rr-cache</code>.</p>
+                <h2>4.9 rerere: запоминание решений конфликтов</h2>
+
+                <p><code>rerere</code> расшифровывается как <strong>Reuse Recorded Resolution</strong>. Эта функция запоминает, как вы разрешили конфликт, и автоматически применяет то же решение, если конфликт повторится.</p>
+
+                <h3>Когда это полезно</h3>
+                <ul>
+                    <li>Вы делаете <code>rebase</code> и каждый раз сталкиваетесь с одним и тем же конфликтом</li>
+                    <li>Вы регулярно мёржите одну и ту же ветку (например, <code>develop</code> в <code>feature</code>)</li>
+                    <li>Вы тестируете merge, отменяете его, а потом делаете заново</li>
+                </ul>
+
+                <h3>Как включить</h3>
+                <div class="code-example">
+<pre><code class="bash"># Включить rerere глобально
+git config --global rerere.enabled true
+
+# Проверить, что включено
+git config rerere.enabled
+# true</code></pre>
+                </div>
+
+                <h3>Как это работает</h3>
+                <div class="code-example">
+<pre><code class="bash"># 1. Делаете merge, получаете конфликт
+git merge feature
+# CONFLICT ...
+
+# 2. Разрешаете конфликт вручную
+# (редактируете файл, убираете маркеры)
+
+# 3. Git записывает ваше решение
+git add file.txt
+git commit
+# Recorded resolution for 'file.txt'.
+
+# 4. В следующий раз при таком же конфликте:
+git merge feature
+# Resolved 'file.txt' using previous resolution.
+# Git автоматически применил ваше прошлое решение!</code></pre>
+                </div>
+
+                <div class="note">
+                    <p><strong>Где хранятся решения:</strong> в папке <code>.git/rr-cache/</code>. Это локальные данные, они не попадают в удалённый репозиторий.</p>
+                </div>
             </section>
+
             <section id="squash-history" class="topic-section">
-                <h2>4.10 Squash merge и история</h2>
-                <p><code>--squash</code> создаёт один коммит вместо merge‑коммита, скрывая детализацию ветки. Это упрощает историю, но теряет информацию о происхождении отдельных коммитов.</p>
+                <h2>4.10 Squash merge и влияние на историю</h2>
+
+                <p><code>--squash</code> — один из самых спорных инструментов. Он собирает все коммиты ветки в один, но <strong>не создаёт merge-коммит</strong>. Это значит, что Git не знает, что слияние произошло.</p>
+
+                <h3>Как работает squash merge</h3>
+                <div class="code-example">
+<pre><code class="bash"># Ветка feature/auth имеет 15 коммитов
+git merge --squash feature/auth
+
+# Все изменения в staging, но НЕ закоммичены
+git commit -m "feat: авторизация пользователей"
+
+# Результат: один чистый коммит в main
+# НО: Git не знает, что feature/auth была слита</code></pre>
+                </div>
+
+                <h3>Плюсы и минусы</h3>
+                <div class="visual-guide">
+                    <h4>Когда squash — хорошо</h4>
+                    <ul>
+                        <li>Ветка содержит «мусорные» коммиты (<code>fix typo</code>, <code>wip</code>, <code>test</code>)</li>
+                        <li>Вы хотите чистую линейную историю в main</li>
+                        <li>Feature маленькая и логически единая</li>
+                    </ul>
+                </div>
+                <div class="visual-guide">
+                    <h4>Когда squash — плохо</h4>
+                    <ul>
+                        <li>Ветка большая — теряется контекст отдельных изменений</li>
+                        <li><code>git log</code> не покажет, что ветка была слита → повторный merge вызовет конфликты</li>
+                        <li><code>git bisect</code> не сможет найти коммит с багом внутри «сжатого» коммита</li>
+                        <li>После squash ветку нужно удалять — повторно слить её невозможно</li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <p><strong>Рекомендация:</strong> для коротких feature-веток (1-5 коммитов) squash удобен. Для длинных веток лучше <code>--no-ff</code> merge или предварительная «уборка» через <code>rebase -i</code>.</p>
+                </div>
+            </section>
+
+            <section class="topic-section">
+                <h2>Практическое задание</h2>
+
+                <div class="exercise">
+                    <h4>Задание 1: Создать и разрешить конфликт</h4>
+                    <ol>
+                        <li>Создайте новый репозиторий с файлом <code>index.html</code></li>
+                        <li>Создайте ветку <code>feature/header</code>, измените заголовок <code>&lt;h1&gt;</code></li>
+                        <li>Вернитесь в <code>main</code>, измените тот же <code>&lt;h1&gt;</code> по-другому</li>
+                        <li>Выполните <code>git merge feature/header</code></li>
+                        <li>Разрешите конфликт, объединив оба варианта</li>
+                        <li>Завершите merge и проверьте историю: <code>git log --oneline --graph</code></li>
+                    </ol>
+                </div>
+
+                <div class="exercise">
+                    <h4>Задание 2: Сравнить стратегии</h4>
+                    <ol>
+                        <li>Создайте репозиторий с 3 коммитами в <code>main</code></li>
+                        <li>Создайте ветку <code>feature</code> с 2 коммитами (без изменений в main)</li>
+                        <li>Выполните <code>git merge feature</code> — какая стратегия использовалась?</li>
+                        <li>Откатите: <code>git reset --hard HEAD~1</code></li>
+                        <li>Теперь <code>git merge --no-ff feature</code> — в чём разница в <code>git log --graph</code>?</li>
+                    </ol>
+                </div>
+
+                <div class="exercise">
+                    <h4>Задание 3: Настроить rerere</h4>
+                    <ol>
+                        <li>Включите rerere: <code>git config rerere.enabled true</code></li>
+                        <li>Создайте конфликт (как в задании 1) и разрешите его</li>
+                        <li>Откатите merge: <code>git reset --hard HEAD~1</code></li>
+                        <li>Повторите merge — Git должен разрешить конфликт автоматически!</li>
+                    </ol>
+                </div>
             </section>
         </main>
     </div>

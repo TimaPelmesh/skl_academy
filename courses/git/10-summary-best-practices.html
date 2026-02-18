@@ -100,30 +100,167 @@
 
             <section id="best" class="topic-section">
                 <h2>10.2 Лучшие практики</h2>
+
+                <h3>Коммиты</h3>
                 <ul>
-                    <li>Делайте <strong>частые и маленькие коммиты</strong></li>
-                    <li>Пишите <strong>осмысленные сообщения</strong> (Conventional Commits приветствуются)</li>
-                    <li>Поддерживайте <code>.gitignore</code></li>
-                    <li>Для синхронизации используйте <code>git pull --rebase</code> (обсуждайте в команде)</li>
-                    <li><strong>Не force‑push</strong> в общие ветки</li>
+                    <li><strong>Маленькие и частые</strong> — один коммит = одно логическое изменение</li>
+                    <li><strong>Осмысленные сообщения</strong> — пишите «зачем», а не «что» (diff покажет «что»)</li>
+                    <li><strong>Conventional Commits</strong> — <code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>refactor:</code>, <code>test:</code>, <code>chore:</code></li>
+                    <li><strong>Не коммитьте мусор</strong> — <code>.env</code>, <code>node_modules/</code>, <code>__pycache__/</code> должны быть в <code>.gitignore</code></li>
                 </ul>
-                <p>Выберите минимум правил, которые принесут максимум пользы вашей команде, и применяйте их последовательно. Важна не «идеальность», а предсказуемость.</p>
+
+                <div class="code-example">
+<pre><code class="bash"># Пример хороших сообщений:
+git commit -m "feat: добавить авторизацию по JWT"
+git commit -m "fix: исправить утечку памяти в кэше сессий"
+git commit -m "docs: обновить README с инструкцией деплоя"
+git commit -m "refactor: вынести валидацию в отдельный модуль"
+
+# Плохие сообщения:
+# "fix"
+# "update"
+# "changes"
+# "asdfgh"</code></pre>
+                </div>
+
+                <h3>Ветвление</h3>
+                <ul>
+                    <li>Используйте <strong>короткоживущие ветки</strong> — чем меньше живёт ветка, тем меньше конфликтов</li>
+                    <li>Именуйте ветки с <strong>префиксами</strong>: <code>feature/</code>, <code>fix/</code>, <code>hotfix/</code>, <code>docs/</code></li>
+                    <li><strong>Удаляйте слитые ветки</strong> — <code>git branch --merged | xargs git branch -d</code></li>
+                    <li><strong>Синхронизируйтесь</strong> с main регулярно — <code>git pull --rebase origin main</code></li>
+                </ul>
+
+                <h3>Работа в команде</h3>
+                <ul>
+                    <li><strong>Не force-push</strong> в общие ветки (main, develop)</li>
+                    <li><strong>Всё через PR</strong> — никаких коммитов напрямую в main</li>
+                    <li><strong>Code review обязателен</strong> — минимум один approve</li>
+                    <li><strong>CI/CD на каждый PR</strong> — тесты должны проходить до merge</li>
+                </ul>
             </section>
+
             <section id="commit-style" class="topic-section">
-                <h2>10.3 Стиль коммитов и трейлеры</h2>
-                <p>Единый стиль сообщений (Conventional Commits), длина заголовка, осмысленность описания. Используйте трейлеры: <code>Co-authored-by:</code>, <code>Signed-off-by:</code>, ссылки на задачи/тикеты.</p>
+                <h2>10.3 Conventional Commits</h2>
+                <p>Стандарт именования коммитов, который позволяет автоматизировать генерацию CHANGELOG и определение версий.</p>
+                <div class="code-example">
+<pre><code class="bash"># Формат:
+# &lt;type&gt;(&lt;scope&gt;): &lt;description&gt;
+#
+# [optional body]
+#
+# [optional footer(s)]
+
+# Примеры:
+feat(auth): добавить авторизацию через OAuth2
+fix(api): исправить 500 ошибку при пустом запросе
+docs(readme): добавить инструкцию по установке
+refactor(db): перейти с SQLite на PostgreSQL
+test(auth): покрыть тестами модуль авторизации
+chore(deps): обновить зависимости
+
+# С телом и трейлерами:
+# feat(payment): добавить оплату через Apple Pay
+#
+# Интегрировать Apple Pay SDK, добавить обработку
+# callback'ов и проверку подписи транзакции.
+#
+# Refs: #142
+# Co-authored-by: Иван &lt;ivan@example.com&gt;</code></pre>
+                </div>
             </section>
+
             <section id="history-hygiene" class="topic-section">
                 <h2>10.4 Гигиена истории</h2>
-                <p>Чистая линейная история облегчает поиск причин регрессий и автоматизацию релизов. Используйте rebase/merge согласно политике проекта, удаляйте мёртвые ветки, фиксируйте релизы тегами.</p>
+                <div class="code-example">
+<pre><code class="bash"># Чистим историю перед PR
+git rebase -i main      # squash/fixup мусорных коммитов
+
+# Удаляем слитые ветки
+git branch --merged main | grep -v "main" | xargs git branch -d
+
+# Очищаем remote-tracking ветки
+git fetch --prune
+
+# Проверяем граф — должно быть чисто
+git log --oneline --graph --all</code></pre>
+                </div>
             </section>
+
             <section id="repo-health" class="topic-section">
                 <h2>10.5 Здоровье репозитория</h2>
-                <p>Следите за размером и количеством объектов, периодически выполняйте обслуживание (gc/prune), используйте LFS для больших файлов и partial/shallow clone для оптимизации.</p>
+                <div class="code-example">
+<pre><code class="bash"># Проверить размер репозитория
+git count-objects -vH
+
+# Найти большие файлы в истории
+git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | awk '/^blob/ {print $3, $4}' | sort -rn | head -20
+
+# Оптимизация
+git gc --auto
+
+# Для больших файлов используйте Git LFS
+git lfs install
+git lfs track "*.psd" "*.zip" "*.mp4"</code></pre>
+                </div>
             </section>
+
             <section id="security" class="topic-section">
-                <h2>10.6 Безопасность секретов</h2>
-                <p>Не храните секреты в репозитории; применяйте секрет‑сканеры, политики ревью и удаление утечек (ревок токенов, перевыпуск ключей). Для подтверждения авторства используйте подпись коммитов.</p>
+                <h2>10.6 Безопасность и секреты</h2>
+                <ul>
+                    <li><strong>Никогда</strong> не храните пароли, токены, ключи в репозитории</li>
+                    <li>Используйте <code>.env</code> файлы (добавьте в <code>.gitignore</code>)</li>
+                    <li>Включите секрет-сканеры (GitHub Secret Scanning, git-secrets)</li>
+                    <li>Если секрет утёк — <strong>немедленно ревокните</strong> его (даже если удалили из кода — он остаётся в истории)</li>
+                </ul>
+                <div class="code-example">
+<pre><code class="bash"># .gitignore — обязательные правила:
+.env
+.env.local
+*.key
+*.pem
+credentials.json
+secrets/</code></pre>
+                </div>
+            </section>
+
+            <section class="topic-section">
+                <h2>Шпаргалка: топ-20 команд Git</h2>
+                <div class="code-example">
+<pre><code class="bash"># Настройка
+git config --global user.name "Имя"
+git config --global user.email "email@example.com"
+
+# Создание и клонирование
+git init                          # новый репозиторий
+git clone URL                     # клонировать
+
+# Ежедневная работа
+git status                        # что происходит?
+git add -p                        # интерактивное добавление
+git commit -m "сообщение"         # коммит
+git push                          # отправить
+git pull --rebase                 # получить + rebase
+
+# Ветки
+git switch -c feature/name        # создать и переключиться
+git switch main                   # переключиться
+git branch -d feature/name        # удалить слитую
+
+# История
+git log --oneline --graph --all   # визуальная история
+git diff                          # изменения
+git show HASH                     # конкретный коммит
+
+# Слияние
+git merge --no-ff feature         # merge с коммитом
+git rebase -i HEAD~5              # уборка истории
+
+# Спасение
+git stash                         # временно убрать изменения
+git restore file                  # откатить файл
+git reflog                        # найти потерянное</code></pre>
+                </div>
             </section>
         </main>
     </div>
