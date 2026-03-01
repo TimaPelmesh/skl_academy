@@ -28,6 +28,24 @@ const SEARCH_DATA = {
       ]
     },
     {
+      id: 'math',
+      title: 'Математика',
+      description: 'Справочник и курс по школьной математике: числа, арифметика, алгебра, функции, геометрия, тригонометрия, прогрессии. Подготовка к ОГЭ и ЕГЭ, формулы и разбор заданий.',
+      url: 'courses/math/01-part1-baza.html',
+      icon: 'fas fa-calculator',
+      tags: ['математика', 'алгебра', 'геометрия', 'огэ', 'егэ', 'дроби', 'уравнения', 'функции', 'тригонометрия', 'прогрессии', 'формулы', 'справочник'],
+      lessons: [
+        { title: 'Часть I: База (числа и арифметика)', url: 'courses/math/01-part1-baza.html', description: 'Числа, дроби, проценты, степени, корни' },
+        { title: 'Часть II: Алгебра и преобразования', url: 'courses/math/02-part2-algebra.html', description: 'Многочлены, уравнения, неравенства, системы' },
+        { title: 'Часть III: Функции и графики', url: 'courses/math/03-part3-functions.html', description: 'Координаты, функции, линейная, квадратичная, графики' },
+        { title: 'Часть IV: Геометрия (планиметрия)', url: 'courses/math/04-part4-geometry.html', description: 'Углы, треугольники, окружность, четырёхугольники, площади' },
+        { title: 'Часть V: Тригонометрия и прогрессии', url: 'courses/math/05-part5-trigonometry.html', description: 'Синус, косинус, тангенс, арифметическая и геометрическая прогрессии' },
+        { title: 'Часть VI: Задачи и формулы под ОГЭ', url: 'courses/math/06-part6-oge.html', description: 'Структура ОГЭ, разбор заданий по темам' },
+        { title: 'Часть VII: Задачи и формулы под ЕГЭ', url: 'courses/math/07-part7-ege.html', description: 'Структура ЕГЭ профиль, разбор заданий' },
+        { title: 'Справочные таблицы', url: 'courses/math/08-reference.html', description: 'Все основные формулы: ОГЭ и ЕГЭ' }
+      ]
+    },
+    {
       id: 'networks',
       title: 'Компьютерные сети',
       description: 'Изучите компьютерные сети: от основ до продвинутых технологий. Модель OSI, TCP/IP, IP-адресация, коммутация, маршрутизация, VLAN, протоколы OSPF, BGP, EIGRP, IS-IS, RIP, MPLS, VXLAN, EVPN, QoS, Multicast, VPN, IPSec, firewall, ACL, NAT, IPv4, IPv6, CIDR, VLSM, STP, LACP, DNS, DHCP, HTTP, FTP, SMTP, беспроводные сети Wi-Fi 802.11, WPA, безопасность, Wireshark, Packet Tracer, GNS3, CCNA, SDN, SD-WAN, LTE, 5G, IoT, MQTT, Kubernetes, data center, cloud networking.',
@@ -146,24 +164,6 @@ const SEARCH_DATA = {
       url: '404.html',
       icon: 'fas fa-gamepad',
       tags: ['unity', 'игры', 'csharp', 'физика', 'анимация', 'ui', '2d', '3d'],
-      status: 'planned'
-    },
-    {
-      id: 'ege',
-      title: 'ЕГЭ по информатике',
-      description: 'Полная подготовка к ЕГЭ по информатике: от основ до сложных алгоритмов и программирования. Алгоритмизация и программирование, системы счисления и логика, базы данных и сети.',
-      url: '404.html',
-      icon: 'fas fa-graduation-cap',
-      tags: ['егэ', 'информатика', 'алгоритмы', 'программирование', 'системы счисления', 'логика', 'базы данных'],
-      status: 'planned'
-    },
-    {
-      id: 'oge',
-      title: 'ОГЭ по информатике',
-      description: 'Подготовка к ОГЭ по информатике: основы программирования, алгоритмы и информационные технологии. Основы программирования на Python, алгоритмы и структуры данных, работа с таблицами и базами данных.',
-      url: '404.html',
-      icon: 'fas fa-certificate',
-      tags: ['огэ', 'информатика', 'python', 'алгоритмы', 'структуры данных', 'базы данных'],
       status: 'planned'
     }
   ],

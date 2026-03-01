@@ -3,7 +3,7 @@
     <!-- Главная страница -->
     <url>
         <loc>https://skl-academy.ru/</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -11,7 +11,7 @@
     <!-- Страница "О проекте" -->
     <url>
         <loc>https://skl-academy.ru/about.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -19,49 +19,49 @@
     <!-- Статьи -->
     <url>
         <loc>https://skl-academy.ru/articles/first-python-program.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/articles/tkinter-notes-app.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/articles/ai-for-beginners.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/articles/docker-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/articles/url-journey.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/articles/billion-dollar-bugs.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/articles/reading-code.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/library.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -69,61 +69,61 @@
     <!-- Курс Python -->
     <url>
         <loc>https://skl-academy.ru/courses/python/01-python-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/02-control-flow.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/03-functions.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/04-data-structures.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/05-oop.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/06-file-handling.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/07-modules-and-packages.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/08-advanced-topics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/09-typing-testing-and-quality.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/python/10-concurrency-performance-packaging.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -131,61 +131,61 @@
     <!-- Курс Компьютерные сети -->
     <url>
         <loc>https://skl-academy.ru/courses/networks/01-networks-fundamental.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/02-osi-tcp-ip-models.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/03-ethernet-switching.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/04-ip-addressing-and-routing.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/05-routing.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/06-transport-layer.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/07-application-protocols.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/08-network-security.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/09-diagnostics-and-tools.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/networks/10-advanced-topics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -193,61 +193,61 @@
     <!-- Курс Git -->
     <url>
         <loc>https://skl-academy.ru/courses/git/01-git-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/02-commits-and-history.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/03-branching.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/04-merging-and-conflicts.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/05-rebase.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/06-remotes.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/07-teamwork-and-practices.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/08-recovery-and-troubleshooting.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/09-tools-and-integrations.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/git/10-summary-best-practices.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -255,61 +255,61 @@
     <!-- Курс Веб-разработка -->
     <url>
         <loc>https://skl-academy.ru/courses/web/01-html-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/02-css-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/03-javascript-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/04-responsive-design.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/05-flexbox-grid.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/06-forms-validation.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/07-dom-advanced.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/08-async-apis.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/09-optimization.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/web/10-projects.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -317,55 +317,55 @@
     <!-- Курс Linux и Bash -->
     <url>
         <loc>https://skl-academy.ru/courses/linux/01-linux-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/02-file-system.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/03-file-operations.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/04-permissions.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/05-processes.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/06-redirection.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/07-search.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/08-scripting.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/linux/09-networking.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -373,137 +373,123 @@
     <!-- Курс Windows -->
     <url>
         <loc>https://skl-academy.ru/courses/windows/01-windows-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/02-powershell-basics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/03-file-system.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/04-registry.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/05-services.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/06-networking.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/07-security.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/08-automation.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/09-troubleshooting.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/windows/10-advanced-topics.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
-    <!-- ОГЭ по информатике -->
-    <url>
-        <loc>https://skl-academy.ru/courses/oge/01-oge-part1.html</loc>
-        <lastmod>2026-02-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://skl-academy.ru/courses/oge/02-oge-part2.html</loc>
-        <lastmod>2026-02-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    
     <!-- Курс Технический английский -->
     <url>
         <loc>https://skl-academy.ru/courses/english/01-foundations.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/02-everyday-life.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/03-work-professional.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/04-technologies-infrastructure.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/05-travel-transport.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/06-shopping-services.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/07-business-communication.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/08-it-interviews.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/09-technical-documentation.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/english/10-final-test.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -511,93 +497,143 @@
     <!-- Курс Введение в AI -->
     <url>
         <loc>https://skl-academy.ru/courses/ai/00-about-course.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/01-math-logic.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/02-ml-intro.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/03-classical-ml.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/04-ensembles.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/05-neural-intro.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/06-backprop-optimization.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/07-rnn-lstm.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/08-attention-transformers.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/09-llm.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/courses/ai/10-practice-mlops.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
+    <!-- Курс Математика -->
+    <url>
+        <loc>https://skl-academy.ru/courses/math/01-part1-baza.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://skl-academy.ru/courses/math/02-part2-algebra.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://skl-academy.ru/courses/math/03-part3-functions.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://skl-academy.ru/courses/math/04-part4-geometry.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://skl-academy.ru/courses/math/05-part5-trigonometry.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://skl-academy.ru/courses/math/06-part6-oge.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://skl-academy.ru/courses/math/07-part7-ege.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://skl-academy.ru/courses/math/08-reference.html</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
     <!-- Тренажер печати и песочницы -->
     <url>
         <loc>https://skl-academy.ru/sandbox/typing/index.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/sandbox/linux-commands/index.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/sandbox/web-playground/index.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://skl-academy.ru/sandbox/pc-architecture/index.html</loc>
-        <lastmod>2026-02-14</lastmod>
+        <lastmod>2026-03-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
