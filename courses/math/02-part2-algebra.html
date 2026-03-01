@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Часть II. Алгебра и преобразования: многочлены, уравнения, неравенства, системы. Курс математики SKL Academy.">
+    <meta name="keywords" content="алгебра, многочлены, квадратные уравнения, системы уравнений, неравенства, ОГЭ, ЕГЭ, математика">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Математика — Часть II. Алгебра и преобразования | SKL Academy">
+    <meta property="og:description" content="Многочлены, уравнения, неравенства, системы. Курс математики и подготовка к ОГЭ и ЕГЭ.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/math/02-part2-algebra.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Математика — Алгебра и преобразования | SKL Academy">
+    <meta name="twitter:description" content="Многочлены, уравнения, неравенства, системы. Подготовка к ОГЭ и ЕГЭ.">
+    <title>Часть II. Алгебра и преобразования | Математика | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/math/02-part2-algebra.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="math">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Математика</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons"><button class="color-scheme-btn" data-color="purple" aria-label="Фиолетовая схема"><span class="color-dot" style="background: #6c63ff;"></span></button></div>
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" aria-label="Настройки"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg></button>
+            <a href="../../index.html" class="exit-btn" title="На главную"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
+        </div>
+    </header>
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic"><button class="topic-btn">I. База</button><div class="subtopics"><a href="01-part1-baza.html#numbers" class="subtopic">Числа</a><a href="01-part1-baza.html#fractions" class="subtopic">Дроби</a><a href="01-part1-baza.html#percents" class="subtopic">Проценты</a><a href="01-part1-baza.html#powers" class="subtopic">Степень</a><a href="01-part1-baza.html#roots" class="subtopic">Корень</a></div></div>
+                <div class="topic"><button class="topic-btn active">II. Алгебра и преобразования</button><div class="subtopics" style="max-height: 1000px;"><a href="#letter-expressions" class="subtopic active">Буквенные выражения и тождества</a><a href="#polynomials" class="subtopic">Многочлены</a><a href="#factoring" class="subtopic">Разложение на множители</a><a href="#algebraic-fractions" class="subtopic">Алгебраические дроби</a><a href="#linear-equations" class="subtopic">Линейные уравнения и неравенства</a><a href="#quadratic" class="subtopic">Квадратные уравнения</a><a href="#rational-equations" class="subtopic">Дробно-рациональные уравнения</a><a href="#systems" class="subtopic">Системы линейных уравнений</a><a href="#inequalities" class="subtopic">Неравенства</a></div></div>
+                <div class="topic"><button class="topic-btn">III. Функции и графики</button><div class="subtopics"><a href="03-part3-functions.html#coordinates" class="subtopic">Координаты</a><a href="03-part3-functions.html#function-def" class="subtopic">Функция</a><a href="03-part3-functions.html#linear-func" class="subtopic">Линейная функция</a><a href="03-part3-functions.html#quadratic-func" class="subtopic">Квадратичная</a><a href="03-part3-functions.html#inverse-proportion" class="subtopic">Обратная пропорциональность</a><a href="03-part3-functions.html#graphs-modulus" class="subtopic">Графики модуля, корня, степени</a></div></div>
+                <div class="topic"><button class="topic-btn">IV. Геометрия</button><div class="subtopics"><a href="04-part4-geometry.html#angles" class="subtopic">Углы</a><a href="04-part4-geometry.html#triangles" class="subtopic">Треугольники</a><a href="04-part4-geometry.html#pythagoras" class="subtopic">Пифагор</a><a href="04-part4-geometry.html#circle" class="subtopic">Окружность</a><a href="04-part4-geometry.html#quadrilaterals" class="subtopic">Четырёхугольники</a><a href="04-part4-geometry.html#areas-volumes" class="subtopic">Площади и объёмы</a></div></div>
+                <div class="topic"><button class="topic-btn">V. Тригонометрия и прогрессии</button><div class="subtopics"><a href="05-part5-trigonometry.html#trig" class="subtopic">Синус, косинус, тангенс</a><a href="05-part5-trigonometry.html#progressions" class="subtopic">Прогрессии</a></div></div>
+                <div class="topic"><button class="topic-btn">VI. ОГЭ</button><div class="subtopics"><a href="06-part6-oge.html#oge-structure" class="subtopic">Структура ОГЭ</a><a href="06-part6-oge.html#oge-1-5" class="subtopic">Задания 1–5</a><a href="06-part6-oge.html#oge-algebra" class="subtopic">Алгебра</a><a href="06-part6-oge.html#oge-geometry" class="subtopic">Геометрия</a><a href="06-part6-oge.html#oge-hard" class="subtopic">Сложные</a></div></div>
+                <div class="topic"><button class="topic-btn">VII. ЕГЭ</button><div class="subtopics"><a href="07-part7-ege.html#ege-structure" class="subtopic">Структура ЕГЭ</a><a href="07-part7-ege.html#ege-1-12" class="subtopic">Задания 1–12</a><a href="07-part7-ege.html#ege-13-15" class="subtopic">Задания 13–15</a><a href="07-part7-ege.html#ege-geometry" class="subtopic">Геометрия</a><a href="07-part7-ege.html#ege-economics" class="subtopic">Экономические задачи</a><a href="07-part7-ege.html#ege-params" class="subtopic">Параметры</a></div></div>
+                <div class="topic"><button class="topic-btn">Справочные таблицы</button><div class="subtopics"><a href="08-reference.html#formulas" class="subtopic">Формулы</a></div></div>
+            </div>
+        </div>
+        <main id="content" class="content sidebar-active">
+            <div class="part-title-wrap"><h2 class="topic-section-title">Часть II. Алгебра и преобразования</h2></div>
+            <section id="letter-expressions" class="topic-section">
+                <h3>Буквенные выражения и тождества</h3>
+                <div class="lesson-content">
+                    <p><strong>Буквенное выражение</strong> — запись из чисел, букв, знаков действий и скобок. Примеры: 2a + b, (x − 1)/(x + 2), √(x + 1). При подстановке вместо букв допустимых значений получается число.</p>
+                    <p><strong>ОДЗ</strong> (область допустимых значений) — множество значений переменных, при которых выражение имеет смысл.</p>
+                    <div class="math-key">
+                        <strong>При записи ОДЗ учитываем:</strong> знаменатель ≠ 0; подкоренное выражение ≥ 0 (для корня чётной степени); основание степени при отрицательном или дробном показателе — свои ограничения.
+                    </div>
+                    <p><strong>Тождество</strong> — равенство, верное при всех значениях переменных из ОДЗ. Упрощение — раскрытие скобок, приведение подобных, сокращение дробей.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Пример тождества</div>
+                        <p>(a + b)² = a² + 2ab + b²</p>
+                    </div>
+                </div>
+            </section>
+            <section id="polynomials" class="topic-section">
+                <h3>Многочлены</h3>
+                <div class="lesson-content">
+                    <p><strong>Одночлен</strong> — произведение числа (коэффициент) и степеней переменных (например, 3x²y). <strong>Многочлен</strong> — сумма одночленов. Степень многочлена — наибольшая степень входящего в него одночлена.</p>
+                    <div class="math-key">Подобные слагаемые — одинаковая буквенная часть; складываем коэффициенты, буквенную часть сохраняем. Например: 3x² + 2x² = 5x².</div>
+                    <p>Сложение и вычитание: раскрываем скобки (знак минус перед скобкой меняет знаки внутри), приводим подобные. Умножение: каждый член первого на каждый член второго, затем приводим подобные.</p>
+                    <p><strong>Формулы сокращённого умножения</strong> упрощают раскрытие скобок и разложение на множители. Их нужно знать наизусть.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">ФСУ</div>
+                        <p>(a + b)² = a² + 2ab + b² &nbsp;|&nbsp; (a − b)² = a² − 2ab + b² &nbsp;|&nbsp; a² − b² = (a − b)(a + b)</p>
+                        <p>(a + b)³ = a³ + 3a²b + 3ab² + b³ &nbsp;|&nbsp; (a − b)³ = a³ − 3a²b + 3ab² − b³</p>
+                        <p>a³ + b³ = (a + b)(a² − ab + b²) &nbsp;|&nbsp; a³ − b³ = (a − b)(a² + ab + b²)</p>
+                    </div>
+                </div>
+            </section>
+            <section id="factoring" class="topic-section">
+                <h3>Разложение на множители</h3>
+                <div class="lesson-content">
+                    <p>Разложить на множители — представить выражение в виде произведения. Это нужно для сокращения дробей, решения уравнений и неравенств.</p>
+                    <h4>Приёмы</h4>
+                    <p><strong>Вынесение общего множителя:</strong> найти общий множитель всех членов (число и/или степень переменной), вынести его за скобки.</p>
+                    <p><strong>Группировка:</strong> объединить слагаемые в группы так, чтобы в каждой группе можно было вынести общий множитель; затем вынести получившуюся общую скобку.</p>
+                    <p><strong>ФСУ в обратную сторону:</strong> разность квадратов a² − b² = (a − b)(a + b); сумма и разность кубов — по формулам из блока выше.</p>
+                    <p><strong>Квадратный трёхчлен</strong> ax² + bx + c: найти корни x₁, x₂ уравнения ax² + bx + c = 0; тогда разложение по формуле ниже.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Разложение квадратного трёхчлена</div>
+                        <p>ax² + bx + c = a(x − x₁)(x − x₂)</p>
+                        <p>Если D = 0 (один корень x₀): ax² + bx + c = a(x − x₀)²</p>
+                    </div>
+                </div>
+            </section>
+            <section id="algebraic-fractions" class="topic-section">
+                <h3>Алгебраические дроби</h3>
+                <div class="lesson-content">
+                    <p><strong>Алгебраическая дробь</strong> — выражение <span class="math-frac"><span class="frac-num">P</span><span class="frac-line"></span><span class="frac-den">Q</span></span>, где P и Q — многочлены, Q не тождественный ноль. ОДЗ: все значения переменных, при которых Q ≠ 0.</p>
+                    <p><strong>Сокращение:</strong> разложить числитель и знаменатель на множители; разделить числитель и знаменатель на их общий множитель. Сокращать можно только множители, а не слагаемые.</p>
+                    <p><strong>Сложение и вычитание:</strong> привести дроби к общему знаменателю (удобно брать НОК знаменателей или произведение); сложить или вычесть числители; знаменатель общий; по возможности сократить.</p>
+                    <p>Перед умножением удобно сокращать крест-накрест. Деление — заменить умножением на обратную дробь.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Умножение и деление дробей</div>
+                        <div class="math-frac-block">
+                            <span class="math-frac"><span class="frac-num">P</span><span class="frac-line"></span><span class="frac-den">Q</span></span> · <span class="math-frac"><span class="frac-num">R</span><span class="frac-line"></span><span class="frac-den">S</span></span> = <span class="math-frac"><span class="frac-num">P·R</span><span class="frac-line"></span><span class="frac-den">Q·S</span></span>
+                        </div>
+                        <div class="math-frac-block">
+                            <span class="math-frac"><span class="frac-num">P</span><span class="frac-line"></span><span class="frac-den">Q</span></span> : <span class="math-frac"><span class="frac-num">R</span><span class="frac-line"></span><span class="frac-den">S</span></span> = <span class="math-frac"><span class="frac-num">P</span><span class="frac-line"></span><span class="frac-den">Q</span></span> · <span class="math-frac"><span class="frac-num">S</span><span class="frac-line"></span><span class="frac-den">R</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="linear-equations" class="topic-section">
+                <h3>Линейные уравнения и неравенства</h3>
+                <div class="lesson-content">
+                    <p><strong>Линейное уравнение</strong> — вид ax + b = 0 (a, b — числа). При a ≠ 0 корень один; при a = 0 — либо бесконечно много решений (b = 0), либо решений нет (b ≠ 0).</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Решение линейного уравнения</div>
+                        <p>ax + b = 0 &nbsp; ⇒ &nbsp; x = <span class="math-frac"><span class="frac-num">−b</span><span class="frac-line"></span><span class="frac-den">a</span></span> &nbsp; (a ≠ 0)</p>
+                    </div>
+                    <p><strong>Алгоритм</strong> для сложного уравнения: раскрыть скобки; перенести слагаемые с x в одну часть, числа в другую (знак при переносе меняется); привести подобные; разделить на коэффициент при x.</p>
+                    <div class="math-key">Линейное неравенство: при делении на отрицательное число знак неравенства меняется (&gt; ↔ &lt;, ≥ ↔ ≤).</div>
+                    <p>Ответ — промежуток: (a; b) или [a; b], (−∞; a), (a; +∞). Круглая скобка — граница не входит, квадратная — входит.</p>
+                </div>
+            </section>
+            <section id="quadratic" class="topic-section">
+                <h3>Квадратные уравнения</h3>
+                <div class="lesson-content">
+                    <p><strong>Квадратное уравнение</strong> — вид ax² + bx + c = 0, a ≠ 0. Решение зависит от <strong>дискриминанта</strong> D = b² − 4ac.</p>
+                    <p>При D &gt; 0 — два различных корня; при D = 0 — один корень (два совпавших); при D &lt; 0 — действительных корней нет.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Формула корней</div>
+                        <p>D = b² − 4ac</p>
+                        <div class="math-frac-block">x₁,₂ = <span class="math-frac"><span class="frac-num">−b ± √D</span><span class="frac-line"></span><span class="frac-den">2a</span></span></div>
+                    </div>
+                    <p><strong>Теорема Виета</strong> связывает корни и коэффициенты. Для приведённого уравнения x² + px + q = 0 и для общего ax² + bx + c = 0:</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Теорема Виета</div>
+                        <p>x² + px + q = 0: &nbsp; x₁ + x₂ = −p, &nbsp; x₁·x₂ = q</p>
+                        <p>ax² + bx + c = 0: &nbsp; x₁ + x₂ = <span class="math-frac"><span class="frac-num">−b</span><span class="frac-line"></span><span class="frac-den">a</span></span>, &nbsp; x₁·x₂ = <span class="math-frac"><span class="frac-num">c</span><span class="frac-line"></span><span class="frac-den">a</span></span></p>
+                    </div>
+                    <p>Разложение: ax² + bx + c = a(x − x₁)(x − x₂).</p>
+                </div>
+            </section>
+            <section id="rational-equations" class="topic-section">
+                <h3>Дробно-рациональные уравнения</h3>
+                <div class="lesson-content">
+                    <p>Неизвестное входит в знаменатель (например, <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">x−2</span></span> + <span class="math-frac"><span class="frac-num">3</span><span class="frac-line"></span><span class="frac-den">x</span></span> = 5). Сначала выписываем ОДЗ: все знаменатели ≠ 0.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Порядок решения</div>
+                        <p>1. Выписать ОДЗ</p>
+                        <p>2. Перенести всё в одну сторону, привести к общему знаменателю</p>
+                        <p>3. Приравнять числитель к нулю, решить уравнение</p>
+                        <p>4. Отобрать корни: оставить только те, что входят в ОДЗ</p>
+                    </div>
+                    <div class="math-key">Посторонние корни появляются после умножения на знаменатель. Проверка подстановкой в исходные знаменатели обязательна.</div>
+                </div>
+            </section>
+            <section id="systems" class="topic-section">
+                <h3>Системы линейных уравнений</h3>
+                <div class="lesson-content">
+                    <p>Система двух уравнений с двумя неизвестными. Решение — пара (x; y), удовлетворяющая обоим уравнениям.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Система</div>
+                        <p>a₁x + b₁y = c₁</p>
+                        <p>a₂x + b₂y = c₂</p>
+                    </div>
+                    <p><strong>Метод подстановки:</strong> выразить из одного уравнения одну переменную (например, y через x); подставить во второе; решить уравнение с одной переменной; найти вторую переменную.</p>
+                    <p><strong>Метод сложения:</strong> умножить уравнения на числа так, чтобы коэффициенты при одной переменной стали противоположными; сложить уравнения — одна переменная исчезнет; решить, затем подстановкой найти вторую.</p>
+                    <div class="math-key">Система может иметь одно решение, бесконечно много или не иметь решений. Ответ — пара (x; y).</div>
+                </div>
+            </section>
+            <section id="inequalities" class="topic-section">
+                <h3>Неравенства: линейные, квадратные, метод интервалов</h3>
+                <div class="lesson-content">
+                    <p><strong>Квадратное неравенство</strong> ax² + bx + c &gt; 0 (или &lt;, ≥, ≤). Решаем уравнение ax² + bx + c = 0, находим корни. Парабола: при a &gt; 0 ветви вверх, при a &lt; 0 — вниз. Для &gt; 0 берём промежутки, где парабола выше Ox; для &lt; 0 — где ниже. Строгое неравенство — границы не включаем; нестрогое — корни включаем.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Квадратное неравенство</div>
+                        <p>ax² + bx + c = 0 → корни x₁, x₂. Эскиз параболы (a &gt; 0 ↑, a &lt; 0 ↓) → выбор промежутков по знаку.</p>
+                    </div>
+                    <p><strong>Метод интервалов</strong> — для неравенств вида произведение или дробь &gt; 0, &lt; 0. Отмечаем на прямой корни числителя и точки, где знаменатель равен нулю (их выкалываем). На каждом промежутке выражение сохраняет знак; определяем знак подстановкой на одном промежутке, остальные — чередованием.</p>
+                    <div class="math-diagram">
+                        <div class="diagram-title">Метод интервалов: знаки на прямой (пример для (x−x₁)(x−x₂) &gt; 0)</div>
+                        <svg viewBox="0 0 320 56" width="320" height="56" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="20" y1="28" x2="300" y2="28" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                            <line x1="100" y1="28" x2="100" y2="36" stroke="currentColor" stroke-width="1"/>
+                            <line x1="200" y1="28" x2="200" y2="36" stroke="currentColor" stroke-width="1"/>
+                            <text x="100" y="48" text-anchor="middle" font-size="12" fill="currentColor">x₁</text>
+                            <text x="200" y="48" text-anchor="middle" font-size="12" fill="currentColor">x₂</text>
+                            <text x="55" y="22" text-anchor="middle" font-size="13" fill="currentColor">+</text>
+                            <text x="150" y="22" text-anchor="middle" font-size="13" fill="currentColor">−</text>
+                            <text x="250" y="22" text-anchor="middle" font-size="13" fill="currentColor">+</text>
+                        </svg>
+                    </div>
+                    <div class="math-key">Для (x−x₁)(x−x₂) &gt; 0 берём промежутки со знаком «+»: (−∞; x₁) и (x₂; +∞). Точки x₁, x₂ при строгом &gt; 0 не включаем.</div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть">×</button></div><div class="mobile-settings-section"><h4>Тема</h4><button class="mobile-theme-toggle-btn" id="mobileThemeToggle">Тема</button></div></div></div>
+    <script src="../courses.js"></script>
+</body>
+</html>

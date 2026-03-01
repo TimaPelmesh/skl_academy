@@ -267,46 +267,39 @@ header .header-buttons {
     border-color: transparent;
 }
 
+.theme-toggle-btn {
+    overflow: hidden;
+}
+
 .theme-toggle-btn svg {
     width: 20px;
     height: 20px;
     position: absolute;
-    transition: all 0.3s ease;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.25s ease;
+    pointer-events: none;
 }
 
-/* Светлая тема: иконки в шапке всегда контрастные (как в других курсах) */
-body:not(.dark-theme) header .theme-toggle-btn,
-body:not(.dark-theme) header .exit-btn,
-body:not(.dark-theme) header .mobile-settings-btn {
-    color: #333344;
-}
-body:not(.dark-theme) header .theme-toggle-btn svg,
-body:not(.dark-theme) header .exit-btn svg,
-body:not(.dark-theme) header .mobile-settings-btn svg {
-    color: inherit;
-}
-body:not(.dark-theme) header .header-title {
-    color: #333344;
-}
-
-.theme-icon-sun {
+.theme-toggle-btn .theme-icon-sun {
     opacity: 1;
-    transform: rotate(0deg);
+    display: block;
 }
 
-.theme-icon-moon {
+.theme-toggle-btn .theme-icon-moon {
     opacity: 0;
-    transform: rotate(90deg);
+    display: none;
 }
 
-body.dark-theme .theme-icon-sun {
+body.dark-theme .theme-toggle-btn .theme-icon-sun {
     opacity: 0;
-    transform: rotate(90deg);
+    display: none;
 }
 
-body.dark-theme .theme-icon-moon {
+body.dark-theme .theme-toggle-btn .theme-icon-moon {
     opacity: 1;
-    transform: rotate(0deg);
+    display: block;
 }
 
 /* Кнопка меню */
@@ -370,7 +363,7 @@ body.dark-theme .theme-icon-moon {
     overflow: hidden;
 }
 
-/* Боковое меню — акцентная полоса */
+/* Боковое меню */
 .sidebar {
     width: 280px;
     background: var(--bg-color);
@@ -384,7 +377,6 @@ body.dark-theme .theme-icon-moon {
     transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
     z-index: 99;
     border-right: 1px solid var(--border-color);
-    border-left: 3px solid var(--primary-color);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -1093,14 +1085,6 @@ h4 {
 .light-theme .code-example pre,
 .light-theme .code-example code {
     color: #1e1e1e !important;
-}
-
-/* Текстовые блоки (h4, ul, p) внутри code-example — читаемый тёмный текст на светлом фоне */
-.light-theme .code-example h4,
-.light-theme .code-example ul,
-.light-theme .code-example li,
-.light-theme .code-example p {
-    color: #111827 !important;
 }
 
 .light-theme .code-example code .hljs-comment,
@@ -2053,6 +2037,7 @@ body.dark-theme .exercise li { color: #e6e6e6; }
     max-width: 900px;
     margin: 0 auto 40px;
     padding: 0 20px;
+    scroll-margin-top: calc(var(--header-height, 70px) + 16px);
 }
 
 /* Вводный блок модуля: описание и подготовительный этап в одном потоке */
@@ -2136,7 +2121,6 @@ body.dark-theme header {
 body.dark-theme .sidebar {
     background: #111827;
     border-right-color: rgba(255, 255, 255, 0.1);
-    border-left-color: var(--primary-light);
 }
 
 body.dark-theme .topic-btn {
@@ -2304,11 +2288,17 @@ body.dark-theme .color-scheme-btn.active {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* ===== МОБИЛЬНОЕ МЕНЮ НАСТРОЕК ===== */
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ: кнопка темы в шапке (как на десктопе), без иконки настроек ===== */
 @media (max-width: 768px) {
-    .color-scheme-buttons,
-    .theme-toggle-btn {
+    .color-scheme-buttons {
         display: none;
+    }
+    /* Кнопка смены темы остаётся в шапке на мобильной */
+    .theme-toggle-btn {
+        display: flex;
+    }
+    .mobile-settings-btn {
+        display: none !important;
     }
 }
 
@@ -2496,4 +2486,218 @@ body.dark-theme .mobile-theme-toggle-btn .theme-icon-sun {
 
 body.dark-theme .mobile-theme-toggle-btn .theme-icon-moon {
     display: block;
+}
+
+/* ----- Курс Математика: заголовок части и визуальные блоки ----- */
+
+/* Заголовок части (Часть I. База ...) — не выходит за блок контента */
+.part-title-wrap {
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+    padding: 0 20px;
+}
+
+.part-title-wrap .topic-section-title,
+.content > .topic-section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(79, 70, 229, 0.25);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.35;
+}
+
+.part-title-wrap {
+    scroll-margin-top: calc(var(--header-height, 70px) + 16px);
+}
+
+body.dark-theme .part-title-wrap .topic-section-title,
+body.dark-theme .content > .topic-section-title {
+    color: #e5e7eb;
+    border-bottom-color: rgba(129, 140, 248, 0.35);
+}
+
+/* Блок формулы — выделенная карточка */
+.math-formula-box {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.06) 0%, rgba(99, 102, 241, 0.04) 100%);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    box-shadow: var(--shadow-small);
+    overflow: visible;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.math-formula-box .formula-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.math-formula-box p,
+.math-formula-box .formula {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.math-formula-box code {
+    background: rgba(79, 70, 229, 0.12);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+body.dark-theme .math-formula-box {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(99, 102, 241, 0.06) 100%);
+    border-left-color: var(--primary-light);
+}
+
+body.dark-theme .math-formula-box code {
+    background: rgba(129, 140, 248, 0.2);
+}
+
+/* Ключевое правило / определение в курсе математики */
+.math-key {
+    background: rgba(79, 70, 229, 0.08);
+    border-radius: var(--radius-card);
+    padding: 14px 18px;
+    margin: 12px 0;
+    border: 1px solid rgba(79, 70, 229, 0.15);
+    overflow: visible;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.math-key strong {
+    color: var(--primary-dark);
+}
+
+body.dark-theme .math-key {
+    background: rgba(79, 70, 229, 0.15);
+    border-color: rgba(129, 140, 248, 0.25);
+}
+
+/* Улучшенное оформление code в курсе математики */
+body[data-course="math"] .topic-section .lesson-content code {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    font-weight: 500;
+    background: rgba(79, 70, 229, 0.1);
+    border: 1px solid rgba(79, 70, 229, 0.15);
+}
+
+body.dark-theme[data-course="math"] .topic-section .lesson-content code {
+    background: rgba(129, 140, 248, 0.15);
+    border-color: rgba(129, 140, 248, 0.25);
+}
+
+/* ——— Дроби и математическая нотация (курс математики) ——— */
+.math-frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 2px;
+    font-size: 1.05em;
+}
+
+.math-frac .frac-num,
+.math-frac .frac-den {
+    line-height: 1.25;
+    padding: 0 4px;
+}
+
+.math-frac .frac-line {
+    width: 100%;
+    min-width: 1.2em;
+    border-top: 1.5px solid currentColor;
+    margin: 2px 0;
+    opacity: 0.85;
+}
+
+body.dark-theme .math-frac .frac-line {
+    opacity: 0.9;
+}
+
+/* Крупная формула в одну строку (дроби на одном уровне, перенос при нехватке места) */
+.lesson-content .math-frac-block {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 10px;
+    margin: 12px 0;
+    padding: 14px 18px;
+    background: rgba(79, 70, 229, 0.06);
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(79, 70, 229, 0.12);
+    overflow: visible;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.lesson-content .math-frac-block .math-frac {
+    font-size: 1.2rem;
+    margin: 0 2px;
+}
+
+body.dark-theme .lesson-content .math-frac-block {
+    background: rgba(79, 70, 229, 0.1);
+    border-color: rgba(129, 140, 248, 0.2);
+}
+
+/* Схема / мини-график в уроке */
+.math-diagram {
+    margin: 20px 0;
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(79, 70, 229, 0.04) 0%, rgba(99, 102, 241, 0.02) 100%);
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(79, 70, 229, 0.1);
+    overflow-x: auto;
+}
+
+.math-diagram .diagram-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.math-diagram svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+body.dark-theme .math-diagram {
+    background: linear-gradient(180deg, rgba(79, 70, 229, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%);
+    border-color: rgba(129, 140, 248, 0.18);
+}
+
+/* Краткая заметка / подсказка (без иконок) */
+.math-note {
+    margin: 14px 0;
+    padding: 12px 16px;
+    background: rgba(79, 70, 229, 0.06);
+    border-radius: var(--radius-card);
+    border-left: 3px solid var(--primary-color);
+    font-size: 0.98rem;
+}
+
+body.dark-theme .math-note {
+    background: rgba(79, 70, 229, 0.12);
+    border-left-color: var(--primary-light);
 }

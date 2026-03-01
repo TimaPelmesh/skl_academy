@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Часть IV. Геометрия (планиметрия): углы, треугольники, теорема Пифагора, окружность, четырёхугольники, площади. Курс математики SKL Academy.">
+    <meta name="keywords" content="геометрия, планиметрия, Пифагор, треугольники, окружность, площади, объёмы, ОГЭ, ЕГЭ, математика">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Математика — Часть IV. Геометрия (планиметрия) | SKL Academy">
+    <meta property="og:description" content="Углы, треугольники, теорема Пифагора, окружность, четырёхугольники, площади и объёмы. Подготовка к ОГЭ и ЕГЭ.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/math/04-part4-geometry.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Математика — Геометрия | SKL Academy">
+    <meta name="twitter:description" content="Планиметрия: треугольники, окружность, площади. Подготовка к ОГЭ и ЕГЭ.">
+    <title>Часть IV. Геометрия (планиметрия) | Математика | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/math/04-part4-geometry.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="math">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Математика</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons"><button class="color-scheme-btn" data-color="purple" aria-label="Фиолетовая схема"><span class="color-dot" style="background: #6c63ff;"></span></button></div>
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" aria-label="Настройки">⚙</button>
+            <a href="../../index.html" class="exit-btn" title="На главную"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
+        </div>
+    </header>
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic"><button class="topic-btn">I. База</button><div class="subtopics"><a href="01-part1-baza.html#numbers" class="subtopic">Числа</a><a href="01-part1-baza.html#fractions" class="subtopic">Дроби</a><a href="01-part1-baza.html#percents" class="subtopic">Проценты</a><a href="01-part1-baza.html#powers" class="subtopic">Степень</a><a href="01-part1-baza.html#roots" class="subtopic">Корень</a></div></div>
+                <div class="topic"><button class="topic-btn">II. Алгебра</button><div class="subtopics"><a href="02-part2-algebra.html#letter-expressions" class="subtopic">Буквенные выражения</a><a href="02-part2-algebra.html#quadratic" class="subtopic">Квадратные уравнения</a><a href="02-part2-algebra.html#inequalities" class="subtopic">Неравенства</a></div></div>
+                <div class="topic"><button class="topic-btn">III. Функции</button><div class="subtopics"><a href="03-part3-functions.html#coordinates" class="subtopic">Координаты</a><a href="03-part3-functions.html#linear-func" class="subtopic">Линейная функция</a><a href="03-part3-functions.html#quadratic-func" class="subtopic">Квадратичная</a></div></div>
+                <div class="topic"><button class="topic-btn active">IV. Геометрия (планиметрия)</button><div class="subtopics" style="max-height: 1000px;"><a href="#angles" class="subtopic active">Углы и прямые</a><a href="#triangles" class="subtopic">Треугольники</a><a href="#pythagoras" class="subtopic">Теорема Пифагора</a><a href="#circle" class="subtopic">Окружность</a><a href="#quadrilaterals" class="subtopic">Четырёхугольники</a><a href="#areas-volumes" class="subtopic">Площади и объёмы</a></div></div>
+                <div class="topic"><button class="topic-btn">V. Тригонометрия и прогрессии</button><div class="subtopics"><a href="05-part5-trigonometry.html#trig" class="subtopic">Синус, косинус, тангенс</a><a href="05-part5-trigonometry.html#progressions" class="subtopic">Прогрессии</a></div></div>
+                <div class="topic"><button class="topic-btn">VI. ОГЭ</button><div class="subtopics"><a href="06-part6-oge.html#oge-structure" class="subtopic">Структура ОГЭ</a><a href="06-part6-oge.html#oge-geometry" class="subtopic">Геометрия</a></div></div>
+                <div class="topic"><button class="topic-btn">VII. ЕГЭ</button><div class="subtopics"><a href="07-part7-ege.html#ege-structure" class="subtopic">Структура ЕГЭ</a><a href="07-part7-ege.html#ege-geometry" class="subtopic">Геометрия</a></div></div>
+                <div class="topic"><button class="topic-btn">Справочные таблицы</button><div class="subtopics"><a href="08-reference.html#formulas" class="subtopic">Формулы</a></div></div>
+            </div>
+        </div>
+        <main id="content" class="content sidebar-active">
+            <div class="part-title-wrap"><h2 class="topic-section-title">Часть IV. Геометрия (планиметрия)</h2></div>
+            <section id="angles" class="topic-section">
+                <h3>Углы и прямые</h3>
+                <div class="lesson-content">
+                    <p>Углы и свойства прямых — основа для доказательств в треугольниках и многоугольниках. Все утверждения ниже нужно уметь применять по ходу решения.</p>
+                    <h4>Вертикальные и смежные углы</h4>
+                    <p><strong>Вертикальные углы</strong> — пары углов, образованные при пересечении двух прямых (не имеющие общей стороны). Они равны между собой.</p>
+                    <p><strong>Смежные углы</strong> — два угла с общей стороной, две другие стороны составляют одну прямую. Сумма смежных углов всегда 180°. Из этого следует: если один угол известен, второй находится как 180° − первый.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Углы при пересечении прямых</div>
+                        <p>Вертикальные: ∠1 = ∠3, ∠2 = ∠4</p>
+                        <p>Смежные: ∠1 + ∠2 = 180°</p>
+                    </div>
+                    <h4>Параллельные прямые и секущая</h4>
+                    <p><strong>Параллельные прямые</strong> (a ∥ b) не пересекаются. <strong>Секущая</strong> — прямая, пересекающая обе параллельные. Она образует с ними восемь углов. Пары углов имеют специальные названия: <strong>накрест лежащие</strong> (лежат по разные стороны секущей, между параллельными), <strong>соответственные</strong> (по одну сторону секущей, один «над», другой «под» своей прямой), <strong>односторонние</strong> (по одну сторону секущей, оба между параллельными).</p>
+                    <div class="math-key">
+                        <strong>Свойства при параллельных:</strong> накрест лежащие углы равны; соответственные углы равны; сумма односторонних углов равна 180°.
+                    </div>
+                    <p><strong>Признаки параллельности двух прямых:</strong> если при пересечении с секущей накрест лежащие углы равны (или соответственные равны, или сумма односторонних равна 180°), то прямые параллельны. В задачах часто используют именно признак: доказывают равенство углов и делают вывод a ∥ b.</p>
+                </div>
+            </section>
+            <section id="triangles" class="topic-section">
+                <h3>Треугольники: свойства, площади, подобие</h3>
+                <div class="lesson-content">
+                    <p>Треугольник — основная фигура планиметрии. Все формулы площадей и многие задачи ОГЭ/ЕГЭ опираются на его свойства.</p>
+                    <h4>Сумма углов и внешний угол</h4>
+                    <p><strong>Сумма углов треугольника</strong> равна 180°. То есть ∠A + ∠B + ∠C = 180°. Это позволяет находить третий угол, если известны два.</p>
+                    <p><strong>Внешний угол</strong> треугольника — угол, смежный с одним из внутренних (продолжаем сторону и получаем угол «снаружи»). Внешний угол равен сумме двух внутренних углов, <em>не</em> смежных с ним. Например, внешний при вершине C равен ∠A + ∠B.</p>
+                    <h4>Неравенство треугольника</h4>
+                    <p>Каждая сторона треугольника меньше суммы двух других: a &lt; b + c, b &lt; a + c, c &lt; a + b. Иначе три отрезка не «сойдутся» в треугольник. При проверке существования треугольника проверяют все три неравенства; часто достаточно проверить наибольшую сторону.</p>
+                    <h4>Площадь треугольника</h4>
+                    <p>Три основные формулы. Выбор зависит от того, что дано в задаче.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Площадь треугольника</div>
+                        <p>S = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">2</span></span>·a·hₐ — сторона и высота к ней</p>
+                        <p>S = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">2</span></span>·a·b·sin γ — две стороны и угол между ними</p>
+                        <p>Формула Герона: S = √(p(p−a)(p−b)(p−c)), где p = <span class="math-frac"><span class="frac-num">a+b+c</span><span class="frac-line"></span><span class="frac-den">2</span></span> (полупериметр)</p>
+                    </div>
+                    <p>Формула с синусом удобна, когда известны две стороны и угол между ними (в том числе в параллелограмме: S = ab·sin α). Герон — когда известны все три стороны.</p>
+                    <h4>Подобие треугольников</h4>
+                    <p>Два треугольника <strong>подобны</strong> (ΔABC ∼ ΔA₁B₁C₁), если их углы равны и стороны пропорциональны. Коэффициент подобия k: отношение соответственных сторон одно и то же: <span class="math-frac"><span class="frac-num">AB</span><span class="frac-line"></span><span class="frac-den">A₁B₁</span></span> = <span class="math-frac"><span class="frac-num">BC</span><span class="frac-line"></span><span class="frac-den">B₁C₁</span></span> = <span class="math-frac"><span class="frac-num">AC</span><span class="frac-line"></span><span class="frac-den">A₁C₁</span></span> = k.</p>
+                    <div class="math-key">
+                        <strong>Признаки подобия</strong> (достаточно одного): по двум углам; по двум сторонам и углу между ними; по трём сторонам (отношения сторон равны). <strong>Отношение площадей</strong> подобных треугольников равно k².
+                    </div>
+                </div>
+            </section>
+            <section id="pythagoras" class="topic-section">
+                <h3>Теорема Пифагора и прямоугольный треугольник</h3>
+                <div class="lesson-content">
+                    <p>В <strong>прямоугольном треугольнике</strong> один угол прямой (90°). Стороны, образующие прямой угол, — <strong>катеты</strong> (a, b); сторона против прямого угла — <strong>гипотенуза</strong> (c).</p>
+                    <h4>Теорема Пифагора и обратная</h4>
+                    <p><strong>Теорема Пифагора:</strong> в прямоугольном треугольнике квадрат гипотенузы равен сумме квадратов катетов: c² = a² + b². По двум катетам находим гипотенузу: c = √(a² + b²); по гипотенузе и катету — второй катет: a = √(c² − b²).</p>
+                    <p><strong>Обратная теорема:</strong> если в треугольнике со сторонами a, b, c выполняется a² + b² = c², то треугольник прямоугольный, причём прямой угол лежит против стороны c. Это используют для проверки «прямоугольности» по длинам сторон.</p>
+                    <div class="math-diagram">
+                        <div class="diagram-title">Прямоугольный треугольник: катеты a, b, гипотенуза c</div>
+                        <svg viewBox="0 0 180 120" width="240" height="160" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 100 L20 20 L160 100 Z" fill="none" stroke="currentColor" stroke-width="1.8" opacity="0.8"/>
+                            <text x="12" y="62" font-size="14" fill="currentColor">a</text>
+                            <text x="85" y="108" font-size="14" fill="currentColor">b</text>
+                            <text x="78" y="58" font-size="14" fill="currentColor">c</text>
+                            <path d="M24 24 L24 28 L28 28 L28 24 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                        </svg>
+                    </div>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Прямоугольный треугольник</div>
+                        <p>c² = a² + b² &nbsp;|&nbsp; S = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">2</span></span>ab &nbsp;|&nbsp; Высота к гипотенузе: h = <span class="math-frac"><span class="frac-num">ab</span><span class="frac-line"></span><span class="frac-den">c</span></span></p>
+                    </div>
+                    <h4>Важные следствия</h4>
+                    <p>Катет, лежащий против угла 30°, равен половине гипотенузы: a = <span class="math-frac"><span class="frac-num">c</span><span class="frac-line"></span><span class="frac-den">2</span></span> (если ∠B = 30°, то b — этот катет). Медиана, проведённая к гипотенузе, равна половине гипотенузы: m_c = <span class="math-frac"><span class="frac-num">c</span><span class="frac-line"></span><span class="frac-den">2</span></span>. Высота из прямого угла: h² = a_c·b_c (проекции катетов на гипотенузу) и a·b = c·h.</p>
+                    <div class="math-key">В задачах часто дают прямоугольный треугольник с углом 30° — сразу используйте: катет против 30° = половина гипотенузы.</div>
+                </div>
+            </section>
+            <section id="circle" class="topic-section">
+                <h3>Окружность: касательная, хорда, центральные и вписанные углы</h3>
+                <div class="lesson-content">
+                    <p><strong>Окружность</strong> — множество точек плоскости, равноудалённых от данной точки O (центра). Расстояние от центра до любой точки окружности — <strong>радиус</strong> R. <strong>Диаметр</strong> d = 2R — отрезок через центр, соединяющий две точки окружности. Длина окружности и площадь круга:</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Окружность и круг</div>
+                        <p>Длина окружности: L = 2πR &nbsp;|&nbsp; Площадь круга: S = πR²</p>
+                    </div>
+                    <h4>Касательная к окружности</h4>
+                    <p><strong>Касательная</strong> — прямая, имеющая с окружностью ровно одну общую точку (точку касания). Касательная перпендикулярна радиусу, проведённому в точку касания. Из одной точки вне окружности можно провести две касательные; отрезки от этой точки до точек касания равны. Эти факты часто используют в задачах на нахождение длин или доказательство равенства отрезков.</p>
+                    <h4>Хорда</h4>
+                    <p><strong>Хорда</strong> — отрезок, соединяющий две точки окружности. Перпендикуляр, опущенный из центра на хорду, делит её пополам (и наоборот: серединный перпендикуляр хорды проходит через центр). Хорда, проходящая через центр, — диаметр.</p>
+                    <h4>Центральный и вписанный углы</h4>
+                    <p><strong>Центральный угол</strong> — угол с вершиной в центре окружности. Его градусная мера равна градусной мере дуги, на которую он опирается (дуга между сторонами угла).</p>
+                    <p><strong>Вписанный угол</strong> — угол, вершина которого лежит на окружности, а стороны пересекают окружность. Вписанный угол равен половине дуги, на которую он опирается (дуга между точками пересечения сторон с окружностью, не содержащая вершину). Отсюда: вписанный угол равен половине центрального угла, опирающегося на ту же дугу.</p>
+                    <div class="math-key">Вписанный угол, опирающийся на диаметр, равен 90° (дуга 180°, половина — 90°). В задачах это даёт прямоугольный треугольник.</div>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Углы и дуги</div>
+                        <p>Центральный ∠AOB = дуга AB &nbsp;|&nbsp; Вписанный ∠ACB = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">2</span></span> дуги AB</p>
+                    </div>
+                </div>
+            </section>
+            <section id="quadrilaterals" class="topic-section">
+                <h3>Четырёхугольники</h3>
+                <div class="lesson-content">
+                    <p>Четырёхугольники в школе — параллелограмм, его частные случаи (прямоугольник, ромб, квадрат) и трапеция. Свойства и формулы площадей нужно знать твёрдо.</p>
+                    <h4>Параллелограмм</h4>
+                    <p><strong>Параллелограмм</strong> — четырёхугольник, у которого противоположные стороны параллельны. Свойства: противоположные стороны равны; противоположные углы равны; диагонали точкой пересечения делятся пополам. Площадь: S = a·h (любая сторона × высота к ней) или S = a·b·sin α (две стороны и угол между ними).</p>
+                    <h4>Прямоугольник, ромб, квадрат</h4>
+                    <p><strong>Прямоугольник</strong> — параллелограмм с прямыми углами. Диагонали равны. S = ab (две смежные стороны).</p>
+                    <p><strong>Ромб</strong> — параллелограмм с равными сторонами. Диагонали перпендикулярны и делят углы пополам. Площадь S = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">2</span></span>d₁d₂ (половина произведения диагоналей) или S = a·h, S = a²·sin α.</p>
+                    <p><strong>Квадрат</strong> — прямоугольник с равными сторонами (или ромб с прямыми углами). S = a²; диагональ d = a√2.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Площади четырёхугольников</div>
+                        <p>Параллелограмм: S = ah = ab·sin α &nbsp;|&nbsp; Прямоугольник: S = ab &nbsp;|&nbsp; Ромб: S = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">2</span></span>d₁d₂ &nbsp;|&nbsp; Квадрат: S = a²</p>
+                    </div>
+                    <h4>Трапеция</h4>
+                    <p><strong>Трапеция</strong> — четырёхугольник, у которого две стороны параллельны (основания), две другие — нет (боковые). Основания обычно обозначают a и b (a &gt; b или наоборот), высота h — расстояние между прямыми, содержащими основания. <strong>Средняя линия</strong> трапеции — отрезок, соединяющий середины боковых сторон; она параллельна основаниям и равна полусумме оснований: m = <span class="math-frac"><span class="frac-num">a+b</span><span class="frac-line"></span><span class="frac-den">2</span></span>. Площадь S = <span class="math-frac"><span class="frac-num">(a+b)h</span><span class="frac-line"></span><span class="frac-den">2</span></span> = m·h.</p>
+                    <p>В <strong>равнобедренной</strong> (равнобокой) трапеции боковые стороны равны; углы при каждом основании равны; диагонали равны. Эти свойства часто используют в задачах.</p>
+                    <div class="math-key">Средняя линия трапеции = полусумма оснований; площадь = средняя линия × высота.</div>
+                </div>
+            </section>
+            <section id="areas-volumes" class="topic-section">
+                <h3>Площади и объёмы (планиметрия и стереометрия)</h3>
+                <div class="lesson-content">
+                    <p>Итоговые формулы по площадям плоских фигур и объёмам тел. В ОГЭ и ЕГЭ их нужно применять без ошибок.</p>
+                    <h4>Планиметрия: площади</h4>
+                    <p>Треугольник: S = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">2</span></span>ah (или ½ab·sin γ, или Герон). Параллелограмм: S = ah. Трапеция: S = <span class="math-frac"><span class="frac-num">(a+b)h</span><span class="frac-line"></span><span class="frac-den">2</span></span>. Круг: S = πR². <strong>Сектор</strong> круга (часть круга между двумя радиусами): S = <span class="math-frac"><span class="frac-num">α</span><span class="frac-line"></span><span class="frac-den">360°</span></span>·πR², где α — центральный угол в градусах.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Площади (кратко)</div>
+                        <p>Треугольник: ½ah &nbsp;|&nbsp; Параллелограмм: ah &nbsp;|&nbsp; Трапеция: (a+b)h/2 &nbsp;|&nbsp; Круг: πR² &nbsp;|&nbsp; Сектор: (α/360°)πR²</p>
+                    </div>
+                    <h4>Стереометрия: объёмы и поверхности</h4>
+                    <p><strong>Призма</strong> (в том числе параллелепипед, куб): V = Sосн·h, где h — высота (перпендикуляр между основаниями). Прямой параллелепипед: V = abc. Куб: V = a³.</p>
+                    <p><strong>Пирамида</strong>: V = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">3</span></span>Sосн·h. Коэффициент <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">3</span></span> запомнить: объём пирамиды в три раза меньше объёма призмы с тем же основанием и высотой.</p>
+                    <p><strong>Цилиндр</strong> (круговой): V = πR²h; боковая поверхность Sбок = 2πRh (развёртка — прямоугольник). <strong>Конус</strong>: V = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">3</span></span>πR²h; Sбок = πRl, где l — образующая (длина от вершины до точки на окружности основания). <strong>Шар</strong>: V = <span class="math-frac"><span class="frac-num">4</span><span class="frac-line"></span><span class="frac-den">3</span></span>πR³; площадь сферы S = 4πR².</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Объёмы тел</div>
+                        <p>Призма: V = Sосн·h &nbsp;|&nbsp; Пирамида: V = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">3</span></span>Sосн·h &nbsp;|&nbsp; Цилиндр: V = πR²h &nbsp;|&nbsp; Конус: V = <span class="math-frac"><span class="frac-num">1</span><span class="frac-line"></span><span class="frac-den">3</span></span>πR²h &nbsp;|&nbsp; Шар: V = <span class="math-frac"><span class="frac-num">4</span><span class="frac-line"></span><span class="frac-den">3</span></span>πR³</p>
+                    </div>
+                    <div class="math-key">В ЕГЭ часто дают комбинацию тел (например, конус вписан в цилиндр) или просят найти высоту/радиус по объёму — подставляйте в формулу и решайте уравнение.</div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть">×</button></div><div class="mobile-settings-section"><button class="mobile-theme-toggle-btn" id="mobileThemeToggle">Тема</button></div></div></div>
+    <script src="../courses.js"></script>
+</body>
+</html>

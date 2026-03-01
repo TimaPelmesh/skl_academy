@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Часть III. Функции и графики: координаты, линейная и квадратичная функции, обратная пропорциональность. Курс математики SKL Academy.">
+    <meta name="keywords" content="функции, графики, парабола, линейная функция, координаты, ОГЭ, ЕГЭ, математика">
+    <meta name="author" content="SKL Academy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Математика — Часть III. Функции и графики | SKL Academy">
+    <meta property="og:description" content="Координаты, линейная и квадратичная функции, обратная пропорциональность. Подготовка к ОГЭ и ЕГЭ.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skl-academy.ru/courses/math/03-part3-functions.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Математика — Функции и графики | SKL Academy">
+    <meta name="twitter:description" content="Координаты, линейная и квадратичная функции. Подготовка к ОГЭ и ЕГЭ.">
+    <title>Часть III. Функции и графики | Математика | SKL Academy</title>
+    <link rel="canonical" href="https://skl-academy.ru/courses/math/03-part3-functions.html">
+    <link rel="stylesheet" href="../courses.css">
+    <link rel="icon" href="../../images/icon.ico" type="image/x-icon">
+</head>
+<body data-course="math">
+    <header>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <h1 class="header-title">Математика</h1>
+        <div class="header-buttons">
+            <div class="color-scheme-buttons"><button class="color-scheme-btn" data-color="purple" aria-label="Фиолетовая схема"><span class="color-dot" style="background: #6c63ff;"></span></button></div>
+            <button class="theme-toggle-btn" id="themeToggle" title="Переключить тему" aria-label="Переключить тему">
+                <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/></svg>
+            </button>
+            <button class="mobile-settings-btn" id="mobileSettingsTrigger" aria-label="Настройки">⚙</button>
+            <a href="../../index.html" class="exit-btn" title="На главную"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></a>
+        </div>
+    </header>
+    <div class="container">
+        <div id="sidebar" class="sidebar">
+            <div class="course-structure">
+                <div class="topic"><button class="topic-btn">I. База</button><div class="subtopics"><a href="01-part1-baza.html#numbers" class="subtopic">Числа</a><a href="01-part1-baza.html#fractions" class="subtopic">Дроби</a><a href="01-part1-baza.html#percents" class="subtopic">Проценты</a><a href="01-part1-baza.html#powers" class="subtopic">Степень</a><a href="01-part1-baza.html#roots" class="subtopic">Корень</a></div></div>
+                <div class="topic"><button class="topic-btn">II. Алгебра</button><div class="subtopics"><a href="02-part2-algebra.html#letter-expressions" class="subtopic">Буквенные выражения</a><a href="02-part2-algebra.html#polynomials" class="subtopic">Многочлены</a><a href="02-part2-algebra.html#quadratic" class="subtopic">Квадратные уравнения</a><a href="02-part2-algebra.html#systems" class="subtopic">Системы</a><a href="02-part2-algebra.html#inequalities" class="subtopic">Неравенства</a></div></div>
+                <div class="topic"><button class="topic-btn active">III. Функции и графики</button><div class="subtopics" style="max-height: 1000px;"><a href="#coordinates" class="subtopic active">Координатная прямая и плоскость</a><a href="#function-def" class="subtopic">Функция: определение, график</a><a href="#linear-func" class="subtopic">Линейная функция</a><a href="#quadratic-func" class="subtopic">Квадратичная функция</a><a href="#inverse-proportion" class="subtopic">Обратная пропорциональность</a><a href="#graphs-modulus" class="subtopic">Графики модуля, корня, степени</a></div></div>
+                <div class="topic"><button class="topic-btn">IV. Геометрия</button><div class="subtopics"><a href="04-part4-geometry.html#angles" class="subtopic">Углы</a><a href="04-part4-geometry.html#triangles" class="subtopic">Треугольники</a><a href="04-part4-geometry.html#pythagoras" class="subtopic">Пифагор</a><a href="04-part4-geometry.html#circle" class="subtopic">Окружность</a><a href="04-part4-geometry.html#quadrilaterals" class="subtopic">Четырёхугольники</a><a href="04-part4-geometry.html#areas-volumes" class="subtopic">Площади и объёмы</a></div></div>
+                <div class="topic"><button class="topic-btn">V. Тригонометрия и прогрессии</button><div class="subtopics"><a href="05-part5-trigonometry.html#trig" class="subtopic">Синус, косинус, тангенс</a><a href="05-part5-trigonometry.html#progressions" class="subtopic">Прогрессии</a></div></div>
+                <div class="topic"><button class="topic-btn">VI. ОГЭ</button><div class="subtopics"><a href="06-part6-oge.html#oge-structure" class="subtopic">Структура ОГЭ</a><a href="06-part6-oge.html#oge-1-5" class="subtopic">Задания 1–5</a><a href="06-part6-oge.html#oge-algebra" class="subtopic">Алгебра</a><a href="06-part6-oge.html#oge-geometry" class="subtopic">Геометрия</a><a href="06-part6-oge.html#oge-hard" class="subtopic">Сложные</a></div></div>
+                <div class="topic"><button class="topic-btn">VII. ЕГЭ</button><div class="subtopics"><a href="07-part7-ege.html#ege-structure" class="subtopic">Структура ЕГЭ</a><a href="07-part7-ege.html#ege-1-12" class="subtopic">Задания 1–12</a><a href="07-part7-ege.html#ege-13-15" class="subtopic">Задания 13–15</a><a href="07-part7-ege.html#ege-geometry" class="subtopic">Геометрия</a><a href="07-part7-ege.html#ege-economics" class="subtopic">Экономические</a><a href="07-part7-ege.html#ege-params" class="subtopic">Параметры</a></div></div>
+                <div class="topic"><button class="topic-btn">Справочные таблицы</button><div class="subtopics"><a href="08-reference.html#formulas" class="subtopic">Формулы</a></div></div>
+            </div>
+        </div>
+        <main id="content" class="content sidebar-active">
+            <div class="part-title-wrap"><h2 class="topic-section-title">Часть III. Функции и графики</h2></div>
+            <section id="coordinates" class="topic-section">
+                <h3>Координатная прямая и плоскость</h3>
+                <div class="lesson-content">
+                    <p><strong>Координатная прямая:</strong> на прямой выбраны начало O, единичный отрезок и направление. Каждой точке соответствует одно число — её координата. Расстояние между точками A(a) и B(b) равно |b − a|. Отрезок [a; b] — множество точек с координатами x, где a ≤ x ≤ b; интервал (a; b) — те же x, но без концов.</p>
+                    <p><strong>Плоскость:</strong> две перпендикулярные оси Ox и Oy с общим началом O образуют прямоугольную систему координат. Точка задаётся парой (x; y) — абсцисса и ордината. Расстояние между A(x₁; y₁) и B(x₂; y₂): AB = √((x₂−x₁)² + (y₂−y₁)²). Середина отрезка AB: (<span class="math-frac"><span class="frac-num">x₁+x₂</span><span class="frac-line"></span><span class="frac-den">2</span></span>; <span class="math-frac"><span class="frac-num">y₁+y₂</span><span class="frac-line"></span><span class="frac-den">2</span></span>).</p>
+                    <div class="math-diagram">
+                        <div class="diagram-title">Координатная плоскость Oxy</div>
+                        <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                            <defs><marker id="arr" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto"><path d="M0 0 L6 2 L0 4 Z" fill="currentColor" opacity="0.7"/></marker></defs>
+                            <line x1="20" y1="100" x2="180" y2="100" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                            <line x1="100" y1="180" x2="100" y2="20" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>
+                            <path d="M180 100 L175 100" stroke="currentColor" stroke-width="1.2" marker-end="url(#arr)"/>
+                            <path d="M100 20 L100 25" stroke="currentColor" stroke-width="1.2" marker-end="url(#arr)"/>
+                            <text x="185" y="104" font-size="13" fill="currentColor">x</text>
+                            <text x="96" y="18" font-size="13" fill="currentColor">y</text>
+                            <text x="94" y="108" font-size="12" fill="currentColor">O</text>
+                            <circle cx="140" cy="60" r="4" fill="var(--primary-color)" stroke="currentColor" stroke-width="1"/>
+                            <line x1="140" y1="60" x2="140" y2="100" stroke="currentColor" stroke-dasharray="3" opacity="0.6"/>
+                            <line x1="100" y1="60" x2="140" y2="60" stroke="currentColor" stroke-dasharray="3" opacity="0.6"/>
+                            <text x="145" y="55" font-size="11" fill="currentColor">(x; y)</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+            <section id="function-def" class="topic-section">
+                <h3>Функция: определение, график, свойства</h3>
+                <div class="lesson-content">
+                    <p><strong>Функция</strong> — правило, по которому каждому допустимому x соответствует ровно одно значение y. Запись: y = f(x). <strong>Область определения</strong> D(f) — все x, при которых выражение имеет смысл (знаменатель ≠ 0, подкоренное выражение ≥ 0 и т.д.). <strong>Множество значений</strong> E(f) — все значения, которые принимает f(x).</p>
+                    <p><strong>График функции</strong> — множество точек плоскости с координатами (x; f(x)). По графику можно определять: значение f в точке x (ордината точки графика с этой абсциссой); <strong>нули</strong> — абсциссы точек пересечения с осью Ox (f(x) = 0); знак функции на промежутках (выше или ниже Ox); промежутки <strong>возрастания</strong> и <strong>убывания</strong>; <strong>наибольшее</strong> и <strong>наименьшее</strong> значение на отрезке (самая высокая и самая низкая точки графика на этом отрезке).</p>
+                </div>
+            </section>
+            <section id="linear-func" class="topic-section">
+                <h3>Линейная функция и прямая (y = kx + b)</h3>
+                <div class="lesson-content">
+                    <p><strong>Линейная функция</strong> y = kx + b. График — прямая линия. Коэффициент <strong>k</strong> (угловой коэффициент) равен тангенсу угла наклона прямой к положительному направлению оси Ox. При k &gt; 0 прямая идёт вверх (функция возрастает), при k &lt; 0 — вниз (убывает), при k = 0 — горизонтальная прямая y = b.</p>
+                    <p>Свободный член <strong>b</strong> — ордината точки пересечения графика с осью Oy (точка (0; b)). Для построения прямой достаточно двух точек; удобно брать (0; b) и, например, (1; k + b).</p>
+                    <p>Две прямые y = k₁x + b₁ и y = k₂x + b₂ <strong>параллельны</strong>, если k₁ = k₂; <strong>перпендикулярны</strong>, если k₁·k₂ = −1. Угловой коэффициент прямой, проходящей через точки (x₁; y₁) и (x₂; y₂): k = <span class="math-frac"><span class="frac-num">y₂ − y₁</span><span class="frac-line"></span><span class="frac-den">x₂ − x₁</span></span> (при x₁ ≠ x₂).</p>
+                </div>
+            </section>
+            <section id="quadratic-func" class="topic-section">
+                <h3>Квадратичная функция и парабола (y = ax² + bx + c)</h3>
+                <div class="lesson-content">
+                    <p><strong>Квадратичная функция</strong> y = ax² + bx + c, a ≠ 0. График — <strong>парабола</strong>. При a &gt; 0 ветви направлены вверх, при a &lt; 0 — вниз. Парабола симметрична относительно вертикальной прямой, проходящей через вершину.</p>
+                    <p><strong>Вершина</strong> параболы — точка минимума (если a &gt; 0) или максимума (если a &lt; 0). Её абсцисса x₀ = <span class="math-frac"><span class="frac-num">−b</span><span class="frac-line"></span><span class="frac-den">2a</span></span>; ордината y₀ = f(x₀) = <span class="math-frac"><span class="frac-num">−D</span><span class="frac-line"></span><span class="frac-den">4a</span></span>, где D = b² − 4ac. Ось симметрии — прямая x = x₀.</p>
+                    <p><strong>Нули функции</strong> — корни уравнения ax² + bx + c = 0; это абсциссы точек пересечения параболы с осью Ox. Если D &gt; 0, парабола пересекает Ox в двух точках; если D = 0 — касается в вершине; если D &lt; 0 — не пересекает.</p>
+                    <div class="math-formula-box">
+                        <div class="formula-title">Вершина параболы</div>
+                        <p>x₀ = <span class="math-frac"><span class="frac-num">−b</span><span class="frac-line"></span><span class="frac-den">2a</span></span>; &nbsp; y₀ = <span class="math-frac"><span class="frac-num">−D</span><span class="frac-line"></span><span class="frac-den">4a</span></span>, где D = b² − 4ac</p>
+                    </div>
+                </div>
+            </section>
+            <section id="inverse-proportion" class="topic-section">
+                <h3>Обратная пропорциональность (y = k/x)</h3>
+                <div class="lesson-content">
+                    <p><strong>Обратная пропорциональность</strong> y = k/x, k ≠ 0. ОДЗ: x ≠ 0; множество значений: y ≠ 0. График — <strong>гипербола</strong>: две гладкие ветви. При k &gt; 0 ветви лежат в I и III координатных четвертях; при k &lt; 0 — во II и IV.</p>
+                    <p>Гипербола не пересекает оси Ox и Oy. При приближении x к нулю |y| неограниченно растёт (ветви «уходят в бесконечность»); при больших по модулю x значение y близко к нулю (ветви приближаются к осям). Функция нечётная: f(−x) = −f(x), график симметричен относительно начала координат.</p>
+                </div>
+            </section>
+            <section id="graphs-modulus" class="topic-section">
+                <h3>Графики модуля, корня, степени</h3>
+                <div class="lesson-content">
+                    <p><strong>y = |x|.</strong> При x ≥ 0 это y = x, при x &lt; 0 это y = −x. График — «галочка» с вершиной в начале координат, симметричная относительно Oy. Для y = |f(x)|: часть графика y = f(x), лежащая ниже оси Ox, симметрично отражается вверх; часть выше Ox остаётся без изменений.</p>
+                    <p><strong>y = √x.</strong> Область определения x ≥ 0, множество значений y ≥ 0. График — верхняя ветвь параболы x = y² (полупарабола в первой четверти). Функция возрастает на всей области определения.</p>
+                    <p><strong>y = xⁿ.</strong> При чётном n график похож на параболу y = x²: симметрия относительно Oy, ветви вверх. При нечётном n — кубическая парабола y = x³: симметрия относительно начала координат, возрастает на всей оси.</p>
+                    <p><strong>Сдвиги и растяжения.</strong> График y = f(x − m) + n получается из графика y = f(x) сдвигом на m вправо по Ox и на n вверх по Oy. График y = a·f(x) — растяжение по вертикали в |a| раз (при a &lt; 0 ещё отражение относительно Ox).</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="mobile-settings-menu" id="mobileSettingsMenu"><div class="mobile-settings-content"><div class="mobile-settings-header"><h3>Настройки</h3><button class="mobile-settings-close" id="mobileSettingsClose" aria-label="Закрыть">×</button></div><div class="mobile-settings-section"><button class="mobile-theme-toggle-btn" id="mobileThemeToggle">Тема</button></div></div></div>
+    <script src="../courses.js"></script>
+</body>
+</html>

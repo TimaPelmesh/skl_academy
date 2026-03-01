@@ -60,8 +60,9 @@
                 var targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     var header = document.querySelector('header');
-                    var offset = (header ? header.offsetHeight : 0) + 30;
-                    smoothScrollToElement(targetSection, offset);
+                    var offset = (header ? header.offsetHeight : 0) + 20;
+                    var scrollTarget = getScrollTargetForSection(targetSection);
+                    smoothScrollToElement(scrollTarget, offset);
                 }
                 if (sidebar && sidebar.classList.contains('active') && window.innerWidth <= 991) {
                     if (menuToggle) menuToggle.classList.remove('active');
@@ -70,6 +71,17 @@
                 }
             });
         });
+    }
+
+    /** При переходе на первый блок модуля прокручиваем к заголовку части, чтобы было видно название модуля */
+    function getScrollTargetForSection(section) {
+        if (!section || !section.classList.contains('topic-section')) return section;
+        var main = document.getElementById('content');
+        if (!main) return section;
+        var firstSection = main.querySelector('.topic-section');
+        if (firstSection !== section) return section;
+        var wrap = main.querySelector('.part-title-wrap');
+        return wrap || section;
     }
 
     function smoothScrollToElement(element, offset) {
@@ -134,7 +146,8 @@
                 var targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     var header = document.querySelector('header');
-                    smoothScrollToElement(targetElement, (header ? header.offsetHeight : 0) + 30);
+                    var scrollTarget = getScrollTargetForSection(targetElement);
+                    smoothScrollToElement(scrollTarget, (header ? header.offsetHeight : 0) + 20);
                     var relatedLink = document.querySelector('.subtopic[href="#' + targetId + '"]');
                     if (relatedLink) {
                         document.querySelectorAll('.subtopic').forEach(function(item) { item.classList.remove('active'); });
