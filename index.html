@@ -1483,11 +1483,78 @@
           </a>
         </div>
       </div>
+      <div class="footer-simple__help hidden md:block">
+        <h4>Справка</h4>
+        <div class="footer-simple__links">
+          <a href="desk/index.html">
+            <i class="fas fa-desktop"></i>
+            Попробовать новый дизайн
+          </a>
+        </div>
+      </div>
     </div>
     <div class="footer-simple__bottom">
       <p>SKL Academy · 2026</p>
     </div>
   </footer>
+
+  <!-- Баннер «Попробовать новый дизайн» — только десктоп, правый нижний угол -->
+  <div id="desk-promo-banner" class="desk-promo-banner hidden" aria-label="Предложение перейти на новый дизайн">
+    <p class="desk-promo-banner__text">Попробовать новый дизайн?</p>
+    <div class="desk-promo-banner__actions">
+      <a href="desk/index.html" class="desk-promo-banner__btn desk-promo-banner__btn--go">Перейти</a>
+      <button type="button" class="desk-promo-banner__btn desk-promo-banner__btn--close" aria-label="Закрыть">Закрыть</button>
+    </div>
+  </div>
+  <style>
+    .desk-promo-banner {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 50;
+      padding: 14px 18px;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.97), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    }
+    .desk-promo-banner.hidden { display: none !important; }
+    .desk-promo-banner__text { margin: 0 0 12px; font-size: 14px; color: #e2e8f0; }
+    .desk-promo-banner__actions { display: flex; gap: 8px; }
+    .desk-promo-banner__btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .desk-promo-banner__btn:hover { opacity: 0.95; transform: scale(1.02); }
+    .desk-promo-banner__btn--go {
+      background: rgba(99, 102, 241, 0.9);
+      color: #fff;
+    }
+    .desk-promo-banner__btn--close {
+      background: rgba(71, 85, 105, 0.6);
+      color: #cbd5e1;
+    }
+  </style>
+  <script>
+    (function() {
+      if (typeof window.matchMedia === 'undefined' || !window.matchMedia('(min-width: 768px)').matches) return;
+      var key = 'desk-promo-closed';
+      if (sessionStorage.getItem(key)) return;
+      var el = document.getElementById('desk-promo-banner');
+      if (!el) return;
+      el.classList.remove('hidden');
+      el.querySelector('.desk-promo-banner__btn--close').addEventListener('click', function() {
+        el.classList.add('hidden');
+        sessionStorage.setItem(key, '1');
+      });
+    })();
+  </script>
 
   <script src="search-data.js" defer></script>
   <script src="search.js" defer></script>
