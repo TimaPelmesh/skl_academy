@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKL Academy — Рабочий стол</title>
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="desk.css">
+</head>
+<body class="desk-os">
+  <div class="desk-wallpaper">
+    <div class="desk-wallpaper-gradient"></div>
+    <div class="desk-wallpaper-grid" aria-hidden="true"></div>
+  </div>
+
+  <!-- Рабочий стол: только ярлык и корзина -->
+  <div class="desk-icons-wrap" id="desk-icons-wrap">
+    <div class="desk-icons desk-icons-pool" id="desk-icons">
+      <a href="../index.html" class="desk-icon desk-icon-link" data-app="home" title="На главную"><span class="desk-icon-img"><i class="fas fa-external-link-alt"></i></span><span class="desk-icon-label">На главную</span></a>
+      <button type="button" class="desk-icon" data-app="trash" title="Корзина"><span class="desk-icon-img"><i class="fas fa-trash-alt"></i></span><span class="desk-icon-label">Корзина</span></button>
+    </div>
+  </div>
+
+  <!-- Календарь и время справа внизу (над часами в панели) -->
+  <div class="desk-calendar" id="desk-calendar" aria-label="Календарь и время">
+    <div class="desk-calendar-time" id="desk-calendar-time">--:--</div>
+    <div class="desk-calendar-header" id="desk-calendar-header"></div>
+    <div class="desk-calendar-grid" id="desk-calendar-grid"></div>
+  </div>
+
+  <!-- Окна приложений (создаются через JS) -->
+  <div id="desk-windows" class="desk-windows"></div>
+
+  <!-- Панель задач: по центру как в Win11 — Пуск, закреплённые иконки, открытые окна -->
+  <footer class="desk-taskbar">
+    <div class="desk-taskbar-left"></div>
+    <div class="desk-taskbar-center">
+      <button type="button" class="desk-start" id="desk-start" aria-label="Меню">
+        <img src="../images/icon.ico" alt="SKL" class="desk-start-icon">
+      </button>
+      <div class="desk-taskbar-pinned">
+        <button type="button" class="desk-taskbar-pinned-btn" data-app="courses" title="Курсы"><i class="fas fa-folder"></i></button>
+        <button type="button" class="desk-taskbar-pinned-btn" data-app="tools" title="Инструменты"><i class="fas fa-tools"></i></button>
+        <button type="button" class="desk-taskbar-pinned-btn" data-app="library" title="Библиотека"><i class="fas fa-folder-open"></i></button>
+        <button type="button" class="desk-taskbar-pinned-btn" data-app="about" title="О проекте"><i class="fas fa-file-alt"></i></button>
+        <button type="button" class="desk-taskbar-pinned-btn" data-app="settings" title="Настройки"><i class="fas fa-cog"></i></button>
+      </div>
+      <div id="desk-taskbar-apps" class="desk-taskbar-apps"></div>
+    </div>
+    <div class="desk-taskbar-right">
+      <a href="../index.html" class="desk-taskbar-link" title="Перейти на главную">
+        <i class="fas fa-home"></i>
+        <span class="desk-taskbar-link-text">На главную</span>
+      </a>
+      <div class="desk-clock" id="desk-clock">--:--</div>
+    </div>
+  </footer>
+
+  <!-- Стартовое меню (по клику на SKL) -->
+  <div id="desk-start-menu" class="desk-start-menu" hidden>
+    <div class="desk-start-menu-apps">
+      <button type="button" class="desk-start-menu-item" data-app="courses">
+        <i class="fas fa-folder"></i>
+        <span>Курсы</span>
+      </button>
+      <button type="button" class="desk-start-menu-item" data-app="tools">
+        <i class="fas fa-tools"></i>
+        <span>Инструменты</span>
+      </button>
+      <button type="button" class="desk-start-menu-item" data-app="library">
+        <i class="fas fa-folder"></i>
+        <span>Библиотека</span>
+      </button>
+      <button type="button" class="desk-start-menu-item" data-app="about">
+        <i class="fas fa-file-alt"></i>
+        <span>О проекте</span>
+      </button>
+      <button type="button" class="desk-start-menu-item" data-app="settings">
+        <i class="fas fa-cog"></i>
+        <span>Настройки</span>
+      </button>
+      <button type="button" class="desk-start-menu-item" data-app="trash">
+        <i class="fas fa-trash-alt"></i>
+        <span>Корзина</span>
+      </button>
+    </div>
+    <div class="desk-start-menu-footer">
+      <a href="../index.html" class="desk-start-menu-item desk-start-menu-exit">
+        <i class="fas fa-external-link-alt"></i>
+        <span>Перейти на главную</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="desk.js"></script>
+</body>
+</html>
