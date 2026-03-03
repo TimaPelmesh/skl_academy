@@ -57,6 +57,18 @@ function initDesk() {
       icon: 'fas fa-cog',
       type: 'settings'
     },
+    bash: {
+      title: 'Bash',
+      icon: 'fab fa-linux',
+      type: 'terminal',
+      shell: 'bash'
+    },
+    powershell: {
+      title: 'PowerShell',
+      icon: 'fab fa-windows',
+      type: 'terminal',
+      shell: 'ps'
+    },
     trash: {
       title: 'Корзина',
       icon: 'fas fa-trash-alt',
@@ -89,13 +101,14 @@ function initDesk() {
   let focusedId = null;
   let dragState = null;
   let resizeState = null;
+  let _zCounter = 100;
   let _restoring = false;
   let _pushStateTimer = null;
   var lastDraggedIcon = null;
   var iconDragState = { active: false, el: null, startX: 0, startY: 0, left0: 0, top0: 0 };
   var ICON_POS_KEY = 'desk-icon-positions';
   var ICON_ORDER = ['home', 'trash'];
-  var PINNED_APPS = ['courses', 'tools', 'library', 'about', 'settings'];
+  var PINNED_APPS = ['courses', 'tools', 'library', 'about', 'settings', 'bash', 'powershell'];
   var GRID_ORIGIN_X = 24;
   var GRID_ORIGIN_Y = 24;
   var GRID_CELL_W = 130;
@@ -196,14 +209,16 @@ function initDesk() {
   }
 
   function renderTerminalContent(shell) {
-    var prompt = shell === 'cmd' ? 'C:\\Users\\SKL>' : 'PS C:\\Users\\SKL>';
-    return '<div class="desk-terminal-body">' +
+    var isBash = shell === 'bash';
+    var isCmd  = shell === 'cmd';
+    var initialPrompt = isBash ? 'student@skl:~$ ' : (isCmd ? 'C:\\Users\\SKL> ' : 'PS C:\\Users\\SKL> ');
+    return '<div class="desk-terminal-body" data-shell="' + escapeHtml(shell) + '">' +
       '<div class="desk-terminal-output" data-terminal-output></div>' +
       '<div class="desk-terminal-input-row">' +
-        '<span class="desk-terminal-prompt-prefix">' + escapeHtml(prompt) + '</span>' +
-        '<input type="text" class="desk-terminal-input" data-terminal-input autocomplete="off" spellcheck="false" placeholder="Введите команду...">' +
+        '<span class="desk-terminal-prompt-prefix" data-terminal-prompt>' + escapeHtml(initialPrompt) + '</span>' +
+        '<input type="text" class="desk-terminal-input" data-terminal-input autocomplete="off" spellcheck="false">' +
       '</div>' +
-      '</div>';
+    '</div>';
   }
 
   function openUrlInWindow(url, title, bounds) {
@@ -302,6 +317,8 @@ function initDesk() {
       bodyHtml = renderSettingsContent();
     } else if (app.type === 'easteregg' && appKey === 'trash') {
       bodyHtml = renderTrashEasterEgg();
+    } else if (app.type === 'terminal') {
+      bodyHtml = renderTerminalContent(app.shell);
     } else if (app.items) {
       bodyHtml = renderAppGrid(app);
     } else if (app.url) {
@@ -376,6 +393,7 @@ function initDesk() {
 
     win.addEventListener('mousedown', function () { setFocus(id); });
     if (app.type === 'settings') initSettings(win);
+    if (app.type === 'terminal') initTerminal(win, app.shell);
     pushStateDebounced();
     return id;
   }
@@ -419,116 +437,490 @@ function initDesk() {
   }
 
   function initTerminal(win, shell) {
-    var output = win.querySelector('[data-terminal-output]');
-    var input = win.querySelector('[data-terminal-input]');
+    var output    = win.querySelector('[data-terminal-output]');
+    var input     = win.querySelector('[data-terminal-input]');
+    var promptEl  = win.querySelector('[data-terminal-prompt]');
     if (!output || !input) return;
-    var isCmd = shell === 'cmd';
-    var path = 'C:\\Users\\SKL';
-    var promptStr = isCmd ? 'C:\\Users\\SKL>' : 'PS C:\\Users\\SKL>';
-    function promptHtml() { return '<div class="desk-terminal-line prompt">' + escapeHtml(promptStr) + '</div>'; }
-    function out(line, cls) {
-      var div = document.createElement('div');
-      div.className = 'desk-terminal-line' + (cls ? ' ' + cls : '');
-      div.textContent = line;
-      output.appendChild(div);
+
+    var isBash = shell === 'bash';
+    var isCmd  = shell === 'cmd';
+
+    // ── История команд (↑↓) ──
+    var histCmds = [];
+    var histIdx  = -1;
+
+    // ── Bash: виртуальная файловая система ──
+    var bashPath = '/home/skl';
+    var FS = {
+      '/home/skl':                  { files: ['readme.txt', 'notes.txt', 'scripts/', 'projects/'] },
+      '/home/skl/scripts':          { files: ['hello.sh', 'backup.sh'] },
+      '/home/skl/projects':         { files: ['webapp/', 'api/'] },
+      '/home/skl/projects/webapp':  { files: ['index.html', 'style.css'] },
+      '/home/skl/projects/api':     { files: ['server.py', 'requirements.txt'] }
+    };
+    var FILES = {
+      '/home/skl/readme.txt':
+        'SKL Academy — Bash Тренажёр\n============================\n\nДобро пожаловать! Это интерактивный bash-тренажёр.\nВведи help для списка доступных команд.\n\nСтруктура файловой системы:\n~/\n├── readme.txt\n├── notes.txt\n├── scripts/\n│   ├── hello.sh\n│   └── backup.sh\n└── projects/\n    ├── webapp/\n    └── api/',
+      '/home/skl/notes.txt':
+        'Заметки по Linux\n-----------------\n• Linux — основа серверного мира\n• bash — мощнейший инструмент автоматизации\n• Учи: ls, cd, grep, find, chmod, cat, pipe (|)\n• Каждый devops-инженер обязан знать bash',
+      '/home/skl/scripts/hello.sh':
+        '#!/bin/bash\n# Простой приветственный скрипт\n\nNAME="SKL Student"\necho "Привет, $NAME!"\necho "Дата: $(date)"\necho "Текущий путь: $(pwd)"',
+      '/home/skl/scripts/backup.sh':
+        '#!/bin/bash\n# Скрипт резервного копирования\n\nSRC="/home/skl/projects"\nDST="/backup"\nDATE=$(date +%Y%m%d)\n\necho "Создаю бэкап $SRC -> $DST/$DATE"\ntar -czf "$DST/backup-$DATE.tar.gz" "$SRC"\necho "Готово!"',
+      '/home/skl/projects/webapp/index.html':
+        '<!DOCTYPE html>\n<html lang="ru">\n<head>\n  <meta charset="UTF-8">\n  <title>My App</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <h1>Привет, мир!</h1>\n</body>\n</html>',
+      '/home/skl/projects/webapp/style.css':
+        'body {\n  font-family: sans-serif;\n  background: #f8fafc;\n  color: #1a1a2e;\n}\n\nh1 { color: #4338ca; }',
+      '/home/skl/projects/api/server.py':
+        'from flask import Flask\napp = Flask(__name__)\n\n@app.route("/")\ndef index():\n    return {"status": "ok", "message": "Hello from SKL API"}\n\nif __name__ == "__main__":\n    app.run(debug=True)',
+      '/home/skl/projects/api/requirements.txt':
+        'flask==3.0.0\ngunicorn==21.2.0\npython-dotenv==1.0.0'
+    };
+
+    // ── Путь для PS/CMD ──
+    var winPath = 'C:\\Users\\SKL';
+
+    function getPrompt() {
+      if (isBash) return 'student@skl:' + bashPath.replace('/home/skl', '~') + '$ ';
+      if (isCmd)  return winPath + '> ';
+      return 'PS ' + winPath + '> ';
     }
-    function welcome() {
-      if (isCmd) {
-        out('Microsoft Windows [Version 10.0.22621.0]');
-        out('(c) SKL Academy. Тренажёр команд CMD.');
-      } else {
-        out('Windows PowerShell');
-        out('Copyright (C) Microsoft Corporation. Тренажёр SKL Academy.');
+
+    function updatePromptEl() {
+      if (promptEl) promptEl.textContent = getPrompt();
+    }
+
+    function out(text, cls) {
+      var lines = String(text).split('\n');
+      lines.forEach(function(line) {
+        var div = document.createElement('div');
+        div.className = 'desk-terminal-line' + (cls ? ' ' + cls : '');
+        div.textContent = line;
+        output.appendChild(div);
+      });
+    }
+
+    function outBlank() { output.appendChild(document.createElement('div')); }
+
+    // ── Приветствие ──
+    if (isBash) {
+      out('GNU bash, version 5.2.15(1)-release (x86_64-pc-linux-gnu)', 'info');
+      out('SKL Academy — Bash тренажёр. Введи help для справки.', 'info');
+    } else if (isCmd) {
+      out('Microsoft Windows [Version 10.0.22621.3007]', 'info');
+      out('(c) SKL Academy. Тренажёр команд CMD. Введи help.', 'info');
+    } else {
+      out('Windows PowerShell 7.4.0', 'info');
+      out('SKL Academy — PowerShell тренажёр. Введи Get-Help.', 'info');
+    }
+    outBlank();
+    updatePromptEl();
+
+    // ══════════════════════════════════════════
+    //  BASH
+    // ══════════════════════════════════════════
+    function runBash(line) {
+      var parts = line.trim().match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) || [];
+      var cmd   = (parts[0] || '').toLowerCase();
+      var args  = parts.slice(1).map(function(a){ return a.replace(/^['"]|['"]$/g, ''); });
+      var flags = args.filter(function(a){ return a.startsWith('-'); });
+      var rest  = args.join(' ');
+
+      if (cmd === 'clear' || cmd === 'cls') { output.innerHTML = ''; return; }
+      if (cmd === 'exit')    { out('Выход: закройте окно.', 'info'); return; }
+      if (cmd === 'whoami')  { out('student'); return; }
+      if (cmd === 'hostname'){ out('skl-academy'); return; }
+      if (cmd === 'date')    { out(new Date().toString()); return; }
+      if (cmd === 'uname') {
+        if (flags.includes('-a') || flags.includes('-r')) {
+          out('Linux skl-academy 5.15.0-skl #1 SMP x86_64 GNU/Linux');
+        } else { out('Linux'); }
+        return;
       }
-      output.appendChild(document.createElement('div'));
-      var p = document.createElement('div');
-      p.className = 'desk-terminal-line prompt';
-      p.textContent = promptStr;
-      output.appendChild(p);
+      if (cmd === 'pwd') { out(bashPath); return; }
+      if (cmd === 'echo') { out(rest.replace(/\$HOME/g, '/home/skl').replace(/\$USER/g, 'student')); return; }
+      if (cmd === 'history') {
+        histCmds.forEach(function(h, i) { out('  ' + String(i + 1).padStart(3) + '  ' + h); });
+        return;
+      }
+      if (cmd === 'ls') {
+        var dir = FS[bashPath];
+        if (!dir) { out('ls: не могу получить доступ к \'' + bashPath + '\': Нет такого файла или каталога', 'error'); return; }
+        var showHidden = flags.includes('-a') || flags.some(function(f){ return f.includes('a'); });
+        var longFmt    = flags.some(function(f){ return f.includes('l'); });
+        var items = dir.files.slice();
+        if (showHidden) items = ['.', '..', '.bashrc', '.bash_history'].concat(items);
+        if (longFmt) {
+          out('total ' + (items.length * 4));
+          items.forEach(function(f) {
+            var isDir  = f.endsWith('/') || f === '.' || f === '..';
+            var isHid  = f.startsWith('.');
+            var perm   = isDir ? 'drwxr-xr-x' : (isHid ? '-rw-------' : '-rw-r--r--');
+            var size   = isDir ? '4096' : String((FILES[bashPath + '/' + f] || '').length || 64);
+            out(perm + '  1 student student ' + size.padStart(5) + ' Mar  3 12:00 ' + f, isDir ? 'success' : '');
+          });
+        } else {
+          out(items.join('   '));
+        }
+        return;
+      }
+      if (cmd === 'cd') {
+        var target = args[0];
+        if (!target || target === '~') { bashPath = '/home/skl'; updatePromptEl(); return; }
+        if (target === '-') { out('bash: cd: OLDPWD not set', 'error'); return; }
+        var newPath;
+        if (target === '..') {
+          var p = bashPath.split('/');
+          p.pop();
+          newPath = p.join('/') || '/';
+        } else if (target.startsWith('/')) {
+          newPath = target.replace(/\/$/, '') || '/';
+        } else {
+          newPath = bashPath + '/' + target.replace(/\/$/, '');
+        }
+        if (FS[newPath]) { bashPath = newPath; updatePromptEl(); return; }
+        out('bash: cd: ' + target + ': Нет такого файла или каталога', 'error');
+        return;
+      }
+      if (cmd === 'cat') {
+        if (!args[0]) { out('cat: нет операнда\nПопробуй: cat readme.txt', 'error'); return; }
+        var fp = args[0].startsWith('/') ? args[0] : bashPath + '/' + args[0];
+        if (FILES[fp] !== undefined) { out(FILES[fp]); return; }
+        if (FS[fp])  { out('cat: ' + args[0] + ': это каталог', 'error'); return; }
+        out('cat: ' + args[0] + ': Нет такого файла или каталога', 'error');
+        return;
+      }
+      if (cmd === 'mkdir') {
+        if (!args[0]) { out('mkdir: нет операнда', 'error'); return; }
+        var nd = bashPath + '/' + args[0];
+        if (FS[nd]) { out('mkdir: невозможно создать каталог \'' + args[0] + '\': Файл существует', 'error'); return; }
+        FS[nd] = { files: [] };
+        if (FS[bashPath]) FS[bashPath].files.push(args[0] + '/');
+        out('', 'success');
+        return;
+      }
+      if (cmd === 'touch') {
+        if (!args[0]) { out('touch: нет операнда', 'error'); return; }
+        var tf = bashPath + '/' + args[0];
+        if (FILES[tf] === undefined) {
+          FILES[tf] = '';
+          if (FS[bashPath]) FS[bashPath].files.push(args[0]);
+        }
+        return;
+      }
+      if (cmd === 'rm') {
+        if (!args[0]) { out('rm: нет операнда', 'error'); return; }
+        var rf = bashPath + '/' + args[0];
+        if (FILES[rf] !== undefined) {
+          delete FILES[rf];
+          if (FS[bashPath]) FS[bashPath].files = FS[bashPath].files.filter(function(f){ return f !== args[0]; });
+          return;
+        }
+        out('rm: невозможно удалить \'' + args[0] + '\': Нет такого файла или каталога', 'error');
+        return;
+      }
+      if (cmd === 'grep') {
+        if (args.length < 2) { out('Использование: grep <шаблон> <файл>', 'error'); return; }
+        var pattern = args[0], gfile = args[1];
+        var gfp = gfile.startsWith('/') ? gfile : bashPath + '/' + gfile;
+        if (FILES[gfp] === undefined) { out('grep: ' + gfile + ': Нет такого файла или каталога', 'error'); return; }
+        var glines = FILES[gfp].split('\n');
+        var found  = glines.filter(function(l){ return l.toLowerCase().includes(pattern.toLowerCase()); });
+        if (found.length) found.forEach(function(l){ out(l, 'success'); });
+        else out('(совпадений не найдено)');
+        return;
+      }
+      if (cmd === 'find') {
+        out(bashPath);
+        var allPaths = [bashPath];
+        Object.keys(FS).forEach(function(k){
+          if (k.startsWith(bashPath + '/')) {
+            allPaths.push(k);
+            FS[k].files.forEach(function(f){
+              if (!f.endsWith('/')) allPaths.push(k + '/' + f);
+            });
+          }
+        });
+        FS[bashPath].files.forEach(function(f){
+          if (!f.endsWith('/')) allPaths.push(bashPath + '/' + f);
+        });
+        allPaths.slice(1).forEach(function(p){ out(p); });
+        return;
+      }
+      if (cmd === 'man' || cmd === 'help') {
+        out('Доступные команды bash:');
+        out('  ls [-la]          список файлов/каталогов');
+        out('  cd <dir>          сменить каталог (cd ~ — домой)');
+        out('  pwd               текущий каталог');
+        out('  cat <file>        содержимое файла');
+        out('  mkdir <dir>       создать каталог');
+        out('  touch <file>      создать пустой файл');
+        out('  rm <file>         удалить файл');
+        out('  grep <pat> <f>    поиск в файле');
+        out('  find              найти файлы рекурсивно');
+        out('  echo <text>       вывести текст');
+        out('  whoami            текущий пользователь');
+        out('  hostname          имя хоста');
+        out('  date              дата и время');
+        out('  uname -a          информация о системе');
+        out('  history           история команд');
+        out('  clear             очистить экран');
+        out('');
+        out('Совет: используй ↑↓ для навигации по истории', 'info');
+        return;
+      }
+      if (cmd === '') return;
+      out('bash: ' + parts[0] + ': команда не найдена', 'error');
+      out('Введи help для списка команд', 'info');
     }
-    welcome();
+
+    // ══════════════════════════════════════════
+    //  CMD
+    // ══════════════════════════════════════════
     function runCmd(line) {
       var parts = line.trim().split(/\s+/);
-      var cmd = (parts[0] || '').toLowerCase();
-      var rest = parts.slice(1).join(' ');
-      if (isCmd) {
-        if (cmd === 'cls') { output.innerHTML = ''; output.appendChild(document.createElement('div')); return; }
-        if (cmd === 'exit') { out('Выход из тренажёра: закройте окно.'); return; }
-        if (cmd === 'help') {
-          out('CD       - сменить каталог');
-          out('DIR      - список файлов');
-          out('ECHO     - вывести текст');
-          out('CLS      - очистить экран');
-          out('VER      - версия');
-          out('EXIT     - выход');
-          return;
-        }
-        if (cmd === 'ver') { out('Microsoft Windows [Version 10.0.22621.0]'); return; }
-        if (cmd === 'echo') { out(rest || ''); return; }
-        if (cmd === 'dir') {
-          out(' Сведения о каталоге ' + path);
-          out('');
-          out('03.03.2025  12:00    <DIR>          .');
-          out('03.03.2025  12:00    <DIR>          ..');
-          out('03.03.2025  12:00             0  file.txt');
-          out('               1 файл(ов)              0 байт');
-          return;
-        }
-        if (cmd === 'cd') {
-          if (!rest || rest === '..') { path = 'C:\\Users\\SKL'; out(path); return; }
-          path = path + '\\' + rest; out(path); return;
-        }
-        if (cmd) out('"' + cmd + '" не является внутренней или внешней командой.');
-      } else {
-        if (cmd === 'clear-host' || cmd === 'cls') { output.innerHTML = ''; output.appendChild(document.createElement('div')); return; }
-        if (cmd === 'exit') { out('Выход: закройте окно.'); return; }
-        if (cmd === 'get-help' || cmd === 'help') {
-          out('Get-ChildItem  - список элементов');
-          out('Get-Location    - текущий путь');
-          out('Set-Location    - сменить каталог');
-          out('Write-Output    - вывести');
-          out('Clear-Host      - очистить');
-          return;
-        }
-        if (cmd === 'write-output' || cmd === 'echo') { out(rest || ''); return; }
-        if (cmd === 'get-location' || cmd === 'pwd') { out('Path\n----\n' + path); return; }
-        if (cmd === 'get-childitem' || cmd === 'dir' || cmd === 'ls') {
-          out('    Directory: ' + path);
-          out('');
-          out('Mode                 LastWriteTime         Name');
-          out('----                 -------------         ----');
-          out('-a----        03.03.2025     12:00              0 file.txt');
-          return;
-        }
-        if (cmd === 'set-location' || cmd === 'cd') {
-          if (!rest || rest === '..') path = 'C:\\Users\\SKL'; else path = path + '\\' + rest;
-          out(path); return;
-        }
-        if (cmd) out("'" + cmd + "' не распознано как имя командлета, функции, файла сценария или выполняемой программы.");
+      var cmd   = (parts[0] || '').toUpperCase();
+      var rest  = parts.slice(1).join(' ');
+      if (cmd === 'CLS')  { output.innerHTML = ''; return; }
+      if (cmd === 'EXIT') { out('Закройте окно для выхода.', 'info'); return; }
+      if (cmd === 'VER')  { out('Microsoft Windows [Version 10.0.22621.3007]'); return; }
+      if (cmd === 'ECHO') { out(rest || 'ECHO включён.'); return; }
+      if (cmd === 'CD' || cmd === 'CHDIR') {
+        if (!rest || rest === '..') winPath = 'C:\\Users\\SKL';
+        else winPath = winPath + '\\' + rest;
+        out(winPath); updatePromptEl(); return;
       }
+      if (cmd === 'DIR') {
+        out(' Том в устройстве C: не имеет метки.');
+        out(' Содержимое папки ' + winPath);
+        outBlank();
+        out('03.03.2026  12:00    <DIR>          .');
+        out('03.03.2026  12:00    <DIR>          ..');
+        out('03.03.2026  12:00               512  notes.txt');
+        out('03.03.2026  12:00    <DIR>          Documents');
+        out('03.03.2026  12:00    <DIR>          Downloads');
+        outBlank();
+        out('               1 файл(ов)             512 байт');
+        return;
+      }
+      if (cmd === 'IPCONFIG') {
+        out('Настройка протокола Windows IP');
+        outBlank();
+        out('Адаптер Ethernet eth0:');
+        out('   IPv4-адрес . . . . . . . . . . . : 192.168.1.100');
+        out('   Маска подсети . . . . . . . . . . : 255.255.255.0');
+        out('   Основной шлюз . . . . . . . . . . : 192.168.1.1');
+        return;
+      }
+      if (cmd === 'PING') {
+        var host = rest || 'google.com';
+        out('Обмен пакетами с ' + host + ' [8.8.8.8]:');
+        out('Ответ от 8.8.8.8: число байт=32 время=12мс TTL=57', 'success');
+        out('Ответ от 8.8.8.8: число байт=32 время=11мс TTL=57', 'success');
+        out('Ответ от 8.8.8.8: число байт=32 время=13мс TTL=57', 'success');
+        outBlank();
+        out('Статистика Ping для 8.8.8.8: пакетов: отправлено=3, получено=3, потеряно=0');
+        return;
+      }
+      if (cmd === 'HELP') {
+        out('Доступные команды CMD:');
+        out('  DIR           список файлов');
+        out('  CD <путь>     сменить каталог');
+        out('  ECHO <текст>  вывести текст');
+        out('  CLS           очистить экран');
+        out('  VER           версия Windows');
+        out('  IPCONFIG      сетевые настройки');
+        out('  PING <хост>   проверить соединение');
+        out('  SYSTEMINFO    информация о системе');
+        out('  TASKLIST      список процессов');
+        out('  EXIT          выход');
+        return;
+      }
+      if (cmd === 'SYSTEMINFO') {
+        out('Имя узла:          SKL-ACADEMY');
+        out('Имя ОС:            Microsoft Windows 11 Pro');
+        out('Версия ОС:         10.0.22621 N/A Build 22621');
+        out('Изготовитель ОС:   Microsoft Corporation');
+        out('Процессор(ы):      1 процессор, Intel64 Family 6');
+        return;
+      }
+      if (cmd === 'TASKLIST') {
+        out('Имя образа          PID   Имя сессии    Использование памяти');
+        out('=================== ===== ============= ====================');
+        out('System              4     Services        1 028 КБ');
+        out('explorer.exe        2156  Console        48 640 КБ', 'success');
+        out('code.exe            4832  Console       312 448 КБ', 'success');
+        out('chrome.exe          5120  Console       189 312 КБ');
+        return;
+      }
+      if (cmd === '') return;
+      out('"' + parts[0] + '" не является внутренней или внешней командой,', 'error');
+      out('исполняемой программой или пакетным файлом.', 'error');
     }
-    input.addEventListener('keydown', function (e) {
+
+    // ══════════════════════════════════════════
+    //  POWERSHELL
+    // ══════════════════════════════════════════
+    function runPs(line) {
+      var parts = line.trim().split(/\s+/);
+      var cmd   = (parts[0] || '').toLowerCase();
+      var rest  = parts.slice(1).join(' ');
+      if (cmd === 'clear-host' || cmd === 'clear' || cmd === 'cls') { output.innerHTML = ''; return; }
+      if (cmd === 'exit') { out('Закройте окно для выхода.', 'info'); return; }
+      if (cmd === 'get-help' || cmd === 'help') {
+        out('Доступные командлеты PowerShell:');
+        out('  Get-ChildItem (ls, dir)   список элементов');
+        out('  Set-Location  (cd)        сменить каталог');
+        out('  Get-Location  (pwd)       текущий путь');
+        out('  Write-Output  (echo)      вывести');
+        out('  Get-Process               список процессов');
+        out('  Get-Service               список служб');
+        out('  Get-Content               содержимое файла');
+        out('  Test-Connection           проверить соединение');
+        out('  Get-Date                  дата и время');
+        out('  Get-ComputerInfo          информация о системе');
+        out('  Clear-Host                очистить экран');
+        out('');
+        out('Совет: используй ↑↓ для навигации по истории', 'info');
+        return;
+      }
+      if (cmd === 'write-output' || cmd === 'echo') { out(rest || ''); return; }
+      if (cmd === 'get-location' || cmd === 'pwd') {
+        outBlank();
+        out('Path');
+        out('----');
+        out(winPath);
+        outBlank();
+        return;
+      }
+      if (cmd === 'get-date') { out(new Date().toString()); return; }
+      if (cmd === 'get-childitem' || cmd === 'dir' || cmd === 'ls' || cmd === 'gci') {
+        outBlank();
+        out('    Directory: ' + winPath);
+        outBlank();
+        out('Mode                 LastWriteTime         Length  Name');
+        out('----                 -------------         ------  ----');
+        out('d----          03.03.2026  12:00                   Documents', 'success');
+        out('d----          03.03.2026  12:00                   Downloads', 'success');
+        out('-a---          03.03.2026  12:00             512   notes.txt');
+        out('-a---          03.03.2026  12:00            1024   profile.ps1');
+        outBlank();
+        return;
+      }
+      if (cmd === 'set-location' || cmd === 'cd') {
+        if (!rest || rest === '~') winPath = 'C:\\Users\\SKL';
+        else if (rest === '..') {
+          var parts2 = winPath.split('\\');
+          if (parts2.length > 1) parts2.pop();
+          winPath = parts2.join('\\') || 'C:\\';
+        } else winPath = winPath + '\\' + rest;
+        updatePromptEl(); return;
+      }
+      if (cmd === 'get-process' || cmd === 'ps') {
+        out('Handles  NPM(K)    PM(K)      WS(K) CPU(s)     Id  ProcessName');
+        out('-------  ------    -----      ----- ------     --  -----------');
+        out('    424      28    45212      52316   0.52   4832  Code', 'success');
+        out('    892      68   189312     201024   3.14   5120  chrome', 'success');
+        out('    156      12     8192       9344   0.05   2156  explorer');
+        out('     48       4     1028       1540   0.00      4  System');
+        return;
+      }
+      if (cmd === 'get-service') {
+        out('Status   Name               DisplayName');
+        out('------   ----               -----------');
+        out('Running  WinDefend          Windows Defender Antivirus', 'success');
+        out('Running  wuauserv           Windows Update', 'success');
+        out('Stopped  Print Spooler      Print Spooler');
+        out('Running  AudioSrv           Windows Audio', 'success');
+        return;
+      }
+      if (cmd === 'test-connection') {
+        var host = rest || 'google.com';
+        out('Source        Destination   IPV4Address    Bytes    Time(ms)');
+        out('------        -----------   -----------    -----    --------');
+        out('SKL-ACADEMY   ' + host.padEnd(14) + '8.8.8.8        32       12', 'success');
+        out('SKL-ACADEMY   ' + host.padEnd(14) + '8.8.8.8        32       11', 'success');
+        return;
+      }
+      if (cmd === 'get-computerinfo') {
+        out('WindowsProductName : Windows 11 Pro');
+        out('OsArchitecture     : 64-bit');
+        out('CsName             : SKL-ACADEMY');
+        out('CsProcessors       : {Intel Core i7}');
+        out('OsTotalVisibleMemorySize : 16777216');
+        return;
+      }
+      if (cmd === 'get-content' || cmd === 'cat' || cmd === 'type') {
+        if (!rest) { out('Get-Content: нет пути', 'error'); return; }
+        out('Содержимое файла ' + rest + ':');
+        out('# Файл: ' + rest);
+        out('# (Содержимое недоступно в тренажёре)');
+        return;
+      }
+      if (cmd === '$psversiontable' || cmd === '$host') {
+        out('Name                           Value');
+        out('----                           -----');
+        out('PSVersion                      7.4.0');
+        out('PSEdition                      Core');
+        out('OS                             Microsoft Windows 10.0.22621');
+        return;
+      }
+      if (cmd === '') return;
+      out("'" + parts[0] + "' не распознано как имя командлета,", 'error');
+      out('функции, файла сценария или исполняемой программы.', 'error');
+      out('Введи Get-Help для списка команд.', 'info');
+    }
+
+    // ── Обработчик ввода ──
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (histIdx < histCmds.length - 1) {
+          histIdx++;
+          input.value = histCmds[histCmds.length - 1 - histIdx] || '';
+          // Ставим курсор в конец
+          setTimeout(function(){ input.setSelectionRange(input.value.length, input.value.length); }, 0);
+        }
+        return;
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (histIdx > 0) {
+          histIdx--;
+          input.value = histCmds[histCmds.length - 1 - histIdx] || '';
+        } else {
+          histIdx = -1;
+          input.value = '';
+        }
+        setTimeout(function(){ input.setSelectionRange(input.value.length, input.value.length); }, 0);
+        return;
+      }
       if (e.key !== 'Enter') return;
       e.preventDefault();
       var line = input.value;
       input.value = '';
-      var p = document.createElement('div');
-      p.className = 'desk-terminal-line prompt';
-      p.textContent = promptStr;
-      output.appendChild(p);
-      var c = document.createElement('div');
-      c.className = 'desk-terminal-line cmd';
-      c.textContent = line;
-      output.appendChild(c);
-      runCmd(line);
-      output.appendChild(document.createElement('div'));
-      var next = document.createElement('div');
-      next.className = 'desk-terminal-line prompt';
-      next.textContent = promptStr;
-      output.appendChild(next);
+      histIdx = -1;
+
+      // Записываем в историю (непустые команды)
+      if (line.trim()) histCmds.push(line);
+
+      // Показываем введённую команду в выводе
+      var echoLine = document.createElement('div');
+      echoLine.className = 'desk-terminal-line prompt';
+      echoLine.textContent = getPrompt() + line;
+      output.appendChild(echoLine);
+
+      // Выполняем команду
+      if (isBash)       runBash(line);
+      else if (isCmd)   runCmd(line);
+      else              runPs(line);
+
+      outBlank();
+      updatePromptEl();
       output.scrollTop = output.scrollHeight;
       input.focus();
     });
+
     input.focus();
   }
 
@@ -571,10 +963,13 @@ function initDesk() {
   }
 
   function setFocus(id) {
+    var w = windows.get(id);
+    // Всегда поднимаем окно на передний план при любом обращении
+    if (w) w.el.style.zIndex = ++_zCounter;
     if (focusedId === id) return;
-    windows.forEach(function (w, wid) {
-      w.el.classList.toggle('focused', wid === id);
-      w.taskbarBtn.classList.toggle('active', wid === id);
+    windows.forEach(function (wd, wid) {
+      wd.el.classList.toggle('focused', wid === id);
+      wd.taskbarBtn.classList.toggle('active', wid === id);
     });
     focusedId = id;
   }

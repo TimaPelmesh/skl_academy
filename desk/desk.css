@@ -1,22 +1,24 @@
-/* SKL Desk — концепт новой ОС, единый стиль с сайтом (образование / IT) */
+/* SKL Desk — свежий дизайн: аврора, градиентные акценты, живые анимации */
 
 :root {
-  --desk-bg: #0c0e12;
-  --desk-surface: #1a1d24;
-  --desk-surface-hover: #252a33;
-  --desk-border: rgba(255, 255, 255, 0.1);
-  --desk-border-glass: rgba(255, 255, 255, 0.18);
-  --desk-text: #e6e8ec;
-  --desk-text-muted: #8b9099;
-  --desk-accent: #0ea5e9;
-  --desk-accent-hover: #38bdf8;
-  --desk-radius: 14px;
-  --desk-radius-sm: 8px;
-  --desk-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.45);
-  --desk-shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.35);
-  --desk-taskbar-h: 48px;
-  --desk-glass-bg: rgba(22, 26, 32, 0.6);
-  --desk-glass-blur: 24px;
+  --desk-bg: #0d0b14;
+  --desk-surface: #120f1e;
+  --desk-surface-hover: #1a1630;
+  --desk-border: rgba(255, 255, 255, 0.07);
+  --desk-border-glass: rgba(255, 255, 255, 0.1);
+  --desk-text: #eef0ff;
+  --desk-text-muted: #6b74a4;
+  --desk-accent: #818cf8;
+  --desk-accent2: #a855f7;
+  --desk-accent3: #f43f5e;
+  --desk-accent-hover: #a5b4fc;
+  --desk-radius: 16px;
+  --desk-radius-sm: 10px;
+  --desk-shadow: 0 32px 80px -12px rgba(0, 0, 0, 0.7);
+  --desk-shadow-glass: 0 12px 48px rgba(0, 0, 0, 0.55);
+  --desk-taskbar-h: 60px;
+  --desk-glass-bg: rgba(13, 11, 24, 0.75);
+  --desk-glass-blur: 32px;
 }
 
 * {
@@ -32,61 +34,78 @@
   overflow: hidden;
 }
 
-/* Стилизованные скроллбары — тёмная тема */
-.desk-os ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.desk-os ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-}
+/* ── Скроллбары ── */
+.desk-os ::-webkit-scrollbar { width: 8px; height: 8px; }
+.desk-os ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
 .desk-os ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
+  background: rgba(255,255,255,0.14);
+  border-radius: 4px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 .desk-os ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
+  background: rgba(255,255,255,0.24);
+  border-radius: 4px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
-.desk-os {
-  scrollbar-color: rgba(255, 255, 255, 0.25) rgba(0, 0, 0, 0.2);
-  scrollbar-width: thin;
+.desk-os { scrollbar-color: rgba(255,255,255,0.18) rgba(0,0,0,0.2); scrollbar-width: thin; }
+
+/* ── Обои — Aurora effect ── */
+@keyframes aurora-drift {
+  0%,  100% { opacity: 1;   transform: scale(1)    translateX(0)    translateY(0);   }
+  33%        { opacity: 0.8; transform: scale(1.06) translateX(1.5%) translateY(-2%); }
+  66%        { opacity: 0.9; transform: scale(0.97) translateX(-1%)  translateY(1.5%);}
 }
 
-/* Фон — тёмная тема: глубокая база + мягкий акцент (как новая ОС) */
+@keyframes aurora-pulse {
+  0%,  100% { opacity: 0.7; transform: scale(1);    }
+  50%        { opacity: 1;   transform: scale(1.12); }
+}
+
 .desk-wallpaper {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(160deg, #0c0e14 0%, #11141c 40%, #0e1118 100%);
+  background: #0d0b14;
 }
 
 .desk-wallpaper-gradient {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 100% 70% at 50% -20%, rgba(14, 165, 233, 0.2), transparent 45%),
-    radial-gradient(ellipse 80% 60% at 90% 60%, rgba(99, 102, 241, 0.12), transparent 40%),
-    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(14, 165, 233, 0.08), transparent 40%);
-  pointer-events: none;
+  animation: aurora-drift 18s ease-in-out infinite;
 }
 
+/* Повторяет структуру hero сайта: индиго слева, тёмный индиго справа, синий сверху, пурпур снизу */
+.desk-wallpaper-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 0%    50%, rgba(99,  102, 241, 0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 100%  50%, rgba(79,  70,  229, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 50%  -5%,  rgba(18,  113, 255, 0.16) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50%  105%, rgba(221, 74,  255, 0.12) 0%, transparent 50%);
+}
+
+.desk-wallpaper-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 50% at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 58%);
+  animation: aurora-pulse 14s ease-in-out infinite;
+}
+
+/* Точечная сетка вместо линий */
 .desk-wallpaper-grid {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
   pointer-events: none;
 }
 
-/* Обёртка иконок рабочего стола */
+/* ── Иконки рабочего стола ── */
 .desk-icons-wrap {
   position: fixed;
   inset: 0;
@@ -94,11 +113,8 @@
   pointer-events: none;
 }
 
-.desk-icons-wrap > * {
-  pointer-events: auto;
-}
+.desk-icons-wrap > * { pointer-events: auto; }
 
-/* Пул иконок: позиции задаются через JS (слева 4, справа 4 по умолчанию) */
 .desk-icons-pool {
   position: fixed;
   inset: 0;
@@ -118,91 +134,127 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 12px 14px;
   background: transparent;
   border: none;
   border-radius: var(--desk-radius-sm);
   color: var(--desk-text);
   cursor: grab;
-  transition: background 0.15s, transform 0.15s;
+  transition: background 0.2s, transform 0.22s;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
 }
 
 .desk-icon:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.06);
+  transform: scale(1.05) translateY(-3px);
 }
 
-.desk-icon.desk-icon-dragging {
-  cursor: grabbing;
-  opacity: 0.9;
-  z-index: 10;
-}
-
-.desk-icon:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-}
+.desk-icon.desk-icon-dragging { cursor: grabbing; opacity: 0.9; z-index: 10; }
+.desk-icon:focus { outline: none; background: rgba(255,255,255,0.07); }
 
 .desk-icon-img {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--desk-glass-bg);
-  backdrop-filter: blur(var(--desk-glass-blur));
-  -webkit-backdrop-filter: blur(var(--desk-glass-blur));
-  border: 1px solid var(--desk-border-glass);
-  border-radius: var(--desk-radius-sm);
+  background: linear-gradient(135deg, rgba(99,102,241,0.22), rgba(99,102,241,0.06));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(99,102,241,0.32);
+  border-radius: 14px;
   font-size: 22px;
   color: var(--desk-accent);
-  box-shadow: var(--desk-shadow-glass);
+  box-shadow: 0 4px 18px rgba(99,102,241,0.2), 0 0 0 1px rgba(255,255,255,0.06) inset;
+  transition: box-shadow 0.22s, transform 0.22s;
 }
 
-.desk-icon-link {
-  text-decoration: none;
+.desk-icon:hover .desk-icon-img {
+  box-shadow: 0 8px 32px rgba(99,102,241,0.32), 0 0 0 1px rgba(255,255,255,0.1) inset;
 }
+
+/* Корзина — красная */
+.desk-icon[data-app="trash"] .desk-icon-img {
+  background: linear-gradient(135deg, rgba(244,63,94,0.18), rgba(244,63,94,0.06));
+  border-color: rgba(244,63,94,0.28);
+  color: #f43f5e;
+  box-shadow: 0 4px 18px rgba(244,63,94,0.18), 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.desk-icon[data-app="trash"]:hover .desk-icon-img {
+  box-shadow: 0 8px 32px rgba(244,63,94,0.28), 0 0 0 1px rgba(255,255,255,0.1) inset;
+}
+
+/* Терминальные иконки на рабочем столе */
+.desk-icon[data-app="bash"] .desk-icon-img {
+  background: linear-gradient(135deg, rgba(78,201,176,0.18), rgba(78,201,176,0.06));
+  border-color: rgba(78,201,176,0.28);
+  color: #4ec9b0;
+  box-shadow: 0 4px 18px rgba(78,201,176,0.15), 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.desk-icon[data-app="powershell"] .desk-icon-img {
+  background: linear-gradient(135deg, rgba(129,140,248,0.2), rgba(129,140,248,0.06));
+  border-color: rgba(129,140,248,0.32);
+  color: #818cf8;
+  box-shadow: 0 4px 18px rgba(129,140,248,0.18), 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+
+.desk-icon-link { text-decoration: none; }
 
 .desk-icon-label {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7), 0 2px 12px rgba(0,0,0,0.5);
 }
 
-/* Календарь и время — справа внизу, над часами в панели */
+/* ── Виджет календаря ── */
 .desk-calendar {
   position: fixed;
-  bottom: calc(var(--desk-taskbar-h) + 12px);
-  right: 12px;
-  left: auto;
+  bottom: calc(var(--desk-taskbar-h) + 16px);
+  right: 16px;
   z-index: 6;
-  width: 200px;
-  padding: 12px;
+  width: 212px;
+  padding: 16px;
   background: var(--desk-glass-bg);
-  -webkit-backdrop-filter: blur(var(--desk-glass-blur));
   backdrop-filter: blur(var(--desk-glass-blur));
+  -webkit-backdrop-filter: blur(var(--desk-glass-blur));
   border: 1px solid var(--desk-border-glass);
   border-radius: var(--desk-radius);
-  box-shadow: var(--desk-shadow-glass);
+  box-shadow: var(--desk-shadow-glass), 0 0 0 1px rgba(0,212,255,0.05) inset;
+  overflow: hidden;
+}
+
+.desk-calendar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 14px; right: 14px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.65), rgba(139,92,246,0.6), transparent);
 }
 
 .desk-calendar-time {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--desk-text);
+  font-size: 30px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, rgba(129,140,248,0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
-  margin-bottom: 10px;
-  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  letter-spacing: -0.03em;
 }
 
 .desk-calendar-header {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--desk-text-muted);
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
 }
 
 .desk-calendar-grid {
@@ -210,45 +262,48 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
   font-size: 11px;
-  color: var(--desk-text-muted);
   text-align: center;
 }
 
 .desk-calendar-cell {
   padding: 4px 0;
-  border-radius: 4px;
-}
-
-.desk-calendar-cell.weekday {
-  font-weight: 600;
+  border-radius: 5px;
   color: var(--desk-text-muted);
 }
 
+.desk-calendar-cell.weekday {
+  font-weight: 700;
+  color: rgba(129,140,248,0.75);
+  margin-bottom: 2px;
+}
+
 .desk-calendar-cell.today {
-  background: rgba(14, 165, 233, 0.22);
-  color: var(--desk-accent);
-  font-weight: 600;
+  background: linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.35));
+  color: #fff;
+  font-weight: 700;
 }
 
-.desk-calendar-cell.other-month {
-  opacity: 0.5;
-}
+.desk-calendar-cell.other-month { opacity: 0.28; }
 
-/* Контейнер окон — выше иконок и календаря */
+/* ── Контейнер окон ── */
 .desk-windows {
   position: fixed;
   inset: 0;
   z-index: 8;
   padding: 12px;
-  padding-bottom: calc(var(--desk-taskbar-h) + 12px);
+  padding-bottom: calc(var(--desk-taskbar-h) + 16px);
   pointer-events: none;
 }
 
-.desk-windows > * {
-  pointer-events: auto;
+.desk-windows > * { pointer-events: auto; }
+
+/* ── Анимация открытия окна ── */
+@keyframes window-open {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
 }
 
-/* Окно — выраженное стекло (position: fixed для перетаскивания) */
+/* ── Окно ── */
 .desk-window {
   position: fixed;
   min-width: 380px;
@@ -256,186 +311,155 @@
   max-width: 95vw;
   max-height: calc(100vh - var(--desk-taskbar-h) - 48px);
   background: var(--desk-glass-bg);
-  -webkit-backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.5) brightness(1.05);
-  backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.5) brightness(1.05);
+  backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.7) brightness(1.08);
+  -webkit-backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.7) brightness(1.08);
   border: 1px solid var(--desk-border-glass);
   border-radius: var(--desk-radius);
-  box-shadow:
-    var(--desk-shadow-glass),
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-    0 0 24px -8px rgba(14, 165, 233, 0.12);
+  box-shadow: var(--desk-shadow-glass), 0 0 0 1px rgba(255,255,255,0.05) inset;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition: box-shadow 0.25s, border-color 0.25s;
+  animation: window-open 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .desk-window.focused {
-  border-color: rgba(14, 165, 233, 0.4);
+  border-color: rgba(99,102,241,0.38);
   box-shadow:
-    0 0 0 1px rgba(14, 165, 233, 0.22),
     var(--desk-shadow-glass),
-    0 0 0 1px rgba(255, 255, 255, 0.14) inset,
-    0 0 32px -6px rgba(14, 165, 233, 0.15);
+    0 0 0 1px rgba(255,255,255,0.07) inset,
+    0 0 56px -8px rgba(99,102,241,0.25),
+    0 0 0 1px rgba(99,102,241,0.15);
 }
 
-.desk-window.minimized {
-  display: none;
-}
+.desk-window.minimized { display: none; }
 
 .desk-window.maximized {
-  left: 0 !important;
-  top: 0 !important;
+  left: 0 !important; top: 0 !important;
   width: 100% !important;
   height: calc(100vh - var(--desk-taskbar-h)) !important;
-  max-width: none !important;
-  max-height: none !important;
+  max-width: none !important; max-height: none !important;
   border-radius: 0;
 }
 
-.desk-window.maximized .desk-window-resize {
-  display: none;
-}
+.desk-window.maximized .desk-window-resize { display: none; }
 
-/* Ручки изменения размера окна */
+/* Ручки ресайза */
 .desk-window-resize {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none;
 }
 
-.desk-window-resize > span {
-  position: absolute;
-  pointer-events: auto;
-  z-index: 1;
-}
-
-.desk-window-resize-e {
-  top: 0;
-  right: 0;
-  width: 6px;
-  height: 100%;
-  cursor: ew-resize;
-}
-
-.desk-window-resize-s {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  cursor: ns-resize;
-}
-
-.desk-window-resize-se {
-  bottom: 0;
-  right: 0;
-  width: 14px;
-  height: 14px;
-  cursor: nwse-resize;
-  border-radius: 0 0 var(--desk-radius) 0;
-}
+.desk-window-resize > span { position: absolute; pointer-events: auto; z-index: 1; }
+.desk-window-resize-e  { top: 0; right: 0;   width: 6px;  height: 100%; cursor: ew-resize; }
+.desk-window-resize-s  { bottom: 0; left: 0; width: 100%; height: 6px;  cursor: ns-resize; }
+.desk-window-resize-se { bottom: 0; right: 0; width: 14px; height: 14px; cursor: nwse-resize; border-radius: 0 0 var(--desk-radius) 0; }
 
 .desk-window-resize-e:hover,
 .desk-window-resize-s:hover,
-.desk-window-resize-se:hover {
-  background: rgba(14, 165, 233, 0.15);
-}
+.desk-window-resize-se:hover { background: rgba(0,212,255,0.12); }
 
 .desk-window-resizing .desk-window-resize-e,
 .desk-window-resizing .desk-window-resize-s,
-.desk-window-resizing .desk-window-resize-se {
-  background: rgba(14, 165, 233, 0.2);
-}
+.desk-window-resizing .desk-window-resize-se { background: rgba(0,212,255,0.18); }
 
-body.desk-window-resizing-active {
-  cursor: nwse-resize;
-  user-select: none;
-}
+body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
 
-
-/* Заголовок окна — за него перетаскиваем */
+/* ── Заголовок окна ── */
 .desk-window-titlebar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 44px;
-  padding: 0 12px 0 14px;
-  background: rgba(0, 0, 0, 0.25);
-  -webkit-backdrop-filter: blur(16px);
+  padding: 0 10px 0 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.14) 100%);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--desk-border);
   cursor: grab;
-  -webkit-user-select: none;
   user-select: none;
+  -webkit-user-select: none;
   flex-shrink: 0;
   touch-action: none;
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.desk-window-titlebar:active {
-  cursor: grabbing;
+.desk-window.focused .desk-window-titlebar {
+  background: linear-gradient(180deg, rgba(99,102,241,0.1) 0%, rgba(0,0,0,0.14) 100%);
+  border-bottom-color: rgba(99,102,241,0.18);
 }
 
-.desk-window-titlebar.dragging {
-  cursor: grabbing;
-}
+.desk-window-titlebar:active { cursor: grabbing; }
+.desk-window-titlebar.dragging { cursor: grabbing; }
 
 .desk-window-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--desk-text);
 }
 
 .desk-window-title i {
   font-size: 14px;
-  color: var(--desk-text-muted);
+  color: var(--desk-accent);
 }
 
 .desk-window-actions {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 6px;
 }
 
+/* Кнопки окна — macOS-style цвета на hover */
 .desk-window-btn {
-  width: 32px;
+  width: 28px;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: none;
-  border-radius: 4px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
   color: var(--desk-text-muted);
   cursor: pointer;
-  font-size: 12px;
-  transition: background 0.15s, color 0.15s;
+  font-size: 11px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .desk-window-btn:hover {
-  background: var(--desk-surface-hover);
+  background: rgba(255,255,255,0.12);
   color: var(--desk-text);
+  border-color: rgba(255,255,255,0.14);
 }
 
-.desk-window-btn.maximize {
-  font-size: 11px;
-}
+.desk-window-btn.maximize { font-size: 10px; }
 
 .desk-window-btn.close:hover {
-  background: #dc2626;
+  background: rgba(244,63,94,0.75);
+  border-color: rgba(244,63,94,0.5);
   color: #fff;
 }
 
-/* Тело окна */
+.desk-window-btn.minimize:hover {
+  background: rgba(251,191,36,0.75);
+  border-color: rgba(251,191,36,0.5);
+  color: #000;
+}
+
+.desk-window-btn.maximize:hover {
+  background: rgba(16,185,129,0.75);
+  border-color: rgba(16,185,129,0.5);
+  color: #fff;
+}
+
+/* ── Тело окна ── */
 .desk-window-body {
   flex: 1;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(0,0,0,0.08);
 }
 
 .desk-window-body:has(.desk-terminal-body) {
@@ -453,48 +477,59 @@ body.desk-window-resizing-active {
   display: block;
 }
 
-/* Контент внутри окна */
-.desk-window-content {
-  padding: 24px;
-}
+/* ── Контент окна ── */
+.desk-window-content { padding: 24px; }
 
 .desk-window-content h2 {
   margin: 0 0 20px;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--desk-text);
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 30%, rgba(0,212,255,0.85));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Сетка карточек (инструменты) */
+/* ── Сетка карточек (Инструменты) ── */
 .desk-app-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
 }
 
 .desk-app-card {
   display: flex;
   flex-direction: column;
   padding: 18px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--desk-border);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: var(--desk-radius-sm);
   color: var(--desk-text);
   text-decoration: none;
-  transition: background 0.18s, border-color 0.18s, transform 0.15s;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.desk-app-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.05), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .desk-app-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(14, 165, 233, 0.35);
-  transform: translateY(-1px);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(0,212,255,0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,212,255,0.1);
 }
 
-.desk-app-card-btn {
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-}
+.desk-app-card:hover::before { opacity: 1; }
+
+.desk-app-card-btn { cursor: pointer; text-align: left; font-family: inherit; }
 
 .desk-app-card-icon {
   width: 44px;
@@ -502,11 +537,48 @@ body.desk-window-resizing-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(14, 165, 233, 0.16);
-  border-radius: 10px;
+  background: rgba(0,212,255,0.14);
+  border-radius: 12px;
   color: var(--desk-accent);
   font-size: 20px;
   margin-bottom: 12px;
+  transition: transform 0.2s;
+}
+
+.desk-app-card:hover .desk-app-card-icon { transform: scale(1.1); }
+
+/* Цветные иконки по типу */
+.desk-app-card-icon:has(.fa-keyboard),
+.desk-app-card-icon:has(.fa-language) {
+  background: rgba(139,92,246,0.14);
+  color: #a78bfa;
+}
+.desk-app-card-icon:has(.fa-linux),
+.desk-app-card-icon:has(.fa-python) {
+  background: rgba(251,191,36,0.14);
+  color: #fbbf24;
+}
+.desk-app-card-icon:has(.fa-desktop),
+.desk-app-card-icon:has(.fa-windows) {
+  background: rgba(16,185,129,0.14);
+  color: #34d399;
+}
+.desk-app-card-icon:has(.fa-code),
+.desk-app-card-icon:has(.fa-html5) {
+  background: rgba(244,63,94,0.14);
+  color: #fb7185;
+}
+.desk-app-card-icon:has(.fa-git-alt) {
+  background: rgba(251,113,36,0.14);
+  color: #fb923c;
+}
+.desk-app-card-icon:has(.fa-brain) {
+  background: rgba(217,70,239,0.14);
+  color: #e879f9;
+}
+.desk-app-card-icon:has(.fa-network-wired) {
+  background: rgba(0,212,255,0.14);
+  color: #00d4ff;
 }
 
 .desk-app-card-title {
@@ -522,37 +594,35 @@ body.desk-window-resizing-active {
   line-height: 1.4;
 }
 
-/* Папка: аккуратный список */
-.desk-folder-content {
-  padding: 24px;
-}
+/* ── Папка: список ── */
+.desk-folder-content { padding: 20px; }
 
 .desk-folder-content .desk-folder-title {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--desk-text-muted);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--desk-border);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .desk-folder-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .desk-folder-item {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 16px;
+  padding: 10px 12px;
   border-radius: 10px;
   color: var(--desk-text);
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.15s;
   cursor: pointer;
   border: none;
   background: transparent;
@@ -563,47 +633,51 @@ body.desk-window-resizing-active {
 }
 
 .desk-folder-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.06);
+  transform: translateX(2px);
 }
 
 .desk-folder-item-icon {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 16px;
   flex-shrink: 0;
 }
 
-.desk-folder-item-icon.folder { background: rgba(14, 165, 233, 0.18); color: var(--desk-accent); }
-.desk-folder-item-icon.txt   { background: rgba(120, 200, 120, 0.2); color: #6bc96b; }
-.desk-folder-item-icon.link  { background: rgba(14, 165, 233, 0.18); color: var(--desk-accent); }
+.desk-folder-item-icon.folder {
+  background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.04));
+  color: var(--desk-accent);
+}
+
+.desk-folder-item-icon.txt {
+  background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.04));
+  color: #34d399;
+}
+
+.desk-folder-item-icon.link {
+  background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(139,92,246,0.04));
+  color: #a78bfa;
+}
 
 .desk-folder-item-name { flex: 1; font-weight: 500; min-width: 0; }
-.desk-folder-item-meta { font-size: 12px; color: var(--desk-text-muted); flex-shrink: 0; }
+.desk-folder-item-meta { font-size: 11px; color: var(--desk-text-muted); flex-shrink: 0; }
 
-/* Настройки */
-.desk-settings-content {
-  padding: 24px;
-}
-
-.desk-settings-section {
-  margin-bottom: 28px;
-}
-
-.desk-settings-section:last-child {
-  margin-bottom: 0;
-}
+/* ── Настройки ── */
+.desk-settings-content { padding: 24px; }
+.desk-settings-section { margin-bottom: 28px; }
+.desk-settings-section:last-child { margin-bottom: 0; }
 
 .desk-settings-section-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--desk-text-muted);
-  margin-bottom: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--desk-accent);
+  margin-bottom: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 }
 
 .desk-settings-row {
@@ -611,29 +685,24 @@ body.desk-window-resizing-active {
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  margin-bottom: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--desk-border);
+  border-radius: 12px;
+  margin-bottom: 8px;
 }
 
-.desk-settings-row:last-child {
-  margin-bottom: 0;
-}
-
-.desk-settings-label {
-  font-size: 14px;
-  color: var(--desk-text);
-}
+.desk-settings-row:last-child { margin-bottom: 0; }
+.desk-settings-label { font-size: 14px; color: var(--desk-text); }
 
 .desk-settings-toggle {
-  width: 44px;
-  height: 24px;
-  border-radius: 12px;
+  width: 46px;
+  height: 26px;
+  border-radius: 13px;
   border: none;
-  background: var(--desk-surface-hover);
+  background: rgba(255,255,255,0.1);
   cursor: pointer;
   position: relative;
-  transition: background 0.2s;
+  transition: background 0.25s;
 }
 
 .desk-settings-toggle::after {
@@ -642,10 +711,10 @@ body.desk-window-resizing-active {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--desk-text);
-  top: 2px;
-  left: 2px;
-  transition: transform 0.2s;
+  background: var(--desk-text-muted);
+  top: 3px;
+  left: 3px;
+  transition: transform 0.25s, background 0.25s;
 }
 
 .desk-os.light-theme .desk-settings-toggle::after {
@@ -654,46 +723,43 @@ body.desk-window-resizing-active {
 }
 
 .desk-os.light-theme .desk-settings-toggle {
-  background: var(--desk-accent);
+  background: linear-gradient(90deg, var(--desk-accent), var(--desk-accent2));
 }
 
 .desk-settings-info {
   padding: 16px;
-  background: rgba(14, 165, 233, 0.08);
-  border: 1px solid rgba(14, 165, 233, 0.2);
-  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(139,92,246,0.06));
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 12px;
   font-size: 13px;
   color: var(--desk-text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
-.desk-settings-info strong {
-  color: var(--desk-accent);
-}
+.desk-settings-info strong { color: var(--desk-accent); }
 
-/* Корзина — пасхалка: кот и донат */
+/* ── Корзина — пасхалка ── */
 .desk-trash-easteregg {
-  padding: 20px 24px;
+  padding: 24px;
   text-align: center;
 }
 
 .desk-trash-easteregg-img {
   width: 100%;
-  max-width: 220px;
+  max-width: 200px;
   height: auto;
-  border-radius: 12px;
+  border-radius: 16px;
   object-fit: cover;
-  margin-bottom: 16px;
+  margin: 0 auto 18px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.45);
 }
 
 .desk-trash-easteregg-text {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--desk-text);
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .desk-trash-easteregg-btn {
@@ -701,29 +767,31 @@ body.desk-window-resizing-active {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
-  background: var(--desk-accent);
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
   color: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s, transform 0.15s;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 18px rgba(244,63,94,0.4);
 }
 
 .desk-trash-easteregg-btn:hover {
-  background: var(--desk-accent-hover);
+  opacity: 0.9;
   color: #fff;
-  transform: scale(1.03);
+  transform: scale(1.04);
+  box-shadow: 0 8px 28px rgba(244,63,94,0.5);
 }
 
-/* Терминал CMD / PowerShell */
+/* ── Терминал ── */
 .desk-terminal-body {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 280px;
-  background: #0c0c0c;
+  background: #080615;
   font-family: 'JetBrains Mono', 'Consolas', monospace;
   font-size: 13px;
 }
@@ -733,67 +801,82 @@ body.desk-window-resizing-active {
   min-height: 0;
   overflow-y: auto;
   padding: 16px;
-  color: #cccccc;
-  line-height: 1.5;
+  color: #c8d0e0;
+  line-height: 1.65;
 }
 
-.desk-terminal-line {
-  margin-bottom: 4px;
-  word-break: break-all;
+.desk-terminal-line { margin-bottom: 3px; word-break: break-all; white-space: pre-wrap; }
+.desk-terminal-line.cmd     { color: #e2e8f0; }
+.desk-terminal-line.error   { color: #f87171; }
+.desk-terminal-line.success { color: #34d399; }
+.desk-terminal-line.info    { color: #94a3b8; font-style: italic; }
+
+/* Bash — зелёный промпт */
+.desk-terminal-body[data-shell="bash"] .desk-terminal-line.prompt   { color: #4ec9b0; }
+.desk-terminal-body[data-shell="bash"] .desk-terminal-prompt-prefix { color: #4ec9b0; }
+.desk-terminal-body[data-shell="bash"] .desk-terminal-input-row {
+  border-top-color: rgba(78,201,176,0.18);
+  background: rgba(78,201,176,0.03);
 }
 
-.desk-terminal-line.prompt {
-  color: #4ec9b0;
+/* PowerShell — индиго промпт */
+.desk-terminal-body[data-shell="ps"] .desk-terminal-line.prompt   { color: #818cf8; }
+.desk-terminal-body[data-shell="ps"] .desk-terminal-prompt-prefix { color: #818cf8; }
+.desk-terminal-body[data-shell="ps"] .desk-terminal-input-row {
+  border-top-color: rgba(129,140,248,0.18);
+  background: rgba(129,140,248,0.03);
 }
 
-.desk-terminal-line.cmd { color: #dcdcaa; }
-.desk-terminal-line.error { color: #f48771; }
-.desk-terminal-line.success { color: #6a9955; }
+/* CMD — синий промпт */
+.desk-terminal-body[data-shell="cmd"] .desk-terminal-line.prompt   { color: #569cd6; }
+.desk-terminal-body[data-shell="cmd"] .desk-terminal-prompt-prefix { color: #569cd6; }
+.desk-terminal-body[data-shell="cmd"] .desk-terminal-input-row {
+  border-top-color: rgba(86,156,214,0.18);
+  background: rgba(86,156,214,0.03);
+}
 
 .desk-terminal-input-row {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  background: #0c0c0c;
-  border-top: 1px solid #333;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .desk-terminal-prompt-prefix {
-  color: #4ec9b0;
-  margin-right: 8px;
+  color: #818cf8;
+  margin-right: 6px;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .desk-terminal-input {
   flex: 1;
   background: transparent;
   border: none;
-  color: #cccccc;
+  color: #e2e8f0;
   font: inherit;
   font-size: 13px;
   outline: none;
+  min-width: 0;
 }
 
-.desk-terminal-input::placeholder {
-  color: #555;
-}
+.desk-terminal-input::placeholder { color: rgba(255,255,255,0.18); }
 
-/* Документ .txt — блокнот */
+/* ── TXT-просмотрщик ── */
 .desk-txt-content {
   padding: 24px;
   font-family: 'JetBrains Mono', 'Consolas', monospace;
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--desk-text);
   white-space: pre-wrap;
   word-break: break-word;
-  background: rgba(0, 0, 0, 0.15);
 }
 
 .desk-txt-content h2 {
   font-family: 'Inter', sans-serif;
   font-size: 1.1em;
-  font-weight: 600;
+  font-weight: 700;
   margin: 1.2em 0 0.4em;
   color: var(--desk-accent);
 }
@@ -803,7 +886,15 @@ body.desk-window-resizing-active {
 .desk-txt-content a { color: var(--desk-accent); text-decoration: none; }
 .desk-txt-content a:hover { text-decoration: underline; }
 
-/* Панель задач — стекло, кнопка меню по центру */
+/* ═══════════════════════════════════════
+   ПАНЕЛЬ ЗАДАЧ
+═══════════════════════════════════════ */
+
+@keyframes gradient-flow {
+  0%   { background-position: 0%   0%; }
+  100% { background-position: 200% 0%; }
+}
+
 .desk-taskbar {
   position: fixed;
   bottom: 0;
@@ -814,12 +905,31 @@ body.desk-window-resizing-active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
-  background: rgba(20, 24, 35, 0.6);
-  -webkit-backdrop-filter: blur(32px) saturate(1.5);
-  backdrop-filter: blur(32px) saturate(1.5);
-  border-top: 1px solid var(--desk-border-glass);
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3), 0 -1px 0 rgba(14, 165, 233, 0.06);
+  padding: 0 16px;
+  background: rgba(7, 9, 18, 0.8);
+  backdrop-filter: blur(44px) saturate(2);
+  -webkit-backdrop-filter: blur(44px) saturate(2);
+  overflow: hidden;
+}
+
+/* Живая градиентная линия сверху — под палитру сайта */
+.desk-taskbar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent         0%,
+    rgba(99,102,241,0.9) 15%,
+    rgba(139,92,246,0.9) 35%,
+    rgba(221,74,255,0.7) 50%,
+    rgba(139,92,246,0.9) 65%,
+    rgba(99,102,241,0.9) 85%,
+    transparent          100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-flow 5s linear infinite;
 }
 
 .desk-taskbar-left {
@@ -830,12 +940,16 @@ body.desk-window-resizing-active {
   min-width: 0;
 }
 
+/* Центральная «капсула» — island */
 .desk-taskbar-center {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
+  gap: 2px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 4px 6px;
 }
 
 .desk-taskbar-pinned {
@@ -845,6 +959,7 @@ body.desk-window-resizing-active {
 }
 
 .desk-taskbar-pinned-btn {
+  position: relative;
   width: 40px;
   height: 40px;
   display: flex;
@@ -856,21 +971,46 @@ body.desk-window-resizing-active {
   color: var(--desk-text-muted);
   cursor: pointer;
   font-size: 16px;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
 }
 
 .desk-taskbar-pinned-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.09);
   color: var(--desk-text);
+  transform: translateY(-1px);
 }
 
-.desk-taskbar-pinned-btn:active {
-  background: rgba(255, 255, 255, 0.08);
-}
+.desk-taskbar-pinned-btn:active { transform: translateY(0); }
 
-.desk-taskbar-pinned-btn.active {
-  background: rgba(14, 165, 233, 0.25);
-  color: var(--desk-accent);
+/* Цветные акценты для каждого приложения */
+.desk-taskbar-pinned-btn[data-app="courses"]:hover    { color: #818cf8; background: rgba(129,140,248,0.12); }
+.desk-taskbar-pinned-btn[data-app="tools"]:hover      { color: #a78bfa; background: rgba(139,92,246,0.12); }
+.desk-taskbar-pinned-btn[data-app="library"]:hover    { color: #fbbf24; background: rgba(251,191,36,0.12); }
+.desk-taskbar-pinned-btn[data-app="about"]:hover      { color: #34d399; background: rgba(16,185,129,0.12); }
+.desk-taskbar-pinned-btn[data-app="settings"]:hover   { color: #fb7185; background: rgba(244,63,94,0.12); }
+.desk-taskbar-pinned-btn[data-app="bash"]:hover       { color: #4ec9b0; background: rgba(78,201,176,0.12); }
+.desk-taskbar-pinned-btn[data-app="powershell"]:hover { color: #818cf8; background: rgba(129,140,248,0.12); }
+
+.desk-taskbar-pinned-btn[data-app="courses"].active    { color: #818cf8; background: rgba(129,140,248,0.16); }
+.desk-taskbar-pinned-btn[data-app="tools"].active      { color: #a78bfa; background: rgba(139,92,246,0.16); }
+.desk-taskbar-pinned-btn[data-app="library"].active    { color: #fbbf24; background: rgba(251,191,36,0.16); }
+.desk-taskbar-pinned-btn[data-app="about"].active      { color: #34d399; background: rgba(16,185,129,0.16); }
+.desk-taskbar-pinned-btn[data-app="settings"].active   { color: #fb7185; background: rgba(244,63,94,0.16); }
+.desk-taskbar-pinned-btn[data-app="bash"].active       { color: #4ec9b0; background: rgba(78,201,176,0.16); }
+.desk-taskbar-pinned-btn[data-app="powershell"].active { color: #818cf8; background: rgba(129,140,248,0.16); }
+
+/* Точка под активной иконкой */
+.desk-taskbar-pinned-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
 }
 
 .desk-taskbar-right {
@@ -878,40 +1018,40 @@ body.desk-window-resizing-active {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 12px;
   min-width: 0;
 }
 
+/* Кнопка Пуск */
 .desk-start {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   padding: 0;
-  background: var(--desk-glass-bg);
+  background: linear-gradient(135deg, rgba(99,102,241,0.22), rgba(139,92,246,0.22));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--desk-border-glass);
-  border-radius: 12px;
+  border: 1px solid rgba(99,102,241,0.32);
+  border-radius: 11px;
   color: var(--desk-text);
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 
 .desk-start:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(14, 165, 233, 0.35);
-  transform: scale(1.05);
+  background: linear-gradient(135deg, rgba(99,102,241,0.38), rgba(139,92,246,0.35));
+  border-color: rgba(99,102,241,0.55);
+  transform: scale(1.06);
+  box-shadow: 0 4px 18px rgba(99,102,241,0.28);
 }
 
-.desk-start:active {
-  transform: scale(0.98);
-}
+.desk-start:active { transform: scale(0.97); }
 
 .desk-start-icon {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
   display: block;
 }
@@ -927,16 +1067,16 @@ body.desk-window-resizing-active {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 34px;
+  height: 32px;
   padding: 0 12px;
   background: transparent;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--desk-text-muted);
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
-  max-width: 180px;
+  max-width: 160px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -949,17 +1089,16 @@ body.desk-window-resizing-active {
 }
 
 .desk-taskbar-app-btn.active {
-  background: rgba(14, 165, 233, 0.2);
+  background: rgba(0,212,255,0.14);
   color: var(--desk-accent);
 }
-
 
 .desk-taskbar-link {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--desk-text-muted);
   text-decoration: none;
   font-size: 13px;
@@ -967,42 +1106,59 @@ body.desk-window-resizing-active {
 }
 
 .desk-taskbar-link:hover {
-  background: var(--desk-surface-hover);
+  background: rgba(255,255,255,0.06);
   color: var(--desk-text);
 }
 
 .desk-clock {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  color: var(--desk-text-muted);
-  min-width: 60px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--desk-text);
+  min-width: 48px;
   text-align: right;
+  letter-spacing: 0.02em;
 }
 
-/* Стартовое меню — компактное стекло над панелью */
+/* ═══════════════════════════════════════
+   СТАРТОВОЕ МЕНЮ
+═══════════════════════════════════════ */
+
+@keyframes menu-open {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.96); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0)     scale(1);    }
+}
+
 .desk-start-menu {
   position: fixed;
-  bottom: calc(var(--desk-taskbar-h) + 6px);
+  bottom: calc(var(--desk-taskbar-h) + 8px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 11;
-  width: 260px;
-  padding: 6px 0;
-  background: var(--desk-glass-bg);
-  -webkit-backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.2);
-  backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.2);
+  width: 270px;
+  padding: 8px;
+  background: rgba(10, 12, 24, 0.88);
+  backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.4);
+  -webkit-backdrop-filter: blur(var(--desk-glass-blur)) saturate(1.4);
   border: 1px solid var(--desk-border-glass);
-  border-radius: 12px;
-  box-shadow: var(--desk-shadow-glass), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  border-radius: 16px;
+  box-shadow: var(--desk-shadow-glass), 0 0 0 1px rgba(255,255,255,0.05) inset;
   overflow: hidden;
+  animation: menu-open 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.desk-start-menu[hidden] {
-  display: none !important;
+.desk-start-menu[hidden] { display: none !important; }
+
+/* Цветная линия сверху меню */
+.desk-start-menu::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.8), rgba(139,92,246,0.8), transparent);
 }
 
 .desk-start-menu-apps {
-  padding: 4px 6px;
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -1011,152 +1167,220 @@ body.desk-window-resizing-active {
 .desk-start-menu-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  gap: 12px;
+  padding: 8px 10px;
   background: transparent;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--desk-text);
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
+  font-weight: 500;
   text-align: left;
   width: 100%;
   text-decoration: none;
-  transition: background 0.12s, color 0.12s;
+  transition: background 0.12s, transform 0.12s;
 }
 
 .desk-start-menu-item:hover {
-  background: var(--desk-surface-hover);
-  color: var(--desk-text);
+  background: rgba(255,255,255,0.07);
+  transform: translateX(2px);
 }
 
+/* Цветные иконки в меню */
 .desk-start-menu-item i {
-  width: 18px;
-  text-align: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  font-size: 14px;
+  flex-shrink: 0;
+  background: rgba(0,212,255,0.1);
   color: var(--desk-accent);
-  font-size: 12px;
+  transition: transform 0.12s;
 }
+
+.desk-start-menu-item:hover i { transform: scale(1.08); }
+
+.desk-start-menu-item[data-app="courses"]    i { background: rgba(129,140,248,0.12); color: #818cf8; }
+.desk-start-menu-item[data-app="tools"]      i { background: rgba(139,92,246,0.12);  color: #a78bfa; }
+.desk-start-menu-item[data-app="library"]    i { background: rgba(251,191,36,0.12);  color: #fbbf24; }
+.desk-start-menu-item[data-app="about"]      i { background: rgba(16,185,129,0.12);  color: #34d399; }
+.desk-start-menu-item[data-app="settings"]   i { background: rgba(244,63,94,0.12);   color: #fb7185; }
+.desk-start-menu-item[data-app="trash"]      i { background: rgba(244,63,94,0.08);   color: rgba(244,63,94,0.65); }
+.desk-start-menu-item[data-app="bash"]       i { background: rgba(78,201,176,0.12);  color: #4ec9b0; }
+.desk-start-menu-item[data-app="powershell"] i { background: rgba(129,140,248,0.12); color: #818cf8; }
 
 .desk-start-menu-footer {
-  padding: 4px 6px 2px;
-  margin-top: 2px;
+  padding: 4px 0 0;
+  margin-top: 4px;
   border-top: 1px solid var(--desk-border);
 }
 
 .desk-start-menu-exit {
   color: var(--desk-text-muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 
-.desk-start-menu-exit:hover {
-  color: var(--desk-text);
-}
+.desk-start-menu-exit:hover { color: var(--desk-text); }
 
 .desk-start-menu-exit i {
-  color: var(--desk-text-muted);
+  background: rgba(255,255,255,0.05) !important;
+  color: var(--desk-text-muted) !important;
 }
 
-/* Светлая тема — та же концепция ОС, стильный и современный вид */
+/* ═══════════════════════════════════════
+   СВЕТЛАЯ ТЕМА
+═══════════════════════════════════════ */
+
 .desk-os.light-theme {
-  --desk-bg: #eef1f5;
-  --desk-text: #1a1d24;
-  --desk-text-muted: #5c6370;
-  --desk-surface: #f4f6f9;
-  --desk-surface-hover: #e8ecf1;
-  --desk-border: rgba(0, 0, 0, 0.07);
-  --desk-border-glass: rgba(0, 0, 0, 0.1);
-  --desk-accent: #0ea5e9;
-  --desk-accent-hover: #0284c7;
-  --desk-glass-bg: rgba(255, 255, 255, 0.72);
-  --desk-shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --desk-bg: #f0f0fa;
+  --desk-text: #141520;
+  --desk-text-muted: #5c6485;
+  --desk-surface: #f6f6fc;
+  --desk-surface-hover: #e8e8f4;
+  --desk-border: rgba(0,0,0,0.07);
+  --desk-border-glass: rgba(0,0,0,0.09);
+  --desk-accent: #4338ca;
+  --desk-accent-hover: #3730a3;
+  --desk-glass-bg: rgba(255,255,255,0.78);
+  --desk-shadow-glass: 0 8px 32px rgba(0,0,0,0.08);
 }
 
 .desk-os.light-theme .desk-wallpaper {
-  background: linear-gradient(165deg, #e4e8ef 0%, #eef1f6 50%, #e0e5ec 100%);
+  background: #f0f0fa;
 }
 
-.desk-os.light-theme .desk-wallpaper-gradient {
+.desk-os.light-theme .desk-wallpaper-gradient::before {
   background:
-    radial-gradient(ellipse 100% 70% at 50% -20%, rgba(14, 165, 233, 0.12), transparent 45%),
-    radial-gradient(ellipse 80% 60% at 90% 70%, rgba(99, 102, 241, 0.08), transparent 40%);
+    radial-gradient(ellipse 80% 60% at 0%   50%, rgba(99,102,241,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 100% 50%, rgba(79,70,229,0.1)   0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 50%  -5%, rgba(18,113,255,0.08)  0%, transparent 50%);
 }
 
 .desk-os.light-theme .desk-wallpaper-grid {
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
 }
 
-.desk-os.light-theme .desk-window.focused {
-  border-color: rgba(14, 165, 233, 0.35);
-  box-shadow: var(--desk-shadow-glass), 0 0 0 1px rgba(0, 0, 0, 0.04) inset, 0 0 20px -6px rgba(14, 165, 233, 0.15);
+.desk-os.light-theme .desk-icon-img {
+  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.04));
+  border-color: rgba(99,102,241,0.25);
+  color: var(--desk-accent);
+  box-shadow: 0 4px 18px rgba(99,102,241,0.1);
 }
 
-.desk-os.light-theme .desk-taskbar {
-  border-top-color: rgba(0, 0, 0, 0.06);
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.06);
-}
-
-.desk-os.light-theme .desk-start {
-  color: var(--desk-text);
+.desk-os.light-theme .desk-icon-label {
+  color: #141722;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.8), 0 2px 8px rgba(255,255,255,0.5);
 }
 
 .desk-os.light-theme .desk-calendar {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: rgba(255,255,255,0.88);
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.desk-os.light-theme .desk-calendar::before {
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.55), rgba(139,92,246,0.45), transparent);
 }
 
 .desk-os.light-theme .desk-calendar-time {
-  color: var(--desk-text);
-}
-
-.desk-os.light-theme .desk-calendar-header {
-  color: var(--desk-text-muted);
+  background: linear-gradient(135deg, #141520, rgba(99,102,241,0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .desk-os.light-theme .desk-calendar-cell.today {
-  background: rgba(14, 165, 233, 0.18);
-  color: var(--desk-accent);
+  background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.2));
+  color: #3730a3;
 }
 
-/* Стилизованные скроллбары — светлая тема */
-.desk-os.light-theme ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.06);
-  border-radius: 5px;
+.desk-os.light-theme .desk-calendar-cell.weekday {
+  color: rgba(99,102,241,0.8);
 }
+
+.desk-os.light-theme .desk-taskbar {
+  background: rgba(240,244,252,0.85);
+  border-top: none;
+}
+
+.desk-os.light-theme .desk-taskbar::before {
+  background: linear-gradient(
+    90deg,
+    transparent          0%,
+    rgba(99,102,241,0.7) 15%,
+    rgba(139,92,246,0.7) 35%,
+    rgba(221,74,255,0.5) 50%,
+    rgba(139,92,246,0.7) 65%,
+    rgba(99,102,241,0.7) 85%,
+    transparent          100%
+  );
+}
+
+.desk-os.light-theme .desk-taskbar-center {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.08);
+}
+
+.desk-os.light-theme .desk-taskbar-pinned-btn { color: #5c6485; }
+.desk-os.light-theme .desk-clock { color: #141722; }
+
+.desk-os.light-theme .desk-start {
+  background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(139,92,246,0.18));
+  border-color: rgba(99,102,241,0.28);
+}
+
+.desk-os.light-theme .desk-start:hover {
+  background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.3));
+}
+
+.desk-os.light-theme .desk-window.focused {
+  border-color: rgba(99,102,241,0.35);
+  box-shadow: var(--desk-shadow-glass), 0 0 0 1px rgba(0,0,0,0.03) inset, 0 0 40px -8px rgba(99,102,241,0.14);
+}
+
+.desk-os.light-theme .desk-window.focused .desk-window-titlebar {
+  background: linear-gradient(180deg, rgba(99,102,241,0.08) 0%, rgba(0,0,0,0.03) 100%);
+  border-bottom-color: rgba(99,102,241,0.14);
+}
+
+.desk-os.light-theme .desk-start-menu {
+  background: rgba(245,245,255,0.94);
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+.desk-os.light-theme .desk-start-menu::before {
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.6), rgba(139,92,246,0.5), transparent);
+}
+
+.desk-os.light-theme .desk-start-menu-item { color: #141520; }
+.desk-os.light-theme .desk-start-menu-item:hover { background: rgba(0,0,0,0.04); }
+
+/* Скроллбары — светлая тема */
+.desk-os.light-theme ::-webkit-scrollbar-track { background: rgba(0,0,0,0.06); }
 .desk-os.light-theme ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  background: rgba(0,0,0,0.18);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 .desk-os.light-theme ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 5px;
+  background: rgba(0,0,0,0.32);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 .desk-os.light-theme {
-  scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.08);
-  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.25) rgba(0,0,0,0.07);
 }
 
-/* Адаптив: на узком экране иконки в ряд */
+/* ── Адаптив ── */
 @media (max-width: 640px) {
-  .desk-icons {
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: none;
-    gap: 12px;
-  }
-
-  .desk-icon-label {
-    display: none;
-  }
-
+  .desk-icons { flex-direction: row; flex-wrap: wrap; max-width: none; gap: 12px; }
+  .desk-icon-label { display: none; }
   .desk-window {
     min-width: 100%;
     max-width: 100%;
@@ -1166,8 +1390,6 @@ body.desk-window-resizing-active {
     bottom: auto !important;
     max-height: 70vh;
   }
-
-  .desk-taskbar-link-text {
-    display: none;
-  }
+  .desk-taskbar-link-text { display: none; }
+  .desk-taskbar-center { gap: 1px; }
 }
