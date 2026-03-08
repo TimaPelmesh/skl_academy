@@ -51,18 +51,258 @@
             <section id="formulas" class="topic-section">
                 <h3>Все основные формулы</h3>
                 <div class="lesson-content">
-                    <p><strong>Арифметика.</strong> Дробь a/b + c/d = (ad+bc)/(bd). a/b · c/d = (ac)/(bd). a/b : c/d = (ad)/(bc). Процент: p% от N = N·p/100. Число по его части: если a = b·x, то b = a/x. Степень: aⁿ·aᵐ = aⁿ⁺ᵐ, aⁿ/aᵐ = aⁿ⁻ᵐ, (aⁿ)ᵐ = aⁿᵐ, (ab)ⁿ = aⁿbⁿ. Корень: (√a)² = a при a ≥ 0; √(a²) = |a|; ⁿ√(ab) = ⁿ√a·ⁿ√b.</p>
-                    <div class="math-formula-box">
-                        <div class="formula-title">Алгебра: ФСУ и квадратное уравнение</div>
-                        <p>(a±b)² = a²±2ab+b²; a²−b² = (a−b)(a+b); (a±b)³ = a³±3a²b+3ab²±b³; a³±b³ = (a±b)(a²∓ab+b²).</p>
-                        <p>ax²+bx+c = 0: D = b²−4ac; x₁,₂ = (−b±√D)/(2a); x₁+x₂ = −b/a, x₁x₂ = c/a.</p>
+
+                    <h4 id="ref-arifm" class="ref-section-title">Арифметика. Дроби</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Сложение</th><td class="formula-cell">a/b + c/d = (ad + bc)/(bd)</td></tr>
+                                <tr><th>Вычитание</th><td class="formula-cell">a/b − c/d = (ad − bc)/(bd)</td></tr>
+                                <tr><th>Умножение</th><td class="formula-cell">a/b · c/d = (ac)/(bd)</td></tr>
+                                <tr><th>Деление</th><td class="formula-cell">a/b : c/d = (ad)/(bc)</td></tr>
+                                <tr><th>Общий знаменатель</th><td class="formula-cell">НОК знаменателей; доп. множитель = общий знаменатель ÷ знаменатель дроби</td></tr>
+                                <tr><th>Сокращение</th><td class="formula-cell">числитель и знаменатель делим на НОД(a, b)</td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <p><strong>Функции.</strong> Линейная: y = kx+b, k = tg α. Парабола y = ax²+bx+c: вершина x₀ = −b/(2a), y₀ = −D/(4a). Расстояние между точками A(x₁;y₁) и B(x₂;y₂): AB = √((x₂−x₁)²+(y₂−y₁)²).</p>
-                    <p><strong>Геометрия.</strong> Треугольник: S = ½ah = ½ab·sin γ = √(p(p−a)(p−b)(p−c)), p = (a+b+c)/2. Прямоугольный: c² = a²+b², S = ½ab. Параллелограмм: S = ah = ab·sin α. Трапеция: S = (a+b)h/2, средняя линия m = (a+b)/2. Круг: L = 2πR, S = πR². Окружность: вписанный угол равен половине дуги.</p>
-                    <p><strong>Стереометрия.</strong> Призма V = Sосн·h. Пирамида V = (1/3)Sосн·h. Цилиндр V = πR²h, Sбок = 2πRh. Конус V = (1/3)πR²h, Sбок = πRl. Шар V = (4/3)πR³, S = 4πR².</p>
-                    <p><strong>Тригонометрия.</strong> sin²α+cos²α = 1; tg α = sin α/cos α. sin(π/2−α) = cos α, cos(π/2−α) = sin α.</p>
-                    <p><strong>Прогрессии.</strong> АП: aₙ = a₁+(n−1)d, Sₙ = (a₁+aₙ)n/2. ГП: bₙ = b₁qⁿ⁻¹, Sₙ = b₁(qⁿ−1)/(q−1), при |q|&lt;1 S∞ = b₁/(1−q).</p>
-                    <p><strong>Производная (ЕГЭ).</strong> (xⁿ)' = nxⁿ⁻¹, (eˣ)' = eˣ, (ln x)' = 1/x, (sin x)' = cos x, (cos x)' = −sin x. Касательная: y = f(x₀)+f'(x₀)(x−x₀).</p>
+
+                    <h4 class="ref-section-title">Арифметика. Проценты</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>p% от N</th><td class="formula-cell">N · p/100</td></tr>
+                                <tr><th>Число по части</th><td class="formula-cell">если a = b·x, то b = a/x; если p% числа = B, то число = B · 100/p</td></tr>
+                                <tr><th>Увеличение на p%</th><td class="formula-cell">N · (1 + p/100)</td></tr>
+                                <tr><th>Уменьшение на p%</th><td class="formula-cell">N · (1 − p/100)</td></tr>
+                                <tr><th>1%</th><td class="formula-cell">1/100 = 0,01</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Арифметика. Степень</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Определение (n ∈ N)</th><td class="formula-cell">aⁿ = a·a·…·a (n множителей); a¹ = a; a⁰ = 1 (a ≠ 0)</td></tr>
+                                <tr><th>Отрицательный показатель</th><td class="formula-cell">a⁻ᵏ = 1/aᵏ (a ≠ 0)</td></tr>
+                                <tr><th>Умножение</th><td class="formula-cell">aⁿ · aᵐ = aⁿ⁺ᵐ</td></tr>
+                                <tr><th>Деление</th><td class="formula-cell">aⁿ : aᵐ = aⁿ⁻ᵐ (a ≠ 0)</td></tr>
+                                <tr><th>Степень степени</th><td class="formula-cell">(aⁿ)ᵐ = aⁿᵐ</td></tr>
+                                <tr><th>Степень произведения</th><td class="formula-cell">(ab)ⁿ = aⁿbⁿ</td></tr>
+                                <tr><th>Степень частного</th><td class="formula-cell">(a/b)ⁿ = aⁿ/bⁿ (b ≠ 0)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Арифметика. Корень</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Определение</th><td class="formula-cell">ⁿ√a = x ⇔ xⁿ = a (a ≥ 0, x ≥ 0); при n = 2 пишут √a</td></tr>
+                                <tr><th>Квадрат корня</th><td class="formula-cell">(√a)² = a при a ≥ 0</td></tr>
+                                <tr><th>Корень из квадрата</th><td class="formula-cell">√(a²) = |a|</td></tr>
+                                <tr><th>Корень произведения</th><td class="formula-cell">ⁿ√(ab) = ⁿ√a · ⁿ√b (a, b ≥ 0)</td></tr>
+                                <tr><th>Корень частного</th><td class="formula-cell">ⁿ√(a/b) = ⁿ√a / ⁿ√b (a ≥ 0, b &gt; 0)</td></tr>
+                                <tr><th>Степень с дробным показателем</th><td class="formula-cell">a¹/ⁿ = ⁿ√a; aᵐ/ⁿ = ⁿ√(aᵐ) = (ⁿ√a)ᵐ (a &gt; 0)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Алгебра. Формулы сокращённого умножения (ФСУ)</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Квадрат суммы</th><td class="formula-cell">(a + b)² = a² + 2ab + b²</td></tr>
+                                <tr><th>Квадрат разности</th><td class="formula-cell">(a − b)² = a² − 2ab + b²</td></tr>
+                                <tr><th>Разность квадратов</th><td class="formula-cell">a² − b² = (a − b)(a + b)</td></tr>
+                                <tr><th>Куб суммы</th><td class="formula-cell">(a + b)³ = a³ + 3a²b + 3ab² + b³</td></tr>
+                                <tr><th>Куб разности</th><td class="formula-cell">(a − b)³ = a³ − 3a²b + 3ab² − b³</td></tr>
+                                <tr><th>Сумма кубов</th><td class="formula-cell">a³ + b³ = (a + b)(a² − ab + b²)</td></tr>
+                                <tr><th>Разность кубов</th><td class="formula-cell">a³ − b³ = (a − b)(a² + ab + b²)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Алгебра. Квадратное уравнение ax² + bx + c = 0</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Дискриминант</th><td class="formula-cell">D = b² − 4ac</td></tr>
+                                <tr><th>Корни</th><td class="formula-cell">x₁,₂ = (−b ± √D)/(2a); при D &gt; 0 — два корня; D = 0 — один; D &lt; 0 — нет действительных корней</td></tr>
+                                <tr><th>Теорема Виета (приведённое x² + px + q = 0)</th><td class="formula-cell">x₁ + x₂ = −p; x₁·x₂ = q</td></tr>
+                                <tr><th>Теорема Виета (общий вид)</th><td class="formula-cell">x₁ + x₂ = −b/a; x₁·x₂ = c/a</td></tr>
+                                <tr><th>Разложение трёхчлена</th><td class="formula-cell">ax² + bx + c = a(x − x₁)(x − x₂); при D = 0: a(x − x₀)²</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Алгебра. Линейное уравнение и неравенства</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Линейное уравнение</th><td class="formula-cell">ax + b = 0 ⇒ x = −b/a (a ≠ 0)</td></tr>
+                                <tr><th>Линейное неравенство</th><td class="formula-cell">при делении на отрицательное число знак неравенства меняется: &gt; ↔ &lt;, ≥ ↔ ≤</td></tr>
+                                <tr><th>Метод интервалов</th><td class="formula-cell">отметить нули числителя и знаменателя на прямой; определить знак на промежутках; выбрать промежутки по условию (&gt; 0 или &lt; 0)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Функции. Координаты</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Расстояние между точками A(x₁; y₁), B(x₂; y₂)</th><td class="formula-cell">AB = √((x₂ − x₁)² + (y₂ − y₁)²)</td></tr>
+                                <tr><th>Середина отрезка AB</th><td class="formula-cell">M((x₁ + x₂)/2; (y₁ + y₂)/2)</td></tr>
+                                <tr><th>Расстояние на прямой</th><td class="formula-cell">|b − a| между точками с координатами a и b</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Функции. Линейная и квадратичная</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Линейная функция</th><td class="formula-cell">y = kx + b; k — угловой коэффициент, k = tg α; b — ордината точки пересечения с Oy</td></tr>
+                                <tr><th>Параллельность прямых</th><td class="formula-cell">y = k₁x + b₁ ∥ y = k₂x + b₂ ⇔ k₁ = k₂</td></tr>
+                                <tr><th>Перпендикулярность прямых</th><td class="formula-cell">k₁·k₂ = −1</td></tr>
+                                <tr><th>Парабола y = ax² + bx + c</th><td class="formula-cell">вершина: x₀ = −b/(2a), y₀ = −D/(4a), D = b² − 4ac; ось симметрии x = x₀</td></tr>
+                                <tr><th>Обратная пропорциональность</th><td class="formula-cell">y = k/x, k ≠ 0; график — гипербола</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Геометрия. Углы и прямые</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Смежные углы</th><td class="formula-cell">∠1 + ∠2 = 180°</td></tr>
+                                <tr><th>Вертикальные углы</th><td class="formula-cell">равны</td></tr>
+                                <tr><th>При параллельных и секущей</th><td class="formula-cell">накрест лежащие равны; соответственные равны; сумма односторонних = 180°</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Геометрия. Треугольник</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Сумма углов</th><td class="formula-cell">∠A + ∠B + ∠C = 180°</td></tr>
+                                <tr><th>Внешний угол</th><td class="formula-cell">равен сумме двух внутренних, не смежных с ним</td></tr>
+                                <tr><th>Неравенство треугольника</th><td class="formula-cell">a &lt; b + c, b &lt; a + c, c &lt; a + b</td></tr>
+                                <tr><th>Площадь (сторона и высота)</th><td class="formula-cell">S = ½ah</td></tr>
+                                <tr><th>Площадь (две стороны и угол)</th><td class="formula-cell">S = ½ab·sin γ</td></tr>
+                                <tr><th>Формула Герона</th><td class="formula-cell">S = √(p(p−a)(p−b)(p−c)), p = (a+b+c)/2</td></tr>
+                                <tr><th>Прямоугольный: Пифагор</th><td class="formula-cell">c² = a² + b²</td></tr>
+                                <tr><th>Прямоугольный: площадь</th><td class="formula-cell">S = ½ab</td></tr>
+                                <tr><th>Подобие</th><td class="formula-cell">отношение площадей = k² (k — коэффициент подобия)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Геометрия. Окружность и круг</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Длина окружности</th><td class="formula-cell">L = 2πR</td></tr>
+                                <tr><th>Площадь круга</th><td class="formula-cell">S = πR²</td></tr>
+                                <tr><th>Площадь сектора</th><td class="formula-cell">S = (α/360°)·πR² (α в градусах)</td></tr>
+                                <tr><th>Вписанный угол</th><td class="formula-cell">равен половине дуги, на которую опирается; вписанный, опирающийся на диаметр, = 90°</td></tr>
+                                <tr><th>Центральный угол</th><td class="formula-cell">равен дуге, на которую опирается</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Геометрия. Четырёхугольники</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Параллелограмм</th><td class="formula-cell">S = ah = ab·sin α</td></tr>
+                                <tr><th>Прямоугольник</th><td class="formula-cell">S = ab</td></tr>
+                                <tr><th>Ромб</th><td class="formula-cell">S = ½d₁d₂ = ah = a²·sin α</td></tr>
+                                <tr><th>Квадрат</th><td class="formula-cell">S = a²; диагональ d = a√2</td></tr>
+                                <tr><th>Трапеция</th><td class="formula-cell">S = (a+b)h/2 = m·h; средняя линия m = (a+b)/2</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Стереометрия. Объёмы и поверхности</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Призма</th><td class="formula-cell">V = Sосн·h; прямой параллелепипед V = abc; куб V = a³</td></tr>
+                                <tr><th>Пирамида</th><td class="formula-cell">V = (1/3)Sосн·h</td></tr>
+                                <tr><th>Цилиндр</th><td class="formula-cell">V = πR²h; Sбок = 2πRh; Sполн = 2πR(R+h)</td></tr>
+                                <tr><th>Конус</th><td class="formula-cell">V = (1/3)πR²h; Sбок = πRl (l — образующая)</td></tr>
+                                <tr><th>Шар</th><td class="formula-cell">V = (4/3)πR³; площадь сферы S = 4πR²</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Тригонометрия. Основные тождества</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>Основное тождество</th><td class="formula-cell">sin²α + cos²α = 1</td></tr>
+                                <tr><th>Тангенс и котангенс</th><td class="formula-cell">tg α = sin α/cos α (cos α ≠ 0); ctg α = cos α/sin α; tg α·ctg α = 1</td></tr>
+                                <tr><th>1 + tg²α</th><td class="formula-cell">1 + tg²α = 1/cos²α</td></tr>
+                                <tr><th>Формулы приведения (π/2 ± α)</th><td class="formula-cell">sin(π/2 − α) = cos α; cos(π/2 − α) = sin α; sin(π/2 + α) = cos α; cos(π/2 + α) = −sin α</td></tr>
+                                <tr><th>Формулы приведения (π ± α)</th><td class="formula-cell">sin(π + α) = −sin α; cos(π + α) = −cos α; sin(π − α) = sin α; cos(π − α) = −cos α</td></tr>
+                                <tr><th>Формулы приведения (2π − α)</th><td class="formula-cell">sin(2π − α) = −sin α; cos(2π − α) = cos α</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Тригонометрия. Таблица значений (0°, 30°, 45°, 60°, 90°)</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <thead><tr><th>Угол</th><th>sin</th><th>cos</th><th>tg</th></tr></thead>
+                            <tbody>
+                                <tr><th>0°</th><td>0</td><td>1</td><td>0</td></tr>
+                                <tr><th>30°</th><td>1/2</td><td>√3/2</td><td>1/√3</td></tr>
+                                <tr><th>45°</th><td>√2/2</td><td>√2/2</td><td>1</td></tr>
+                                <tr><th>60°</th><td>√3/2</td><td>1/2</td><td>√3</td></tr>
+                                <tr><th>90°</th><td>1</td><td>0</td><td>не опр.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Прогрессии</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>АП: n-й член</th><td class="formula-cell">aₙ = a₁ + (n−1)d</td></tr>
+                                <tr><th>АП: сумма n членов</th><td class="formula-cell">Sₙ = (a₁ + aₙ)n/2 = (2a₁ + (n−1)d)n/2</td></tr>
+                                <tr><th>АП: характеристическое свойство</th><td class="formula-cell">aₙ = (aₙ₋₁ + aₙ₊₁)/2</td></tr>
+                                <tr><th>ГП: n-й член</th><td class="formula-cell">bₙ = b₁·qⁿ⁻¹</td></tr>
+                                <tr><th>ГП: сумма n членов (q ≠ 1)</th><td class="formula-cell">Sₙ = b₁(qⁿ−1)/(q−1) = b₁(1−qⁿ)/(1−q)</td></tr>
+                                <tr><th>ГП: при q = 1</th><td class="formula-cell">Sₙ = n·b₁</td></tr>
+                                <tr><th>ГП: бесконечно убывающая (|q| &lt; 1)</th><td class="formula-cell">S∞ = b₁/(1−q)</td></tr>
+                                <tr><th>ГП: характеристическое свойство</th><td class="formula-cell">bₙ² = bₙ₋₁·bₙ₊₁</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="ref-section-title">Производная (ЕГЭ)</h4>
+                    <div class="ref-table-wrapper">
+                        <table class="ref-table">
+                            <tbody>
+                                <tr><th>(xⁿ)′</th><td class="formula-cell">nxⁿ⁻¹ (n ∈ R)</td></tr>
+                                <tr><th>(eˣ)′</th><td class="formula-cell">eˣ</td></tr>
+                                <tr><th>(aˣ)′</th><td class="formula-cell">aˣ ln a (a &gt; 0)</td></tr>
+                                <tr><th>(ln x)′</th><td class="formula-cell">1/x (x &gt; 0)</td></tr>
+                                <tr><th>(logₐ x)′</th><td class="formula-cell">1/(x ln a)</td></tr>
+                                <tr><th>(sin x)′</th><td class="formula-cell">cos x</td></tr>
+                                <tr><th>(cos x)′</th><td class="formula-cell">−sin x</td></tr>
+                                <tr><th>(tg x)′</th><td class="formula-cell">1/cos²x</td></tr>
+                                <tr><th>(ctg x)′</th><td class="formula-cell">−1/sin²x</td></tr>
+                                <tr><th>(u ± v)′</th><td class="formula-cell">u′ ± v′</td></tr>
+                                <tr><th>(uv)′</th><td class="formula-cell">u′v + uv′</td></tr>
+                                <tr><th>(u/v)′</th><td class="formula-cell">(u′v − uv′)/v²</td></tr>
+                                <tr><th>Касательная к y = f(x) в точке x₀</th><td class="formula-cell">y = f(x₀) + f′(x₀)(x − x₀)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </section>
         </main>
