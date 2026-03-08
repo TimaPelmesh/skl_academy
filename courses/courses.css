@@ -142,8 +142,16 @@ header .header-buttons {
     border: 1px solid var(--border-color);
     background: transparent;
     transition: all 0.3s ease;
+    font-size: 0;
 }
-
+.exit-btn::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M11.47 3.841a.75.75 0 011.06 0l8.69 8.69a.75.75 0 10 1.06-1.061l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 10 1.061 1.06l8.69-8.69z'/%3E%3Cpath d='M12 5.432 18.879 12.3l-1.427 1.428a.75.75 0 00-.375.653v6.131a.75.75 0 01-.75.75h-3.75v-4.5a.75.75 0 00-.75-.75h-2.25a.75.75 0 00-.75.75v4.5H4.5a.75.75 0 01-.75-.75v-6.13a.75.75 0 00-.375-.652L2.12 12.3 12 5.431z'/%3E%3C/svg%3E") no-repeat center;
+    background-size: contain;
+}
 .exit-btn:hover {
     background: var(--primary-color);
     color: #ffffff;
@@ -151,10 +159,12 @@ header .header-buttons {
     box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
     border-color: transparent;
 }
-
-.exit-btn svg {
-    width: 20px;
-    height: 20px;
+.exit-btn:hover::before {
+    filter: brightness(0) invert(1);
+}
+.exit-btn svg,
+.exit-btn > * {
+    display: none !important;
 }
 
 /* Кнопки переключения цветовой схемы — скрыты, используется только фиолетовая схема */
@@ -2514,6 +2524,17 @@ body.dark-theme .mobile-theme-toggle-btn .theme-icon-moon {
     scroll-margin-top: calc(var(--header-height, 70px) + 16px);
 }
 
+/* Вводный абзац части — та же ширина и отступы, что у разделов */
+.part-intro {
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+    padding: 0 20px;
+}
+.part-intro p {
+    line-height: 1.75;
+    margin: 0;
+}
+
 body.dark-theme .part-title-wrap .topic-section-title,
 body.dark-theme .content > .topic-section-title {
     color: #e5e7eb;
@@ -2685,6 +2706,83 @@ body.dark-theme .lesson-content .math-frac-block {
 body.dark-theme .math-diagram {
     background: linear-gradient(180deg, rgba(79, 70, 229, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%);
     border-color: rgba(129, 140, 248, 0.18);
+}
+
+/* Справочные таблицы формул: табличный вид, адаптация под мобильные */
+.ref-table-wrapper {
+    margin: 1rem 0 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+    border: 1px solid rgba(79, 70, 229, 0.15);
+    background: rgba(79, 70, 229, 0.04);
+}
+body.dark-theme .ref-table-wrapper {
+    border-color: rgba(129, 140, 248, 0.2);
+    background: rgba(79, 70, 229, 0.08);
+}
+.ref-table {
+    width: 100%;
+    min-width: 320px;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+.ref-table th,
+.ref-table td {
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(79, 70, 229, 0.12);
+}
+.ref-table th {
+    font-weight: 600;
+    color: var(--primary-dark);
+    background: rgba(79, 70, 229, 0.08);
+    white-space: nowrap;
+    width: 1%;
+}
+.ref-table td {
+    color: inherit;
+}
+.ref-table tr:last-child th,
+.ref-table tr:last-child td {
+    border-bottom: none;
+}
+.ref-table .formula-cell {
+    font-family: inherit;
+    word-break: break-word;
+}
+body.dark-theme .ref-table th,
+body.dark-theme .ref-table td {
+    border-bottom-color: rgba(129, 140, 248, 0.15);
+}
+body.dark-theme .ref-table th {
+    background: rgba(79, 70, 229, 0.12);
+    color: var(--primary-light);
+}
+.ref-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 1.5rem 0 0.75rem;
+    padding-bottom: 4px;
+}
+.ref-section-title:first-child {
+    margin-top: 0;
+}
+body.dark-theme .ref-section-title {
+    color: var(--primary-light);
+}
+@media (max-width: 576px) {
+    .ref-table th,
+    .ref-table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    .ref-table th {
+        white-space: normal;
+        min-width: 100px;
+    }
 }
 
 /* Краткая заметка / подсказка (без иконок) */
