@@ -9,6 +9,7 @@
   --desk-text: #eef0ff;
   --desk-text-muted: #6b74a4;
   --desk-accent: #818cf8;
+  --desk-accent-cyan: #00d2ff; /* концепт «рабочего стола» */
   --desk-accent2: #a855f7;
   --desk-accent3: #f43f5e;
   --desk-accent-hover: #a5b4fc;
@@ -32,6 +33,19 @@
   background: var(--desk-bg);
   color: var(--desk-text);
   overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* В полях ввода и терминале выделение разрешено */
+.desk-os input,
+.desk-os textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 /* ── Скроллбары ── */
@@ -70,9 +84,21 @@
   background: #0d0b14;
 }
 
+/* Частицы на фоне (концепт «рабочего стола») */
+.desk-wallpaper-particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .desk-wallpaper-gradient {
   position: absolute;
   inset: 0;
+  z-index: 0;
   animation: aurora-drift 18s ease-in-out infinite;
 }
 
@@ -100,9 +126,14 @@
 .desk-wallpaper-grid {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
   background-size: 32px 32px;
   pointer-events: none;
+}
+
+.desk-wallpaper-particle {
+  z-index: 2;
 }
 
 /* ── Иконки рабочего стола ── */
@@ -238,7 +269,7 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 30px;
   font-weight: 700;
-  background: linear-gradient(135deg, #ffffff, rgba(129,140,248,0.9));
+  background: linear-gradient(135deg, #ffffff, var(--desk-accent-cyan), rgba(129,140,248,0.9));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -329,6 +360,7 @@
     var(--desk-shadow-glass),
     0 0 0 1px rgba(255,255,255,0.07) inset,
     0 0 56px -8px rgba(99,102,241,0.25),
+    0 0 24px -4px rgba(0,210,255,0.12),
     0 0 0 1px rgba(99,102,241,0.15);
 }
 
@@ -343,6 +375,7 @@
 }
 
 .desk-window.maximized .desk-window-resize { display: none; }
+.desk-window--fixed-size .desk-window-resize { display: none; }
 
 /* Ручки ресайза */
 .desk-window-resize {
@@ -740,49 +773,65 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
 
 /* ── Корзина — пасхалка ── */
 .desk-trash-easteregg {
-  padding: 24px;
+  padding: 28px 24px;
   text-align: center;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(244,63,94,0.06) 0%, rgba(236,72,153,0.04) 40%, transparent 100%);
+  border-radius: 0 0 var(--desk-radius) var(--desk-radius);
+}
+
+.desk-trash-easteregg-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fda4af;
+  margin: 0 0 12px;
+  letter-spacing: 0.02em;
 }
 
 .desk-trash-easteregg-img {
   width: 100%;
-  max-width: 200px;
+  max-width: 220px;
   height: auto;
-  border-radius: 16px;
+  border-radius: 18px;
   object-fit: cover;
-  margin: 0 auto 18px;
+  margin: 0 auto 20px;
   display: block;
-  box-shadow: 0 8px 36px rgba(0,0,0,0.45);
+  box-shadow: 0 12px 40px rgba(244,63,94,0.25), 0 0 0 1px rgba(255,255,255,0.08) inset;
 }
 
 .desk-trash-easteregg-text {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--desk-text);
-  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.95);
+  margin: 0 0 20px;
+  max-width: 320px;
 }
 
 .desk-trash-easteregg-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 24px;
+  gap: 10px;
+  padding: 12px 28px;
   background: linear-gradient(135deg, #f43f5e, #ec4899);
   color: #fff;
-  border-radius: 12px;
-  font-size: 14px;
+  border-radius: 14px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 18px rgba(244,63,94,0.4);
+  box-shadow: 0 6px 24px rgba(244,63,94,0.45), 0 0 0 1px rgba(255,255,255,0.15) inset;
 }
 
 .desk-trash-easteregg-btn:hover {
-  opacity: 0.9;
+  opacity: 1;
   color: #fff;
-  transform: scale(1.04);
-  box-shadow: 0 8px 28px rgba(244,63,94,0.5);
+  transform: scale(1.05);
+  box-shadow: 0 10px 32px rgba(244,63,94,0.55), 0 0 0 1px rgba(255,255,255,0.2) inset;
 }
 
 /* ── Терминал ── */
@@ -912,7 +961,7 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
   overflow: hidden;
 }
 
-/* Живая градиентная линия сверху — под палитру сайта */
+/* Живая градиентная линия сверху — под палитру сайта + концепт cyan */
 .desk-taskbar::before {
   content: '';
   position: absolute;
@@ -920,13 +969,15 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
   height: 1px;
   background: linear-gradient(
     90deg,
-    transparent         0%,
-    rgba(99,102,241,0.9) 15%,
-    rgba(139,92,246,0.9) 35%,
-    rgba(221,74,255,0.7) 50%,
-    rgba(139,92,246,0.9) 65%,
-    rgba(99,102,241,0.9) 85%,
-    transparent          100%
+    transparent          0%,
+    rgba(0,210,255,0.6)  8%,
+    rgba(99,102,241,0.9)  18%,
+    rgba(139,92,246,0.9)  35%,
+    rgba(221,74,255,0.7)  50%,
+    rgba(139,92,246,0.9)  65%,
+    rgba(99,102,241,0.9)  82%,
+    rgba(0,210,255,0.6)  92%,
+    transparent           100%
   );
   background-size: 200% 100%;
   animation: gradient-flow 5s linear infinite;
@@ -945,11 +996,11 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 16px;
-  padding: 4px 6px;
+  border-radius: 18px;
+  padding: 6px 8px;
 }
 
 .desk-taskbar-pinned {
@@ -960,17 +1011,17 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
 
 .desk-taskbar-pinned-btn {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   color: var(--desk-text-muted);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   transition: background 0.15s, color 0.15s, transform 0.15s;
 }
 
@@ -985,6 +1036,7 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
 /* Цветные акценты для каждого приложения */
 .desk-taskbar-pinned-btn[data-app="courses"]:hover    { color: #818cf8; background: rgba(129,140,248,0.12); }
 .desk-taskbar-pinned-btn[data-app="tools"]:hover      { color: #a78bfa; background: rgba(139,92,246,0.12); }
+.desk-taskbar-pinned-btn[data-app="games"]:hover       { color: #f59e0b; background: rgba(245,158,11,0.12); }
 .desk-taskbar-pinned-btn[data-app="library"]:hover    { color: #fbbf24; background: rgba(251,191,36,0.12); }
 .desk-taskbar-pinned-btn[data-app="about"]:hover      { color: #34d399; background: rgba(16,185,129,0.12); }
 .desk-taskbar-pinned-btn[data-app="settings"]:hover   { color: #fb7185; background: rgba(244,63,94,0.12); }
@@ -993,6 +1045,7 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
 
 .desk-taskbar-pinned-btn[data-app="courses"].active    { color: #818cf8; background: rgba(129,140,248,0.16); }
 .desk-taskbar-pinned-btn[data-app="tools"].active      { color: #a78bfa; background: rgba(139,92,246,0.16); }
+.desk-taskbar-pinned-btn[data-app="games"].active      { color: #f59e0b; background: rgba(245,158,11,0.16); }
 .desk-taskbar-pinned-btn[data-app="library"].active    { color: #fbbf24; background: rgba(251,191,36,0.16); }
 .desk-taskbar-pinned-btn[data-app="about"].active      { color: #34d399; background: rgba(16,185,129,0.16); }
 .desk-taskbar-pinned-btn[data-app="settings"].active   { color: #fb7185; background: rgba(244,63,94,0.16); }
@@ -1044,7 +1097,7 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
   background: linear-gradient(135deg, rgba(99,102,241,0.38), rgba(139,92,246,0.35));
   border-color: rgba(99,102,241,0.55);
   transform: scale(1.06);
-  box-shadow: 0 4px 18px rgba(99,102,241,0.28);
+  box-shadow: 0 4px 18px rgba(99,102,241,0.28), 0 0 20px rgba(0,210,255,0.2);
 }
 
 .desk-start:active { transform: scale(0.97); }
@@ -1207,6 +1260,7 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
 
 .desk-start-menu-item[data-app="courses"]    i { background: rgba(129,140,248,0.12); color: #818cf8; }
 .desk-start-menu-item[data-app="tools"]      i { background: rgba(139,92,246,0.12);  color: #a78bfa; }
+.desk-start-menu-item[data-app="games"]      i { background: rgba(245,158,11,0.12);  color: #f59e0b; }
 .desk-start-menu-item[data-app="library"]    i { background: rgba(251,191,36,0.12);  color: #fbbf24; }
 .desk-start-menu-item[data-app="about"]      i { background: rgba(16,185,129,0.12);  color: #34d399; }
 .desk-start-menu-item[data-app="settings"]   i { background: rgba(244,63,94,0.12);   color: #fb7185; }
@@ -1328,6 +1382,12 @@ body.desk-window-resizing-active { cursor: nwse-resize; user-select: none; }
 
 .desk-os.light-theme .desk-taskbar-pinned-btn { color: #5c6485; }
 .desk-os.light-theme .desk-clock { color: #141722; }
+
+.desk-os.light-theme .desk-trash-easteregg {
+  background: linear-gradient(180deg, rgba(244,63,94,0.08) 0%, rgba(236,72,153,0.05) 50%, transparent 100%);
+}
+.desk-os.light-theme .desk-trash-easteregg-title { color: #be123c; }
+.desk-os.light-theme .desk-trash-easteregg-text { color: #374151; }
 
 .desk-os.light-theme .desk-start {
   background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(139,92,246,0.18));

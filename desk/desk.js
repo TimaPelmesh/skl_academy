@@ -6,6 +6,62 @@ function initDesk() {
   // Относительный путь к корню сайта (desk/ лежит в корне)
   const root = '..';
 
+  // ── Фон с частицами (концепт рабочего стола) ──
+  (function initParticleBackground() {
+    var canvas = document.getElementById('desk-bg-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function Particle() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2;
+      this.speedX = Math.random() * 0.5 - 0.25;
+      this.speedY = Math.random() * 0.5 - 0.25;
+      this.color = 'rgba(255, 255, 255, ' + (Math.random() * 0.5) + ')';
+    }
+    Particle.prototype.update = function () {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x > canvas.width) this.x = 0;
+      if (this.x < 0) this.x = canvas.width;
+      if (this.y > canvas.height) this.y = 0;
+      if (this.y < 0) this.y = canvas.height;
+    };
+    Particle.prototype.draw = function () {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    function initParticles() {
+      particles = [];
+      for (var i = 0; i < 100; i++) particles.push(new Particle());
+    }
+
+    function animate() {
+      if (!ctx || !canvas.width || !canvas.height) { requestAnimationFrame(animate); return; }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    initParticles();
+    animate();
+  })();
+
   const APPS = {
     courses: {
       title: 'Курсы',
@@ -30,6 +86,13 @@ function initDesk() {
         { title: 'Linux команды', desc: 'Интерактивный тренажер', url: root + '/sandbox/linux-commands/index.html', icon: 'fab fa-linux' },
         { title: 'Архитектура ПК', desc: '3D-модель компьютера', url: root + '/sandbox/pc-architecture/index.html', icon: 'fas fa-desktop' },
         { title: 'Веб-песочница', desc: 'HTML, CSS, JS', url: root + '/sandbox/web-playground/index.html', icon: 'fas fa-code' }
+      ]
+    },
+    games: {
+      title: 'Игры',
+      icon: 'fas fa-gamepad',
+      items: [
+        { title: '2048', desc: 'Объединяй плитки — залипательная головоломка', url: root + '/desk/games/2048.html', icon: 'fas fa-th' }
       ]
     },
     library: {
@@ -108,7 +171,7 @@ function initDesk() {
   var iconDragState = { active: false, el: null, startX: 0, startY: 0, left0: 0, top0: 0 };
   var ICON_POS_KEY = 'desk-icon-positions';
   var ICON_ORDER = ['home', 'trash'];
-  var PINNED_APPS = ['courses', 'tools', 'library', 'about', 'settings', 'bash', 'powershell'];
+  var PINNED_APPS = ['courses', 'tools', 'games', 'library', 'about', 'settings', 'bash', 'powershell'];
   var GRID_ORIGIN_X = 24;
   var GRID_ORIGIN_Y = 24;
   var GRID_CELL_W = 130;
@@ -187,8 +250,9 @@ function initDesk() {
 
   function renderTrashEasterEgg() {
     return '<div class="desk-trash-easteregg">' +
+      '<h3 class="desk-trash-easteregg-title">Поддержать проект</h3>' +
       '<img src="' + escapeHtml(CAT_IMAGE) + '" alt="Кот-талисман" class="desk-trash-easteregg-img">' +
-      '<p class="desk-trash-easteregg-text">Задонатить на корм котику и хозяину</p>' +
+      '<p class="desk-trash-easteregg-text">Задонатить на корм котику и хозяину — спасибо, что вы с нами!</p>' +
       '<a href="' + escapeHtml(DONATE_URL) + '" target="_blank" rel="noopener noreferrer" class="desk-trash-easteregg-btn">' +
         '<i class="fas fa-heart"></i> Поддержать' +
       '</a>' +
@@ -233,6 +297,14 @@ function initDesk() {
         return w.el.id;
       }
     }
+    var isArticle = (url || '').indexOf('/articles/') !== -1;
+    var is2048 = (url || '').indexOf('2048.html') !== -1;
+    if (!bounds && isArticle) {
+      bounds = { w: 960, h: 600 };
+    }
+    if (!bounds && is2048) {
+      bounds = { w: 520, h: 660 };
+    }
     const id = genId();
     const win = document.createElement('div');
     win.className = 'desk-window focused';
@@ -252,6 +324,19 @@ function initDesk() {
       '<div class="desk-window-body"><iframe src="' + escapeHtml(url) + '" title="' + escapeHtml(title) + '"></iframe></div>' +
       RESIZE_HANDLES_HTML;
     positionWindow(win, bounds);
+    if (isArticle && bounds && bounds.w) {
+      win.style.width = bounds.w + 'px';
+      win.style.height = (bounds.h || DEFAULT_H) + 'px';
+    }
+    if (is2048 && bounds && bounds.w) {
+      win.style.width = bounds.w + 'px';
+      win.style.height = (bounds.h || DEFAULT_H) + 'px';
+      win.style.minWidth = bounds.w + 'px';
+      win.style.maxWidth = bounds.w + 'px';
+      win.style.minHeight = bounds.h + 'px';
+      win.style.maxHeight = bounds.h + 'px';
+      win.classList.add('desk-window--fixed-size');
+    }
     container.appendChild(win);
     const taskbarBtn = document.createElement('button');
     taskbarBtn.type = 'button';
@@ -345,8 +430,8 @@ function initDesk() {
     positionWindow(win, bounds);
     container.appendChild(win);
     if (appKey === 'trash' && !bounds) {
-      win.style.width = '380px';
-      win.style.height = '340px';
+      win.style.width = '400px';
+      win.style.height = '420px';
     }
 
     var taskbarBtn;

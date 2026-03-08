@@ -11,6 +11,7 @@
 </head>
 <body class="desk-os">
   <div class="desk-wallpaper">
+    <canvas id="desk-bg-canvas" class="desk-wallpaper-particle" aria-hidden="true"></canvas>
     <div class="desk-wallpaper-gradient"></div>
     <div class="desk-wallpaper-grid" aria-hidden="true"></div>
   </div>
@@ -43,6 +44,7 @@
       <div class="desk-taskbar-pinned">
         <button type="button" class="desk-taskbar-pinned-btn" data-app="courses" title="Курсы"><i class="fas fa-folder"></i></button>
         <button type="button" class="desk-taskbar-pinned-btn" data-app="tools" title="Инструменты"><i class="fas fa-tools"></i></button>
+        <button type="button" class="desk-taskbar-pinned-btn" data-app="games" title="Игры"><i class="fas fa-gamepad"></i></button>
         <button type="button" class="desk-taskbar-pinned-btn" data-app="library" title="Библиотека"><i class="fas fa-folder-open"></i></button>
         <button type="button" class="desk-taskbar-pinned-btn" data-app="about" title="О проекте"><i class="fas fa-file-alt"></i></button>
         <button type="button" class="desk-taskbar-pinned-btn" data-app="settings" title="Настройки"><i class="fas fa-cog"></i></button>
@@ -71,6 +73,10 @@
       <button type="button" class="desk-start-menu-item" data-app="tools">
         <i class="fas fa-tools"></i>
         <span>Инструменты</span>
+      </button>
+      <button type="button" class="desk-start-menu-item" data-app="games">
+        <i class="fas fa-gamepad"></i>
+        <span>Игры</span>
       </button>
       <button type="button" class="desk-start-menu-item" data-app="library">
         <i class="fas fa-folder"></i>
